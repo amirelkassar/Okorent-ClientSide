@@ -34,9 +34,113 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\.next\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\.next\**" />
+    <EmbeddedResource Remove="ClientApp\.next\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="ClientApp\.next\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\.next\app-build-manifest.json" />
+    <None Remove="ClientApp\.next\build-manifest.json" />
+    <None Remove="ClientApp\.next\cache\images\ubZmSge5BEKzQTptTNx1fxOTyBMxgn44Qhtm3HJViHc=\60.1723313415108.cAUOXBIdwCX-rBAi-lmxpppayPBx05fV8BAYxT+2PnI=.webp" />
+    <None Remove="ClientApp\.next\cache\images\YkDysrzSlDWn89vyG5ofbkII3eOER7T2eIIKcEL12Dw=\60.1723313410862.cUittSl-UN1EG7v4xYILbSVjWf4x9+btFgHXCmVZzn8=.webp" />
+    <None Remove="ClientApp\.next\cache\webpack\client-development\0.pack.gz" />
+    <None Remove="ClientApp\.next\cache\webpack\client-development\1.pack.gz" />
+    <None Remove="ClientApp\.next\cache\webpack\client-development\2.pack.gz" />
+    <None Remove="ClientApp\.next\cache\webpack\client-development\3.pack.gz" />
+    <None Remove="ClientApp\.next\cache\webpack\client-development\index.pack.gz" />
+    <None Remove="ClientApp\.next\cache\webpack\client-development\index.pack.gz.old" />
+    <None Remove="ClientApp\.next\cache\webpack\edge-server-development\0.pack.gz" />
+    <None Remove="ClientApp\.next\cache\webpack\edge-server-development\index.pack.gz" />
+    <None Remove="ClientApp\.next\cache\webpack\server-development\0.pack.gz" />
+    <None Remove="ClientApp\.next\cache\webpack\server-development\1.pack.gz" />
+    <None Remove="ClientApp\.next\cache\webpack\server-development\2.pack.gz" />
+    <None Remove="ClientApp\.next\cache\webpack\server-development\index.pack.gz" />
+    <None Remove="ClientApp\.next\cache\webpack\server-development\index.pack.gz.old" />
+    <None Remove="ClientApp\.next\package.json" />
+    <None Remove="ClientApp\.next\react-loadable-manifest.json" />
+    <None Remove="ClientApp\.next\server\app-paths-manifest.json" />
+    <None Remove="ClientApp\.next\server\app\[locale]\auth\login\page.js" />
+    <None Remove="ClientApp\.next\server\app\[locale]\auth\login\page_client-reference-manifest.js" />
+    <None Remove="ClientApp\.next\server\app\[locale]\page.js" />
+    <None Remove="ClientApp\.next\server\app\[locale]\page_client-reference-manifest.js" />
+    <None Remove="ClientApp\.next\server\app\_not-found\page.js" />
+    <None Remove="ClientApp\.next\server\app\_not-found\page_client-reference-manifest.js" />
+    <None Remove="ClientApp\.next\server\edge-runtime-webpack.js" />
+    <None Remove="ClientApp\.next\server\interception-route-rewrite-manifest.js" />
+    <None Remove="ClientApp\.next\server\middleware-build-manifest.js" />
+    <None Remove="ClientApp\.next\server\middleware-manifest.json" />
+    <None Remove="ClientApp\.next\server\middleware-react-loadable-manifest.js" />
+    <None Remove="ClientApp\.next\server\next-font-manifest.js" />
+    <None Remove="ClientApp\.next\server\next-font-manifest.json" />
+    <None Remove="ClientApp\.next\server\pages-manifest.json" />
+    <None Remove="ClientApp\.next\server\server-reference-manifest.js" />
+    <None Remove="ClientApp\.next\server\server-reference-manifest.json" />
+    <None Remove="ClientApp\.next\server\src\middleware.js" />
+    <None Remove="ClientApp\.next\server\static\webpack\633457081244afec._.hot-update.json" />
+    <None Remove="ClientApp\.next\server\vendor-chunks\%40babel.js" />
+    <None Remove="ClientApp\.next\server\vendor-chunks\%40floating-ui.js" />
+    <None Remove="ClientApp\.next\server\vendor-chunks\%40mantine.js" />
+    <None Remove="ClientApp\.next\server\vendor-chunks\%40swc.js" />
+    <None Remove="ClientApp\.next\server\vendor-chunks\clsx.js" />
+    <None Remove="ClientApp\.next\server\vendor-chunks\get-nonce.js" />
+    <None Remove="ClientApp\.next\server\vendor-chunks\next-intl.js" />
+    <None Remove="ClientApp\.next\server\vendor-chunks\next.js" />
+    <None Remove="ClientApp\.next\server\vendor-chunks\react-number-format.js" />
+    <None Remove="ClientApp\.next\server\vendor-chunks\react-remove-scroll-bar.js" />
+    <None Remove="ClientApp\.next\server\vendor-chunks\react-remove-scroll.js" />
+    <None Remove="ClientApp\.next\server\vendor-chunks\react-style-singleton.js" />
+    <None Remove="ClientApp\.next\server\vendor-chunks\react-textarea-autosize.js" />
+    <None Remove="ClientApp\.next\server\vendor-chunks\swiper.js" />
+    <None Remove="ClientApp\.next\server\vendor-chunks\tabbable.js" />
+    <None Remove="ClientApp\.next\server\vendor-chunks\tailwind-merge.js" />
+    <None Remove="ClientApp\.next\server\vendor-chunks\tslib.js" />
+    <None Remove="ClientApp\.next\server\vendor-chunks\use-callback-ref.js" />
+    <None Remove="ClientApp\.next\server\vendor-chunks\use-composed-ref.js" />
+    <None Remove="ClientApp\.next\server\vendor-chunks\use-intl.js" />
+    <None Remove="ClientApp\.next\server\vendor-chunks\use-sidecar.js" />
+    <None Remove="ClientApp\.next\server\webpack-runtime.js" />
+    <None Remove="ClientApp\.next\static\chunks\app-pages-internals.js" />
+    <None Remove="ClientApp\.next\static\chunks\app\[locale]\auth\layout.js" />
+    <None Remove="ClientApp\.next\static\chunks\app\[locale]\auth\login\page.js" />
+    <None Remove="ClientApp\.next\static\chunks\app\[locale]\layout.js" />
+    <None Remove="ClientApp\.next\static\chunks\app\[locale]\page.js" />
+    <None Remove="ClientApp\.next\static\chunks\app\_not-found\page.js" />
+    <None Remove="ClientApp\.next\static\chunks\main-app.js" />
+    <None Remove="ClientApp\.next\static\chunks\polyfills.js" />
+    <None Remove="ClientApp\.next\static\chunks\webpack.js" />
+    <None Remove="ClientApp\.next\static\css\app\[locale]\layout.css" />
+    <None Remove="ClientApp\.next\static\development\_buildManifest.js" />
+    <None Remove="ClientApp\.next\static\development\_ssgManifest.js" />
+    <None Remove="ClientApp\.next\static\media\arrowLeft.6fe43368.svg" />
+    <None Remove="ClientApp\.next\static\media\arrowRight.16c9f53d.svg" />
+    <None Remove="ClientApp\.next\static\media\IBMPlexSansArabicBold.89621794.ttf" />
+    <None Remove="ClientApp\.next\static\media\IBMPlexSansArabicExtraLight.8ae3ee9b.ttf" />
+    <None Remove="ClientApp\.next\static\media\IBMPlexSansArabicLight.da5905dc.ttf" />
+    <None Remove="ClientApp\.next\static\media\IBMPlexSansArabicMedium.baf9a19a.ttf" />
+    <None Remove="ClientApp\.next\static\media\IBMPlexSansArabicRegular.94a9db23.ttf" />
+    <None Remove="ClientApp\.next\static\media\IBMPlexSansArabicSemiBold.4079bccf.ttf" />
+    <None Remove="ClientApp\.next\static\media\IBMPlexSansArabicThin.aa2b6f48.ttf" />
+    <None Remove="ClientApp\.next\static\media\person1.a802610e.png" />
+    <None Remove="ClientApp\.next\static\media\person2.72ff3d0f.png" />
+    <None Remove="ClientApp\.next\static\webpack\0e5fcebb7f1af65d.webpack.hot-update.json" />
+    <None Remove="ClientApp\.next\static\webpack\633457081244afec._.hot-update.json" />
+    <None Remove="ClientApp\.next\static\webpack\app\[locale]\layout.d4b8151230c9d78f.hot-update.js" />
+    <None Remove="ClientApp\.next\static\webpack\d4b8151230c9d78f.webpack.hot-update.json" />
+    <None Remove="ClientApp\.next\static\webpack\d8deb297671c4c65.webpack.hot-update.json" />
+    <None Remove="ClientApp\.next\static\webpack\webpack.0e5fcebb7f1af65d.hot-update.js" />
+    <None Remove="ClientApp\.next\static\webpack\webpack.d4b8151230c9d78f.hot-update.js" />
+    <None Remove="ClientApp\.next\static\webpack\webpack.d8deb297671c4c65.hot-update.js" />
+    <None Remove="ClientApp\.next\trace" />
+    <None Remove="ClientApp\.next\types\app\[locale]\auth\layout.ts" />
+    <None Remove="ClientApp\.next\types\app\[locale]\auth\login\page.ts" />
+    <None Remove="ClientApp\.next\types\app\[locale]\layout.ts" />
+    <None Remove="ClientApp\.next\types\app\[locale]\page.ts" />
+    <None Remove="ClientApp\.next\types\package.json" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
