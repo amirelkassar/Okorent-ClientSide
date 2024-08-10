@@ -21,9 +21,9 @@ function layout({ children }: layoutProps) {
                     <NavLinks />
                     {children}
                 </main>
-                <Footer />
             </div>
-           
+            <Footer />
+
         </div>
     );
 }
