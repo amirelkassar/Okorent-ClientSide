@@ -1,0 +1,86 @@
+{
+  "home": {
+    "nav": {
+      "titleLogo": "Your fitness center",
+      "titleLogo2": " Women's",
+      "home": " Home",
+      "about": "About Us",
+      "contact": "Contact Us "
+    },
+    "about": {
+      "title": "About us ",
+      "dec1": " Your Fitness Club is located in Riyadh, Saudi Arabia in July 2024 and is a haven for individuals and organizations.",
+      "dec2": " It is a great honor to be a part of the world's most prestigious organization and to be a part of the world's most prestigious group of people.",
+      "dec3": "Our goal is to be the leading fitness destination in Saudi Arabia, renowned for its commitment to health and fitness.",
+      "dec4": "Personal training Customized guidance and support from certified trainers to help you achieve your goals with a nutritional program to get a perfect body",
+      "dec5": "- The electrical stimulation device is the latest technology in the world of fitness based on sports movements in accordance with electrical impulses targeting the main muscles"
+    },
+    "footer": {
+      "title": "Our goal is to provide high-level training in a friendly environment",
+      "hour": "Working Hours ",
+      "program": "Programs",
+      "offer": "Offers",
+      "map": "Location",
+      "follow": "Follow Us",
+      "copy1": " 2023 Women's Fitness Center | Developed by ",
+      "copy2": " Hayat Technology Company",
+      "titleLogo": "Your fitness center",
+      "titleLogo2": " Women's",
+      "terms": "Terms & Conditions"
+    },
+    "story": {
+      "title1": "Hello",
+      "title2": "The story behind our center",
+      "title3": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.",
+      "storyTitle": "story",
+      "storyDec": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.",
+      "vision": "our vision",
+      "visionDec": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.",
+      "message": "Our message",
+      "messageDec": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum."
+    },
+    "map": {
+      "title": "Our site",
+      "locationDec": "50, Afif 17532, Saudi Arabia, Kingdom of Saudi Arabia"
+    },
+    "offer": {
+      "title1": "Offers",
+      "title2": "Latest Offers ",
+      "bestOffer": "Best Offers",
+      "discountTitle": "Enhance your experience with healthy nutrition tips, ongoing support and social activity ",
+      "discountDec": "Subscribe now and enjoy a discount of up to "
+    },
+    "program": {
+      "programTitle": "Programs",
+      "programDec": "Discover our programs ",
+      "more": "Show more",
+      "less": "...Show less"
+    },
+    "hoursWork": {
+      "title": "working hours",
+      "hoursDec1": "All week from 8 am to 10 pm",
+      "hoursDec2": "Friday from 12 noon to 11 pm"
+    },
+    "header": {
+      "title": "Start building your body",
+      "title1": "We have everything you need",
+      "title11": " Your Fitness",
+      "title2": "For you he was found",
+      "title22": " Your fitness",
+      "qr": "Download our application through the App Store and Google Play to receive all new updates."
+    }
+  },
+  "contactUS": {
+    "title1": "We are pleased to have you communicate with us",
+    "title2": "One of our employees will respond to you as soon as possible",
+    "name": "Name",
+    "namePlace": "Enter full name",
+    "email": "Email",
+    "emailPlace": "Enter your email",
+    "pohne": "mobile number",
+    "pohnePlace": "Mobile Number +966",
+    "mes": "What's on your mind?",
+    "mesPlace": "Enter what you want to inquire about",
+    "send": "Send"
+  }
+}
