@@ -10,7 +10,7 @@ function page() {
     <div>
       <div className='flex items-center justify-between gap-6 flex-wrap mb-10'>
         <h2 className='text-[32px] font-Bold'>All Accounts</h2>
-        <FilterBy/>
+        <FilterBy data={['Top Rated']}/>
       </div>
       <div>
       </div>
