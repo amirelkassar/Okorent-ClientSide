@@ -64,7 +64,7 @@ export function DataTable<TData, TValue>({
                 />
               </Table.Th>
               {headerGroup.headers.map((header, i) => {
-                console.log(header);
+              
 
                 return (
                   <Table.Th
