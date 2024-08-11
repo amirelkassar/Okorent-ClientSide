@@ -8,13 +8,20 @@ import { useSearchParams } from "next/navigation";
 import { Link } from "@/src/navigation";
 import CardIcon from "@/src/assets/icons/card";
 import ROUTES from "@/src/routes";
+import CardView from "./_components/cardView";
 
 function page() {
   const searchParams = useSearchParams();
   console.log(searchParams.get("cards"));
   return (
     <div>
-      {searchParams.get("cards") === "true" ? null : (
+      {searchParams.get("cards") === "true" ? (
+        <div>
+          <CardView first title={'My Current Rentals'}/>
+        <CardView title={'Upcoming Rentals'}/>
+        <CardView title={'Closed Rentals'}/>
+        </div>
+      ) : (
         <div>
           <div className="flex items-center justify-between gap-6 flex-wrap mb-10">
             <div className="flex items-center gap-5">
@@ -27,7 +34,7 @@ function page() {
                 <p>Card View</p>
               </Link>
             </div>
-            <FilterBy data={["Closed", "Ongoing",'Upcoming']} search />
+            <FilterBy data={["Closed", "Ongoing", "Upcoming"]} search />
           </div>
           <DataTable data={RentalsData} columns={columns} />
         </div>
