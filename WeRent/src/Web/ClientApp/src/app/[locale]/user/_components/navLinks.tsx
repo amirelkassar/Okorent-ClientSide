@@ -74,7 +74,7 @@ function NavLinks() {
         active: path === ROUTES.USER.BILLING,
       },
       {
-        id: 11,
+        id: 12,
         name: "Support",
         url: ROUTES.USER.SUPPORT,
         active: path === ROUTES.USER.SUPPORT,
