@@ -113,19 +113,19 @@ body {
   left: 50% !important;
   transform: translateX(-50%);
 }
-.swiperAuth  .swiper-pagination-bullet{
-  background-color: #B6BFC6;
+.swiperAuth .swiper-pagination-bullet {
+  background-color: #b6bfc6;
   opacity: 1;
 }
-.swiperAuth  .swiper-pagination-bullet-active{
+.swiperAuth .swiper-pagination-bullet-active {
   background-color: white;
 }
-.offerSlider   .swiper-pagination-bullet-active{
-  background-color: white;
-}
-.offerSlider    .swiper-pagination-bullet{
-  background-color: #B6BFC6;
+.offerSlider .swiper-pagination-bullet {
+  background-color: #b6bfc6;
   opacity: 1;
+}
+.offerSlider .swiper-pagination-bullet-active {
+  background-color: white;
 }
 .headTitle {
   font-size: 32px;

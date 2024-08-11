@@ -93,7 +93,7 @@ function NavLinks() {
       </h1>
       <div className=" max-w-full overflow-x-auto overflow-y-hidden mb-12 pb-4">
         <ul className=" border-b-[1.5px] flex items-center gap-6 justify-between ">
-          {LinksNav.map((link) => {
+          {LinksNav.map((link,i) => {
             return (
               <li
                 key={link.id}

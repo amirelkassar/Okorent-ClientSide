@@ -5,8 +5,7 @@ interface LayoutAuth {
 }
 function layout({ children }: LayoutAuth) {
   return (
-    <div className="flex  gap-10 px-3 py-5 ">
-  
+    <div className="flex  gap-10 px-3 py-5">
       <SliderAuth />
       {children}
     </div>
