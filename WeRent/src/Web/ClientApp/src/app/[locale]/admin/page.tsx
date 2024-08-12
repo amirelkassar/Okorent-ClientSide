@@ -7,7 +7,7 @@ import { columns } from "./_components/column";
 import ArrowWhiteIcon from "@/src/assets/icons/arrowWhite";
 import { UserData } from "@/src/lib/dataUser";
 import { DataTable } from "@/src/components/data-table";
-;
+import ROUTES from "@/src/routes";
 function page() {
   return (
     <div>
@@ -26,16 +26,13 @@ function page() {
         </div>
         <ChartsPlatform />
       </div>
-      <div className="mb-36">
-        <div className="flex items-center justify-between gap-5 flex-wrap mb-11">
-          <h2 className="text-[32px] font-Bold ">New subscriptions</h2>
-          <Button className={"h-10 w-fit gap-3 "}>
-            <p className="text-white text-[16px]">View all</p>
-            <ArrowWhiteIcon />
-          </Button>
-        </div>
-        <DataTable data={UserData} columns={columns} />
-      </div>
+
+      <DataTable
+        title="New subscriptions"
+        viewAll={ROUTES.ADMIN.ACCOUNTS}
+        data={UserData}
+        columns={columns}
+      />
     </div>
   );
 }

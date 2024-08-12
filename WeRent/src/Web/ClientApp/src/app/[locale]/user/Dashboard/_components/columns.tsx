@@ -15,13 +15,23 @@ export type RequestsTableData = {
   id: number;
   name: string;
   phone: string;
-  start: string;
-  end: string;
-  quantity: number;
+  memberSince: string;
+  statusUser: string;
   status: string;
-  payment: number;
+  quantity: number;
+  rating: number;
+  rentedItems: number;
+  leasedItems: number;
+  product: string;
+  payment: string;
   paymentStatus: string;
-  img: StaticImageData;
+  rentalPeriod: number;
+  startDate: string;
+  endDate: string;
+  country: string;
+  action: string;
+  imgUser: StaticImageData;
+  imgHome: StaticImageData;
 };
 
 export const columns: ColumnDef<RequestsTableData>[] = [
@@ -47,7 +57,7 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     },
   },
   {
-    accessorKey: "end",
+    accessorKey: "endDate",
     header: "Rentals Ending Date",
     cell: ({ getValue }) => {
       const end = getValue<string>();
@@ -67,7 +77,7 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     },
     cell: ({ getValue, row }) => {
       const name = getValue<string>();
-      const img = row.original.img;
+      const img = row.original.imgUser;
 
       return (
         <div className="flex items-center gap-2">

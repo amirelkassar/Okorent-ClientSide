@@ -29,7 +29,6 @@ const ROUTES = {
     LISTINGS: "/user/Listings",
     RENTALS: "/user/Rentals",
     REQUESTS: "/user/Requests",
-    BOOKINGS: "/user/Bookings",
     INBOX: "/user/Inbox",
     CLIENTS: "/user/Clients",
     WISHLIST: "/user/Wishlist",

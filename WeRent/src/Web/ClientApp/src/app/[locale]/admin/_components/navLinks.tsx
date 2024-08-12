@@ -81,7 +81,7 @@ function NavLinks() {
     ],
     [path]
   );
-  console.log(LinksNav.find((item) => item.active)?.active);
+  
 
   return (
     <div className="mt-10 max-w-full ">

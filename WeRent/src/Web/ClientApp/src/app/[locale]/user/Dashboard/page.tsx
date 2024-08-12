@@ -7,25 +7,23 @@ import { RequestsData } from "@/src/lib/dataUser";
 import { columns } from "./_components/columns";
 import OngoingRentals from "./_components/ongoing-rentals";
 import EarningReport from "./_components/earning-report";
-
+import ROUTES from "@/src/routes";
 
 function page() {
   return (
     <div>
       <HeaderDash />
       <div className="mt-14 flex gap-10">
-        <OngoingRentals/>
-        <EarningReport/>
+        <OngoingRentals />
+        <EarningReport />
       </div>
       <div className="mt-16">
-        <div className="flex items-center justify-between gap-5 flex-wrap mb-8">
-          <h2 className="headTitle  ">Listings Overview</h2>
-          <Button className={"h-10 w-fit gap-3 "}>
-            <p className="text-white text-[16px]">View all</p>
-            <ArrowWhiteIcon />
-          </Button>
-        </div>
-        <DataTable data={RequestsData} columns={columns}/>
+        <DataTable
+          title="Listings Overview"
+          viewAll={ROUTES.USER.DASHBOARD}
+          data={RequestsData}
+          columns={columns}
+        />
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ import BusIcon from "../assets/icons/bus";
 import PartyIcon from "../assets/icons/party";
 import FilmIcon from "../assets/icons/film";
 import OthersIcon from "../assets/icons/others";
+import { StaticImageData } from "next/image";
 
 export const UserData = [
   {
@@ -30,7 +31,7 @@ export const UserData = [
     package: "Pro Plus Package",
     period: "1 Year",
     payment: 250,
-    rating: 4.52,
+    rating: 5,
     rentedItems: 320,
     leasedItems: 310,
     img: avatar,
@@ -42,7 +43,7 @@ export const UserData = [
     package: "Pro Package",
     period: "1 Year",
     payment: 100,
-    rating: 4.52,
+    rating: 1,
     rentedItems: 320,
     leasedItems: 310,
     img: avatar,
@@ -66,7 +67,7 @@ export const UserData = [
     package: "Pro Package",
     period: "1 Year",
     payment: 100,
-    rating: 4.52,
+    rating: 4,
     rentedItems: 320,
     leasedItems: 310,
     img: avatar,
@@ -194,74 +195,12 @@ export const CategoriesData = [
   },
 ];
 
-export const RequestsData = [
-  {
-    id: 1,
-    name: "Ahmed Mohamed",
-    phone: "Iphone 15 Pro",
-    start: "3 August 2024",
-    end: "3 August 2024",
-    quantity: 100,
-    status: "new",
-    payment: 100,
-    paymentStatus: "Pending",
-    img: avatar,
-  },
-  {
-    id: 2,
-    name: "Fatma Ali",
-    phone: "Samsung Galaxy S23",
-    start: "5 August 2024",
-    end: "10 August 2024",
-    quantity: 200,
-    status: "Ongoing",
-    payment: 250,
-    paymentStatus: "Completed",
-    img: avatar,
-  },
-  {
-    id: 3,
-    name: "Mohamed Ibrahim",
-    phone: "Google Pixel 7",
-    start: "1 August 2024",
-    end: "3 August 2024",
-    quantity: 150,
-    status: "Declined",
-    payment: 150,
-    paymentStatus: "Canceled",
-    img: avatar,
-  },
-  {
-    id: 4,
-    name: "Sara Youssef",
-    phone: "OnePlus 11",
-    start: "12 August 2024",
-    end: "15 August 2024",
-    quantity: 50,
-    status: "new",
-    payment: 50,
-    paymentStatus: "Pending",
-    img: avatar,
-  },
-  {
-    id: 5,
-    name: "Omar Hassan",
-    phone: "Xiaomi Mi 13",
-    start: "7 August 2024",
-    end: "9 August 2024",
-    quantity: 300,
-    status: "ongoing",
-    payment: 300,
-    paymentStatus: "Completed",
-    img: avatar,
-  },
-];
 export const ListingsData = [
   {
     id: 1,
     phone: "Iphone 15 Pro",
     quantity: 100,
-    status: "Active",
+    status: true,
     inStock: 100,
     rented: 5,
     rentalCost: 100,
@@ -270,7 +209,7 @@ export const ListingsData = [
     id: 2,
     phone: "Samsung Galaxy S23",
     quantity: 200,
-    status: "Not Active",
+    status:false,
     inStock: 250,
     rented: 0,
     rentalCost: 100,
@@ -279,7 +218,7 @@ export const ListingsData = [
     id: 3,
     phone: "Google Pixel 7",
     quantity: 150,
-    status: "Active",
+    status: true,
     inStock: 150,
     rented: 6,
     rentalCost: 100,
@@ -346,5 +285,142 @@ export const RentalsData = [
     payment: 300,
     paymentStatus: "Completed",
     img: avatar,
+  },
+];
+
+interface RequestData {
+  id: number;
+  name: string;
+  phone: string;
+  memberSince: string;
+  statusUser: string;
+  status: string;
+  quantity: number;
+  rating: number;
+  rentedItems: number;
+  leasedItems: number;
+  product: string;
+  payment: string;
+  paymentStatus: string;
+  rentalPeriod: number;
+  startDate: string;
+  endDate: string;
+  country: string;
+  action: string;
+  imgUser: StaticImageData;
+  imgHome: StaticImageData;
+}
+
+
+export const RequestsData: RequestData[] = [
+  {
+    id: 1,
+    name: "Ahmed Mohamed Badr",
+    phone: "Iphone 15 Pro",
+    memberSince: "March, 2024",
+    statusUser: "Available",
+    status: "new",
+    quantity: 100,
+    rating: 4.52,
+    rentedItems: 320,
+    leasedItems: 320,
+    product: "Apple Laptop",
+    payment: "100$",
+    paymentStatus: "Pending",
+    rentalPeriod: 5,
+    startDate: "11-10-2024",
+    endDate: "20-8-2024",
+    country: "Netherlands",
+    action: "Accept",
+    imgUser: avatar,
+    imgHome: house,
+  },
+  {
+    id: 2,
+    name: "Fatma Ali",
+    phone: "Samsung Galaxy S23",
+    memberSince: "March, 2024",
+    statusUser: "Available",
+    status: "Ongoing",
+    rating: 4.52,
+    rentedItems: 320,
+    leasedItems: 320,
+    product: "Apple Laptop",
+    payment: "100$",
+    paymentStatus: "Completed",
+    quantity: 200,
+    rentalPeriod: 5,
+    startDate: "11-10-2024",
+    endDate: "20-8-2024",
+    country: "Netherlands",
+    action: "Decline",
+    imgUser: avatar,
+    imgHome: house,
+  },
+  {
+    id: 3,
+    name: "Mohamed Ibrahim",
+    phone: "Google Pixel 7",
+    memberSince: "March, 2024",
+    statusUser: "Available",
+    status: "Declined",
+    rating: 4.52,
+    rentedItems: 320,
+    leasedItems: 320,
+    product: "Apple Laptop",
+    payment: "100$",
+    quantity: 150,
+    paymentStatus: "Canceled",
+    rentalPeriod: 5,
+    startDate: "11-10-2024",
+    endDate: "20-8-2024",
+    country: "Netherlands",
+    action: "Decline",
+    imgUser: avatar,
+    imgHome: house,
+  },
+  {
+    id: 4,
+    name: "Omar Hassan",
+    phone: "Xiaomi Mi 13",
+    memberSince: "March, 2026",
+    statusUser: "Available",
+    status: "new",
+    rating: 4.52,
+    rentedItems: 320,
+    leasedItems: 320,
+    product: "Apple Laptop",
+    payment: "100$",
+    quantity: 50,
+    paymentStatus: "Pending",
+    rentalPeriod: 5,
+    startDate: "11-10-2024",
+    endDate: "20-8-2024",
+    country: "Netherlands",
+    action: "Decline",
+    imgUser: avatar,
+    imgHome: house,
+  },
+  {
+    id: 5,
+    name: "Ahmed Mohamed Badr",
+    phone: "OnePlus 11",
+    memberSince: "March, 2024",
+    statusUser: "Available",
+    status: "new",
+    rating: 4.52,
+    rentedItems: 320,
+    leasedItems: 320,
+    product: "Apple Laptop",
+    payment: "100$",
+    quantity: 50,
+    paymentStatus: "Pending",
+    rentalPeriod: 5,
+    startDate: "11-10-2024",
+    endDate: "20-8-2024",
+    country: "Netherlands",
+    action: "Accept",
+    imgUser: avatar,
+    imgHome: house,
   },
 ];

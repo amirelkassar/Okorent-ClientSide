@@ -24,7 +24,7 @@ function CardView({ title, first = false }: CardViewProps) {
     }
   };
   return (
-    <div className="swiperList pt-14 border-t border-black first-of-type:border-none first-of-type:pt-0">
+    <div className="swiperList pt-14 pb-16border-t border-black first-of-type:border-none first-of-type:pt-0">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-5">
           <h2 className="text-[32px] font-Bold">{title}</h2>

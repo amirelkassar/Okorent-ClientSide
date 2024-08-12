@@ -14,15 +14,13 @@ export type RequestsTableData = {
   id: number;
   phone: string;
   quantity: number;
-  status: string;
+  status: boolean;
   inStock: number;
   rented: number;
   rentalCost: number;
 };
 
 export const columns: ColumnDef<RequestsTableData>[] = [
- 
-
   {
     accessorKey: "phone",
     header: "Product",
@@ -83,14 +81,11 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     header: "Status",
     cell: ({ getValue }) => {
       const status = getValue<string>();
-      switch (status.toLowerCase()) {
-        case "active":
-          return <CardStatus type="blue" title={status} />;
-        case "not active":
-          return <CardStatus type="green" title={status} />;
-        default:
-          return <CardStatus type="gray" title="--" />;
-      }
+      return status ? (
+        <CardStatus type="blue" title={"Active"} />
+      ) : (
+        <CardStatus type="green" title={"Not Active"} />
+      );
     },
   },
   {

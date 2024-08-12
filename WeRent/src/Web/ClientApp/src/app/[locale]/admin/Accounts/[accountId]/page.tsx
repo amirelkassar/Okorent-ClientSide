@@ -59,24 +59,15 @@ function page() {
       </div>
       <AccountReviews />
       <div className="py-16">
-        <div className="flex items-center justify-between gap-4 mb-5">
-          <div className="flex items-center gap-4 mb-6">
-            <h2 className="headTitle">Recent Activities</h2>
-            <button className="flex items-center gap-3 bottom-0 bg-transparent">
-              <p className="text-grayMedium text-[20px] font-Medium">Edit</p>
-              <EditIcon className="w-5" />
-            </button>
-          </div>
-          <Button className={"h-10 gap-3"}>
-            <p className="text-white text-[16px] font-Medium">
-              View all activities
-            </p>
-            <ArrowWhiteIcon />
-          </Button>
-        </div>
-        <DataTable data={dataActivities} columns={columns} />
+        <DataTable
+          title="Recent Activities"
+          data={dataActivities}
+          viewAll="View all activities"
+          columns={columns}
+          viewAllTitle="View all activities"
+        />
       </div>
-      <AccrountRentals/>
+      <AccrountRentals />
     </div>
   );
 }
