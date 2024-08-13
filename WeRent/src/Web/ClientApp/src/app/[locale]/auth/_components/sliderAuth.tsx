@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-;
 import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 import persone1 from "@/src/assets/images/person1.png";
@@ -52,15 +51,16 @@ function SliderAuth({}: SliderAuthProps) {
       <Swiper
         navigation={true}
         pagination={true}
-        modules={[Navigation,Pagination]}
+        modules={[Navigation, Pagination]}
         className="w-full h-full rounded-[30px] swiperAuth"
+       
       >
         {dataSwiper.map((item) => {
           return (
             <SwiperSlide key={item.id}>
               <div className="w-full h-full relative rounded-[30px]">
                 <div className=" absolute top-12 left-14 z-10">
-                  <LogoWhite/>
+                  <LogoWhite />
                 </div>
                 <div className="w-full h-full relative before:content-[''] before:w-full before:h-full before:absolute before:bg-[#0000001a] before:z-[1]">
                   <Image

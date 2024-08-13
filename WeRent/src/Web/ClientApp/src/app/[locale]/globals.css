@@ -53,50 +53,26 @@
   font-display: swap;
   src: url("../../assets/fonts/IBMPlexSansArabicBold.ttf");
 }
-@media (prefers-color-scheme: dark) {
-}
-
-body {
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 }
-.swiperAuth {
+@media (prefers-color-scheme: dark) {
 }
 
 .swiperAuth .swiper-button-next,
 .swiperAuth .swiper-rtl .swiper-button-prev {
-  right: 54px;
-  left: auto;
-  bottom: 36px;
-  top: auto;
-  width: 32px;
-  height: 32px;
+  @apply rtl:rotate-180 size-[32px] after:size-[100%] after:content-[''] after:bg-contain top-auto left-auto right-auto bottom-9 end-[54px];
 }
 .swiperAuth .swiper-button-next::after {
-  content: "";
-  width: 100%;
-  height: 100%;
-  background-size: contain;
   background-image: url("../../assets/icons/arrowRight.svg");
 }
 .swiperAuth .swiper-button-prev,
 .swiperAuth .swiper-rtl .swiper-button-next {
-  right: 120px;
-  left: auto;
-  bottom: 36px;
-  top: auto;
-  width: 32px;
-  height: 32px;
+  @apply size-[32px]  top-auto left-auto right-auto bottom-9  rtl:rotate-180 end-[120px] size-[32px] after:size-[100%] after:content-[''] after:bg-contain;
 }
 .swiperAuth .swiper-button-prev::after {
-  content: "";
-  width: 100%;
-  height: 100%;
-  background-size: contain;
   background-image: url("../../assets/icons/arrowLeft.svg");
 }
 .swiperAuth .swiper-slide h2 {
@@ -104,35 +80,26 @@ body {
   transition: 0.8s;
 }
 .swiperAuth .swiper-slide-active h2 {
-  transform: translateX(0px);
+  @apply translate-x-0
 }
 .swiperAuth .swiper-pagination {
-  width: fit-content !important;
-  bottom: 38px !important;
-  top: auto !important;
-  left: 50% !important;
-  transform: translateX(-50%);
+  @apply !w-fit !bottom-[38px] !top-auto !left-[50%] translate-x-[-50%]
 }
 .swiperAuth .swiper-pagination-bullet {
-  background-color: #b6bfc6;
-  opacity: 1;
+  @apply opacity-100 bg-[#b6bfc6];
 }
 .swiperAuth .swiper-pagination-bullet-active {
-  background-color: white;
+  @apply bg-white;
 }
 .offerSlider .swiper-pagination-bullet {
-  background-color: #b6bfc6;
-  opacity: 1;
+  @apply opacity-100 bg-[#b6bfc6];
 }
 .offerSlider .swiper-pagination-bullet-active {
-  background-color: white;
+  @apply bg-white;
 }
 .headTitle {
-  font-size: 32px;
-  font-weight: 500;
-  font-family: "IBMPlexSansArabicMedium";
+  @apply text-[32px] font-medium font-Medium;
 }
 .swiperList .swiper-button-disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
+  @apply opacity-70 cursor-not-allowed
 }
