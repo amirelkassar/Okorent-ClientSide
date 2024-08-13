@@ -2,6 +2,7 @@ import React from "react";
 import NavLinks from "./_components/navLinks";
 import Nav from "@/src/components/nav";
 import Footer from "@/src/components/footer";
+import ROUTES from "@/src/routes";
 
 interface layoutProps {
   children: React.ReactNode;
@@ -16,7 +17,7 @@ function layout({ children }: layoutProps) {
       }}
     >
       <div className="max-w-screen-2xl mx-auto">
-        <Nav />
+        <Nav linkLogo={ROUTES.ADMIN.DASHBOARD} />
         <main className="px-16 min-h-[calc(100vh-150px)] ">
           <NavLinks />
           {children}

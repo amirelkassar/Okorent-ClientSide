@@ -6,15 +6,17 @@ import React from "react";
 import MenuProfile from "./menuProfile";
 import { useLocale } from "next-intl";
 import { Link, usePathname } from "../navigation";
-
-function Nav() {
+interface NavProps {
+  linkLogo:string
+}
+function Nav({linkLogo='#'}:NavProps) {
   const locale = useLocale();
   const pathname = usePathname();
   return (
     <nav className="px-16 py-8 flex items-center justify-between gap-4">
-      <div>
+      <Link href={linkLogo}>
         <LogoBlack />
-      </div>
+      </Link>
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 rounded-[50%] bg-[#E5F1FB] p-2 relative flex items-center justify-center">
           <p className="text-white text-[8px] flex items-center border border-[#E5F1FB] justify-center bg-red min-w-[12px] w-fit h-[12px] aspect-[1/1] rounded-[50%] p-[2px] absolute top-2 right-2">
