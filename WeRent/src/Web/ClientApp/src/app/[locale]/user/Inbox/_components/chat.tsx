@@ -8,6 +8,8 @@ import MicIcon from "@/src/assets/icons/mic";
 import AttachIcon from "@/src/assets/icons/attach";
 import { cn } from "@/src/lib/utils";
 import CloseChatIcon from "@/src/assets/icons/closeChat";
+import PlayIcon from "@/src/assets/icons/play";
+import RecordIcon from "@/src/assets/icons/record";
 const Chat = () => {
   return (
     <div
@@ -42,6 +44,15 @@ const Chat = () => {
       <div className="overflow-y-auto space-y-5 flex-1 pb-10">
         {/* RECEIVED MESSAGE */}
         <div className="flex flex-row-reverse items-center gap-3">
+          <p className="bg-grayLight rounded-[32px] text-black text-[12px] leading-[15px] px-6 max-w-[344px] py-4 rounded-ee-none">
+            <span className="text-black flex items-center gap-2 w">
+              <PlayIcon />
+              <RecordIcon />
+              01:24
+            </span>
+          </p>
+        </div>
+        <div className="flex flex-row-reverse items-center gap-3">
           <p className="bg-grayLight rounded-[32px] text-black text-[12px] leading-[15px] px-6 max-w-[270px] py-4 rounded-ee-none">
             Oh, hello! All perfectly. I will check it and get back to you soon
           </p>
@@ -64,6 +75,15 @@ const Chat = () => {
               Oh, hello! All perfectly. I will check it and get back to you soon
             </p>
           </div>
+        </div>
+        <div className="flex= items-center gap-3">
+          <p className="bg-grayBack rounded-[32px] text-black text-[12px] leading-[15px] px-6 max-w-[344px] py-4 rounded-es-none">
+            <span className="text-black flex items-center gap-2 w">
+              <PlayIcon />
+              <RecordIcon />
+              01:24
+            </span>
+          </p>
         </div>
         <div className="flex items-center gap-3">
           <div className="flex flex-col gap-2">
@@ -112,6 +132,15 @@ const Chat = () => {
               04:45 PM
             </span>
           </div>
+        </div>
+        <div className="flex flex-row-reverse items-center gap-3">
+          <p className="bg-grayLight rounded-[32px] text-black text-[12px] leading-[15px] px-6 max-w-[344px] py-4 rounded-ee-none">
+            <span className="text-black flex items-center gap-2 w">
+              <PlayIcon />
+              <RecordIcon />
+              01:24
+            </span>
+          </p>
         </div>
       </div>
 
