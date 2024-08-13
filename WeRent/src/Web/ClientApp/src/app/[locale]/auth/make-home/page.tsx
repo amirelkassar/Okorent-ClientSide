@@ -1,21 +1,22 @@
 "use client";
 import Button from "@/src/components/button";
 import Logo from "@/src/components/logo";
-import { useRouter } from "@/src/navigation";
 import Image from "next/image";
 import React, { useState } from "react";
 import avatar1 from "@/src/assets/images/1.png";
 import { FileButton } from "@mantine/core";
 import UpLoadIcon from "@/src/assets/icons/upLoad";
 import DoneAuth from "./_components/doneAuth";
-
+import { cn } from "@/src/lib/utils";
+const dataAvatar = [avatar1, avatar1, avatar1, avatar1];
 function Page() {
   const [files, setFiles] = useState<File | null>();
   const [selectedTheme, setSelectedTheme] = useState("");
   const [Done, setDone] = useState(false);
-  console.log(files);
 
-  const router = useRouter();
+  const [active, setActive] = useState(0);
+  console.log(active);
+
   return (
     <div className="flex-1 pt-20 pb-16  flex  min-h-full justify-start">
       <div className="max-w-[450px] w-full flex flex-col gap-4">
@@ -28,21 +29,17 @@ function Page() {
           <div className="mt-2 mb-9">
             <h2 className="font-Medium text-medium">Choose your avatar</h2>
             <div className="flex items-center gap-3 mt-3">
-              <div>
-                <Image src={avatar1} width={38} height={38} alt="avatar" />
-              </div>
-              <div>
-                <Image src={avatar1} width={38} height={38} alt="avatar" />
-              </div>
-              <div>
-                <Image src={avatar1} width={38} height={38} alt="avatar" />
-              </div>
-              <div>
-                <Image src={avatar1} width={38} height={38} alt="avatar" />
-              </div>
-              <div>
-                <Image src={avatar1} width={38} height={38} alt="avatar" />
-              </div>
+              {
+                dataAvatar.map((item,i)=>{
+                  return (
+                    <button key={i} className={cn(" cursor-pointer rounded-full",
+                      active === i ? "outline-offset-2 outline outline-2 outline-green" :''
+                    )} onClick={()=>{setActive(i)}}>
+                    <Image src={item} width={38} height={38} alt="avatar" />
+                  </button>
+                  )
+                })
+              }
             </div>
           </div>
           <div className="mt-2 mb-9">
@@ -115,7 +112,7 @@ function Page() {
           </div>
         </div>
       </div>
-      {Done ? <DoneAuth done={Done}/> : null}
+      {Done ? <DoneAuth done={Done} /> : null}
     </div>
   );
 }
