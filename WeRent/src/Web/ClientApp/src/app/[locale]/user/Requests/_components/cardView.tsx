@@ -98,7 +98,7 @@ function CardView({ title, first = false, data, filterBy }: CardViewProps) {
             .map((item) => {
               return (
                 <SwiperSlide key={item.id}>
-                  <CardRequest data={item} />
+                  <CardRequest data={item} declined={filterBy==='decline'?true:false}/>
                 </SwiperSlide>
               );
             })}

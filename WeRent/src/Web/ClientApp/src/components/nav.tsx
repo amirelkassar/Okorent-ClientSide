@@ -1,10 +1,15 @@
+"use client";
 import LangIcon from "@/src/assets/icons/lang";
 import LogoBlack from "@/src/assets/icons/logoBlack";
 import NotificationIcon from "@/src/assets/icons/notfication";
 import React from "react";
 import MenuProfile from "./menuProfile";
+import { useLocale } from "next-intl";
+import { Link, usePathname } from "../navigation";
 
 function Nav() {
+  const locale = useLocale();
+  const pathname = usePathname();
   return (
     <nav className="px-16 py-8 flex items-center justify-between gap-4">
       <div>
@@ -17,9 +22,13 @@ function Nav() {
           </p>
           <NotificationIcon />
         </div>
-        <div className="w-10 h-10 rounded-[50%] bg-[#E5F1FB] p-2 relative flex items-center justify-center">
+        <Link
+          href={pathname}
+          locale={locale === "en" ? "ar" : "en"}
+          className="w-10 h-10 cursor-pointer duration-300 hover:shadow-lg rounded-[50%] bg-[#E5F1FB] p-2 relative flex items-center justify-center"
+        >
           <LangIcon />
-        </div>
+        </Link>
         <MenuProfile />
       </div>
     </nav>

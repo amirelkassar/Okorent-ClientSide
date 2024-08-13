@@ -3,6 +3,7 @@ import React from "react";
 import rental from "@/src/assets/images/house1.png";
 import LocationIcon from "@/src/assets/icons/location";
 import StarIcon from "@/src/assets/icons/star";
+import FavIcon from "../assets/icons/fav";
 
 function CardRentals({ data, Fav = false }: any) {
   return (
@@ -15,7 +16,7 @@ function CardRentals({ data, Fav = false }: any) {
         />
         {Fav && (
           <button className="p-2 rounded-lg bg-grayBack flex items-center justify-center absolute bottom-3 end-2 z-[2]">
-            fav
+            <FavIcon/>
           </button>
         )}
       </div>

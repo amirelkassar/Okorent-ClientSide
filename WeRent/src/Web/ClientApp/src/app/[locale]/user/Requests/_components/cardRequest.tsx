@@ -28,12 +28,11 @@ interface RequestData {
 }
 interface CardRequestProps {
   data?: RequestData;
-  dataByModal?:boolean
+  dataByModal?: boolean;
+  declined?: boolean;
 }
 
-function CardRequest({ data ,dataByModal}: CardRequestProps) {
-  console.log(data);
-
+function CardRequest({ data, dataByModal, declined = false }: CardRequestProps) {
   if (!data) {
     return <p>No data available</p>; // Handle missing data case
   }
@@ -143,15 +142,24 @@ function CardRequest({ data ,dataByModal}: CardRequestProps) {
           </div>
         </div>
       </div>
-      <div className="flex gap-6 flex-wrap">
-        <Button className={"w-full"}>Accept</Button>
-        <Button className={"flex-1 text-black bg-grayBack border-none"}>
-          Decline
-        </Button>
-        <Button className={"flex-1 text-black bg-grayBack border-none"}>
-          Message {data.name.split(' ')[0]}
-        </Button>
-      </div>
+      {declined ? (
+        <div className="flex gap-6 flex-wrap">
+          <Button className={"flex-1 text-black bg-grayBack border-none"}>
+            Message {data.name.split(" ")[0]}
+          </Button>
+          <Button className={"flex-1"}>Reoffer Now</Button>
+        </div>
+      ) : (
+        <div className="flex gap-6 flex-wrap">
+          <Button className={"w-full"}>Accept</Button>
+          <Button className={"flex-1 text-black bg-grayBack border-none"}>
+            Decline
+          </Button>
+          <Button className={"flex-1 text-black bg-grayBack border-none"}>
+            Message {data.name.split(" ")[0]}
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
