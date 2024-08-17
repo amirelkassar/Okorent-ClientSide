@@ -109,7 +109,6 @@ function ListChats() {
           {ChatsData.map((item, i) => {
             return (
               <div
-              key={i}
                 className={cn(
                   "py-1 px-2 flex items-center gap-3 cursor-pointer duration-300 hover:bg-grayBack/50 justify-between  w-full rounded-[18px] ",
                   item.identifier > 0 ? "bg-grayBack" : null
