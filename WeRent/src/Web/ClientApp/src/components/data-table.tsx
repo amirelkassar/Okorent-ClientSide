@@ -19,6 +19,7 @@ import CardIcon from "../assets/icons/card";
 import ROUTES from "../routes";
 import { strict } from "assert";
 import Button from "./button";
+import RentSwitch from "./RentSwitch";
 export interface FilterData {
   label: string;
   key: string|boolean;
@@ -40,6 +41,7 @@ interface DataTableProps<TData, TValue> {
   filterData?: FilterData[];
   sort?: boolean;
   sortingData?: SortingData[];
+  haveRentSwitch?:boolean
 }
 export function DataTable<TData, TValue>({
   columns,
@@ -54,6 +56,7 @@ export function DataTable<TData, TValue>({
   filterData = [],
   sort = false,
   sortingData = [],
+  haveRentSwitch=false
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [selectedUsers, setSelectedUsers] = useState<Set<number>>(new Set());
@@ -111,6 +114,9 @@ export function DataTable<TData, TValue>({
             </Link>
           )}
         </div>
+        {
+          haveRentSwitch&&<RentSwitch/>
+        }
         {viewAll && (
           <Button className={"h-10 w-fit gap-3 "}>
             <p className="text-white text-[16px]">{viewAllTitle||'View all'} </p>
@@ -167,10 +173,11 @@ export function DataTable<TData, TValue>({
               </Table.Tr>
             ))}
           </Table.Thead>
-          <Table.Tbody classNames={{ tbody: "pb-10" }}>
+          <Table.Tbody >
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row, index) => (
                 <Table.Tr
+                className="min-h-[72px] h-[72px]"
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >

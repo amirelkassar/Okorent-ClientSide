@@ -12,9 +12,9 @@ function CloseChatIcon() {
       <path
         d="M10 1L1 10M1 1L10 10"
         stroke="#88BA52"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

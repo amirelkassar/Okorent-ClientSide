@@ -10,6 +10,7 @@ import { cn } from "@/src/lib/utils";
 import CloseChatIcon from "@/src/assets/icons/closeChat";
 import PlayIcon from "@/src/assets/icons/play";
 import RecordIcon from "@/src/assets/icons/record";
+import phone from "@/src/assets/images/phone.png";
 const Chat = () => {
   return (
     <div
@@ -18,20 +19,42 @@ const Chat = () => {
       )}
     >
       <div className="flex items-center justify-between  border-b-2 border-b-black/20 px-1  pb-3">
-        <div className=" flex items-center gap-4">
-          <Image
-            className="size-10 rounded-full"
-            src={avatar}
-            alt="user"
-            priority
-          />
-          <div className="text-black">
-            <h3 className="text-[14px] leading-5">Ammi Watts</h3>
-            <p className=" flex items-center gap-1 text-grayMedium text-[12px] h-fit leading-[18px]">
-              {" "}
-              <span className=" block size-[5px] rounded-full bg-green animate-pulse "></span>{" "}
-              Active
-            </p>
+        <div className="flex gap-5">
+          <div className=" flex items-center gap-4">
+            <Image
+              className="size-10 rounded-full"
+              src={avatar}
+              alt="user"
+              priority
+            />
+            <div className="text-black">
+              <h3 className="text-[14px] leading-5">Ammi Watts</h3>
+              <p className=" flex items-center gap-1 text-grayMedium text-[12px] h-fit leading-[18px]">
+                {" "}
+                <span className=" block size-[5px] rounded-full bg-green animate-pulse "></span>{" "}
+                Active
+              </p>
+            </div>
+          </div>
+          <span className=" block h-[60px] w-[1px] bg-grayBack"></span>
+          <div className="bg-grayBack h-full rounded-xl min-w-[270px] flex items-center gap-4 py-3 px-2">
+            <Image
+              src={phone}
+              alt="phone"
+              width={21}
+              height={43}
+              className="w-auto h-full max-h-[44px]"
+            />
+            <div className="flex-1 flex items-center gap-4 justify-between flex-wrap">
+              <div className="">
+                <h4 className="text-grayMedium min-w-[66px] text-[12px]">Product Name</h4>
+                <p className=" text-[14px]">Apple Mobile</p>
+              </div>
+              <div className="">
+                <h4 className="text-grayMedium min-w-[66px] text-[12px]">Payment</h4>
+                <p className=" text-[14px]">100$</p>
+              </div>
+            </div>
           </div>
         </div>
         <div>
