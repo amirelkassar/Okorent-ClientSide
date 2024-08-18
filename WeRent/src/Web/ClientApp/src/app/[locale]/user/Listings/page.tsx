@@ -6,7 +6,6 @@ import { columns } from "./_components/columns";
 import ROUTES from "@/src/routes";
 import { useSearchParams } from "next/navigation";
 import CardView from "./_components/cardView";
-import RentSwitch from "@/src/components/RentSwitch";
 const FilterOptions = [
   {
     label: "Active",

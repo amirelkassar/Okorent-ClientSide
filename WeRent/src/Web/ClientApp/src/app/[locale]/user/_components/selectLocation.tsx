@@ -15,9 +15,11 @@ function SelectLocation() {
           <h3 className="text-blue text-[16px]">Select Location</h3>
         </div>
       </div>
-      <ModalComp opened={opened} close={close} title={"Select rental period"}>
-        <GoogleMapLoc close={close}/>
-      </ModalComp>
+      {opened && (
+        <ModalComp opened={opened} close={close} title={"Select rental period"}>
+          <GoogleMapLoc close={close} />
+        </ModalComp>
+      )}
     </>
   );
 }

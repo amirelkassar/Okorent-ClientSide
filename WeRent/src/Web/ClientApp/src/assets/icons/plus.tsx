@@ -1,6 +1,9 @@
 import React from "react";
-
-function PlusIcon({className}:any) {
+interface PlusIconProps{
+  className?:any,
+  fill?:string
+}
+function PlusIcon({className,fill='white'}:PlusIconProps) {
   return (
     <svg
       width="19"
@@ -12,10 +15,10 @@ function PlusIcon({className}:any) {
     >
       <path
         d="M9.49967 1.83301V18.1663M1.33301 9.99967H17.6663"
-        stroke="white"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        stroke={fill}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

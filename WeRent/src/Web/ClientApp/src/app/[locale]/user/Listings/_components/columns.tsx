@@ -1,13 +1,12 @@
 "use client";
-
 import DeleteIcon from "@/src/assets/icons/delete";
 import EditIcon from "@/src/assets/icons/edit";
-import FilterIcon from "@/src/assets/icons/filter";
 import { ActionIcon } from "@mantine/core";
 import { ColumnDef } from "@tanstack/react-table";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import phoneImg from "@/src/assets/images/phone.png";
 import CardStatus from "@/src/components/cardStatus";
+import BtnBarcode from "./btnBarcode";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type RequestsTableData = {
@@ -93,6 +92,7 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     cell: () => {
       return (
         <div className="flex items-center gap-3 w-fit">
+          <BtnBarcode />
           <ActionIcon variant="transparent">
             <EditIcon className="w-5 h-auto" />
           </ActionIcon>

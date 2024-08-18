@@ -16,7 +16,7 @@ function SelectDate() {
       month: "short",
       day: "numeric",
     }).format(date);
-  };
+  }
   return (
     <>
       <div className="flex items-center justify-center mb-16" onClick={open}>
@@ -25,7 +25,8 @@ function SelectDate() {
           <h3 className="text-blue text-[16px]">Choose Rental Duration</h3>
         </div>
       </div>
-      <ModalComp opened={opened} close={close} title={"Select rental period"}>
+      {
+        opened && <ModalComp opened={opened} close={close} title={"Select rental period"}>
         <div className="mx-auto max-w-[280px]">
           <DatePicker
             classNames={{
@@ -65,6 +66,8 @@ function SelectDate() {
           <Button className={'w-full'} onClick={close}>Save</Button>
         </div>
       </ModalComp>
+      }
+     
     </>
   );
 }

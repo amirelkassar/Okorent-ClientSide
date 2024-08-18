@@ -76,13 +76,12 @@ function NavLinks() {
     ],
     [path]
   );
-  
 
   return (
     <div className="mt-10 max-w-full ">
       <h1 className="mb-11 text-[32px] font-Bold">
         {LinksNav.find((item) => item.active)?.name}
-        
+        {path === ROUTES.USER.ADDLIST && "List an item"}
       </h1>
       <div className=" max-w-full overflow-x-auto overflow-y-hidden mb-12 pb-4">
         <ul className=" border-b-[1.5px] flex items-center gap-6 justify-between ">

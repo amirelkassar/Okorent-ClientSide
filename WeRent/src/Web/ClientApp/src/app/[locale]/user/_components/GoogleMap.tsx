@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { ChangeEvent, useCallback, useState } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import Button from "@/src/components/button";
 import LocationIcon from "@/src/assets/icons/location";
@@ -11,7 +11,20 @@ const center = {
   lat: 31.21405130266879,
   lng: 29.96070451527003,
 };
-function GoogleMapLoc({close}:any) {
+interface GoogleMapProps {
+  index?: any;
+  handleInputChangeLocation: (
+    index: number,
+    value: string,
+    name: string
+  ) => void;
+  close?: any;
+}
+function GoogleMapLoc({
+  close,
+  index,
+  handleInputChangeLocation,
+}: GoogleMapProps) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyDDbeB2JCI9I77iwI6SdzeHpcq2bx0qeQE",
@@ -33,6 +46,10 @@ function GoogleMapLoc({close}:any) {
       const place = data.results[0];
       const name = place.formatted_address || ""; // Store formatted address as place name
       setPlaceName(name);
+      {
+        handleInputChangeLocation &&
+          handleInputChangeLocation(index, name, "address");
+      }
     }
   };
 
@@ -71,7 +88,9 @@ function GoogleMapLoc({close}:any) {
           </h3>
         </div>
 
-        <Button onClick={close} className={"w-full"}>Select this location</Button>
+        <Button onClick={close} className={"w-full"}>
+          Select this location
+        </Button>
       </div>
     </div>
   );

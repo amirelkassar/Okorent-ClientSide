@@ -1,7 +1,6 @@
 "use client";
 import { Modal } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import React, { Children, useEffect } from "react";
+import React from "react";
 import CloseIcon from "../assets/icons/close";
 interface ModalCompProps {
   title: string;
@@ -10,6 +9,8 @@ interface ModalCompProps {
   close: any;
 }
 function ModalComp({ opened, close, children, title }: ModalCompProps) {
+  console.log("ghghghghghghghghghgh");
+
   return (
     <Modal
       opened={opened}
@@ -18,8 +19,9 @@ function ModalComp({ opened, close, children, title }: ModalCompProps) {
       classNames={{
         header: "p-0 h-0 min-h-0 ",
         body: "min-h-[300px] p-0 min-w-[400px] ",
-        content: "rounded-3xl border-2 overflow-hidden shadow-sidebar   border-green",
-        overlay:'bg-black/50'
+        content:
+          "rounded-3xl border-2 overflow-hidden shadow-sidebar   border-green",
+        overlay: "bg-black/50",
       }}
       closeButtonProps={{
         icon: <CloseIcon />,

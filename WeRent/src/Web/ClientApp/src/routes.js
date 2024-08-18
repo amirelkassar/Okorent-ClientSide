@@ -35,6 +35,7 @@ const ROUTES = {
     CALENDAR: "/user/Calendar",
     BILLING: "/user/Billing",
     SUPPORT: "/user/Support",
+    ADDLIST: "/user/add-list",
   },
 };
 
