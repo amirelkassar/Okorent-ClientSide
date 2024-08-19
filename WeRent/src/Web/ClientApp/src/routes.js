@@ -13,6 +13,7 @@ const ROUTES = {
   ADMIN: {
     DASHBOARD: "/admin",
     ACCOUNTS: "/admin/Accounts",
+    ACCOUNTSDETAILS:(id)=> `/admin/Accounts/${id}`,
     LISTINGS: "/admin/Listings",
     SUPPORT: "/admin/Support",
     LESSORS: "/admin/Lessors",

@@ -22,10 +22,12 @@ import Button from "./button";
 import RentSwitch from "./RentSwitch";
 export interface FilterData {
   label: string;
-  key: string|boolean;
+  type: string;
+  key: string | boolean;
 }
 export interface SortingData {
   label: string;
+  type: string;
   key: string;
 }
 interface DataTableProps<TData, TValue> {
@@ -41,7 +43,8 @@ interface DataTableProps<TData, TValue> {
   filterData?: FilterData[];
   sort?: boolean;
   sortingData?: SortingData[];
-  haveRentSwitch?:boolean
+  haveRentSwitch?: boolean;
+  addUser?: boolean;
 }
 export function DataTable<TData, TValue>({
   columns,
@@ -56,7 +59,8 @@ export function DataTable<TData, TValue>({
   filterData = [],
   sort = false,
   sortingData = [],
-  haveRentSwitch=false
+  haveRentSwitch = false,
+  addUser = false,
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [selectedUsers, setSelectedUsers] = useState<Set<number>>(new Set());
@@ -90,14 +94,14 @@ export function DataTable<TData, TValue>({
 
     if (tableColumn) return tableColumn.getFilterValue();
   };
-  const handelFilter = (key: string|boolean) => {
+  const handelFilter = (key: string | boolean) => {
     table.getColumn(filterBy)?.setFilterValue(key);
   };
   const handelSort = (key: string) => {
     table.getColumn(key)?.getIsSorted() !== "desc"
       ? table.getColumn(key)?.toggleSorting()
       : table.resetSorting();
-      return table.getColumn(key)?.getIsSorted()
+    return table.getColumn(key)?.getIsSorted();
   };
   return (
     <div>
@@ -114,31 +118,41 @@ export function DataTable<TData, TValue>({
             </Link>
           )}
         </div>
-        {
-          haveRentSwitch&&<RentSwitch/>
-        }
+        {haveRentSwitch && <RentSwitch />}
         {viewAll && (
           <Button className={"h-10 w-fit gap-3 "}>
-            <p className="text-white text-[16px]">{viewAllTitle||'View all'} </p>
+            <p className="text-white text-[16px]">
+              {viewAllTitle || "View all"}{" "}
+            </p>
             <ArrowWhiteIcon />
           </Button>
         )}
-        {filter && (
+        {filter && sort ? (
+          <FilterBy
+            data={filterData.concat(sortingData)}
+            filterfun={handelFilter}
+            sortFun={handelSort}
+            search={search}
+            addUser={addUser}
+          />
+        ) : filter ? (
           <FilterBy
             data={filterData}
             filterfun={handelFilter}
-            sortFun={()=>{}}
+            sortFun={() => {}}
             search={search}
+            addUser={addUser}
           />
-        )}
-        {sort && (
+        ) : sort ? (
           <FilterBy
             data={sortingData}
-            filterfun={()=>{}}
+            filterfun={() => {}}
             sortFun={handelSort}
             search={search}
+            addUser={addUser}
           />
-        )}
+        ) : null}
+       
       </div>
 
       <div className="space-y-5 border border-[#dee2e6] rounded-3xl pt-3 pb-6 mb-20">
@@ -173,11 +187,11 @@ export function DataTable<TData, TValue>({
               </Table.Tr>
             ))}
           </Table.Thead>
-          <Table.Tbody >
+          <Table.Tbody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row, index) => (
                 <Table.Tr
-                className="min-h-[72px] h-[72px]"
+                  className="min-h-[72px] h-[72px]"
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >

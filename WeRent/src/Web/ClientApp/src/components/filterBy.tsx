@@ -3,23 +3,26 @@ import Button from "./button";
 import { Link } from "../navigation";
 import ROUTES from "../routes";
 import { cn } from "../lib/utils";
+import AddUser from "./add-user";
 export interface HandleFilter {
-  (key: string|boolean): void;
+  (key: string | boolean): void;
 }
 export interface HandleSort {
   (key: string): void;
 }
 export interface FilterData {
   label: string;
-  key: string|boolean;
+  type: string;
+  key: string | boolean;
 }
 interface FilterByProps {
   data: FilterData[];
   filterfun: HandleFilter | null;
   sortFun: HandleSort | null;
   search?: boolean;
+  addUser?: boolean;
 }
-function FilterBy({ data, search, filterfun, sortFun }: FilterByProps) {
+function FilterBy({ data, search, filterfun, sortFun ,addUser=false}: FilterByProps) {
   return (
     <div className="flex items-center gap-2">
       <h3 className="text-grayMedium text-[14px] font-Regular">Filter By</h3>
@@ -28,12 +31,11 @@ function FilterBy({ data, search, filterfun, sortFun }: FilterByProps) {
           return (
             <li
               onClick={() => {
-                if (filterfun) {
-                  filterfun(item.key);
-                }
-                if (sortFun) {
-                  sortFun(item.key.toString());
-                }
+                item.type === "filter"
+                  ? filterfun && filterfun(item.key)
+                  : item.type === "sort"
+                  ? sortFun && sortFun(item.key.toString())
+                  : null;
               }}
               key={i}
               className={cn(
@@ -55,6 +57,7 @@ function FilterBy({ data, search, filterfun, sortFun }: FilterByProps) {
           Search a listing
         </Link>
       )}
+       {addUser && <AddUser/>}
     </div>
   );
 }

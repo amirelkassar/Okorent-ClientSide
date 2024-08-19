@@ -3,8 +3,6 @@ import HeaderDash from "./_components/header";
 import ChartsPlatform from "./_components/charts";
 import Button from "@/src/components/button";
 import { columns } from "./_components/column";
-
-import ArrowWhiteIcon from "@/src/assets/icons/arrowWhite";
 import { UserData } from "@/src/lib/dataUser";
 import { DataTable } from "@/src/components/data-table";
 import ROUTES from "@/src/routes";
