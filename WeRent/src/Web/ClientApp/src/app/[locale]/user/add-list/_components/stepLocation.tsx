@@ -29,8 +29,6 @@ function StepLocation({
   active=false
 }: StepLocationProps) {
   const [opened, { open, close }] = useDisclosure(false);
-  console.log(location);
-
   return (
     <Step
       title="Where is the item storage location "

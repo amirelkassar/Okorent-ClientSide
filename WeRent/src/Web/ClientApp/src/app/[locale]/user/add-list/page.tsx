@@ -5,8 +5,10 @@ import { Checkbox, Radio, Select, Textarea, TextInput } from "@mantine/core";
 import DownIcon from "@/src/assets/icons/down";
 import DropImg from "@/src/components/DropImg";
 import Button from "@/src/components/button";
-import StepAvailability from "./_components/stepAvailability";
+
 import StepLocation from "./_components/stepLocation";
+import StepVariations from "./_components/StepVariations";
+import StepAvailability from "./_components/stepAvailability";
 const OptionTerms = [
   {
     value: "Flexible",
@@ -25,17 +27,7 @@ const OptionTerms = [
     title: "",
   },
 ];
-const OptionAvailability = [
-  {
-    value: "always",
-    label: "Always available",
-  },
-  {
-    value: "pick",
-    label: "Pick a specific dates",
-    title: "",
-  },
-];
+
 interface Variation {
   name: string;
   attribute1: string;
@@ -61,7 +53,7 @@ function Page() {
       i === index ? { ...loc, [name]: value } : loc
     );
     setLocation(updatedVariations);
-    setDataList({...dataList,addresses:updatedVariations})
+    setDataList({ ...dataList, addresses: updatedVariations });
   };
   const addLocation = () => {
     setLocation([...location, { name: "", address: "" }]);
@@ -76,19 +68,19 @@ function Page() {
     index: number,
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    console.log(event);
-
     const { name, value } = event.target;
     const updatedVariations = variations.map((variation, i) =>
       i === index ? { ...variation, [name]: value } : variation
     );
     setVariations(updatedVariations);
+    setDataList({ ...dataList, Variations: updatedVariations });
   };
   const handleInputChangeSelect = (index: number, value: any, name: string) => {
     const updatedVariations = variations.map((variation, i) =>
       i === index ? { ...variation, [name]: value } : variation
     );
     setVariations(updatedVariations);
+    setDataList({ ...dataList, Variations: updatedVariations });
   };
   const handleCheckboxChange = (
     value: string,
@@ -98,10 +90,9 @@ function Page() {
       setState(null);
     } else {
       setState(value);
+      setDataList({ ...dataList, Status: value });
     }
   };
-
-  
 
   return (
     <div className="w-[810px]">
@@ -273,8 +264,23 @@ function Page() {
         handleInputChangeLocation={handleInputChangeLocation}
       />
 
-      <Step title="Cancellation Terms" active={dataList.addresses?dataList.addresses.length>0?true:false:false} stepNum={6}>
-        <Radio.Group  onChange={(e)=>{setDataList({...dataList,Terms:e})}}  name="OptionTerms">
+      <Step
+        title="Cancellation Terms"
+        active={
+          dataList.addresses
+            ? dataList.addresses.length > 0
+              ? true
+              : false
+            : false
+        }
+        stepNum={6}
+      >
+        <Radio.Group
+          onChange={(e) => {
+            setDataList({ ...dataList, Terms: e });
+          }}
+          name="OptionTerms"
+        >
           <div className="flex  items-center justify-between gap-3 flex-wrap">
             {OptionTerms.map((option, inedx) => {
               return (
@@ -299,7 +305,9 @@ function Page() {
       </Step>
       <Step title="Value of the item" active={dataList.Terms} stepNum={7}>
         <TextInput
-        onChange={(e)=>{setDataList({...dataList,value:e.target.value})}}
+          onChange={(e) => {
+            setDataList({ ...dataList, value: e.target.value });
+          }}
           placeholder="Add item value here"
           classNames={{
             input:
@@ -309,54 +317,21 @@ function Page() {
           className="h-[64px] mb-6 duration-200 min-h-[64px] bg-white rounded-2xl border-2 border-green text-grayMedium"
         />
       </Step>
-      <Step
-        title="Availability"
-        active={dataList.value}
-        stepNum={8}
-        dec="Choose when your item will be available for rent"
-      >
-        <Radio.Group
-          defaultValue={OptionAvailability[1].value}
-          name="OptionAvailability"
-        >
-          <div className="flex my-6 items-center justify-between gap-3 flex-wrap">
-            {OptionAvailability.map((option, inedx) => {
-              return (
-                <Radio
-                  color="#88BA52"
-                  key={inedx}
-                  value={option.value}
-                  label={option.label}
-                  classNames={{
-                    icon: "w-3 h-3 left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2",
-                  }}
-                />
-              );
-            })}
-          </div>
-        </Radio.Group>
-        <div>
-          <p className="mt-4 text-[14px] text-grayMedium font-Regular">
-            Your item is available for rent{" "}
-            <span className="text-blue font-Medium">
-              from August 9 to August 24.
-            </span>{" "}
-            <br />
-            Availability automatically updates to reflect rental periods.
-          </p>
-        </div>
-      </Step>
-      <StepAvailability
+      <StepAvailability dataList={dataList} setDataList={setDataList} />
+      <StepVariations
         handleInputChange={handleInputChange}
         variations={variations}
         setVariations={setVariations}
         addVariation={addVariation}
         handleInputChangeSelect={handleInputChangeSelect}
-        active={dataList.value}
+        active={dataList.Availability}
       />
-      <Step title="Stock" active stepNum={10}>
+      <Step title="Stock" active={dataList.Variations?.length > 0} stepNum={10}>
         <TextInput
           placeholder="Add available stock number here"
+          onChange={(e) => {
+            setDataList({ ...dataList, Stock: e.target.value });
+          }}
           classNames={{
             input:
               " text-black rounded-2xl text-grayMedium  h-full border-none placeholder:text-grayMedium placeholder:opacity-100 ",
@@ -365,13 +340,11 @@ function Page() {
           className="h-[64px] mb-6 duration-200 min-h-[64px] bg-white rounded-2xl border-2 border-green text-grayMedium"
         />
       </Step>
-      <Step title="Item Status" last active stepNum={11}>
+      <Step title="Item Status" last active={dataList.Stock} stepNum={11}>
         <div className="flex flex-col gap-4">
           <Checkbox
             checked={selectedCheckbox === "Active"}
             onChange={(e) => {
-              console.log(e.target.value);
-
               handleCheckboxChange(e.target.value, setSelectedCheckbox);
             }}
             color="#88BA52"

@@ -9,8 +9,6 @@ interface ModalCompProps {
   close: any;
 }
 function ModalComp({ opened, close, children, title }: ModalCompProps) {
-  console.log("ghghghghghghghghghgh");
-
   return (
     <Modal
       opened={opened}

@@ -34,7 +34,6 @@ function GoogleMapLoc({
     lng: number;
   } | null>(null);
   const [placeName, setPlaceName] = useState<string>(""); // Store place name
-  console.log(selectedLocation);
 
   // Function to fetch place name from lat/lng
   const fetchPlaceName = async (lat: number, lng: number) => {

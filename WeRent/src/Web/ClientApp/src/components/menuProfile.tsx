@@ -7,7 +7,7 @@ import profile from "@/src/assets/images/Shape.png";
 function MenuProfile() {
     const [opened, setOpened] = useState(false);
   return (
-    <Menu shadow="md" width={140} opened={opened} onChange={setOpened} classNames={{dropdown:'bg-green/15'}}>
+    <Menu shadow="md" width={140} opened={opened} onChange={setOpened} classNames={{dropdown:'bg-[#e0ede2]'}}>
       <Menu.Target>
         <button className="px-[6px] py-[3px] w-fit rounded-xl border border-black flex items-center justify-between gap-3">
           <div className="flex items-center gap-1">

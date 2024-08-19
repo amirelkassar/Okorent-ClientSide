@@ -7,6 +7,8 @@ import Image from "next/image";
 import phoneImg from "@/src/assets/images/phone.png";
 import CardStatus from "@/src/components/cardStatus";
 import BtnBarcode from "./btnBarcode";
+import { Link } from "@/src/navigation";
+import ROUTES from "@/src/routes";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type RequestsTableData = {
@@ -89,13 +91,14 @@ export const columns: ColumnDef<RequestsTableData>[] = [
   },
   {
     id: "actions",
-    cell: () => {
+    cell: ({row}) => {
+      const id = row.original.id
       return (
         <div className="flex items-center gap-3 w-fit">
           <BtnBarcode />
-          <ActionIcon variant="transparent">
+          <Link href={ROUTES.USER.LISTINGSDETAILS(id)} >
             <EditIcon className="w-5 h-auto" />
-          </ActionIcon>
+          </Link>
           <ActionIcon variant="transparent">
             <DeleteIcon className="w-5 h-auto" />
           </ActionIcon>

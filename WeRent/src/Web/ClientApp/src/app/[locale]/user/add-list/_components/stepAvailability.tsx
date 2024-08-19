@@ -1,187 +1,210 @@
 "use client";
-import React, { ChangeEvent } from "react";
+import React from "react";
 import Step from "./step";
-import { Checkbox, Select, TextInput } from "@mantine/core";
-import Button from "@/src/components/button";
-import PlusIcon from "@/src/assets/icons/plus";
-import { cn } from "@/src/lib/utils";
+import { Radio, Select } from "@mantine/core";
 import ModalComp from "@/src/components/modal-comp";
 import { useDisclosure } from "@mantine/hooks";
 import DownIcon from "@/src/assets/icons/down";
-interface Variation {
-  name: string;
-  attribute1: string;
-  attribute2: string;
-}
+import Button from "@/src/components/button";
+const OptionAvailability = [
+  {
+    value: "always",
+    label: "Always available",
+  },
+  {
+    value: "pick",
+    label: "Pick a specific dates",
+    title: "",
+  },
+];
+const OptionTime = [
+  { label: "12:00 AM", value: "00:00" },
+  { label: "1:00 AM", value: "01:00" },
+  { label: "2:00 AM", value: "02:00" },
+  { label: "3:00 AM", value: "03:00" },
+  { label: "4:00 AM", value: "04:00" },
+  { label: "5:00 AM", value: "05:00" },
+  { label: "6:00 AM", value: "06:00" },
+  { label: "7:00 AM", value: "07:00" },
+  { label: "8:00 AM", value: "08:00" },
+  { label: "9:00 AM", value: "09:00" },
+  { label: "10:00 AM", value: "10:00" },
+  { label: "11:00 AM", value: "11:00" },
+  { label: "12:00 PM", value: "12:00" },
+  { label: "1:00 PM", value: "13:00" },
+  { label: "2:00 PM", value: "14:00" },
+  { label: "3:00 PM", value: "15:00" },
+  { label: "4:00 PM", value: "16:00" },
+  { label: "5:00 PM", value: "17:00" },
+  { label: "6:00 PM", value: "18:00" },
+  { label: "7:00 PM", value: "19:00" },
+  { label: "8:00 PM", value: "20:00" },
+  { label: "9:00 PM", value: "21:00" },
+  { label: "10:00 PM", value: "22:00" },
+  { label: "11:00 PM", value: "23:00" },
+];
 interface StepAvailabilityProps {
-  variations: Variation[];
-  setVariations: React.Dispatch<React.SetStateAction<Variation[]>>;
-  addVariation: () => void;
-  handleInputChange: (
-    index: number,
-    event: ChangeEvent<HTMLInputElement>
-  ) => void;
-  handleInputChangeSelect: (index: number, value: any, name: string) => void;
-  active: boolean;
+  setDataList: React.Dispatch<any>;
+  dataList: any;
 }
-function StepAvailability({
-  variations,
-  setVariations,
-  addVariation,
-  handleInputChange,
-  handleInputChangeSelect,
-  active = false,
-}: StepAvailabilityProps) {
+function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
   const [opened, { open, close }] = useDisclosure(false);
   return (
     <Step
-      title="Variations "
-      active={active}
-      stepNum={9}
-      dec="You can add many variations for the same product or you can skip
-Ex. Size and color"
+      title="Availability"
+      active={dataList.value}
+      stepNum={8}
+      dec="Choose when your item will be available for rent"
     >
-      <div className="flex flex-col gap-6">
-        {variations.map((variation, index) => (
-          <div key={index} className="flex items-center gap-3">
-            <Checkbox
-              checked={true}
-              readOnly
-              color="#88BA52"
-              className={cn(index === 0 && "mt-6")}
-            />
-            <div className="flex items-center gap-4">
-              <TextInput
-                value={`Phone Cass ${index + 1}`}
-                name="name"
-                label={index === 0 && "Variation Name"}
-                placeholder={`Phone Cass ${index + 1}`}
-                readOnly
+      <Radio.Group
+        name="OptionAvailability"
+        onChange={(e) => {
+          setDataList({ ...dataList, Availability: e });
+          if (e === "pick") {
+            open();
+          }
+        }}
+      >
+        <div className="flex my-6 items-center justify-between gap-3 flex-wrap">
+          {OptionAvailability.map((option, inedx) => {
+            return (
+              <Radio
+                color="#88BA52"
+                key={inedx}
+                value={option.value}
+                label={option.label}
                 classNames={{
-                  label: "text-[16px] text-grayMedium mb-2",
-                  input:
-                    " text-black rounded-2xl text-grayMedium  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
-                  wrapper: "h-[64px]",
+                  icon: "w-3 h-3 left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2",
                 }}
-                className=" flex-1  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
               />
-              <TextInput
-                value={"Color -" + " " + variation.attribute1}
-                label={index === 0 && "Attribute 1"}
-                name="attribute1"
-                placeholder={`Phone Cass ${index + 1}`}
-                onChange={(event) => handleInputChange(index, event)}
-                classNames={{
-                  label: "text-[16px] text-grayMedium mb-2",
-                  input:
-                    " text-black rounded-2xl text-grayMedium first:font-Bold  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
-                  wrapper: "h-[64px]",
-                }}
-                className=" flex-1  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
-              />
-              <TextInput
-                value={"Size -" + " " + variation.attribute2}
-                label={index === 0 && "Attribute 2"}
-                name="attribute2"
-                placeholder={`Phone Cass ${index + 1}`}
-                onChange={(event) => handleInputChange(index, event)}
-                classNames={{
-                  label: "text-[16px] text-grayMedium mb-2",
-                  input:
-                    " text-black rounded-2xl text-grayMedium  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
-                  wrapper: "h-[64px]",
-                }}
-                className=" flex-1  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
-              />
-            </div>
-          </div>
-        ))}
+            );
+          })}
+        </div>
+      </Radio.Group>
+      <div>
+        <p className="mt-4 text-[14px] text-grayMedium font-Regular">
+          Your item is available for rent{" "}
+          <span className="text-blue font-Medium">
+            from August 9 to August 24.
+          </span>{" "}
+          <br />
+          Availability automatically updates to reflect rental periods.
+        </p>
       </div>
-      <ModalComp title="Add a variation" opened={opened} close={close}>
-        <div className="flex flex-col gap-6 w-[660px] max-w-full">
-          {variations.map((variation, index) => (
-            <div key={index} className="flex items-center gap-4">
-              <Select
-                data={["Color", "Color2", "Color3", "Color4", "Color5"]}
-                leftSectionPointerEvents="none"
-                rightSection={<DownIcon />}
-                placeholder="Color"
-                name="attribute1"
-                onChange={(event) =>
-                  handleInputChangeSelect(index, event, "attribute1")
-                }
-                label={index === 0 && "Attribute 1"}
-                classNames={{
-                  label: "text-[16px] text-black mb-2",
-                  input:
-                    " text-black rounded-2xl text-grayMedium  h-[64px]  border-2 border-green  placeholder:text-grayMedium placeholder:opacity-100 ",
+      <ModalComp
+        title="Choose available date and time "
+        opened={opened}
+        close={close}
+      >
+        <div className="flex flex-col gap-5">
+          <Select
+            data={["1 Day", "3 Day", "Week"]}
+            leftSectionPointerEvents="none"
+            rightSection={<DownIcon />}
+            placeholder="Select rental duration"
+            label={"Minimum rental duration"}
+            classNames={{
+              label: "text-black mb-2",
+              input:
+                " text-black rounded-2xl text-grayMedium bg-white   rounded-2xl border-2 border-green h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
 
-                  wrapper: "h-[64px]",
-                  dropdown:
-                    "bg-white text-black rounded-2xl border border-green/50 text-grayDark py-2",
-                  option: "hover:bg-green hover:text-white duration-300 ",
-                }}
-                className=" flex-1   duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
-              />
-
-              <TextInput
-                value={variation.attribute2}
-                label={index === 0 && " Attribute Details"}
-                name="attribute2"
-                placeholder={`Ex: If color Type Red`}
-                onChange={(event) => handleInputChange(index, event)}
-                classNames={{
-                  label: "text-[16px] text-grayMedium mb-2",
-                  input:
-                    " text-black rounded-2xl text-grayMedium  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
-                  wrapper: "h-[64px]",
-                }}
-                className=" flex-1  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
-              />
-            </div>
-          ))}
-        </div>
-        {variations.length < 3 && (
-          <Button
-            onClick={addVariation}
-            className={
-              "mt-8 bg-grayBack gap-3 px-7 h-[64px] border-none text-black"
-            }
-          >
-            <PlusIcon fill="#0F2A43" />
-            <p>Add Variations</p>
-          </Button>
-        )}
-        <div className="w-full flex items-center gap-5 mt-28">
-          <Button onClick={close} className={" h-[64px] flex-1"}>
-            Save and close
-          </Button>
-          {variations.length < 3 && (
-            <Button
-              onClick={addVariation}
-              className={" h-[64px] flex-1 bg-grayBack border-none text-black"}
-            >
-              Save and add another
-            </Button>
-          )}
-        </div>
-      </ModalComp>
-      {variations.length < 3 && (
-        <div className="variations-header">
-          <Button
-            onClick={() => {
-              addVariation();
-              open();
+              wrapper: "h-[64px]",
+              dropdown:
+                "bg-white text-black rounded-2xl border border-green/50 text-grayDark py-2",
+              option: "hover:bg-green hover:text-white duration-300 ",
             }}
-            className={
-              "mt-8 bg-grayBack gap-3 px-7 h-[64px] border-none text-black"
-            }
-          >
-            <PlusIcon fill="#0F2A43" />
-            <p>Add Variations</p>
-          </Button>
+            className="   duration-200 min-h-[64px]  text-grayMedium"
+          />
+          <div className="flex items-center justify-between gap-5">
+            <Select
+              data={OptionTime}
+              leftSectionPointerEvents="none"
+              rightSection={<DownIcon />}
+              placeholder="Select rental duration"
+              label={"Deafult pickup time"}
+              defaultValue={"08:00"}
+              onChange={(e) => {
+                console.log(e);
+              }}
+              classNames={{
+                label: "text-black mb-2",
+                input:
+                  " text-black rounded-2xl text-grayMedium bg-white   rounded-2xl border-2 border-green h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+
+                wrapper: "h-[64px]",
+                dropdown:
+                  "bg-white text-black rounded-2xl border border-green/50 text-grayDark py-2",
+                option: "hover:bg-green hover:text-white duration-300 ",
+              }}
+              className="flex-1   duration-200 min-h-[64px]  text-grayMedium"
+            />
+            <Select
+              data={OptionTime}
+              leftSectionPointerEvents="none"
+              rightSection={<DownIcon />}
+              placeholder="Select rental duration"
+              label={"Deafult return time"}
+              defaultValue={"08:00"}
+              classNames={{
+                label: "text-black mb-2",
+                input:
+                  " text-black rounded-2xl text-grayMedium bg-white   rounded-2xl border-2 border-green h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+
+                wrapper: "h-[64px]",
+                dropdown:
+                  "bg-white text-black rounded-2xl border border-green/50 text-grayDark py-2",
+                option: "hover:bg-green hover:text-white duration-300 ",
+              }}
+              className=" flex-1   duration-200 min-h-[64px]  text-grayMedium"
+            />
+          </div>
+          <div className="flex items-center justify-between gap-5">
+            <Select
+              data={OptionTime}
+              leftSectionPointerEvents="none"
+              rightSection={<DownIcon />}
+              placeholder="Select rental duration"
+              label={"Available from"}
+              defaultValue={"08:00"}
+              onChange={(e) => {
+                console.log(e);
+              }}
+              classNames={{
+                label: "text-black mb-2",
+                input:
+                  " text-black rounded-2xl text-grayMedium bg-white   rounded-2xl border-2 border-green h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+
+                wrapper: "h-[64px]",
+                dropdown:
+                  "bg-white text-black rounded-2xl border border-green/50 text-grayDark py-2",
+                option: "hover:bg-green hover:text-white duration-300 ",
+              }}
+              className="flex-1   duration-200 min-h-[64px]  text-grayMedium"
+            />
+            <Select
+              data={OptionTime}
+              leftSectionPointerEvents="none"
+              rightSection={<DownIcon />}
+              placeholder="Select rental duration"
+              label={"Available to"}
+              defaultValue={"08:00"}
+              classNames={{
+                label: "text-black mb-2",
+                input:
+                  " text-black rounded-2xl text-grayMedium bg-white   rounded-2xl border-2 border-green h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+
+                wrapper: "h-[64px]",
+                dropdown:
+                  "bg-white text-black rounded-2xl border border-green/50 text-grayDark py-2",
+                option: "hover:bg-green hover:text-white duration-300 ",
+              }}
+              className=" flex-1   duration-200 min-h-[64px]  text-grayMedium"
+            />
+          </div>
         </div>
-      )}
+
+        <Button className={"w-full h-[64px] mt-12"} onClick={close}>Save and close</Button>
+      </ModalComp>
     </Step>
   );
 }
