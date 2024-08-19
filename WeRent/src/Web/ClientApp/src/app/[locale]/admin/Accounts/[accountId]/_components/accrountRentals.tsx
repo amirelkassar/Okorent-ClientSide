@@ -6,8 +6,10 @@ import React from "react";
 
 import { Rentals } from "@/src/lib/dataUser";
 import CardRentals from "@/src/components/cardRentals";
-
-function AccrountRentals() {
+interface AccrountRentalsProps {
+  edit:boolean
+}
+function AccrountRentals({edit}:AccrountRentalsProps) {
   return (
     <div className="bg-grayBack pt-20 pb-14 relative before:content-[''] before:w-[calc(100%+130px)] before:bg-grayBack before:absolute before:bottom-0 before:-translate-x-1/2   before:h-full before:left-[50%]">
       <div className="flex items-center justify-between gap-4 mb-5 relative z-[1]">
@@ -28,7 +30,7 @@ function AccrountRentals() {
       <div className="flex gap-8 flex-wrap relative z-[1]">
         {
           Rentals.map((item)=>{
-            return (<CardRentals data={item} key={item.id}/>)
+            return (<CardRentals edit={edit} data={item} key={item.id}/>)
           })
         }
       </div>

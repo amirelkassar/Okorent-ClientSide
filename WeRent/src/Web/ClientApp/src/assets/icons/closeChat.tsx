@@ -1,6 +1,9 @@
 import React from "react";
-
-function CloseChatIcon() {
+interface CloseChatIconProps{
+  fill?:string,
+  className?:string
+}
+function CloseChatIcon({fill="#88BA52",className}:CloseChatIconProps) {
   return (
     <svg
       width="11"
@@ -11,7 +14,7 @@ function CloseChatIcon() {
     >
       <path
         d="M10 1L1 10M1 1L10 10"
-        stroke="#88BA52"
+        stroke={fill}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
