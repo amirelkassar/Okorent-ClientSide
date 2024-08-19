@@ -39,8 +39,8 @@ function AccountDetails() {
         <div>
           <h3 className="headTitle mb-4">Membership</h3>
           <ul>
-            <li className="flex items-center gap-3">
-              <CupIcon />
+            <li className="flex items-center gap-3 bg-grayBack px-[10px] py-1 rounded-xl">
+              <CupIcon className={'w-5 h-auto'} />
               <p className="text-blue font-Medium text-[20px]">
                 Advanced Package
               </p>

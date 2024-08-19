@@ -14,14 +14,17 @@ import CardView from "./_components/cardView";
 const FilterOptions = [
   {
     label: "New",
+     type: "filter",
     key: "New",
   },
   {
     label: "Ongoing",
+     type: "filter",
     key: "Ongoing",
   },
   {
     label: "Declined",
+     type: "filter",
     key: "Declined",
   },
 ];

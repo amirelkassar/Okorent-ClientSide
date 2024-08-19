@@ -10,7 +10,8 @@ function page() {
   return (
     <div>
       <HeaderDash />
-      <div className="mt-20 mb-32">
+      <div className="mt-20 mb-20 pb-24 border-b border-grayMedium">
+
         <div className="flex items-center justify-between gap-4 flex-wrap md:flex-nowrap">
           <div>
             <h2 className="text-[32px] font-Medium leading-7">

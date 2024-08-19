@@ -41,9 +41,10 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
       const name = getValue<string>();
       const img = row.original.img;
       const date = row.original.date;
+      const id = row.original.id;
 
       return (
-        <div className="flex items-center gap-2">
+        <Link href={ROUTES.ADMIN.ACCOUNTSDETAILS(id)} className="flex items-center gap-2">
           <Image
             src={img}
             alt={name}
@@ -55,7 +56,7 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
             <h2 className="text-[16px] font-SemiBold">{name}</h2>
             <p className="text-[14px] text-grayMedium">{date}</p>
           </div>
-        </div>
+        </Link>
       );
     },
   },

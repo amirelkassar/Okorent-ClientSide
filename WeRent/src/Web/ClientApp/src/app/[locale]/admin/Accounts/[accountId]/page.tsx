@@ -1,14 +1,15 @@
+'use client'
 import EditIcon from "@/src/assets/icons/edit";
 import React from "react";
-import Button from "@/src/components/button";
-import ArrowWhiteIcon from "@/src/assets/icons/arrowWhite";
-
 import AccountReviews from "./_components/accountReviews";
 import AccountDetails from "./_components/accountDetails";
 import phone from "@/src/assets/images/phone.png";
 import { columns } from "./_components/column";
 import AccrountRentals from "./_components/accrountRentals";
 import { DataTable } from "@/src/components/data-table";
+import { Link } from "@/src/navigation";
+import ROUTES from "@/src/routes";
+import { useSearchParams } from "next/navigation";
 const dataActivities = [
   {
     id: 1,
@@ -19,6 +20,7 @@ const dataActivities = [
     payment: 100,
     paymentStatus: "Pending",
     img: phone,
+    quantity: 50,
   },
   {
     id: 2,
@@ -29,6 +31,7 @@ const dataActivities = [
     payment: 250,
     paymentStatus: "Completed",
     img: phone,
+    quantity: 50,
   },
   {
     id: 3,
@@ -40,20 +43,27 @@ const dataActivities = [
     payment: 100,
     paymentStatus: "Pending",
     img: phone,
+    quantity: 50,
   },
 ];
-function page() {
+function Page({ params }: any) {
+  const searchParams = useSearchParams();
+  console.log(searchParams.get("edit"));
+  
   return (
     <div>
       <div>
         <div className="flex items-center justify-between gap-4 mb-6">
           <h2 className="headTitle">Account Details</h2>
-          <button className="flex items-center gap-3 bottom-0 bg-transparent">
+          <Link
+            href={ROUTES.ADMIN.ACCOUNTSDETAILS(params.accountId)+'?edit=true'}
+            className="flex items-center gap-3 bottom-0 bg-transparent"
+          >
             <p className="text-grayMedium text-[20px] font-Medium">
-              Edit profile
+              Edit profile Details
             </p>
             <EditIcon className="w-5" />
-          </button>
+          </Link>
         </div>
         <AccountDetails />
       </div>
@@ -72,4 +82,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

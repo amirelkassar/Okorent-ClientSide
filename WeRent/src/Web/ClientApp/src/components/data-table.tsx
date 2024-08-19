@@ -20,6 +20,10 @@ import ROUTES from "../routes";
 import { strict } from "assert";
 import Button from "./button";
 import RentSwitch from "./RentSwitch";
+import TrueIcon from "../assets/icons/true";
+import DeleteIcon from "../assets/icons/delete";
+import ImportIcon from "../assets/icons/import";
+import ExportIcon from "../assets/icons/export";
 export interface FilterData {
   label: string;
   type: string;
@@ -117,6 +121,22 @@ export function DataTable<TData, TValue>({
               <p>Card View</p>
             </Link>
           )}
+          {selectedUsers.size > 0 && (
+            <div className="flex items-center gap-3 flex-wrap">
+              <div className="px-3 min-h-10 bg-grayBack duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
+                <TrueIcon />
+                <p className="text-grayMedium text-[14px]">Verify</p>
+              </div>
+              <div className="px-3 min-h-10 bg-grayBack duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
+                <ExportIcon />
+                <p className="text-grayMedium text-[14px]">Export</p>
+              </div>
+              <div className="px-3 min-h-10 bg-grayBack duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
+                <DeleteIcon className="h-[14px] w-auto"/>
+                <p className="text-grayMedium text-[14px]">Delete</p>
+              </div>
+            </div>
+          )}
         </div>
         {haveRentSwitch && <RentSwitch />}
         {viewAll && (
@@ -152,7 +172,6 @@ export function DataTable<TData, TValue>({
             addUser={addUser}
           />
         ) : null}
-       
       </div>
 
       <div className="space-y-5 border border-[#dee2e6] rounded-3xl pt-3 pb-6 mb-20">
@@ -164,6 +183,10 @@ export function DataTable<TData, TValue>({
                 <Table.Th className=" pb-4 max-w-[20px] w-[20px]  ">
                   <Checkbox
                     size="xs"
+                    color="#88BA52"
+                    classNames={{
+                      input: "bg-transparent",
+                    }}
                     checked={selectedUsers.size === data.length}
                     indeterminate={
                       selectedUsers.size > 0 && selectedUsers.size < data.length
@@ -191,12 +214,16 @@ export function DataTable<TData, TValue>({
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row, index) => (
                 <Table.Tr
-                  className="min-h-[72px] h-[72px]"
+                  className="min-h-[72px]  h-[72px]"
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
                   <Table.Td>
                     <Checkbox
+                      color="#88BA52"
+                      classNames={{
+                        input: "bg-transparent",
+                      }}
                       size="xs"
                       checked={selectedUsers.has(index)}
                       onChange={() => toggleUser(index)}

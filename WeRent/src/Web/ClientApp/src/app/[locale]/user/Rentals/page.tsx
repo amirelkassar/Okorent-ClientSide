@@ -9,14 +9,17 @@ import CardView from "./_components/cardView";
 const FilterOptions = [
   {
     label: "Closed",
+    type: "filter",
     key: "Closed",
   },
   {
     label: "Ongoing",
+    type: "filter",
     key: "Ongoing",
   },
   {
     label: "Upcoming",
+    type: "filter",
     key: "Upcoming",
   },
 ];

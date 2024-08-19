@@ -9,10 +9,12 @@ import CardView from "./_components/cardView";
 const FilterOptions = [
   {
     label: "Active",
+    type: "filter",
     key: true,
   },
   {
     label: "Not Active",
+    type: "filter",
     key: false,
   },
 ];
@@ -37,7 +39,6 @@ function Page() {
           filter="buttons"
           filterData={FilterOptions}
           columns={columns}
-          
         />
       )}
     </div>

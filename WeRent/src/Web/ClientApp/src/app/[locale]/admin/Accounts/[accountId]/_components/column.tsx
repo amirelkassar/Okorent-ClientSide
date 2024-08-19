@@ -22,7 +22,7 @@ export type MedicalTeamTableData = {
 
 export const columns: ColumnDef<MedicalTeamTableData>[] = [
   {
-    accessorKey: "Product",
+    accessorKey: "product",
     header: "Product",
     cell: ({ getValue, row }) => {
       const name = getValue<string>();
@@ -66,17 +66,15 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     },
   },
   {
+    accessorKey: "quantity",
+    header: "Quantity",
+  },
+  {
     accessorKey: "user",
     header: "User",
     cell: ({ getValue }) => {
       const user = getValue<string>();
-      return (
-        <p
-          className={`text-[16px]  text-grayMedium `}
-        >
-          {user}
-        </p>
-      );
+      return <p className={`text-[16px]  text-grayMedium `}>{user}</p>;
     },
   },
   {

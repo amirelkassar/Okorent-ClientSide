@@ -20,7 +20,7 @@ function AccrountRentals() {
         </div>
         <Button className={"h-10 gap-3"}>
           <p className="text-white text-[16px] font-Medium">
-            View all activities
+          View all rentals
           </p>
           <ArrowWhiteIcon />
         </Button>
