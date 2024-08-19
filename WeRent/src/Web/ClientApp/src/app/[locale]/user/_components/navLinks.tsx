@@ -1,10 +1,12 @@
 "use client";
 import { Link, usePathname } from "@/src/navigation";
 import ROUTES from "@/src/routes";
+import { useParams } from "next/navigation";
 import React, { useMemo } from "react";
 
 function NavLinks() {
   const path = usePathname();
+  const params = useParams();
   const LinksNav = useMemo(
     () => [
       {
@@ -23,7 +25,8 @@ function NavLinks() {
         id: 3,
         name: "My Listings",
         url: ROUTES.USER.LISTINGS,
-        active: path === ROUTES.USER.LISTINGS,
+        active:  path.includes(ROUTES.USER.LISTINGS) ,
+        activeDetails: path===ROUTES.USER.LISTINGSDETAILS(params.listID)  ? "/  Item Details" :path===ROUTES.USER.LISTINGSEDIT(params.listID)?"/ Edit Listing": null,
       },
       {
         id: 4,
@@ -82,6 +85,9 @@ function NavLinks() {
       <h1 className="mb-11 text-[32px] font-Bold">
         {LinksNav.find((item) => item.active)?.name}
         {path === ROUTES.USER.ADDLIST && "List an item"}
+        <span className="mx-3">
+          {LinksNav.find((item) => item?.activeDetails)?.activeDetails}
+        </span>
       </h1>
       <div className=" max-w-full overflow-x-auto overflow-y-hidden mb-12 pb-4">
         <ul className=" border-b-[1.5px] flex items-center gap-6 justify-between ">

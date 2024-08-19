@@ -28,6 +28,7 @@ const ROUTES = {
     DASHBOARD: "/user/Dashboard",
     LISTINGS: "/user/Listings",
     LISTINGSDETAILS: (id) => `/user/Listings/${id}`,
+    LISTINGSEDIT: (id) => `/user/Listings/${id}/edit`,
     RENTALS: "/user/Rentals",
     REQUESTS: "/user/Requests",
     INBOX: "/user/Inbox",

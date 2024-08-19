@@ -17,7 +17,7 @@ function Nav({ linkLogo = "#" }: NavProps) {
   const locale = useLocale();
   const pathname = usePathname();
   return (
-    <nav className="px-16 py-8 flex items-center justify-between gap-4">
+    <nav className="px-4 lg:px-16 py-5 lg:py-8 flex items-center justify-between gap-4">
       <Link href={linkLogo}>
         <Image src={logo} alt="logo" width={135} height={45} />
       </Link>
