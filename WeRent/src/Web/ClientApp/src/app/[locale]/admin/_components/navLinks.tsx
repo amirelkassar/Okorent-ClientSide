@@ -22,7 +22,13 @@ function NavLinks() {
         name: "Accounts",
         url: ROUTES.ADMIN.ACCOUNTS,
         active: path.includes(ROUTES.ADMIN.ACCOUNTS),
-        activeDetails: params.accountId ? "/ Details" : null,
+        activeDetails: params.accountId
+          ? "/ Details"
+          : path === ROUTES.ADMIN.ACCOUNTSLISTDETAILS(params.listID)
+          ? "/ Listing Details"
+          : path === ROUTES.ADMIN.ACCOUNTSLISTDETAILSEDIT(params.listID)
+          ? "/ Edit Listing "
+          : null,
       },
       {
         id: 3,
@@ -81,7 +87,6 @@ function NavLinks() {
     ],
     [path]
   );
-  
 
   return (
     <div className="mt-10 max-w-full ">
@@ -93,7 +98,7 @@ function NavLinks() {
       </h1>
       <div className=" max-w-full overflow-x-auto overflow-y-hidden mb-12 pb-4">
         <ul className=" border-b-[1.5px] flex items-center gap-6 justify-between ">
-          {LinksNav.map((link,i) => {
+          {LinksNav.map((link, i) => {
             return (
               <li
                 key={link.id}
