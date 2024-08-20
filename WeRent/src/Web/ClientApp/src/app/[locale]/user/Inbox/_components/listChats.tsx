@@ -84,11 +84,19 @@ const ChatsData: ChatsDataProps[] = [
     identifier: 1,
     image: avatar,
   },
+  {
+    name: "Ahmed Mohamed Badr",
+    date: "Today",
+    time: "05:30 PM",
+    identifier: 1,
+    image: avatar,
+  },
+  
 ];
 
 function ListChats() {
   return (
-    <div className="max-w-[360px] w-full flex-1 flex flex-col gap-6">
+    <div className="max-w-[360px]  w-full flex-1 flex flex-col gap-6">
       <div className=" flex h-[66px] min-h-[66px] w-full  rounded-2xl  border border-green overflow-hidden">
         <TextInput
           placeholder="Search in chats"
@@ -104,8 +112,8 @@ function ListChats() {
           <SearchIcon />
         </button>
       </div>
-      <div className="py-7 px-2 bg-white border border-green rounded-3xl flex-1 h-full max-h-max shadow-sidebar  overflow-auto">
-        <div className=" flex flex-col gap-4 max-w-full overflow-auto h-full">
+      <div className="py-7 px-2 bg-white border border-green rounded-3xl flex-1 h-full  shadow-sidebar  ">
+        <div className=" flex flex-col gap-4  max-w-full overflow-auto  h-full max-h-[770px]">
           {ChatsData.map((item, i) => {
             return (
               <div

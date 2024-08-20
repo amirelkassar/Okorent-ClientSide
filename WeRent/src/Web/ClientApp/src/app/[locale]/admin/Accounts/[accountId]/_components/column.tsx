@@ -3,6 +3,8 @@
 import DeleteIcon from "@/src/assets/icons/delete";
 import EditIcon from "@/src/assets/icons/edit";
 import StarIcon from "@/src/assets/icons/star";
+import { Link } from "@/src/navigation";
+import ROUTES from "@/src/routes";
 import { ActionIcon } from "@mantine/core";
 import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
@@ -28,9 +30,10 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
       const name = getValue<string>();
       const img = row.original.img;
       const type = row.original.productType;
+      const id = row.original.id;
 
       return (
-        <div className="flex items-center gap-2">
+        <Link href={ROUTES.ADMIN.ACCOUNTSLISTDETAILS(id)} className="flex items-center gap-2">
           <div className="bg-grayBack rounded-[50%] size-[50px] p-1 flex items-center justify-center">
             <Image
               src={img}
@@ -44,7 +47,7 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
             <h2 className="text-[16px] font-SemiBold">{name}</h2>
             <p className="text-#6F6B7D text-[14px]">{type}</p>
           </div>
-        </div>
+        </Link>
       );
     },
   },

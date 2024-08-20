@@ -1,9 +1,10 @@
 "use client";
 import LocationIcon from "@/src/assets/icons/location";
+import GoogleMapLoc from "@/src/components/GoogleMap";
 import ModalComp from "@/src/components/modal-comp";
 import { useDisclosure } from "@mantine/hooks";
 import React from "react";
-import GoogleMapLoc from "./GoogleMap";
+
 
 function SelectLocation() {
   const [opened, { open, close }] = useDisclosure(false);

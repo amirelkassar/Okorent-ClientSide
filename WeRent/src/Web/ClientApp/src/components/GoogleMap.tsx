@@ -2,6 +2,8 @@ import React, { ChangeEvent, useCallback, useState } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import Button from "@/src/components/button";
 import LocationIcon from "@/src/assets/icons/location";
+import { TextInput } from "@mantine/core";
+import SearchIcon from "../assets/icons/search";
 const containerStyle = {
   width: "640px",
   height: "390px",
@@ -13,7 +15,7 @@ const center = {
 };
 interface GoogleMapProps {
   index?: any;
-  handleInputChangeLocation: (
+  handleInputChangeLocation?: (
     index: number,
     value: string,
     name: string
@@ -66,7 +68,22 @@ function GoogleMapLoc({
     return <div>Loading...</div>;
   }
   return (
-    <div className=" max-w-[640px] h-[390px] relative">
+    <div className=" max-w-[640px] h-auto min-h-[360px] relative">
+       <div className="flex-1 flex p-[1px] rounded-2xl h-[66px] mb-6  border-[3px] border-green/30 ps-6 bg-white overflow-hidden">
+      <SearchIcon className={'w-[18px] h-auto'} fill="#0F2A43"/>
+        <TextInput
+          placeholder="What are you looking to rent today?"
+          type="text"
+          classNames={{
+            input: "flex-1  bg-white text-black h-full border-none px-5 text-[16px] font-Medium",
+            wrapper: "h-full",
+          }}
+          className="flex-1  text-grayMedium h-full text-[16px]"
+        />
+        <button className="h-full w-[78px] rounded-e-xl border-[3px] bg-green border-[#a9c788] hover:border-green duration-500 flex items-center justify-center">
+          <SearchIcon className={'w-[26px] h-auto'} />
+        </button>
+      </div>
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}

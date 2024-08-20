@@ -14,6 +14,8 @@ const ROUTES = {
     DASHBOARD: "/admin",
     ACCOUNTS: "/admin/Accounts",
     ACCOUNTSDETAILS:(id)=> `/admin/Accounts/${id}`,
+    ACCOUNTSLISTDETAILS:(id)=> `/admin/Accounts/list/${id}`,
+    ACCOUNTSLISTDETAILSEDIT:(id)=> `/admin/Accounts/list/${id}/edit`,
     LISTINGS: "/admin/Listings",
     SUPPORT: "/admin/Support",
     LESSORS: "/admin/Lessors",

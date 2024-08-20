@@ -1,6 +1,5 @@
 "use client";
-import React, { ChangeEvent } from "react";
-import Step from "./step";
+import React from "react";
 import { Checkbox, TextInput } from "@mantine/core";
 import Button from "@/src/components/button";
 import { cn } from "@/src/lib/utils";
@@ -8,6 +7,7 @@ import ModalComp from "@/src/components/modal-comp";
 import { useDisclosure } from "@mantine/hooks";
 import LocationIcon from "@/src/assets/icons/location";
 import GoogleMapLoc from "@/src/components/GoogleMap";
+
 
 interface LocationProps {
   name: string;
@@ -21,22 +21,20 @@ interface StepLocationProps {
     value: string,
     name: string
   ) => void;
-  active:boolean
 }
 function StepLocation({
   location,
   addLocation,
   handleInputChangeLocation,
-  active=false
 }: StepLocationProps) {
   const [opened, { open, close }] = useDisclosure(false);
   return (
-    <Step
-      title="Where is the item storage location "
-      active={active}
-      stepNum={5}
-      dec="Add storage location that we will pickup the item from"
-    >
+    <div className="mt-[7px] pb-12 flex-1">
+      <h3 className={"text-[24px] mb-1 "}>Storage Location</h3>
+      <p className="text-grayMedium mb-4 text-base font-Regular">
+        Add storage location that we will pickup the item from
+      </p>
+
       <div className="flex flex-col gap-6">
         {location.map((loc, index) => (
           <div key={index} className="flex items-center gap-3">
@@ -109,7 +107,7 @@ function StepLocation({
           </Button>
         </div>
       )}
-    </Step>
+    </div>
   );
 }
 

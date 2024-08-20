@@ -103,3 +103,34 @@
 .swiperList .swiper-button-disabled {
   @apply opacity-70 cursor-not-allowed
 }
+
+.inputChat {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: center;
+  padding-top: 60px;
+  padding: 50px 40px 0px;
+}
+.inputChat .boxInput {
+  flex: 1;
+  position: relative;
+  border-radius: 10px;
+  background: #efefef;
+}
+.inputChat .boxInput .boxImages {
+  padding: 12px;
+  display: flex;
+  gap: 10px;
+  border-bottom: 2px #cccccc dotted;
+  flex-wrap: wrap;
+}
+.inputChat .boxInput .textInput textarea {
+  border-radius: 10px;
+  background: #efefef;
+  border: none;
+  height: 34px;
+  width: 100%;
+  outline: none;
+  padding: 12px 40px 12px 12px;
+}

@@ -6,7 +6,7 @@ import { cn } from "@/src/lib/utils";
 import ModalComp from "@/src/components/modal-comp";
 import { useDisclosure } from "@mantine/hooks";
 import LocationIcon from "@/src/assets/icons/location";
-import GoogleMapLoc from "../../../../_components/GoogleMap";
+import GoogleMapLoc from "@/src/components/GoogleMap";
 
 interface LocationProps {
   name: string;
