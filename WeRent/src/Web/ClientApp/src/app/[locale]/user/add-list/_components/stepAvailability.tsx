@@ -1,11 +1,12 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Step from "./step";
 import { Radio, Select } from "@mantine/core";
 import ModalComp from "@/src/components/modal-comp";
 import { useDisclosure } from "@mantine/hooks";
 import DownIcon from "@/src/assets/icons/down";
 import Button from "@/src/components/button";
+import { DatePickerInput } from "@mantine/dates";
 const OptionAvailability = [
   {
     value: "always",
@@ -49,6 +50,10 @@ interface StepAvailabilityProps {
 }
 function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
   const [opened, { open, close }] = useDisclosure(false);
+  const [value, setValue] = useState<[Date | null, Date | null]>([
+    new Date(),
+    new Date(),
+  ]);
   return (
     <Step
       title="Availability"
@@ -115,7 +120,7 @@ function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
             }}
             className="   duration-200 min-h-[64px]  text-grayMedium"
           />
-          <div className="flex items-center justify-between gap-5">
+          <div className="flex  items-center justify-between gap-5">
             <Select
               data={OptionTime}
               leftSectionPointerEvents="none"
@@ -158,52 +163,30 @@ function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
               className=" flex-1   duration-200 min-h-[64px]  text-grayMedium"
             />
           </div>
-          <div className="flex items-center justify-between gap-5">
-            <Select
-              data={OptionTime}
-              leftSectionPointerEvents="none"
-              rightSection={<DownIcon />}
-              placeholder="Select rental duration"
-              label={"Available from"}
-              defaultValue={"08:00"}
-              onChange={(e) => {
-                console.log(e);
-              }}
-              classNames={{
-                label: "text-black mb-2",
-                input:
-                  " text-black rounded-2xl text-grayMedium bg-white   rounded-2xl border-2 border-green h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
 
-                wrapper: "h-[64px]",
-                dropdown:
-                  "bg-white text-black rounded-2xl border border-green/50 text-grayDark py-2",
-                option: "hover:bg-green hover:text-white duration-300 ",
-              }}
-              className="flex-1   duration-200 min-h-[64px]  text-grayMedium"
-            />
-            <Select
-              data={OptionTime}
-              leftSectionPointerEvents="none"
-              rightSection={<DownIcon />}
-              placeholder="Select rental duration"
-              label={"Available to"}
-              defaultValue={"08:00"}
-              classNames={{
-                label: "text-black mb-2",
-                input:
-                  " text-black rounded-2xl text-grayMedium bg-white   rounded-2xl border-2 border-green h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
-
-                wrapper: "h-[64px]",
-                dropdown:
-                  "bg-white text-black rounded-2xl border border-green/50 text-grayDark py-2",
-                option: "hover:bg-green hover:text-white duration-300 ",
-              }}
-              className=" flex-1   duration-200 min-h-[64px]  text-grayMedium"
-            />
-          </div>
+          <DatePickerInput
+            type="range"
+            label="Available From - To"
+            placeholder=".. - .."
+            value={value}
+            onChange={setValue}
+            popoverProps={{ position: "top" ,classNames:{dropdown:'border-2 border-green  rounded-2xl shadow-lg shadow-green/40'}}}
+            valueFormat="DD-MM-YYYY"
+            classNames={{
+              input:
+                " text-black rounded-2xl text-grayMedium bg-white   rounded-2xl border-2 border-green h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+              day: "data-[in-range]:bg-green data-[last-in-range]:rounded-e-[14px]  data-[first-in-range]:rounded-s-[14px] p-0 rounded-3 data-[in-range]:text-white",
+              monthCell: "px-0",
+              levelsGroup: "justify-center mb-3",
+              weekday: "text-black",
+              calendarHeader: "text-grayMedium",
+            }}
+          />
         </div>
 
-        <Button className={"w-full h-[64px] mt-12"} onClick={close}>Save and close</Button>
+        <Button className={"w-full h-[64px] mt-12"} onClick={close}>
+          Save and close
+        </Button>
       </ModalComp>
     </Step>
   );
