@@ -29,10 +29,10 @@ interface RequestData {
 interface CardRequestProps {
   data?: RequestData;
   dataByModal?: boolean;
-  declined?: boolean;
+  declined?: "accept" | "decline" | "upcoming" | "ongoing";
 }
 
-function CardRequest({ data, dataByModal, declined = false }: CardRequestProps) {
+function CardRequest({ data, dataByModal, declined }: CardRequestProps) {
   if (!data) {
     return <p>No data available</p>; // Handle missing data case
   }
@@ -142,14 +142,28 @@ function CardRequest({ data, dataByModal, declined = false }: CardRequestProps) 
           </div>
         </div>
       </div>
-      {declined ? (
+      {declined === "decline" ? (
         <div className="flex gap-6 flex-wrap">
           <Button className={"flex-1 text-black bg-grayBack border-none"}>
             Message {data.name.split(" ")[0]}
           </Button>
           <Button className={"flex-1"}>Reoffer Now</Button>
         </div>
-      ) : (
+      ) : declined === "ongoing" ? (
+        <div className="flex gap-6 flex-wrap">
+          <Button className={"flex-1 text-black bg-grayBack border-none"}>
+            Message {data.name.split(" ")[0]}
+          </Button>
+          <Button className={"flex-1"}>View Details</Button>
+        </div>
+      ) : declined === "upcoming" ? (
+        <div className="flex gap-6 flex-wrap">
+          <Button className={"flex-1 text-black bg-grayBack border-none"}>
+            Message {data.name.split(" ")[0]}
+          </Button>
+          <Button className={"flex-1"}>Cancel Bookings</Button>
+        </div>
+      ) : declined === "accept" ? (
         <div className="flex gap-6 flex-wrap">
           <Button className={"w-full"}>Accept</Button>
           <Button className={"flex-1 text-black bg-grayBack border-none"}>
@@ -159,7 +173,7 @@ function CardRequest({ data, dataByModal, declined = false }: CardRequestProps) 
             Message {data.name.split(" ")[0]}
           </Button>
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

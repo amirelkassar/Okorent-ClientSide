@@ -14,27 +14,23 @@ interface dataProps {
   details: string;
 }
 interface ProductListProps {
-  title: string;
+  title?:string,
   link?: string;
   data: dataProps[];
 }
-function ProductList({ title, link, data }: ProductListProps) {
+function ProductList({ link,title, data }: ProductListProps) {
   return (
     <div className="mb-11">
-      <div className="flex items-center justify-between flex-wrap gap-4 mb-6">
-        <h2 className="text-[24px]">{title}</h2>
-        <Button className={"gap-2 h-10"}>
-          <p>View More</p>
-          <ArrowWhiteIcon />
-        </Button>
-      </div>
+      <h2 className="text-center mb-10 headTitle">{title}</h2>
+
       {data.length > 0 && (
-        <div className="flex gap-8 flex-wrap">
+        <div className="flex gap-8 justify-center flex-wrap">
           {data?.map((item, i) => {
             return <CardRentals data={item} key={i} Fav={true} />;
           })}
         </div>
       )}
+      <Button className={"gap-2 mx-auto mt-11 h-10"}>View more items</Button>
     </div>
   );
 }

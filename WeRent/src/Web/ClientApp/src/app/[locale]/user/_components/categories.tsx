@@ -5,7 +5,7 @@ import React from "react";
 function Categories() {
   return (
     <div className="mb-16">
-      <h2 className="text-center headTitle">Popular Categories </h2>
+      <h2 className="text-center headTitle">Our Most Popular Categories  </h2>
       <div className="flex justify-center mt-10 gap-7 ">
         {CategoriesData.map((category, index) => {
           return (

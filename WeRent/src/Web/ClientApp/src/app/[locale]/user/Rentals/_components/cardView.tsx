@@ -1,17 +1,25 @@
 import ListIcon from "@/src/assets/icons/list";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
-import React, { useEffect, useRef } from "react";
+import React, {  useRef } from "react";
 import OneCardView from "./oneCardView";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import ArrowLeftIcon from "@/src/assets/icons/arrowLeft";
 import ArrowRightIcon from "@/src/assets/icons/ArrowRight";
+import RentSwitch from "@/src/components/RentSwitch";
 interface CardViewProps {
   title: string;
   first?: boolean;
+  haveRentSwitch?: boolean;
+  filterBy: "completed" | "decline"|'upcoming'|'ongoing';
 }
-function CardView({ title, first = false }: CardViewProps) {
+function CardView({
+  title,
+  first = false,
+  haveRentSwitch = false,
+  filterBy
+}: CardViewProps) {
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
 
@@ -37,7 +45,12 @@ function CardView({ title, first = false }: CardViewProps) {
               <p>List View</p>
             </Link>
           )}
-        </div >
+        </div>
+        {first && haveRentSwitch && (
+          <div>
+            <RentSwitch />
+          </div>
+        )}
         <div className="flex items-center gap-7">
           <div className="flex gap-4">
             <div
@@ -54,16 +67,7 @@ function CardView({ title, first = false }: CardViewProps) {
               <ArrowRightIcon fill="#0F2A43" />
             </div>
           </div>
-          {first && (
-            <Link
-              href={ROUTES.USER.HOMEPAGE}
-              className={
-                "h-10 bg-green px-3 border-4 border-[#a9c788] hover:border-green duration-500 text-medium rounded-xl text-white flex items-center justify-center "
-              }
-            >
-              Search a listing
-            </Link>
-          )}
+         
         </div>
       </div>
       <div className="max-w-[1270px] my-4">

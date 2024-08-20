@@ -1,18 +1,16 @@
 "use client";
 import { DataTable } from "@/src/components/data-table";
-import FilterBy from "@/src/components/filterBy";
 import { RequestsData } from "@/src/lib/dataUser";
 import React, { useState } from "react";
 import { columns } from "./_components/columns";
 import { useSearchParams } from "next/navigation";
-import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
-import CardIcon from "@/src/assets/icons/card";
 import { Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import CloseIcon from "@/src/assets/icons/close";
 import CardRequest from "./_components/cardRequest";
 import CardView from "./_components/cardView";
+
 const FilterOptions = [
   {
     label: "New",
@@ -41,11 +39,23 @@ function Page() {
     <div>
       {searchParams.get("cards") === "true" ? (
         <div>
+          
           <CardView
             title="New Requests"
             first
             data={RequestsData}
             filterBy="accept"
+            haveRentSwitch
+          />
+          <CardView
+            title="Upcoming Bookings"
+            data={RequestsData}
+            filterBy='upcoming'
+          />
+            <CardView
+            title="Ongoing Bookings"
+            data={RequestsData}
+            filterBy='ongoing'
           />
           <CardView
             title="Declined Requests"
@@ -61,6 +71,7 @@ function Page() {
           filterBy="status"
           filterData={FilterOptions}
           data={RequestsData}
+          haveRentSwitch
           columns={columnsWithOpen}
         />
       )}

@@ -4,6 +4,8 @@ import "swiper/css/navigation";
 import 'swiper/css/pagination'
 import "@mantine/core/styles.css";
 import '@mantine/charts/styles.css';
+import '@mantine/dates/styles.css';
+import '@mantine/dropzone/styles.css';
 import "./globals.css";
 import { MantineProvider } from "@mantine/core";
 

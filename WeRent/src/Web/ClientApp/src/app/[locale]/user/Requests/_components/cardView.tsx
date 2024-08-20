@@ -9,6 +9,7 @@ import ArrowLeftIcon from "@/src/assets/icons/arrowLeft";
 import ArrowRightIcon from "@/src/assets/icons/ArrowRight";
 import CardRequest from "./cardRequest";
 import { StaticImageData } from "next/image";
+import RentSwitch from "@/src/components/RentSwitch";
 interface RequestData {
   id: number;
   name: string;
@@ -34,11 +35,18 @@ interface RequestData {
 
 interface CardViewProps {
   data?: RequestData[];
-  filterBy: "accept" | "decline";
+  filterBy: "accept" | "decline"|'upcoming'|'ongoing';
   title: string;
   first?: boolean;
+  haveRentSwitch?: boolean;
 }
-function CardView({ title, first = false, data, filterBy }: CardViewProps) {
+function CardView({
+  title,
+  first = false,
+  data,
+  filterBy,
+  haveRentSwitch = false,
+}: CardViewProps) {
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
 
@@ -55,6 +63,7 @@ function CardView({ title, first = false, data, filterBy }: CardViewProps) {
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-5">
           <h2 className="text-[32px] font-Bold">{title}</h2>
+
           {first && (
             <Link
               href={ROUTES.USER.REQUESTS}
@@ -65,6 +74,12 @@ function CardView({ title, first = false, data, filterBy }: CardViewProps) {
             </Link>
           )}
         </div>
+        {first && haveRentSwitch && (
+          <div>
+            <RentSwitch />
+          </div>
+        )}
+
         <div className="flex gap-4">
           <div
             ref={prevRef}
@@ -98,7 +113,10 @@ function CardView({ title, first = false, data, filterBy }: CardViewProps) {
             .map((item) => {
               return (
                 <SwiperSlide key={item.id}>
-                  <CardRequest data={item} declined={filterBy==='decline'?true:false}/>
+                  <CardRequest
+                    data={item}
+                    declined={filterBy }
+                  />
                 </SwiperSlide>
               );
             })}

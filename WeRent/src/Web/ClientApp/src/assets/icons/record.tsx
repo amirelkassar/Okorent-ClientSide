@@ -15,7 +15,7 @@ function RecordIcon() {
         x2="0.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="2.5"
@@ -23,7 +23,7 @@ function RecordIcon() {
         x2="2.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="4.5"
@@ -31,7 +31,7 @@ function RecordIcon() {
         x2="4.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="6.5"
@@ -39,7 +39,7 @@ function RecordIcon() {
         x2="6.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="8.5"
@@ -47,7 +47,7 @@ function RecordIcon() {
         x2="8.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="10.5"
@@ -55,7 +55,7 @@ function RecordIcon() {
         x2="10.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="12.5"
@@ -63,7 +63,7 @@ function RecordIcon() {
         x2="12.5"
         y2="11.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="14.5"
@@ -71,7 +71,7 @@ function RecordIcon() {
         x2="14.5"
         y2="11.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="16.5"
@@ -79,7 +79,7 @@ function RecordIcon() {
         x2="16.5"
         y2="11.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="18.5"
@@ -87,7 +87,7 @@ function RecordIcon() {
         x2="18.5"
         y2="11.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="20.5"
@@ -95,7 +95,7 @@ function RecordIcon() {
         x2="20.5"
         y2="11.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="22.5"
@@ -103,7 +103,7 @@ function RecordIcon() {
         x2="22.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="24.5"
@@ -111,7 +111,7 @@ function RecordIcon() {
         x2="24.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="26.5"
@@ -119,7 +119,7 @@ function RecordIcon() {
         x2="26.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="28.5"
@@ -127,7 +127,7 @@ function RecordIcon() {
         x2="28.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="30.5"
@@ -135,7 +135,7 @@ function RecordIcon() {
         x2="30.5"
         y2="14.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="32.5"
@@ -143,7 +143,7 @@ function RecordIcon() {
         x2="32.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="34.5"
@@ -151,7 +151,7 @@ function RecordIcon() {
         x2="34.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="36.5"
@@ -159,7 +159,7 @@ function RecordIcon() {
         x2="36.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="38.5"
@@ -167,7 +167,7 @@ function RecordIcon() {
         x2="38.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="40.5"
@@ -175,7 +175,7 @@ function RecordIcon() {
         x2="40.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="42.5"
@@ -183,7 +183,7 @@ function RecordIcon() {
         x2="42.5"
         y2="17.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="44.5"
@@ -191,7 +191,7 @@ function RecordIcon() {
         x2="44.5"
         y2="16.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="46.5"
@@ -199,7 +199,7 @@ function RecordIcon() {
         x2="46.5"
         y2="16.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="48.5"
@@ -207,7 +207,7 @@ function RecordIcon() {
         x2="48.5"
         y2="16.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="50.5"
@@ -215,7 +215,7 @@ function RecordIcon() {
         x2="50.5"
         y2="16.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="52.5"
@@ -223,7 +223,7 @@ function RecordIcon() {
         x2="52.5"
         y2="14.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="54.5"
@@ -231,7 +231,7 @@ function RecordIcon() {
         x2="54.5"
         y2="14.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="56.5"
@@ -239,7 +239,7 @@ function RecordIcon() {
         x2="56.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="58.5"
@@ -247,7 +247,7 @@ function RecordIcon() {
         x2="58.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="60.5"
@@ -255,7 +255,7 @@ function RecordIcon() {
         x2="60.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="62.5"
@@ -263,7 +263,7 @@ function RecordIcon() {
         x2="62.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="64.5"
@@ -271,7 +271,7 @@ function RecordIcon() {
         x2="64.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="66.5"
@@ -279,7 +279,7 @@ function RecordIcon() {
         x2="66.5"
         y2="14.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="68.5"
@@ -287,7 +287,7 @@ function RecordIcon() {
         x2="68.5"
         y2="16.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="70.5"
@@ -295,7 +295,7 @@ function RecordIcon() {
         x2="70.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="72.5"
@@ -303,7 +303,7 @@ function RecordIcon() {
         x2="72.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="74.5"
@@ -311,7 +311,7 @@ function RecordIcon() {
         x2="74.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="76.5"
@@ -319,7 +319,7 @@ function RecordIcon() {
         x2="76.5"
         y2="14.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="78.5"
@@ -327,7 +327,7 @@ function RecordIcon() {
         x2="78.5"
         y2="14.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="80.5"
@@ -335,7 +335,7 @@ function RecordIcon() {
         x2="80.5"
         y2="17.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="82.5"
@@ -343,7 +343,7 @@ function RecordIcon() {
         x2="82.5"
         y2="16.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="84.5"
@@ -351,7 +351,7 @@ function RecordIcon() {
         x2="84.5"
         y2="16.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="86.5"
@@ -359,7 +359,7 @@ function RecordIcon() {
         x2="86.5"
         y2="16.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="88.5"
@@ -367,7 +367,7 @@ function RecordIcon() {
         x2="88.5"
         y2="16.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="90.5"
@@ -375,7 +375,7 @@ function RecordIcon() {
         x2="90.5"
         y2="14.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="92.5"
@@ -383,7 +383,7 @@ function RecordIcon() {
         x2="92.5"
         y2="14.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="94.5"
@@ -391,7 +391,7 @@ function RecordIcon() {
         x2="94.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="96.5"
@@ -399,7 +399,7 @@ function RecordIcon() {
         x2="96.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="98.5"
@@ -407,7 +407,7 @@ function RecordIcon() {
         x2="98.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="100.5"
@@ -415,7 +415,7 @@ function RecordIcon() {
         x2="100.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="102.5"
@@ -423,7 +423,7 @@ function RecordIcon() {
         x2="102.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="104.5"
@@ -431,7 +431,7 @@ function RecordIcon() {
         x2="104.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="106.5"
@@ -439,7 +439,7 @@ function RecordIcon() {
         x2="106.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="108.5"
@@ -447,7 +447,7 @@ function RecordIcon() {
         x2="108.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="110.5"
@@ -455,7 +455,7 @@ function RecordIcon() {
         x2="110.5"
         y2="14.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="112.5"
@@ -463,7 +463,7 @@ function RecordIcon() {
         x2="112.5"
         y2="14.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="114.5"
@@ -471,7 +471,7 @@ function RecordIcon() {
         x2="114.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="116.5"
@@ -479,7 +479,7 @@ function RecordIcon() {
         x2="116.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="118.5"
@@ -487,7 +487,7 @@ function RecordIcon() {
         x2="118.5"
         y2="14.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="120.5"
@@ -495,7 +495,7 @@ function RecordIcon() {
         x2="120.5"
         y2="14.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="122.5"
@@ -503,7 +503,7 @@ function RecordIcon() {
         x2="122.5"
         y2="14.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="124.5"
@@ -511,7 +511,7 @@ function RecordIcon() {
         x2="124.5"
         y2="14.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="126.5"
@@ -519,7 +519,7 @@ function RecordIcon() {
         x2="126.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="128.5"
@@ -527,7 +527,7 @@ function RecordIcon() {
         x2="128.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="130.5"
@@ -535,7 +535,7 @@ function RecordIcon() {
         x2="130.5"
         y2="17.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="132.5"
@@ -543,7 +543,7 @@ function RecordIcon() {
         x2="132.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="134.5"
@@ -551,7 +551,7 @@ function RecordIcon() {
         x2="134.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="136.5"
@@ -559,7 +559,7 @@ function RecordIcon() {
         x2="136.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="138.5"
@@ -567,7 +567,7 @@ function RecordIcon() {
         x2="138.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="140.5"
@@ -575,7 +575,7 @@ function RecordIcon() {
         x2="140.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="142.5"
@@ -583,7 +583,7 @@ function RecordIcon() {
         x2="142.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="144.5"
@@ -591,7 +591,7 @@ function RecordIcon() {
         x2="144.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="146.5"
@@ -599,7 +599,7 @@ function RecordIcon() {
         x2="146.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="148.5"
@@ -607,7 +607,7 @@ function RecordIcon() {
         x2="148.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="150.5"
@@ -615,7 +615,7 @@ function RecordIcon() {
         x2="150.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="152.5"
@@ -623,7 +623,7 @@ function RecordIcon() {
         x2="152.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="154.5"
@@ -631,7 +631,7 @@ function RecordIcon() {
         x2="154.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="156.5"
@@ -639,7 +639,7 @@ function RecordIcon() {
         x2="156.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="158.5"
@@ -647,7 +647,7 @@ function RecordIcon() {
         x2="158.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="160.5"
@@ -655,7 +655,7 @@ function RecordIcon() {
         x2="160.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="162.5"
@@ -663,7 +663,7 @@ function RecordIcon() {
         x2="162.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="164.5"
@@ -671,7 +671,7 @@ function RecordIcon() {
         x2="164.5"
         y2="16.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="166.5"
@@ -679,7 +679,7 @@ function RecordIcon() {
         x2="166.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="168.5"
@@ -687,7 +687,7 @@ function RecordIcon() {
         x2="168.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="170.5"
@@ -695,7 +695,7 @@ function RecordIcon() {
         x2="170.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="172.5"
@@ -703,7 +703,7 @@ function RecordIcon() {
         x2="172.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="174.5"
@@ -711,7 +711,7 @@ function RecordIcon() {
         x2="174.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="176.5"
@@ -719,7 +719,7 @@ function RecordIcon() {
         x2="176.5"
         y2="14.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="178.5"
@@ -727,7 +727,7 @@ function RecordIcon() {
         x2="178.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="180.5"
@@ -735,7 +735,7 @@ function RecordIcon() {
         x2="180.5"
         y2="14.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="182.5"
@@ -743,7 +743,7 @@ function RecordIcon() {
         x2="182.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="184.5"
@@ -751,7 +751,7 @@ function RecordIcon() {
         x2="184.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="186.5"
@@ -759,7 +759,7 @@ function RecordIcon() {
         x2="186.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="188.5"
@@ -767,7 +767,7 @@ function RecordIcon() {
         x2="188.5"
         y2="17.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="190.5"
@@ -775,7 +775,7 @@ function RecordIcon() {
         x2="190.5"
         y2="16.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="192.5"
@@ -783,7 +783,7 @@ function RecordIcon() {
         x2="192.5"
         y2="14.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="194.5"
@@ -791,7 +791,7 @@ function RecordIcon() {
         x2="194.5"
         y2="14.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="196.5"
@@ -799,7 +799,7 @@ function RecordIcon() {
         x2="196.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="198.5"
@@ -807,7 +807,7 @@ function RecordIcon() {
         x2="198.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="200.5"
@@ -815,7 +815,7 @@ function RecordIcon() {
         x2="200.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="202.5"
@@ -823,7 +823,7 @@ function RecordIcon() {
         x2="202.5"
         y2="13"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="204.5"
@@ -831,7 +831,7 @@ function RecordIcon() {
         x2="204.5"
         y2="11.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="206.5"
@@ -839,7 +839,7 @@ function RecordIcon() {
         x2="206.5"
         y2="11.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="208.5"
@@ -847,7 +847,7 @@ function RecordIcon() {
         x2="208.5"
         y2="11.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="210.5"
@@ -855,7 +855,7 @@ function RecordIcon() {
         x2="210.5"
         y2="11.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="212.5"
@@ -863,7 +863,7 @@ function RecordIcon() {
         x2="212.5"
         y2="11.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="214.5"
@@ -871,7 +871,7 @@ function RecordIcon() {
         x2="214.5"
         y2="11.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="216.5"
@@ -879,7 +879,7 @@ function RecordIcon() {
         x2="216.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="218.5"
@@ -887,7 +887,7 @@ function RecordIcon() {
         x2="218.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="220.5"
@@ -895,7 +895,7 @@ function RecordIcon() {
         x2="220.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <line
         x1="222.5"
@@ -903,7 +903,7 @@ function RecordIcon() {
         x2="222.5"
         y2="10.5"
         stroke="#0F2A43"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
     </svg>
   );

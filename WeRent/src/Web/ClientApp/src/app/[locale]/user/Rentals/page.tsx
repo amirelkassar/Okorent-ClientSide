@@ -22,14 +22,19 @@ const FilterOptions = [
 ];
 function Page() {
   const searchParams = useSearchParams();
-  console.log(searchParams.get("cards"));
+
   return (
     <div>
       {searchParams.get("cards") === "true" ? (
         <div>
-          <CardView first title={"My Current Rentals"} />
-          <CardView title={"Upcoming Rentals"} />
-          <CardView title={"Closed Rentals"} />
+          <CardView
+            filterBy="completed"
+            first
+            title={"Ongoing Bookings"}
+            haveRentSwitch
+          />
+          <CardView filterBy="completed" title={"Upcoming Rentals"} />
+          <CardView filterBy="completed" title={"Closed Rentals"} />
         </div>
       ) : (
         <DataTable
@@ -39,7 +44,7 @@ function Page() {
           columns={columns}
           filter="buttons"
           filterData={FilterOptions}
-          search
+          haveRentSwitch
           filterBy="status"
         />
       )}

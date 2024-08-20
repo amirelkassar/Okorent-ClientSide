@@ -3,7 +3,7 @@ const ROUTES = {
   AUTH: {
     LOGIN: "/auth/login",
     SIGNUP: "/auth/signup",
-    SIGNUP_EMAIL_CONFIRM : "/auth/signup-email-confirm",
+    SIGNUP_EMAIL_CONFIRM: "/auth/signup-email-confirm",
     FORGOT_PASSWORD: "/auth/forgot-password",
     RESET_PASSWORD: "/auth/reset-password",
     CONFIRM: "/auth/confirm",
@@ -27,6 +27,8 @@ const ROUTES = {
     HOMEPAGE: "/user",
     DASHBOARD: "/user/Dashboard",
     LISTINGS: "/user/Listings",
+    LISTINGSDETAILS: (id) => `/user/Listings/${id}`,
+    LISTINGSEDIT: (id) => `/user/Listings/${id}/edit`,
     RENTALS: "/user/Rentals",
     REQUESTS: "/user/Requests",
     INBOX: "/user/Inbox",
@@ -35,6 +37,7 @@ const ROUTES = {
     CALENDAR: "/user/Calendar",
     BILLING: "/user/Billing",
     SUPPORT: "/user/Support",
+    ADDLIST: "/user/add-list",
   },
 };
 

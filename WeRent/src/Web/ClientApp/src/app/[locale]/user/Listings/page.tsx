@@ -37,6 +37,7 @@ function Page() {
           filter="buttons"
           filterData={FilterOptions}
           columns={columns}
+          
         />
       )}
     </div>
