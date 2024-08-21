@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import "swiper/css";
 import "swiper/css/navigation";
-import 'swiper/css/pagination'
+import "swiper/css/pagination";
 import "@mantine/core/styles.css";
-import '@mantine/charts/styles.css';
-import '@mantine/dates/styles.css';
-import '@mantine/dropzone/styles.css';
+import "@mantine/charts/styles.css";
+import "@mantine/dates/styles.css";
+import "@mantine/dropzone/styles.css";
 import "./globals.css";
 import { MantineProvider } from "@mantine/core";
 
@@ -23,8 +23,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
-      <body className="font-Medium text-black max-w-[1700px]  mx-auto bg-white">
-        <MantineProvider>{children}</MantineProvider>
+      <body
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(240,246,251,1) 10%,rgb(236, 247, 223) 40%,  rgb(255, 255, 255)  50%, rgb(255, 255, 255) 100%)",
+        }}
+      >
+        <div className="font-Medium text-black max-w-[1700px]  mx-auto ">
+          <MantineProvider>{children}</MantineProvider>
+        </div>
       </body>
     </html>
   );
