@@ -25,53 +25,53 @@ function NavLinks() {
         id: 3,
         name: "My Listings",
         url: ROUTES.USER.LISTINGS,
-        active:  path.includes(ROUTES.USER.LISTINGS) ,
-        activeDetails: path===ROUTES.USER.LISTINGSDETAILS(params.listID)  ? "/  Item Details" :path===ROUTES.USER.LISTINGSEDIT(params.listID)?"/ Edit Listing": null,
+        active: path.includes(ROUTES.USER.LISTINGS),
+        activeDetails:
+          path === ROUTES.USER.LISTINGSDETAILS(params.listID)
+            ? "/  Item Details"
+            : path === ROUTES.USER.LISTINGSEDIT(params.listID)
+            ? "/ Edit Listing"
+            : null,
       },
       {
         id: 4,
         name: "Bookings",
-        url: ROUTES.USER.RENTALS,
-        active: path === ROUTES.USER.RENTALS,
+        url: ROUTES.USER.BOOKINGS,
+        active: path === ROUTES.USER.BOOKINGS,
       },
+
       {
         id: 5,
-        name: "Bookings",
-        url: ROUTES.USER.REQUESTS,
-        active: path === ROUTES.USER.REQUESTS,
-      },
-      {
-        id: 6,
         name: "Inbox",
         url: ROUTES.USER.INBOX,
         active: path === ROUTES.USER.INBOX,
       },
       {
-        id: 7,
+        id: 6,
         name: "Clients",
         url: ROUTES.USER.CLIENTS,
         active: path === ROUTES.USER.CLIENTS,
       },
       {
-        id: 8,
+        id: 7,
         name: "Wishlist",
         url: ROUTES.USER.WISHLIST,
         active: path === ROUTES.USER.WISHLIST,
       },
       {
-        id: 9,
+        id: 8,
         name: "Calendar",
         url: ROUTES.USER.CALENDAR,
         active: path === ROUTES.USER.CALENDAR,
       },
       {
-        id: 10,
+        id: 9,
         name: "Billing",
         url: ROUTES.USER.BILLING,
         active: path === ROUTES.USER.BILLING,
       },
       {
-        id: 11,
+        id: 10,
         name: "Support",
         url: ROUTES.USER.SUPPORT,
         active: path === ROUTES.USER.SUPPORT,

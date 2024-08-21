@@ -1,37 +1,55 @@
 "use client";
 import { DataTable } from "@/src/components/data-table";
-import { RequestsData } from "@/src/lib/dataUser";
+import { RentalsData, RequestsData } from "@/src/lib/dataUser";
 import React, { useState } from "react";
-
+import { columns } from "./_components/columns";
 import { useSearchParams } from "next/navigation";
 import ROUTES from "@/src/routes";
+import CardView from "./_components/cardView";
+import { useSwitchRent } from "@/src/store/rent-slice";
+import CardViewReq from "./_components/cardViewReq";
 import { Modal } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import CloseIcon from "@/src/assets/icons/close";
 import CardRequest from "./_components/cardRequest";
-import CardViewReq from "./_components/cardViewReq";
+import { useDisclosure } from "@mantine/hooks";
 import { columnsReq } from "./_components/columnsReq";
-
-
 const FilterOptions = [
   {
+    label: "Closed",
+    type: "filter",
+    key: "Closed",
+  },
+  {
+    label: "Ongoing",
+    type: "filter",
+    key: "Ongoing",
+  },
+  {
+    label: "Upcoming",
+    type: "filter",
+    key: "Upcoming",
+  },
+];
+const FilterOptionsReq = [
+  {
     label: "New",
-     type: "filter",
+    type: "filter",
     key: "New",
   },
   {
     label: "Ongoing",
-     type: "filter",
+    type: "filter",
     key: "Ongoing",
   },
   {
     label: "Declined",
-     type: "filter",
+    type: "filter",
     key: "Declined",
   },
 ];
 function Page() {
   const searchParams = useSearchParams();
+  const { isRent } = useSwitchRent();
   const [opened, { open, close }] = useDisclosure(false);
   const [getID, setID] = useState(0);
   const openModalWithId = (id: number) => {
@@ -40,11 +58,37 @@ function Page() {
     open();
   };
   const columnsWithOpen = columnsReq(openModalWithId);
-  return (
+
+  return isRent === "rent" ? (
     <div>
       {searchParams.get("cards") === "true" ? (
         <div>
-          
+          <CardView
+            filterBy="completed"
+            first
+            title={"Ongoing Bookings"}
+            haveRentSwitch
+          />
+          <CardView filterBy="completed" title={"Upcoming Rentals"} />
+          <CardView filterBy="completed" title={"Closed Rentals"} />
+        </div>
+      ) : (
+        <DataTable
+          title="My Rentals"
+          cardView={`${ROUTES.USER.BOOKINGS}?cards=true`}
+          data={RentalsData}
+          columns={columns}
+          filter="buttons"
+          filterData={FilterOptions}
+          haveRentSwitch
+          filterBy="status"
+        />
+      )}
+    </div>
+  ) : (
+    <div>
+      {searchParams.get("cards") === "true" ? (
+        <div>
           <CardViewReq
             title="New Requests"
             first
@@ -55,12 +99,12 @@ function Page() {
           <CardViewReq
             title="Upcoming Bookings"
             data={RequestsData}
-            filterBy='upcoming'
+            filterBy="upcoming"
           />
-            <CardViewReq
+          <CardViewReq
             title="Ongoing Bookings"
             data={RequestsData}
-            filterBy='ongoing'
+            filterBy="ongoing"
           />
           <CardViewReq
             title="Declined Requests"
@@ -71,10 +115,10 @@ function Page() {
       ) : (
         <DataTable
           title="My Requests"
-          cardView={`${ROUTES.USER.REQUESTS}?cards=true`}
+          cardView={`${ROUTES.USER.BOOKINGS}?cards=true`}
           filter="buttons"
           filterBy="status"
-          filterData={FilterOptions}
+          filterData={FilterOptionsReq}
           data={RequestsData}
           haveRentSwitch
           columns={columnsWithOpen}

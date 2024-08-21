@@ -66,7 +66,7 @@ function CardViewReq({
 
           {first && (
             <Link
-              href={ROUTES.USER.REQUESTS}
+              href={ROUTES.USER.BOOKINGS}
               className="px-3 duration-300 hover:shadow-md w-fit py-2 rounded-xl border border-black flex items-center justify-center gap-2"
             >
               <ListIcon />

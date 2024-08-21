@@ -22,7 +22,7 @@ function PageLogin() {
             below to verify your account
           </p>
 
-          <form action="" className="w-full flex flex-col gap-5 max-w-[370px]">
+          <form action="" className="w-full flex flex-col gap-5 max-w-[470px]">
             <PinInput
               placeholder=""
               type="number"

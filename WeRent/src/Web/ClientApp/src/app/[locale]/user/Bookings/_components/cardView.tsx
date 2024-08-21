@@ -38,7 +38,7 @@ function CardView({
           <h2 className="text-[32px] font-Bold">{title}</h2>
           {first && (
             <Link
-              href={ROUTES.USER.RENTALS}
+              href={ROUTES.USER.BOOKINGS}
               className="px-3 duration-300 hover:shadow-md w-fit py-2 rounded-xl border border-black flex items-center justify-center gap-2"
             >
               <ListIcon />

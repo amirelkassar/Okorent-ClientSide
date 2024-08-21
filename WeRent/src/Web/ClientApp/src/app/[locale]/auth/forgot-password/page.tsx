@@ -17,7 +17,7 @@ function PageLogin() {
             Enter your email to reset your password
           </h1>
 
-          <form action="" className="w-full flex flex-col gap-5 max-w-[370px]">
+          <form action="" className="w-full flex flex-col gap-5 max-w-[470px]">
             <Input
               type="email"
               label="Email"

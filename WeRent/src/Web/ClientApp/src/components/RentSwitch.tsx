@@ -1,14 +1,17 @@
 "use client";
 import { SegmentedControl } from "@mantine/core";
-import { useState } from "react";
+import { useSwitchRent } from "../store/rent-slice";
 
 const RentSwitch = () => {
-  const [value, setValue] = useState("rent");
+  const { isRent, setSwitchRent } = useSwitchRent();
+console.log(isRent);
 
   return (
     <SegmentedControl
-      value={value}
-      onChange={setValue}
+      value={isRent}
+      onChange={(e) => {
+        setSwitchRent(e === "rent_out" ? "rent_out" : "rent");
+      }}
       withItemsBorders={false}
       color="#88BA52"
       data={[

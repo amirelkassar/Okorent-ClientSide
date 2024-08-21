@@ -34,6 +34,7 @@ const ROUTES = {
     LISTINGSEDIT: (id) => `/user/Listings/${id}/edit`,
     RENTALS: "/user/Rentals",
     REQUESTS: "/user/Requests",
+    BOOKINGS: "/user/Bookings",
     INBOX: "/user/Inbox",
     CLIENTS: "/user/Clients",
     WISHLIST: "/user/Wishlist",
