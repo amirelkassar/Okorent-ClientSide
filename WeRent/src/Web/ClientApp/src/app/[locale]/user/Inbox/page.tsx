@@ -15,7 +15,7 @@ function page() {
         <RentSwitch />
       </div>
 
-      <div className="flex items-start gap-8 min-h-[860px] mb-14">
+      <div className="flex items-start gap-8 min-h-[860px] h-[860px]  mb-14">
         <ListChats />
         <Chat />
       </div>

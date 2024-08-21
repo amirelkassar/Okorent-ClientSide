@@ -26,7 +26,7 @@ const Chat = () => {
   return (
     <div
       className={cn(
-        "lg:h-auto lg:row-span-2 flex flex-col flex-1 bg-white rounded-3xl border border-green px-11 pt-11 pb-5 gap-5 lg:col-span-3 lg:order-2 h-auto"
+        "h-full flex flex-col flex-1 bg-white rounded-3xl border border-green px-11 pt-11 pb-5 gap-5  "
       )}
     >
       <div className="flex items-center justify-between  border-b-2 border-b-black/20 px-1  pb-3">
@@ -79,7 +79,7 @@ const Chat = () => {
         </div>
       </div>
 
-      <div className="overflow-y-auto max-h-[600px]  h-auto space-y-5 flex-1 pb-10">
+      <div className="overflow-y-auto   max-h-full   space-y-5 flex-1 pb-10">
         {/* RECEIVED MESSAGE */}
         <div className="flex flex-row-reverse items-center gap-3">
           <p className="bg-grayLight rounded-[32px] text-black text-[12px] leading-[15px] px-6 max-w-[344px] py-4 rounded-ee-none">
@@ -182,7 +182,7 @@ const Chat = () => {
         </div>
       </div>
 
-      <div className="flex items-center gap-5 ">
+      <div className="flex items-center  gap-5 ">
         <FileButton onChange={setSelectedFile} multiple>
           {(props) => (
             <button {...props}>

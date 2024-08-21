@@ -112,8 +112,8 @@ function ListChats() {
           <SearchIcon />
         </button>
       </div>
-      <div className="py-7 px-2 bg-white border border-green rounded-3xl flex-1 h-full  shadow-sidebar  ">
-        <div className=" flex flex-col gap-4  max-w-full overflow-auto  h-full max-h-[770px]">
+      <div className="py-7 px-2 bg-white border border-green rounded-3xl flex-1   h-auto    shadow-sidebar  ">
+        <div className=" flex flex-col gap-4  max-w-full overflow-auto h-[710px] ">
           {ChatsData.map((item, i) => {
             return (
               <div
