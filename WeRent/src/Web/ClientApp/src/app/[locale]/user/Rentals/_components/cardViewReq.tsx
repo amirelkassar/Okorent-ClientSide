@@ -40,7 +40,7 @@ interface CardViewProps {
   first?: boolean;
   haveRentSwitch?: boolean;
 }
-function CardView({
+function CardViewReq({
   title,
   first = false,
   data,
@@ -126,4 +126,4 @@ function CardView({
   );
 }
 
-export default CardView;
+export default CardViewReq;

@@ -30,13 +30,13 @@ function NavLinks() {
       },
       {
         id: 4,
-        name: "Reservations",
+        name: "Bookings",
         url: ROUTES.USER.RENTALS,
         active: path === ROUTES.USER.RENTALS,
       },
       {
         id: 5,
-        name: "Requests",
+        name: "Bookings",
         url: ROUTES.USER.REQUESTS,
         active: path === ROUTES.USER.REQUESTS,
       },

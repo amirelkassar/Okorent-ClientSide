@@ -13,7 +13,7 @@ function PageLogin() {
   const router=useRouter();
   return (
     <div className="flex-1 pt-20 pb-16  flex  min-h-full justify-start">
-      <div className="max-w-[370px] w-full flex flex-col gap-4">
+      <div className="max-w-[470px] w-full flex flex-col gap-4">
         <Logo theme="green" />
         <div className="flex-1 content-center">
           <h1 className=" font-Bold text-xLarge">Welcome Back!</h1>

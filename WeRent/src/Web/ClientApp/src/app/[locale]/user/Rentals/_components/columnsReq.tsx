@@ -34,7 +34,7 @@ export type RequestsTableData = {
   imgHome: StaticImageData;
 };
 
-export const columns = (
+export const columnsReq = (
   openModal: (id: number) => void
 ): ColumnDef<RequestsTableData>[] => [
   {

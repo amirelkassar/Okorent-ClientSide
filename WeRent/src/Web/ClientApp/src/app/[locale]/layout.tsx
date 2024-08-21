@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
-      <body className="font-Medium text-black max-w-[2000px]  mx-auto bg-white">
+      <body className="font-Medium text-black max-w-[1700px]  mx-auto bg-white">
         <MantineProvider>{children}</MantineProvider>
       </body>
     </html>
