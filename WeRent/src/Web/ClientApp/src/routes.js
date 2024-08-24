@@ -42,6 +42,8 @@ const ROUTES = {
     BILLING: "/user/Billing",
     SUPPORT: "/user/Support",
     ADDLIST: "/user/add-list",
+    PRODUCTDETAILS: (id) => `/user/product/${id}`,
+
   },
 };
 

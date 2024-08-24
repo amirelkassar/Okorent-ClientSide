@@ -1,0 +1,30 @@
+import BestIcon from "@/src/assets/icons/best";
+import DiscountIcon from "@/src/assets/icons/Discount";
+import FreeIcon from "@/src/assets/icons/free";
+import { Rating } from "@mantine/core";
+import React from "react";
+
+function FeaturesProduct() {
+  return (
+    <div className="flex items-center gap-3 flex-wrap mb-5">
+      <div className="bg-blue/10 px-3  rounded-lg flex items-center gap-[6px]">
+        <BestIcon />
+        <p className="text-base font-Regular]">Best Selling</p>
+      </div>
+      <div className="bg-blue/10 px-3  rounded-lg flex items-center gap-[6px]">
+        <FreeIcon />
+        <p className="text-base font-Regular]">Free Delivery</p>
+      </div>
+      <div className="bg-blue/10 px-3  rounded-lg flex items-center gap-[6px]">
+        <DiscountIcon />
+        <p className="text-base font-Regular]">20% Discount</p>
+      </div>
+      <div className="flex items-center gap-2 ">
+        <p className="text-base font-Regular">4.2</p>
+        <Rating color="#88BA52" count={4} value={4.2} fractions={10} readOnly />
+      </div>
+    </div>
+  );
+}
+
+export default FeaturesProduct;

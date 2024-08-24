@@ -13,8 +13,8 @@ function TrueIcon() {
         d="M1 6.55556L4.69231 11L8.84615 6L13 1"
         stroke="#344050"
         stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
