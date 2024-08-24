@@ -29,7 +29,7 @@ export default function RootLayout({
             "linear-gradient(180deg, rgba(240,246,251,1) 10%,rgb(236, 247, 223) 40%,  rgb(255, 255, 255)  50%, rgb(255, 255, 255) 100%)",
         }}
       >
-        <div className="font-Medium text-black max-w-[1700px]  mx-auto ">
+        <div >
           <MantineProvider>{children}</MantineProvider>
         </div>
       </body>

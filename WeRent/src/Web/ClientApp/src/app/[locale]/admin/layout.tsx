@@ -9,7 +9,7 @@ interface layoutProps {
 }
 function layout({ children }: layoutProps) {
   return (
-    <div className="min-h-[100vh] ">
+    <div className="font-Medium min-h-[100vh]  text-black max-w-[1700px]  mx-auto ">
       <div className="max-w-screen-2xl mx-auto">
         <Nav linkLogo={ROUTES.ADMIN.DASHBOARD} />
         <main className="px-16 min-h-[calc(100vh-150px)] ">
