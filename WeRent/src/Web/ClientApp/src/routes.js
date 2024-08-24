@@ -43,6 +43,8 @@ const ROUTES = {
     SUPPORT: "/user/Support",
     ADDLIST: "/user/add-list",
     PRODUCTDETAILS: (id) => `/user/product/${id}`,
+    SUBSCRIPTION: "/user/subscription",
+
 
   },
 };
