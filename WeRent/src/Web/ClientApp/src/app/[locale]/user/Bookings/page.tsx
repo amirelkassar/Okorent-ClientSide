@@ -10,14 +10,14 @@ import { useSwitchRent } from "@/src/store/rent-slice";
 import CardViewReq from "./_components/cardViewReq";
 import { Modal } from "@mantine/core";
 import CloseIcon from "@/src/assets/icons/close";
-import CardRequest from "./_components/cardRequest";
 import { useDisclosure } from "@mantine/hooks";
 import { columnsReq } from "./_components/columnsReq";
+import CardRequest from "@/src/components/cardRequest";
 const FilterOptions = [
   {
-    label: "Closed",
+    label: "Completed",
     type: "filter",
-    key: "Closed",
+    key: "Completed",
   },
   {
     label: "Ongoing",
@@ -28,6 +28,11 @@ const FilterOptions = [
     label: "Upcoming",
     type: "filter",
     key: "Upcoming",
+  },
+  {
+    label: "Declined",
+    type: "filter",
+    key: "Declined",
   },
 ];
 const FilterOptionsReq = [
@@ -40,6 +45,11 @@ const FilterOptionsReq = [
     label: "Ongoing",
     type: "filter",
     key: "Ongoing",
+  },
+  {
+    label: "Completed",
+    type: "filter",
+    key: "Completed",
   },
   {
     label: "Declined",

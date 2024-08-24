@@ -12,6 +12,7 @@ import CloseChatIcon from "@/src/assets/icons/closeChat";
 import PlayIcon from "@/src/assets/icons/play";
 import RecordIcon from "@/src/assets/icons/record";
 import phone from "@/src/assets/images/phone.png";
+import ProductClient from "./productClient";
 const Chat = () => {
   const [Message, setMessage] = useState("");
   const [selectedFile, setSelectedFile] = useState<any[]>([]);
@@ -48,29 +49,8 @@ const Chat = () => {
             </div>
           </div>
           <span className=" block h-[60px] w-[1px] bg-grayBack"></span>
-          <div className="bg-grayBack h-full rounded-xl min-w-[270px] flex items-center gap-4 py-3 px-2">
-            <Image
-              src={phone}
-              alt="phone"
-              width={21}
-              height={43}
-              className="w-auto h-full max-h-[44px]"
-            />
-            <div className="flex-1 flex items-center gap-4 justify-between flex-wrap">
-              <div className="">
-                <h4 className="text-grayMedium min-w-[66px] text-[12px]">
-                  Product Name
-                </h4>
-                <p className=" text-[14px]">Apple Mobile</p>
-              </div>
-              <div className="">
-                <h4 className="text-grayMedium min-w-[66px] text-[12px]">
-                  Payment
-                </h4>
-                <p className=" text-[14px]">100$</p>
-              </div>
-            </div>
-          </div>
+
+          <ProductClient />
         </div>
         <div>
           <button className=" size-[34px] rounded-lg bg-grayBack flex items-center justify-center p-3 duration-200  hover:shadow-sm ">
@@ -191,15 +171,11 @@ const Chat = () => {
           )}
         </FileButton>
         <div className="relative flex-1 border-green border rounded-[18px] py-2 px-4  h-auto">
-        
           {selectedFile.length > 0 ? (
             <div className=" flex flex-wrap gap-4 border-b border-dashed pb-4 ">
               {selectedFile.map((file, i) => {
                 return (
-                  <div
-                    key={i}
-                    className=" w-fit   relative"
-                  >
+                  <div key={i} className=" w-fit   relative">
                     <Image
                       src={URL.createObjectURL(file)}
                       className="h-20 w-auto object-contain"
@@ -250,7 +226,6 @@ const Chat = () => {
           <SendIcon />
         </Button>
       </div>
-      
     </div>
   );
 };

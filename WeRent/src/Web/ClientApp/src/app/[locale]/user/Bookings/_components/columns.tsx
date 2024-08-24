@@ -83,7 +83,6 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     },
   },
 
-
   {
     accessorKey: "status",
     header: "Status",
@@ -91,13 +90,15 @@ export const columns: ColumnDef<RequestsTableData>[] = [
       const status = getValue<string>();
       switch (status.toLowerCase()) {
         case "ongoing":
-          return <CardStatus type="blue" title={status} />;
-        case "closed":
-          return <CardStatus type="gray" title={status} />;
+          return <CardStatus animation circle type="green" title={status} />;
+        case "declined":
+          return <CardStatus circle type="red" title={status} />;
         case "upcoming":
-          return <CardStatus type="green" title={status} />;
+          return <CardStatus animation circle type="blue" title={status} />;
+        case "completed":
+          return <CardStatus circle type="gray" title={status} />;
         default:
-          return <CardStatus type="gray" title="--" />;
+          return <CardStatus circle type="gray" title="--" />;
       }
     },
   },
@@ -116,13 +117,13 @@ export const columns: ColumnDef<RequestsTableData>[] = [
       const paymentStatus = getValue<string>();
       switch (paymentStatus.toLowerCase()) {
         case "completed":
-          return <CardStatus type="blue" title={paymentStatus} />;
+          return <CardStatus circle type="blue" title={paymentStatus} />;
         case "canceled":
-          return <CardStatus type="gray" title={paymentStatus} />;
+          return <CardStatus circle type="red" title={paymentStatus} />;
         case "pending":
-          return <CardStatus type="green" title={paymentStatus} />;
+          return <CardStatus circle type="green" title={paymentStatus} />;
         default:
-          return <CardStatus type="gray" title="--" />;
+          return <CardStatus circle type="gray" title="--" />;
       }
     },
   },

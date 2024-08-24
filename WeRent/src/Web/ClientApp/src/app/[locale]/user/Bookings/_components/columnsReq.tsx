@@ -133,13 +133,15 @@ export const columnsReq = (
       const status = getValue<string>();
       switch (status.toLowerCase()) {
         case "new":
-          return <CardStatus type="blue" title={status} />;
+          return <CardStatus circle type="blue" title={status} />;
+        case "completed":
+          return <CardStatus circle type="blue" title={status} />;
         case "ongoing":
-          return <CardStatus type="gray" title={status} />;
+          return <CardStatus circle type="green" title={status} />;
         case "declined":
-          return <CardStatus type="green" title={status} />;
+          return <CardStatus circle type="red" title={status} />;
         default:
-          return <CardStatus type="gray" title="--" />;
+          return <CardStatus circle type="gray" title="--" />;
       }
     },
   },
@@ -158,13 +160,13 @@ export const columnsReq = (
       const paymentStatus = getValue<string>();
       switch (paymentStatus.toLowerCase()) {
         case "completed":
-          return <CardStatus type="blue" title={paymentStatus} />;
+          return <CardStatus circle type="blue" title={paymentStatus} />;
         case "canceled":
-          return <CardStatus type="gray" title={paymentStatus} />;
+          return <CardStatus circle type="red" title={paymentStatus} />;
         case "pending":
-          return <CardStatus type="green" title={paymentStatus} />;
+          return <CardStatus circle type="green" title={paymentStatus} />;
         default:
-          return <CardStatus type="gray" title="--" />;
+          return <CardStatus circle type="gray" title="--" />;
       }
     },
   },

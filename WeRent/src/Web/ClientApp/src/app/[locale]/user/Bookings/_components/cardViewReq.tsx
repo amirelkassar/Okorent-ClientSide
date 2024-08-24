@@ -7,9 +7,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import ArrowLeftIcon from "@/src/assets/icons/arrowLeft";
 import ArrowRightIcon from "@/src/assets/icons/ArrowRight";
-import CardRequest from "./cardRequest";
+
 import { StaticImageData } from "next/image";
 import RentSwitch from "@/src/components/RentSwitch";
+import CardRequest from "@/src/components/cardRequest";
 interface RequestData {
   id: number;
   name: string;

@@ -83,9 +83,9 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     cell: ({ getValue }) => {
       const status = getValue<string>();
       return status ? (
-        <CardStatus type="blue" title={"Active"} />
+        <CardStatus type="blue" circle animation title={"Active"} />
       ) : (
-        <CardStatus type="green" title={"Not Active"} />
+        <CardStatus type="green" circle title={"Not Active"} />
       );
     },
   },
