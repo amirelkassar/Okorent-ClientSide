@@ -7,6 +7,7 @@ const PricingPlansData = [
     name: "Essential",
     description:
       "Basic features for starting rental businesses and small teams.",
+      numMore:52,
     price: {
       original: "$35",
       discounted: "$29",
@@ -34,6 +35,7 @@ const PricingPlansData = [
     description:
       "The best value for medium-sized and growing rental businesses.",
     badge: "MOST POPULAR",
+    numMore:60,
     price: {
       original: "$35",
       discounted: "$29",
@@ -55,6 +57,7 @@ const PricingPlansData = [
   {
     name: "Premium",
     description: "Advanced features for large rental companies.",
+    numMore:75,
     price: {
       original: "$35",
       discounted: "$29",
@@ -127,7 +130,7 @@ function PricingPlans() {
               })}
             </ul>
             <button className=" text-center flex items-center justify-center mx-auto  px-5 text-blue py-4 text-base font-Regular">
-              See all 52 features
+              See all {plan.numMore} features
             </button>
             <Button className={"w-[280px] max-w-[96%] mx-auto"}>
               Choose this plan
