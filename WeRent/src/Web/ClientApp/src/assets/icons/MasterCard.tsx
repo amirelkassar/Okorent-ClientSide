@@ -10,7 +10,7 @@ function MasterCardIcon() {
       xmlns="http://www.w3.org/2000/svg"
     >
       <circle cx="14" cy="14" r="14" fill="#CF1928" />
-      <circle cx="30" cy="14" r="14" fill="#FFD400" fill-opacity="0.7" />
+      <circle cx="30" cy="14" r="14" fill="#FFD400" fillOpacity="0.7" />
     </svg>
   );
 }

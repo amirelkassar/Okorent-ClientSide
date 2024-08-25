@@ -12,9 +12,9 @@ function ToDwonIcon() {
       <path
         d="M1.51562 2C11.9556 6.58585 17.5052 13.6379 16.648 29.2856M10.6478 24.5353L16.7928 31.3638L22.4849 24.7603"
         stroke="#0F2A43"
-        stroke-width="2.3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

@@ -14,9 +14,9 @@ function XIcon({fill='white'}:XIconProps) {
       <path
         d="M8.40002 2L2 8.40002M2.00002 2L8.40004 8.40002"
         stroke={fill}
-        stroke-width="3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

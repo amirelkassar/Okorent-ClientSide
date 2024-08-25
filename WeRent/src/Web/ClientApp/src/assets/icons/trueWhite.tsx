@@ -1,6 +1,8 @@
 import React from "react";
-
-function TrueWhiteIcon() {
+interface TrueWhiteIconProps {
+  active?: boolean;
+}
+function TrueWhiteIcon({ active = false }: TrueWhiteIconProps) {
   return (
     <svg
       width="32"
@@ -9,13 +11,19 @@ function TrueWhiteIcon() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <circle cx="16" cy="16" r="15.5" fill="white" stroke="#C9C9C9" />
+      <circle
+        cx="16"
+        cy="16"
+        r="15.5"
+        fill={active ? "#88BA52" : "white"}
+        stroke={active ? "#88BA52" : "#C9C9C9"}
+      />
       <path
         d="M23.1109 11.5557L13.3332 21.3334L8.88867 16.889"
-        stroke="#C9C9C9"
-        stroke-width="3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        stroke={active ? "white" : "#C9C9C9"}
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

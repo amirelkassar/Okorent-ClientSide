@@ -4,6 +4,7 @@ import Image from "next/image";
 import Button from "@/src/components/button";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
+import LinkGreen from "@/src/components/linkGreen";
 function page() {
   return (
     <div className="bg-white border border-green/30 rounded-2xl px-11 pt-10 pb-8 shadow-lg max-w-[650px] mx-auto my-20">
@@ -36,12 +37,12 @@ function page() {
         You will receive a confirmation email
       </p>
       <div className="flex  gap-12">
-        <Link
+        <LinkGreen
           href={ROUTES.USER.HOMEPAGE}
-          className="flex-1 flex w-full items-center justify-center h-[50px] bg-grayBack rounded-xl"
+          className=" w-full flex-1  h-[50px] bg-grayBack border-none text-black"
         >
           Back to homepage
-        </Link>
+        </LinkGreen>
         <Button className={"flex-1 w-auto h-[50px] max-w-[calc(50%-20px)]"}>
           Download Invoice
         </Button>

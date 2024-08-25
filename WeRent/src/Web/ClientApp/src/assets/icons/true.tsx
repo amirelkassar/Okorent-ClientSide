@@ -12,7 +12,7 @@ function TrueIcon() {
       <path
         d="M1 6.55556L4.69231 11L8.84615 6L13 1"
         stroke="#344050"
-        stroke-width="2"
+        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />

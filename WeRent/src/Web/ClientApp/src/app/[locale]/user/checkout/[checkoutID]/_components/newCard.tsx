@@ -28,7 +28,7 @@ function NewCard() {
         </div>
         <div className="flex items-center gap-2 w-full">
           <InputCreditCard />
-          <div className="bg-red size-8 rounded-full flex items-center justify-center">
+          <div className="bg-red size-8 rounded-full cursor-pointer duration-200 hover:shadow-md flex items-center justify-center">
             <XIcon />
           </div>
         </div>
@@ -50,7 +50,7 @@ function NewCard() {
             }}
             className=" flex-1  duration-200 w-full min-h-[44px] rounded-2xl text-grayMedium"
           />
-          <TrueWhiteIcon />
+          <TrueWhiteIcon  active/>
         </div>
       </div>
       <div className="flex items-center gap-6 mt-6">

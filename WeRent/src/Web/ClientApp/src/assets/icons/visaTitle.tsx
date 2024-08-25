@@ -26,8 +26,8 @@ function VisaTitleIcon() {
           y2="24.1313"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="white" />
-          <stop offset="1" stop-color="white" stop-opacity="0.75" />
+          <stop stopColor="white" />
+          <stop offset="1" stopColor="white" stopOpacity="0.75" />
         </linearGradient>
         <linearGradient
           id="paint1_linear_2001_1585"
@@ -37,8 +37,8 @@ function VisaTitleIcon() {
           y2="13.1991"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="white" />
-          <stop offset="1" stop-color="white" stop-opacity="0.75" />
+          <stop stopColor="white" />
+          <stop offset="1" stopColor="white" stopOpacity="0.75" />
         </linearGradient>
       </defs>
     </svg>
