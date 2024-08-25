@@ -23,14 +23,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
-      <body
-        className=" overflow-x-hidden"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(240,246,251,1) 10%,rgb(236, 247, 223) 40%,  rgb(255, 255, 255)  50%, rgb(255, 255, 255) 100%)",
-        }}
-      >
-        <div>
+      <body className=" overflow-x-hidden relative">
+        <div
+          className="w-screen h-[150vh] absolute top-0 left-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(240,246,251,1) 20%, rgba(235,246,237,1) 71%, rgba(255,255,255,1) 86%)"
+          }}
+        ></div>
+        <div className=" relative">
           <MantineProvider>{children}</MantineProvider>
         </div>
       </body>
