@@ -45,6 +45,7 @@ const ROUTES = {
     PRODUCTDETAILS: (id) => `/user/product/${id}`,
     SUBSCRIPTION: "/user/subscription",
     CHECKOUT: "/user/checkout",
+    CHECKOUTID:(id)=> `/user/checkout/${id}`,
 
 
   },

@@ -99,56 +99,56 @@ function NavLinks() {
     []
   );
   return (
-    
-    path !== ROUTES.USER.CHECKOUT && <div className="mt-10 max-w-full ">
-      {newPath.find((item) => item.active) ? (
-        <div className="flex mb-11  items-center gap-3">
-          <button
-            className=" size-5"
-            onClick={() => {
-              router.back();
-            }}
-          >
-            <BackIcon className={"w-full h-full"} />
-          </button>
-          <h1 className="text-[32px] font-Bold">
-            {newPath.find((item) => item.active)?.name}
+    path !== ROUTES.USER.CHECKOUT ||
+    (path !== ROUTES.USER.CHECKOUTID(params.checkoutID) && (
+      <div className="mt-10 max-w-full ">
+        {newPath.find((item) => item.active) ? (
+          <div className="flex mb-11  items-center gap-3">
+            <button
+              className=" size-5"
+              onClick={() => {
+                router.back();
+              }}
+            >
+              <BackIcon className={"w-full h-full"} />
+            </button>
+            <h1 className="text-[32px] font-Bold">
+              {newPath.find((item) => item.active)?.name}
+            </h1>
+          </div>
+        ) : (
+          <h1 className="mb-11 text-[32px] font-Bold">
+            {LinksNav.find((item) => item.active)?.name}
+            {path === ROUTES.USER.ADDLIST && "List an item"}
+            <span className="mx-3">
+              {LinksNav.find((item) => item?.activeDetails)?.activeDetails}
+            </span>
           </h1>
-        </div>
-      ) : (
-        <h1 className="mb-11 text-[32px] font-Bold">
-          {LinksNav.find((item) => item.active)?.name}
-          {path === ROUTES.USER.ADDLIST && "List an item"}
-          <span className="mx-3">
-            {LinksNav.find((item) => item?.activeDetails)?.activeDetails}
-          </span>
-        </h1>
-      )}
+        )}
 
-      <div className=" max-w-full overflow-x-auto overflow-y-hidden mb-12 pb-4">
-        <ul className=" border-b-[1.5px] flex items-center gap-6 justify-between ">
-          {LinksNav.map((link) => {
-            return (
-              <li
-                key={link.id}
-                className={` pb-[14px] -mb-[2px] ${
-                  link.active && "border-b-[3px] border-green"
-                } `}
-              >
-                <Link
-                  href={link.url}
-                  className="text-[16px] text-nowrap font-SemiBold duration-200 text-black/80 hover:text-black"
+        <div className=" max-w-full overflow-x-auto overflow-y-hidden mb-12 pb-4">
+          <ul className=" border-b-[1.5px] flex items-center gap-6 justify-between ">
+            {LinksNav.map((link) => {
+              return (
+                <li
+                  key={link.id}
+                  className={` pb-[14px] -mb-[2px] ${
+                    link.active && "border-b-[3px] border-green"
+                  } `}
                 >
-                  {link.name}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+                  <Link
+                    href={link.url}
+                    className="text-[16px] text-nowrap font-SemiBold duration-200 text-black/80 hover:text-black"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
-    </div>
-    
-   
+    ))
   );
 }
 
