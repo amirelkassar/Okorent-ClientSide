@@ -1,7 +1,5 @@
 import LockIcon from "@/src/assets/icons/lock";
-import TrueIcon from "@/src/assets/icons/true";
 import TrueGreenIcon from "@/src/assets/icons/trueGreen";
-import VerifyIcon from "@/src/assets/icons/verify";
 import Button from "@/src/components/button";
 import React from "react";
 const PricingPlansData = [
@@ -21,7 +19,9 @@ const PricingPlansData = [
       { feature: "Lorem ipsum dolor sit amet, consectetur", available: true },
       { feature: "Lorem ipsum dolor sit amet, consectetur", available: true },
       { feature: "Lorem ipsum dolor sit amet, consectetur", available: true },
-      { feature: "Lorem ipsum dolor sit amet, consectetur", available: false }, // Example of a feature not available
+      { feature: "Lorem ipsum dolor sit amet, consectetur", available: false },
+      { feature: "Lorem ipsum dolor sit amet, consectetur", available: true },
+      { feature: "Lorem ipsum dolor sit amet, consectetur", available: false },
     ],
     buttonLabel: "Choose this plan",
     imageDimensions: {
@@ -46,6 +46,8 @@ const PricingPlansData = [
       { feature: "Lorem ipsum dolor sit amet, consectetur", available: true },
       { feature: "Lorem ipsum dolor sit amet, consectetur", available: true },
       { feature: "Lorem ipsum dolor sit amet, consectetur", available: true },
+      { feature: "Lorem ipsum dolor sit amet, consectetur", available: false },
+      { feature: "Lorem ipsum dolor sit amet, consectetur", available: false },
       { feature: "Lorem ipsum dolor sit amet, consectetur", available: true },
     ],
     buttonLabel: "Choose this plan",
@@ -65,6 +67,8 @@ const PricingPlansData = [
       { feature: "Lorem ipsum dolor sit amet, consectetur", available: true },
       { feature: "Lorem ipsum dolor sit amet, consectetur", available: true },
       { feature: "Lorem ipsum dolor sit amet, consectetur", available: true },
+      { feature: "Lorem ipsum dolor sit amet, consectetur", available: false },
+      { feature: "Lorem ipsum dolor sit amet, consectetur", available: false },
       { feature: "Lorem ipsum dolor sit amet, consectetur", available: true },
     ],
     buttonLabel: "Choose this plan",
@@ -78,8 +82,14 @@ function PricingPlans() {
         return (
           <div
             key={i}
-            className="bg-white flex-1 border-[3px] border-green/30  rounded-xl pt-11 pb-9"
+            className="bg-white flex-1 relative  border-[3px] border-green/30  rounded-xl pt-11 pb-9"
           >
+            {plan.badge && (
+              <p className="bg-green ps-5 pe-[22px] py-1 text-center h-7 uppercase after:content-[''] after:right-[-20px] after:-rotate-45 after:absolute after:size-[30px] after:bg-white after:top-1/2 overflow-hidden after:-translate-y-1/2 absolute left-[-3px] top-4 text-white font-Medium">
+                Most Popular
+              </p>
+            )}
+
             <div className="px-[22px]">
               <h2 className="text-[32px] mb-1">{plan.name}</h2>
               <h3 className="text-[20px] font-Regular text-[#565656] leading-6 mb-5">
@@ -107,7 +117,7 @@ function PricingPlans() {
                         <TrueGreenIcon />
                       </span>
                     ) : (
-                      <span className=" size-5 min-w-5">
+                      <span className=" size-5 min-w-5 opacity-50">
                         <LockIcon />
                       </span>
                     )}

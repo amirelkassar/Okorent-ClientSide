@@ -24,12 +24,13 @@ export default function RootLayout({
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body
+        className=" overflow-x-hidden"
         style={{
           background:
             "linear-gradient(180deg, rgba(240,246,251,1) 10%,rgb(236, 247, 223) 40%,  rgb(255, 255, 255)  50%, rgb(255, 255, 255) 100%)",
         }}
       >
-        <div >
+        <div>
           <MantineProvider>{children}</MantineProvider>
         </div>
       </body>

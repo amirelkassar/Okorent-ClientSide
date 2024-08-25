@@ -84,24 +84,24 @@ function NavLinks() {
   const newPath = useMemo(
     () => [
       {
-        id: 10,
+        id: 0,
         name: "Product Details ",
         url: ROUTES.USER.PRODUCTDETAILS(params.productID),
         active: path === ROUTES.USER.PRODUCTDETAILS(params.productID),
+      },
+      {
+        id: 1,
+        name: "Subscription",
+        url: ROUTES.USER.SUBSCRIPTION,
+        active: path === ROUTES.USER.SUBSCRIPTION,
       },
     ],
     []
   );
   return (
-    <div className="mt-10 max-w-full ">
-      <h1 className="mb-11 text-[32px] font-Bold">
-        {LinksNav.find((item) => item.active)?.name}
-        {path === ROUTES.USER.ADDLIST && "List an item"}
-        <span className="mx-3">
-          {LinksNav.find((item) => item?.activeDetails)?.activeDetails}
-        </span>
-      </h1>
-      {newPath.find((item) => item.active) && (
+    
+    path !== ROUTES.USER.CHECKOUT && <div className="mt-10 max-w-full ">
+      {newPath.find((item) => item.active) ? (
         <div className="flex mb-11  items-center gap-3">
           <button
             className=" size-5"
@@ -109,12 +109,20 @@ function NavLinks() {
               router.back();
             }}
           >
-            <BackIcon className={'w-full h-full'}/>
+            <BackIcon className={"w-full h-full"} />
           </button>
           <h1 className="text-[32px] font-Bold">
             {newPath.find((item) => item.active)?.name}
           </h1>
         </div>
+      ) : (
+        <h1 className="mb-11 text-[32px] font-Bold">
+          {LinksNav.find((item) => item.active)?.name}
+          {path === ROUTES.USER.ADDLIST && "List an item"}
+          <span className="mx-3">
+            {LinksNav.find((item) => item?.activeDetails)?.activeDetails}
+          </span>
+        </h1>
       )}
 
       <div className=" max-w-full overflow-x-auto overflow-y-hidden mb-12 pb-4">
@@ -139,6 +147,8 @@ function NavLinks() {
         </ul>
       </div>
     </div>
+    
+   
   );
 }
 
