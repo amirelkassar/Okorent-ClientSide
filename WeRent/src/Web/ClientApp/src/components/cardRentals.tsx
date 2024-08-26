@@ -18,7 +18,7 @@ function CardRentals({ data, Fav = false, edit = false }: CardRentalsProps) {
 
   return (
     <div>
-      <div className="w-[270px] p-4 bg-white/20 rounded-3xl block border border-black/25">
+      <div className="w-[270px] p-4 bg-white/20 rounded-3xl block border border-black/25 duration-200 hover:shadow-md">
         <div className=" relative mb-3">
           <Image
             alt="Rentals"
