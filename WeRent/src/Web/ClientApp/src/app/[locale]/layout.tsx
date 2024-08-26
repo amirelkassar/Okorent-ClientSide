@@ -25,10 +25,10 @@ export default function RootLayout({
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body className=" overflow-x-hidden relative">
         <div
-          className="w-screen h-[150vh] absolute top-0 left-0"
+          className="w-screen max-h-[150vh] h-full absolute top-0 left-0"
           style={{
             background:
-              "linear-gradient(180deg, rgba(240,246,251,1) 20%, rgba(235,246,237,1) 71%, rgba(255,255,255,1) 86%)"
+              "linear-gradient(180deg, #F0F6FB 0%, #F0F6FB 35%,#EBF6EDBD 70%, #DFF5C608 88%, #DFF5C608 100%)"
           }}
         ></div>
         <div className=" relative">
