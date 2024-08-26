@@ -4,6 +4,8 @@ import imageCard from "@/src/assets/images/phone.png";
 import StarIcon from "@/src/assets/icons/star";
 import VerifyBlackIcon from "@/src/assets/icons/verifyBlack";
 import Button from "@/src/components/button";
+import ROUTES from "../routes";
+import LinkGreen from "./linkGreen";
 interface RequestData {
   id: number;
   name: string;
@@ -144,34 +146,34 @@ function CardRequest({ data, dataByModal, declined }: CardRequestProps) {
       </div>
       {declined === "decline" ? (
         <div className="flex gap-6 flex-wrap">
-          <Button className={"flex-1 text-black bg-grayBack border-none"}>
+          <LinkGreen href={ROUTES.USER.INBOX} className={"flex-1 text-black bg-grayBack border-none"}>
             Message {data.name.split(" ")[0]}
-          </Button>
+          </LinkGreen>
           <Button className={"flex-1"}>Reoffer Now</Button>
         </div>
       ) : declined === "ongoing" ? (
         <div className="flex gap-6 flex-wrap">
-          <Button className={"flex-1 text-black bg-grayBack border-none"}>
+          <LinkGreen href={ROUTES.USER.INBOX} className={"flex-1 text-black bg-grayBack border-none"}>
             Message {data.name.split(" ")[0]}
-          </Button>
+          </LinkGreen>
           <Button className={"flex-1"}>View Details</Button>
         </div>
       ) : declined === "upcoming" ? (
         <div className="flex gap-6 flex-wrap">
-          <Button className={"flex-1 text-black bg-grayBack border-none"}>
+          <LinkGreen href={ROUTES.USER.INBOX} className={"flex-1 text-black bg-grayBack border-none"}>
             Message {data.name.split(" ")[0]}
-          </Button>
+          </LinkGreen>
           <Button className={"flex-1"}>Cancel Bookings</Button>
         </div>
       ) : declined === "accept" ? (
         <div className="flex gap-6 flex-wrap">
           <Button className={"w-full"}>Accept</Button>
-          <Button className={"flex-1 text-black bg-grayBack border-none"}>
+          <LinkGreen href={ROUTES.USER.INBOX} className={"flex-1 text-black bg-grayBack border-none"}>
             Decline
-          </Button>
-          <Button className={"flex-1 text-black bg-grayBack border-none"}>
+          </LinkGreen>
+          <LinkGreen href={ROUTES.USER.INBOX} className={"flex-1 text-black bg-grayBack border-none"}>
             Message {data.name.split(" ")[0]}
-          </Button>
+          </LinkGreen>
         </div>
       ) : null}
     </div>

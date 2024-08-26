@@ -7,6 +7,7 @@ import Image from "next/image";
 import React from "react";
 import house1 from "@/src/assets/images/house1.png";
 import house2 from "@/src/assets/images/house2.png";
+import LinkGreen from "@/src/components/linkGreen";
 
 const data = {
   category: "category3",
@@ -55,15 +56,15 @@ function page({ params }: any) {
 
   return (
     <div className="flex flex-col lgl:mt-[-30px] gap-3 mb-20">
-      <Link
+      <LinkGreen
         href={ROUTES.USER.LISTINGSEDIT(params.listID)}
         className={
-          "bg-green cursor-pointer ms-auto relative lgl:bottom-[-40px] px-10 w-fit border-2 gap-2 h-10 border-[#a9c788] hover:border-green duration-500  text-medium rounded-xl text-white flex items-center justify-center"
+          " ms-auto relative lgl:bottom-[-40px] px-10  gap-2 h-10   text-medium"
         }
       >
         <EditIcon fill="white" className="w-[16px]" />
-        <p>Edit</p>
-      </Link>
+        <p className="text-white">Edit</p>
+      </LinkGreen>
       <CardDetailsList title="Item category" decs={data.category} />
       <CardDetailsList title="Title" decs={data.Describe.title} />
       <CardDetailsList title="Describtion" decs={data.Describe.dec} />

@@ -2,9 +2,10 @@ import Image from "next/image";
 import React from "react";
 import avatar from "@/src/assets/images/avatar.png";
 import { OneUserData } from "@/src/lib/dataUser";
-import Button from "@/src/components/button";
 import StarIcon from "@/src/assets/icons/star";
 import VerifyBlackIcon from "@/src/assets/icons/verifyBlack";
+import LinkGreen from "@/src/components/linkGreen";
+import ROUTES from "@/src/routes";
 function CardDetails() {
   return (
     <div className="pt-[50px] pb-10 ps-9 pe-14 rounded-3xl border border-green shadow-sidebar bg-white flex  gap-6 max-w-[684px]">
@@ -41,9 +42,9 @@ function CardDetails() {
             <p className="text-[16px] mb-1 text-grayMedium"> Leased Items</p>
           </div>
         </div>
-        <Button className={"w-full"}>
+        <LinkGreen href={ROUTES.USER.INBOX} className={"w-full"}>
           Message {OneUserData.name.split(" ")[0]}
-        </Button>
+        </LinkGreen>
       </div>
     </div>
   );

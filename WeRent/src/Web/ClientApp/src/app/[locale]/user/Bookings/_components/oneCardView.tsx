@@ -4,6 +4,8 @@ import homeImg from "@/src/assets/images/house1.png";
 import userImg from "@/src/assets/images/avatar.png";
 import Button from "@/src/components/button";
 import NoteIcon from "@/src/assets/icons/note";
+import LinkGreen from "@/src/components/linkGreen";
+import ROUTES from "@/src/routes";
 
 function OneCardView() {
   return (
@@ -52,7 +54,7 @@ function OneCardView() {
         <Button className={"h-10 bg-grayBack flex-1 text-black border-none"}>
           View Details
         </Button>
-        <Button className={"h-10 flex-1"}> Message Ahmed</Button>
+        <LinkGreen href={ROUTES.USER.INBOX} className={"h-10 flex-1"}> Message Ahmed</LinkGreen>
       </div>
     </div>
   );

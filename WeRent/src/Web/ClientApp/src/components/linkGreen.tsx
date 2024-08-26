@@ -11,7 +11,7 @@ function LinkGreen({ children, className, href = "#" }: ButtonProps) {
     <Link
       href={href}
       className={cn(
-        "bg-green px-3 border-4 h-[50px] border-[#a9c788] hover:border-green duration-500 text-medium rounded-xl text-white flex items-center justify-center",
+        "bg-green px-3 text-white border-4 h-[50px] border-[#a9c788] hover:border-green duration-500 text-medium rounded-xl text-white flex items-center justify-center",
         className
       )}
     >

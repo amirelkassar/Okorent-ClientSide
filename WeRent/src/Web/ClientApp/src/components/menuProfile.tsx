@@ -8,6 +8,8 @@ import ProfileIcon from "../assets/icons/Profile";
 import LogoutIcon from "../assets/icons/Logout";
 import SettingsIcon from "../assets/icons/Settings";
 import SubscriptionIcon from "../assets/icons/Subscription";
+import { Link } from "../navigation";
+import ROUTES from "../routes";
 function MenuProfile() {
   const [opened, setOpened] = useState(false);
   return (
@@ -46,7 +48,7 @@ function MenuProfile() {
           leftSection={<SubscriptionIcon />}
           className=" hover:bg-green/15 py-0 h-[30px] px-1 text-[14px] font-SemiBold rounded-lg"
         >
-          Subscription
+          <Link href={ROUTES.USER.SUBSCRIPTION}>Subscription</Link>
         </Menu.Item>
         <Menu.Item
           leftSection={<SettingsIcon />}

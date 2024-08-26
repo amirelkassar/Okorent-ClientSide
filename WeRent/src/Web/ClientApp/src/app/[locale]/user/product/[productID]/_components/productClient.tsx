@@ -4,6 +4,8 @@ import Button from "@/src/components/button";
 import Image from "next/image";
 import React from "react";
 import avatar from "@/src/assets/images/avatar.png";
+import ROUTES from "@/src/routes";
+import LinkGreen from "@/src/components/linkGreen";
 function ProductClient() {
   return (
     <div className="border border-green/30 mt-6 rounded-lg py-6 px-5">
@@ -47,7 +49,9 @@ function ProductClient() {
         </div>
       </div>
       <div className="flex items-center gap-6 flex-wrap mt-5">
-        <Button className={"flex-1 h-10"}>Message Ahmed</Button>
+        <LinkGreen href={ROUTES.USER.INBOX} className={"flex-1 h-10"}>
+          Message Ahmed
+        </LinkGreen>
         <Button className={"flex-1 h-10 bg-grayBack text-black border-none"}>
           {" "}
           View Profile
