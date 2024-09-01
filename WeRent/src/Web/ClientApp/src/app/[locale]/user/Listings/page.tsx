@@ -20,19 +20,14 @@ const FilterOptions = [
 ];
 function Page() {
   const searchParams = useSearchParams();
-  console.log(searchParams.get("cards"));
+  console.log(searchParams.get("list"));
 
   return (
     <div>
-      {searchParams.get("cards") === "true" ? (
-        <div>
-          <CardView first title={"Active"} />
-          <CardView title={"Not Active"} />
-        </div>
-      ) : (
+      {searchParams.get("list") === "true" ? (
         <DataTable
           title="My Listings"
-          cardView={`${ROUTES.USER.LISTINGS}?cards=true`}
+          cardView={ROUTES.USER.LISTINGS}
           search
           data={ListingsData}
           filterBy="status"
@@ -40,6 +35,11 @@ function Page() {
           filterData={FilterOptions}
           columns={columns}
         />
+      ) : (
+        <div>
+          <CardView first title={"Active"} />
+          <CardView title={"Not Active"} />
+        </div>
       )}
     </div>
   );

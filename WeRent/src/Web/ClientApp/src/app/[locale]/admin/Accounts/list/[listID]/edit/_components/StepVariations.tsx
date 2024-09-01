@@ -96,7 +96,7 @@ function StepVariations({
       <ModalComp title="Add a variation" opened={opened} close={close}>
         <div className="flex flex-col gap-6 w-[660px] max-w-full">
           {variations.map((variation, index) => (
-            <div key={index} className="flex items-center gap-4">
+            <div key={index} className="flex items-center  flex-col md:flex-row gap-4">
               <Select
                 data={["Color", "Color2", "Color3", "Color4", "Color5"]}
                 leftSectionPointerEvents="none"
@@ -141,21 +141,21 @@ function StepVariations({
           <Button
             onClick={addVariation}
             className={
-              "mt-8 bg-grayBack gap-3 px-7 h-[64px] border-none text-black"
+              "mt-8 bg-grayBack gap-3 px-7 h-[50px] lg:h-[64px] border-none text-black"
             }
           >
             <PlusIcon fill="#0F2A43" />
-            <p>Add Variations</p>
+            <p className="text-[14px] text-base">Add Variations</p>
           </Button>
         )}
-        <div className="w-full flex items-center gap-5 mt-28">
-          <Button onClick={close} className={" h-[64px] flex-1"}>
+        <div className="w-full flex items-center gap-5 mt-11 lg:mt-28">
+            <Button onClick={close} className={" h-[54px] lg:h-[64px] flex-1"}>
             Save and close
           </Button>
           {variations.length < 3 && (
-            <Button
+             <Button
               onClick={addVariation}
-              className={" h-[64px] flex-1 bg-grayBack border-none text-black"}
+              className={" h-[54px] lg:h-[64px] flex-1 bg-grayBack border-none text-black"}
             >
               Save and add another
             </Button>
@@ -170,11 +170,11 @@ function StepVariations({
               open();
             }}
             className={
-              "mt-8 bg-grayBack gap-3 px-7 h-[64px] border-none text-black"
+              "mt-8 bg-grayBack gap-3 px-7 h-[50px] lg:h-[64px] border-none text-black"
             }
           >
             <PlusIcon fill="#0F2A43" />
-            <p>Add Variations</p>
+            <p className="text-[14px] text-base">Add Variations</p>
           </Button>
         </div>
       )}

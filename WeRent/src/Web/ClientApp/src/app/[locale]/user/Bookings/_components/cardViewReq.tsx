@@ -36,7 +36,7 @@ interface RequestData {
 
 interface CardViewProps {
   data?: RequestData[];
-  filterBy: "accept" | "decline"|'upcoming'|'ongoing';
+  filterBy: "accept" | "decline" | "upcoming" | "ongoing";
   title: string;
   first?: boolean;
   haveRentSwitch?: boolean;
@@ -67,7 +67,7 @@ function CardViewReq({
 
           {first && (
             <Link
-              href={ROUTES.USER.BOOKINGS}
+              href={`${ROUTES.USER.BOOKINGS}?list=true`}
               className="px-3 duration-300 hover:shadow-md w-fit py-2 rounded-xl border border-black flex items-center justify-center gap-2"
             >
               <ListIcon />
@@ -114,10 +114,7 @@ function CardViewReq({
             .map((item) => {
               return (
                 <SwiperSlide key={item.id}>
-                  <CardRequest
-                    data={item}
-                    declined={filterBy }
-                  />
+                  <CardRequest data={item} declined={filterBy} />
                 </SwiperSlide>
               );
             })}

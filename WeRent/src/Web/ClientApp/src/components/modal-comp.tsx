@@ -16,7 +16,7 @@ function ModalComp({ opened, close, children, title }: ModalCompProps) {
       size="auto"
       classNames={{
         header: "p-0 h-0 min-h-0 ",
-        body: "min-h-[300px] p-0 min-w-[400px] ",
+        body: "min-h-[300px] p-0 min-w-auto md:min-w-[400px] ",
         content:
           "rounded-3xl border-2 overflow-hidden shadow-sidebar   border-green",
         overlay: "bg-black/50",
@@ -24,12 +24,12 @@ function ModalComp({ opened, close, children, title }: ModalCompProps) {
       closeButtonProps={{
         icon: <CloseIcon />,
         className:
-          "mb-[-40px]  border-none  focus-visible:outline-none   outline-none absolute end-4 top-7",
+          "mb-[-40px] size-5 lg:size-6  border-none hover:shadow-md hover:shadow-red/20 duration-300 rounded-full  min-w-5 aspect-square min-h-5  focus-visible:outline-none   outline-none absolute end-4 top-4 lg:top-7",
       }}
       centered
     >
-      <div className="w-full mt-7 mb-4 pb-5 border-b border-1">
-        <h2 className="text-center    max-w-[76%] mx-auto text-[24px]">
+      <div className="w-full mt-3 lg:mt-7 mb-4 pb-3 lg:pb-5 border-b border-1">
+        <h2 className="text-center    max-w-[76%] mx-auto text-xl font-medium lg:text-[24px]">
           {title}
         </h2>
       </div>

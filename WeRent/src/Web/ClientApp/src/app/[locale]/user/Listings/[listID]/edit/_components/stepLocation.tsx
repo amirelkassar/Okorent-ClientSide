@@ -28,9 +28,9 @@ function StepLocation({
 }: StepLocationProps) {
   const [opened, { open, close }] = useDisclosure(false);
   return (
-    <div className="mt-[7px] pb-12 flex-1">
-      <h3 className={"text-[24px] mb-1 "}>Storage Location</h3>
-      <p className="text-grayMedium mb-4 text-base font-Regular">
+    <div className="mt-[7px] pb-8 lg:pb-12 flex-1">
+      <h3 className={"text-base lg:text-[24px] mb-1 "}>Storage Location</h3>
+      <p className="text-grayMedium mb-4 text-sm lg:text-base font-Regular">
         Add storage location that we will pickup the item from
       </p>
 
@@ -51,9 +51,9 @@ function StepLocation({
                 placeholder={`Location ${index + 1}`}
                 readOnly
                 classNames={{
-                  label: "text-[16px] text-grayMedium mb-2",
+                  label: "text-sm lg:text-base text-grayMedium mb-2",
                   input:
-                    " text-black rounded-2xl text-grayMedium  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+                    " text-black rounded-2xl text-[12px] md:text-[16px] text-grayMedium  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
                   wrapper: "h-[64px]",
                 }}
                 className=" flex-1  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
@@ -71,9 +71,9 @@ function StepLocation({
                   )
                 }
                 classNames={{
-                  label: "text-[16px] text-grayMedium mb-2",
+                  label: "text-sm lg:text-base text-grayMedium mb-2",
                   input:
-                    " text-black rounded-2xl text-grayMedium first:font-Bold  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+                    " text-black rounded-2xl text-[12px] md:text-[16px] text-grayMedium first:font-Bold  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
                   wrapper: "h-[64px]",
                 }}
                 className=" flex-1  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"

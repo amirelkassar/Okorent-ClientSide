@@ -50,9 +50,9 @@ interface StepAvailabilityProps {
 function StepAvailability({ setDataList, dataList ,defaultValue}: StepAvailabilityProps) {
   const [opened, { open, close }] = useDisclosure(false);
   return (
-    <div className="mt-[7px] pb-12 flex-1">
-      <h3 className={"text-[24px] mb-3 "}>Availability</h3>
-      <p className="text-grayMedium mb-4 text-base font-Regular">
+    <div className="mt-[7px] pb-8 lg:pb-12 flex-1">
+      <h3 className={"text-base lg:text-[24px] mb-2 lg:mb-3 "}>Availability</h3>
+      <p className="text-grayMedium mb-4 text-sm lg:text-base font-Regular">
         Choose when your item will be available for rent
       </p>
       <Radio.Group
@@ -82,7 +82,7 @@ function StepAvailability({ setDataList, dataList ,defaultValue}: StepAvailabili
         </div>
       </Radio.Group>
       <div>
-        <p className="mt-4 text-[14px] text-grayMedium font-Regular">
+        <p className="mt-4 text-[12px] lg:text-[14px] text-grayMedium font-Regular">
           Your item is available for rent{" "}
           <span className="text-blue font-Medium">
             from August 9 to August 24.

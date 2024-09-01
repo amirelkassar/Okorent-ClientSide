@@ -71,7 +71,18 @@ function Page() {
 
   return isRent === "rent" ? (
     <div>
-      {searchParams.get("cards") === "true" ? (
+      {searchParams.get("list") === "true" ? (
+        <DataTable
+          title="My Rentals"
+          cardView={ROUTES.USER.BOOKINGS}
+          data={RentalsData}
+          columns={columns}
+          filter="buttons"
+          filterData={FilterOptions}
+          haveRentSwitch
+          filterBy="status"
+        />
+      ) : (
         <div>
           <CardView
             filterBy="completed"
@@ -82,22 +93,22 @@ function Page() {
           <CardView filterBy="completed" title={"Upcoming Rentals"} />
           <CardView filterBy="completed" title={"Closed Rentals"} />
         </div>
-      ) : (
-        <DataTable
-          title="My Rentals"
-          cardView={`${ROUTES.USER.BOOKINGS}?cards=true`}
-          data={RentalsData}
-          columns={columns}
-          filter="buttons"
-          filterData={FilterOptions}
-          haveRentSwitch
-          filterBy="status"
-        />
       )}
     </div>
   ) : (
     <div>
-      {searchParams.get("cards") === "true" ? (
+      {searchParams.get("list") === "true" ? (
+        <DataTable
+          title="My Requests"
+          cardView={ROUTES.USER.BOOKINGS}
+          filter="buttons"
+          filterBy="status"
+          filterData={FilterOptionsReq}
+          data={RequestsData}
+          haveRentSwitch
+          columns={columnsWithOpen}
+        />
+      ) : (
         <div>
           <CardViewReq
             title="New Requests"
@@ -122,17 +133,6 @@ function Page() {
             filterBy="decline"
           />
         </div>
-      ) : (
-        <DataTable
-          title="My Requests"
-          cardView={`${ROUTES.USER.BOOKINGS}?cards=true`}
-          filter="buttons"
-          filterBy="status"
-          filterData={FilterOptionsReq}
-          data={RequestsData}
-          haveRentSwitch
-          columns={columnsWithOpen}
-        />
       )}
       <Modal
         opened={opened}

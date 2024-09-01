@@ -70,7 +70,7 @@ function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
           }
         }}
       >
-        <div className="flex my-6 items-center justify-between gap-3 flex-wrap">
+        <div className="flex my-6 items-center justify-between gap-1 lg:gap-3 flex-wrap">
           {OptionAvailability.map((option, inedx) => {
             return (
               <Radio
@@ -87,7 +87,7 @@ function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
         </div>
       </Radio.Group>
       <div>
-        <p className="mt-4 text-[14px] text-grayMedium font-Regular">
+        <p className="mt-4 text-[12px] md:text-[14px] text-grayMedium font-Regular">
           Your item is available for rent{" "}
           <span className="text-blue font-Medium">
             from August 9 to August 24.
@@ -184,7 +184,7 @@ function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
           />
         </div>
 
-        <Button className={"w-full h-[64px] mt-12"} onClick={close}>
+        <Button className={"w-full h-[64px] mt-8 lg:mt-12"} onClick={close}>
           Save and close
         </Button>
       </ModalComp>

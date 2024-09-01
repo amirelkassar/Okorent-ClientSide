@@ -21,10 +21,10 @@ interface ProductListProps {
 function ProductList({ link,title, data }: ProductListProps) {
   return (
     <div className="mb-11">
-      <h2 className="text-center mb-10 headTitle">{title}</h2>
+      <h2 className="text-center mb-5 lg:mb-10 headTitle">{title}</h2>
 
       {data.length > 0 && (
-        <div className="flex gap-8 justify-center flex-wrap">
+        <div className="flex gap-3 lg:gap-8 justify-center flex-wrap">
           {data?.map((item, i) => {
             return <CardRentals data={item} key={i} Fav={true} />;
           })}

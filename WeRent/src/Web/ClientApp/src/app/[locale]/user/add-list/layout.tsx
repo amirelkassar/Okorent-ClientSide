@@ -11,14 +11,14 @@ function layout({ children }: LayoutProps) {
     <div className="mb-24">
       <div className="flex items-center justify-between gap-4 mb-12 flex-wrap">
         <h2 className="headTitle !font-bold">List your item</h2>
-        <Button className={"gap-1 px-6"}>
+        <Button className={"gap-1 px-6 lg:h-[50px] h-10"}>
           <ImportIcon />
           <p>Bulk Import</p>
         </Button>
       </div>
       <div className="flex items-start justify-between gap-6">
         {children}
-        <div className="mt-4">
+        <div className="mt-4 hidden lg:block">
           <Image
             alt="primum"
             src={primum}

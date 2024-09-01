@@ -19,7 +19,7 @@ function DropImg({dataList,setDataList}:DropImgProps) {
   return (
     <div>
       {files.length > 0 ? (
-        <div className="h-fit min-h-[340] gap-2 flex-wrap  p-1 relative flex items-center justify-center border-green overflow-hidden border-solid border-2 rounded-2xl">
+        <div className="h-fit min-h-[220px] lg:min-h-[340] gap-2 flex-wrap  p-1 relative flex items-center justify-center border-green overflow-hidden border-solid border-2 rounded-2xl">
           <Button
             className={
               "absolute end-3 border-2 h-8 w-8 rounded-full hover:bg-rose-100 duration-200 p-1 bg-grayBack top-2"
@@ -49,7 +49,7 @@ function DropImg({dataList,setDataList}:DropImgProps) {
           maxSize={3 * 1024 ** 2} // 3MB
           accept={[MIME_TYPES.jpeg, MIME_TYPES.png, MIME_TYPES.pdf]}
           multiple={true}
-          className="h-[340px]  border-green overflow-hidden border-solid border-2 rounded-2xl"
+          className="h-[220px] lg:h-[340px]  border-green overflow-hidden border-solid border-2 rounded-2xl"
         >
           <div className="h-full absolute w-full inset-0 flex justify-center items-center flex-col gap-3">
             <UpLoadIcon className={"w-9 h-auto"} />

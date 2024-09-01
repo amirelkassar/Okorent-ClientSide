@@ -86,12 +86,12 @@ function Page() {
   const [location, setLocation] = useState<LocationProps[]>([]);
   const [countValueInput, setCountValueInput] = useState(0);
   const [dataList, setDataList] = useState<any>({});
-  useEffect(()=>{
+  useEffect(() => {
     setDataList(data);
-    setLocation(data.addresses)
-    setVariations(data.Variations)
-    setSelectedCheckbox(data.Status )
-  },[])
+    setLocation(data.addresses);
+    setVariations(data.Variations);
+    setSelectedCheckbox(data.Status);
+  }, []);
   console.log(dataList);
   const handleInputChangeLocation = (
     index: number,
@@ -144,10 +144,11 @@ function Page() {
   };
 
   return (
-    <div className="w-[810px] mb-20 flex flex-col gap-4">
-     
-      <div className="mt-[7px] pb-12 flex-1">
-        <h3 className={"text-[24px] mb-3 "}>Choose item category</h3>
+    <div className="w-full lg:w-[810px] mb-20 flex flex-col gap-4">
+      <div className="mt-[7px] pb-8 flex-1">
+        <h3 className={"text-base lg:text-[24px] mb-2 lg:mb-3 "}>
+          Choose item category
+        </h3>
         <Select
           data={[
             "category",
@@ -176,8 +177,10 @@ function Page() {
           className="h-[64px]   duration-200 min-h-[64px] bg-white rounded-2xl border-2 border-green text-grayMedium"
         />
       </div>
-      <div className="mt-[7px] pb-12 flex-1">
-        <h3 className={"text-[24px] mb-3 "}>Describtion</h3>
+      <div className="mt-[7px] pb-8 flex-1">
+        <h3 className={"text-base lg:text-[24px] mb-2 lg:mb-3 "}>
+          Describtion
+        </h3>
         <TextInput
           placeholder="Add item title here"
           defaultValue={data.Describe.title}
@@ -198,7 +201,7 @@ function Page() {
           className="h-[64px] mb-6 duration-200 min-h-[64px] bg-white rounded-2xl border-2 border-green text-grayMedium"
         />
         <Textarea
-        defaultValue={data.Describe.dec}
+          defaultValue={data.Describe.dec}
           onChange={(e) => {
             setDataList({
               ...dataList,
@@ -215,22 +218,24 @@ function Page() {
               " text-black rounded-2xl text-grayMedium  h-full border-none placeholder:text-grayMedium placeholder:opacity-100 ",
             wrapper: "h-full",
           }}
-          className="  mb-6 duration-200 min-h-[190px] bg-white rounded-2xl border-2 border-green text-grayMedium"
+          className="  lg:mb-6 duration-200 min-h-[190px] bg-white rounded-2xl border-2 border-green text-grayMedium"
         />
       </div>
-      <div className="mt-[7px] pb-12 flex-1">
-        <h3 className={"text-[24px] mb-3 "}>Item Images</h3>
-        <p className="text-grayMedium mb-4 text-base font-Regular">
+      <div className="mt-[7px] pb-8 flex-1">
+        <h3 className={"text-base lg:text-[24px] mb-2 lg:mb-3 "}>
+          Item Images
+        </h3>
+        <p className="text-grayMedium mb-4  text-sm lg:text-base font-Regular">
           You can upload up to 8 images
         </p>
         <DropImg setDataList={setDataList} dataList={dataList} />
       </div>
-      <div className="mt-[7px] pb-12 flex-1">
-        <h3 className={"text-[24px] mb-3 "}>Item Price</h3>
-        <p className="text-grayMedium mb-4 text-base font-Regular">
+      <div className="mt-[7px] pb-8 flex-1">
+        <h3 className={"text-base lg:text-[24px] mb-2 lg:mb-3 "}>Item Price</h3>
+        <p className="text-grayMedium mb-4  text-sm lg:text-base font-Regular">
           Try to add lower price for longer bookings
         </p>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center flex-wrap gap-4">
           <TextInput
             name="name"
             label={"Price for 1 Day"}
@@ -246,20 +251,18 @@ function Page() {
               });
             }}
             classNames={{
-              label: "text-[16px] text-grayMedium mb-2",
+              label: "text-sm lg:text-[16px] text-grayMedium mb-2",
               input:
-                " text-black max-w-[200px] rounded-2xl text-grayMedium bg-white  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+                " text-black md:max-w-[200px] rounded-2xl text-grayMedium bg-white  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
               wrapper: "h-[64px]",
             }}
-            className=" flex-1  duration-200 max-w-[200px] min-h-[64px] rounded-2xl text-grayMedium"
+            className=" flex-1  min-w-[170px] w-full duration-200 md:max-w-[200px] min-h-[64px] rounded-2xl text-grayMedium"
           />
           <TextInput
             label={"Price for 3 Days"}
             name="attribute1"
             placeholder={"Add Price Here"}
-
             defaultValue={data.priceItems.ThreeDay}
-
             onChange={(e) => {
               setDataList({
                 ...dataList,
@@ -270,19 +273,18 @@ function Page() {
               });
             }}
             classNames={{
-              label: "text-[16px] text-grayMedium mb-2",
+              label: "text-sm lg:text-[16px] text-grayMedium mb-2",
               input:
-                " text-black max-w-[200px] rounded-2xl text-grayMedium bg-white  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+                " text-black md:max-w-[200px] rounded-2xl text-grayMedium bg-white  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
               wrapper: "h-[64px]",
             }}
-            className=" flex-1  duration-200 max-w-[200px] min-h-[64px] rounded-2xl text-grayMedium"
+            className=" flex-1  min-w-[170px] w-full duration-200 md:max-w-[200px] min-h-[64px] rounded-2xl text-grayMedium"
           />
           <TextInput
             label={"Price for 1 Week"}
             name="attribute2"
             placeholder={"Add Price Here"}
             defaultValue={data.priceItems.Week}
-
             onChange={(e) => {
               setDataList({
                 ...dataList,
@@ -293,12 +295,12 @@ function Page() {
               });
             }}
             classNames={{
-              label: "text-[16px] text-grayMedium mb-2",
+              label: "text-sm lg:text-[16px] text-grayMedium mb-2",
               input:
-                " text-black max-w-[200px] rounded-2xl text-grayMedium bg-white  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+                " text-black md:max-w-[200px] rounded-2xl text-grayMedium bg-white  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
               wrapper: "h-[64px]",
             }}
-            className=" flex-1  duration-200 max-w-[200px] min-h-[64px] rounded-2xl text-grayMedium"
+            className=" flex-1  min-w-[170px] w-full duration-200 md:max-w-[200px] min-h-[64px] rounded-2xl text-grayMedium"
           />
         </div>
       </div>
@@ -307,10 +309,12 @@ function Page() {
         location={location}
         handleInputChangeLocation={handleInputChangeLocation}
       />
-      <div className="mt-[7px] pb-12 flex-1">
-        <h3 className={"text-[24px] mb-3 "}>Cancellation Terms</h3>
+      <div className="mt-[7px] pb-8 flex-1">
+        <h3 className={"text-base lg:text-[24px] mb-2 lg:mb-3 "}>
+          Cancellation Terms
+        </h3>
         <Radio.Group
-        defaultValue={data.Terms}
+          defaultValue={data.Terms}
           onChange={(e) => {
             setDataList({ ...dataList, Terms: e });
           }}
@@ -338,10 +342,12 @@ function Page() {
           </p>
         </div>
       </div>
-      <div className="mt-[7px] pb-12 flex-1">
-        <h3 className={"text-[24px] mb-3 "}>Value of the item</h3>
+      <div className="mt-[7px] pb-8 flex-1">
+        <h3 className={"text-base lg:text-[24px] mb-2 lg:mb-3 "}>
+          Value of the item
+        </h3>
         <TextInput
-         defaultValue={data.value}
+          defaultValue={data.value}
           onChange={(e) => {
             setDataList({ ...dataList, value: e.target.value });
           }}
@@ -355,15 +361,19 @@ function Page() {
         />
       </div>
 
-      <StepAvailability defaultValue={data.Availability} dataList={dataList} setDataList={setDataList} />
+      <StepAvailability
+        defaultValue={data.Availability}
+        dataList={dataList}
+        setDataList={setDataList}
+      />
       <StepVariations
         handleInputChange={handleInputChange}
         variations={variations}
         addVariation={addVariation}
         handleInputChangeSelect={handleInputChangeSelect}
       />
-      <div className="mt-[7px] pb-12 flex-1">
-        <h3 className={"text-[24px] mb-3 "}>Stock</h3>
+      <div className="mt-[7px] pb-8 flex-1">
+        <h3 className={"text-base lg:text-[24px] mb-2 lg:mb-3 "}>Stock</h3>
         <TextInput
           placeholder="Add available stock number here"
           defaultValue={data.Stock}
@@ -375,12 +385,14 @@ function Page() {
               " text-black rounded-2xl text-grayMedium  h-full border-none placeholder:text-grayMedium placeholder:opacity-100 ",
             wrapper: "h-full",
           }}
-          className="h-[64px] mb-6 duration-200 min-h-[64px] bg-white rounded-2xl border-2 border-green text-grayMedium"
+          className="h-[64px] lg:mb-6 duration-200 min-h-[64px] bg-white rounded-2xl border-2 border-green text-grayMedium"
         />
       </div>
 
-      <div className="mt-[7px] pb-12 flex-1">
-        <h3 className={"text-[24px] mb-3 "}>Item Status</h3>
+      <div className="mt-[7px] pb-8 flex-1">
+        <h3 className={"text-base lg:text-[24px] mb-2 lg:mb-3 "}>
+          Item Status
+        </h3>
         <div className="flex flex-col gap-4">
           <Checkbox
             checked={selectedCheckbox === "Active"}
@@ -408,10 +420,12 @@ function Page() {
         </p>
       </div>
 
-      <div className="flex items-center gap-7">
-        <Button className={"w-[208px] h-[64px]"}>Save Edits</Button>
+      <div className="flex items-center mt-8 gap-7 md:flex-row flex-col">
+        <Button className={"w-full lg:w-[208px] h-[64px]"}>Save Edits</Button>
         <Button
-          className={"w-[208px] h-[64px] text-black bg-grayBack border-none"}
+          className={
+            "w-full lg:w-[208px] h-[64px] text-black bg-grayBack border-none"
+          }
         >
           Discard Edits
         </Button>

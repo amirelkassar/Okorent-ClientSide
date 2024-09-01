@@ -43,14 +43,14 @@ Ex. Size and color"
     >
       <div className="flex flex-col gap-6">
         {variations.map((variation, index) => (
-          <div key={index} className="flex items-center gap-3">
+          <div key={index} className="flex lg:items-center gap-3">
             <Checkbox
               checked={true}
               readOnly
               color="#88BA52"
               className={cn(index === 0 && "mt-6")}
             />
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap lg:flex-nowrap items-center gap-3 lg:gap-4">
               <TextInput
                 value={`Phone Cass ${index + 1}`}
                 name="name"
@@ -58,12 +58,12 @@ Ex. Size and color"
                 placeholder={`Phone Cass ${index + 1}`}
                 readOnly
                 classNames={{
-                  label: "text-[16px] text-grayMedium mb-2",
+                  label: "text-sm lg:text-[16px] text-grayMedium mb-2",
                   input:
-                    " text-black rounded-2xl text-grayMedium  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+                    " text-black rounded-2xl  text-grayMedium  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
                   wrapper: "h-[64px]",
                 }}
-                className=" flex-1  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
+                className=" flex-1 min-w-full lg:min-w-[166px] duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
               />
               <TextInput
                 value={"Color -" + " " + variation.attribute1}
@@ -72,12 +72,12 @@ Ex. Size and color"
                 placeholder={`Phone Cass ${index + 1}`}
                 onChange={(event) => handleInputChange(index, event)}
                 classNames={{
-                  label: "text-[16px] text-grayMedium mb-2",
+                  label: "text-sm lg:text-[16px] text-grayMedium mb-2",
                   input:
-                    " text-black rounded-2xl text-grayMedium first:font-Bold  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+                    " text-black rounded-2xl  text-grayMedium first:font-Bold  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
                   wrapper: "h-[64px]",
                 }}
-                className=" flex-1  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
+                className=" flex-1 min-w-[166px]  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
               />
               <TextInput
                 value={"Size -" + " " + variation.attribute2}
@@ -86,21 +86,24 @@ Ex. Size and color"
                 placeholder={`Phone Cass ${index + 1}`}
                 onChange={(event) => handleInputChange(index, event)}
                 classNames={{
-                  label: "text-[16px] text-grayMedium mb-2",
+                  label: "text-sm lg:text-[16px] text-grayMedium mb-2",
                   input:
-                    " text-black rounded-2xl text-grayMedium  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+                    " text-black rounded-2xl  text-grayMedium  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
                   wrapper: "h-[64px]",
                 }}
-                className=" flex-1  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
+                className=" flex-1 min-w-[166px]  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
               />
             </div>
           </div>
         ))}
       </div>
       <ModalComp title="Add a variation" opened={opened} close={close}>
-        <div className="flex flex-col gap-6 w-[660px] max-w-full">
+        <div className="flex flex-col gap-6 w-[660px] max-w-full ">
           {variations.map((variation, index) => (
-            <div key={index} className="flex items-center gap-4">
+            <div
+              key={index}
+              className="flex items-center gap-4  flex-col md:flex-row"
+            >
               <Select
                 data={["Color", "Color2", "Color3", "Color4", "Color5"]}
                 leftSectionPointerEvents="none"
@@ -112,7 +115,7 @@ Ex. Size and color"
                 }
                 label={index === 0 && "Attribute 1"}
                 classNames={{
-                  label: "text-[16px] text-black mb-2",
+                  label: "text-sm lg:text-[16px] text-black mb-2",
                   input:
                     " text-black rounded-2xl text-grayMedium  h-[64px]  border-2 border-green  placeholder:text-grayMedium placeholder:opacity-100 ",
 
@@ -121,7 +124,7 @@ Ex. Size and color"
                     "bg-white text-black rounded-2xl border border-green/50 text-grayDark py-2",
                   option: "hover:bg-green hover:text-white duration-300 ",
                 }}
-                className=" flex-1   duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
+                className=" flex-1   duration-200 min-h-[64px] bg-white rounded-2xl w-full text-grayMedium"
               />
 
               <TextInput
@@ -131,12 +134,12 @@ Ex. Size and color"
                 placeholder={`Ex: If color Type Red`}
                 onChange={(event) => handleInputChange(index, event)}
                 classNames={{
-                  label: "text-[16px] text-grayMedium mb-2",
+                  label: "text-sm lg:text-[16px] text-grayMedium mb-2",
                   input:
                     " text-black rounded-2xl text-grayMedium  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
                   wrapper: "h-[64px]",
                 }}
-                className=" flex-1  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
+                className=" flex-1  duration-200 min-h-[64px] bg-white rounded-2xl w-full text-grayMedium"
               />
             </div>
           ))}
@@ -145,21 +148,23 @@ Ex. Size and color"
           <Button
             onClick={addVariation}
             className={
-              "mt-8 bg-grayBack gap-3 px-7 h-[64px] border-none text-black"
+              "mt-8 bg-grayBack gap-3 px-7 h-[50px] lg:h-[64px] border-none text-black"
             }
           >
             <PlusIcon fill="#0F2A43" />
-            <p>Add Variations</p>
+            <p className="text-[14px] text-base">Add Variations</p>
           </Button>
         )}
-        <div className="w-full flex items-center gap-5 mt-28">
-          <Button onClick={close} className={" h-[64px] flex-1"}>
+        <div className="w-full flex items-center gap-5 mt-11 lg:mt-28">
+          <Button onClick={close} className={" h-[54px] lg:h-[64px] flex-1"}>
             Save and close
           </Button>
           {variations.length < 3 && (
             <Button
               onClick={addVariation}
-              className={" h-[64px] flex-1 bg-grayBack border-none text-black"}
+              className={
+                " h-[54px] lg:h-[64px] flex-1 bg-grayBack border-none text-black"
+              }
             >
               Save and add another
             </Button>
@@ -174,11 +179,11 @@ Ex. Size and color"
               open();
             }}
             className={
-              "mt-8 bg-grayBack gap-3 px-7 h-[64px] border-none text-black"
+              "mt-8 bg-grayBack gap-3 px-7 h-[50px] lg:h-[64px] border-none text-black"
             }
           >
             <PlusIcon fill="#0F2A43" />
-            <p>Add Variations</p>
+            <p className="text-sm md:text-base">Add Variations</p>
           </Button>
         </div>
       )}

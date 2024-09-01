@@ -19,15 +19,15 @@ function SelectDate() {
   }
   return (
     <>
-      <div className="flex items-center justify-center mb-16" onClick={open}>
-        <div className=" h-10 min-h-fit px-3 rounded-xl flex items-center border cursor-pointer border-transparent gap-3 duration-300 hover:border-blue hover:shadow-sidebar">
+      <div className="flex items-center justify-center " onClick={open}>
+        <div className=" h-10 min-h-fit px-3 rounded-xl flex items-center border bg-blue/10 cursor-pointer border-transparent gap-1 lg:gap-3 duration-300 hover:border-blue hover:shadow-sidebar">
           <DateIcon />
-          <h3 className="text-blue text-[16px]">Choose Rental Duration</h3>
+          <h3 className="text-blue text-sm lg:text-[16px]">Choose Rental Duration</h3>
         </div>
       </div>
       {
         opened && <ModalComp opened={opened} close={close} title={"Select rental period"}>
-        <div className="mx-auto max-w-[280px]">
+        <div className="mx-auto max-w-[95%] w-[420px] lg:max-w-[280px]">
           <DatePicker
             classNames={{
               day: "data-[in-range]:bg-green data-[last-in-range]:rounded-e-[14px]  data-[first-in-range]:rounded-s-[14px] p-0 rounded-3 data-[in-range]:text-white",

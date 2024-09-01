@@ -23,8 +23,8 @@ function CardPhone({ data }: CardPhoneProps) {
           />
         </div>
         <div>
-          <h4 className="text-[16px] font-SemiBold">{data.productName}</h4>
-          <h5 className="text-grayMedium text-[14px] font-Regular mb-1">
+          <h4 className="text-sm lg:text-[16px] font-SemiBold">{data.productName}</h4>
+          <h5 className="text-grayMedium text-[12px] lg:text-[14px] font-Regular mb-1">
             Ending Date:{" "}
             <span className="font-SemiBold"> {data.endingDate}</span>
           </h5>

@@ -36,17 +36,17 @@ function EarningReport() {
     return value.toString();
   };
   return (
-    <div className="bg-white border border-green rounded-3xl py-8 px-9 flex-1 shadow-sidebar">
-      <div className="flex items-center justify-between gap-4 mb-20">
+    <div className="bg-white border border-green rounded-3xl py-6 lg:py-8 px-4 lg:px-9 flex-1 shadow-sidebar">
+      <div className="flex items-center justify-between gap-2 lg:gap-4 mb-9 lg:mb-20">
         <h3 className="headTitle">Earning Report</h3>
-        <div className="flex gap-3 flex-wrap">
-          <button className="bg-grayBack duration-300 hover:shadow-sidebar px-[10px] w-fit rounded-xl text-blue flex items-center justify-center h-10">
+        <div className="flex gap-2 lg:gap-3 flex-wrap">
+          <button className="bg-grayBack duration-300 text-[12px] lg:text-base hover:shadow-sidebar px-[10px] w-fit rounded-xl text-blue flex items-center justify-center h-6 lg:h-10">
             Quarterly
           </button>
-          <button className="bg-grayBack duration-300 hover:shadow-sidebar px-[10px] w-fit rounded-xl text-blue flex items-center justify-center h-10">
+          <button className="bg-grayBack duration-300 text-[12px] lg:text-base hover:shadow-sidebar px-[10px] w-fit rounded-xl text-blue flex items-center justify-center h-6 lg:h-10">
             Yearly
           </button>
-          <button className="bg-grayBack duration-300 hover:shadow-sidebar px-[10px] w-fit rounded-xl text-blue flex items-center justify-center h-10">
+          <button className="bg-grayBack duration-300 text-[12px] lg:text-base hover:shadow-sidebar px-[10px] w-fit rounded-xl text-blue flex items-center justify-center h-6 lg:h-10">
             5 Years
           </button>
         </div>

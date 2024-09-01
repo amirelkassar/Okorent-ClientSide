@@ -5,7 +5,6 @@ import { Checkbox, Radio, Select, Textarea, TextInput } from "@mantine/core";
 import DownIcon from "@/src/assets/icons/down";
 import DropImg from "@/src/components/DropImg";
 import Button from "@/src/components/button";
-
 import StepLocation from "./_components/stepLocation";
 import StepVariations from "./_components/StepVariations";
 import StepAvailability from "./_components/stepAvailability";
@@ -95,7 +94,7 @@ function Page() {
   };
 
   return (
-    <div className="w-[810px]">
+    <div className="w-full lg:w-[810px]">
       <Step title="Choose item category" active stepNum={1}>
         <Select
           data={[
@@ -187,7 +186,7 @@ function Page() {
         stepNum={4}
         dec="Try to add lower price for longer bookings"
       >
-        <div className="flex items-center gap-4">
+        <div className="flex items-center flex-wrap gap-4">
           <TextInput
             name="name"
             label={"Price for 1 Day"}
@@ -202,12 +201,12 @@ function Page() {
               });
             }}
             classNames={{
-              label: "text-[16px] text-grayMedium mb-2",
+              label: "text-sm lg:text-[16px] text-grayMedium mb-2",
               input:
-                " text-black max-w-[200px] rounded-2xl text-grayMedium bg-white  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+                " text-black md:max-w-[200px] rounded-2xl text-grayMedium bg-white  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
               wrapper: "h-[64px]",
             }}
-            className=" flex-1  duration-200 max-w-[200px] min-h-[64px] rounded-2xl text-grayMedium"
+            className=" flex-1 min-w-[170px] w-full  duration-200 md:max-w-[200px] min-h-[64px] rounded-2xl text-grayMedium"
           />
           <TextInput
             label={"Price for 3 Days"}
@@ -223,12 +222,12 @@ function Page() {
               });
             }}
             classNames={{
-              label: "text-[16px] text-grayMedium mb-2",
+              label: "text-sm lg:text-[16px] text-grayMedium mb-2",
               input:
-                " text-black max-w-[200px] rounded-2xl text-grayMedium bg-white  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+                " text-black md:max-w-[200px] rounded-2xl text-grayMedium bg-white  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
               wrapper: "h-[64px]",
             }}
-            className=" flex-1  duration-200 max-w-[200px] min-h-[64px] rounded-2xl text-grayMedium"
+            className=" flex-1 min-w-[170px] w-full  duration-200 md:max-w-[200px] min-h-[64px] rounded-2xl text-grayMedium"
           />
           <TextInput
             label={"Price for 1 Week"}
@@ -244,12 +243,12 @@ function Page() {
               });
             }}
             classNames={{
-              label: "text-[16px] text-grayMedium mb-2",
+              label: "text-sm lg:text-[16px] text-grayMedium mb-2",
               input:
-                " text-black max-w-[200px] rounded-2xl text-grayMedium bg-white  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+                " text-black md:max-w-[200px] rounded-2xl text-grayMedium bg-white  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
               wrapper: "h-[64px]",
             }}
-            className=" flex-1  duration-200 max-w-[200px] min-h-[64px] rounded-2xl text-grayMedium"
+            className=" flex-1 min-w-[170px] w-full  duration-200 md:max-w-[200px] min-h-[64px] rounded-2xl text-grayMedium"
           />
         </div>
       </Step>
@@ -311,7 +310,7 @@ function Page() {
           placeholder="Add item value here"
           classNames={{
             input:
-              " text-black rounded-2xl text-grayMedium  h-full border-none placeholder:text-grayMedium placeholder:opacity-100 ",
+              " text-black text-sm lg:text-base rounded-2xl text-grayMedium  h-full border-none placeholder:text-grayMedium placeholder:opacity-100 ",
             wrapper: "h-full",
           }}
           className="h-[64px] mb-6 duration-200 min-h-[64px] bg-white rounded-2xl border-2 border-green text-grayMedium"
@@ -367,10 +366,10 @@ function Page() {
           keep the item unavailable for rent
         </p>
       </Step>
-      <div className="flex items-center gap-7">
-        <Button className={"w-[208px] h-[64px]"}>Save</Button>
+      <div className="flex items-center mt-16 gap-7 md:flex-row flex-col">
+        <Button className={"w-full lg:w-[208px] h-[64px]"}>Save</Button>
         <Button
-          className={"w-[208px] h-[64px] text-black bg-grayBack border-none"}
+          className={"w-full lg:w-[208px] h-[64px] text-black bg-grayBack border-none"}
         >
           Save and Promote
         </Button>

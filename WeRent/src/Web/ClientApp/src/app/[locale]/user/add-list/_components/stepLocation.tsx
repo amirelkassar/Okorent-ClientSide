@@ -37,7 +37,7 @@ function StepLocation({
       stepNum={5}
       dec="Add storage location that we will pickup the item from"
     >
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-5 lg:gap-6">
         {location.map((loc, index) => (
           <div key={index} className="flex items-center gap-3">
             <Checkbox
@@ -54,9 +54,9 @@ function StepLocation({
                 placeholder={`Location ${index + 1}`}
                 readOnly
                 classNames={{
-                  label: "text-[16px] text-grayMedium mb-2",
+                  label: "text-sm md:text-[16px] text-grayMedium mb-2",
                   input:
-                    " text-black rounded-2xl text-grayMedium  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+                    " text-black text-[12px] md:text-[16px] rounded-2xl text-grayMedium  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
                   wrapper: "h-[64px]",
                 }}
                 className=" flex-1  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
@@ -74,9 +74,9 @@ function StepLocation({
                   )
                 }
                 classNames={{
-                  label: "text-[16px] text-grayMedium mb-2",
+                  label: "text-sm md:text-[16px] text-grayMedium mb-2",
                   input:
-                    " text-black rounded-2xl text-grayMedium first:font-Bold  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+                    " text-black text-[12px] md:text-[16px] rounded-2xl text-grayMedium first:font-Bold  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
                   wrapper: "h-[64px]",
                 }}
                 className=" flex-1  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"

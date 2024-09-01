@@ -27,10 +27,10 @@ function CardView({ title, first = false }: CardViewProps) {
     <div className="swiperList pt-14 pb-16border-t border-black first-of-type:border-none first-of-type:pt-0">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-5">
-          <h2 className="text-[32px] font-Bold">{title}</h2>
+          <h2 className="text-2xl lg:text-[32px] font-Bold">{title}</h2>
           {first && (
             <Link
-              href={ROUTES.USER.LISTINGS}
+              href={`${ROUTES.USER.LISTINGS}?list=true`}
               className="px-3 duration-300 hover:shadow-md w-fit py-2 rounded-xl border border-black flex items-center justify-center gap-2"
             >
               <ListIcon />
@@ -38,7 +38,7 @@ function CardView({ title, first = false }: CardViewProps) {
             </Link>
           )}
         </div>
-        <div className="flex gap-4">
+        <div className="md:flex hidden gap-4">
           <div
             ref={prevRef}
             className={`cursor-pointer duration-200 swiper-button-prev-${title}`}
@@ -57,11 +57,27 @@ function CardView({ title, first = false }: CardViewProps) {
       <div className="max-w-[1270px] my-4">
         <Swiper
           onSwiper={handleSwiper}
-          slidesPerView={3}
-          spaceBetween={30}
+          slidesPerView={1}
+          spaceBetween={18}
           navigation={{
             prevEl: prevRef.current,
             nextEl: nextRef.current,
+          }}
+          breakpoints={{
+            450: {
+              slidesPerView: 1.5,
+            },
+            600: {
+              slidesPerView: 2,
+              spaceBetween: 18,
+            },
+            900: {
+              slidesPerView: 2.5,
+            },
+            1100: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
           }}
           modules={[Navigation]}
           className={"mySwiper "}

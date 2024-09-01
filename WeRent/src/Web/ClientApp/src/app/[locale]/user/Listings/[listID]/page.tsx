@@ -69,7 +69,7 @@ function page({ params }: any) {
       <CardDetailsList title="Title" decs={data.Describe.title} />
       <CardDetailsList title="Describtion" decs={data.Describe.dec} />
       <div className="pb-4 border-b border-grayMedium/40 last-of-type:border-none">
-        <h3 className="text-[24px] mb-1">Item Images</h3>
+        <h3 className="text-base lg:text-[24px] mb-1">Item Images</h3>
         {data.pictures.length > 0 && (
           <div className="h-fit  gap-2 flex-wrap  p-1 relative flex  overflow-hidden  rounded-2xl">
             {data.pictures.map((file, index) => (
@@ -79,14 +79,14 @@ function page({ params }: any) {
                 alt={`img item ${data.Describe.title}`}
                 width={200}
                 height={150}
-                className=" object-contain rounded-sm h-[132px] w-auto"
+                className=" object-contain rounded-sm h-[100px] lg:h-[132px] w-auto"
               />
             ))}
           </div>
         )}
       </div>
       <div className="pb-4 border-b border-grayMedium/40 last-of-type:border-none">
-        <h3 className="text-[24px] mb-1">Item Price</h3>
+        <h3 className="text-base lg:text-[24px] mb-1">Item Price</h3>
         <p className="text-base border-b border-grayMedium/40 py-2 last-of-type:border-none text-grayMedium font-Regular">
           Per hour:{" "}
           <span className="font-Medium">{data.priceItems.OneDay}</span>
@@ -103,7 +103,7 @@ function page({ params }: any) {
         </p>
       </div>
       <div className="pb-4 border-b border-grayMedium/40 last-of-type:border-none">
-        <h3 className="text-[24px] mb-1">Storage Location</h3>
+        <h3 className="text-base lg:text-[24px] mb-1">Storage Location</h3>
         {data.addresses.map((address, i) => {
           return (
             <p
@@ -123,7 +123,7 @@ function page({ params }: any) {
       <CardDetailsList title="Item Value" decs={`${data.value}$`} />
       <CardDetailsList title="Availability" decs={data.Availability} />
       <div className="pb-4 border-b border-grayMedium/40 last-of-type:border-none">
-        <h3 className="text-[24px] mb-1">Variations</h3>
+        <h3 className="text-base lg:text-[24px] mb-1">Variations</h3>
         {data.Variations.map((variation, i) => {
           return (
             <div

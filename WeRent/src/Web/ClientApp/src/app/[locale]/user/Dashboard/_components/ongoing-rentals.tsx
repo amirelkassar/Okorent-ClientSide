@@ -21,10 +21,10 @@ const PhonesData = [
 ];
 function OngoingRentals() {
   return (
-    <div className="bg-white rounded-3xl border w-[430px] border-green shadow-sidebar py-7 px-4">
-      <h3 className="headTitle mb-8">Ongoing Rentals</h3>
+    <div className="bg-white rounded-3xl border w-full lg:w-[430px] border-green shadow-sidebar py-6 lg:py-7 px-4">
+      <h3 className="headTitle mb-5 lg:mb-8">Ongoing Rentals</h3>
       <div>
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-6 lg:gap-8">
           {PhonesData.map((phone,i) => {
             return <CardPhone key={i} data={phone} />;
           })}

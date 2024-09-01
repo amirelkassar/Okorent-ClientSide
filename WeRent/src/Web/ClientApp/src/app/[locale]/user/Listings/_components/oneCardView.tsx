@@ -5,7 +5,7 @@ import Button from "@/src/components/button";
 
 function OneCardView() {
   return (
-    <div className="bg-white border border-green/50 rounded-3xl px-5 py-4 max-w-[400px] mb-3 w-full min-w-[320px] shadow-sidebar">
+    <div className="bg-white border border-green/50 rounded-3xl px-5 py-4 max-w-[400px] mb-3 w-full min-w-[280px] lg:min-w-[320px] shadow-sidebar">
       <Image
         alt="home"
         priority

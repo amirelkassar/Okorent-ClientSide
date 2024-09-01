@@ -98,7 +98,7 @@
   @apply bg-white;
 }
 .headTitle {
-  @apply text-[32px] font-medium font-Medium;
+  @apply text-xl lg:text-[32px] font-medium font-Medium;
 }
 .swiperList .swiper-button-disabled {
   @apply opacity-70 cursor-not-allowed
@@ -133,4 +133,10 @@
   width: 100%;
   outline: none;
   padding: 12px 40px 12px 12px;
+}
+@media (max-width: 768px) {
+  .hideScroll {
+    scrollbar-width: none;
+    padding-bottom: 10px;
+  }
 }

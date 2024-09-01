@@ -27,8 +27,9 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     header: "Product",
     cell: ({ getValue, row }) => {
       const phone = getValue<string>();
+      const id = row.original.id
       return (
-        <div className="flex items-center gap-2">
+        <Link href={ROUTES.USER.LISTINGSDETAILS(id)} className="flex items-center gap-2">
           <div className="size-[50px] rounded-[50%] p-[6px] bg-grayBack flex justify-center items-center">
             <Image
               src={phoneImg}
@@ -39,7 +40,7 @@ export const columns: ColumnDef<RequestsTableData>[] = [
             />
           </div>
           <h2 className="text-[16px] font-SemiBold">{phone}</h2>
-        </div>
+        </Link>
       );
     },
   },
@@ -96,7 +97,7 @@ export const columns: ColumnDef<RequestsTableData>[] = [
       return (
         <div className="flex items-center gap-3 w-fit">
           <BtnBarcode />
-          <Link href={ROUTES.USER.LISTINGSDETAILS(id)} >
+          <Link href={ROUTES.USER.LISTINGSDETAILS(id)+'/edit'} >
             <EditIcon className="w-5 h-auto" />
           </Link>
           <ActionIcon variant="transparent">

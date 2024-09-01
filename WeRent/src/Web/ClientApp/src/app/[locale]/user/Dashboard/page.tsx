@@ -13,11 +13,11 @@ function page() {
   return (
     <div>
       <HeaderDash />
-      <div className="mt-14 flex gap-10">
+      <div className="lg:mt-14 mt-8 flex gap-7 lg:gap-10 lg:flex-row flex-col pb-10 border-b border-[#B6BFC6] ">
         <OngoingRentals />
         <EarningReport />
       </div>
-      <div className="mt-16">
+      <div className="mt-6 lg:mt-10">
         <DataTable
           title="Listings Overview"
           viewAll={ROUTES.USER.DASHBOARD}

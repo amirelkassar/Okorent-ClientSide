@@ -24,6 +24,7 @@ import TrueIcon from "../assets/icons/true";
 import DeleteIcon from "../assets/icons/delete";
 import ImportIcon from "../assets/icons/import";
 import ExportIcon from "../assets/icons/export";
+import CardViewPhoneListing from "../app/[locale]/user/Listings/_components/CardViewPhoneLisiting";
 export interface FilterData {
   label: string;
   type: string;
@@ -107,6 +108,11 @@ export function DataTable<TData, TValue>({
       : table.resetSorting();
     return table.getColumn(key)?.getIsSorted();
   };
+  console.log(table.getRowModel().rows);
+  console.log(columns);
+  table.getRowModel().rows.map((row, i) => {
+    console.log(row.original);
+  });
   return (
     <div>
       <div className="flex items-center justify-between gap-6 flex-wrap mb-10">
@@ -132,7 +138,7 @@ export function DataTable<TData, TValue>({
                 <p className="text-grayMedium text-[14px]">Export</p>
               </div>
               <div className="px-3 min-h-10 bg-grayBack duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
-                <DeleteIcon className="h-[14px] w-auto"/>
+                <DeleteIcon className="h-[14px] w-auto" />
                 <p className="text-grayMedium text-[14px]">Delete</p>
               </div>
             </div>
@@ -173,8 +179,17 @@ export function DataTable<TData, TValue>({
           />
         ) : null}
       </div>
-
-      <div className="space-y-5 border border-[#dee2e6] rounded-3xl pt-3 pb-6 mb-20">
+      <div className=" flex flex-col w-full gap-5 mdl:hidden mb-14">
+        {table
+          .getRowModel()
+          .rows.map(
+            (row, i) =>
+              row.original !== null ? (
+                <CardViewPhoneListing key={i} dataCard={row.original as any } />
+              ):null
+          )}
+      </div>
+      <div className="space-y-5 border hidden mdl:block border-[#dee2e6] rounded-3xl pt-3 pb-6 mb-20">
         {/* Table */}
         <Table>
           <Table.Thead className="  ">
