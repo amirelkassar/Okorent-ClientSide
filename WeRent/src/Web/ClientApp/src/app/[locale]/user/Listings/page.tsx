@@ -6,6 +6,7 @@ import { columns } from "./_components/columns";
 import ROUTES from "@/src/routes";
 import { useSearchParams } from "next/navigation";
 import CardView from "./_components/cardView";
+import CardViewPhoneListing from "./_components/CardViewPhoneLisiting";
 const FilterOptions = [
   {
     label: "Active",
@@ -26,6 +27,7 @@ function Page() {
     <div>
       {searchParams.get("list") === "true" ? (
         <DataTable
+        Component={CardViewPhoneListing}
           title="My Listings"
           cardView={ROUTES.USER.LISTINGS}
           search

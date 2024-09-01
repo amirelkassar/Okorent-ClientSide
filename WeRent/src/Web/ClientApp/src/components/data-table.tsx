@@ -10,7 +10,7 @@ import {
   ColumnFiltersState,
 } from "@tanstack/react-table";
 import { Checkbox, Table, TextInput } from "@mantine/core";
-import { Fragment, useState } from "react";
+import { ComponentType, Fragment, useState } from "react";
 import { cn } from "../lib/utils";
 import ArrowWhiteIcon from "../assets/icons/arrowWhite";
 import FilterBy from "./filterBy";
@@ -50,6 +50,7 @@ interface DataTableProps<TData, TValue> {
   sortingData?: SortingData[];
   haveRentSwitch?: boolean;
   addUser?: boolean;
+  Component: React.ComponentType<{ dataCard: TData }>
 }
 export function DataTable<TData, TValue>({
   columns,
@@ -66,6 +67,7 @@ export function DataTable<TData, TValue>({
   sortingData = [],
   haveRentSwitch = false,
   addUser = false,
+  Component,
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [selectedUsers, setSelectedUsers] = useState<Set<number>>(new Set());
@@ -182,11 +184,10 @@ export function DataTable<TData, TValue>({
       <div className=" flex flex-col w-full gap-5 mdl:hidden mb-14">
         {table
           .getRowModel()
-          .rows.map(
-            (row, i) =>
-              row.original !== null ? (
-                <CardViewPhoneListing key={i} dataCard={row.original as any } />
-              ):null
+          .rows.map((row, i) =>
+            row.original !== null ? (
+              <Component key={i} dataCard={row.original as TData} />
+            ) : null
           )}
       </div>
       <div className="space-y-5 border hidden mdl:block border-[#dee2e6] rounded-3xl pt-3 pb-6 mb-20">
