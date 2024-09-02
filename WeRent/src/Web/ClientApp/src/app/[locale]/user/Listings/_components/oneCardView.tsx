@@ -5,29 +5,29 @@ import Button from "@/src/components/button";
 
 function OneCardView() {
   return (
-    <div className="bg-white border border-green/50 rounded-3xl px-5 py-4 max-w-[400px] mb-3 w-full min-w-[280px] lg:min-w-[320px] shadow-sidebar">
+    <div className="bg-white border border-green/50 rounded-3xl px-3 lg:px-5 py-3 lg:py-4 max-w-[400px] mb-3 w-full min-w-[280px] lg:min-w-[320px] shadow-sidebar">
       <Image
         alt="home"
         priority
         src={homeImg}
         className="w-full rounded-xl h-40 object-cover object-top"
       />
-      <div className="flex items-end justify-between gap-3 mt-5">
+      <div className="flex items-end justify-between lg:gap-3 gap-2 mt-5">
         <div>
-          <h3 className="text-grayMedium mb-1 font-Regular">Product Name</h3>
-          <p className="text-[16px] font-SemiBold">Apple Laptop</p>
+          <h3 className="text-grayMedium mb-1 font-Regular lg:text-[16px] text-sm" >Product Name</h3>
+          <p className="lg:text-[16px] text-sm font-SemiBold">Apple Laptop</p>
         </div>
         <span className=" block h-[34px] w-[1px] bg-green"></span>
         <div>
-          <h3 className="text-grayMedium text-center mb-1 font-Regular">
+          <h3 className="text-grayMedium text-center mb-1 font-Regular lg:text-[16px] text-sm" >
             Payment
           </h3>
-          <p className="text-[16px] text-center font-SemiBold">100$</p>
+          <p className="lg:text-[16px] text-sm text-center font-SemiBold">100$</p>
         </div>
         <span className=" block h-[34px] w-[1px] bg-green"></span>
         <div>
-          <h3 className="text-grayMedium mb-1 font-Regular">Quantity</h3>
-          <p className="text-[16px] font-SemiBold">14</p>
+          <h3 className="text-grayMedium mb-1 font-Regular lg:text-[16px] text-sm" >Quantity</h3>
+          <p className="lg:text-[16px] text-sm font-SemiBold">14</p>
         </div>
       </div>
       <div className="flex items-center gap-5 mt-4">

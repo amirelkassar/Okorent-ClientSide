@@ -42,7 +42,7 @@ function CardView({
               className="px-3 duration-300 hover:shadow-md w-fit py-2 rounded-xl border border-black flex items-center justify-center gap-2"
             >
               <ListIcon />
-              <p>List View</p>
+              <p className="lg:text-[16px] text-sm">List View</p>
             </Link>
           )}
         </div>

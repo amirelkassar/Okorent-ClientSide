@@ -71,7 +71,7 @@ function CardViewReq({
               className="px-3 duration-300 hover:shadow-md w-fit py-2 rounded-xl border border-black flex items-center justify-center gap-2"
             >
               <ListIcon />
-              <p>List View</p>
+              <p className="lg:text-[16px] text-sm">List View</p>
             </Link>
           )}
         </div>
@@ -100,11 +100,25 @@ function CardViewReq({
       <div className=" my-4">
         <Swiper
           onSwiper={handleSwiper}
-          slidesPerView={2}
+          slidesPerView={1.1}
           spaceBetween={30}
           navigation={{
             prevEl: prevRef.current,
             nextEl: nextRef.current,
+          }}
+          breakpoints={{
+            740: {
+              slidesPerView: 1.7,
+            },
+            1024: {
+              slidesPerView: 1.7,
+            },
+            1300: {
+              slidesPerView: 1.9,
+            },
+            1500: {
+              slidesPerView: 2,
+            },
           }}
           modules={[Navigation]}
           className={"mySwiper "}

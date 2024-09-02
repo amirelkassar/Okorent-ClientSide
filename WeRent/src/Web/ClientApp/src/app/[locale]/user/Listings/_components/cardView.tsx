@@ -33,8 +33,8 @@ function CardView({ title, first = false }: CardViewProps) {
               href={`${ROUTES.USER.LISTINGS}?list=true`}
               className="px-3 duration-300 hover:shadow-md w-fit py-2 rounded-xl border border-black flex items-center justify-center gap-2"
             >
-              <ListIcon />
-              <p>List View</p>
+              <ListIcon  />
+              <p className="lg:text-[16px] text-sm">List View</p>
             </Link>
           )}
         </div>
@@ -57,7 +57,7 @@ function CardView({ title, first = false }: CardViewProps) {
       <div className="max-w-[1270px] my-4">
         <Swiper
           onSwiper={handleSwiper}
-          slidesPerView={1}
+          slidesPerView={1.1}
           spaceBetween={18}
           navigation={{
             prevEl: prevRef.current,
