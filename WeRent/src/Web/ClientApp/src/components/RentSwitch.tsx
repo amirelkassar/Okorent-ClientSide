@@ -4,7 +4,7 @@ import { useSwitchRent } from "../store/rent-slice";
 
 const RentSwitch = () => {
   const { isRent, setSwitchRent } = useSwitchRent();
-console.log(isRent);
+  console.log(isRent);
 
   return (
     <SegmentedControl
@@ -20,7 +20,7 @@ console.log(isRent);
       ]}
       classNames={{
         label:
-          " data-[active]:text-white h-full py-0 flex items-center rounded-[2px] justify-center    text-black",
+          " data-[active]:text-white h-full py-0 flex items-center rounded-[2px] justify-center text-sm lg:text-base flex item-center justify-center   text-black",
         root: "!bg-transparent pt-[2px] ps-[2px] w-[242px] items-center h-10  border !border-green",
         control: "h-full items-center bg-transparent",
       }}

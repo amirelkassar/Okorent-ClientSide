@@ -39,8 +39,8 @@ function CardRequest({ data, dataByModal, declined }: CardRequestProps) {
     return <p>No data available</p>; // Handle missing data case
   }
   return (
-    <div className="bg-white pt-8 lgl:pt-10 pb-8 px-5 lgl:px-9 max-w-[670px]  rounded-3xl border border-green">
-      <div className=" flex items-start gap-4 lgl:gap-6 w-full pb-7 border-b border-black/20">
+    <div className="bg-white pt-8 lgl:pt-10 pb-6 px-5 lgl:px-9 max-w-[670px]  rounded-3xl border border-green">
+      <div className=" flex items-start gap-4 lgl:gap-6 w-full pb-5 lg:pb-7 border-b border-black/20">
         <div className="flex flex-col gap-2 justify-center ">
           <Image
             alt="user"
@@ -89,7 +89,7 @@ function CardRequest({ data, dataByModal, declined }: CardRequestProps) {
           </div>
         </div>
       </div>
-      <div className="pt-6 pb-9 lgl:pb-12">
+      <div className=" pt-4lg:pt-6 pb-7 lgl:pb-12">
         <div className="flex items-center gap-4">
           {dataByModal ? (
             <div className="bg-grayBack rounded-2xl p-3 w-[104px] lgl:w-[212px] h-[110px] lgl:h-[170px] flex items-center justify-center">

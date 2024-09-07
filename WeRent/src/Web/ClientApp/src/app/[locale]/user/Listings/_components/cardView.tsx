@@ -33,12 +33,60 @@ function CardView({ title, first = false }: CardViewProps) {
               href={`${ROUTES.USER.LISTINGS}?list=true`}
               className="px-3 duration-300 hover:shadow-md w-fit py-2 rounded-xl border border-black flex items-center justify-center gap-2"
             >
-              <ListIcon  />
+              <ListIcon />
               <p className="lg:text-[16px] text-sm">List View</p>
             </Link>
           )}
         </div>
-        <div className="md:flex hidden gap-4">
+        <Link href={ROUTES.USER.LISTINGS} className=" underline text-lg font-medium">View all</Link>
+      </div>
+      <div className=" relative w-full">
+        <div className="max-w-full lgl:max-w-[calc(100%-80px)] my-4 relative flex-wrap-reverse flex items-center">
+          <Swiper
+            onSwiper={handleSwiper}
+            slidesPerView={1.1}
+            spaceBetween={18}
+            navigation={{
+              prevEl: prevRef.current,
+              nextEl: nextRef.current,
+            }}
+            breakpoints={{
+              450: {
+                slidesPerView: 1.5,
+              },
+              600: {
+                slidesPerView: 2,
+                spaceBetween: 18,
+              },
+              900: {
+                slidesPerView: 2.5,
+              },
+              1100: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+              },
+            }}
+            modules={[Navigation]}
+            className={"mySwiper "}
+          >
+            <SwiperSlide>
+              <OneCardView />
+            </SwiperSlide>
+            <SwiperSlide>
+              <OneCardView />
+            </SwiperSlide>
+            <SwiperSlide>
+              <OneCardView />
+            </SwiperSlide>
+            <SwiperSlide>
+              <OneCardView />
+            </SwiperSlide>
+            <SwiperSlide>
+              <OneCardView />
+            </SwiperSlide>
+          </Swiper>
+        </div>
+        <div className="lgl:flex hidden gap-3  absolute top-1/2 -translate-y-1/2 right-0">
           <div
             ref={prevRef}
             className={`cursor-pointer duration-200 swiper-button-prev-${title}`}
@@ -53,51 +101,6 @@ function CardView({ title, first = false }: CardViewProps) {
             <ArrowRightIcon fill="#0F2A43" />
           </div>
         </div>
-      </div>
-      <div className="max-w-[1270px] my-4">
-        <Swiper
-          onSwiper={handleSwiper}
-          slidesPerView={1.1}
-          spaceBetween={18}
-          navigation={{
-            prevEl: prevRef.current,
-            nextEl: nextRef.current,
-          }}
-          breakpoints={{
-            450: {
-              slidesPerView: 1.5,
-            },
-            600: {
-              slidesPerView: 2,
-              spaceBetween: 18,
-            },
-            900: {
-              slidesPerView: 2.5,
-            },
-            1100: {
-              slidesPerView: 3,
-              spaceBetween: 30,
-            },
-          }}
-          modules={[Navigation]}
-          className={"mySwiper "}
-        >
-          <SwiperSlide>
-            <OneCardView />
-          </SwiperSlide>
-          <SwiperSlide>
-            <OneCardView />
-          </SwiperSlide>
-          <SwiperSlide>
-            <OneCardView />
-          </SwiperSlide>
-          <SwiperSlide>
-            <OneCardView />
-          </SwiperSlide>
-          <SwiperSlide>
-            <OneCardView />
-          </SwiperSlide>
-        </Swiper>
       </div>
     </div>
   );

@@ -26,7 +26,7 @@ interface CardDataProps {
 function CardViewPhoneListing({ dataCard }: CardDataProps) {
   return dataCard ? (
     <>
-      <div className="px-8 pt-4 relative pb-6 rounded-3xl border border-green shadow-md bg-white w-full">
+      <div className="px-8 pt-4 relative pb-6 rounded-3xl border border-green shadow-md bg-white/50 w-full">
         <div className="absolute top-5 end-5">
           <Popover width={110} position="bottom-end" shadow="md">
             <Popover.Target>
