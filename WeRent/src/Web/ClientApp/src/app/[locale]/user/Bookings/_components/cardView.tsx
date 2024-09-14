@@ -1,7 +1,7 @@
 import ListIcon from "@/src/assets/icons/list";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
-import React, {  useRef } from "react";
+import React, { useRef } from "react";
 import OneCardView from "./oneCardView";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
@@ -12,13 +12,13 @@ interface CardViewProps {
   title: string;
   first?: boolean;
   haveRentSwitch?: boolean;
-  filterBy: "completed" | "decline"|'upcoming'|'ongoing';
+  filterBy: "completed" | "decline" | "upcoming" | "ongoing";
 }
 function CardView({
   title,
   first = false,
   haveRentSwitch = false,
-  filterBy
+  filterBy,
 }: CardViewProps) {
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
@@ -32,10 +32,10 @@ function CardView({
     }
   };
   return (
-    <div className="swiperList pt-14 pb-16 border-t border-black first-of-type:border-none first-of-type:pt-0">
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-5">
-          <h2 className="text-[32px] font-Bold">{title}</h2>
+    <div className="swiperList pt-4 lg:pt-14 pb-3 lg:pb-16 lg:border-t border-black first-of-type:border-none first-of-type:pt-0">
+      <div className="flex lg:items-center flex-col-reverse lg:flex-row lg:gap-4 gap-8  justify-between mb-6">
+        <div className="flex items-center justify-between lg:justify-start gap-5">
+          <h2 className="text-2xl lg:text-[32px] font-Bold">{title}</h2>
           {first && (
             <Link
               href={`${ROUTES.USER.BOOKINGS}?list=true`}
@@ -47,11 +47,11 @@ function CardView({
           )}
         </div>
         {first && haveRentSwitch && (
-          <div>
+          <div className="mx-auto">
             <RentSwitch />
           </div>
         )}
-        <div className="flex items-center gap-7">
+        <div className="  xl:flex hidden items-center gap-7">
           <div className="flex gap-4">
             <div
               ref={prevRef}
@@ -67,20 +67,38 @@ function CardView({
               <ArrowRightIcon fill="#0F2A43" />
             </div>
           </div>
-         
         </div>
       </div>
       <div className="max-w-[1270px] my-4">
         <Swiper
           onSwiper={handleSwiper}
-          slidesPerView={3}
-          spaceBetween={30}
+          slidesPerView={1.4}
+          spaceBetween={10}
           navigation={{
             prevEl: prevRef.current,
             nextEl: nextRef.current,
           }}
           modules={[Navigation]}
           className={"mySwiper "}
+          breakpoints={{
+            0: {
+              slidesPerView: 1.2,
+              spaceBetween:10,
+
+            },
+            650: {
+              slidesPerView: 2,
+            },
+            992: {
+              slidesPerView: 2.5,
+              spaceBetween:30,
+            },
+            1200: {
+              slidesPerView: 3,
+              spaceBetween:30,
+
+            },
+          }}
         >
           <SwiperSlide>
             <OneCardView />

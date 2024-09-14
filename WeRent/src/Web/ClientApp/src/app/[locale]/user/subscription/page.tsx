@@ -8,8 +8,8 @@ import ToDwonIcon from "@/src/assets/icons/ToDwon";
 function page() {
   return (
     <div>
-      <h1 className="text-[56px] text-center mb-2 ">Pick a plan</h1>
-      <h2 className="text-center text-[32px] leading-9">
+      <h1 className="text-[32px] lg:text-[56px] text-center mb-2 ">Pick a plan</h1>
+      <h2 className="text-center text-2xl lg:text-[32px] leading-9">
         Save <br />{" "}
         <span className="text-green relative">
           Up to 49%

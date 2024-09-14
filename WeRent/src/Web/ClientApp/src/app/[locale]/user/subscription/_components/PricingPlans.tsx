@@ -80,27 +80,27 @@ const PricingPlansData = [
 
 function PricingPlans() {
   return (
-    <div className="flex justify-between gap-12 mb-20">
+    <div className="flex justify-between gap-4 lg:gap-12 hideScroll max-w-full overflow-x-auto mb-11 lg:mb-20">
       {PricingPlansData.map((plan, i) => {
         return (
           <div
             key={i}
-            className="bg-white flex-1 relative  border-[3px] border-green/30  rounded-xl pt-11 pb-9"
+            className="bg-white flex-1 relative  border-[3px] border-green/30 md:min-w-[377px] min-w-[90%]  max-w-[90%]   rounded-xl pt-11 pb-5 lg:pb-9"
           >
             {plan.badge && (
-              <p className="bg-green ps-5 pe-[22px] py-1 text-center h-7 uppercase after:content-[''] after:right-[-20px] after:-rotate-45 after:absolute after:size-[30px] after:bg-white after:top-1/2 overflow-hidden after:-translate-y-1/2 absolute left-[-3px] top-4 text-white font-Medium">
+              <p className="bg-green ps-5 pe-[22px] py-1 text-center h-7 uppercase after:content-[''] after:right-[-20px] after:-rotate-45 after:absolute text-sm md:text-base  after:size-[30px] after:bg-white after:top-1/2 overflow-hidden after:-translate-y-1/2 absolute left-[-3px] top-4 text-white font-Medium">
                 Most Popular
               </p>
             )}
 
             <div className="px-[22px]">
-              <h2 className="text-[32px] mb-1">{plan.name}</h2>
-              <h3 className="text-[20px] font-Regular text-[#565656] leading-6 mb-5">
+              <h2 className="text-2xl lg:text-[32px] mb-1">{plan.name}</h2>
+              <h3 className="text-base lg:text-[20px] font-Regular text-[#565656] leading-6 mb-3 lg:mb-5">
                 {plan.description}
               </h3>
-              <p className="text-[20px] text-black/80 mb-8 ">
+              <p className="text-base lg:text-[20px] text-black/80 mb-4 lg:mb-8 ">
                 {plan.price.original}{" "}
-                <span className="text-[32px] text-blue font-Bold">
+                <span className="text-2xl lg:text-[32px] text-blue font-Bold">
                   {" "}
                   {plan.price.discounted}
                 </span>{" "}
@@ -108,12 +108,12 @@ function PricingPlans() {
               </p>
             </div>
 
-            <ul className="py-10 border-t border-[#B6BFC64D]">
+            <ul className=" py-7 lg:py-10 border-t border-[#B6BFC64D]">
               {plan.features.map((feature, j) => {
                 return (
                   <li
                     key={j}
-                    className="flex items-center px-[22px] gap-5 py-[10px] odd:bg-green/10"
+                    className="flex items-center px-4 lg:px-[22px] gap-4 lg:gap-5 py-[10px] odd:bg-green/10"
                   >
                     {feature.available ? (
                       <span className=" size-5 min-w-5">
@@ -124,12 +124,12 @@ function PricingPlans() {
                         <LockIcon />
                       </span>
                     )}
-                    <p>{feature.feature}</p>
+                    <p className="text-sm lg:text-base"> {feature.feature}</p>
                   </li>
                 );
               })}
             </ul>
-            <button className=" text-center flex items-center justify-center mx-auto  px-5 text-blue py-4 text-base font-Regular">
+            <button className=" text-center flex items-center justify-center mx-auto  px-5 text-blue py-4 text-sm md:text-base font-Regular">
               See all {plan.numMore} features
             </button>
             <Button className={"w-[280px] max-w-[96%] mx-auto"}>

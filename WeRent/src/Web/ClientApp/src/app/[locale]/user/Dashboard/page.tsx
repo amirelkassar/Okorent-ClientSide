@@ -1,13 +1,12 @@
 import React from "react";
 import HeaderDash from "./_components/header";
-import Button from "@/src/components/button";
-import ArrowWhiteIcon from "@/src/assets/icons/arrowWhite";
 import { DataTable } from "@/src/components/data-table";
 import { RequestsData } from "@/src/lib/dataUser";
 import { columns } from "./_components/columns";
 import OngoingRentals from "./_components/ongoing-rentals";
 import EarningReport from "./_components/earning-report";
 import ROUTES from "@/src/routes";
+import CardPhoneTable from "./_components/CardPhoneTable";
 
 function page() {
   return (
@@ -23,6 +22,7 @@ function page() {
           viewAll={ROUTES.USER.DASHBOARD}
           data={RequestsData}
           columns={columns}
+          Component={CardPhoneTable}
         />
       </div>
     </div>

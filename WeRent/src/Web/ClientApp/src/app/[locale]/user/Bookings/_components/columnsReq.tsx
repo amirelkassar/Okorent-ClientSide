@@ -3,7 +3,6 @@
 import DeleteIcon from "@/src/assets/icons/delete";
 import EditIcon from "@/src/assets/icons/edit";
 import FilterIcon from "@/src/assets/icons/filter";
-import StarIcon from "@/src/assets/icons/star";
 import { ActionIcon } from "@mantine/core";
 import { ColumnDef } from "@tanstack/react-table";
 import Image, { StaticImageData } from "next/image";

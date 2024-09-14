@@ -9,38 +9,38 @@ import TwoLineIcon from "@/src/assets/icons/twoLine";
 function TryFree() {
   return (
     <div className="mb-20">
-      <div className="p-3 size-[70px] mx-auto rounded-full bg-green/20 flex items-center justify-center">
+      <div className="p-2 lg:p-3 size-[52px] lg:size-[70px] mx-auto rounded-full bg-green/20 flex items-center justify-center">
         <SadIcon />
       </div>
-      <h2 className="text-center  mb-10 text-[32px]">Still Confused?</h2>
+      <h2 className="text-center  mb-10 text-2xl lg:text-[32px]">Still Confused?</h2>
       <div
-        className="w-full rounded-3xl pt-[60px] px-6 pb-12 bg-cover bg-no-repeat"
+        className="w-full rounded-3xl pt-5 lg:pt-[60px] px-6 pb-8 lg:pb-12 bg-cover bg-no-repeat"
         style={{ backgroundImage: `url(${backFree.src})` }}
       >
-        <h3 className="text-[56px] text-center mb-4 leading-[58px]">
+        <h3 className="text-2xl lg:text-[56px] text-center mb-4 lg:leading-[58px]">
           Try essential package for{" "}
           <span className=" inline-block relative">
             free
-            <span className=" absolute left-1/2 -translate-x-1/2 -bottom-3">
-              <TwoLineIcon />
+            <span className=" absolute w-full left-1/2 -translate-x-1/2 -bottom-3">
+              <TwoLineIcon className="w-full" />
             </span>
           </span>
         </h3>
-        <p className="text-center text-xl font-Regular mb-9">
+        <p className="text-center text-sm lg:text-xl font-Regular mb-9">
           Get started and see the benefits of our premium packages.
         </p>
-        <Button className={" gap-1 mx-auto mb-10"}>
+        <Button className={" gap-2 mx-auto min-w-[270px] mb-7 lg:mb-10"}>
           <p>Start free trial</p>
           <ArrowWhiteIcon />
         </Button>
         <ul className="flex items-center justify-center gap-10 flex-wrap">
           <li className="flex items-center gap-1">
-            <TrueGreenIcon fill="#006AFF" className=" size-7" />
-            <p className="text-xl font-Regular">Free 14-day trial</p>
+            <TrueGreenIcon fill="#006AFF" className=" size-6 lg:size-7" />
+            <p className="text-base lg:text-xl font-Regular">Free 14-day trial</p>
           </li>
           <li className="flex items-center gap-1">
-            <TrueGreenIcon fill="#006AFF" className=" size-7" />
-            <p className="text-xl font-Regular">Free 14-day trial</p>
+            <TrueGreenIcon fill="#006AFF" className=" size-6 lg:size-7" />
+            <p className="text-base lg:text-xl font-Regular">Free 14-day trial</p>
           </li>
         </ul>
       </div>

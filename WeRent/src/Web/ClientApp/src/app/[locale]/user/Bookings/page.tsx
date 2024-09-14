@@ -13,6 +13,8 @@ import CloseIcon from "@/src/assets/icons/close";
 import { useDisclosure } from "@mantine/hooks";
 import { columnsReq } from "./_components/columnsReq";
 import CardRequest from "@/src/components/cardRequest";
+import CardReqPhone from "./_components/CardReqPhone";
+import CardBookPhone from "./_components/CardBookPhone";
 const FilterOptions = [
   {
     label: "Completed",
@@ -81,6 +83,7 @@ function Page() {
           filterData={FilterOptions}
           haveRentSwitch
           filterBy="status"
+          Component={CardBookPhone}
         />
       ) : (
         <div>
@@ -107,6 +110,7 @@ function Page() {
           data={RequestsData}
           haveRentSwitch
           columns={columnsWithOpen}
+          Component={CardReqPhone}
         />
       ) : (
         <div>
@@ -144,7 +148,7 @@ function Page() {
           content: "rounded-3xl ",
         }}
         closeButtonProps={{
-          icon: <CloseIcon />,
+          icon: <CloseIcon className="lg:w-6 w-5 h-auto" />,
           className: "mb-[-40px] absolute end-4 top-3",
         }}
         centered

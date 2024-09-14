@@ -1,6 +1,6 @@
 import React from "react";
 
-function TwoLineIcon() {
+function TwoLineIcon({className}: {className?: string}) {
   return (
     <svg
       width="95"
@@ -8,6 +8,7 @@ function TwoLineIcon() {
       viewBox="0 0 95 17"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path
         d="M2 8.00019C21.3333 3.66686 66.6 -2.39981 93 8.00019"

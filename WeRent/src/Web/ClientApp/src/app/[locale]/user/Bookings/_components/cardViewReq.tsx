@@ -106,7 +106,6 @@ function CardViewReq({
             breakpoints={{
               0: {
                 slidesPerView: 1.05,
-
                 spaceBetween: 10,
               },
               740: {

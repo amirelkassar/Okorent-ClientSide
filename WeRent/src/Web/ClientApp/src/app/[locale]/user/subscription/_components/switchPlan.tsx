@@ -4,7 +4,7 @@ import React from "react";
 
 function SwitchPlan() {
   return (
-    <div className="mx-auto flex items-center justify-center mt-7 mb-16">
+    <div className="mx-auto flex items-center justify-center mt-7 mb-12 lg:mb-16">
       <SegmentedControl
         withItemsBorders={false}
         color="#88BA52"
