@@ -1,8 +1,9 @@
 import React from "react";
 interface TrueWhiteIconProps {
   active?: boolean;
+  className?: string;
 }
-function TrueWhiteIcon({ active = false }: TrueWhiteIconProps) {
+function TrueWhiteIcon({ active = false, className }: TrueWhiteIconProps) {
   return (
     <svg
       width="32"
@@ -10,6 +11,7 @@ function TrueWhiteIcon({ active = false }: TrueWhiteIconProps) {
       viewBox="0 0 32 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <circle
         cx="16"

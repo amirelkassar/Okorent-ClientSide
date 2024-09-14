@@ -1,6 +1,6 @@
 import React from "react";
 
-function WifiIcon() {
+function WifiIcon({ className }: { className?: string }) {
   return (
     <svg
       width="32"
@@ -8,6 +8,7 @@ function WifiIcon() {
       viewBox="0 0 32 40"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path
         id="Vector (Stroke)"

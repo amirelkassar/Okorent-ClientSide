@@ -1,6 +1,6 @@
 import React from "react";
 
-function ChipIcon() {
+function ChipIcon({ className }: { className?: string }) {
   return (
     <svg
       width="61"
@@ -8,6 +8,7 @@ function ChipIcon() {
       viewBox="0 0 61 47"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <g opacity="0.7">
         <rect
