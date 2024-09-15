@@ -11,7 +11,7 @@ function ProgressRev({ val }: ProgressRev) {
           className={`block duration-300 bg-green h-full `}
         ></span>
       </div>
-      <p className="text-[14px] font-Regular text-grayMedium">{val}%</p>
+      <p className="text-xs lg:text-[14px] font-Regular text-grayMedium">{val}%</p>
     </div>
   );
 }

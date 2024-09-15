@@ -26,10 +26,10 @@ function CardReviews() {
           <p className="text-base">4.6</p>
         </div>
       </div>
-      <h3 className="text-base">
+      <h3 className="text-sm lg:text-base">
         Slightly expensive, but the performance justifies the cost
       </h3>
-      <div className="text-base text-grayMedium font-Regular">
+      <div className="text-sm lg:text-base text-grayMedium font-Regular">
         <Spoiler
           showLabel="Read More"
           hideLabel="Read Less"

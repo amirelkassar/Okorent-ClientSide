@@ -59,7 +59,7 @@ const processItems: ProcessItem[] = [
 ];
 const items = processItems.map((item, i) => (
   <Accordion.Item key={i} value={item.id.toString()}>
-    <Accordion.Control className="text-[20px] py-2 max-w-[840px]">{item.title}</Accordion.Control>
+    <Accordion.Control className="text-base lg:text-[20px] py-2 max-w-[840px] px-0">{item.title}</Accordion.Control>
     <Accordion.Panel>
       <ul className="flex flex-col gap-5 max-w-[840px]">
         {item.details.map((det, j) => {
@@ -79,7 +79,7 @@ const items = processItems.map((item, i) => (
 function FAQ() {
   return (
     <div className="mb-16">
-      <h2 className=" relative text-[24px] mb-8">FAQ</h2>
+      <h2 className=" relative text-[20px] mb-4">FAQ</h2>
       <Accordion classNames={{control:'hover:bg-transparent'}}>{items}</Accordion>
     </div>
   );
