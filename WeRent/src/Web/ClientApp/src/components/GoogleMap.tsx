@@ -21,11 +21,13 @@ interface GoogleMapProps {
     name: string
   ) => void;
   close?: any;
+  setLocation?:React.Dispatch<React.SetStateAction<string>>
 }
 function GoogleMapLoc({
   close,
   index,
   handleInputChangeLocation,
+  setLocation
 }: GoogleMapProps) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -46,7 +48,9 @@ function GoogleMapLoc({
     if (data.results && data.results[0]) {
       const place = data.results[0];
       const name = place.formatted_address || ""; // Store formatted address as place name
+      setLocation&&setLocation(name)
       setPlaceName(name);
+
       {
         handleInputChangeLocation &&
           handleInputChangeLocation(index, name, "address");

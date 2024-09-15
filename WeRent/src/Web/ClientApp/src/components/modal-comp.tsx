@@ -20,6 +20,7 @@ function ModalComp({ opened, close, children, title }: ModalCompProps) {
         content:
           "rounded-3xl border-2 overflow-hidden shadow-sidebar   border-green",
         overlay: "bg-black/50",
+        close: `${!title && "!top-5"}`,
       }}
       closeButtonProps={{
         icon: <CloseIcon />,
@@ -28,11 +29,13 @@ function ModalComp({ opened, close, children, title }: ModalCompProps) {
       }}
       centered
     >
-      <div className="w-full mt-3 lg:mt-7 mb-4 pb-3 lg:pb-5 border-b border-1">
-        <h2 className="text-center    max-w-[76%] mx-auto text-xl font-medium lg:text-[24px]">
-          {title}
-        </h2>
-      </div>
+      {title && (
+        <div className="w-full mt-3 lg:mt-7 mb-4 pb-3 lg:pb-5 border-b border-1">
+          <h2 className="text-center    max-w-[76%] mx-auto text-xl font-medium lg:text-[24px]">
+            {title}
+          </h2>
+        </div>
+      )}
       <div className="px-4 pb-7">{children}</div>
     </Modal>
   );

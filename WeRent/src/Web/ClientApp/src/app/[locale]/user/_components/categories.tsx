@@ -1,4 +1,6 @@
 import { CategoriesData } from "@/src/lib/dataUser";
+import { Link } from "@/src/navigation";
+import ROUTES from "@/src/routes";
 import React from "react";
 
 function Categories() {
@@ -8,10 +10,10 @@ function Categories() {
       <div className="flex justify-center flex-wrap mt-7 lg:mt-10 gap-1 lg:gap-7 ">
         {CategoriesData.map((category, index) => {
           return (
-            <div key={category.id} className="pt-3 px-3 pb-1 rounded-xl w-[108px] h-[102px] min-h-max flex flex-col justify-between  border border-transparent items-center gap-3 duration-300 hover:shadow-sidebar hover:border hover:border-green">
+            <Link href={ROUTES.USER.CATEGORIES(category.title)} key={category.id} className="pt-3 px-3 pb-1 rounded-xl w-[108px] h-[102px] min-h-max flex flex-col justify-between  border border-transparent items-center gap-3 duration-300 hover:shadow-sidebar hover:border hover:border-green">
             {category.img}
               <h3 className="text-sm lg:text-[16px] font-SemiBold text-center">{category.title}</h3>
-            </div>
+            </Link>
           );
         })}
       </div>

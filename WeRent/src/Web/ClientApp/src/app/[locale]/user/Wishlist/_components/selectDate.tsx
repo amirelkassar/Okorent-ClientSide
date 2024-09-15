@@ -19,19 +19,11 @@ function SelectDate() {
   }
   return (
     <>
-      <div className="flex items-center justify-center gap-2 " onClick={open}>
+      <div className="flex items-center justify-center " onClick={open}>
         <div className=" h-10 min-h-fit px-3 rounded-xl flex items-center border bg-blue/10 cursor-pointer border-transparent gap-1 lg:gap-3 duration-300 hover:border-blue hover:shadow-sidebar">
           <DateIcon />
-          <h3 className="text-blue text-sm lg:text-[16px]">{value.length>0? formatDate(value[0]) + ' - ' + formatDate(value[1]) :'Choose Rental Duration'}</h3>
+          <h3 className="text-blue text-sm lg:text-[16px]">Choose Rental Duration</h3>
         </div>
-        {value.length>0 && (
-          <p
-            onClick={open}
-            className="text-green cursor-pointer text-base font-Regular"
-          >
-            (Change)
-          </p>
-        )}
       </div>
       {
         opened && <ModalComp opened={opened} close={close} title={"Select rental period"}>

@@ -2,13 +2,16 @@
 import BackIcon from "@/src/assets/icons/back";
 import { Link, usePathname } from "@/src/navigation";
 import ROUTES from "@/src/routes";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import React, { useMemo } from "react";
 
 function NavLinks() {
   const path = usePathname();
   const params = useParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  console.log(searchParams.getAll('category'));
+  
   const LinksNav = useMemo(
     () => [
       {
@@ -17,6 +20,7 @@ function NavLinks() {
         url: ROUTES.USER.HOMEPAGE,
         active: path === ROUTES.USER.HOMEPAGE,
       },
+    
       {
         id: 2,
         name: "Dashboard",
@@ -84,6 +88,12 @@ function NavLinks() {
   const newPath = useMemo(
     () => [
       {
+        id: 1,
+        name: `Homepage / ${searchParams.get("category")}`,
+        url: ROUTES.USER.CATEGORIES(searchParams.get("category")),
+        active: path+`?category=${searchParams.get("category")}` ===  ROUTES.USER.CATEGORIES(searchParams.get("category")),
+      },
+      {
         id: 0,
         name: "Product Details ",
         url: ROUTES.USER.PRODUCTDETAILS(params.productID),
@@ -96,7 +106,7 @@ function NavLinks() {
         active: path === ROUTES.USER.SUBSCRIPTION,
       },
     ],
-    []
+    [path]
   );
   return (
     path !== ROUTES.USER.CHECKOUT &&

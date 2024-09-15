@@ -29,6 +29,7 @@ const ROUTES = {
   USER: {
     HOMEPAGE: "/user",
     DASHBOARD: "/user/Dashboard",
+    CATEGORIES:(id)=> `/user/Categories?category=${id}`,
     LISTINGS: "/user/Listings",
     LISTINGSDETAILS: (id) => `/user/Listings/${id}`,
     LISTINGSEDIT: (id) => `/user/Listings/${id}/edit`,
