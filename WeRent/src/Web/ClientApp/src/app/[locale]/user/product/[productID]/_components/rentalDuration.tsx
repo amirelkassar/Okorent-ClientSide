@@ -10,7 +10,7 @@ function RentalDuration() {
   ]);
   return (
     <div className="mb-8">
-      <h3 className="text-[24px] mb-5">Choose rental duration</h3>
+      <h3 className="text-xl mb-5">Choose rental duration</h3>
       <DatePickerInput
         type="range"
       

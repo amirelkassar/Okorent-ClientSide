@@ -1,48 +1,55 @@
 import React from "react";
 import ImagesProduct from "./imagesProduct";
-import ProductClient from "./productClient";
 import PricingOptions from "./PricingOptions";
 import RentalDuration from "./rentalDuration";
 import PriceDetails from "./priceDetails";
-import Button from "@/src/components/button";
 import ShareIcon from "@/src/assets/icons/share";
 import FavRedIcon from "@/src/assets/icons/favRed";
 import FeaturesProduct from "./FeaturesProduct";
-import ColorProduct from "./colorProduct";
-import SizesProduct from "./SizesProduct";
 
 function CardProduct() {
   return (
-    <div className="flex items-start gap-10 justify-between mb-14">
-      <div>
-        <ImagesProduct />
-        <ProductClient />
-      </div>
-      <div className="flex-1">
-        <h2 className="text-[56px] font-SemiBold">Blink Video Doorbell</h2>
-        <p className="text-[24px] font-Regular text-[#565656] leading-7 mb-12">
-          Two-way audio, HD video, motion and chime app alerts and enabled —
-          wired or wire-free
-        </p>
-        <div className="flex gap-12 flex-wrap mb-10">
-          <ColorProduct />
-          <SizesProduct/>
+    <div className=" mb-14">
+      <ImagesProduct />
+      <div className=" w-full mt-10">
+        <div className=" w-full  border-b border-grayMedium/40 pb-6">
+          <div className="flex w-full items-center  justify-between gap-3 mb-7 ">
+            <h2 className="text-2xl lg:text-[32px] font-SemiBold ">
+              Hbada E3 Air Ergonomic Office Chair{" "}
+            </h2>
+            <div className="flex items-center gap-5">
+              <button className=" size-[46px] lg:size-[60px] rounded-full bg-grayBack flex items-center justify-center p-3 duration-300 hover:shadow-md">
+                <ShareIcon />
+              </button>
+              <button className=" size-[46px] lg:size-[60px] rounded-full bg-grayBack flex items-center justify-center p-3 duration-300 hover:shadow-md">
+                <FavRedIcon />
+              </button>
+            </div>
+          </div>
+
+          <FeaturesProduct />
         </div>
-        <FeaturesProduct />
-        <div className="max-w-[550px]">
-          <PricingOptions />
-          <RentalDuration />
-          <PriceDetails />
-        </div>
-        <div className="flex items-center justify-between gap-4 flex-wrap mt-5">
-          <Button className={"w-full max-w-[550px]"}>Rent this item</Button>
-          <div className="flex items-center gap-5">
-            <button className=" size-[60px] rounded-full bg-grayBack flex items-center justify-center duration-300 hover:shadow-md">
-              <ShareIcon />
-            </button>
-            <button className=" size-[60px] rounded-full bg-grayBack flex items-center justify-center duration-300 hover:shadow-md">
-              <FavRedIcon />
-            </button>
+        <div className="flex mt-10 items-start justify-between flex-col lg:flex-row gap-11">
+          <div className="lg:max-w-[650px] w-full flex-1">
+            <div>
+              <h3 className="text-base font-SemiBold mb-1 lg:mb-2 lg:text-xl">
+                Description
+              </h3>
+              <p className="text-sm lg:text-base text-grayMedium">
+                Hbada E3 Air ergonomic office chair combines the latest
+                technologies to help you maintain a comfortable posture and live
+                a healthy lifestyle. This office chair comes with elastic lumbar
+                support, 3D adjustable headrest and armrests, durable and
+                breathable mesh, 140 degree reclining, adjustable seat depth and
+                gravity-sensing chassis, offering lasting comfort even after all
+                day sitting.
+              </p>
+            </div>
+            <PricingOptions />
+            <RentalDuration />
+          </div>
+          <div className="flex-1 lg:max-w-[620px] w-full">
+            <PriceDetails />
           </div>
         </div>
       </div>

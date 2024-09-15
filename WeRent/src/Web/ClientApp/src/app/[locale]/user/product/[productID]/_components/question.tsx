@@ -39,7 +39,7 @@ const questions: Question[] = [
 ];
 function QuestionView() {
   const [selectedQuestionId, setSelectedQuestionId] = useState<number | null>(
-    0
+    1
   );
   const handleQuestionClick = (id: number) => {
     setSelectedQuestionId(id);
@@ -65,11 +65,11 @@ function QuestionView() {
       </div>
 
       {/* Display the answer for the selected question */}
-      {selectedQuestionId && (
+      {selectedQuestionId ? (
         <p className="text-grayMedium font-Regular text-sm lg:text-base">
           {questions.find((q) => q.id === selectedQuestionId)?.answer}
         </p>
-      )}
+      ):null}
     </div>
   );
 }
