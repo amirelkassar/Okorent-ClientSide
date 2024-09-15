@@ -7,6 +7,7 @@ import CloseIcon from "@/src/assets/icons/close";
 import { Rentals } from "@/src/lib/dataUser";
 import ProductList from "./_components/productList";
 import { MultiSelect } from "@mantine/core";
+import CantFind from "./_components/CantFind";
 
 const subcategories: string[] = [
   "TV",
@@ -160,6 +161,9 @@ function Page() {
           </div>
 
           <ProductList data={Rentals} />
+          <div>
+            <CantFind/>
+          </div>
         </div>
       </div>
     </div>
