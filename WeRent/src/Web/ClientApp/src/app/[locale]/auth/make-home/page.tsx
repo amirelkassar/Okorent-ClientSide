@@ -8,6 +8,7 @@ import { FileButton } from "@mantine/core";
 import UpLoadIcon from "@/src/assets/icons/upLoad";
 import DoneAuth from "./_components/doneAuth";
 import { cn } from "@/src/lib/utils";
+
 const dataAvatar = [avatar1, avatar1, avatar1, avatar1];
 function Page() {
   const [files, setFiles] = useState<File | null>();
@@ -29,17 +30,24 @@ function Page() {
           <div className="mt-2 mb-9">
             <h2 className="font-Medium text-medium">Choose your avatar</h2>
             <div className="flex items-center gap-3 mt-3">
-              {
-                dataAvatar.map((item,i)=>{
-                  return (
-                    <button key={i} className={cn(" cursor-pointer rounded-full",
-                      active === i ? "outline-offset-2 outline outline-2 outline-green" :''
-                    )} onClick={()=>{setActive(i)}}>
+              {dataAvatar.map((item, i) => {
+                return (
+                  <button
+                    key={i}
+                    className={cn(
+                      " cursor-pointer rounded-full",
+                      active === i
+                        ? "outline-offset-2 outline outline-2 outline-green"
+                        : ""
+                    )}
+                    onClick={() => {
+                      setActive(i);
+                    }}
+                  >
                     <Image src={item} width={38} height={38} alt="avatar" />
                   </button>
-                  )
-                })
-              }
+                );
+              })}
             </div>
           </div>
           <div className="mt-2 mb-9">
@@ -57,6 +65,7 @@ function Page() {
               )}
             </FileButton>
           </div>
+          
           <div className="mt-2 mb-9 ">
             <h2 className="font-Medium text-medium">Choose your theme</h2>
             <div className="flex w-full gap-7 mt-2">

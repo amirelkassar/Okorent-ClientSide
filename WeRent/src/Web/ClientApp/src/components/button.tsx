@@ -17,7 +17,7 @@ function Button({ children, className, onClick }: ButtonProps) {
         handelClick(e);
       }}
       className={cn(
-        "bg-green px-2 lg:px-3 border-4 h-[50px] border-[#a9c788] hover:border-green duration-500 text-sm lg:text-medium rounded-xl text-white flex items-center justify-center",
+        "bg-green px-2 font-Medium  lg:px-3 border-4 h-[50px] border-[#a9c788] hover:border-green duration-500 text-sm lg:text-medium rounded-xl text-white flex items-center justify-center",
         className
       )}
     >

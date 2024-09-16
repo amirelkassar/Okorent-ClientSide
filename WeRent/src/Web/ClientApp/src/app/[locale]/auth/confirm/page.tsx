@@ -1,9 +1,7 @@
 "use client";
 import Button from "@/src/components/button";
-import Input from "@/src/components/input";
 import Logo from "@/src/components/logo";
-import Password from "@/src/components/password";
-import { Link, useRouter } from "@/src/navigation";
+import { useRouter } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import { PinInput } from "@mantine/core";
 import React from "react";
@@ -49,12 +47,20 @@ function PageLogin() {
                 </button>
               </h3>
             </div>
-            <div className={"w-full mt-9 flex flex-col gap-2"}>
+            <div className={"w-full mt-16 flex  gap-6 flex-wrap"}>
               <Button
+                className={"w-[156px] bg-white border text-green "}
+                onClick={() => {
+                  router.push(ROUTES.AUTH.FORGOT_PASSWORD);
+                }}
+              >
+                Back
+              </Button>
+              <Button
+                className={"w-[156px] "}
                 onClick={() => {
                   router.push(ROUTES.AUTH.RESET_PASSWORD);
                 }}
-                className={"w-full "}
               >
                 Next
               </Button>

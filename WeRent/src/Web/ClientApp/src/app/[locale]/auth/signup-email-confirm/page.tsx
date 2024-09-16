@@ -1,25 +1,25 @@
 "use client";
 import Button from "@/src/components/button";
-import Input from "@/src/components/input";
 import Logo from "@/src/components/logo";
-import Password from "@/src/components/password";
-import { Link, useRouter } from "@/src/navigation";
+import Timer from "@/src/components/timer";
+import { useRouter } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import { PinInput } from "@mantine/core";
-import React from "react";
+import React, { useState } from "react";
 
 function PageLogin() {
   const router = useRouter();
-
+  const [seconds, setSeconds] = useState(60);
+  const [start, setStart] = useState(false);
   return (
     <div className="flex-1 pt-20 pb-16  flex  min-h-full justify-start">
-      <div className="max-w-[390px] w-full flex flex-col gap-4">
+      <div className=" w-full flex flex-col gap-4">
         <Logo theme="green" />
         <div className="flex-1 content-center">
-          <h1 className=" font-Bold text-xLarge">Confirm You Email</h1>
-          <p className="text-grayMedium font-Light leading-5 text-medium mb-6 ">
-            We have sent you a code to ahmed5vadr5@gmail.com please enter it
-            below to verify your account
+          <h1 className=" font-Bold text-xLarge">Confirm Your number</h1>
+          <p className="text-grayMedium max-w-[390px] font-Light leading-5 text-medium mb-6 ">
+            We have sent you a code to +20 1067373528 please enter it below to
+            verify your account
           </p>
 
           <form action="" className="w-full flex flex-col gap-5 max-w-[470px]">
@@ -34,27 +34,58 @@ function PageLogin() {
                 pinInput: "min-w-[44px] h-[44px] bg-transparent rounded-[8px]",
               }}
             />
-
             <div className="flex items-center  py-5">
               <h3 className="flex items-center justify-center gap-1 font-Light">
                 Didn’t receive a code?
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    console.log("send agin");
-                  }}
-                  className="text-blue font-Bold"
-                >
-                  Sent new code
-                </button>
+                {start ? (
+                  <div className="flex items-center gap-1">
+                    <p className="text-green font-SemiBold text-base">
+                      Request another one after
+                    </p>
+                    <Timer
+                      setSeconds={setSeconds}
+                      setStart={setStart}
+                      seconds={seconds}
+                      time={60}
+                    />
+                  </div>
+                ) : (
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      console.log("send agin");
+                    }}
+                    className="text-blue font-Bold"
+                  >
+                    Sent new code
+                  </button>
+                )}
               </h3>
             </div>
-            <div className={"w-full mt-9 flex flex-col gap-2"}>
+
+            <div className={"w-full mt-16 flex  gap-6 flex-wrap"}>
               <Button
+                className={"w-[156px] bg-white border text-green "}
+                onClick={() => {
+                  router.push(ROUTES.AUTH.LOGIN);
+                }}
+              >
+                Back
+              </Button>
+              <Button
+                className={"w-[156px] "}
+                onClick={() => {
+                  setStart(true);
+                  setSeconds(60);
+                }}
+              >
+                Next
+              </Button>
+              <Button
+                className={"w-[156px] "}
                 onClick={() => {
                   router.push(ROUTES.AUTH.MAKE_HOME);
                 }}
-                className={"w-full "}
               >
                 Next
               </Button>
