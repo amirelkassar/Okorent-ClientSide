@@ -52,7 +52,7 @@ const data = {
   Status: "Not",
 };
 function page({ params }: any) {
-  console.log(params);
+
 
   return (
     <div className="flex flex-col lgl:mt-[-30px] gap-3 mb-20">

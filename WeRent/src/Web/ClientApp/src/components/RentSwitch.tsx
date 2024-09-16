@@ -4,8 +4,6 @@ import { useSwitchRent } from "../store/rent-slice";
 
 const RentSwitch = () => {
   const { isRent, setSwitchRent } = useSwitchRent();
-  console.log(isRent);
-
   return (
     <SegmentedControl
       value={isRent}

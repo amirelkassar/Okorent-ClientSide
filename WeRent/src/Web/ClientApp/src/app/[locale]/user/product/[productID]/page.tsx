@@ -2,17 +2,26 @@ import CardRentals from "@/src/components/cardRentals";
 import { Rentals } from "@/src/lib/dataUser";
 import React from "react";
 import FAQ from "./_components/faq";
-import Map from "./_components/map";
 import Reviews from "./_components/reviews";
 import CardProduct from "./_components/cardProduct";
 import Description from "./_components/description";
 import QuestionView from "./_components/question";
+import MapComponent from "./_components/map";
 
 function page() {
   return (
     <div>
       <CardProduct />
-      <Map />
+      <div className="bg-[#D9D9D933] px-3 lg:px-10 lg:rounded-[50px] rounded-[30px] pt-8 lg:pt-11 pb-9 lg:pb-7 mb-11 lg:mb-14">
+        <h2 className="text-xl mb-5 px-2 lg:text-2xl">How to receive this item</h2>
+
+        <MapComponent />
+        <p className="text-sm lg:text-base text-grayMedium font-Regular mt-5">
+          This item is available for in-store pickup. Request it from the lessor
+          and select your preferred pickup location. Once the lessor approves,
+          you can make your payment and proceed to pick up your order.
+        </p>
+      </div>
       <Reviews />
       <div className="flex flex-col gap-5 mb-5">
         <Description
@@ -23,7 +32,7 @@ function page() {
           title="Cancelation Policy"
           description="In case of cancellation 2 days before the rental period, 100% of the rental amount is refunded. If canceled one day before the rental period, 50% of the rental amount is refunded. If you cancel the same day the rental period starts, no refund is made."
         />
-        <QuestionView/>
+        <QuestionView />
       </div>
       <FAQ />
       <div className="bg-grayBack max-w-full  pt-5 pb-8 lg:pb-16 relative before:content-[''] before:w-[calc(100%+32px)] lg:before:w-[calc(100%+130px)] before:bg-grayBack before:absolute before:bottom-0 before:-translate-x-1/2   before:h-full before:left-[50%]">

@@ -15,7 +15,7 @@ function Page() {
   const [Done, setDone] = useState(false);
 
   const [active, setActive] = useState(0);
-  console.log(active);
+
 
   return (
     <div className="flex-1 pt-20 pb-16  flex  min-h-full justify-start">

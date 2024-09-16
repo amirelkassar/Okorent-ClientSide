@@ -10,8 +10,7 @@ function NavLinks() {
   const params = useParams();
   const router = useRouter();
   const searchParams = useSearchParams();
-  console.log(searchParams.getAll('category'));
-  
+
   const LinksNav = useMemo(
     () => [
       {
@@ -20,7 +19,7 @@ function NavLinks() {
         url: ROUTES.USER.HOMEPAGE,
         active: path === ROUTES.USER.HOMEPAGE,
       },
-    
+
       {
         id: 2,
         name: "Dashboard",
@@ -91,7 +90,9 @@ function NavLinks() {
         id: 1,
         name: `Homepage / ${searchParams.get("category")}`,
         url: ROUTES.USER.CATEGORIES(searchParams.get("category")),
-        active: path+`?category=${searchParams.get("category")}` ===  ROUTES.USER.CATEGORIES(searchParams.get("category")),
+        active:
+          path + `?category=${searchParams.get("category")}` ===
+          ROUTES.USER.CATEGORIES(searchParams.get("category")),
       },
       {
         id: 0,
@@ -110,7 +111,7 @@ function NavLinks() {
   );
   return (
     path !== ROUTES.USER.CHECKOUT &&
-    (path !== ROUTES.USER.CHECKOUTID(params.checkoutID) && (
+    path !== ROUTES.USER.CHECKOUTID(params.checkoutID) && (
       <div className="mt-10 max-w-full ">
         {newPath.find((item) => item.active) ? (
           <div className="flex mb-11  items-center gap-3">
@@ -158,7 +159,7 @@ function NavLinks() {
           </ul>
         </div>
       </div>
-    ))
+    )
   );
 }
 export default NavLinks;

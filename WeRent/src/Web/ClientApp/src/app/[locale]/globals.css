@@ -140,3 +140,18 @@
     padding-bottom: 10px;
   }
 }
+.map-label {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+
+  @apply text-base font-Regular text-center rounded-xl px-2 py-1 text-white bg-green absolute -top-14 left-1/2 -translate-x-1/2 
+}
+.map-label::before {
+  content: "";
+  bottom: -5px;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+
+
+  @apply  border-t-green border-[8px] border-b-transparent border-x-[8px] border-x-transparent left-1/2 absolute -bottom-4
+}

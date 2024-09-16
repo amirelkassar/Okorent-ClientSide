@@ -7,7 +7,6 @@ import React, { useMemo } from "react";
 function NavLinks() {
   const path = usePathname();
   const params = useParams();
-  console.log(params);
 
   const LinksNav = useMemo(
     () => [

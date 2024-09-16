@@ -1,8 +1,9 @@
-'use client'
+"use client";
 import Image from "next/image";
 import React, { useState } from "react";
 import man from "@/src/assets/images/person1.png";
 import { Rating, Spoiler } from "@mantine/core";
+import ShowMore from "@/src/components/showMore";
 function CardReviews() {
   const [expanded, setExpanded] = useState(false);
   return (
@@ -30,16 +31,13 @@ function CardReviews() {
         Slightly expensive, but the performance justifies the cost
       </h3>
       <div className="text-sm lg:text-base text-grayMedium font-Regular">
-        <Spoiler
-          showLabel="Read More"
-          hideLabel="Read Less"
-          transitionDuration={0}
-          maxHeight={48}
-        >
+        <ShowMore lines={2}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-        </Spoiler>
+          minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet,
+          consectetur adipiscing elit, sed do
+        </ShowMore>
+     
       </div>
     </div>
   );

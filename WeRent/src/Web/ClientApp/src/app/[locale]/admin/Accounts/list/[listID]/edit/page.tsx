@@ -92,7 +92,7 @@ function Page() {
     setVariations(data.Variations)
     setSelectedCheckbox(data.Status )
   },[])
-  console.log(dataList);
+
   const handleInputChangeLocation = (
     index: number,
     value: string,

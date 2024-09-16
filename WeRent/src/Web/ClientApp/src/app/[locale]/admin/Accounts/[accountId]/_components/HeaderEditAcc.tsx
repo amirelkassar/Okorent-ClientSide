@@ -11,7 +11,7 @@ interface HeaderEditAccProps{
   id: number;
 }
 function HeaderEditAcc({id}:HeaderEditAccProps) {
-  console.log(id);
+
   
   return (
     <div className="flex items-center justify-between gap-7 flex-wrap mb-8">

@@ -50,7 +50,7 @@ const dataActivities = [
 ];
 function Page({ params }: any) {
   const searchParams = useSearchParams();
-  console.log(searchParams.get("edit"));
+
 
   return (
     <div>

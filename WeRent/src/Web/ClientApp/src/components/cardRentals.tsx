@@ -14,7 +14,6 @@ interface CardRentalsProps {
   edit?: boolean;
 }
 function CardRentals({ data, Fav = false, edit = false }: CardRentalsProps) {
-  console.log(data.id);
 
   return (
     <div>

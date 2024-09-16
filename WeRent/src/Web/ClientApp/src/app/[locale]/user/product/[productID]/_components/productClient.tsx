@@ -6,50 +6,56 @@ import React from "react";
 import avatar from "@/src/assets/images/avatar.png";
 import ROUTES from "@/src/routes";
 import LinkGreen from "@/src/components/linkGreen";
+import UserAvailable from "@/src/components/userAvailable";
 function ProductClient() {
   return (
-    <div className="border border-green/30 mt-6 rounded-lg py-6 px-5">
-      <div className=" flex items-start gap-6 w-full pb-3 border-b border-black/20">
-        <div className="flex flex-col gap-2 justify-center ">
+    <div className="border border-green/30 mt-6 rounded-lg py-6 px-5 bg-white/50">
+      <div className=" flex items-center lg:items-start gap-4 flex-col lg:flex-row lg:gap-6 w-full pb-3 border-b border-grayLight">
+        <div className="flex flex-col items-center gap-2 justify-center ">
           <Image
             alt="user"
             src={avatar}
-            className=" size-[60px] rounded-[50%] object-cover object-top"
+            className=" size-[50px] lg:size-[60px] rounded-[50%] object-cover object-top"
             priority
           />
-          <p className="text-green text-[14px] text-center">Available</p>
+          <UserAvailable available={false} />
         </div>
-        <div
-          className="flex-1
-            "
-        >
-          <div className="flex  gap-5 justify-between ">
-            <h3 className="text-[24px]">Ahmed Mohamed Badr</h3>
+        <div className="flex-1">
+          <div className="flex gap-3  lg:gap-5 justify-center lg:justify-between mb-3 lg:mb-1 ">
+            <h3 className="text-xl lg:text-[24px]">Ahmed Mohamed Badr</h3>
             <div className="flex items-center justify-center">
-              <VerifyBlackIcon />
+              <VerifyBlackIcon className=" size-5 lg:size-[26px]"  />
             </div>
           </div>
-          <h4 className="text-grayMedium text-[16px] font-Regular -mt-2 mb-2">
+          <h4 className="text-grayMedium text-center lg:text-start text-sm lg:text-[16px] font-Regular -mt-2 mb-2">
             Member Since March, 2024
           </h4>
           <div className="flex items-center ">
-            <div className="flex items-center gap-1 pe-4">
-              <p className="font-Bold text-[24px]">4.52</p>
-              <StarIcon className="w-[22px] h-auto" />
+            <div className="flex items-center gap-1 pe-2 lg:pe-4">
+              <p className="font-Bold text-lg lg:text-xl ">4.52</p>
+              <StarIcon className="w-[18px] lg:w-[20px] h-auto" />
             </div>
-            <div className="flex items-end gap-1 pe-4 ps-2 border-s border-green">
-              <p className="font-Bold text-[24px]">320</p>
-              <p className="text-[16px] mb-1 text-grayMedium">Rented Items</p>
+            <div className="flex items-center md:items-end gap-1 pe-2 lg:pe-4 ps-2 border-s border-green">
+              <p className="font-Bold text-lg lg:text-xl ">95%</p>
+              <p className="text-sm lg:text-[16px] mb-1 text-grayMedium">
+                Response Rate
+              </p>
             </div>
-            <div className="flex items-end gap-1 pe-4 ps-2 border-s border-green">
-              <p className="font-Bold text-[24px]">320</p>
-              <p className="text-[16px] mb-1 text-grayMedium"> Leased Items</p>
+            <div className="flex items-center md:items-end gap-1 pe-2 lg:pe-4 ps-2 border-s border-green">
+              <p className="font-Bold text-lg lg:text-xl ">320</p>
+              <p className="text-sm lg:text-[16px] mb-1 text-grayMedium">
+                {" "}
+                Leased Items
+              </p>
             </div>
           </div>
         </div>
       </div>
       <div className="flex items-center gap-6 flex-wrap mt-5">
-        <LinkGreen href={ROUTES.USER.INBOX} className={"flex-1 h-10"}>
+        <LinkGreen
+          href={ROUTES.USER.INBOX}
+          className={"flex-1 h-10 bg-transparent text-green border "}
+        >
           Message Ahmed
         </LinkGreen>
         <Button className={"flex-1 h-10 bg-grayBack text-black border-none"}>

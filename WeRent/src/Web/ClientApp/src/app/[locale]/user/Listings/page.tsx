@@ -21,8 +21,6 @@ const FilterOptions = [
 ];
 function Page() {
   const searchParams = useSearchParams();
-  console.log(searchParams.get("list"));
-
   return (
     <div>
       {searchParams.get("list") === "true" ? (

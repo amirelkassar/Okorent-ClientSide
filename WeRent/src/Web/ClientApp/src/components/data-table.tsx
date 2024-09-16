@@ -110,10 +110,7 @@ export function DataTable<TData, TValue>({
       : table.resetSorting();
     return table.getColumn(key)?.getIsSorted();
   };
-  console.log(table.getRowModel().rows);
-  console.log(columns);
   table.getRowModel().rows.map((row, i) => {
-    console.log(row.original);
   });
   return (
     <div>
