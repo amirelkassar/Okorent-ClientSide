@@ -42,7 +42,7 @@ function MenuProfile() {
           leftSection={<ProfileIcon />}
           className=" hover:bg-green/15 py-0 h-[30px] px-1 text-[14px] font-SemiBold rounded-lg"
         >
-          Profile
+          <Link href={ROUTES.USER.PROFILE}>Profile</Link>
         </Menu.Item>
         <Menu.Item
           leftSection={<SubscriptionIcon />}

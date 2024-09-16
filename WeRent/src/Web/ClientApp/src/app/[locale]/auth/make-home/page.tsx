@@ -4,23 +4,21 @@ import Logo from "@/src/components/logo";
 import Image from "next/image";
 import React, { useState } from "react";
 import avatar1 from "@/src/assets/images/1.png";
-import { FileButton } from "@mantine/core";
-import UpLoadIcon from "@/src/assets/icons/upLoad";
 import DoneAuth from "./_components/doneAuth";
 import { cn } from "@/src/lib/utils";
-
+import UploadAndCropImg from "./_components/uploadAndCropImg";
 const dataAvatar = [avatar1, avatar1, avatar1, avatar1];
 function Page() {
-  const [files, setFiles] = useState<File | null>();
   const [selectedTheme, setSelectedTheme] = useState("");
   const [Done, setDone] = useState(false);
-
   const [active, setActive] = useState(0);
+  const [croppedImage, setCroppedImage] = useState<string | null>(null);
+
 
 
   return (
     <div className="flex-1 pt-20 pb-16  flex  min-h-full justify-start">
-      <div className="max-w-[450px] w-full flex flex-col gap-4">
+      <div className="max-w-[450px] w-full flex flex-col gap-4 pb-8">
         <Logo theme="green" />
         <div className="flex-1 content-center">
           <h1 className=" font-Bold text-xLarge">Make yourself at home</h1>
@@ -50,22 +48,9 @@ function Page() {
               })}
             </div>
           </div>
-          <div className="mt-2 mb-9">
-            <h2 className="font-Medium text-medium">
-              Upload your profile picture
-            </h2>
-            <FileButton onChange={setFiles} accept="image/png,image/jpeg">
-              {(props) => (
-                <div
-                  {...props}
-                  className="bg-[#c0c8cf] h-10 w-[154px] rounded-[8px] flex items-center mt-2 justify-center px-3"
-                >
-                  <UpLoadIcon />
-                </div>
-              )}
-            </FileButton>
-          </div>
-          
+
+          {/* crup */}
+          <UploadAndCropImg croppedImage={croppedImage} setCroppedImage={setCroppedImage} />
           <div className="mt-2 mb-9 ">
             <h2 className="font-Medium text-medium">Choose your theme</h2>
             <div className="flex w-full gap-7 mt-2">
@@ -119,6 +104,7 @@ function Page() {
               Next
             </Button>
           </div>
+          
         </div>
       </div>
       {Done ? <DoneAuth done={Done} /> : null}

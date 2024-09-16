@@ -87,7 +87,7 @@ function NavLinks() {
   const newPath = useMemo(
     () => [
       {
-        id: 1,
+        id: 0,
         name: `Homepage / ${searchParams.get("category")}`,
         url: ROUTES.USER.CATEGORIES(searchParams.get("category")),
         active:
@@ -95,16 +95,22 @@ function NavLinks() {
           ROUTES.USER.CATEGORIES(searchParams.get("category")),
       },
       {
-        id: 0,
+        id: 1,
         name: "Product Details ",
         url: ROUTES.USER.PRODUCTDETAILS(params.productID),
         active: path === ROUTES.USER.PRODUCTDETAILS(params.productID),
       },
       {
-        id: 1,
+        id: 2,
         name: "Subscription",
         url: ROUTES.USER.SUBSCRIPTION,
         active: path === ROUTES.USER.SUBSCRIPTION,
+      },
+      {
+        id: 3,
+        name: "My Profile",
+        url: ROUTES.USER.PROFILE,
+        active: path === ROUTES.USER.PROFILE,
       },
     ],
     [path]
