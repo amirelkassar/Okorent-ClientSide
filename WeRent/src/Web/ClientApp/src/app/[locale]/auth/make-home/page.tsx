@@ -48,7 +48,6 @@ function Page() {
               })}
             </div>
           </div>
-
           {/* crup */}
           <UploadAndCropImg croppedImage={croppedImage} setCroppedImage={setCroppedImage} />
           <div className="mt-2 mb-9 ">

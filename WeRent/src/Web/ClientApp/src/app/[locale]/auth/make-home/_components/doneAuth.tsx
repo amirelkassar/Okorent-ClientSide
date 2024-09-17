@@ -3,6 +3,8 @@ import Button from "@/src/components/button";
 import { useRouter } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import React from "react";
+import imgDone from '@/src/assets/images/done.png'
+import Image from "next/image";
 interface DoneProps {
     done: boolean;
 }
@@ -22,8 +24,9 @@ function DoneAuth({done}:DoneProps) {
         }}
       >
         <div className="flex items-center justify-center flex-col h-full">
-          <div className="mb-10 mx-auto   ">
-            <DoneIdcon />
+          <div className="mb-0 mx-auto   ">
+            <Image src={imgDone} alt="imgDone" width={298} height={364}/>
+          
           </div>
           <h2 className="text-[32px] font-Bold text-center leading-7">
             We are all done!

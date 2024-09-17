@@ -8,12 +8,15 @@ import ModalComp from "@/src/components/modal-comp";
 import { useDisclosure } from "@mantine/hooks";
 import DeleteIcon from "@/src/assets/icons/delete";
 import Button from "@/src/components/button";
+import ListRemove from "@/src/assets/icons/listRemove";
 interface Props {
   croppedImage: string | null;
   setCroppedImage: React.Dispatch<React.SetStateAction<string | null>>;
 }
 function UploadAndCropImg({ croppedImage, setCroppedImage }: Props) {
   const [opened, { open, close }] = useDisclosure(false);
+  const [openedChanges, { open: openChanges, close: closeChanges }] =
+    useDisclosure(false);
 
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [crop, setCrop] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -78,8 +81,10 @@ function UploadAndCropImg({ croppedImage, setCroppedImage }: Props) {
 
       {croppedImage && (
         <div className="mt-4  size-[294px] relative mb-8">
-          <div className="mt-2 mb-9 absolute top-3 end-3 bg-red/20 cursor-pointer duration-200 hover:shadow-md size-7 p-1 flex- items-center justify-center rounded-xl  " onClick={() => handleReset()}>
-
+          <div
+            className="mt-2 mb-9 absolute top-3 end-3 bg-red/20 cursor-pointer duration-200 hover:shadow-md size-7 p-1 flex- items-center justify-center rounded-xl  "
+            onClick={() => handleReset()}
+          >
             <DeleteIcon className="w-auto h-full" />
           </div>
           <Image
@@ -92,7 +97,11 @@ function UploadAndCropImg({ croppedImage, setCroppedImage }: Props) {
         </div>
       )}
 
-      <ModalComp opened={opened} close={close} title="Upload your profile picture">
+      <ModalComp
+        opened={opened}
+        close={close}
+        title="Upload your profile picture"
+      >
         <div className="flex justify-center items-center flex-col px-10 min-w-[490px] ">
           {!croppedImage && (
             <>
@@ -136,16 +145,14 @@ function UploadAndCropImg({ croppedImage, setCroppedImage }: Props) {
                     <Button
                       onClick={() => {
                         handleReset();
+                        openChanges();
                         close();
                       }}
                       className="bg-transparent flex-1 border text-green"
                     >
                       No
                     </Button>
-                    <Button
-                      onClick={onCrop}
-                      className= " flex-1 "
-                    >
+                    <Button onClick={onCrop} className=" flex-1 ">
                       Yes
                     </Button>
                   </div>
@@ -153,6 +160,33 @@ function UploadAndCropImg({ croppedImage, setCroppedImage }: Props) {
               )}
             </>
           )}
+        </div>
+      </ModalComp>
+
+      <ModalComp title="" opened={openedChanges} close={closeChanges}>
+        <div className="mt-8">
+          <div className="w-[200px] h-[200px] mb-2 block mx-auto">
+            <ListRemove />
+          </div>
+
+          <h3 className="text-xl text-center mb-1 font-SemiBold">
+          Discard Changes
+          </h3>
+          <p className="text-grayMedium text-base text-center mx-auto max-w-[300px] mb-11">
+          Are you sure you want to discard your
+          changes?
+          </p>
+          <div className="flex items-center gap-2 lg:gap-5 ">
+            <Button
+              onClick={closeChanges}
+              className={
+                "h-10  flex-1 font-Medium text-green bg-white border-2 hover:bg-green duration-300 hover:text-white"
+              }
+            >
+              No
+            </Button>
+            <Button className={"h-10 font-Medium flex-1"}>Yes</Button>
+          </div>
         </div>
       </ModalComp>
     </div>

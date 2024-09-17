@@ -1,6 +1,6 @@
 import React from "react";
 
-function LangIcon() {
+function LangIcon({ className }: { className?: string }) {
   return (
     <svg
       width="20"
@@ -8,6 +8,7 @@ function LangIcon() {
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <circle cx="10" cy="10" r="9.25" stroke="#0F2A43" strokeWidth="1.5" />
       <path

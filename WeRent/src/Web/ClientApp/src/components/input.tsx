@@ -14,7 +14,7 @@ function Input({ label, placeholder, type = "text" }: InputText) {
       placeholder={placeholder}
       classNames={{
         input:
-          "bg-grayLight border-none h-11 rounded-[8px] placeholder:text-grayMedium ",
+          "bg-grayLight border-grayLight  h-11 rounded-[8px] placeholder:text-grayMedium duration-300 focus:border-green focus:bg-white ",
         label: "text-[16px] mb-2 font-Medium ms-1",
       }}
     />
