@@ -155,3 +155,18 @@
 
   @apply  border-t-green border-[8px] border-b-transparent border-x-[8px] border-x-transparent left-1/2 absolute -bottom-4
 }
+/*phone input*/
+li.search {
+  @apply !border-b relative border-[#CCCCCC] !p-0 !ps-8 before:size-3  before:absolute before:top-1/2 before:-translate-y-1/2 before:start-5
+}
+li.search::before {
+  content: "";
+  background-image: url('../../assets/icons/search.svg');
+  background-size: 12px;
+}
+.react-tel-input .country-list .search-emoji{
+  display: none;
+}
+.react-tel-input .country-list .country{
+  @apply h-10  flex items-center !ps-4 w-full mx-auto max-w-full border-b border-[#CCCCCC] 
+}

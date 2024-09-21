@@ -103,14 +103,13 @@ function Nav({ linkLogo = "#" }: NavProps) {
         url: ROUTES.USER.SUPPORT,
         active: pathname === ROUTES.USER.SUPPORT,
       },
-     
     ],
     [pathname]
   );
   return (
     <nav className="px-4 lg:px-16 py-5 lg:py-8 flex items-center justify-between gap-4">
       <Link href={linkLogo}>
-        <Image src={logo} alt="logo" width={135} height={45}  />
+        <Image src={logo} alt="logo" width={135} height={45} />
       </Link>
       <div className="hidden mdl:flex items-center gap-3">
         <Link
@@ -157,9 +156,21 @@ function Nav({ linkLogo = "#" }: NavProps) {
             }`}
           >
             <div>
-              <div className="h-24 w-full ps-11 pb-5 flex items-end" onClick={() => setShowMenu(false)}>
-                <Link href={ROUTES.USER.PROFILE} className="flex items-center gap-2 ">
-                  <Image src={man} width={44} height={44} className=" rounded-full size-11 object-cover object-top" alt="user" />
+              <div
+                className="h-24 w-full ps-11 pb-5 flex items-end"
+                onClick={() => setShowMenu(false)}
+              >
+                <Link
+                  href={ROUTES.USER.PROFILE}
+                  className="flex items-center gap-2 "
+                >
+                  <Image
+                    src={man}
+                    width={44}
+                    height={44}
+                    className=" rounded-full size-11 object-cover object-top"
+                    alt="user"
+                  />
                   <h3 className="text-base font-Medium">John Mark</h3>
                 </Link>
               </div>

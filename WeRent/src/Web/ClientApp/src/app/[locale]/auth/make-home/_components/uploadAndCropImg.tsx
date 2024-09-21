@@ -9,6 +9,7 @@ import { useDisclosure } from "@mantine/hooks";
 import DeleteIcon from "@/src/assets/icons/delete";
 import Button from "@/src/components/button";
 import ListRemove from "@/src/assets/icons/listRemove";
+import DiscardIcon from "@/src/assets/icons/Discard";
 interface Props {
   croppedImage: string | null;
   setCroppedImage: React.Dispatch<React.SetStateAction<string | null>>;
@@ -144,16 +145,14 @@ function UploadAndCropImg({ croppedImage, setCroppedImage }: Props) {
                   <div className="flex w-full mt-8 items-center justify-center gap-10">
                     <Button
                       onClick={() => {
-                        handleReset();
                         openChanges();
-                        close();
                       }}
                       className="bg-transparent flex-1 border text-green"
                     >
-                      No
+                      Cancel
                     </Button>
                     <Button onClick={onCrop} className=" flex-1 ">
-                      Yes
+                      Save
                     </Button>
                   </div>
                 </>
@@ -165,27 +164,35 @@ function UploadAndCropImg({ croppedImage, setCroppedImage }: Props) {
 
       <ModalComp title="" opened={openedChanges} close={closeChanges}>
         <div className="mt-8">
-          <div className="w-[200px] h-[200px] mb-2 block mx-auto">
-            <ListRemove />
+          <div className="w-[200px] h-[200px] mb-8 block mx-auto">
+            <DiscardIcon />
           </div>
 
           <h3 className="text-xl text-center mb-1 font-SemiBold">
-          Discard Changes
+            Discard Changes
           </h3>
           <p className="text-grayMedium text-base text-center mx-auto max-w-[300px] mb-11">
-          Are you sure you want to discard your
-          changes?
+            Are you sure you want to discard your changes?
           </p>
           <div className="flex items-center gap-2 lg:gap-5 ">
             <Button
               onClick={closeChanges}
               className={
-                "h-10  flex-1 font-Medium text-green bg-white border-2 hover:bg-green duration-300 hover:text-white"
+                "  flex-1 font-Medium text-green bg-white border-2 hover:bg-green duration-300 hover:text-white"
               }
             >
               No
             </Button>
-            <Button className={"h-10 font-Medium flex-1"}>Yes</Button>
+            <Button
+              className={" font-Medium flex-1"}
+              onClick={() => {
+                closeChanges();
+                close();
+                handleReset();
+              }}
+            >
+              Yes
+            </Button>
           </div>
         </div>
       </ModalComp>

@@ -13,9 +13,6 @@ function Page() {
   const [Done, setDone] = useState(false);
   const [active, setActive] = useState(0);
   const [croppedImage, setCroppedImage] = useState<string | null>(null);
-
-
-
   return (
     <div className="flex-1 pt-20 pb-16  flex  min-h-full justify-start">
       <div className="max-w-[450px] w-full flex flex-col gap-4 pb-8">
