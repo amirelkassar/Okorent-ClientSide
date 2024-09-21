@@ -10,6 +10,8 @@ import phone from "@/src/assets/images/phone.png";
 import avatar from "@/src/assets/images/avatar.png";
 import Image, { StaticImageData } from "next/image";
 import OrdersIcon from "@/src/assets/icons/orders";
+import CardCalender from "./cardCalender";
+import OrderCard from "./orderCard";
 
 interface EventData {
   id: string;
@@ -55,7 +57,7 @@ const CustomCalendar: React.FC = () => {
     },
     {
       id: "2",
-      title: "ali",
+      title: "alialialialialialialialiali",
       start: "2024-09-03",
       end: "2024-09-06",
       status: "ongoing",
@@ -135,60 +137,21 @@ const CustomCalendar: React.FC = () => {
           eventClick={handleEventClick}
           eventShortHeight={300}
           slotMinWidth={80}
-          eventMinWidth={800}
+          
           resourceAreaWidth={400}
           resourceAreaHeaderClassNames={"bg-green/10 rounded-t-3xl"}
-          dayCellClassNames={() => 'w-[100px] h-[50px]'}
+          
           eventContent={(eventInfo) => (
-            <div className="flex items-center justify-between max-w-fit  overflow-hidden px-4 py-2  gap-4 bg-white border-green border rounded-xl shadow-lg">
-              <div className="flex items-center gap-2">
-                <Image
-                  alt="event"
-                  src={eventInfo.event._def.extendedProps.image}
-                  className=" size-8 rounded-full object-cover"
-                />
-                <div>
-                  <h3 className="text-black text-sm font-SemiBold">{eventInfo.event._def.title}</h3>
-                  <p className="text-xs font-Regular text-grayMedium !truncate text-nowrap   w-full">
-                    {eventInfo.event._instance?.range.start +
-                      "to" }
-                  </p>
-                </div>
-              </div>
-              <p>{eventInfo.event._def.extendedProps.status}</p>
-            </div>
+           <CardCalender eventInfo={eventInfo}/>
           )}
           resourceAreaHeaderContent={() => (
-            <div className="flex items-center gap-2  w-full flex-1 h-[90px]">
+            <div className="flex items-center gap-2  w-full ps-10 flex-1 h-[90px]">
               <OrdersIcon />
-              <h2>Orders</h2>
+              <h2 className="text-3xl font-SemiBold">Orders</h2>
             </div>
           )}
           resourceLabelContent={(resource) => (
-            <div className="flex items-center justify-between gap-3 flex-wrap py-3">
-              <div className="flex items-center gap-3">
-                <div className=" size-[50px] min-w-[50px] flex items-center justify-center bg-grayBack rounded-full p-[6px]">
-                  <Image
-                    alt="order"
-                    src={resource.resource._resource.extendedProps.img.src}
-                    className="h-full w-auto"
-                    width={20}
-                    height={40}
-                  />
-                </div>
-                <div>
-                  <h3 className="text-base font-SemiBold">
-                    {resource.resource._resource.title}
-                  </h3>
-                  <p className="text-sm font-Regular text-grayMedium">
-                    {resource.resource._resource.extendedProps.productType}
-                  </p>
-                </div>
-              </div>
-              <p className="text-sm font-Regular text-grayMedium">
-                {resource.resource._resource.extendedProps.code}
-              </p>
-            </div>
+            <OrderCard resource={resource}/>
           )}
         />
       </div>

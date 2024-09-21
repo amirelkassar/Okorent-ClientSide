@@ -151,8 +151,6 @@
   transform: translateX(-50%);
   width: 0;
   height: 0;
-
-
   @apply  border-t-green border-[8px] border-b-transparent border-x-[8px] border-x-transparent left-1/2 absolute -bottom-4
 }
 /*phone input*/
@@ -171,12 +169,8 @@ li.search::before {
   @apply h-10  flex items-center !ps-4 w-full mx-auto max-w-full border-b border-[#CCCCCC] 
 }
 .fc-h-event {
-   background-color:transparent;
-   border: none; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @apply bg-transparent border-none flex items-center justify-center
 }
-/* .fc-timeline-event-harness{
-  height: 100%;
-} */
+.fc-timeline-event-harness{
+  @apply h-full
+} 
