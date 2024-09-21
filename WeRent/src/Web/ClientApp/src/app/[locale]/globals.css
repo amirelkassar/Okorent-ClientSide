@@ -170,3 +170,13 @@ li.search::before {
 .react-tel-input .country-list .country{
   @apply h-10  flex items-center !ps-4 w-full mx-auto max-w-full border-b border-[#CCCCCC] 
 }
+.fc-h-event {
+   background-color:transparent;
+   border: none; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* .fc-timeline-event-harness{
+  height: 100%;
+} */
