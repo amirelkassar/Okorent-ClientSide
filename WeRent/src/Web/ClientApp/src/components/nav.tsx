@@ -8,6 +8,7 @@ import { Link, usePathname } from "../navigation";
 import PlusIcon from "../assets/icons/plus";
 import Image from "next/image";
 import logo from "@/src/assets/images/logo.png";
+import man from "@/src/assets/images/user.png";
 import ROUTES from "../routes";
 import MenuIcon from "../assets/icons/menu";
 import { useMediaQuery } from "@mantine/hooks";
@@ -102,13 +103,14 @@ function Nav({ linkLogo = "#" }: NavProps) {
         url: ROUTES.USER.SUPPORT,
         active: pathname === ROUTES.USER.SUPPORT,
       },
+     
     ],
     [pathname]
   );
   return (
     <nav className="px-4 lg:px-16 py-5 lg:py-8 flex items-center justify-between gap-4">
       <Link href={linkLogo}>
-        <Image src={logo} alt="logo" width={135} height={45} />
+        <Image src={logo} alt="logo" width={135} height={45}  />
       </Link>
       <div className="hidden mdl:flex items-center gap-3">
         <Link
@@ -150,22 +152,29 @@ function Nav({ linkLogo = "#" }: NavProps) {
           }`}
         >
           <div
-            className={` bg-white z-50 rounded-e-2xl duration-300   top-0  absolute h-screen w-[350px] max-w-[75%] ${
+            className={` bg-white hideScroll overflow-y-auto z-50 rounded-e-2xl duration-300   top-0  absolute h-screen w-[350px] max-w-[75%] ${
               showMenu ? "start-0" : "-start-[calc(100%+50px)]"
             }`}
           >
             <div>
-              <div className="h-20 w-full">
-
+              <div className="h-24 w-full ps-11 pb-5 flex items-end" onClick={() => setShowMenu(false)}>
+                <Link href={ROUTES.USER.PROFILE} className="flex items-center gap-2 ">
+                  <Image src={man} width={44} height={44} className=" rounded-full size-11 object-cover object-top" alt="user" />
+                  <h3 className="text-base font-Medium">John Mark</h3>
+                </Link>
               </div>
               <div className="px-5 border-t border-grayLight ">
                 <div className="flex flex-col gap-1 mt-8">
-                  {LinksNav.map((link) => {
+                  {LinksNav.map((link, i) => {
                     return (
-                      <div>
+                      <div key={i} onClick={() => setShowMenu(false)}>
                         <Link
                           href={link.url}
-                          className="text-[16px] py-5 bg-green/15 rounded-xl min-h-[60px] flex items-center gap-6 px-8 text-nowrap font-SemiBold duration-200 text-black/80 hover:text-black"
+                          className={`text-base py- ${
+                            link.active
+                              ? " before:bg-green !bg-green/15 hover:bg-green/15 "
+                              : " bg-transparent"
+                          } rounded-lg min-h-[60px] relative  before:w-[6px] before:content-[''] hover:bg-green/5  before:h-12 before:-start-5 before:absolute before:top-1/2 before:-translate-y-1/2 before:rounded-e-lg  flex items-center gap-6 px-8 text-nowrap font-SemiBold duration-200 text-black/80 hover:text-black`}
                         >
                           <FilmIcon className={"w-auto h-5"} />
                           {link.name}
@@ -183,7 +192,7 @@ function Nav({ linkLogo = "#" }: NavProps) {
                   <PlusIcon className={"w-[16px] h-auto"} />
                   <p className="text-base">List an item</p>
                 </Link>
-                <div className="flex items-center gap-4 ps-8 mt-11">
+                <div className="flex items-center gap-4 min-h-8 mb-10 cursor-pointer ps-8 mt-11">
                   <LogOutMenuIcon />
                   <p className="text-[#E31B1B] text-base">Log out</p>
                 </div>

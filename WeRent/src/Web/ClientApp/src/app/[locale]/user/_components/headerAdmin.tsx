@@ -18,7 +18,7 @@ function HeaderAdmin() {
           location, and choose when you need it.
         </p>
         <SearchItem />
-        <div className="flex items-center justify-center lg:justify-start gap-2 lg:gap-5  lg:mb-16">
+        <div className="flex items-center justify-center flex-col md:flex-row lg:justify-start gap-2 lg:gap-5  lg:mb-16">
           <SelectLocation />
           <SelectDate  />
         </div>

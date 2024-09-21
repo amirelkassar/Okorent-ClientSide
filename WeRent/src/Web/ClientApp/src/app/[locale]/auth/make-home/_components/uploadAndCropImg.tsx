@@ -80,9 +80,9 @@ function UploadAndCropImg({ croppedImage, setCroppedImage }: Props) {
       )}
 
       {croppedImage && (
-        <div className="mt-4  size-[294px] relative mb-8">
+        <div className="mt-4  h-[125px] w-fit relative mb-8">
           <div
-            className="mt-2 mb-9 absolute top-3 end-3 bg-red/20 cursor-pointer duration-200 hover:shadow-md size-7 p-1 flex- items-center justify-center rounded-xl  "
+            className=" absolute top-0 -end-11 bg-grayLight cursor-pointer duration-200 hover:shadow-md size-9 p-2 flex- items-center justify-center rounded-full  "
             onClick={() => handleReset()}
           >
             <DeleteIcon className="w-auto h-full" />
@@ -92,7 +92,7 @@ function UploadAndCropImg({ croppedImage, setCroppedImage }: Props) {
             alt="Cropped"
             width={294}
             height={294}
-            className="rounded-lg"
+            className="rounded-lg h-full w-auto"
           />
         </div>
       )}

@@ -118,7 +118,7 @@ function NavLinks() {
   return (
     path !== ROUTES.USER.CHECKOUT &&
     path !== ROUTES.USER.CHECKOUTID(params.checkoutID) && (
-      <div className="mt-10 max-w-full ">
+      <div className="mt-10 max-w-full hidden lg:block ">
         {newPath.find((item) => item.active) ? (
           <div className="flex mb-11  items-center gap-3">
             <button
