@@ -27,7 +27,7 @@ function CardCalender({eventInfo}: any) {
   console.log(eventInfo);
   
   return (
-    <div className="flex items-center justify-between w-full max-w-full min-h-16   overflow-hidden px-4 py-2  gap-4 bg-white border-green border rounded-xl shadow-lg">
+    <div className="flex my-3 mx-auto max-w-fit items-center justify-between w-full max-w-full min-h-16   overflow-hidden px-4 py-2  gap-4 bg-white border-green border rounded-xl shadow-lg">
       <div className="flex items-center gap-2 flex-1 w-[calc(100%-90px)] ">
         <Image
           alt="event"

@@ -289,7 +289,7 @@ const CustomCalendar: React.FC = () => {
             eventContent={(eventInfo) => <CardCalender eventInfo={eventInfo} />}
             eventResourceEditable={true}
             resourceAreaHeaderContent={() => (
-              <div className="flex items-center gap-2 w-full ps-10 flex-1 h-[70px]">
+              <div className="flex items-center gap-2 w-full ps-7 flex-1 h-[70px]">
                 <div className=" size-10 rounded-full flex items-center justify-center p-1 bg-[#E5F1FB]">
                   <OrdersIcon />
                 </div>

@@ -3,7 +3,7 @@ import React from 'react'
 
 function OrderCard({resource}: any) {
   return (
-    <div className="flex items-center justify-between gap-3 flex-wrap py-3">
+    <div className="flex items-center justify-between gap-3 px-5 flex-wrap py-3">
     <div className="flex items-center gap-3">
       <div className=" size-[50px] min-w-[50px] flex items-center justify-center bg-grayBack rounded-full p-[6px]">
         <Image

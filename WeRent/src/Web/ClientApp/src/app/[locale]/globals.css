@@ -199,52 +199,26 @@ li.search::before {
   @apply !bg-transparent !opacity-100;
 }
 .fc-toolbar-chunk div {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  width: fit-content;
-  margin-top: -20px;
+
+  @apply flex items-center gap-5 w-fit -mt-5
 }
 .fc-toolbar-chunk div .fc-button {
-  width: 28px;
-  height: 28px;
-  min-width: 28px;
-  min-height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
   transition: 0.5s;
-  @apply rounded-full bg-transparent border-none;
+  @apply rounded-full w-7 h-7 min-w-7 min-h-7 p-0 flex items-center justify-center bg-transparent border-none;
 }
 .fc-toolbar-chunk div .fc-button span::before {
   content: "";
-  width: 24px;
-  height: 24px;
-  display: block;
   background-image: url("../../assets//icons/arrowRightBlack.svg");
-  background-size: contain;
-  position: absolute;
+  background-size: 24px;
+  @apply w-6 h-6 block absolute  bg-no-repeat;
 }
 .fc-toolbar-chunk .fc-prev-button span::before {
   transform: rotate(180deg);
 }
 .fc-toolbar-chunk div .fc-button:hover {
-  background-color: transparent;
   box-shadow: 0px 0px 5px rgba(162, 162, 162, 0.422);
+  @apply bg-transparent;
 }
-.fc-daygrid-day {
-  width: 120px;
-  height: 120px;
-}
-.fc-day .fc-col-header-cell-cushion {
-  color: #939393;
-  font-weight: 400;
-  text-align: end;
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-}
-.fc-scrollgrid  .fc-scroller {
+.fc-scrollgrid .fc-scroller {
   overflow-y: auto !important;
 }

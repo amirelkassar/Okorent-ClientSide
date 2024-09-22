@@ -19,7 +19,7 @@ const RentSwitch = () => {
       classNames={{
         label:
           " data-[active]:text-white h-full py-0 flex items-center rounded-[2px] justify-center text-sm lg:text-base flex item-center justify-center   text-black",
-        root: "!bg-transparent pt-[2px] ps-[2px] w-[242px] items-center h-10  border !border-green",
+        root: "!bg-transparent pt-[2px] ps-[2px] w-[190px] lg:w-[242px] items-center h-10  border !border-green",
         control: "h-full items-center bg-transparent",
       }}
       radius="12px"
