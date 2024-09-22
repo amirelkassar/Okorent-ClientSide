@@ -80,10 +80,10 @@
   transition: 0.8s;
 }
 .swiperAuth .swiper-slide-active h2 {
-  @apply translate-x-0
+  @apply translate-x-0;
 }
 .swiperAuth .swiper-pagination {
-  @apply !w-fit !bottom-[38px] !top-auto !left-[50%] translate-x-[-50%]
+  @apply !w-fit !bottom-[38px] !top-auto !left-[50%] translate-x-[-50%];
 }
 .swiperAuth .swiper-pagination-bullet {
   @apply opacity-100 bg-[#b6bfc6];
@@ -101,7 +101,7 @@
   @apply text-xl lg:text-[32px] font-medium font-Medium;
 }
 .swiperList .swiper-button-disabled {
-  @apply opacity-70 cursor-not-allowed
+  @apply opacity-70 cursor-not-allowed;
 }
 
 .inputChat {
@@ -143,7 +143,7 @@
 .map-label {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 
-  @apply text-base font-Regular text-center rounded-xl px-2 py-1 text-white bg-green absolute -top-14 left-1/2 -translate-x-1/2 
+  @apply text-base font-Regular text-center rounded-xl px-2 py-1 text-white bg-green absolute -top-14 left-1/2 -translate-x-1/2;
 }
 .map-label::before {
   content: "";
@@ -151,26 +151,100 @@
   transform: translateX(-50%);
   width: 0;
   height: 0;
-  @apply  border-t-green border-[8px] border-b-transparent border-x-[8px] border-x-transparent left-1/2 absolute -bottom-4
+  @apply border-t-green border-[8px] border-b-transparent border-x-[8px] border-x-transparent left-1/2 absolute -bottom-4;
 }
 /*phone input*/
 li.search {
-  @apply !border-b relative border-[#CCCCCC] !p-0 !ps-8 before:size-3  before:absolute before:top-1/2 before:-translate-y-1/2 before:start-5
+  @apply !border-b relative border-[#CCCCCC] !p-0 !ps-8 before:size-3  before:absolute before:top-1/2 before:-translate-y-1/2 before:start-5;
 }
 li.search::before {
   content: "";
-  background-image: url('../../assets/icons/search.svg');
+  background-image: url("../../assets/icons/search.svg");
   background-size: 12px;
 }
-.react-tel-input .country-list .search-emoji{
+.react-tel-input .country-list .search-emoji {
   display: none;
 }
-.react-tel-input .country-list .country{
-  @apply h-10  flex items-center !ps-4 w-full mx-auto max-w-full border-b border-[#CCCCCC] 
+.react-tel-input .country-list .country {
+  @apply h-10  flex items-center !ps-4 w-full mx-auto max-w-full border-b border-[#CCCCCC];
 }
 .fc-h-event {
-  @apply bg-transparent border-none flex items-center justify-center
+  @apply bg-transparent border-none flex items-center justify-center;
 }
-.fc-timeline-event-harness{
-  @apply h-full
-} 
+
+.fc-scrollgrid-liquid {
+  @apply !border-none;
+}
+.fc-timeline-event-harness {
+  @apply h-full;
+}
+.fc .fc-resource-timeline-divider {
+}
+.fc-resource-timeline {
+  @apply border border-green overflow-hidden rounded-3xl;
+}
+.fc
+  .fc-scrollgrid
+  tbody
+  .fc-scrollgrid-section-body
+  td:first-of-type
+  .fc-scroller-harness.fc-scroller-harness-liquid
+  .fc-scroller {
+  @apply !overflow-hidden rounded-b-3xl;
+}
+.fc-timeline-slot-frame {
+  @apply !justify-center;
+}
+.fc .fc-bg-event {
+  @apply !bg-transparent !opacity-100;
+}
+.fc-toolbar-chunk div {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: fit-content;
+  margin-top: -20px;
+}
+.fc-toolbar-chunk div .fc-button {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: 0.5s;
+  @apply rounded-full bg-transparent border-none;
+}
+.fc-toolbar-chunk div .fc-button span::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  display: block;
+  background-image: url("../../assets//icons/arrowRightBlack.svg");
+  background-size: contain;
+  position: absolute;
+}
+.fc-toolbar-chunk .fc-prev-button span::before {
+  transform: rotate(180deg);
+}
+.fc-toolbar-chunk div .fc-button:hover {
+  background-color: transparent;
+  box-shadow: 0px 0px 5px rgba(162, 162, 162, 0.422);
+}
+.fc-daygrid-day {
+  width: 120px;
+  height: 120px;
+}
+.fc-day .fc-col-header-cell-cushion {
+  color: #939393;
+  font-weight: 400;
+  text-align: end;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+}
+.fc-scrollgrid  .fc-scroller {
+  overflow-y: auto !important;
+}

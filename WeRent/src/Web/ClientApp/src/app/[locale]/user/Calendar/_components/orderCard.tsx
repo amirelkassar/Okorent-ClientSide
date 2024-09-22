@@ -8,7 +8,7 @@ function OrderCard({resource}: any) {
       <div className=" size-[50px] min-w-[50px] flex items-center justify-center bg-grayBack rounded-full p-[6px]">
         <Image
           alt="order"
-          src={resource.resource._resource.extendedProps.img.src}
+          src={resource._resource.extendedProps.img.src}
           className="h-full w-auto"
           width={20}
           height={40}
@@ -16,15 +16,15 @@ function OrderCard({resource}: any) {
       </div>
       <div>
         <h3 className="text-base font-SemiBold">
-          {resource.resource._resource.title}
+          {resource._resource.title}
         </h3>
         <p className="text-sm font-Regular text-grayMedium">
-          {resource.resource._resource.extendedProps.productType}
+          {resource._resource.extendedProps.productType}
         </p>
       </div>
     </div>
     <p className="text-sm font-Regular text-grayMedium">
-      {resource.resource._resource.extendedProps.code}
+      {resource._resource.extendedProps.code}
     </p>
   </div>
   )

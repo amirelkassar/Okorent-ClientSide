@@ -7,7 +7,7 @@ const GetStatus = (status: string) => {
       return <CardStatus animation circle type="green" title={status} />;
     case "declined":
       return <CardStatus circle type="red" title={status} />;
-    case "now":
+    case "new":
       return <CardStatus animation circle type="blue" title={status} />;
     case "completed":
       return <CardStatus circle type="gray" title={status} />;
@@ -24,6 +24,8 @@ const formatDate = (dateString: string) => {
   });
 }
 function CardCalender({eventInfo}: any) {
+  console.log(eventInfo);
+  
   return (
     <div className="flex items-center justify-between w-full max-w-full min-h-16   overflow-hidden px-4 py-2  gap-4 bg-white border-green border rounded-xl shadow-lg">
       <div className="flex items-center gap-2 flex-1 w-[calc(100%-90px)] ">
