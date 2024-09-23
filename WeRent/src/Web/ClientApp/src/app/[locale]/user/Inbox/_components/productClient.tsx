@@ -33,7 +33,7 @@ function ProductClient() {
   const [opened, { toggle }] = useDisclosure(false);
   const [openedModal, { open, close }] = useDisclosure(false);
   return (
-    <div className=" relative w-full  mx-auto md:mx-0">
+    <div className=" relative w-full md:w-auto  mx-auto md:mx-0">
       <div className="bg-grayBack h-full w-full lg:w-[430px] rounded-xl min-w-[270px] flex items-center gap-1 md:gap-4 py-3 px-2">
         <Image
           src={phone}
