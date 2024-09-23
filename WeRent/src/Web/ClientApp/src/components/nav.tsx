@@ -109,7 +109,7 @@ function Nav({ linkLogo = "#" }: NavProps) {
   return (
     <nav className="px-4 lg:px-16 py-5 lg:py-8 flex items-center justify-between gap-4">
       <Link href={linkLogo}>
-        <Image src={logo} alt="logo" width={135} height={45} />
+        <Image src={logo} alt="logo" width={135} height={45} className="md:w-[135px] w-[98px] h-auto" />
       </Link>
       <div className="hidden mdl:flex items-center gap-3">
         <Link

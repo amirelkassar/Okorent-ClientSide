@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { FileButton, Menu, Textarea } from "@mantine/core";
+import { FileButton, Textarea } from "@mantine/core";
 import Image from "next/image";
 import avatar from "@/src/assets/images/avatar.png";
 import SendIcon from "@/src/assets/icons/send";
@@ -11,9 +11,13 @@ import { cn } from "@/src/lib/utils";
 import CloseChatIcon from "@/src/assets/icons/closeChat";
 import PlayIcon from "@/src/assets/icons/play";
 import RecordIcon from "@/src/assets/icons/record";
-import phone from "@/src/assets/images/phone.png";
 import ProductClient from "./productClient";
+import ArrowBackIcon from "@/src/assets/icons/arrowBack";
+import { useSearchParams } from "next/navigation";
+import { Link } from "@/src/navigation";
+import ROUTES from "@/src/routes";
 const Chat = () => {
+  const searchParams = useSearchParams();
   const [Message, setMessage] = useState("");
   const [selectedFile, setSelectedFile] = useState<any[]>([]);
   const handleHeaderInputChange = (e: any) => {
@@ -24,15 +28,19 @@ const Chat = () => {
       setSelectedFile((oldArray) => [...oldArray, selectedFile]);
     }
   };
+  if (!searchParams.get("chat")) return null;
   return (
     <div
       className={cn(
-        "h-full flex flex-col flex-1 bg-white rounded-3xl border border-green px-11 pt-11 pb-5 gap-5  "
+        "h-full min-h-[calc(100vh-140px)] lg:min-h-64 max-w-full flex flex-col flex-1 md:bg-white rounded-3xl md:border md:border-green md:px-6 xl:px-11 md:pt-11 pb-5 gap-5  "
       )}
     >
       <div className="flex items-center justify-between  border-b-2 border-b-black/20 px-1  pb-3">
-        <div className="flex gap-5">
-          <div className=" flex items-center gap-4">
+        <div className="flex gap-5 flex-wrap ">
+          <div className=" flex items-center gap-2 lg:gap-4">
+            <Link href={ROUTES.USER.INBOX} className="block lg:hidden">
+              <ArrowBackIcon />
+            </Link>
             <Image
               className="size-10 rounded-full"
               src={avatar}
@@ -48,18 +56,21 @@ const Chat = () => {
               </p>
             </div>
           </div>
-          <span className=" block h-[60px] w-[1px] bg-grayBack"></span>
+          <span className=" hidden lg:block h-[60px] w-[1px] bg-grayBack"></span>
 
           <ProductClient />
         </div>
-        <div>
-          <button className=" size-[34px] rounded-lg bg-grayBack flex items-center justify-center p-3 duration-200  hover:shadow-sm ">
+        <div className=" hidden lg:flex items-center justify-center">
+          <Link
+            href={ROUTES.USER.INBOX}
+            className=" size-[34px] rounded-lg bg-grayBack flex items-center justify-center p-3 duration-200  hover:shadow-sm "
+          >
             <CloseChatIcon />
-          </button>
+          </Link>
         </div>
       </div>
 
-      <div className="overflow-y-auto   max-h-full   space-y-5 flex-1 pb-10">
+      <div className="overflow-y-auto hideScroll   max-h-full space-y-4  md:space-y-5 flex-1 pb-10">
         {/* RECEIVED MESSAGE */}
         <div className="flex flex-row-reverse items-center gap-3">
           <p className="bg-grayLight rounded-[32px] text-black text-[12px] leading-[15px] px-6 max-w-[344px] py-4 rounded-ee-none">
@@ -80,7 +91,7 @@ const Chat = () => {
             <p className="bg-grayLight rounded-[32px] text-black text-[12px] leading-[15px] px-6 max-w-[270px] py-4 rounded-ee-none">
               Oh, hello! All perfectly. I will check it and get back to you soon
             </p>
-            <span className="text-[12px] text-[#B6BFC6] text-end">
+            <span className="text-[10px] md:text-[12px] text-[#B6BFC6] text-end">
               04:45 PM
             </span>
           </div>
@@ -115,7 +126,7 @@ const Chat = () => {
             <p className="bg-grayBack rounded-[32px] text-black text-[12px] leading-[15px] px-6 max-w-[270px] py-4 rounded-es-none">
               Oh, hello! All perfectly. I will check it and get back to you soon
             </p>
-            <span className="text-[12px] text-[#B6BFC6] text-start">
+            <span className="text-[10px] md:text-[12px] text-[#B6BFC6] text-start">
               04:45 PM
             </span>
           </div>
@@ -146,7 +157,7 @@ const Chat = () => {
             <p className="bg-grayLight rounded-[32px] text-black text-[12px] leading-[15px] px-6 max-w-[270px] py-4 rounded-ee-none">
               Oh, hello! All perfectly. I will check it and get back to you soon
             </p>
-            <span className="text-[12px] text-[#B6BFC6] text-end">
+            <span className="text-[10px] md:text-[12px] text-[#B6BFC6] text-end">
               04:45 PM
             </span>
           </div>
@@ -162,7 +173,7 @@ const Chat = () => {
         </div>
       </div>
 
-      <div className="flex items-center  gap-5 ">
+      <div className="flex items-center gap-2  md:gap-5 ">
         <FileButton onChange={setSelectedFile} multiple>
           {(props) => (
             <button {...props}>
@@ -170,7 +181,7 @@ const Chat = () => {
             </button>
           )}
         </FileButton>
-        <div className="relative flex-1 border-green border rounded-[18px] py-2 px-4  h-auto">
+        <div className="relative flex-1 border-green overflow-hidden border rounded-[18px] py-[2px] lg:py-2 px-1 lg:px-4  h-auto">
           {selectedFile.length > 0 ? (
             <div className=" flex flex-wrap gap-4 border-b border-dashed pb-4 ">
               {selectedFile.map((file, i) => {
@@ -206,15 +217,15 @@ const Chat = () => {
             </div>
           ) : null}
           <div className="relative flex-1 flex items-center gap-5 ">
-            <button className="absolute top-1/2 end-5 -translate-y-1/2 z-50">
-              <MicIcon />
+            <button className="absolute top-1/2 end-2 md:end-3 -translate-y-1/2 z-50">
+              <MicIcon className= " w-[14px] md:w-4 h-auto"/>
             </button>
             <Textarea
               className="flex-1 text-[16px]"
               autosize
               classNames={{
                 input:
-                  "border-none flex-1  h-fit text-[16px] min-h-[46px]  py-2 ps-1  pe-12",
+                  "border-none flex-1 placeholder:text-xs md:placeholder:text-base placeholder:absolute relative  placeholder:text-[#B6BFC6] placeholder:top-[40%] placeholder:-translate-y-1/2 placeholder:start-2   h-fit text-[16px] min-h-[46px] py-[2px] lg:py-2 ps-1  pe-12",
                 root: "flex-1",
               }}
               placeholder="Type your message here ..."
@@ -222,7 +233,7 @@ const Chat = () => {
           </div>
         </div>
 
-        <Button className={"w-[130px] h-[60px]"}>
+        <Button className={" w-[60px] lg:w-[130px] h-10 px-4 py-1 lg:h-[60px]"}>
           <SendIcon />
         </Button>
       </div>
