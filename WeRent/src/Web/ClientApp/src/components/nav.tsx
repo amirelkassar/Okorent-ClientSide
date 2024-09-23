@@ -15,6 +15,17 @@ import { useMediaQuery } from "@mantine/hooks";
 import LogOutMenuIcon from "../assets/icons/logOutMenu";
 import { useParams } from "next/navigation";
 import FilmIcon from "../assets/icons/film";
+import HomepageIcon from "../assets/icons/Homepage";
+import DashboardIcon from "../assets/icons/Dashboard";
+import ListingsIcon from "../assets/icons/Listings";
+import BookingsIcon from "../assets/icons/Bookings";
+import ClientsIcon from "../assets/icons/Clients";
+import WishlistIcon from "../assets/icons/Wishlist";
+import CalendarIcon from "../assets/icons/Calendar";
+import BillingIcon from "../assets/icons/Billing";
+import SupportIcon from "../assets/icons/Support";
+import InboxIcon from "../assets/icons/Inbox";
+import NotificationsIcon from "../assets/icons/Notifications";
 interface NavProps {
   linkLogo: string;
 }
@@ -38,6 +49,7 @@ function Nav({ linkLogo = "#" }: NavProps) {
       {
         id: 1,
         name: "Homepage",
+        icon:<HomepageIcon/>,
         url: ROUTES.USER.HOMEPAGE,
         active: pathname === ROUTES.USER.HOMEPAGE,
       },
@@ -45,12 +57,14 @@ function Nav({ linkLogo = "#" }: NavProps) {
       {
         id: 2,
         name: "Dashboard",
+        icon:<DashboardIcon/>,
         url: ROUTES.USER.DASHBOARD,
         active: pathname.includes(ROUTES.USER.DASHBOARD),
       },
       {
         id: 3,
         name: "My Listings",
+        icon:<ListingsIcon/>,
         url: ROUTES.USER.LISTINGS,
         active: pathname.includes(ROUTES.USER.LISTINGS),
         activeDetails:
@@ -63,6 +77,7 @@ function Nav({ linkLogo = "#" }: NavProps) {
       {
         id: 4,
         name: "Bookings",
+        icon:<BookingsIcon/>,
         url: ROUTES.USER.BOOKINGS,
         active: pathname === ROUTES.USER.BOOKINGS,
       },
@@ -70,36 +85,49 @@ function Nav({ linkLogo = "#" }: NavProps) {
       {
         id: 5,
         name: "Inbox",
+        icon:<InboxIcon/>,
         url: ROUTES.USER.INBOX,
         active: pathname === ROUTES.USER.INBOX,
       },
       {
         id: 6,
         name: "Clients",
+        icon:<ClientsIcon/>,
         url: ROUTES.USER.CLIENTS,
         active: pathname === ROUTES.USER.CLIENTS,
       },
       {
         id: 7,
         name: "Wishlist",
+        icon:<WishlistIcon/>,
         url: ROUTES.USER.WISHLIST,
         active: pathname === ROUTES.USER.WISHLIST,
       },
       {
         id: 8,
         name: "Calendar",
+        icon:<CalendarIcon/>,
         url: ROUTES.USER.CALENDAR,
         active: pathname === ROUTES.USER.CALENDAR,
       },
       {
         id: 9,
         name: "Billing",
+        icon:<BillingIcon/>,
         url: ROUTES.USER.BILLING,
         active: pathname === ROUTES.USER.BILLING,
       },
       {
         id: 10,
         name: "Support",
+        icon:<SupportIcon/>,
+        url: ROUTES.USER.SUPPORT,
+        active: pathname === ROUTES.USER.SUPPORT,
+      },
+      {
+        id: 11,
+        name: "Notifications",
+        icon:<NotificationsIcon/>,
         url: ROUTES.USER.SUPPORT,
         active: pathname === ROUTES.USER.SUPPORT,
       },
@@ -185,9 +213,9 @@ function Nav({ linkLogo = "#" }: NavProps) {
                             link.active
                               ? " before:bg-green !bg-green/15 hover:bg-green/15 "
                               : " bg-transparent"
-                          } rounded-lg min-h-[60px] relative  before:w-[6px] before:content-[''] hover:bg-green/5  before:h-12 before:-start-5 before:absolute before:top-1/2 before:-translate-y-1/2 before:rounded-e-lg  flex items-center gap-6 px-8 text-nowrap font-SemiBold duration-200 text-black/80 hover:text-black`}
+                          } rounded-lg min-h-[60px] relative  before:w-[6px] before:content-[''] hover:bg-green/5  before:h-12 before:-start-5 before:absolute before:top-1/2 before:-translate-y-1/2 before:rounded-e-lg  flex items-center gap-5 px-8 text-nowrap font-SemiBold duration-200 text-black/80 hover:text-black`}
                         >
-                          <FilmIcon className={"w-auto h-5"} />
+                         {link.icon}
                           {link.name}
                         </Link>
                       </div>

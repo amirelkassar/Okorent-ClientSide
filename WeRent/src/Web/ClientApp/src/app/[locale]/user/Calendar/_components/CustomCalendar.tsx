@@ -12,6 +12,9 @@ import CardCalender from "./cardCalender";
 import OrderCard from "./orderCard";
 import { EventSourceInput } from "@fullcalendar/core";
 import RentSwitch from "@/src/components/RentSwitch";
+import { Select } from "@mantine/core";
+import ArrowDownIcon from "@/src/assets/icons/arrowDown";
+import DownIcon from "@/src/assets/icons/down";
 
 interface EventData {
   id: string;
@@ -38,12 +41,30 @@ interface OrderResource {
   img: StaticImageData;
   code: string;
 }
+const months = [
+  "January 2024",
+  "February 2024",
+  "March 2024",
+  "April 2024",
+  "May 2024",
+  "June 2024",
+  "July 2024",
+  "August 2024",
+  "September 2024",
+  "October 2024",
+  "November 2024",
+  "December 2024",
+];
 const CustomCalendar: React.FC = () => {
   const [selectedEvent, setSelectedEvent] = useState<EventData | null>(null);
   const calendarRef = useRef<FullCalendar | null>(null);
   const [currentView, setCurrentView] = useState<string>(
     "resourceTimelineMonth"
   );
+  const [selectedDate, setSelectedDate] = useState<string | null>(
+    "September 2024"
+  );
+
   const events: EventSourceInput = useMemo(
     () => [
       {
@@ -235,24 +256,44 @@ const CustomCalendar: React.FC = () => {
     }
     return labels;
   };
-  const getWeekNumber = (date: Date) => {  
-    const oneJan = new Date(date.getFullYear(), 0, 1);  
-    const numberOfDays = Math.floor((date.getTime() - oneJan.getTime()) / (24 * 60 * 60 * 1000));  
-    return Math.ceil((numberOfDays + oneJan.getDay() + 1) / 7);  
-  };  
-  const getWeekNumberInMonth = (date: Date) => {  
-    const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);  
-    const firstWeekDay = firstDayOfMonth.getDay();  
-    const daysInCurrentWeek = (firstWeekDay === 0) ? 0 : 7 - firstWeekDay;  
-    const currentDay = date.getDate();  
-
-    // حساب رقم الأسبوع  
-    const weekNumber = Math.ceil((currentDay + daysInCurrentWeek) / 7);  
-    return weekNumber;  
-  };  
+  const getWeekNumber = (date: Date) => {
+    const oneJan = new Date(date.getFullYear(), 0, 1);
+    const numberOfDays = Math.floor(
+      (date.getTime() - oneJan.getTime()) / (24 * 60 * 60 * 1000)
+    );
+    return Math.ceil((numberOfDays + oneJan.getDay() + 1) / 7);
+  };
+  const getWeekNumberInMonth = (date: Date) => {
+    const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+    const firstWeekDay = firstDayOfMonth.getDay();
+    const daysInCurrentWeek = firstWeekDay === 0 ? 0 : 7 - firstWeekDay;
+    const currentDay = date.getDate();
+    const weekNumber = Math.ceil((currentDay + daysInCurrentWeek) / 7);
+    return weekNumber;
+  };
   return (
     <div className="w-full mb-36">
       <div className="flex items-center justify-between gap-3 flex-wrap mb-4">
+        <Select
+          value={selectedDate}
+          onChange={setSelectedDate}
+          data={months}
+          leftSectionPointerEvents="none"
+          rightSection={<DownIcon />}
+          placeholder="Select category"
+          searchable
+          classNames={{
+            input:
+              " text-black rounded-xl font-semibold h-full border-none placeholder:text-grayMedium placeholder:opacity-100 ",
+
+            wrapper: "h-full",
+            dropdown:
+              "bg-white text-black rounded-xl border border-green/50  py-2",
+            option: "hover:bg-green hover:text-white duration-300 ",
+          }}
+          className="h-10   duration-200 min-h-10  bg-white rounded-xl border border-green text-grayMedium"
+        />
+
         <RentSwitch />
         <div className="flex items-center gap-5 ">
           <Button
@@ -263,7 +304,7 @@ const CustomCalendar: React.FC = () => {
             }`}
             onClick={() => handleViewChange("resourceTimelineMonth")}
           >
-            Montly
+            Daily
           </Button>
           <Button
             className={`px-4 py-2 ${
@@ -283,11 +324,11 @@ const CustomCalendar: React.FC = () => {
             views={{
               resourceTimelineMonth: {
                 type: "resourceTimeline",
-                duration: { months: 1 }, // Monthly view duration
+                duration: { months: 1 }, 
               },
               resourceTimelineWeek: {
                 type: "resourceTimeline",
-                duration: { weeks: 1 }, // Weekly view duration
+                duration: { weeks: 1 }, 
               },
             }}
             eventOverlap={false}
@@ -323,28 +364,31 @@ const CustomCalendar: React.FC = () => {
             )}
             resourceLabelContent={(resource) => OrderCard(resource)}
             slotLabelClassNames={" text-sm font-Regular max-h-8 bg-[#DFEBF4]"}
-            slotLabelContent={(args) => {  
-              if (currentView === "resourceTimelineMonth") {  
-                return `${args.date.getDate()} ${args.date.toLocaleString('default', { weekday: 'short' })}`;  
-              } else if (currentView === "resourceTimelineWeek") {  
-                const weekNumber = getWeekNumberInMonth(args.date);  
-                return `Week ${weekNumber}`; // يظهر الأرقام من 1 إلى 4 حسب الأسابيع في الشهر  
-              }  
-            }}  
-            slotDuration={{  
-              days: currentView === "resourceTimelineMonth" ? 1 : 7,  
-            }}  
+            slotLabelContent={(args) => {
+              if (currentView === "resourceTimelineMonth") {
+                return `${args.date.getDate()} ${args.date.toLocaleString(
+                  "default",
+                  { weekday: "short" }
+                )}`;
+              } else if (currentView === "resourceTimelineWeek") {
+                const weekNumber = getWeekNumberInMonth(args.date);
+                return `Week ${weekNumber}`; 
+              }
+            }}
+            slotDuration={{
+              days: currentView === "resourceTimelineMonth" ? 1 : 7,
+            }}
             slotLabelFormat={{
               weekday: "short",
               day:
-                currentView === "resourceTimelineMonth" ? "numeric" : 'numeric', // Show day numbers in month view
+                currentView === "resourceTimelineMonth" ? "numeric" : "numeric", 
               week:
-                currentView === "resourceTimelineWeek" ? "numeric" : undefined, // Show week numbers in week view
+                currentView === "resourceTimelineWeek" ? "numeric" : undefined, 
             }}
             headerToolbar={{
-              left: "", // Previous and next month/week buttons
-              center: "prev,title,next", // Current month or week title
-              right: "", // Buttons to toggle between views
+              left: "", 
+              center: "prev,title,next",
+              right: "", 
             }}
           />
         </Suspense>

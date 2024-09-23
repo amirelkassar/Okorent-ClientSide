@@ -33,7 +33,7 @@ function ProductClient() {
   const [opened, { toggle }] = useDisclosure(false);
   const [openedModal, { open, close }] = useDisclosure(false);
   return (
-    <div className=" relative mx-auto md:mx-0">
+    <div className=" relative w-full  mx-auto md:mx-0">
       <div className="bg-grayBack h-full w-full lg:w-[430px] rounded-xl min-w-[270px] flex items-center gap-1 md:gap-4 py-3 px-2">
         <Image
           src={phone}
@@ -42,7 +42,7 @@ function ProductClient() {
           height={43}
           className="w-auto h-full max-h-[44px]"
         />
-        <div className="flex-1 flex items-center relative  gap-4 justify-between flex-wrap pe-9">
+        <div className="flex-1 flex items-center relative  gap-2 md:gap-4 justify-between flex-wrap pe-9">
           <div className="">
             <h4 className="text-grayMedium min-w-[66px] text-[10px] mdl:text-[12px]">
               Product Name
@@ -91,7 +91,7 @@ function ProductClient() {
                   height={43}
                   className="w-auto h-full max-h-[44px]"
                 />
-                <div className="flex-1 flex items-center relative  gap-4 justify-between pe-[36px]  lg:pe-[40px] ">
+                <div className="flex-1 flex items-center relative  gap-2 md:gap-4 justify-between pe-[36px]  lg:pe-[40px] ">
                   <div className="">
                     <h4 className="text-grayMedium min-w-[66px] text-[10px] mdl:text-[12px]">
                       Product Name

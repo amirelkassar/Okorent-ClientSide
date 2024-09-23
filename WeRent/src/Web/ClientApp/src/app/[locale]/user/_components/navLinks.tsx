@@ -155,7 +155,7 @@ function NavLinks() {
                 >
                   <Link
                     href={link.url}
-                    className="text-[16px] text-nowrap font-SemiBold duration-200 text-black/80 hover:text-black"
+                    className={`${link.active && "!font-Bold !text-black"} text-[16px] text-nowrap font-SemiBold duration-200 text-black/80 hover:text-black`}
                   >
                     {link.name}
                   </Link>

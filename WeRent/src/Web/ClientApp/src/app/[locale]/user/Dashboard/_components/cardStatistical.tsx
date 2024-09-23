@@ -17,7 +17,7 @@ function CardStatistical({
   titleLink,
 }: CardStatisticalProps) {
   return (
-    <div className="pt-[14px] lg:pt-7 px-4 lg:px-9 pb-3 lg:pb-6 flex-1 min-w-[190px] lg:min-w-[300px] lg:max-w-[430px] bg-white lg:pe-10  rounded-[24px] border border-green flex items-center justify-between gap-5 shadow-sidebar">
+    <div className="pt-[14px] lg:pt-7 mb-2 px-4 lg:px-9 pb-3 lg:pb-6 flex-1 min-w-[190px] lg:min-w-[300px] lg:max-w-[430px] bg-white lg:pe-10  rounded-[24px] border border-green flex items-center justify-between gap-5 shadow-md">
       <div>
         <div className="flex items-center gap-4">
           <div className="size-11 rounded-full p-[10px] flex lg:hidden justify-center items-center bg-[#E9F1F8]">

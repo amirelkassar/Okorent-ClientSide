@@ -48,8 +48,6 @@ const ROUTES = {
     CHECKOUT: "/user/checkout",
     CHECKOUTID:(id)=> `/user/checkout/${id}`,
     PROFILE: "/user/profile",
-
-
   },
 };
 

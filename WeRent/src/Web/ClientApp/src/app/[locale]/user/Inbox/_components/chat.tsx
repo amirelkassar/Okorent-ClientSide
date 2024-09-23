@@ -217,7 +217,7 @@ const Chat = () => {
             </div>
           ) : null}
           <div className="relative flex-1 flex items-center gap-5 ">
-            <button className="absolute top-1/2 end-2 md:end-3 -translate-y-1/2 z-50">
+            <button className="absolute top-1/2 end-2 md:end-3 -translate-y-1/2 z-20">
               <MicIcon className= " w-[14px] md:w-4 h-auto"/>
             </button>
             <Textarea

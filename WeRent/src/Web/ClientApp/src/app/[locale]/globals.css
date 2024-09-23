@@ -198,9 +198,12 @@ li.search::before {
 .fc .fc-bg-event {
   @apply !bg-transparent !opacity-100;
 }
+.fc .fc-toolbar.fc-header-toolbar{
+  @apply mb-3
+}
 .fc-toolbar-chunk div {
 
-  @apply flex items-center gap-5 w-fit -mt-5
+  @apply flex items-center gap-5 w-fit 
 }
 .fc-toolbar-chunk div .fc-button {
   transition: 0.5s;
