@@ -17,17 +17,15 @@ const GetStatus = (status: string) => {
 };
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
-  return date.toLocaleDateString('en-GB', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric',
+  return date.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
   });
-}
-function CardCalender({eventInfo}: any) {
-  console.log(eventInfo);
-  
+};
+function CardCalender({ eventInfo }: any) {
   return (
-    <div className="flex my-3 mx-auto max-w-fit items-center justify-between w-full max-w-full min-h-16   overflow-hidden px-4 py-2  gap-4 bg-white border-green border rounded-xl shadow-lg">
+    <div className="flex my-3  items-center justify-between w-full max-w-[calc(100%-32px)] min-h-16 mx-auto   overflow-hidden px-4 py-2  gap-4 bg-white border-green border rounded-xl shadow-lg">
       <div className="flex items-center gap-2 flex-1 w-[calc(100%-90px)] ">
         <Image
           alt="event"
@@ -39,14 +37,13 @@ function CardCalender({eventInfo}: any) {
             {eventInfo.event._def.title}d
           </h3>
           <p className="text-xs font-Regular text-grayMedium !truncate text-nowrap max-w-full   w-full">
-            {formatDate(eventInfo.event._instance.range.start) + " to " + formatDate(eventInfo.event._instance.range.end)}
+            {formatDate(eventInfo.event._instance.range.start) +
+              " to " +
+              formatDate(eventInfo.event._instance.range.end)}
           </p>
         </div>
       </div>
-      {
-        GetStatus(eventInfo.event._def.extendedProps.status)
-      }
-      
+      {GetStatus(eventInfo.event._def.extendedProps.status)}
     </div>
   );
 }

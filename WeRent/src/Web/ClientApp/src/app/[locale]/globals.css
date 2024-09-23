@@ -222,3 +222,24 @@ li.search::before {
 .fc-scrollgrid .fc-scroller {
   overflow-y: auto !important;
 }
+.fc-scrollgrid thead .fc-scrollgrid-section td.fc-resource-timeline-divider{
+width: 0;
+border: none;
+box-shadow: 7px 0 15px #9d1313;
+}
+.fc .fc-datagrid-header .fc-datagrid-cell-frame{
+  box-shadow: 7px 0 15px #0000001A;
+@apply rounded-t-3xl
+}
+.fc-scrollgrid tbody .fc-scrollgrid-section  td:first-of-type .fc-scroller-harness {
+  box-shadow: 7px 0 15px #0000001A;
+@apply rounded-b-3xl
+}
+.fc .fc-scrollgrid-section-liquid > td {
+
+  border: none;
+}
+.fc .fc-scrollgrid-section-footer > *, .fc .fc-scrollgrid-section-header > * {
+  border-bottom-width: 0px;
+  
+}

@@ -50,7 +50,7 @@ const CustomCalendar: React.FC = () => {
         id: "1",
         title: "Iphone 15 Pro",
         start: "2024-09-18",
-        end: "2024-09-25",
+        end: "2024-10-08",
         groupId: "1",
         interactive: false,
         display: "background",
@@ -214,21 +214,42 @@ const CustomCalendar: React.FC = () => {
         img: phone,
         code: "#17421",
       },
-      
     ],
     []
   );
   const handleEventClick = useCallback((info: any) => {}, [events]);
   const handleViewChange = (view: string) => {
-    if (calendarRef.current) {
-      const calendarApi = calendarRef.current.getApi();
-      calendarApi.changeView(view);
-      setCurrentView(view);
-    }
+    setCurrentView(view); // Store the current view (month or week)
   };
   const sortedResources = useMemo(() => {
     return [...resources].sort((a, b) => a.title.localeCompare(b.title)); // Sorting by title alphabetically
   }, [resources]);
+  const getWeekLabels = (date: Date) => {
+    const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+    let weekNumber = 1;
+    const labels = [];
+    while (startOfMonth.getMonth() === date.getMonth()) {
+      labels.push(`Week ${weekNumber}`);
+      weekNumber++;
+      startOfMonth.setDate(startOfMonth.getDate() + 7);
+    }
+    return labels;
+  };
+  const getWeekNumber = (date: Date) => {  
+    const oneJan = new Date(date.getFullYear(), 0, 1);  
+    const numberOfDays = Math.floor((date.getTime() - oneJan.getTime()) / (24 * 60 * 60 * 1000));  
+    return Math.ceil((numberOfDays + oneJan.getDay() + 1) / 7);  
+  };  
+  const getWeekNumberInMonth = (date: Date) => {  
+    const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);  
+    const firstWeekDay = firstDayOfMonth.getDay();  
+    const daysInCurrentWeek = (firstWeekDay === 0) ? 0 : 7 - firstWeekDay;  
+    const currentDay = date.getDate();  
+
+    // حساب رقم الأسبوع  
+    const weekNumber = Math.ceil((currentDay + daysInCurrentWeek) / 7);  
+    return weekNumber;  
+  };  
   return (
     <div className="w-full mb-36">
       <div className="flex items-center justify-between gap-3 flex-wrap mb-4">
@@ -260,9 +281,13 @@ const CustomCalendar: React.FC = () => {
         <Suspense fallback={<div>Loading Calendar...</div>}>
           <FullCalendar
             views={{
-              resourceTimelinePlugin: {
+              resourceTimelineMonth: {
                 type: "resourceTimeline",
-                duration: { days: 30 },
+                duration: { months: 1 }, // Monthly view duration
+              },
+              resourceTimelineWeek: {
+                type: "resourceTimeline",
+                duration: { weeks: 1 }, // Weekly view duration
               },
             }}
             eventOverlap={false}
@@ -298,9 +323,23 @@ const CustomCalendar: React.FC = () => {
             )}
             resourceLabelContent={(resource) => OrderCard(resource)}
             slotLabelClassNames={" text-sm font-Regular max-h-8 bg-[#DFEBF4]"}
+            slotLabelContent={(args) => {  
+              if (currentView === "resourceTimelineMonth") {  
+                return `${args.date.getDate()} ${args.date.toLocaleString('default', { weekday: 'short' })}`;  
+              } else if (currentView === "resourceTimelineWeek") {  
+                const weekNumber = getWeekNumberInMonth(args.date);  
+                return `Week ${weekNumber}`; // يظهر الأرقام من 1 إلى 4 حسب الأسابيع في الشهر  
+              }  
+            }}  
+            slotDuration={{  
+              days: currentView === "resourceTimelineMonth" ? 1 : 7,  
+            }}  
             slotLabelFormat={{
-              day: "numeric",
               weekday: "short",
+              day:
+                currentView === "resourceTimelineMonth" ? "numeric" : 'numeric', // Show day numbers in month view
+              week:
+                currentView === "resourceTimelineWeek" ? "numeric" : undefined, // Show week numbers in week view
             }}
             headerToolbar={{
               left: "", // Previous and next month/week buttons
