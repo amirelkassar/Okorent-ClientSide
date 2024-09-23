@@ -49,6 +49,14 @@ const ROUTES = {
     CHECKOUTID:(id)=> `/user/checkout/${id}`,
     PROFILE: "/user/profile",
   },
+  GUEST: {
+    HOMEPAGE: "/Home",
+    ADDLISTING: "Add-Listing",
+    WHOWEARE: "/Who-We-Are",
+    HOWITWORKS: "/How-It-Works",
+    PRICING: "/Pricing",
+    CONTACTUS: "/Contact-Us",
+  },
 };
 
 export default ROUTES;

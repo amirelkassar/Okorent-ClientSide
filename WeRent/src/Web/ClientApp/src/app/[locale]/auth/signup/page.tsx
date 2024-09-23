@@ -17,7 +17,7 @@ function PageLogin() {
     <div className="flex-1 pt-20 pb-16 flex  min-h-full justify-start">
       <div className="max-w-[470px] w-full flex flex-col gap-4">
         <Logo theme="green" />
-        {AddPhone ? (
+        {!AddPhone ? (
           <div className="flex-1  content-center">
             <h1 className="mt-1 font-Bold text-xLarge">Create New Account</h1>
             <p className="text-grayMedium text-medium mb-6 opacity-">

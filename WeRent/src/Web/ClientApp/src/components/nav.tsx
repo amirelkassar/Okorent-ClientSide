@@ -14,7 +14,6 @@ import MenuIcon from "../assets/icons/menu";
 import { useMediaQuery } from "@mantine/hooks";
 import LogOutMenuIcon from "../assets/icons/logOutMenu";
 import { useParams } from "next/navigation";
-import FilmIcon from "../assets/icons/film";
 import HomepageIcon from "../assets/icons/Homepage";
 import DashboardIcon from "../assets/icons/Dashboard";
 import ListingsIcon from "../assets/icons/Listings";
