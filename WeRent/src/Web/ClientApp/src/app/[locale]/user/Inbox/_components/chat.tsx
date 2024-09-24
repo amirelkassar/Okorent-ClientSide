@@ -32,7 +32,7 @@ const Chat = () => {
   return (
     <div
       className={cn(
-        "h-full min-h-[calc(100vh-140px)] lg:min-h-64 max-w-full flex flex-col flex-1 md:bg-white rounded-3xl md:border md:border-green md:px-6 xl:px-11 md:pt-11 pb-5 gap-5  "
+        "h-full min-h-[calc(100vh-140px)] lg:min-h-64 max-w-full flex flex-col flex-1 md:bg-white rounded-3xl md:border md:border-green md:px-6 xl:ps-4 lg:pe-16 md:pt-6 pb-5 gap-5  "
       )}
     >
       <div className="flex items-center justify-between  border-b-2 border-b-black/20 px-1  pb-3">

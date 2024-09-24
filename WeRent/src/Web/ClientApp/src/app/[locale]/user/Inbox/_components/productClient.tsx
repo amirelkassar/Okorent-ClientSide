@@ -61,7 +61,7 @@ function ProductClient() {
           <span className="w-[1px] h-[36px] block bg-[#B6BFC6]"></span>
           <Button
             onClick={open}
-            className={"h-[34px] text-sm lg:text-base font-Regular px-5 mdl:px-7 "}
+            className={"h-[34px] w-[90px] text-sm lg:text-base font-Regular px-5 mdl:px-7 "}
           >
             View{" "}
           </Button>
@@ -110,7 +110,7 @@ function ProductClient() {
                   <span className="w-[1px] h-[36px] block bg-[#B6BFC6]"></span>
                   <Button
                     onClick={open}
-                    className={"h-[34px] text-sm lg:text-base font-Regular px-5 mdl:px-7 "}
+                    className={"h-[34px] w-[90px] text-sm lg:text-base font-Regular px-5 mdl:px-7 "}
                   >
                     View{" "}
                   </Button>
