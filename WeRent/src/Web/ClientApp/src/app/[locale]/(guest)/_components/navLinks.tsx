@@ -8,17 +8,24 @@ import logo from "@/src/assets/images/logo.png";
 import LinkGreen from "@/src/components/linkGreen";
 import LangIcon from "@/src/assets/icons/lang";
 import { useLocale } from "next-intl";
+import { useParams, useSearchParams } from "next/navigation";
 
 function NavLinks() {
   const locale = useLocale();
   const pathname = usePathname();
+  const params = useParams();
+  const searchParams = useSearchParams();
+
   const LinksNav = useMemo(
     () => [
       {
         id: 1,
         name: "Home",
         url: ROUTES.GUEST.HOMEPAGE,
-        active: pathname === ROUTES.GUEST.HOMEPAGE,
+        active:
+          pathname === ROUTES.GUEST.HOMEPAGE ||
+          pathname+`?category=${searchParams.get("category")}` === ROUTES.GUEST.PRODUCTS(searchParams.get("category")) ||
+          pathname === ROUTES.GUEST.PRODUCTSDETAILS(params.productID),
       },
 
       {

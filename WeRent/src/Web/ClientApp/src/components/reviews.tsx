@@ -1,8 +1,9 @@
 import { Rating } from "@mantine/core";
 import React from "react";
-import ProgressRev from "./ProgressRev";
 import Button from "@/src/components/button";
 import CardReviews from "./cardReviews";
+import ProgressRev from "./product/ProgressRev";
+
 
 function Reviews() {
   return (

@@ -1,9 +1,11 @@
 import React from "react";
-import SwitchPlan from "./_components/switchPlan";
-import PricingPlans from "./_components/PricingPlans";
-import Included from "./_components/included";
-import TryFree from "./_components/tryFree";
+
 import ToDwonIcon from "@/src/assets/icons/ToDwon";
+import SwitchPlan from "@/src/components/subscription/switchPlan";
+import PricingPlans from "@/src/components/subscription/PricingPlans";
+import Included from "@/src/components/subscription/included";
+import TryFree from "@/src/components/subscription/tryFree";
+
 
 function page() {
   return (

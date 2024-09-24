@@ -294,7 +294,7 @@ const CustomCalendar: React.FC = () => {
           className="h-10   duration-200 min-h-10  bg-white rounded-xl border border-green text-grayMedium"
         />
 
-        <RentSwitch />
+        <RentSwitch typeUser='user' />
         <div className="flex items-center gap-5 ">
           <Button
             className={`px-4 py-2 ${

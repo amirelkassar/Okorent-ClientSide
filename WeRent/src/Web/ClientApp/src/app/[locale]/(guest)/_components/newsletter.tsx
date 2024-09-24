@@ -1,14 +1,13 @@
-import Image from "next/image";
+
 import React from "react";
-import news from "@/src/assets/images/news.png";
 import NewsIcon from "@/src/assets/icons/news";
 import Button from "@/src/components/button";
 import { TextInput } from "@mantine/core";
 function NewsLetter() {
   return (
-    <div className=" bg-grayBack">
+    <div className=" bg-[#F0F6FB]">
       <div className=" max-w-screen-2xl mx-auto py-8 flex items-center gap-4 px-20">
-        <div>
+        <div className="flex-1 md:min-w-[580px] ">
           <h2 className="text-[42px] mb-1 font-Bold">Stay informed</h2>
           <h3 className="text-[22px] font-Bold mb-3">
             Subscribe to our newsletter to receive news about okoRent
@@ -25,7 +24,7 @@ function NewsLetter() {
                   " text-black rounded-xl text-grayMedium  h-full border-none placeholder:text-grayMedium placeholder:opacity-100 ",
                 wrapper: "h-full",
               }}
-              className="h-[56px]  w-[320px] duration-200 min-h-[56px] bg-white rounded-xl border border-green text-grayMedium"
+              className="h-[56px] flex-1 duration-200 min-h-[56px] bg-white rounded-xl border border-green text-grayMedium"
             />
             <TextInput
               placeholder="Your Email"
@@ -34,14 +33,14 @@ function NewsLetter() {
                   " text-black rounded-xl text-grayMedium bg-transparent  h-full border-none placeholder:text-grayMedium placeholder:opacity-100 ",
                 wrapper: "h-full",
               }}
-              className="h-[56px]  w-[320px] duration-200 min-h-[56px] bg-transparent rounded-xl border-none border-green text-grayMedium"
+              className="h-[56px]  flex-1 duration-200 min-h-[56px] bg-transparent rounded-xl border-none border-green text-grayMedium"
             />
             <Button className={"w-fit !px-7 h-[56px] "}>Subscribe</Button>
           </form>
         </div>
 
-        <div className="max-w-[630px] w-full h-auto">
-          <NewsIcon />
+        <div className="max-w-full w-[630px] min-w-[300px] h-auto">
+          <NewsIcon className="w-full h-auto" />
         </div>
       </div>
     </div>

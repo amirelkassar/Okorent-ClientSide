@@ -1,9 +1,31 @@
-import React from 'react'
+import ToDwonIcon from "@/src/assets/icons/ToDwon";
+import Included from "@/src/components/subscription/included";
+import PricingPlans from "@/src/components/subscription/PricingPlans";
+import SwitchPlan from "@/src/components/subscription/switchPlan";
+import TryFree from "@/src/components/subscription/tryFree";
+import React from "react";
 
 function page() {
   return (
-    <div>page</div>
-  )
+    <div>
+      <h1 className="text-[32px] lg:text-[56px] text-center mb-2 ">
+        Pick a plan
+      </h1>
+      <h2 className="text-center text-2xl lg:text-[32px] leading-9">
+        Save <br />{" "}
+        <span className="text-green relative">
+          Up to 49%
+          <span className=" absolute animate-bounce start-full rotate-12 -bottom-4">
+            <ToDwonIcon />
+          </span>
+        </span>
+      </h2>
+      <SwitchPlan />
+      <PricingPlans />
+      <Included />
+      <TryFree />
+    </div>
+  );
 }
 
-export default page
+export default page;

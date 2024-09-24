@@ -48,7 +48,7 @@ function CardView({
         </div>
         {first && haveRentSwitch && (
           <div className="mx-auto">
-            <RentSwitch />
+            <RentSwitch typeUser='user' />
           </div>
         )}
         <div className="  xl:flex hidden items-center gap-7">

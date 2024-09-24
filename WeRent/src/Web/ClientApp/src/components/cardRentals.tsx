@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import React from "react";
 import rental from "@/src/assets/images/house1.png";
@@ -5,7 +6,7 @@ import LocationIcon from "@/src/assets/icons/location";
 import StarIcon from "@/src/assets/icons/star";
 import FavIcon from "../assets/icons/fav";
 import DeleteIcon from "../assets/icons/delete";
-import { Link } from "../navigation";
+import { Link, usePathname } from "../navigation";
 import ROUTES from "../routes";
 
 interface CardRentalsProps {
@@ -14,7 +15,7 @@ interface CardRentalsProps {
   edit?: boolean;
 }
 function CardRentals({ data, Fav = false, edit = false }: CardRentalsProps) {
-
+const pathName = usePathname()
   return (
     <div>
       <div className="w-full flex-1 max-w-[270px] min-w-[200px] p-2 lg:p-4 bg-white/20 rounded-3xl block border border-black/25 duration-200 hover:shadow-md">
@@ -30,7 +31,7 @@ function CardRentals({ data, Fav = false, edit = false }: CardRentalsProps) {
             </button>
           )}
         </div>
-        <Link href={ROUTES.USER.PRODUCTDETAILS(data.id)}>
+        <Link href={pathName.includes('/user')?ROUTES.USER.PRODUCTDETAILS(data.id):ROUTES.GUEST.PRODUCTSDETAILS(data.id)}>
           <div className="flex items-center justify-between gap-4">
             <h3 className="font-Bold text-[12px] md:text-[20px]">${data.price}</h3>
             {data.state === "New" ? (

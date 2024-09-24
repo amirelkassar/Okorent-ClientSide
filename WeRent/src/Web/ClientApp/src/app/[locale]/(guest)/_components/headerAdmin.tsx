@@ -5,6 +5,7 @@ import LocationIcon from "@/src/assets/icons/location";
 import HeaderAdminIcon from "@/src/assets/icons/headerAdmin";
 import SelectDate from "./selectDate";
 import SelectLocation from "./selectLocation";
+import ImgDash from "@/src/assets/icons/imgDash";
 function HeaderAdmin() {
   return (
     <div className="flex items-center gap-5 mb-12 lg:mb-28 justify-between">
@@ -23,9 +24,8 @@ function HeaderAdmin() {
           <SelectDate  />
         </div>
       </div>
-
-      <div className="w-[660px] max-w-full h-auto object-contain lg:block hidden">
-        <HeaderAdminIcon className={"w-full h-auto"} />
+      <div className="w-[780px] max-w-full h-auto object-contain lg:block hidden">
+        <ImgDash className={"w-full h-auto"} />
       </div>
     </div>
   );

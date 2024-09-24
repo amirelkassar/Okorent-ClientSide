@@ -14,7 +14,7 @@ function TopChat() {
         <CountMessage title="Unread" num={50} />
       </div>
       <div className="mx-auto md:mx-0 ">
-        <RentSwitch />
+        <RentSwitch typeUser='user' />
       </div>
     </div>
   );

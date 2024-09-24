@@ -246,3 +246,9 @@ box-shadow: 7px 0 15px #9d1313;
   border-bottom-width: 0px;
   
 }
+/*mapBefore*/
+.mapBefore::before{
+  background-image: url('../../assets/images/map.png');
+background-size: auto;
+z-index: 0;
+}

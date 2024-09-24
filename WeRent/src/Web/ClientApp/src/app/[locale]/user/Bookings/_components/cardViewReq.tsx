@@ -81,7 +81,7 @@ function CardViewReq({
         </div>
         {first && haveRentSwitch && (
           <div className="mx-auto">
-            <RentSwitch />
+            <RentSwitch typeUser='user' />
           </div>
         )}
         <Link

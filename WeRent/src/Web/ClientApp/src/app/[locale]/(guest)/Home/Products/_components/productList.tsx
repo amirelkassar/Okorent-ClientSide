@@ -1,4 +1,3 @@
-import Button from "@/src/components/button";
 import CardRentals from "@/src/components/cardRentals";
 import { StaticImageData } from "next/image";
 import React from "react";
@@ -13,28 +12,20 @@ interface dataProps {
   details: string;
 }
 interface ProductListProps {
-  title?: string;
-  link?: string;
   data: dataProps[];
-  more?: boolean;
 }
-function ProductList({ link, title, data, more=true }: ProductListProps) {
+function ProductList({data }: ProductListProps) {
   return (
     <div className="mb-11">
-      {title && (
-        <h2 className="text-center mb-5 lg:mb-10 headTitle">{title}</h2>
-      )}
-
+    
       {data.length > 0 && (
-        <div className="flex gap-3 lg:gap-8  flex-wrap">
+        <div className="flex gap-3 justify-center lg:justify-start  flex-wrap">
           {data?.map((item, i) => {
             return <CardRentals data={item} key={i} Fav={true} />;
           })}
         </div>
       )}
-      {more && (
-        <Button className={"gap-2 mx-auto mt-11 h-10"}>View more items</Button>
-      )}
+   
     </div>
   );
 }

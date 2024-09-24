@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import man from "@/src/assets/images/person1.png";
-import { Rating, Spoiler } from "@mantine/core";
+import { Rating } from "@mantine/core";
 import ShowMore from "@/src/components/showMore";
 function CardReviews() {
   const [expanded, setExpanded] = useState(false);

@@ -143,7 +143,7 @@ export function DataTable<TData, TValue>({
             </div>
           )}
         </div>
-        {haveRentSwitch && <RentSwitch />}
+        {haveRentSwitch && <RentSwitch typeUser='user' />}
         {viewAll && (
           <Button className={"h-10 w-fit gap-3 "}>
             <p className="text-white text-[16px]">

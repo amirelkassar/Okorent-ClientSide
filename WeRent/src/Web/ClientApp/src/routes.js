@@ -51,6 +51,8 @@ const ROUTES = {
   },
   GUEST: {
     HOMEPAGE: "/Home",
+    PRODUCTS: (id)=>`/Home/Products?category=${id}`,
+    PRODUCTSDETAILS:(id)=> `/Home/Products/${id}`,
     ADDLISTING: "Add-Listing",
     WHOWEARE: "/Who-We-Are",
     HOWITWORKS: "/How-It-Works",
