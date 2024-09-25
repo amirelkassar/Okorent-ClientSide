@@ -2,6 +2,7 @@ import React from "react";
 import NavLinks from "./_components/navLinks";
 import NewsLetter from "./_components/newsletter";
 import Footer from "@/src/components/footer";
+import FooterGuest from "./_components/footer";
 
 function layout({ children }: { children: React.ReactNode }) {
   return (
@@ -14,6 +15,7 @@ function layout({ children }: { children: React.ReactNode }) {
           </main>
         </div>
         <NewsLetter />
+        <FooterGuest />
         <Footer />
       </div>
     </div>
