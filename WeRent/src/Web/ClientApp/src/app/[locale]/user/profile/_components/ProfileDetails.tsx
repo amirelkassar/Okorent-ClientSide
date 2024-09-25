@@ -7,7 +7,6 @@ import Missing from "./Missing";
 import SpeakIcon from "@/src/assets/icons/speake";
 import LangIcon from "@/src/assets/icons/lang";
 import GmailIcon from "@/src/assets/icons/gmail";
-import Verify from "./verify";
 import RocketIcon from "@/src/assets/icons/Rocket";
 import Image from "next/image";
 import imgUser from "@/src/assets/images/user.png";
@@ -17,6 +16,7 @@ import ModalComp from "@/src/components/modal-comp";
 import { useDisclosure } from "@mantine/hooks";
 import { MultiSelect, Select, TextInput } from "@mantine/core";
 import Input from "@/src/components/input";
+import Verify from "@/src/components/verify";
 const profileData = {
   name: "Mark James",
   memberSince: "March 2024",
@@ -170,14 +170,12 @@ function ProfileDetails() {
             data={["English", "French"]}
             placeholder="Select Languages"
             searchable
-            
             classNames={{
-              input:
-                "bg-grayLight border-none h-11 rounded-[8px] ",
+              input: "bg-grayLight border-none h-11 rounded-[8px] ",
               label: "text-[16px] mb-2 font-Medium ms-1",
               inputField: " h-full placeholder:text-xs ",
               pillsList: "h-full ",
-              pill:'bg-green text-white rounded-lg text-xs font-Regular',
+              pill: "bg-green text-white rounded-lg text-xs font-Regular",
               dropdown:
                 "bg-white text-black rounded-lg border border-green/50 text-grayDark py-2",
               option:

@@ -5,9 +5,10 @@ import SelectLocation from "../_components/selectLocation";
 import SelectDate from "../_components/selectDate";
 import CloseIcon from "@/src/assets/icons/close";
 import { Rentals } from "@/src/lib/dataUser";
-import ProductList from "./_components/productList";
+
 import { MultiSelect } from "@mantine/core";
 import CantFind from "./_components/CantFind";
+import ProductList from "@/src/components/product/productList";
 
 const subcategories: string[] = [
   "TV",

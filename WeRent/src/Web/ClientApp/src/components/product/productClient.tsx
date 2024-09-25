@@ -1,13 +1,15 @@
+'use client'
 import StarIcon from "@/src/assets/icons/star";
 import VerifyBlackIcon from "@/src/assets/icons/verifyBlack";
-import Button from "@/src/components/button";
 import Image from "next/image";
 import React from "react";
 import avatar from "@/src/assets/images/avatar.png";
 import ROUTES from "@/src/routes";
 import LinkGreen from "@/src/components/linkGreen";
 import UserAvailable from "@/src/components/userAvailable";
+import { useParams } from "next/navigation";
 function ProductClient() {
+  const params = useParams()
   return (
     <div className="border border-green/30 mt-6 rounded-lg py-6 px-5 bg-white/50">
       <div className=" flex items-center lg:items-start gap-4 flex-col lg:flex-row lg:gap-6 w-full pb-3 border-b border-grayLight">
@@ -58,10 +60,10 @@ function ProductClient() {
         >
           Message Ahmed
         </LinkGreen>
-        <Button className={"flex-1 h-10 bg-grayBack text-black border-none"}>
+        <LinkGreen href={ROUTES.GUEST.PROFILE(params.productID,1)} className={"flex-1 h-10 bg-grayBack text-black border-none"}>
           {" "}
           View Profile
-        </Button>
+        </LinkGreen>
       </div>
     </div>
   );

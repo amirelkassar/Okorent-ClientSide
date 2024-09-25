@@ -1,9 +1,9 @@
-import React, { useMemo } from "react";
+import React from "react";
 import Categories from "../_components/categories";
 import { Rentals } from "@/src/lib/dataUser";
-import ProductList from "../_components/productList";
 import HeaderAdmin from "../_components/headerAdmin";
 import LookingFor from "../_components/lookingFor";
+import ProductList from "@/src/components/product/productList";
 
 function page() {
   return (
