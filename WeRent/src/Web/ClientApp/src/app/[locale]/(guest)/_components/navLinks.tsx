@@ -62,7 +62,7 @@ function NavLinks() {
     [pathname]
   );
   return (
-    <nav className="py-7 px-4">
+    <nav className="py-7 px-4 relative z-[2]">
       <div className=" mx-auto gap-4   flex justify-between items-center">
         <Link href={"/"}>
           <Image

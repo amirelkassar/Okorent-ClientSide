@@ -198,12 +198,11 @@ li.search::before {
 .fc .fc-bg-event {
   @apply !bg-transparent !opacity-100;
 }
-.fc .fc-toolbar.fc-header-toolbar{
-  @apply mb-3
+.fc .fc-toolbar.fc-header-toolbar {
+  @apply mb-3;
 }
 .fc-toolbar-chunk div {
-
-  @apply flex items-center gap-5 w-fit 
+  @apply flex items-center gap-5 w-fit;
 }
 .fc-toolbar-chunk div .fc-button {
   transition: 0.5s;
@@ -225,30 +224,38 @@ li.search::before {
 .fc-scrollgrid .fc-scroller {
   overflow-y: auto !important;
 }
-.fc-scrollgrid thead .fc-scrollgrid-section td.fc-resource-timeline-divider{
-width: 0;
-border: none;
-box-shadow: 7px 0 15px #9d1313;
+.fc-scrollgrid thead .fc-scrollgrid-section td.fc-resource-timeline-divider {
+  width: 0;
+  border: none;
+  box-shadow: 7px 0 15px #9d1313;
 }
-.fc .fc-datagrid-header .fc-datagrid-cell-frame{
-  box-shadow: 7px 0 15px #0000001A;
-@apply rounded-t-3xl
+.fc .fc-datagrid-header .fc-datagrid-cell-frame {
+  box-shadow: 7px 0 15px #0000001a;
+  @apply rounded-t-3xl;
 }
-.fc-scrollgrid tbody .fc-scrollgrid-section  td:first-of-type .fc-scroller-harness {
-  box-shadow: 7px 0 15px #0000001A;
-@apply rounded-b-3xl
+.fc-scrollgrid
+  tbody
+  .fc-scrollgrid-section
+  td:first-of-type
+  .fc-scroller-harness {
+  box-shadow: 7px 0 15px #0000001a;
+  @apply rounded-b-3xl;
 }
 .fc .fc-scrollgrid-section-liquid > td {
-
   border: none;
 }
-.fc .fc-scrollgrid-section-footer > *, .fc .fc-scrollgrid-section-header > * {
+.fc .fc-scrollgrid-section-footer > *,
+.fc .fc-scrollgrid-section-header > * {
   border-bottom-width: 0px;
-  
 }
 /*mapBefore*/
-.mapBefore::before{
-  background-image: url('../../assets/images/map.png');
-background-size: auto;
-z-index: 0;
+.mapBefore::before {
+  background-image: url("../../assets/images/map.png");
+  background-size: auto;
+  z-index: 0;
+}
+.mapBefore2::before {
+  background-image: url("../../assets/images/map.png");
+  background-size: cover;
+  z-index: 0;
 }

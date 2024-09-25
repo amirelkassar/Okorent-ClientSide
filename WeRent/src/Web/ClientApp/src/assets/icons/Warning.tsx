@@ -10,7 +10,7 @@ function Warning({className}:{className?:string}) {
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
-      <g clip-path="url(#clip0_1251_5875)">
+      <g clipPath="url(#clip0_1251_5875)">
         <path
           d="M16.0235 33.0001C24.8601 33.0001 32.0235 25.6128 32.0235 16.5C32.0235 7.38732 24.8601 0 16.0235 0C7.1869 0 0.0234375 7.38732 0.0234375 16.5C0.0234375 25.6128 7.1869 33.0001 16.0235 33.0001Z"
           fill="white"

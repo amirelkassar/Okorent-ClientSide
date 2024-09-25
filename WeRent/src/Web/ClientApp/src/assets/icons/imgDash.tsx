@@ -48,7 +48,7 @@ function ImgDash({ className }: { className?: string }) {
         <path
           d="M10.7109 458.568C10.7109 452.217 15.8597 447.068 22.2109 447.068H354.395C360.746 447.068 365.895 452.217 365.895 458.568V498.568C365.895 504.92 360.746 510.068 354.395 510.068H22.2109C15.8597 510.068 10.7109 504.92 10.7109 498.568V458.568Z"
           stroke="#6F6B7D"
-          stroke-opacity="0.2"
+          strokeOpacity="0.2"
         />
       </g>
       <path
@@ -73,7 +73,7 @@ function ImgDash({ className }: { className?: string }) {
       <path
         d="M278.219 475.068C278.219 470.65 281.8 467.068 286.219 467.068H340.219C344.637 467.068 348.219 470.65 348.219 475.068V482.068C348.219 486.487 344.637 490.068 340.219 490.068H286.219C281.8 490.068 278.219 486.487 278.219 482.068V475.068Z"
         fill="#006AFF"
-        fill-opacity="0.1"
+        fillOpacity="0.1"
       />
       <circle cx="293.719" cy="478.568" r="3.5" fill="#006AFF" />
       <path
@@ -93,7 +93,7 @@ function ImgDash({ className }: { className?: string }) {
         <path
           d="M494.418 380.529C494.418 374.178 499.567 369.029 505.918 369.029H790.613C796.965 369.029 802.113 374.178 802.113 380.529V420.529C802.113 426.881 796.965 432.029 790.613 432.029H505.918C499.567 432.029 494.418 426.881 494.418 420.529V380.529Z"
           stroke="#6F6B7D"
-          stroke-opacity="0.2"
+          strokeOpacity="0.2"
         />
       </g>
       <path
@@ -110,7 +110,7 @@ function ImgDash({ className }: { className?: string }) {
       <path
         d="M686.912 396.969C686.912 392.55 690.494 388.969 694.912 388.969H775.912C780.33 388.969 783.912 392.55 783.912 396.969V403.969C783.912 408.387 780.33 411.969 775.912 411.969H694.912C690.494 411.969 686.912 408.387 686.912 403.969V396.969Z"
         fill="#88BA52"
-        fill-opacity="0.1"
+        fillOpacity="0.1"
       />
       <circle cx="702.412" cy="400.469" r="3.5" fill="#88BA52" />
       <path
@@ -192,9 +192,9 @@ function ImgDash({ className }: { className?: string }) {
           width="376.184"
           height="84"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -235,9 +235,9 @@ function ImgDash({ className }: { className?: string }) {
           width="328.695"
           height="84"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
