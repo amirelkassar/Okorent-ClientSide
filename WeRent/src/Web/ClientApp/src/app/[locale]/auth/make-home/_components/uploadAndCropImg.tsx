@@ -32,7 +32,7 @@ function UploadAndCropImg({ croppedImage, setCroppedImage }: Props) {
   );
 
   const handleFileChange = async (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: any
   ) => {
     console.log(event);
     console.log(imageSrc);
