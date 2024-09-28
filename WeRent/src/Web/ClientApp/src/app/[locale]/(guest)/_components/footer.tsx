@@ -1,9 +1,15 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import logo from "@/src/assets/images/logoWhite.png";
 import Image from "next/image";
-import { Link } from "@/src/navigation";
+import { Link, usePathname } from "@/src/navigation";
 import AppStoreIcon from "@/src/assets/icons/appStore";
 import GooglePlayIcon from "@/src/assets/icons/googlePlay";
+import englishImg from "@/src/assets/images/english.png";
+import arabicImg from "@/src/assets/images/saud.png";
+import { Menu } from "@mantine/core";
+import DownIcon from "@/src/assets/icons/down";
+import { useLocale } from "next-intl";
 const footerData = [
   {
     title: "About Werent",
@@ -48,6 +54,10 @@ const footerDataButtons = [
 ];
 
 function FooterGuest() {
+  const [opened, setOpened] = useState(false);
+  const locale = useLocale();
+  const pathname = usePathname();
+
   return (
     <div className="bg-[#022E2D] w-full pb-20 pt-14">
       <div className="max-w-[1600px] mx-auto px-[74px] flex gap-36 justify-between">
@@ -59,9 +69,75 @@ function FooterGuest() {
             height={45}
             className="w-[135px] h-[45px] mb-5 block"
           />
-          <h2 className="font-Regular text-[#D3D4DC]/70 text-base mb-16">
+          <h2 className="font-Regular text-[#D3D4DC]/70 text-base mb-4">
             Rent and lease anything at any time
           </h2>
+
+          <Menu
+            shadow="md"
+            width={124}
+            opened={opened}
+            onChange={setOpened}
+            classNames={{
+              dropdown: " border rounded-xl border-black",
+            }}
+          >
+            <Menu.Target>
+              <button className="flex h-9 py-1 items-center bg-[#012928] text-white px-[6px] w-fit rounded-md border  border-black  justify-between gap-3">
+                <Image
+                  src={locale === "en" ? englishImg : arabicImg}
+                  alt="Language Flag"
+                  width={26}
+                  height={20}
+                  className="w-[26px] h-5"
+                />
+
+                <p className="text-white text-[15px] font-Regular">
+                  {locale === "en" ? "English" : "العربية"}
+                </p>
+                <DownIcon
+                  fill="white"
+                  className={` duration-300 ${opened && "rotate-180"}`}
+                />
+              </button>
+            </Menu.Target>
+
+            <Menu.Dropdown className="w-[124px] bg-green/10">
+              <Menu.Item className="flex items-center gap-2 hover:bg-green/20 py-1 px-1">
+                <Link
+                  className="flex items-center gap-2"
+                  href={pathname}
+                  locale={"en"}
+                >
+                  <Image
+                    src={englishImg}
+                    width={26}
+                    height={20}
+                    alt="English"
+                    className="w-[26px] h-5"
+                  />
+                  <p className="text-white text-[15px] font-Regular">English</p>
+                </Link>
+              </Menu.Item>
+
+              <Menu.Item className="flex items-center gap-2 hover:bg-green/20 py-1 px-1">
+                <Link
+                  className="flex items-center gap-2"
+                  href={pathname}
+                  locale={"ar"}
+                >
+                  <Image
+                    src={arabicImg}
+                    width={25.83}
+                    height={20}
+                    alt="Arabic"
+                    className="w-[26px] h-5"
+                  />
+                  <p className="text-white text-[15px] font-Regular">العربية</p>
+                </Link>
+              </Menu.Item>
+            </Menu.Dropdown>
+          </Menu>
         </div>
         <div className="flex-1 flex justify-between gap-16">
           {footerData.map((itemFooter, i) => {

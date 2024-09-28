@@ -3,6 +3,7 @@ import { PasswordInput } from "@mantine/core";
 import React from "react";
 import PasswordIconHide from "../assets/icons/password";
 import { useDisclosure } from "@mantine/hooks";
+import PasswordIconShow from "../assets/icons/PasswordIconShow";
 interface PasswordProps {
   label?: string;
   placeholder?: string;
@@ -23,7 +24,7 @@ function Password({ label, placeholder }: PasswordProps) {
       visible={visible}
       onVisibilityChange={toggle}
       visibilityToggleIcon={() =>
-        visible ? <PasswordIconHide /> : <PasswordIconHide />
+        visible ? <PasswordIconShow /> : <PasswordIconHide />
       }
     />
   );

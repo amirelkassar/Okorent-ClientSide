@@ -53,7 +53,7 @@ const ROUTES = {
     HOMEPAGE: "/Home",
     PRODUCTS: (id)=>`/Home/Products?category=${id}`,
     PRODUCTSDETAILS:(id)=> `/Home/Products/${id}`,
-    PROFILE:(id,id2)=> `${id}/profile/${id2}`,
+    PROFILE:(id,id2)=> `/Home/Products/${id}/profile/${id2}`,
     ADDLISTING: "Add-Listing",
     WHOWEARE: "/Who-We-Are",
     HOWITWORKS: "/How-It-Works",
