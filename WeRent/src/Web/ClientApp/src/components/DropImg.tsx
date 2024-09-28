@@ -4,43 +4,69 @@ import { Dropzone, MIME_TYPES } from "@mantine/dropzone";
 import Image from "next/image";
 import UpLoadIcon from "../assets/icons/upLoad";
 import Button from "./button";
-import CloseChatIcon from "../assets/icons/closeChat";
+import PlusImgIcon from "../assets/icons/plusImg";
+import RemoveIcon from "../assets/icons/remove";
 interface DropImgProps {
   setDataList: React.Dispatch<any>;
   dataList: any;
 }
-function DropImg({dataList,setDataList}:DropImgProps) {
+function DropImg({ dataList, setDataList }: DropImgProps) {
   const [files, setFiles] = useState<File[]>([]);
+
   const handleDrop = (acceptedFiles: File[]) => {
-    setFiles(acceptedFiles);
-     setDataList({...dataList, pictures:acceptedFiles.map((file) =>file)})
+    const newFiles = [...files, ...acceptedFiles];
+    setFiles(newFiles);
+    setDataList({
+      ...dataList,
+      pictures: [...(dataList.pictures || []), ...acceptedFiles],
+    });
+  };
+
+  const handleRemoveFile = (index: number) => {
+    const newFiles = files.filter((_, i) => i !== index);
+    setFiles(newFiles);
+    setDataList({
+      ...dataList,
+      pictures: newFiles,
+    });
   };
 
   return (
     <div>
       {files.length > 0 ? (
-        <div className="h-fit min-h-[220px] lg:min-h-[340] gap-2 flex-wrap  p-1 relative flex items-center justify-center border-green overflow-hidden border-solid border-2 rounded-2xl">
-          <Button
-            className={
-              "absolute end-3 border-2 h-8 w-8 rounded-full hover:bg-rose-100 duration-200 p-1 bg-grayBack top-2"
-            }
-            onClick={() => {
-              setFiles([]);
-              setDataList({...dataList,pictures:[]})
-            }}
-          >
-            <CloseChatIcon />
-          </Button>
+        <div className="flex gap-4 p-1 flex-wrap relative items-center">
           {files.map((file, index) => (
-            <Image
+            <div
               key={index}
-              src={URL.createObjectURL(file)}
-              alt={`preview of ${file.name}`}
-              width={200}
-              height={190}
-              className=" object-contain rounded-sm h-full w-auto"
-            />
+              className="h-[146px] w-[146px] relative overflow-hidden rounded-md shadow-md"
+            >
+              <Image
+                src={URL.createObjectURL(file)}
+                alt={`preview of ${file.name}`}
+                width={146}
+                height={146}
+                className=" object-cover h-full w-full"
+              />
+              <Button
+                className="absolute bottom-3 end-3 bg-white hover:border-red border-grayLight border-2 !p-[4px] size-[30px] rounded-full hover:bg-red-200"
+                onClick={() => handleRemoveFile(index)}
+              >
+                <RemoveIcon />
+              </Button>
+            </div>
           ))}
+          <Dropzone
+            onDrop={handleDrop}
+            onReject={(files) => console.log("Rejected files", files)}
+            maxSize={3 * 1024 ** 2} // 3MB
+            accept={[MIME_TYPES.jpeg, MIME_TYPES.png, MIME_TYPES.pdf]}
+            multiple={true}
+            className="h-[146px] w-[146px]   border-green overflow-hidden border-solid border rounded-md"
+          >
+            <div className="h-full absolute w-full inset-0 flex justify-center items-center flex-col gap-3">
+              <PlusImgIcon />
+            </div>
+          </Dropzone>
         </div>
       ) : (
         <Dropzone
@@ -49,7 +75,7 @@ function DropImg({dataList,setDataList}:DropImgProps) {
           maxSize={3 * 1024 ** 2} // 3MB
           accept={[MIME_TYPES.jpeg, MIME_TYPES.png, MIME_TYPES.pdf]}
           multiple={true}
-          className="h-[220px] lg:h-[340px]  border-green overflow-hidden border-solid border-2 rounded-2xl"
+          className="h-[146px] lg:h-[340px]  border-green overflow-hidden border-solid border-2 rounded-2xl"
         >
           <div className="h-full absolute w-full inset-0 flex justify-center items-center flex-col gap-3">
             <UpLoadIcon className={"w-9 h-auto"} />

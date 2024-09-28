@@ -14,12 +14,8 @@ const center = {
   lng: 29.96070451527003,
 };
 interface GoogleMapProps {
-  index?: any;
-  handleInputChangeLocation?: (
-    index: number,
-    value: string,
-    name: string
-  ) => void;
+  index?: number;
+  handleInputChangeLocation?: (index: number, value: string, name: string) => void;
   close?: any;
   setLocation?:React.Dispatch<React.SetStateAction<string>>
 }
@@ -51,9 +47,10 @@ function GoogleMapLoc({
       setLocation&&setLocation(name)
       setPlaceName(name);
 
-      {
-        handleInputChangeLocation &&
-          handleInputChangeLocation(index, name, "address");
+      if (handleInputChangeLocation&&index) {
+        console.log(index, name, 'address');
+        
+        handleInputChangeLocation(index, name, 'address');
       }
     }
   };

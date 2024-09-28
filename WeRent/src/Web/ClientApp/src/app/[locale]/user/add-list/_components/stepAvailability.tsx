@@ -58,7 +58,7 @@ function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
     <Step
       title="Availability"
       active={dataList.value}
-      stepNum={8}
+      stepNum={7}
       dec="Choose when your item will be available for rent"
     >
       <Radio.Group

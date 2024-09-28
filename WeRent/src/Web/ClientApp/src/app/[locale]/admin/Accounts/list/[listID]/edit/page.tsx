@@ -6,7 +6,6 @@ import DropImg from "@/src/components/DropImg";
 import Button from "@/src/components/button";
 import StepLocation from "./_components/stepLocation";
 import StepAvailability from "./_components/stepAvailability";
-import StepVariations from "./_components/StepVariations";
 import house1 from "@/src/assets/images/house1.png";
 import house2 from "@/src/assets/images/house2.png";
 
@@ -356,12 +355,7 @@ function Page() {
       </div>
 
       <StepAvailability defaultValue={data.Availability} dataList={dataList} setDataList={setDataList} />
-      <StepVariations
-        handleInputChange={handleInputChange}
-        variations={variations}
-        addVariation={addVariation}
-        handleInputChangeSelect={handleInputChangeSelect}
-      />
+ 
       <div className="mt-[7px] pb-12 flex-1">
         <h3 className={"text-[24px] mb-3 "}>Stock</h3>
         <TextInput
