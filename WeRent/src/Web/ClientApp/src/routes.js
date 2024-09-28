@@ -51,6 +51,7 @@ const ROUTES = {
   },
   GUEST: {
     HOMEPAGE: "/Home",
+    ALLPRODUCTS:`/Home/Products`,
     PRODUCTS: (id)=>`/Home/Products?category=${id}`,
     PRODUCTSDETAILS:(id)=> `/Home/Products/${id}`,
     PROFILE:(id,id2)=> `/Home/Products/${id}/profile/${id2}`,

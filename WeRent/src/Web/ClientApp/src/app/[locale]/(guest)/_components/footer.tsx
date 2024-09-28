@@ -10,6 +10,7 @@ import arabicImg from "@/src/assets/images/saud.png";
 import { Menu } from "@mantine/core";
 import DownIcon from "@/src/assets/icons/down";
 import { useLocale } from "next-intl";
+import ROUTES from "@/src/routes";
 const footerData = [
   {
     title: "About Werent",
@@ -17,26 +18,26 @@ const footerData = [
       { label: "Terms and conditions", url: "#" },
       { label: "Privacy Policy", url: "#", isNew: true },
       { label: "FAQs", url: "#" },
-      { label: "Contact us", url: "#" },
-      { label: "Who are we ?", url: "#" },
+      { label: "Contact us", url: ROUTES.GUEST.CONTACTUS },
+      { label: "Who are we ?", url: ROUTES.GUEST.WHOWEARE },
     ],
   },
   {
     title: "Browse ads",
     links: [
-      { label: "All listings", url: "#" },
-      { label: "Electronic", url: "#" },
-      { label: "Fashion", url: "#" },
-      { label: "Real estate", url: "#" },
-      { label: "Tools", url: "#" },
-      { label: "Leisure & Sport", url: "#" },
+      { label: "All listings", url: ROUTES.GUEST.ALLPRODUCTS },
+      { label: "Electronic", url: ROUTES.GUEST.PRODUCTS("Electronic") },
+      { label: "Fashion", url: ROUTES.GUEST.PRODUCTS("Fashion") },
+      { label: "Real estate", url: ROUTES.GUEST.PRODUCTS("RealEstate") },
+      { label: "Tools", url: ROUTES.GUEST.PRODUCTS("Tools") },
+      { label: "Leisure & Sport", url: ROUTES.GUEST.PRODUCTS("LeisureSport") },
     ],
   },
   {
     title: "Join WeRent",
     links: [
-      { label: "Log in", url: "#" },
-      { label: "Create an account", url: "#" },
+      { label: "Log in", url: ROUTES.AUTH.LOGIN },
+      { label: "Create an account", url: ROUTES.AUTH.SIGNUP },
     ],
   },
 ];
@@ -62,13 +63,15 @@ function FooterGuest() {
     <div className="bg-[#022E2D] w-full pb-20 pt-14">
       <div className="max-w-[1600px] mx-auto px-[74px] flex gap-36 justify-between">
         <div className=" max-w-[320px]">
-          <Image
-            src={logo}
-            alt="logo Footer"
-            width={135}
-            height={45}
-            className="w-[135px] h-[45px] mb-5 block"
-          />
+          <Link href={ROUTES.GUEST.HOMEPAGE}>
+            <Image
+              src={logo}
+              alt="logo Footer"
+              width={135}
+              height={45}
+              className="w-[135px] h-[45px] mb-5 block"
+            />
+          </Link>
           <h2 className="font-Regular text-[#D3D4DC]/70 text-base mb-4">
             Rent and lease anything at any time
           </h2>
