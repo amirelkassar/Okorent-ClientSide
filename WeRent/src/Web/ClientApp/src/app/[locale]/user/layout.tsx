@@ -13,7 +13,6 @@ function layout({ children }: layoutProps) {
       <div className="max-w-[1600px] mx-auto ">
         <Nav linkLogo={ROUTES.USER.HOMEPAGE} />
         <main className="px-4 xl:px-[60px] min-h-[calc(100vh-150px)] mt-6 lg:mt-0">
-       
           <NavLinks />
           {children}
         </main>

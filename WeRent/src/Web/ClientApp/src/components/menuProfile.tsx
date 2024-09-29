@@ -48,7 +48,7 @@ function MenuProfile() {
           leftSection={<SubscriptionIcon />}
           className=" hover:bg-green/15 py-0 h-[30px] px-1 text-[14px] font-SemiBold rounded-lg"
         >
-          <Link href={ROUTES.USER.SUBSCRIPTION}>Subscription</Link>
+          <Link href={ROUTES.USER.WALLET}>Wallet</Link>
         </Menu.Item>
         <Menu.Item
           leftSection={<SettingsIcon />}

@@ -48,6 +48,8 @@ const ROUTES = {
     CHECKOUT: "/user/checkout",
     CHECKOUTID:(id)=> `/user/checkout/${id}`,
     PROFILE: "/user/profile",
+    WALLET: "/user/Wallet",
+
   },
   GUEST: {
     HOMEPAGE: "/Home",

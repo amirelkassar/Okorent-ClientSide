@@ -1,7 +1,6 @@
 "use client";
 import Filter2Icon from "@/src/assets/icons/filter2";
 import Button from "@/src/components/button";
-import Input from "@/src/components/input";
 import ModalComp from "@/src/components/modal-comp";
 import { TextInput } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
@@ -115,10 +114,9 @@ function FilterBilling() {
                 onChange={(e) => handleInputChange("name", e.target.value)}
                 classNames={{
                   input:
-                    "bg-grayLight border-grayLight pe-14   h-11 rounded-[8px] placeholder:text-grayMedium duration-300 focus:border-green focus:bg-white ",
+                    "bg-grayLight border-grayLight    h-11 rounded-[8px] placeholder:text-grayMedium duration-300 focus:border-green focus:bg-white ",
                   label: "text-[16px] mb-2 font-Medium ms-1",
-                  wrapper:
-                    "relative before:absolute before:content-['USD'] before:top-1/2 before:-translate-y-1/2 before:end-0 before:text-grayMedium before:text-sm before:ps-2 before:border-s before:border-grayMedium before:w-12 before:h-8 before:place-content-center",
+                
                 }}
               />
               <div className="  ">

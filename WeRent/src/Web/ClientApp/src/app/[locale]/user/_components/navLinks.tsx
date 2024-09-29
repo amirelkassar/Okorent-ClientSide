@@ -112,6 +112,12 @@ function NavLinks() {
         url: ROUTES.USER.PROFILE,
         active: path === ROUTES.USER.PROFILE,
       },
+      {
+        id: 4,
+        name: "Wallet",
+        url: ROUTES.USER.WALLET,
+        active: path === ROUTES.USER.WALLET,
+      },
     ],
     [path]
   );

@@ -4,7 +4,6 @@ import PlanPage from "./planPage";
 import { useSwitchBilling } from "@/src/store/rent-slice";
 import SwitchBilling from "./switchBilling";
 import RentOuts from "./RentOuts";
-import Filter2Icon from "@/src/assets/icons/filter2";
 import SearchItem from "./searchItem";
 import FilterBilling from "./filterBilling";
 
