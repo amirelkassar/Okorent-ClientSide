@@ -1,7 +1,5 @@
 import React from "react";
 import SearchItem from "./searchItem";
-import DateIcon from "@/src/assets/icons/date";
-import LocationIcon from "@/src/assets/icons/location";
 import HeaderAdminIcon from "@/src/assets/icons/headerAdmin";
 import SelectDate from "./selectDate";
 import SelectLocation from "./selectLocation";

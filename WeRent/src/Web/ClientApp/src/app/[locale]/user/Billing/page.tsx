@@ -1,12 +1,8 @@
-import React from 'react'
-import Plan from './_components/plan'
+import React from "react";
+import BillingPage from "./_components/BillingPage";
 
 function page() {
-  return (
-    <div>
-        <Plan/>
-    </div>
-  )
+  return <BillingPage />;
 }
 
-export default page
+export default page;

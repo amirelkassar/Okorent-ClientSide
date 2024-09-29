@@ -13,16 +13,16 @@ const dataPla = [
 ];
 function Plan() {
   return (
-    <div className=" flex justify-between border gap-5 bg-white/50 border-green rounded-3xl px-6 pt-10 pb-4">
+    <div className=" order-1 flex flex-col lg:flex-row flex-1 justify-between shadow-md border gap-3 lg:gap-5 bg-white/50 border-green rounded-3xl px-6 pt-8 lg:pt-10 pb-4">
       <div>
-        <h3 className="text-xl text-grayMedium font-Regular ps-10">
+        <h3 className="text-base lg:text-xl text-grayMedium font-Regular mb-3 lg:mb-0 ps-10">
           Your Plan{" "}
         </h3>
         <div className="flex items-center gap-2 mb-3">
           <div className="bg-green/10 size-8 rounded-lg flex items-center justify-center p-2">
             <RocketIcon />
           </div>
-          <h4 className="text-2xl">Starter Membership</h4>
+          <h4 className="text-xl lg:text-2xl">Starter Membership</h4>
         </div>
         <div>
           <ul className="flex flex-col gap-4 ps-9 ">
@@ -42,7 +42,7 @@ function Plan() {
           </ul>
         </div>
       </div>
-      <LinkGreen href={ROUTES.USER.SUBSCRIPTION} className={"mt-6"}>
+      <LinkGreen href={ROUTES.USER.SUBSCRIPTION} className={"lg:mt-6"}>
         Change Plan
       </LinkGreen>
     </div>
