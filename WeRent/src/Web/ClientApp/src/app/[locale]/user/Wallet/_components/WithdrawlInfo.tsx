@@ -11,11 +11,8 @@ import React, { useState } from "react";
 function WithdrawlInfo() {
   const [opened, { open, close }] = useDisclosure(false);
   const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
+  const [value, setValue] = useState<Date | null>(new Date());
 
-  const [value, setValue] = useState<[Date | null, Date | null]>([
-    new Date(),
-    new Date(),
-  ]);
   const formatDate = (date: Date | null) => {
     if (!date) return "";
     return new Intl.DateTimeFormat("en-US", {
@@ -103,11 +100,11 @@ function WithdrawlInfo() {
                     "relative before:absolute before:content-[''] before:bg-[url('../../assets/icons/Calendar.svg')]  before:bg-[length:22px_22px]   before:bg-center before:bg-no-repeat before:top-1/2 before:-translate-y-1/2 before:start-0     before:w-12 before:h-8 before:place-content-center",
                 }}
                 className=" cursor-pointer"
-                value={
-                  formatDate(value[0]) + " -- " + formatDate(value[1]) ||
-                  "Choose specific starting date"
-                }
-                onClick={()=>{close();open2()}}
+                value={formatDate(value) || "Choose specific starting date"}
+                onClick={() => {
+                  close();
+                  open2();
+                }}
               />
 
               <Select
@@ -131,55 +128,33 @@ function WithdrawlInfo() {
               />
             </form>
 
-            <Button onClick={close} className={"w-full mx-auto mt-11  mb-4 h-[64px]"}>
+            <Button
+              onClick={close}
+              className={"w-full mx-auto mt-11  mb-4 h-[64px]"}
+            >
               Save and close
             </Button>
           </div>
         </ModalComp>
       )}
-      <ModalComp opened={opened2} close={close2} title={"Select rental period"}>
+      <ModalComp opened={opened2} close={close2} title={"Scheudle Starting Date"}>
         <div className="mx-auto max-w-[95%] w-[420px] lg:max-w-[280px]">
           <DatePicker
             classNames={{
-              day: "data-[in-range]:bg-green data-[last-in-range]:rounded-e-[14px]  data-[first-in-range]:rounded-s-[14px] p-0 rounded-3 data-[in-range]:text-white",
+              day: "data-[selected]:bg-green data-[selected]:rounded-full   p-0 rounded-3 data-[selected]:text-white",
               monthCell: "px-0",
               levelsGroup: "justify-center mb-3",
               weekday: "text-black",
               calendarHeader: "text-grayMedium",
             }}
             weekendDays={[]}
-            type="range"
             value={value}
             onChange={setValue}
           />
-          <div className="flex gap-6 flex-wrap bg-grayBack  rounded-xl py-2 px-3">
-            <div className="flex-1 min-w-[100px]">
-              <h3 className="text-[12px] text-grayMedium/50 text-center">
-                Pickup
-              </h3>
-              <p className="text-[12px] text-grayMedium text-center">
-                {formatDate(value[0]) || "__"}
-              </p>
-            </div>
-            <div className="flex-1 min-w-[100px]">
-              <h3 className="text-[12px] text-grayMedium/50 text-center">
-                Return
-              </h3>
-              <p className="text-[12px] text-grayMedium text-center">
-                {formatDate(value[1]) || "__"}
-              </p>
-            </div>
-          </div>
-          <button
-            onClick={() => {
-              setValue([null, null]);
-            }}
-            className="text-blue mx-auto text-center flex items-center justify-center py-3 font-Regular w-fit  text-[12px]"
-          >
-            Remove Dates
-          </button>
+         
+      
           <Button
-            className={"w-full"}
+            className={"w-full mt-6"}
             onClick={() => {
               close2();
               open();

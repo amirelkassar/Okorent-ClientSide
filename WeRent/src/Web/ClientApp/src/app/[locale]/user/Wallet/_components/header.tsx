@@ -25,7 +25,7 @@ const number = [
 ];
 function HeaderDash() {
   return (
-    <div className="flex  justify-between gap-5 lg:gap-8 overflow-x-auto hideScroll px-3 pb-3 lg:pb-0 lg:px-0 lg:flex-wrap">
+    <div className="flex  justify-between gap-5 lg:gap-8 overflow-x-auto hideScroll md:px-3 pb-3 lg:pb-0 lg:px-0 lg:flex-wrap">
       {number.map((item) => {
         return (
           <CardStatistical

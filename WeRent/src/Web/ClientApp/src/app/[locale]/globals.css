@@ -259,3 +259,6 @@ li.search::before {
   background-size: cover;
   z-index: 0;
 }
+.TopBarChart:hover .nameLine{
+@apply block
+}
