@@ -8,7 +8,6 @@ const containerStyle = {
   width: "100%",
   height: "390px",
 };
-
 const center = {
   lat: 31.21405130266879,
   lng: 29.96070451527003,
@@ -19,15 +18,17 @@ interface GoogleMapProps {
   close?: any;
   setLocation?:React.Dispatch<React.SetStateAction<string>>
 }
+
 function GoogleMapLoc({
   close,
   index,
   handleInputChangeLocation,
   setLocation
 }: GoogleMapProps) {
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyDDbeB2JCI9I77iwI6SdzeHpcq2bx0qeQE",
+    googleMapsApiKey: "AIzaSyCdBmOtAFzrgkikmCDsk_lb0z2EU_eYSbY",
   });
   const [selectedLocation, setSelectedLocation] = useState<{
     lat: number;

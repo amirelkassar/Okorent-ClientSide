@@ -63,7 +63,10 @@ function StepLocation({
         <MultiSelect
           data={oldLocations.map((loc) => loc.name)}
           value={SelectLocation}
-          onChange={setSelectLocation}
+          onChange={(value) => {
+            
+            handleInputChangeLocation(oldLocations?.find((location) => location.name === value[0])?.id||2, value[0], "name");
+          }}
           placeholder="Choose Location"
           searchable
           size="lg"
@@ -84,54 +87,56 @@ function StepLocation({
           clearable
           className="block " // Visible on mobile, hidden on larger screens
         />
-        {oldLocations.filter((loc) => SelectLocation.includes(loc.name)).map((loc, index) => (
-          <div key={index} className="flex items-center gap-3">
-            <Checkbox
-              checked={true}
-              readOnly
-              color="#88BA52"
-              className={cn("mt-6")}
-            />
-            <div className="flex items-center flex-wrap lg:flex-nowrap flex-1 gap-4">
-              <TextInput
-                value={loc.name}
-                name="name"
-                label={"Location Name"}
-                placeholder={`Location ${index + 1}`}
-                onChange={(e) =>
-                  handleInputChangeLocation(loc.id, e.target.value, "name")
-                }
-                classNames={{
-                  label: "text-sm md:text-[16px] text-grayMedium mb-2",
-                  input:
-                    " text-black text-[12px] md:text-[16px] rounded-2xl text-grayMedium  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
-                  wrapper: "h-[64px]",
-                }}
-                className=" flex-1 min-w-[144px]  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
+        {oldLocations
+          .filter((loc) => SelectLocation.includes(loc.name))
+          .map((loc, index) => (
+            <div key={index} className="flex items-center gap-3">
+              <Checkbox
+                checked={true}
+                readOnly
+                color="#88BA52"
+                className={cn("mt-6")}
               />
-              <div
-                onClick={() => {
-                  setIndexSelect(loc.id);
-                  open();
-                }}
-                className=" cursor-pointer flex-1 min-w-[156px]"
-              >
-                <h3 className="text-sm md:text-[16px] text-grayMedium mb-2">
-                  Address
-                </h3>
-                <p className=" flex items-center px-2 py-3 flex-1 text-nowrap truncate  max-w-[260px] text-[12px] md:text-[16px] rounded-2xl text-grayMedium first:font-Bold  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100">
-                  {loc.address}
-                </p>
-              </div>
-              <div
-                onClick={() => handleRemoveLocation(loc.id)}
-                className="bg-grayBack mt-6 flex items-center cursor-pointer duration-300 hover:shadow-md justify-center size-7 lg:size-11 p-2 rounded-full"
-              >
-                <DeleteIcon className=" h-auto w-3 lg:w-5" />
+              <div className="flex items-center flex-wrap lg:flex-nowrap flex-1 gap-4">
+                <TextInput
+                  value={loc.name}
+                  name="name"
+                  label={"Location Name"}
+                  placeholder={`Location ${index + 1}`}
+                  onChange={(e) =>
+                    handleInputChangeLocation(loc.id, e.target.value, "name")
+                  }
+                  classNames={{
+                    label: "text-sm md:text-[16px] text-grayMedium mb-2",
+                    input:
+                      " text-black text-[12px] md:text-[16px] rounded-2xl text-grayMedium  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+                    wrapper: "h-[64px]",
+                  }}
+                  className=" flex-1 min-w-[144px]  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
+                />
+                <div
+                  onClick={() => {
+                    setIndexSelect(loc.id);
+                    open();
+                  }}
+                  className=" cursor-pointer flex-1 min-w-[156px]"
+                >
+                  <h3 className="text-sm md:text-[16px] text-grayMedium mb-2">
+                    Address
+                  </h3>
+                  <p className=" flex items-center px-2 py-3 flex-1 text-nowrap truncate  max-w-[260px] text-[12px] md:text-[16px] rounded-2xl text-grayMedium first:font-Bold  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100">
+                    {loc.address}
+                  </p>
+                </div>
+                <div
+                  onClick={() => handleRemoveLocation(loc.id)}
+                  className="bg-grayBack mt-6 flex items-center cursor-pointer duration-300 hover:shadow-md justify-center size-7 lg:size-11 p-2 rounded-full"
+                >
+                  <DeleteIcon className=" h-auto w-3 lg:w-5" />
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
         {location.map((loc, index) => (
           <div key={index} className="flex items-center gap-3">
             <Checkbox

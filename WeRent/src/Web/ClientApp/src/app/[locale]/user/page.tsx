@@ -4,13 +4,12 @@ import OfferSlider from "./_components/offerSlider";
 import Categories from "./_components/categories";
 import HeaderAdmin from "./_components/headerAdmin";
 import ProductList from "@/src/components/product/productList";
-import MapWithCircle from "@/src/components/MapWithCircle";
-
+import MapOl from "@/src/components/mapOl";
 
 function page() {
   return (
     <div>
-     
+    
       <HeaderAdmin />
       <Categories />
       <OfferSlider />

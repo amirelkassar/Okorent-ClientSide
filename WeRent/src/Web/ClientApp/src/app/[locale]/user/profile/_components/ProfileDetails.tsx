@@ -183,7 +183,10 @@ function ProfileDetails() {
             }}
             clearable
           />
-          <Input label="Street Name" placeholder="Street Name" />
+          <div>
+            <p className="text-sm lg:text-base font-Medium mb-1">Address information</p>
+            <Input label="Street Name" placeholder="Street Name" />
+          </div>
           <div className="flex gap-7">
             <Input label="City" placeholder="City" />
             <Input label="Postal Code" placeholder="Postal Code" />

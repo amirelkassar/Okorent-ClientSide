@@ -15,6 +15,7 @@ import RentSwitch from "@/src/components/RentSwitch";
 import { Select } from "@mantine/core";
 import ArrowDownIcon from "@/src/assets/icons/arrowDown";
 import DownIcon from "@/src/assets/icons/down";
+import { useMediaQuery } from "@mantine/hooks";
 
 interface EventData {
   id: string;
@@ -56,6 +57,7 @@ const months = [
   "December 2024",
 ];
 const CustomCalendar: React.FC = () => {
+  const isMobile = useMediaQuery("(max-width: 992px)");
   const [selectedEvent, setSelectedEvent] = useState<EventData | null>(null);
   const calendarRef = useRef<FullCalendar | null>(null);
   const [currentView, setCurrentView] = useState<string>(
@@ -347,7 +349,7 @@ const CustomCalendar: React.FC = () => {
             height={"870px"}
             scrollTimeReset={false}
             slotMinWidth={74}
-            resourceAreaWidth={400}
+            resourceAreaWidth={isMobile?0:400}
             eventDurationEditable={false}
             eventLongPressDelay={500}
             resourcesInitiallyExpanded={false}
