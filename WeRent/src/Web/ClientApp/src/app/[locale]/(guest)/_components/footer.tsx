@@ -60,21 +60,23 @@ function FooterGuest() {
   const pathname = usePathname();
 
   return (
-    <div className="bg-[#022E2D] w-full pb-20 pt-14">
-      <div className="max-w-[1600px] mx-auto px-[74px] flex gap-36 justify-between">
-        <div className=" max-w-[320px]">
-          <Link href={ROUTES.GUEST.HOMEPAGE}>
-            <Image
-              src={logo}
-              alt="logo Footer"
-              width={135}
-              height={45}
-              className="w-[135px] h-[45px] mb-5 block"
-            />
-          </Link>
-          <h2 className="font-Regular text-[#D3D4DC]/70 text-base mb-4">
-            Rent and lease anything at any time
-          </h2>
+    <div className="bg-[#022E2D] w-full pb-14 lg:pb-20 pt-8 mdl:pt-14">
+      <div className="max-w-[1600px] flex-col mdl:flex-row mx-auto px-12 lg:px-[74px] flex gap-14 lg:gap-36 justify-between">
+        <div className=" w-full  justify-between gap-4 mdl:max-w-[320px] flex flex-row mdl:flex-col flex-wrap">
+          <div>
+            <Link href={ROUTES.GUEST.HOMEPAGE}>
+              <Image
+                src={logo}
+                alt="logo Footer"
+                width={135}
+                height={45}
+                className="w-[135px] h-[45px] mb-5 block"
+              />
+            </Link>
+            <h2 className="font-Regular text-[#D3D4DC]/70 text-base mb-4 max-w-[180px] mdl:max-w-[320px]">
+              Rent and lease anything at any time
+            </h2>
+          </div>
 
           <Menu
             shadow="md"
@@ -142,7 +144,7 @@ function FooterGuest() {
             </Menu.Dropdown>
           </Menu>
         </div>
-        <div className="flex-1 flex justify-between gap-16">
+        <div className="flex-1 xl:flex-nowrap flex-wrap  flex justify-between gap-x-6 gap-y-10 lg:gap-16">
           {footerData.map((itemFooter, i) => {
             return (
               <div key={i}>
@@ -153,7 +155,7 @@ function FooterGuest() {
                       <li className="flex items-center gap-2" key={j}>
                         <Link
                           href={link.url}
-                          className="text-base text-[#D3D4DC]/70 duration-200 hover:text-[#D3D4DC] font-Regular"
+                          className="text-sm md:text-base text-[#D3D4DC]/70 duration-200 hover:text-[#D3D4DC] font-Regular"
                         >
                           {link.label}
                         </Link>
@@ -169,9 +171,11 @@ function FooterGuest() {
               </div>
             );
           })}
-          <div>
-            <h3 className="text-white  mb-6">Download our app</h3>
-            <ul className="flex flex-col gap-4">
+          <div className="w-full lg:w-auto mx-auto lg:mx-0">
+            <h3 className="text-white  mb-6 text-center lg:text-start">
+              Download our app
+            </h3>
+            <ul className="flex flex-col items-center lg:items-start gap-4">
               {footerDataButtons.map((itemButton, i) => {
                 return (
                   <li className="flex items-center gap-2" key={i}>

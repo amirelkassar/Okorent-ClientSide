@@ -14,7 +14,7 @@ function Page() {
   const [active, setActive] = useState(0);
   const [croppedImage, setCroppedImage] = useState<string | null>(null);
   return (
-    <div className="flex-1 pt-20 pb-16  flex  min-h-full justify-start">
+    <div className="flex-1 pt-4 lgl:pt-20  pb-8 md:pb-16  flex  min-h-full justify-center lgl:justify-start">
       <div className="max-w-[450px] w-full flex flex-col gap-4 pb-8">
         <Logo theme="green" />
         <div className="flex-1 content-center">

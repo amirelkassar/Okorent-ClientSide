@@ -9,11 +9,11 @@ import React from "react";
 function PageLogin() {
   const router = useRouter();
   return (
-    <div className="flex-1 pt-20 pb-16  flex  min-h-full justify-start">
-      <div className=" w-full flex flex-col gap-4">
+    <div className="flex-1 pt-4 lgl:pt-20  pb-8 md:pb-16  flex  min-h-full justify-center lgl:justify-start">
+      <div className="max-w-[470px]  w-full flex flex-col gap-4">
         <Logo theme="green" />
         <div className="flex-1 content-center">
-          <h1 className=" font-Bold text-xLarge mb-7">
+          <h1 className=" font-Bold text-lg lg:text-xLarge mb-7">
             Enter your email to reset your password
           </h1>
 
@@ -24,9 +24,9 @@ function PageLogin() {
               placeholder="Write you email here"
             />
 
-            <div className={"w-full mt-16 flex  gap-6 flex-wrap"}>
+            <div className={"w-full mt-16 flex   gap-6  flex-col-reverse md:flex-row"}>
               <Button
-                className={"w-[156px] bg-white border text-green "}
+                className={" w-full lg:w-[156px] bg-white border text-green "}
                 onClick={() => {
                   router.push(ROUTES.AUTH.LOGIN);
                 }}
@@ -34,7 +34,7 @@ function PageLogin() {
                 Back
               </Button>
               <Button
-                className={"w-[156px] "}
+                className={" w-full lg:w-[156px] "}
                 onClick={() => {
                   router.push(ROUTES.AUTH.CONFIRM);
                 }}

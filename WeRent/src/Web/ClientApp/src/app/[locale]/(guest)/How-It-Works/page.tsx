@@ -75,10 +75,10 @@ function page() {
     <div>
       <LookingFor />
       <Goals/>
-      <div className="mb-16 mt-10 relative">
+      <div className="mb-16 mt-4 lg:mt-10 relative">
         <h2 className="text-2xl text-center lg:text-3xl mb-14">What our users say</h2>
 
-        <div className="flex gap-5 lg:gap-8 md:flex-wrap overflow-x-auto hideScroll">
+        <div className="flex gap-5 lg:gap-8 md:flex-wrap   overflow-x-auto hideScroll">
           {ReviewData.map((item, i) => {
             return (
               <Review

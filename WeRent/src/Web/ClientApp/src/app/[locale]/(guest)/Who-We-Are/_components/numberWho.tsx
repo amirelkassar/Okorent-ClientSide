@@ -24,22 +24,22 @@ const dataNumbers = [
 ];
 function NumberWho() {
   return (
-    <div className="my-28 flex justify-between relative max-w-[1130px] w-full mx-auto gap-5">
+    <div className="my-16 lg:my-28 flex-col mdl:flex-row flex justify-center items-center lg:items-start lg:justify-between relative max-w-[1130px] w-full mx-auto gap-4 lg:gap-5">
       {dataNumbers.map((item, i) => {
         return (
           <div
             key={i}
             className="bg-white w-[302px] rounded-2xl shadow-md px-4 py-9 flex flex-col justify-center items-center "
           >
-            <div className="bg-[#DFEBF4]/40 rounded-full mb-2 p-1 size-[74px] flex items-center justify-center">
-              <div className="bg-[#DFEBF4]/40 rounded-full p-1 w-full h-full flex items-center justify-center">
+            <div className="bg-[#DFEBF4]/40 rounded-full mb-2 p-1 size-[58px] mdl:size-[74px] flex items-center justify-center">
+              <div className="bg-[#DFEBF4]/40 rounded-full p-2 lg:p-1 w-full h-full flex items-center justify-center">
                 {item.icon}
               </div>
             </div>
-            <h3 className="text-center font-Bold text-3xl mb-1">
+            <h3 className="text-center font-Bold text-2xl mdl:text-3xl mb-1">
               {item.textNum}
             </h3>
-            <h4 className="text-grayMedium text-2xl text-center">
+            <h4 className="text-grayMedium text-lg mdl:text-2xl text-center">
               {item.title}
             </h4>
           </div>

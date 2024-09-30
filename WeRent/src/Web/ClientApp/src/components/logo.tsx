@@ -6,7 +6,7 @@ interface Logo {
 }
 function Logo({ theme }: Logo) {
   return (
-    <div className={`w-fit text-[25px] font-Bold leading-[22px]`} dir="ltr">
+    <div className={`w-fit text-[25px] font-Bold leading-[22px] mx-auto lgl:mx-0`} dir="ltr">
       <Image src={logo} alt="logo" width={135} height={45} />
     </div>
   );

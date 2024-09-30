@@ -14,8 +14,8 @@ function PageLogin() {
       <div className="max-w-[390px] w-full flex flex-col gap-4">
         <Logo theme="green" />
         <div className="flex-1 content-center">
-          <h1 className=" font-Bold text-xLarge">Confirm You Email</h1>
-          <p className="text-grayMedium font-Light leading-5 text-medium mb-6 ">
+          <h1 className=" font-Bold text-lg lg:text-xLarge">Confirm You Email</h1>
+          <p className="text-grayMedium font-Light lg:leading-5 text-sm lg:text-medium mb-6 ">
             We have sent you a code to ahmed5vadr5@gmail.com please enter it
             below to verify your account
           </p>
@@ -47,9 +47,9 @@ function PageLogin() {
                 </button>
               </h3>
             </div>
-            <div className={"w-full mt-16 flex  gap-6 flex-wrap"}>
+            <div className={"w-full mt-16 flex  gap-6 flex-col-reverse md:flex-row"}>
               <Button
-                className={"w-[156px] bg-white border text-green "}
+                className={" w-full lg:w-[156px] bg-white border text-green "}
                 onClick={() => {
                   router.push(ROUTES.AUTH.FORGOT_PASSWORD);
                 }}
@@ -57,7 +57,7 @@ function PageLogin() {
                 Back
               </Button>
               <Button
-                className={"w-[156px] "}
+                className={" w-full lg:w-[156px] "}
                 onClick={() => {
                   router.push(ROUTES.AUTH.RESET_PASSWORD);
                 }}

@@ -12,12 +12,12 @@ function PageLogin() {
   const [seconds, setSeconds] = useState(60);
   const [start, setStart] = useState(false);
   return (
-    <div className="flex-1 pt-20 pb-16  flex  min-h-full justify-start">
-      <div className=" w-full flex flex-col gap-4">
+    <div className="flex-1 pt-4 lgl:pt-20  pb-8 md:pb-16  flex  min-h-full justify-center lgl:justify-start">
+      <div className=" w-full max-w-[470px] flex flex-col gap-4">
         <Logo theme="green" />
         <div className="flex-1 content-center">
-          <h1 className=" font-Bold text-xLarge">Confirm Your number</h1>
-          <p className="text-grayMedium max-w-[390px] font-Light leading-5 text-medium mb-6 ">
+          <h1 className=" font-Bold  text-xLarge">Confirm Your number</h1>
+          <p className="text-grayMedium max-w-[390px] font-Light leading-5 text-medium mb-16 md:mb-6 ">
             We have sent you a code to +20 1067373528 please enter it below to
             verify your account
           </p>
@@ -35,7 +35,7 @@ function PageLogin() {
               }}
             />
             <div className="flex items-center  py-5">
-              <h3 className="flex items-center justify-center gap-1 font-Light">
+              <h3 className="flex items-center flex-wrap gap-1 font-Light">
                 Didn’t receive a code?
                 {start ? (
                   <div className="flex items-center gap-1">
@@ -63,9 +63,9 @@ function PageLogin() {
               </h3>
             </div>
 
-            <div className={"w-full mt-16 flex  gap-6 flex-wrap"}>
+            <div className={"w-full mt-16 flex flex-col-reverse md:flex-row  gap-6 flex-wrap"}>
               <Button
-                className={"w-[156px] bg-white border text-green "}
+                className={"md:w-[156px] w-full bg-white border text-green "}
                 onClick={() => {
                   router.push(ROUTES.AUTH.LOGIN);
                 }}
@@ -73,7 +73,7 @@ function PageLogin() {
                 Back
               </Button>
               <Button
-                className={"w-[156px] "}
+                className={"md:w-[156px] w-full "}
                 onClick={() => {
                   setStart(true);
                   setSeconds(60);
@@ -82,7 +82,7 @@ function PageLogin() {
                 Next
               </Button>
               <Button
-                className={"w-[156px] "}
+                className={"md:w-[156px] w-full "}
                 onClick={() => {
                   router.push(ROUTES.AUTH.MAKE_HOME);
                 }}

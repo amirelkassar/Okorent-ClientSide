@@ -47,7 +47,7 @@ const dataSwiper = [
 ];
 function SliderAuth({}: SliderAuthProps) {
   return (
-    <div className="flex-1 max-w-[55%] h-full flex items-center ">
+    <div className="flex-1 max-w-[55%] h-full hidden lgl:flex items-center ">
       <Swiper
         navigation={true}
         pagination={true}

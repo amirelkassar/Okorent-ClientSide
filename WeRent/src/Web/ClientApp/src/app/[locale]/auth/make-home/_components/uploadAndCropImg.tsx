@@ -31,9 +31,7 @@ function UploadAndCropImg({ croppedImage, setCroppedImage }: Props) {
     []
   );
 
-  const handleFileChange = async (
-    event: any
-  ) => {
+  const handleFileChange = async (event: any) => {
     console.log(event);
     console.log(imageSrc);
     handleReset();
@@ -100,10 +98,13 @@ function UploadAndCropImg({ croppedImage, setCroppedImage }: Props) {
 
       <ModalComp
         opened={opened}
-        close={close}
+        close={() => {
+          close();
+          handleReset();
+        }}
         title="Upload your profile picture"
       >
-        <div className="flex justify-center items-center flex-col px-10 min-w-[490px] ">
+        <div className="flex justify-center items-center flex-col px-10 lg:min-w-[490px] ">
           {!croppedImage && (
             <>
               {imageSrc && (
@@ -142,16 +143,16 @@ function UploadAndCropImg({ croppedImage, setCroppedImage }: Props) {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex w-full mt-8 items-center justify-center gap-10">
+                  <div className="flex w-full flex-col-reverse lg:flex-row mt-8 lg:items-center lg:justify-center gap-5 lg:gap-10">
                     <Button
                       onClick={() => {
                         openChanges();
                       }}
-                      className="bg-transparent flex-1 border text-green"
+                      className="bg-transparent w-full h-[50px] border text-green"
                     >
                       Cancel
                     </Button>
-                    <Button onClick={onCrop} className=" flex-1 ">
+                    <Button onClick={onCrop} className=" w-full h-[50px] ">
                       Save
                     </Button>
                   </div>
@@ -162,7 +163,13 @@ function UploadAndCropImg({ croppedImage, setCroppedImage }: Props) {
         </div>
       </ModalComp>
 
-      <ModalComp title="" opened={openedChanges} close={closeChanges}>
+      <ModalComp
+        title=""
+        opened={openedChanges}
+        close={() => {
+          closeChanges();
+        }}
+      >
         <div className="mt-8">
           <div className="w-[200px] h-[200px] mb-8 block mx-auto">
             <DiscardIcon />

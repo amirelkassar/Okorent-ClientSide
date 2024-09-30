@@ -9,7 +9,7 @@ function page() {
   return (
     <div>
       <HeaderAdmin />
-      <div className="w-full py-14 mb-5 bg-white rounded-t-[60px]">
+      <div className="w-full py-10 px-3 mdl:py-14 mb-5 bg-white rounded-t-[50px] lg:rounded-t-[60px]">
         <LookingFor />
       </div>
       <Categories />

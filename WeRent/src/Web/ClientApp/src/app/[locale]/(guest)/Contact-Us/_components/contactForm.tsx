@@ -6,8 +6,8 @@ import React from "react";
 function ContactForm() {
   return (
     <div className="flex-1 max-w-[950px] ">
-      <h3 className="text-center text-3xl mb-10">Fill the form</h3>
-      <div className="bg-[#E8EFF8]/80 rounded-2xl py-8 px-10  ">
+      <h3 className="text-center text-2xl lg:text-3xl mb-8 lg:mb-10">Fill the form</h3>
+      <div className="bg-[#E8EFF8]/80 rounded-2xl py-5 lg:py-8 px-5 lg:px-10  ">
         <form action="" className="flex flex-wrap gap-6">
           <TextInput
             type={"text"}
@@ -16,9 +16,9 @@ function ContactForm() {
             classNames={{
               input:
                 "bg-white border-green/30 text-base  h-16 rounded-xl placeholder:text-grayMedium placeholder:text-base duration-300 focus:border-green focus:bg-white ",
-              label: "text-2xl mb-2 font-Medium ms-1",
+              label: "text-lg lg:text-2xl mb-2 font-Medium ms-1",
             }}
-            className="w-[calc(50%-12px)]"
+            className="w-full md:w-[calc(50%-12px)]"
           />
           <TextInput
             type={"text"}
@@ -27,9 +27,9 @@ function ContactForm() {
             classNames={{
               input:
                 "bg-white border-green/30 text-base  h-16 rounded-xl  focus:border-green active:border-green placeholder:text-grayMedium placeholder:text-base duration-300 focus:border-green focus:bg-white ",
-              label: "text-2xl mb-2 font-Medium ms-1",
+              label: "text-lg lg:text-2xl mb-2 font-Medium ms-1",
             }}
-            className="w-[calc(50%-12px)]"
+            className="w-full md:w-[calc(50%-12px)]"
           />
           <TextInput
             type={"email"}
@@ -38,7 +38,7 @@ function ContactForm() {
             classNames={{
               input:
                 "bg-white border-green/30 text-base focus:border-green active:border-green   h-16 rounded-xl placeholder:text-grayMedium placeholder:text-base duration-300 focus:border-green focus:bg-white ",
-              label: "text-2xl mb-2 font-Medium ms-1",
+              label: "text-lg lg:text-2xl mb-2 font-Medium ms-1",
             }}
             className="w-full mb-2"
           />
@@ -50,7 +50,7 @@ function ContactForm() {
             label={"Subject"}
             defaultValue={"08:00"}
             classNames={{
-              label: "text-2xl mb-2 font-Medium ms-1",
+              label: "text-lg lg:text-2xl mb-2 font-Medium ms-1",
               input:
                 "bg-white border-green/30 text-base focus:border-green active:border-green   h-16 rounded-xl placeholder:text-grayMedium placeholder:text-base duration-300 focus:border-green focus:bg-white ",
 
@@ -69,7 +69,7 @@ function ContactForm() {
               input:
                 " bg-white border-green/30 text-base focus:border-green active:border-green   min-h-[180px] rounded-xl placeholder:text-grayMedium placeholder:text-base duration-300 focus:border-green focus:bg-white ",
               wrapper: "h-full",
-              label: "text-2xl mb-2 font-Medium ms-1",
+              label: "text-lg lg:text-2xl mb-2 font-Medium ms-1",
             }}
             className="w-full mb-4"
           />

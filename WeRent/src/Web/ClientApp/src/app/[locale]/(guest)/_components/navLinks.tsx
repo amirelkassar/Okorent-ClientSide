@@ -3,18 +3,20 @@
 import { Link, usePathname } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import Image from "next/image";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import logo from "@/src/assets/images/logo.png";
 import LinkGreen from "@/src/components/linkGreen";
 import LangIcon from "@/src/assets/icons/lang";
 import { useLocale } from "next-intl";
 import { useParams, useSearchParams } from "next/navigation";
+import MenuIcon from "@/src/assets/icons/menu";
 
 function NavLinks() {
   const locale = useLocale();
   const pathname = usePathname();
   const params = useParams();
   const searchParams = useSearchParams();
+  const [showMenu, setShowMenu] = useState(false);
 
   const LinksNav = useMemo(
     () => [
@@ -24,7 +26,8 @@ function NavLinks() {
         url: ROUTES.GUEST.HOMEPAGE,
         active:
           pathname === ROUTES.GUEST.HOMEPAGE ||
-          pathname+`?category=${searchParams.get("category")}` === ROUTES.GUEST.PRODUCTS(searchParams.get("category")) ||
+          pathname + `?category=${searchParams.get("category")}` ===
+            ROUTES.GUEST.PRODUCTS(searchParams.get("category")) ||
           pathname === ROUTES.GUEST.PRODUCTSDETAILS(params.productID),
       },
 
@@ -73,7 +76,23 @@ function NavLinks() {
             className="md:w-[135px] w-[98px] h-auto"
           />
         </Link>
-        <div className="flex items-center gap-6 xl:gap-11">
+        <div className=" lg:hidden flex items-center gap-5">
+          <LinkGreen
+            href={ROUTES.AUTH.SIGNUP}
+            className="h-10  !px-7 text-base"
+          >
+            Signup
+          </LinkGreen>
+          <div
+            className=" cursor-pointer duration-300 hover:shadow-md"
+            onClick={() => {
+              setShowMenu(!showMenu);
+            }}
+          >
+            <MenuIcon />
+          </div>
+        </div>
+        <div className=" hidden lg:flex items-center gap-6 xl:gap-11">
           {/* Map through the links array to render each link */}
           {LinksNav.map((link, i) => (
             <Link
@@ -89,7 +108,7 @@ function NavLinks() {
             </Link>
           ))}
         </div>
-        <div className="flex items-center gap-5 xl:gap-8">
+        <div className=" hidden lg:flex items-center gap-5 xl:gap-8">
           <Link
             href={pathname}
             locale={locale === "en" ? "ar" : "en"}

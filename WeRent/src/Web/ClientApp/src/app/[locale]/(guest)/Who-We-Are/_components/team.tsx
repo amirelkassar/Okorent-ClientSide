@@ -28,13 +28,13 @@ const dataTeam = [
 function Team() {
   return (
     <div className="py-7 mb-20">
-      <h2 className="text-3xl text-center mb-8">Meet out team</h2>
-      <div className="flex justify-between gap-5 max-w-[900px] mx-auto ">
+      <h2 className=" text-2xl lg:text-3xl text-center mb-8">Meet out team</h2>
+      <div className="flex justify-between gap-5 max-w-[900px] mx-auto overflow-x-auto hideScroll">
         {dataTeam.map((item, i) => {
          
 
           return (
-            <div className="w-[252px]" key={i}>
+            <div className="w-[252px] min-w-[190px]" key={i}>
               <div
                 className={`w-full mb-5 relative before:content-[''] before:z-0 before:absolute before:w-full before:h-[75%] before:rounded-[32px] before:opacity-10 before:bottom-0 before:left-1/2 before:-translate-x-1/2 ${
                   (i + 1) % 3 === 0 ? "before:bg-black" : (i + 1) % 3 === 1
@@ -49,8 +49,8 @@ function Team() {
                 />
               </div>
               <div className=" relative">
-                <h3 className="text-base font-Bold text-center">{item.name}</h3>
-                <p className="text-base font-Regular text-center text-blue">
+                <h3 className=" text-sm lg:text-base font-Bold text-center">{item.name}</h3>
+                <p className="text-sm lg:text-base font-Regular text-center text-blue">
                   {item.titleJob}
                 </p>
               </div>

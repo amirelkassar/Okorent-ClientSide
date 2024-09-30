@@ -14,13 +14,13 @@ function PageLogin() {
   const router = useRouter();
   const [AddPhone, setAddPhone] = useState(false);
   return (
-    <div className="flex-1 pt-20 pb-16 flex  min-h-full justify-start">
+    <div className="flex-1 pt-4 lgl:pt-20 pb-8 md:pb-16  flex  min-h-full justify-center lgl:justify-start">
       <div className="max-w-[470px] w-full flex flex-col gap-4">
         <Logo theme="green" />
         {!AddPhone ? (
           <div className="flex-1  content-center">
-            <h1 className="mt-1 font-Bold text-xLarge">Create New Account</h1>
-            <p className="text-grayMedium text-medium mb-6 opacity-">
+            <h1 className="mt-1 font-Bold text-lg lg:text-xLarge">Create New Account</h1>
+            <p className="text-grayMedium text-sm lg:text-medium mb-6 opacity-">
               Let’s get started in leasing and renting some items
             </p>
             <form action="" className="w-full flex flex-col gap-5">
@@ -70,8 +70,8 @@ function PageLogin() {
           </div>
         ) : (
           <div className="flex-1  content-center flex flex-col mt-12">
-            <h1 className="mt-1 font-Bold text-xLarge">One more step</h1>
-            <p className="text-grayMedium text-medium mb-14 max-w-[240px] leading-6">
+            <h1 className="mt-1 font-Bold text-lg lg:text-xLarge">One more step</h1>
+            <p className="text-grayMedium text-sm lg:text-medium mb-14 max-w-[240px] leading-6">
               Enter your phone number below to verify your identity
             </p>
             <form action="" className="w-full flex flex-col ">
@@ -101,7 +101,7 @@ function PageLogin() {
                   }}
                 />
               </div>
-              <div className={"w-full mt-2 flex flex-col gap-2 mt-28"}>
+              <div className={"w-full mt-10 flex flex-col gap-2 md:mt-28"}>
                 <Button
                   onClick={() => {
                     router.push(ROUTES.AUTH.SIGNUP_EMAIL_CONFIRM);
@@ -112,7 +112,7 @@ function PageLogin() {
                 </Button>
               </div>
             </form>
-            <div className="flex items-center justify-center py-5 mt-auto">
+            <div className="flex items-center justify-center py-5 mt-20 lg:mt-auto">
               <h3 className="flex items-center justify-center gap-1 font-Light">
                 Already have an account?
                 <Link

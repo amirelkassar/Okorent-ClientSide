@@ -18,7 +18,7 @@ function Password({ label, placeholder }: PasswordProps) {
       classNames={{
         input:
           "bg-grayLight border-none h-11 rounded-[8px] opacity-100 !placeholder:!text-red placeholder:opacity-100 placeholder:text-[500px] ",
-        label: "text-[16px] mb-2 font-Medium ms-1",
+        label: "text-sm md:text-[16px] mb-2 font-Medium ms-1",
         innerInput:" placeholder:!text-grayMedium  ",
       }}
       visible={visible}

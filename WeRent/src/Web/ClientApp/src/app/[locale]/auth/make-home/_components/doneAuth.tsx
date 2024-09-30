@@ -28,7 +28,7 @@ function DoneAuth({done}:DoneProps) {
             <Image src={imgDone} alt="imgDone" width={298} height={364}/>
           
           </div>
-          <h2 className="text-[32px] font-Bold text-center leading-7">
+          <h2 className="text-2xl lg:text-[32px] font-Bold text-center leading-7">
             We are all done!
           </h2>
           <p className="text-grayMedium font-Light">
