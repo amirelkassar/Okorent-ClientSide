@@ -14,18 +14,21 @@ const center = {
 };
 interface GoogleMapProps {
   index?: number;
-  handleInputChangeLocation?: (index: number, value: string, name: string) => void;
+  handleInputChangeLocation?: (
+    index: number,
+    value: string,
+    name: string
+  ) => void;
   close?: any;
-  setLocation?:React.Dispatch<React.SetStateAction<string>>
+  setLocation?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 function GoogleMapLoc({
   close,
   index,
   handleInputChangeLocation,
-  setLocation
+  setLocation,
 }: GoogleMapProps) {
-
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyCdBmOtAFzrgkikmCDsk_lb0z2EU_eYSbY",
@@ -45,13 +48,13 @@ function GoogleMapLoc({
     if (data.results && data.results[0]) {
       const place = data.results[0];
       const name = place.formatted_address || ""; // Store formatted address as place name
-      setLocation&&setLocation(name)
+      setLocation && setLocation(name);
       setPlaceName(name);
 
-      if (handleInputChangeLocation&&index) {
-        console.log(index, name, 'address');
-        
-        handleInputChangeLocation(index, name, 'address');
+      if (handleInputChangeLocation && index) {
+        console.log(index, `place ${index}`, "address");
+
+        handleInputChangeLocation(index, `place ${index}`, "address");
       }
     }
   };
@@ -72,7 +75,10 @@ function GoogleMapLoc({
   return (
     <div className=" max-w-[640px] h-auto min-h-[360px] relative">
       <div className="flex-1 flex p-[1px] rounded-2xl h-11 lg:h-[66px] mb-3 lg:mb-6 border-2 lg:border-[3px] border-green/30 lg:ps-6 bg-white overflow-hidden">
-        <SearchIcon className={"w-[18px] h-auto hidden lg:block"} fill="#0F2A43" />
+        <SearchIcon
+          className={"w-[18px] h-auto hidden lg:block"}
+          fill="#0F2A43"
+        />
         <TextInput
           placeholder="What are you looking to rent today?"
           type="text"
@@ -107,7 +113,17 @@ function GoogleMapLoc({
           </h3>
         </div>
 
-        <Button onClick={close} className={"w-full text-sm lg:text-base h-10 lg:h-[50px]"}>
+        <Button
+          onClick={() => {
+            if (handleInputChangeLocation && index) {
+              console.log(index, `place ${index}`, "address");
+
+              handleInputChangeLocation(index, `place ${index}`, "address");
+            }
+            close();
+          }}
+          className={"w-full text-sm lg:text-base h-10 lg:h-[50px]"}
+        >
           Select this location
         </Button>
       </div>
