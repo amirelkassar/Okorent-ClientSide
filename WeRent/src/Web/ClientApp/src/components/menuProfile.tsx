@@ -10,6 +10,7 @@ import SettingsIcon from "../assets/icons/Settings";
 import SubscriptionIcon from "../assets/icons/Subscription";
 import { Link } from "../navigation";
 import ROUTES from "../routes";
+import SwitchAvailable from "./switchAvailable";
 function MenuProfile() {
   const [opened, setOpened] = useState(false);
   return (
@@ -37,7 +38,10 @@ function MenuProfile() {
           />
         </button>
       </Menu.Target>
-      <Menu.Dropdown className="pt-3">
+      <Menu.Dropdown className="pt-3 !w-[172px] ">
+        <Menu.Item closeMenuOnClick={false} className="  py-0 h-[30px] px-1 !mb-2 text-[14px] font-SemiBold rounded-lg">
+          <SwitchAvailable />
+        </Menu.Item>
         <Menu.Item
           leftSection={<ProfileIcon />}
           className=" hover:bg-green/15 py-0 h-[30px] px-1 text-[14px] font-SemiBold rounded-lg"
