@@ -13,7 +13,6 @@ import OrderCard from "./orderCard";
 import { EventSourceInput } from "@fullcalendar/core";
 import RentSwitch from "@/src/components/RentSwitch";
 import { Select } from "@mantine/core";
-import ArrowDownIcon from "@/src/assets/icons/arrowDown";
 import DownIcon from "@/src/assets/icons/down";
 import { useMediaQuery } from "@mantine/hooks";
 
@@ -92,8 +91,8 @@ const CustomCalendar: React.FC = () => {
       {
         id: "2",
         title: "alialialialialialialialiali",
-        start: "2024-09-03",
-        end: "2024-09-09",
+        start: "2024-10-03",
+        end: "2024-10-10",
         groupId: "2",
         resourceId: "2",
         interactive: false,
@@ -112,8 +111,8 @@ const CustomCalendar: React.FC = () => {
       {
         id: "3",
         title: "ali",
-        start: "2024-09-20",
-        end: "2024-09-26",
+        start: "2024-10-20",
+        end: "2024-10-26",
         resourceId: "3",
         groupId: "3",
         interactive: false,
@@ -132,8 +131,8 @@ const CustomCalendar: React.FC = () => {
       {
         id: "4",
         title: "ahmed ali",
-        start: "2024-09-01",
-        end: "2024-09-07",
+        start: "2024-10-01",
+        end: "2024-10-07",
         resourceId: "4",
         groupId: "4",
         interactive: false,
@@ -152,8 +151,8 @@ const CustomCalendar: React.FC = () => {
       {
         id: "5",
         title: "ahmed ali",
-        start: "2024-09-03",
-        end: "2024-09-10",
+        start: "2024-10-03",
+        end: "2024-10-10",
         resourceId: "5",
         groupId: "5",
         interactive: false,
@@ -172,8 +171,8 @@ const CustomCalendar: React.FC = () => {
       {
         id: "6",
         title: "ahmed ali",
-        start: "2024-09-04",
-        end: "2024-09-10",
+        start: "2024-10-04",
+        end: "2024-10-10",
         resourceId: "6",
         groupId: "6",
         interactive: false,
@@ -225,7 +224,7 @@ const CustomCalendar: React.FC = () => {
       },
       {
         id: "4",
-        title: "Iphone 16 Pro Max",
+        title: "Iphone 16 Pro Max 54 54 ",
         productType: "Phone",
         img: phone,
         code: "#17421",
@@ -286,20 +285,22 @@ const CustomCalendar: React.FC = () => {
           searchable
           classNames={{
             input:
-              " text-black rounded-xl font-semibold h-full border-none placeholder:text-grayMedium placeholder:opacity-100 ",
+              " text-black rounded-xl  w-[190px] text-sm lg:text-base font-semibold h-full border-none placeholder:text-grayMedium placeholder:opacity-100 ",
 
             wrapper: "h-full",
             dropdown:
-              "bg-white text-black rounded-xl border border-green/50  py-2",
-            option: "hover:bg-green hover:text-white duration-300 ",
+              "bg-white text-black rounded-xl border border-green/50  py-2 text-sm lg:text-base",
+            option: "hover:bg-green hover:text-white duration-300 text-sm lg:text-base ",
           }}
-          className="h-10   duration-200 min-h-10  bg-white rounded-xl border border-green text-grayMedium"
+          className="h-10 order-2 mdl:order-1   duration-200 min-h-10  bg-white rounded-xl border border-green text-grayMedium"
         />
 
-        <RentSwitch typeUser='user' />
-        <div className="flex items-center gap-5 ">
+        <div className="flex items-center justify-center order-1 mdl:order-2 w-full mdl:w-fit mb-8 mdl:mb-0">
+          <RentSwitch typeUser="user" />
+        </div>
+        <div className="flex items-center gap-5 order-3">
           <Button
-            className={`px-4 py-2 ${
+            className={` text-sm px-2 py-1 h-10 mdl:h-12 ${
               currentView === "resourceTimelineMonth"
                 ? ""
                 : "bg-grayBack text-blue border-grayBack hover:border-grayBack hover:shadow-md"
@@ -309,7 +310,7 @@ const CustomCalendar: React.FC = () => {
             Daily
           </Button>
           <Button
-            className={`px-4 py-2 ${
+            className={` text-sm px-4 py-1 h-10 mdl:h-12 ${
               currentView === "resourceTimelineWeek"
                 ? ""
                 : "bg-grayBack text-blue border-grayBack hover:border-grayBack hover:shadow-md"
@@ -320,17 +321,18 @@ const CustomCalendar: React.FC = () => {
           </Button>
         </div>
       </div>
+
       <div className="w-full">
         <Suspense fallback={<div>Loading Calendar...</div>}>
           <FullCalendar
             views={{
               resourceTimelineMonth: {
                 type: "resourceTimeline",
-                duration: { months: 1 }, 
+                duration: { months: 1 },
               },
               resourceTimelineWeek: {
                 type: "resourceTimeline",
-                duration: { weeks: 1 }, 
+                duration: { weeks: 1 },
               },
             }}
             eventOverlap={false}
@@ -348,8 +350,8 @@ const CustomCalendar: React.FC = () => {
             stickyFooterScrollbar={false}
             height={"870px"}
             scrollTimeReset={false}
-            slotMinWidth={74}
-            resourceAreaWidth={isMobile?0:400}
+            slotMinWidth={isMobile ? 40 : 74}
+            resourceAreaWidth={isMobile ? 120 : 400}
             eventDurationEditable={false}
             eventLongPressDelay={500}
             resourcesInitiallyExpanded={false}
@@ -357,11 +359,11 @@ const CustomCalendar: React.FC = () => {
             eventContent={(eventInfo) => <CardCalender eventInfo={eventInfo} />}
             eventResourceEditable={true}
             resourceAreaHeaderContent={() => (
-              <div className="flex items-center gap-2 w-full ps-7 flex-1 h-[70px]">
-                <div className=" size-10 rounded-full flex items-center justify-center p-1 bg-[#E5F1FB]">
+              <div className="flex items-center gap-2 w-full ps-2 lgl:ps-7 flex-1 h-[54px] lgl:h-[70px]">
+                <div className=" size-8 lgl:size-10 rounded-full flex items-center justify-center p-1 bg-[#E5F1FB]">
                   <OrdersIcon />
                 </div>
-                <h2 className="text-3xl font-SemiBold">Orders</h2>
+                <h2 className="text-sm lgl:text-3xl font-SemiBold">Orders</h2>
               </div>
             )}
             resourceLabelContent={(resource) => OrderCard(resource)}
@@ -370,11 +372,11 @@ const CustomCalendar: React.FC = () => {
               if (currentView === "resourceTimelineMonth") {
                 return `${args.date.getDate()} ${args.date.toLocaleString(
                   "default",
-                  { weekday: "short" }
+                  { weekday: isMobile ? "narrow" : "short" }
                 )}`;
               } else if (currentView === "resourceTimelineWeek") {
                 const weekNumber = getWeekNumberInMonth(args.date);
-                return `Week ${weekNumber}`; 
+                return `Week ${weekNumber}`;
               }
             }}
             slotDuration={{
@@ -383,19 +385,18 @@ const CustomCalendar: React.FC = () => {
             slotLabelFormat={{
               weekday: "short",
               day:
-                currentView === "resourceTimelineMonth" ? "numeric" : "numeric", 
+                currentView === "resourceTimelineMonth" ? "numeric" : "numeric",
               week:
-                currentView === "resourceTimelineWeek" ? "numeric" : undefined, 
+                currentView === "resourceTimelineWeek" ? "numeric" : undefined,
             }}
             headerToolbar={{
-              left: "", 
+              left: "",
               center: "prev,title,next",
-              right: "", 
+              right: "",
             }}
           />
         </Suspense>
       </div>
-
       {/* Right-side Event Detail Panel */}
       {selectedEvent && (
         <div className="w-1/3 bg-white p-4 rounded shadow-lg">

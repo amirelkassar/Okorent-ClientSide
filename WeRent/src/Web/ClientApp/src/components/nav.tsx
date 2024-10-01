@@ -48,7 +48,7 @@ function Nav({ linkLogo = "#" }: NavProps) {
       {
         id: 1,
         name: "Homepage",
-        icon:<HomepageIcon/>,
+        icon: <HomepageIcon />,
         url: ROUTES.USER.HOMEPAGE,
         active: pathname === ROUTES.USER.HOMEPAGE,
       },
@@ -56,14 +56,14 @@ function Nav({ linkLogo = "#" }: NavProps) {
       {
         id: 2,
         name: "Dashboard",
-        icon:<DashboardIcon/>,
+        icon: <DashboardIcon />,
         url: ROUTES.USER.DASHBOARD,
         active: pathname.includes(ROUTES.USER.DASHBOARD),
       },
       {
         id: 3,
         name: "My Listings",
-        icon:<ListingsIcon/>,
+        icon: <ListingsIcon />,
         url: ROUTES.USER.LISTINGS,
         active: pathname.includes(ROUTES.USER.LISTINGS),
         activeDetails:
@@ -76,7 +76,7 @@ function Nav({ linkLogo = "#" }: NavProps) {
       {
         id: 4,
         name: "Bookings",
-        icon:<BookingsIcon/>,
+        icon: <BookingsIcon />,
         url: ROUTES.USER.BOOKINGS,
         active: pathname === ROUTES.USER.BOOKINGS,
       },
@@ -84,49 +84,49 @@ function Nav({ linkLogo = "#" }: NavProps) {
       {
         id: 5,
         name: "Inbox",
-        icon:<InboxIcon/>,
+        icon: <InboxIcon />,
         url: ROUTES.USER.INBOX,
         active: pathname === ROUTES.USER.INBOX,
       },
       {
         id: 6,
         name: "Clients",
-        icon:<ClientsIcon/>,
+        icon: <ClientsIcon />,
         url: ROUTES.USER.CLIENTS,
         active: pathname === ROUTES.USER.CLIENTS,
       },
       {
         id: 7,
         name: "Wishlist",
-        icon:<WishlistIcon/>,
+        icon: <WishlistIcon />,
         url: ROUTES.USER.WISHLIST,
         active: pathname === ROUTES.USER.WISHLIST,
       },
       {
         id: 8,
         name: "Calendar",
-        icon:<CalendarIcon/>,
+        icon: <CalendarIcon />,
         url: ROUTES.USER.CALENDAR,
         active: pathname === ROUTES.USER.CALENDAR,
       },
       {
         id: 9,
         name: "Billing",
-        icon:<BillingIcon/>,
+        icon: <BillingIcon />,
         url: ROUTES.USER.BILLING,
         active: pathname === ROUTES.USER.BILLING,
       },
       {
         id: 10,
         name: "Support",
-        icon:<SupportIcon/>,
+        icon: <SupportIcon />,
         url: ROUTES.USER.SUPPORT,
         active: pathname === ROUTES.USER.SUPPORT,
       },
       {
         id: 11,
         name: "Notifications",
-        icon:<NotificationsIcon/>,
+        icon: <NotificationsIcon />,
         url: ROUTES.USER.SUPPORT,
         active: pathname === ROUTES.USER.SUPPORT,
       },
@@ -136,7 +136,13 @@ function Nav({ linkLogo = "#" }: NavProps) {
   return (
     <nav className="px-4 lg:px-16 py-5 lg:py-8 flex items-center justify-between gap-4">
       <Link href={linkLogo}>
-        <Image src={logo} alt="logo" width={135} height={45} className="md:w-[135px] w-[98px] h-auto" />
+        <Image
+          src={logo}
+          alt="logo"
+          width={135}
+          height={45}
+          className="md:w-[135px] w-[98px] h-auto"
+        />
       </Link>
       <div className="hidden mdl:flex items-center gap-3">
         <Link
@@ -214,12 +220,22 @@ function Nav({ linkLogo = "#" }: NavProps) {
                               : " bg-transparent"
                           } rounded-lg min-h-[60px] relative  before:w-[6px] before:content-[''] hover:bg-green/5  before:h-12 before:-start-5 before:absolute before:top-1/2 before:-translate-y-1/2 before:rounded-e-lg  flex items-center gap-5 px-8 text-nowrap font-SemiBold duration-200 text-black/80 hover:text-black`}
                         >
-                         {link.icon}
+                          {link.icon}
                           {link.name}
                         </Link>
                       </div>
                     );
                   })}
+                  <div  onClick={() => setShowMenu(false)}>
+                    <Link
+                      href={pathname}
+                      locale={locale === "en" ? "ar" : "en"}
+                      className={`text-base py- ${" bg-transparent"} rounded-lg min-h-[60px] relative  before:w-[6px] before:content-[''] hover:bg-green/5  before:h-12 before:-start-5 before:absolute before:top-1/2 before:-translate-y-1/2 before:rounded-e-lg  flex items-center gap-5 px-8 text-nowrap font-SemiBold duration-200 text-black/80 hover:text-black`}
+                    >
+                      <LangIcon />
+                      Language
+                    </Link>
+                  </div>
                 </div>
                 <Link
                   href={ROUTES.USER.ADDLIST}

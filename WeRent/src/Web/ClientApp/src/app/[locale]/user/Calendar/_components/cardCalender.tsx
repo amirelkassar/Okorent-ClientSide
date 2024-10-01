@@ -25,25 +25,31 @@ const formatDate = (dateString: string) => {
 };
 function CardCalender({ eventInfo }: any) {
   return (
-    <div className="flex my-3  items-center justify-between w-full max-w-[calc(100%-32px)] min-h-16 mx-auto   overflow-hidden px-4 py-2  gap-4 bg-white border-green border rounded-xl shadow-lg">
-      <div className="flex items-center gap-2 flex-1 w-[calc(100%-90px)] ">
+    <div className="flex flex-col lgl:flex-row my-3  lgl:items-center lgl:justify-between w-full max-w-[calc(100%-32px)] min-h-16 mx-auto   overflow-hidden px-2 lgl:px-4 py-2 gap-1  lgl:gap-4 bg-white lgl:border-green border rounded-xl shadow-lg">
+      <div className="flex items-center gap-2 flex-1 lgl:w-[calc(100%-90px)] ">
         <Image
           alt="event"
           src={eventInfo.event._def.extendedProps.image}
           className=" size-8 rounded-full object-cover"
         />
         <div className="flex-1 max-w-full">
-          <h3 className="text-black text-sm font-SemiBold !truncate max-w-full">
-            {eventInfo.event._def.title}d
+          <h3 className="text-black text-[10px] mb-1 lgl:text-sm font-SemiBold !truncate max-w-full">
+            {eventInfo.event._def.title}
           </h3>
-          <p className="text-xs font-Regular text-grayMedium !truncate text-nowrap max-w-full   w-full">
+          <div className=" block lgl:hidden">
+          {GetStatus(eventInfo.event._def.extendedProps.status)}
+          </div>
+          <p className=" hidden lgl:block text-xs font-Regular text-grayMedium !truncate text-nowrap max-w-full   w-full">
             {formatDate(eventInfo.event._instance.range.start) +
               " to " +
               formatDate(eventInfo.event._instance.range.end)}
           </p>
         </div>
       </div>
+      <div className=" lgl:block hidden">
       {GetStatus(eventInfo.event._def.extendedProps.status)}
+
+      </div>
     </div>
   );
 }

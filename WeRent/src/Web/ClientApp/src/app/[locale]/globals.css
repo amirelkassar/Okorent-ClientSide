@@ -221,13 +221,15 @@ li.search::before {
   box-shadow: 0px 0px 5px rgba(162, 162, 162, 0.422);
   @apply bg-transparent;
 }
+.fc .fc-toolbar-title {
+  @apply text-base lgl:text-2xl m-0 font-SemiBold
+}
 .fc-scrollgrid .fc-scroller {
   overflow-y: auto !important;
 }
 .fc-scrollgrid thead .fc-scrollgrid-section td.fc-resource-timeline-divider {
-  width: 0;
-  border: none;
   box-shadow: 7px 0 15px #9d1313;
+  @apply w-0 border-none;
 }
 .fc .fc-datagrid-header .fc-datagrid-cell-frame {
   box-shadow: 7px 0 15px #0000001a;
