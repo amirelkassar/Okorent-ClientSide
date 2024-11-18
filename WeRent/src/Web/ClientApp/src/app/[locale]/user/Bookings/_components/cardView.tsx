@@ -48,74 +48,82 @@ function CardView({
         </div>
         {first && haveRentSwitch && (
           <div className="mx-auto">
-            <RentSwitch typeUser='user' />
+            <RentSwitch typeUser="user" />
           </div>
         )}
-        <div className="  xl:flex hidden items-center gap-7">
-          <div className="flex gap-4">
-            <div
-              ref={prevRef}
-              className={`cursor-pointer duration-200 swiper-button-prev-${title}`}
-            >
-              <ArrowLeftIcon fill="#0F2A43" />
-            </div>
+        <Link
+          href={ROUTES.USER.BOOKINGSID(title.split(" ").join("-"))}
+          className={` underline text-sm lg:text-lg min-w-fit ${
+            first
+              ? "order-first w-full lg:w-fit lg:order-none -mt-5 lg:mt-0  text-end"
+              : ""
+          }     font-medium`}
+        >
+          View all
+        </Link>
+      </div>
+      <div className="w-full relative flex items-center">
+        <div className=" my-4 w-full xl:max-w-[calc(100%-80px)]">
+          <Swiper
+            onSwiper={handleSwiper}
+            slidesPerView={1.4}
+            spaceBetween={10}
+            navigation={{
+              prevEl: prevRef.current,
+              nextEl: nextRef.current,
+            }}
+            modules={[Navigation]}
+            className={"mySwiper "}
+            breakpoints={{
+              0: {
+                slidesPerView: 1.2,
+                spaceBetween: 10,
+              },
+              650: {
+                slidesPerView: 2,
+              },
+              992: {
+                slidesPerView: 2.5,
+                spaceBetween: 30,
+              },
+              1200: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+              },
+            }}
+          >
+            <SwiperSlide>
+              <OneCardView />
+            </SwiperSlide>
+            <SwiperSlide>
+              <OneCardView />
+            </SwiperSlide>
+            <SwiperSlide>
+              <OneCardView />
+            </SwiperSlide>
+            <SwiperSlide>
+              <OneCardView />
+            </SwiperSlide>
+            <SwiperSlide>
+              <OneCardView />
+            </SwiperSlide>
+          </Swiper>
+        </div>
+        <div className="xl:flex hidden gap-3  absolute top-1/2 -translate-y-1/2 -right-10">
+          <div
+            ref={prevRef}
+            className={`cursor-pointer duration-200 swiper-button-prev-${title}`}
+          >
+            <ArrowLeftIcon fill="#0F2A43" />
+          </div>
 
-            <div
-              ref={nextRef}
-              className={`cursor-pointer duration-200 swiper-button-next-${title}`}
-            >
-              <ArrowRightIcon fill="#0F2A43" />
-            </div>
+          <div
+            ref={nextRef}
+            className={`cursor-pointer duration-200 swiper-button-next-${title}`}
+          >
+            <ArrowRightIcon fill="#0F2A43" />
           </div>
         </div>
-      </div>
-      <div className="max-w-[1270px] my-4">
-        <Swiper
-          onSwiper={handleSwiper}
-          slidesPerView={1.4}
-          spaceBetween={10}
-          navigation={{
-            prevEl: prevRef.current,
-            nextEl: nextRef.current,
-          }}
-          modules={[Navigation]}
-          className={"mySwiper "}
-          breakpoints={{
-            0: {
-              slidesPerView: 1.2,
-              spaceBetween:10,
-
-            },
-            650: {
-              slidesPerView: 2,
-            },
-            992: {
-              slidesPerView: 2.5,
-              spaceBetween:30,
-            },
-            1200: {
-              slidesPerView: 3,
-              spaceBetween:30,
-
-            },
-          }}
-        >
-          <SwiperSlide>
-            <OneCardView />
-          </SwiperSlide>
-          <SwiperSlide>
-            <OneCardView />
-          </SwiperSlide>
-          <SwiperSlide>
-            <OneCardView />
-          </SwiperSlide>
-          <SwiperSlide>
-            <OneCardView />
-          </SwiperSlide>
-          <SwiperSlide>
-            <OneCardView />
-          </SwiperSlide>
-        </Swiper>
       </div>
     </div>
   );

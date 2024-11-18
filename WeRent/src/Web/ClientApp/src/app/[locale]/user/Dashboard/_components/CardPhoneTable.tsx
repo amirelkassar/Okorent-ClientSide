@@ -63,9 +63,9 @@ function CardPhoneTable({dataCard}:any) {
             <ul className="flex flex-col gap-2">
               <li className="flex items-center justify-between gap-3">
                 <h5 className="text-base font-SemiBold">Payment Status</h5>
-                <p className="text-base text-grayMedium">
+                <div className="text-base text-grayMedium">
                   {GetStatusPayment("Pending")}
-                </p>
+                </div>
               </li>
             </ul>
           </div>

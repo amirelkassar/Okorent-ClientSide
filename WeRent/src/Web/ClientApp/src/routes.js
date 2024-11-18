@@ -36,6 +36,7 @@ const ROUTES = {
     RENTALS: "/user/Rentals",
     REQUESTS: "/user/Requests",
     BOOKINGS: "/user/Bookings",
+    BOOKINGSID: (id)=>`/user/Bookings/${id}`,
     INBOX: "/user/Inbox",
     CLIENTS: "/user/Clients",
     WISHLIST: "/user/Wishlist",

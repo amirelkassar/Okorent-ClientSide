@@ -18,7 +18,7 @@ function page() {
       </div>
       <div className="mt-6 lg:mt-10">
         <DataTable
-          title="Listings Overview"
+          title="Rented Listings Overview"
           viewAll={ROUTES.USER.DASHBOARD}
           data={RequestsData}
           columns={columns}

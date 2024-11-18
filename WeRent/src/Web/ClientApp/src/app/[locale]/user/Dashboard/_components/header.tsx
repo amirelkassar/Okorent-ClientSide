@@ -42,18 +42,21 @@ function HeaderDash() {
     <div>
       <div className="flex items-center justify-between flex-col lg:flex-row flex-wrap gap-4 mb-9 lg:mb-14">
         <div className="flex gap-3 lg:gap-5 lg:items-end items-center flex-col lg:flex-row">
-          <Image alt="tom" src={tom} priority className="w-[96px] lg:w-[154px] h-auto" />
+          <Image
+            alt="tom"
+            src={tom}
+            priority
+            className="w-[96px] lg:w-[154px] h-auto"
+          />
           <div className="lg:mb-4">
             <h2 className="text-grayMedium text-xl lg:text-[24px] text-center lg:text-start font-Medium">
               Welcome Back, Tom 👋{" "}
             </h2>
-            <h3 className="lg:text-[32px] text-2xl text-center lg:text-start font-Bold">Here is an overview</h3>
+            <h3 className="lg:text-[32px] text-2xl text-center lg:text-start font-Bold">
+              Here is an overview
+            </h3>
           </div>
         </div>
-        <Button className={"h-10 gap-2"}>
-          <SwitchIcon />
-          <p className="text-white text-base">Switch to Pro View</p>
-        </Button>
       </div>
 
       <div className="flex  justify-between gap-5 lg:gap-10 overflow-x-auto hideScroll px-3 pb-3 lg:pb-0 lg:px-0 lg:flex-wrap">

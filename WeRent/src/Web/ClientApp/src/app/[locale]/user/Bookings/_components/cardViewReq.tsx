@@ -85,7 +85,7 @@ function CardViewReq({
           </div>
         )}
         <Link
-          href={ROUTES.USER.LISTINGS}
+          href={ROUTES.USER.BOOKINGSID(title.split(" ").join("-"))}
           className={` underline text-sm lg:text-lg min-w-fit ${
             first ? "order-first w-full lg:w-fit lg:order-none -mt-5 lg:mt-0  text-end" : ""
           }     font-medium`}

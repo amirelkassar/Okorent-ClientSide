@@ -17,7 +17,10 @@ function NavLinks() {
         id: 1,
         name: "Homepage",
         url: ROUTES.USER.HOMEPAGE,
-        active: path === ROUTES.USER.HOMEPAGE,
+        active:
+          path === ROUTES.USER.HOMEPAGE ||
+          path + `?category=${searchParams.get("category")}` ===
+            ROUTES.USER.CATEGORIES(searchParams.get("category")),
       },
 
       {
@@ -42,7 +45,9 @@ function NavLinks() {
         id: 4,
         name: "Bookings",
         url: ROUTES.USER.BOOKINGS,
-        active: path === ROUTES.USER.BOOKINGS,
+        active:
+          path === ROUTES.USER.BOOKINGS ||
+          path === ROUTES.USER.BOOKINGSID(params.BookingID),
       },
 
       {
@@ -96,24 +101,30 @@ function NavLinks() {
       },
       {
         id: 1,
+        name: `Bookings / ${params.BookingID?.toString().split("-").join('  ')}`,
+        url: ROUTES.USER.BOOKINGS,
+        active: path === ROUTES.USER.BOOKINGSID(params.BookingID),
+      },
+      {
+        id: 2,
         name: "Product Details ",
         url: ROUTES.USER.PRODUCTDETAILS(params.productID),
         active: path === ROUTES.USER.PRODUCTDETAILS(params.productID),
       },
       {
-        id: 2,
+        id: 3,
         name: "Subscription",
         url: ROUTES.USER.SUBSCRIPTION,
         active: path === ROUTES.USER.SUBSCRIPTION,
       },
       {
-        id: 3,
+        id: 4,
         name: "My Profile",
         url: ROUTES.USER.PROFILE,
         active: path === ROUTES.USER.PROFILE,
       },
       {
-        id: 4,
+        id: 5,
         name: "Wallet",
         url: ROUTES.USER.WALLET,
         active: path === ROUTES.USER.WALLET,
@@ -161,7 +172,9 @@ function NavLinks() {
                 >
                   <Link
                     href={link.url}
-                    className={`${link.active && "!font-Bold !text-black"} text-[16px] text-nowrap font-SemiBold duration-200 text-black/80 hover:text-black`}
+                    className={`${
+                      link.active && "!font-Bold !text-black"
+                    } text-[16px] text-nowrap font-SemiBold duration-200 text-black/80 hover:text-black`}
                   >
                     {link.name}
                   </Link>

@@ -18,7 +18,7 @@ function CardRentals({ data, Fav = false, edit = false }: CardRentalsProps) {
 const pathName = usePathname()
   return (
     <div>
-      <div className="w-full flex-1 max-w-[270px] min-w-[200px] p-2 lg:p-4 bg-white/20 rounded-3xl block border border-black/25 duration-200 hover:shadow-md">
+      <div className="w-full flex-1 max-w-[270px] min-w-[200px] p-2 lg:p-4 bg-white/80 rounded-3xl block border border-black/25 duration-200 hover:shadow-md">
         <div className=" relative mb-[6px] md:mb-3">
           <Image
             alt="Rentals"
