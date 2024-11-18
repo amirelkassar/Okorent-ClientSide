@@ -25,7 +25,7 @@ const dataLookingFor = [
 function LookingFor() {
   return (
     <div className=" relative z-[2]">
-      <h2 className="text-2xl mdl:text-[48px] mb-8  mdl:mb-3 text-center">
+      <h2 className="text-2xl mdl:text-[48px] leading-normal mb-6  mdl:mb-3 text-center">
         What are you looking for
       </h2>
       <div className="mx-auto mb-8 w-fit">

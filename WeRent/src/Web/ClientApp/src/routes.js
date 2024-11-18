@@ -52,11 +52,11 @@ const ROUTES = {
 
   },
   GUEST: {
-    HOMEPAGE: "/Home",
-    ALLPRODUCTS:`/Home/Products`,
-    PRODUCTS: (id)=>`/Home/Products?category=${id}`,
-    PRODUCTSDETAILS:(id)=> `/Home/Products/${id}`,
-    PROFILE:(id,id2)=> `/Home/Products/${id}/profile/${id2}`,
+    HOMEPAGE: "/",
+    ALLPRODUCTS:`/Products`,
+    PRODUCTS: (id)=>`/Products?category=${id}`,
+    PRODUCTSDETAILS:(id)=> `/Products/${id}`,
+    PROFILE:(id,id2)=> `/Products/${id}/profile/${id2}`,
     ADDLISTING: "Add-Listing",
     WHOWEARE: "/Who-We-Are",
     HOWITWORKS: "/How-It-Works",

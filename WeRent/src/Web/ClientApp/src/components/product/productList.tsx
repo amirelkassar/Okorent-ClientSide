@@ -26,7 +26,7 @@ function ProductList({ link, title, data, more=true }: ProductListProps) {
       )}
 
       {data.length > 0 && (
-        <div className="flex gap-3 lg:gap-8  flex-wrap">
+        <div className="flex gap-3 lg:gap-4  flex-wrap">
           {data?.map((item, i) => {
             return <CardRentals data={item} key={i} Fav={true} />;
           })}

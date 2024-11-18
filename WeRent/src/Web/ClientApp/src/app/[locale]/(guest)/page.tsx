@@ -1,9 +1,9 @@
 import React from "react";
-import Categories from "../_components/categories";
 import { Rentals } from "@/src/lib/dataUser";
-import HeaderAdmin from "../_components/headerAdmin";
-import LookingFor from "../_components/lookingFor";
 import ProductList from "@/src/components/product/productList";
+import HeaderAdmin from "./_components/headerAdmin";
+import LookingFor from "./_components/lookingFor";
+import Categories from "./_components/categories";
 
 function page() {
   return (

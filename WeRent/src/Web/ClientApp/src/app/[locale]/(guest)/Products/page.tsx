@@ -5,9 +5,10 @@ import { Rentals } from "@/src/lib/dataUser";
 import { MultiSelect } from "@mantine/core";
 import CantFind from "./_components/CantFind";
 import SearchItem from "./_components/searchItem";
-import SelectLocation from "../../_components/selectLocation";
-import SelectDate from "../../_components/selectDate";
+
 import ProductList from "@/src/components/product/productList";
+import SelectLocation from "../_components/selectLocation";
+import SelectDate from "../_components/selectDate";
 
 const subcategories: string[] = [
   "TV",

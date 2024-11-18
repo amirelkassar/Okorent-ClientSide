@@ -101,7 +101,7 @@ function NavLinks() {
         <div className=" lg:hidden flex items-center gap-5">
           <LinkGreen
             href={ROUTES.AUTH.SIGNUP}
-            className="h-10  !px-7 text-base"
+            className="h-10  !px-5 text-sm mdl:text-base"
           >
             Signup
           </LinkGreen>
