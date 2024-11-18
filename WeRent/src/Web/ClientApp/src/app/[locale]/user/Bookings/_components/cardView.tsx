@@ -1,3 +1,4 @@
+'use client';
 import ListIcon from "@/src/assets/icons/list";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
