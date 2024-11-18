@@ -28,7 +28,7 @@ export default function RootLayout({
           className="w-screen max-h-[150vh] h-full absolute top-0 left-0"
           style={{
             background:
-              "linear-gradient(180deg, #F0F6FB 0%, #F0F6FB 35%,#EBF6EDBD 70%, #DFF5C608 88%, #DFF5C608 100%)"
+              "linear-gradient(267deg, rgba(16,176,193,1) 60%, rgba(62,221,238,1) 100%)"
           }}
         ></div>
         <div className=" relative">
