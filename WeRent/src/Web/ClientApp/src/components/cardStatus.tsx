@@ -13,14 +13,14 @@ function CardStatus({
 }: CardStatusProps) {
   return (
     <p
-      className={` px-2 lg:px-3 w-fit text-nowrap rounded-lg gap-[6px] flex items-center text-[10px] lg:text-[14px] justify-center h-6 min-h-max bg-grayBack ${
+      className={` px-2 lg:px-3 w-fit text-nowrap rounded-lg gap-[6px] flex items-center text-[10px] lg:text-[14px] justify-center h-6 min-h-max  ${
         type === "blue"
-          ? "text-blue bg-blue/10"
+          ? " bg-blue/10"
           : type === "green"
-          ? "text-green bg-green/10"
+          ? " bg-green/10"
           : type === "red"
-          ? "text-red bg-red/10"
-          : "text-grayMedium bg-grayMedium/10"
+          ? " bg-red/10"
+          : " bg-black/10"
       }`}
     >
       {circle && (
@@ -32,7 +32,7 @@ function CardStatus({
               ? "bg-green"
               : type === "red"
               ? "bg-red"
-              : "bg-grayMedium"
+              : "bg-black"
           } ${animation && "animate-pulse "}`}
         ></span>
       )}

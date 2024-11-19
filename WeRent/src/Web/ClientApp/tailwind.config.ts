@@ -32,9 +32,11 @@ module.exports = {
         grayMedium: '#6F6B7D',
         grayDark: '#344050',
         purple: '#8A22A0',
-        red: '#FF3D3D',
+        red: '#E31B1B',
         blue: '#006AFF',
+        blueLight:'#DFEBF4',
         black: '#0F2A43',
+  
       },
       screens: {
         xs: '320px',

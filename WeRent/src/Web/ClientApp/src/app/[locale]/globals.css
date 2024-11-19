@@ -222,7 +222,7 @@ li.search::before {
   @apply bg-transparent;
 }
 .fc .fc-toolbar-title {
-  @apply text-base lgl:text-2xl m-0 font-SemiBold
+  @apply text-base lgl:text-2xl m-0 font-SemiBold;
 }
 .fc-scrollgrid .fc-scroller {
   overflow-y: auto !important;
@@ -261,6 +261,7 @@ li.search::before {
   background-size: cover;
   z-index: 0;
 }
-.TopBarChart:hover .nameLine{
-@apply block
+.TopBarChart:hover .nameLine {
+  @apply block;
 }
+

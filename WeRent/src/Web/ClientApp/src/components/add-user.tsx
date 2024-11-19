@@ -6,12 +6,14 @@ import { useDisclosure } from "@mantine/hooks";
 import Button from "./button";
 import Input from "./input";
 import Password from "./password";
+import AddUserIcon from "../assets/icons/addUser";
 
 function AddUser() {
   const [opened, { open, close }] = useDisclosure(false);
   return (
     <>
       <Button className={"h-10 w-fit gap-3 "} onClick={open}>
+        <AddUserIcon/>
         Add user
       </Button>
       <ModalComp title="Add user" opened={opened} close={close}>

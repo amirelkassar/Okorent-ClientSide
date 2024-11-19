@@ -22,7 +22,6 @@ export type MedicalTeamTableData = {
   rating: number;
   img: StaticImageData;
   verified: boolean;
-  accountDetails: string;
   date: string;
 };
 
@@ -44,7 +43,10 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
       const id = row.original.id;
 
       return (
-        <Link href={ROUTES.ADMIN.ACCOUNTSDETAILS(id)} className="flex items-center gap-2">
+        <Link
+          href={ROUTES.ADMIN.ACCOUNTSDETAILS(id)}
+          className="flex items-center gap-2"
+        >
           <Image
             src={img}
             alt={name}
@@ -60,19 +62,11 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
       );
     },
   },
-
   {
-    accessorKey: "verified",
-    header: "Status",
-    cell: ({ getValue }) => {
-      const status = getValue<string>();
-      return status ? (
-        <CardStatus title={'Verified'} type="blue" />
-      ) : (
-        <CardStatus title={'Not Verified'} type="green" />
-      );
-    },
+    accessorKey: "email",
+    header: "Email",
   },
+
   {
     accessorKey: "package",
     header: () => {
@@ -85,12 +79,12 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     },
     cell: ({ getValue }) => {
       const packageVal = getValue<string>();
-      return packageVal === "Pro Package" ? (
-        <CardStatus title={packageVal} type="blue" />
-      ) : packageVal === "Starter Package" ? (
-        <CardStatus title={packageVal} type='gray' />
+      return packageVal === "Essential Package" ? (
+        <CardStatus circle title={packageVal} type="green" />
+      ) : packageVal === "Premium Package" ? (
+        <CardStatus circle title={packageVal} type="gray" />
       ) : (
-        <CardStatus title={packageVal} type="green" />
+        <CardStatus circle title={packageVal} type='blue' />
       );
     },
   },
@@ -102,16 +96,16 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
       return <p className=" text-[16px] font-SemiBold">{payment}$</p>;
     },
   },
-  
+
   {
-    accessorKey: "accountDetails",
-    header: "Account details",
+    accessorKey: "verified",
+    header: "Status",
     cell: ({ getValue }) => {
-      const accountDetails = getValue<string>();
-      return accountDetails === "Completed" ? (
-        <CardStatus title={accountDetails} type="blue" />
-      ) : (
-        <CardStatus title={accountDetails} type="green" />
+      const verified = getValue();
+      return (
+        <p className="text-[16px] font-SemiBold">
+          {verified ? "Verified" : "Un Verified"}
+        </p>
       );
     },
   },
@@ -130,11 +124,11 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
   },
   {
     id: "actions",
-    cell: ({row}) => {
-      const id = row.original.id
+    cell: ({ row }) => {
+      const id = row.original.id;
       return (
         <div className="flex items-center gap-3 w-fit">
-          <Link href={ROUTES.ADMIN.ACCOUNTSDETAILS(id)}   >
+          <Link href={ROUTES.ADMIN.ACCOUNTSDETAILS(id)}>
             <EditIcon className="w-5 h-auto" />
           </Link>
           <ActionIcon variant="transparent">

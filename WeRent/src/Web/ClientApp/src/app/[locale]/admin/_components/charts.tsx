@@ -1,76 +1,38 @@
 import { AreaChart } from "@mantine/charts";
 import React from "react";
-const data = [
-  {
-    date: "January",
-    Rental: 0,
-  },
-  {
-    date: "February",
-    Rental: 400,
-  },
-  {
-    date: "March",
-    Rental: 350,
-  },
-  {
-    date: "April",
-    Rental: 710,
-  },
-  {
-    date: "June",
-    Rental: 420,
-  },
-  {
-    date: "July",
-    Rental: 400,
-  },
-  {
-    date: "August",
-    Rental: 700,
-  },
-  {
-    date: "September",
-    Rental: 2000,
-  },
-  {
-    date: "October",
-    Rental: 800,
-  },
-  {
-    date: "November",
-    Rental: 1000,
-  },
-  {
-    date: "December",
-    Rental: 200,
-  },
-];
-function ChartsPlatform() {
+
+function ChartsPlatform({ data }: { data: { date: string; Rental: number }[] }) {
   return (
     <AreaChart
+      tooltipAnimationDuration={200}
       classNames={{
         tooltip:
-          "bg-[#B6BFC6] text-[#1D3A54] flex items-center justify-center rounded-[12px] px-2 h-8 w-auto min-w-[80px] text-[14px]",
+          "bg-green text-white  flex items-center justify-center rounded-[12px] p-0  h-8 w-auto min-w-[80px] text-[14px]",
         tooltipBody:
-          "min-w-auto w-full justify-center items-center p-0 bg-transparent",
-        tooltipItemData: "text-[14px]  ",
-        tooltipItem: "flex items-center justify-center  w-full gap-1 m-0 p-0",
-        tooltipItemName: "text-[14px] text-center  order-1",
+          "min-w-auto w-full justify-center text-white items-center p-0 bg-transparent",
+        tooltipItemData: "text-[14px] font-Regular  text-white  order-3 p-0",
+        tooltipItem:
+          "    text-white justify-center  w-full flex flex-row-reverse gap-1  m-0 p-0",
+        tooltipItemName: "text-[14px] font-Regular text-white text-center  p-0",
         tooltipItemColor: "hidden",
-        tooltipLabel: "hidden",
+        tooltipLabel:
+          " text-[14px] font-Regular relative after:absolute after:top-1/2 after:end-0 after:content-['-'] after:px-1 after:-translate-y-1/2 max-w-fit w-24 truncate text-white text-center ps-1 pe-4",
+        axisLabel: "bg-red text-red min-w-5 min-h-5",
       }}
-      h={300}
+      h={250}
       data={data}
       dataKey="date"
-      series={[{ name: "Rental", color: "#88BA52" }]}
+      series={[{ name: "Rental", color: "#88BA52", label: "Rental" }]}
       curveType="bump"
       tickLine="none"
       gridAxis="none"
       withGradient
-      fillOpacity={0.1}
+      fillOpacity={0.2}
       withYAxis={false}
-      withDots={false}
+      withDots
+      dotProps={{
+        className: "bg-red ",
+      }}
     />
   );
 }

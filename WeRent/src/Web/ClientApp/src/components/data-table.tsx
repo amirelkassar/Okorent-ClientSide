@@ -9,22 +9,19 @@ import {
   getSortedRowModel,
   ColumnFiltersState,
 } from "@tanstack/react-table";
-import { Checkbox, Table, TextInput } from "@mantine/core";
-import { ComponentType, Fragment, useState } from "react";
-import { cn } from "../lib/utils";
+import { Checkbox, Table } from "@mantine/core";
+import { useState } from "react";
 import ArrowWhiteIcon from "../assets/icons/arrowWhite";
 import FilterBy from "./filterBy";
 import { Link } from "../navigation";
 import CardIcon from "../assets/icons/card";
-import ROUTES from "../routes";
-import { strict } from "assert";
 import Button from "./button";
 import RentSwitch from "./RentSwitch";
 import TrueIcon from "../assets/icons/true";
 import DeleteIcon from "../assets/icons/delete";
-import ImportIcon from "../assets/icons/import";
 import ExportIcon from "../assets/icons/export";
-import CardViewPhoneListing from "../app/[locale]/user/Listings/_components/CardViewPhoneLisiting";
+import AddUser from "./add-user";
+import LinkGreen from "./linkGreen";
 export interface FilterData {
   label: string;
   type: string;
@@ -35,7 +32,12 @@ export interface SortingData {
   type: string;
   key: string;
 }
-interface DataTableProps<TData, TValue> {
+export interface functionSelectProps {
+  title: string;
+  icon: React.JSX.Element;
+  onclick: (ids: any) => void;
+}
+interface DataTableProps<TData extends { id: any }, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   title: string;
@@ -51,8 +53,10 @@ interface DataTableProps<TData, TValue> {
   haveRentSwitch?: boolean;
   addUser?: boolean;
   Component?: React.ComponentType<{ dataCard: TData }>;
+  children?: React.ReactNode;
+  functionSelect?: functionSelectProps[];
 }
-export function DataTable<TData, TValue>({
+export function DataTable<TData extends { id: any }, TValue>({
   columns,
   data,
   title,
@@ -68,16 +72,10 @@ export function DataTable<TData, TValue>({
   haveRentSwitch = false,
   addUser = false,
   Component,
+  children,
+  functionSelect,
 }: DataTableProps<TData, TValue>) {
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [selectedUsers, setSelectedUsers] = useState<Set<number>>(new Set());
-  const toggleAll = () => {
-    if (selectedUsers.size === data.length) {
-      setSelectedUsers(new Set());
-    } else {
-      setSelectedUsers(new Set(data.map((_, i) => i)));
-    }
-  };
 
   const table = useReactTable({
     data,
@@ -96,11 +94,7 @@ export function DataTable<TData, TValue>({
     }
     setSelectedUsers(newSelectedUsers);
   };
-  const getFillterValue = () => {
-    const tableColumn = table.getColumn(filterBy);
 
-    if (tableColumn) return tableColumn.getFilterValue();
-  };
   const handelFilter = (key: string | boolean) => {
     table.getColumn(filterBy)?.setFilterValue(key);
   };
@@ -110,8 +104,17 @@ export function DataTable<TData, TValue>({
       : table.resetSorting();
     return table.getColumn(key)?.getIsSorted();
   };
-  table.getRowModel().rows.map((row, i) => {
-  });
+
+  const toggleAll = () => {
+    if (selectedUsers.size === table.getRowModel().rows.length) {
+      setSelectedUsers(new Set());
+    } else {
+      setSelectedUsers(
+        new Set(table.getRowModel().rows.map((item) => item.original.id))
+      );
+    }
+  };
+
   return (
     <div>
       <div className="flex items-center justify-between gap-6 flex-wrap mb-10">
@@ -126,31 +129,57 @@ export function DataTable<TData, TValue>({
               <p>Card View</p>
             </Link>
           )}
-          {selectedUsers.size > 0 && (
-            <div className="flex items-center gap-3 flex-wrap">
-              <div className="px-3 min-h-10 bg-grayBack duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
-                <TrueIcon />
-                <p className="text-grayMedium text-[14px]">Verify</p>
+          {}
+          {selectedUsers.size > 0 ? (
+            functionSelect ? (
+              functionSelect.map((item, index) => {
+                return (
+                  <div
+                    key={index}
+                    onClick={() => {
+                      item.onclick(selectedUsers);
+                    }}
+                    className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2"
+                  >
+                    {item.icon}
+                    <p
+                      className={`${
+                        item.title.toLowerCase() === "delete"
+                          ? "text-red"
+                          : "text-blue"
+                      }  text-[14px]`}
+                    >
+                      {item.title}
+                    </p>
+                  </div>
+                );
+              })
+            ) : (
+              <div className="flex items-center gap-3 flex-wrap">
+                <div className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
+                  <TrueIcon />
+                  <p className="text-blue text-[14px]">Verify</p>
+                </div>
+                <div className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
+                  <ExportIcon />
+                  <p className="text-blue text-[14px]">Export</p>
+                </div>
+                <div className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
+                  <DeleteIcon className="h-[14px] w-auto" />
+                  <p className="text-red text-[14px]">Delete</p>
+                </div>
               </div>
-              <div className="px-3 min-h-10 bg-grayBack duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
-                <ExportIcon />
-                <p className="text-grayMedium text-[14px]">Export</p>
-              </div>
-              <div className="px-3 min-h-10 bg-grayBack duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
-                <DeleteIcon className="h-[14px] w-auto" />
-                <p className="text-grayMedium text-[14px]">Delete</p>
-              </div>
-            </div>
-          )}
+            )
+          ) : null}
         </div>
-        {haveRentSwitch && <RentSwitch typeUser='user' />}
+        {haveRentSwitch && <RentSwitch typeUser="user" />}
         {viewAll && (
-          <Button className={"h-10 w-fit gap-3 "}>
+          <LinkGreen href={viewAll||'#'} className={"h-10 w-fit gap-3 "}>
             <p className="text-white text-[16px]">
               {viewAllTitle || "View all"}{" "}
             </p>
             <ArrowWhiteIcon />
-          </Button>
+          </LinkGreen>
         )}
         {filter && sort ? (
           <FilterBy
@@ -176,7 +205,9 @@ export function DataTable<TData, TValue>({
             search={search}
             addUser={addUser}
           />
-        ) : null}
+        ) : (
+          addUser && <AddUser />
+        )}
       </div>
       {Component && (
         <div className=" flex flex-col w-full gap-5 mdl:hidden mb-14">
@@ -203,9 +234,12 @@ export function DataTable<TData, TValue>({
                     classNames={{
                       input: "bg-transparent",
                     }}
-                    checked={selectedUsers.size === data.length}
+                    checked={
+                      selectedUsers.size === table.getRowModel().rows.length
+                    }
                     indeterminate={
-                      selectedUsers.size > 0 && selectedUsers.size < data.length
+                      selectedUsers.size > 0 &&
+                      selectedUsers.size < table.getRowModel().rows.length
                     }
                     onChange={toggleAll}
                   />
@@ -241,8 +275,8 @@ export function DataTable<TData, TValue>({
                         input: "bg-transparent",
                       }}
                       size="xs"
-                      checked={selectedUsers.has(index)}
-                      onChange={() => toggleUser(index)}
+                      checked={selectedUsers.has(row.original?.id)}
+                      onChange={() => toggleUser(row.original?.id)}
                     />
                   </Table.Td>
                   {row.getVisibleCells().map((cell, i) => (

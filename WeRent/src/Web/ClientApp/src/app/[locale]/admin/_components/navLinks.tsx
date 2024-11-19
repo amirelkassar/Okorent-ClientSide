@@ -42,28 +42,10 @@ function NavLinks() {
         active: path === ROUTES.ADMIN.SUPPORT,
       },
       {
-        id: 5,
-        name: "Lessors",
-        url: ROUTES.ADMIN.LESSORS,
-        active: path === ROUTES.ADMIN.LESSORS,
-      },
-      {
-        id: 6,
-        name: "Renters",
-        url: ROUTES.ADMIN.RENTERS,
-        active: path === ROUTES.ADMIN.RENTERS,
-      },
-      {
         id: 7,
         name: "Bookings",
         url: ROUTES.ADMIN.BOOKINGS,
         active: path === ROUTES.ADMIN.BOOKINGS,
-      },
-      {
-        id: 8,
-        name: "Reservations",
-        url: ROUTES.ADMIN.RESERVATIONS,
-        active: path === ROUTES.ADMIN.RESERVATIONS,
       },
       {
         id: 9,
@@ -77,26 +59,20 @@ function NavLinks() {
         url: ROUTES.ADMIN.MEMBERSHIPS,
         active: path === ROUTES.ADMIN.MEMBERSHIPS,
       },
-      {
-        id: 11,
-        name: "User Management",
-        url: ROUTES.ADMIN.MANAGEMENT,
-        active: path === ROUTES.ADMIN.MANAGEMENT,
-      },
     ],
     [path]
   );
 
   return (
-    <div className="mt-10 max-w-full ">
+    <div className="mt-5 max-w-full ">
       <h1 className="mb-11 text-[32px] font-Bold">
         {LinksNav.find((item) => item.active)?.name}
         <span className="mx-3">
           {LinksNav.find((item) => item?.activeDetails)?.activeDetails}
         </span>
       </h1>
-      <div className=" max-w-full overflow-x-auto overflow-y-hidden mb-12 pb-4">
-        <ul className=" border-b-[1.5px] flex items-center gap-6 justify-between ">
+      <div className=" max-w-full overflow-x-auto overflow-y-hidden mb-6 pb-4">
+        <ul className=" border-b-[1.5px] flex items-center gap-6 lgl:gap-12 justify-between lgl:justify-start ">
           {LinksNav.map((link, i) => {
             return (
               <li
