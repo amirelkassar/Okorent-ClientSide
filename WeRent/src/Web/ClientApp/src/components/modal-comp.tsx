@@ -30,8 +30,8 @@ function ModalComp({ opened, close, children, title }: ModalCompProps) {
       centered
     >
       {title && (
-        <div className="w-full mt-3 lg:mt-7 mb-4 pb-3 lg:pb-5 border-b border-1">
-          <h2 className="text-center    max-w-[76%] mx-auto text-xl font-medium lg:text-[24px]">
+        <div className="w-full mt-3 lg:mt-6 mb-4 pb-3 lg:pb-5 border-b border-1">
+          <h2 className="   max-w-[76%] ms-3 lg:ms-5 me-auto text-lg font-medium lg:text-2xl">
             {title}
           </h2>
         </div>

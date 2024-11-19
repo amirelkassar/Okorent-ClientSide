@@ -10,6 +10,7 @@ import ROUTES from "@/src/routes";
 import { ActionIcon } from "@mantine/core";
 import { ColumnDef } from "@tanstack/react-table";
 import Image, { StaticImageData } from "next/image";
+import ActionMenu from "./action-menu";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -84,7 +85,7 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
       ) : packageVal === "Premium Package" ? (
         <CardStatus circle title={packageVal} type="gray" />
       ) : (
-        <CardStatus circle title={packageVal} type='blue' />
+        <CardStatus circle title={packageVal} type="blue" />
       );
     },
   },
@@ -127,13 +128,8 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     cell: ({ row }) => {
       const id = row.original.id;
       return (
-        <div className="flex items-center gap-3 w-fit">
-          <Link href={ROUTES.ADMIN.ACCOUNTSDETAILS(id)}>
-            <EditIcon className="w-5 h-auto" />
-          </Link>
-          <ActionIcon variant="transparent">
-            <DeleteIcon className="w-5 h-auto" />
-          </ActionIcon>
+        <div className="flex items-center gap-3 justify-end">
+          <ActionMenu id={id} />
         </div>
       );
     },
