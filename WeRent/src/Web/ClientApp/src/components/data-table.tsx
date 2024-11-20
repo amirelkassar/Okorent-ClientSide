@@ -20,6 +20,7 @@ import DeleteIcon from "../assets/icons/delete";
 import ExportIcon from "../assets/icons/export";
 import AddUser from "./add-user";
 import LinkGreen from "./linkGreen";
+import Events from "./Events";
 export interface FilterData {
   label: string;
   type: string;
@@ -132,24 +133,7 @@ export function DataTable<TData extends { id: any }, TValue>({
             functionSelect ? (
               functionSelect.map((item, index) => {
                 return (
-                  <div
-                    key={index}
-                    onClick={() => {
-                      item.onclick(selectedUsers);
-                    }}
-                    className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2"
-                  >
-                    {item.icon}
-                    <p
-                      className={`${
-                        item.title.toLowerCase() === "delete"
-                          ? "text-red"
-                          : "text-blue"
-                      }  text-[14px]`}
-                    >
-                      {item.title}
-                    </p>
-                  </div>
+                  <Events key={index} item={item} ids={selectedUsers}/>
                 );
               })
             ) : (
