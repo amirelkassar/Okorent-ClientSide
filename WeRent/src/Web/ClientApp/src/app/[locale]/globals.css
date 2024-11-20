@@ -60,7 +60,18 @@
 }
 @media (prefers-color-scheme: dark) {
 }
-
+h1,
+h2,
+h3,
+p,
+a,
+.mantine-Menu-itemLabel,
+label {
+  @apply text-black;
+}
+p{
+  color: inherit;
+}
 .swiperAuth .swiper-button-next,
 .swiperAuth .swiper-rtl .swiper-button-prev {
   @apply rtl:rotate-180 size-[32px] after:size-[100%] after:content-[''] after:bg-contain top-auto left-auto right-auto bottom-9 end-[54px];
@@ -264,4 +275,3 @@ li.search::before {
 .TopBarChart:hover .nameLine {
   @apply block;
 }
-

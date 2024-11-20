@@ -11,9 +11,11 @@ import ROUTES from "@/src/routes";
 import React from "react";
 import DeactivateModal from "./DeactivateModal";
 import { useDisclosure } from "@mantine/hooks";
+import NoteModal from "./NoteModal";
 
 function ActionMenu({ id }: { id: any }) {
   const [opened, { open, close }] = useDisclosure(false);
+  const [opened2, { open:open2, close:close2 }] = useDisclosure(false);
   const options = [
     {
       label: "Edit Details",
@@ -49,7 +51,7 @@ function ActionMenu({ id }: { id: any }) {
       label: "Send Note",
       icon: <NoteTableIcon fill="#6F6B7D" className="w-3 h-auto" />,
       type: "btn",
-      action: () => {},
+      action: open2,
     },
     {
       label: "Delete",
@@ -63,6 +65,7 @@ function ActionMenu({ id }: { id: any }) {
     <>
       <DataActions data={options} />
       {opened && <DeactivateModal id={id} opened={opened} close={close} />}
+      {opened2 && <NoteModal id={id} opened={opened2} close={close2} />}
     </>
   );
 }

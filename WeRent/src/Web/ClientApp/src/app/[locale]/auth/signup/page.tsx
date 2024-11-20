@@ -9,7 +9,7 @@ import { Link, useRouter } from "@/src/navigation";
 import React, { useState } from "react";
 import ROUTES from "@/src/routes";
 import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
+
 function PageLogin() {
   const router = useRouter();
   const [AddPhone, setAddPhone] = useState(false);

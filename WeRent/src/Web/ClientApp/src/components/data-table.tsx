@@ -7,7 +7,6 @@ import {
   useReactTable,
   getPaginationRowModel,
   getSortedRowModel,
-  ColumnFiltersState,
 } from "@tanstack/react-table";
 import { Checkbox, Table } from "@mantine/core";
 import { useState } from "react";
@@ -15,7 +14,6 @@ import ArrowWhiteIcon from "../assets/icons/arrowWhite";
 import FilterBy from "./filterBy";
 import { Link } from "../navigation";
 import CardIcon from "../assets/icons/card";
-import Button from "./button";
 import RentSwitch from "./RentSwitch";
 import TrueIcon from "../assets/icons/true";
 import DeleteIcon from "../assets/icons/delete";
