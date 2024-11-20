@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import ModalComp from "./modal-comp";
 import { useDisclosure } from "@mantine/hooks";

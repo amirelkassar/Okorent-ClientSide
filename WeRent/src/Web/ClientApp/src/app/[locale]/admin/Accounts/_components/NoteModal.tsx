@@ -1,8 +1,7 @@
-import DownIcon from "@/src/assets/icons/down";
 import Button from "@/src/components/button";
 import ModalComp from "@/src/components/modal-comp";
 import SelectInput from "@/src/components/select-input";
-import { Select, Textarea } from "@mantine/core";
+import { Textarea } from "@mantine/core";
 import React, { useState } from "react";
 
 function NoteModal({ opened, close, id }: any) {
@@ -25,7 +24,7 @@ function NoteModal({ opened, close, id }: any) {
             setDataList(e);
           }}
           inputClassName="!h-[54px]"
-          className='h-auto'
+          className="h-auto"
         />
         <Textarea
           label={"Note Content"}
