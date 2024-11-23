@@ -63,7 +63,7 @@ const pathName = usePathname()
         </Link>
       </div>
       {edit && (
-        <button className="flex items-center gap-2 w-fit mx-auto mt-3 text-grayMedium text-base">
+        <button className="flex items-center gap-2 text-red w-fit mx-auto mt-3 border px-4 py-2 duration-300 hover:shadow-md hover:border-red rounded-xl border-black/20 text-base">
           <DeleteIcon className="h-[14px] w-auto" />
           Delete
         </button>

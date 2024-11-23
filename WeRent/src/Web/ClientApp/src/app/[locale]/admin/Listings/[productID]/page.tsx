@@ -1,3 +1,4 @@
+"use client";
 import Button from "@/src/components/button";
 import CardRentals from "@/src/components/cardRentals";
 import FAQ from "@/src/components/faq";
@@ -7,10 +8,12 @@ import Description from "@/src/components/product/description";
 import QuestionView from "@/src/components/question";
 import Reviews from "@/src/components/reviews";
 import { Rentals } from "@/src/lib/dataUser";
-import React from "react";
+import React, { useState } from "react";
 import HeaderProduct from "./_components/headerProduct";
+import AddProduct from "./_components/add-product";
 
-function page() {
+function Page() {
+  const [IsEdit, setIsEdit] = useState(false);
   return (
     <div>
       <HeaderProduct />
@@ -40,20 +43,47 @@ function page() {
       </div>
       <FAQ />
       <div className="bg-grayBack max-w-full  pt-5 pb-8 lg:pb-16 relative before:content-[''] before:w-[calc(100%+32px)] lg:before:w-[calc(100%+130px)] before:bg-grayBack before:absolute before:bottom-0 before:-translate-x-1/2   before:h-full before:left-[50%]">
-        <div className="relative flex items-center justify-between gap-3 flex-wrap">
-          <h2 className=" text-xl lg:text-[24px] mb-8">
+        <div className="relative flex items-center justify-between gap-3 flex-wrap mb-8">
+          <h2 className=" text-xl lg:text-[24px] ">
             Customers who rent this item also rent
           </h2>
-          <Button className={"h-9 !px-5 !text-sm"}>Edit</Button>
+          {IsEdit ? (
+            <div className="flex items-center gap-2 ">
+              <Button
+                className={
+                  "h-9 text-blue bg-blue/15 border-none hover:shadow-md !px-5 !text-sm"
+                }
+                onClick={() => setIsEdit(false)}
+              >
+                Discard Edits
+              </Button>
+              <Button
+                className={"h-9 !px-5 !text-sm"}
+                onClick={() => setIsEdit(false)}
+              >
+                Save Edits
+              </Button>
+            </div>
+          ) : (
+            <Button
+              className={"h-9 !px-5 !text-sm"}
+              onClick={() => setIsEdit(true)}
+            >
+              Edit
+            </Button>
+          )}
         </div>
-        <div className="flex gap-4 max-w-full  lg:gap-8 overflow-x-auto  hideScroll md:flex-wrap relative z-[10]">
-          {Rentals.slice(0, 5).map((item) => {
-            return <CardRentals data={item} key={item.id} />;
-          })}
+        <div className="flex flex-wrap gap-4 lg:gap-8  relative z-[10]">
+          <div className="flex gap-4 max-w-full  lg:gap-8 overflow-x-auto  hideScroll md:flex-wrap ">
+            {Rentals.slice(0, IsEdit?4:5).map((item) => {
+              return <CardRentals data={item} key={item.id} edit={IsEdit} />;
+            })}
+          </div>
+          {IsEdit && <AddProduct />}
         </div>
       </div>
     </div>
   );
 }
 
-export default page;
+export default Page;
