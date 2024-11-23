@@ -33,7 +33,7 @@ const profileData = {
       verifiedIdentity: true,
     },
   }
-function ViewProfile() {
+function ViewProfile({editAdmin = false}: {editAdmin?: boolean}) {
   return (
     <div className="flex  flex-col lg:flex-row gap-10  lg:gap-4 -mt-5 lg:-mt-[140px] lg:ps-8">
       <div className="min-w-[370px]   bg-white rounded-2xl lg:rounded-3xl w-full max-w-[93%] lg:max-w-[370px] mx-auto flex-1 pb-12 lg:pb-24 shadow-md">
@@ -130,7 +130,7 @@ function ViewProfile() {
 
       <div className=" flex-1 lg:pt-[180px] self-end w-full">
         <AboutProfile />
-        <ReviewsProfile />
+        <ReviewsProfile editAdmin={editAdmin} />
       </div>
     </div>
   );

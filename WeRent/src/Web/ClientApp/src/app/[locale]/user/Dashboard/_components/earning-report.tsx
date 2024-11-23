@@ -1,6 +1,5 @@
 "use client";
 import { BarChart } from "@mantine/charts";
-import { strict } from "assert";
 import React from "react";
 export const data = [
   { month: "Jan", value: 28000 },

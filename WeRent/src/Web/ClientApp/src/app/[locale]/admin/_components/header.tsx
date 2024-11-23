@@ -1,9 +1,9 @@
 import React from "react";
-import CardStatistical from "./cardStatistical";
 import SubscribersIcon from "@/src/assets/icons/Subscribers";
 import AccountsIcon from "@/src/assets/icons/Accounts";
 import EarningsIcon from "@/src/assets/icons/Earnings";
 import RenewalsIcon from "@/src/assets/icons/Renewals";
+import CardStatistical from "@/src/components/cardStatistical";
 const number = [
   {
     id: 1,

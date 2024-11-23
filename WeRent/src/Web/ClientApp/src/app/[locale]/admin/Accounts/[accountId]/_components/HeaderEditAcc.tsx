@@ -8,6 +8,8 @@ import React, { useState } from "react";
 import SwitchViewProfile from "./switchViewProfile";
 interface HeaderEditAccProps {
   id: number;
+  viewProfile: string;
+  setViewProfile: (value: string) => void;
 }
 const functionSelect = [
   {
@@ -46,9 +48,11 @@ const functionSelect = [
     },
   },
 ];
-function HeaderEditAcc({ id }: HeaderEditAccProps) {
-  const [viewProfile, setViewProfile] = useState<string>("Profile"); 
-
+function HeaderEditAcc({
+  id,
+  viewProfile,
+  setViewProfile,
+}: HeaderEditAccProps) {
   return (
     <div className="flex items-center justify-between gap-7 flex-wrap mb-8">
       <div className="flex items-center gap-5">

@@ -11,9 +11,10 @@ import StepFAQ from "./_components/stepFAQ";
 import Preview from "./_components/preview";
 import LinkGreen from "@/src/components/linkGreen";
 import { useSearchParams } from "next/navigation";
+import InputTextarea from "@/src/components/InputTextarea";
 
 interface LocationProps {
-  id:number,
+  id: number;
   name: string;
   address: string;
 }
@@ -46,10 +47,11 @@ function Page() {
     setDataList({ ...dataList, addresses: updatedLocations });
   };
 
-
-
   const addLocation = () => {
-    setLocation([...location, { id: Math.floor(Math.random() * 100) + 1, name: "", address: "" }]);
+    setLocation([
+      ...location,
+      { id: Math.floor(Math.random() * 100) + 1, name: "", address: "" },
+    ]);
   };
   const handleCheckboxChange = (
     value: string,
@@ -71,10 +73,10 @@ function Page() {
   return (
     <div
       className={`"w-full  ${
-        searchparams.get("preview")==='true' ? "" : "lg:w-[810px]"
+        searchparams.get("preview") === "true" ? "" : "lg:w-[810px]"
       }`}
     >
-      {searchparams.get("preview")==='true' ? (
+      {searchparams.get("preview") === "true" ? (
         <Preview />
       ) : (
         <div className="w-full">
@@ -129,7 +131,7 @@ function Page() {
               }}
               className="h-[64px] mb-6 duration-200 min-h-[64px] bg-white rounded-2xl  text-grayMedium"
             />
-            <Textarea
+            <InputTextarea
               onChange={(e) => {
                 setDataList({
                   ...dataList,
@@ -141,12 +143,6 @@ function Page() {
               }}
               autosize
               placeholder="Add as much details as you can here about your item "
-              classNames={{
-                input:
-                  " text-black rounded-2xl text-grayMedium min-h-[190px]  border border-green/30 focus:border-green active:border-green placeholder:text-grayMedium placeholder:opacity-100 ",
-                wrapper: "h-full",
-              }}
-              className="  mb-6 duration-200 min-h-[190px] bg-white rounded-2xl  text-grayMedium"
             />
           </Step>
           <Step
@@ -325,7 +321,7 @@ function Page() {
 
       <div className="flex items-center mt-16 gap-7 md:flex-row flex-col">
         <Button className={"w-full lg:w-[208px] h-[64px]"}>Save</Button>
-        {searchparams.get("preview")==='true' ? (
+        {searchparams.get("preview") === "true" ? (
           <LinkGreen
             href={"?preview=false"}
             className={

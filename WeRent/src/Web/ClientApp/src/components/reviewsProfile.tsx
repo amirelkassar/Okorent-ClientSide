@@ -28,13 +28,12 @@ const ReviewData = [
     rate: 5,
   },
 ];
-function ReviewsProfile() {
+function ReviewsProfile({ editAdmin = false }: { editAdmin?: boolean }) {
   return (
     <div className=" mt-10 relative">
       <h2 className="text-2xl  lg:text-3xl mb-7">
         Customer Reviews about <span className="font-Bold">Mark</span>
       </h2>
-
       <div className="flex gap-3 lg:gap-4 md:flex-wrap overflow-x-auto hideScroll">
         {ReviewData.map((item, i) => {
           return (
@@ -45,6 +44,7 @@ function ReviewsProfile() {
               stateUser={item.stateUser}
               title={item.title}
               rate={item.rate}
+              edit={editAdmin}
             />
           );
         })}

@@ -1,4 +1,3 @@
-import { Icon } from "ol/style";
 import React from "react";
 interface CardStatisticalProps {
   title: string;
