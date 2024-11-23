@@ -17,6 +17,7 @@ const ROUTES = {
     ACCOUNTSLISTDETAILS:(id)=> `/admin/Accounts/list/${id}`,
     ACCOUNTSLISTDETAILSEDIT:(id)=> `/admin/Accounts/list/${id}/edit`,
     LISTINGS: "/admin/Listings",
+    LISTINGSDETAILS: (id) => `/admin/Listings/${id}`,
     SUPPORT: "/admin/Support",
     LESSORS: "/admin/Lessors",
     RENTERS: "/admin/Renters",

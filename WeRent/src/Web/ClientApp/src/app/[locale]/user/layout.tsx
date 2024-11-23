@@ -12,12 +12,11 @@ function layout({ children }: layoutProps) {
     <div className="font-Medium min-h-[100vh]  text-black   mx-auto ">
       <div className="max-w-[1600px] mx-auto ">
         <Nav linkLogo={ROUTES.USER.HOMEPAGE} />
-        <main className="px-4 xl:px-[60px] min-h-[calc(100vh-150px)] mt-6 lg:mt-0">
+        <main className="px-4 xl:px-[60px] min-h-[calc(100vh-130px)] md:min-h-[calc(100vh-150px)] mt-6 lg:mt-0">
           <NavLinks />
           {children}
         </main>
       </div>
-
       <Footer />
     </div>
   );

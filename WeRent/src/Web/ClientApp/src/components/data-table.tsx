@@ -116,9 +116,9 @@ export function DataTable<TData extends { id: any }, TValue>({
 
   return (
     <div>
-      <div className="flex items-center justify-between gap-6 flex-wrap mb-10">
+      <div className="flex items-center justify-between gap-6 flex-wrap mb-8">
         <div className="flex items-center gap-5">
-          <h2 className="headTitle">{title}</h2>
+          <h2 className="headTitle min-h-10">{title}</h2>
           {cardView && (
             <Link
               href={cardView}

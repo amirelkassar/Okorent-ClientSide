@@ -1,12 +1,14 @@
 "use client";
+import BackIcon from "@/src/assets/icons/back";
 import { Link, usePathname } from "@/src/navigation";
 import ROUTES from "@/src/routes";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React, { useMemo } from "react";
 
 function NavLinks() {
   const path = usePathname();
   const params = useParams();
+  const router = useRouter();
 
   const LinksNav = useMemo(
     () => [
@@ -33,7 +35,9 @@ function NavLinks() {
         id: 3,
         name: "Listings",
         url: ROUTES.ADMIN.LISTINGS,
-        active: path === ROUTES.ADMIN.LISTINGS,
+        active:
+          path === ROUTES.ADMIN.LISTINGS ||
+          path === ROUTES.ADMIN.LISTINGSDETAILS(params.productID),
       },
       {
         id: 4,
@@ -62,15 +66,49 @@ function NavLinks() {
     ],
     [path]
   );
-
+  const newPath = useMemo(
+    () => [
+      {
+        id: 2,
+        name: "Listing Details",
+        url: ROUTES.ADMIN.LISTINGSDETAILS(params.productID),
+        active: path === ROUTES.ADMIN.LISTINGSDETAILS(params.productID),
+      },
+      {
+        id: 3,
+        name: "Subscription",
+        url: ROUTES.USER.SUBSCRIPTION,
+        active: path === ROUTES.USER.SUBSCRIPTION,
+      },
+    ],
+    [path]
+  );
   return (
     <div className="mt-5 max-w-full ">
-      <h1 className="mb-11 text-[32px] font-Bold">
-        {LinksNav.find((item) => item.active)?.name}
-        <span className="mx-3">
-          {LinksNav.find((item) => item?.activeDetails)?.activeDetails}
-        </span>
-      </h1>
+      {newPath.find((item) => item.active) ? (
+        <div className="flex mb-11  items-center gap-3">
+          <button
+            className=" size-5"
+            onClick={() => {
+              router.back();
+            }}
+          >
+            <BackIcon className={"w-full h-full"} />
+          </button>
+          <h1 className="text-[32px] font-Bold">
+            {newPath.find((item) => item.active)?.name}
+          </h1>
+        </div>
+      ) : (
+        <h1 className="mb-11 text-[32px] font-Bold">
+          {LinksNav.find((item) => item.active)?.name}
+
+          <span className="mx-3">
+            {LinksNav.find((item) => item?.activeDetails)?.activeDetails}
+          </span>
+        </h1>
+      )}
+
       <div className=" max-w-full overflow-x-auto overflow-y-hidden mb-6 pb-4">
         <ul className=" border-b-[1.5px] flex items-center gap-6 lgl:gap-12 justify-between lgl:justify-start ">
           {LinksNav.map((link, i) => {

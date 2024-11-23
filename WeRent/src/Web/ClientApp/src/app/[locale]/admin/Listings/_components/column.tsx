@@ -1,27 +1,32 @@
 "use client";
+
 import DownloadIcon from "@/src/assets/icons/download";
+import CardStatus from "@/src/components/cardStatus";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import { ActionIcon } from "@mantine/core";
 import { ColumnDef } from "@tanstack/react-table";
 import Image, { StaticImageData } from "next/image";
+import ActionMenu from "./action-menu";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type MedicalTeamTableData = {
   id: number;
-  Product: string;
+  phone: string;
   ProductImage: StaticImageData;
-  Renter: string;
-  img: StaticImageData;
-  Payment: string;
-  Date: string;
-  InvoiceReference: string;
+  user: string;
+  avatar: StaticImageData;
+  category: string;
+  status: boolean;
+  rentalCost: number;
+  location: string;
 };
 
 export const columns: ColumnDef<MedicalTeamTableData>[] = [
   {
-    accessorKey: "Product",
+    header: "Product",
+    accessorKey: "phone",
     cell: ({ getValue, row }) => {
       const name = getValue<string>();
       const img = row.original.ProductImage;
@@ -49,54 +54,62 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     },
   },
   {
-    accessorKey: "Renter",
+    header: "Owner",
+    accessorKey: "user",
     cell: ({ getValue, row }) => {
-      const Renter = getValue<string>();
-      const img = row.original.img;
+      const user = getValue<string>();
+      const avatar = row.original.avatar;
       return (
         <div className="flex items-center gap-2">
           <Image
-            src={img}
-            alt={Renter}
+            src={avatar}
+            alt={user}
             width={50}
             height={50}
             className="w-12 h-12 rounded-[50%] object-cover object-top"
           />
-          <h2 className="text-[16px] font-SemiBold">{Renter}</h2>
+          <h2 className="text-[16px] font-SemiBold">{user}</h2>
         </div>
       );
     },
   },
 
   {
-    accessorKey: "Payment",
-    header: "Payment",
+    accessorKey: "rentalCost",
+    header: "Rental price",
+    cell: ({ getValue }) => {
+      const rentalCost = getValue<number>();
+      return <p className="font-SemiBold text-[16px]">{rentalCost}$</p>;
+    },
   },
 
   {
-    accessorKey: "Date",
-    header: "Date",
+    accessorKey: "category",
+    header: "Category",
   },
   {
-    accessorKey: "InvoiceReference",
-    header: "Invoice Refrence ",
+    accessorKey: "status",
+    header: "Status",
     cell: ({ getValue }) => {
-      const invoice = getValue<number>();
-      return (
-        <p className="px-2 w-fit rounded-xl py-1 h-11 text-base font-SemiBold bg-blue/15 text-center flex items-center justify-center">
-          {invoice}
-        </p>
+      const status = getValue<string>();
+      return status ? (
+        <CardStatus type="blue" circle animation title={"Online"} />
+      ) : (
+        <CardStatus type="green" circle title={"Offline"} />
       );
     },
   },
   {
+    accessorKey: "location",
+    header: "Stock Location",
+  },
+  {
     id: "actions",
     cell: ({ row }) => {
+      const id = row.original.id;
       return (
-        <div className="flex items-center gap-3 w-fit">
-          <ActionIcon variant="transparent">
-            <DownloadIcon className="w-5 h-auto" />
-          </ActionIcon>
+        <div className="flex items-center gap-3 justify-end">
+          <ActionMenu id={id} />
         </div>
       );
     },

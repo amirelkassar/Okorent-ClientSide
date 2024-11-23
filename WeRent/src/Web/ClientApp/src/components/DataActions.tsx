@@ -32,7 +32,7 @@ function DataActions({ data }: { data: any[] }) {
             return item.type === "link" ? (
               <Link
                 key={index}
-                href={item.link}
+                href={item.link||'#'}
                 className="flex items-center gap-2 py-2 hover:bg-green/20 duration-200 min-h-[30px] h-[30px] rounded-md px-2  "
               >
                 <span className=" block size-3">{item.icon}</span>

@@ -1,6 +1,7 @@
 import avatar from "@/src/assets/images/1.png";
 import house from "@/src/assets/images/house1.png";
 import house2 from "@/src/assets/images/house2.png";
+import phoneImg from "@/src/assets/images/phone.png";
 import ElectronicsIcon from "../assets/icons/electronics";
 import ToolsIcon from "../assets/icons/tools";
 import SportIcon from "../assets/icons/sport";
@@ -22,7 +23,7 @@ export const UserData = [
     img: avatar,
     verified: true,
     date: "15/8/2024",
-    email:'marchmanx@gmail.com',
+    email: "marchmanx@gmail.com",
   },
 
   {
@@ -33,9 +34,9 @@ export const UserData = [
     payment: 250,
     rating: 5,
     img: avatar,
-    verified:false,
+    verified: false,
     date: "15/8/2024",
-    email:'marchmanx@gmail.com',
+    email: "marchmanx@gmail.com",
   },
   {
     id: 3,
@@ -47,7 +48,7 @@ export const UserData = [
     img: avatar,
     verified: true,
     date: "15/8/2024",
-    email:'marchmanx@gmail.com',
+    email: "marchmanx@gmail.com",
   },
   {
     id: 4,
@@ -59,7 +60,7 @@ export const UserData = [
     img: avatar,
     verified: false,
     date: "15/8/2024",
-    email:'marchmanx@gmail.com',
+    email: "marchmanx@gmail.com",
   },
   {
     id: 5,
@@ -71,7 +72,7 @@ export const UserData = [
     img: avatar,
     verified: true,
     date: "15/8/2024",
-    email:'marchmanx@gmail.com',
+    email: "marchmanx@gmail.com",
   },
   {
     id: 6,
@@ -83,7 +84,7 @@ export const UserData = [
     img: avatar,
     verified: true,
     date: "15/8/2024",
-    email:'marchmanx@gmail.com',
+    email: "marchmanx@gmail.com",
   },
   {
     id: 7,
@@ -95,7 +96,7 @@ export const UserData = [
     img: avatar,
     verified: false,
     date: "15/8/2024",
-    email:'marchmanx@gmail.com',
+    email: "marchmanx@gmail.com",
   },
 ];
 
@@ -575,5 +576,63 @@ export const RequestsData: RequestData[] = [
     action: "Ongoing",
     imgUser: avatar,
     imgHome: house,
+  },
+];
+
+export const ListingsDataAdmin = [
+  {
+    id: 1,
+    phone: "Iphone 15 Pro",
+    ProductImage: phoneImg,
+    user: "Ahmed Mohamed",
+    avatar: avatar,
+    category: "Electronics",
+    status: true,
+    rentalCost: 100,
+    location:'Eastern Warehouse'
+  },
+  {
+    id: 2,
+    phone: "Samsung Galaxy S23",
+    ProductImage: phoneImg,
+    user: "Ahmed Mohamed",
+    avatar: avatar,
+    category: "Electronics",
+    status: false,
+    rentalCost: 100,
+    location:'Eastern Warehouse'
+  },
+  {
+    id: 3,
+    phone: "Google Pixel 7",
+    ProductImage: phoneImg,
+    user: "Ahmed Mohamed",
+    avatar: avatar,
+    category: "Electronics",
+    status: true,
+    rentalCost: 100,
+    location:'Eastern Warehouse'
+  },
+  {
+    id: 4,
+    phone: "Iphone 15 Pro",
+    ProductImage: phoneImg,
+    user: "Ahmed Mohamed",
+    avatar: avatar,
+    category: "Electronics",
+    status: true,
+    rentalCost: 100,
+    location:'Eastern Warehouse'
+  },
+  {
+    id: 5,
+    phone: "Google Pixel 7",
+    ProductImage: phoneImg,
+    user: "Ahmed Mohamed",
+    avatar: avatar,
+    category: "Electronics",
+    status: true,
+    rentalCost: 100,
+    location:'Eastern Warehouse'
   },
 ];

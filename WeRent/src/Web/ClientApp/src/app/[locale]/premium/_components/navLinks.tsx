@@ -22,7 +22,6 @@ function NavLinks() {
           path + `?category=${searchParams.get("category")}` ===
             ROUTES.USER.CATEGORIES(searchParams.get("category")),
       },
-
       {
         id: 2,
         name: "Dashboard",
@@ -49,7 +48,6 @@ function NavLinks() {
           path === ROUTES.USER.BOOKINGS ||
           path === ROUTES.USER.BOOKINGSID(params.BookingID),
       },
-
       {
         id: 5,
         name: "Inbox",
@@ -132,6 +130,7 @@ function NavLinks() {
     ],
     [path]
   );
+  
   return (
     path !== ROUTES.USER.CHECKOUT &&
     path !== ROUTES.USER.CHECKOUTID(params.checkoutID) && (

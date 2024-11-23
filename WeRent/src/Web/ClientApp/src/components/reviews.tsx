@@ -1,15 +1,18 @@
+"use client";
 import { Rating } from "@mantine/core";
-import React from "react";
+import React, { useState } from "react";
 import Button from "@/src/components/button";
 import CardReviews from "./cardReviews";
 import ProgressRev from "./product/ProgressRev";
 
-
-function Reviews() {
+function Reviews({ editAdmin = false }: { editAdmin?: boolean }) {
+  const [IsEdit, setIsEdit] = useState(false);
   return (
     <div className="flex gap-5 justify-between flex-wrap pb-9 border-b border-grayMedium/20 mb-10">
       <div className="w-full lg:w-[410px]">
-        <h2 className=" relative text-xl lg:text-[24px] mb-3">Customer reviews</h2>
+        <h2 className=" relative text-xl lg:text-[24px] mb-3">
+          Customer reviews
+        </h2>
         <div className="flex items-center gap-3 mb-2">
           <Rating
             classNames={{ starSymbol: "rounded-md " }}
@@ -53,22 +56,56 @@ function Reviews() {
             <ProgressRev val={4} />
           </div>
         </div>
-        <h4 className=" relative text-base lg:text-[24px] mb-3">Review this product</h4>
+        <h4 className=" relative text-base lg:text-[24px] mb-3">
+          Review this product
+        </h4>
         <p className="text-[14px] font-Regular text-grayMedium mb-6">
           Share your thoughts with other customers
         </p>
-        <Button className={"bg-grayBack text-black border-none w-full lg:w-[90%] h-10"}>
+        <Button
+          className={
+            "bg-grayBack text-black border-none w-full lg:w-[90%] h-10"
+          }
+        >
           Write review
         </Button>
       </div>
       <div className="w-[800px] max-w-full">
-        <h2 className=" relative text-xl lg:text-[24px] mb-10">
-          Top reviews from neatherland{" "}
-        </h2>
+        <div className="flex items-center gap-3 flex-wrap justify-between mb-10">
+          <h2 className=" relative text-xl lg:text-[24px] ">
+            Top reviews from neatherland{" "}
+          </h2>
+          {editAdmin &&
+            (IsEdit ? (
+              <div className="flex items-center gap-2 ">
+                <Button
+                  className={
+                    "h-9 text-blue bg-blue/15 border-none hover:shadow-md !px-5 !text-sm"
+                  }
+                  onClick={() => setIsEdit(false)}
+                >
+                  Discard Edits
+                </Button>
+                <Button
+                  className={"h-9 !px-5 !text-sm"}
+                  onClick={() => setIsEdit(false)}
+                >
+                  Save Edits
+                </Button>
+              </div>
+            ) : (
+              <Button
+                className={"h-9 !px-5 !text-sm"}
+                onClick={() => setIsEdit(true)}
+              >
+                Edit
+              </Button>
+            ))}
+        </div>
         <div className="flex flex-col gap-7 mb-7">
-          <CardReviews />
-          <CardReviews />
-          <CardReviews />
+          <CardReviews IsEdit={IsEdit} />
+          <CardReviews IsEdit={IsEdit} />
+          <CardReviews IsEdit={IsEdit} />
         </div>
         <button className="px-8 py-3 text-nowrap duration-300 hover:shadow-md leading-4 rounded-xl text-sm lg:text-base border border-black text-center">
           Show all 19 reviews
