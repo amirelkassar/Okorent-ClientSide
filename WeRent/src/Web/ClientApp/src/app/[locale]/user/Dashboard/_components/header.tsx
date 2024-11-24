@@ -15,7 +15,7 @@ const number = [
     number: "+12",
 
     icon: <ShopIcon />,
-    link: ROUTES.USER.HOMEPAGE,
+    link: ROUTES.USER.BOOKINGS,
     titleLink: "View rentals",
   },
   {

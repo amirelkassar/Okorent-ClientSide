@@ -87,7 +87,7 @@ function NavLinks() {
     [path]
   );
   return (
-    <div className="mt-5 max-w-full ">
+    <div className="mt-5 max-w-full hidden lg:block">
       {newPath.find((item) => item.active) ? (
         <div className="flex mb-11  items-center gap-3">
           <button

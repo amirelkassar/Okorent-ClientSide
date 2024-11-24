@@ -132,9 +132,7 @@ export function DataTable<TData extends { id: any }, TValue>({
           {selectedUsers.size > 0 ? (
             functionSelect ? (
               functionSelect.map((item, index) => {
-                return (
-                  <Events key={index} item={item} ids={selectedUsers}/>
-                );
+                return <Events key={index} item={item} ids={selectedUsers} />;
               })
             ) : (
               <div className="flex items-center gap-3 flex-wrap">
@@ -156,7 +154,7 @@ export function DataTable<TData extends { id: any }, TValue>({
         </div>
         {haveRentSwitch && <RentSwitch typeUser="user" />}
         {viewAll && (
-          <LinkGreen href={viewAll||'#'} className={"h-10 w-fit gap-3 "}>
+          <LinkGreen href={viewAll || "#"} className={"h-10 w-fit gap-3 "}>
             <p className="text-white text-[16px]">
               {viewAllTitle || "View all"}{" "}
             </p>
@@ -193,13 +191,22 @@ export function DataTable<TData extends { id: any }, TValue>({
       </div>
       {Component && (
         <div className=" flex flex-col w-full gap-5 mdl:hidden mb-14">
-          {table
-            .getRowModel()
-            .rows.map((row, i) =>
-              row.original !== null ? (
-                <Component key={i} dataCard={row.original as TData} />
-              ) : null
-            )}
+          {table.getRowModel().rows.map((row, i) =>
+            row.original !== null ? (
+              <div key={i} className="w-full flex gap-2">
+                <Checkbox
+                  color="#88BA52"
+                  classNames={{
+                    input: "bg-transparent",
+                  }}
+                  size="xs"
+                  checked={selectedUsers.has(row.original?.id)}
+                  onChange={() => toggleUser(row.original?.id)}
+                />
+                <Component dataCard={row.original as TData} />
+              </div>
+            ) : null
+          )}
         </div>
       )}
 

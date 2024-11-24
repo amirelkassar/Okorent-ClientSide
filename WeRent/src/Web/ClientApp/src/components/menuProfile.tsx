@@ -11,6 +11,7 @@ import SubscriptionIcon from "../assets/icons/Subscription";
 import { Link } from "../navigation";
 import ROUTES from "../routes";
 import SwitchAvailable from "./switchAvailable";
+import AdsIcon from "../assets/icons/ads";
 function MenuProfile() {
   const [opened, setOpened] = useState(false);
   return (
@@ -39,7 +40,10 @@ function MenuProfile() {
         </button>
       </Menu.Target>
       <Menu.Dropdown className="pt-3 !w-[172px] ">
-        <Menu.Item closeMenuOnClick={false} className="  py-0 h-[30px] px-1 !mb-2 text-[14px] font-SemiBold rounded-lg">
+        <Menu.Item
+          closeMenuOnClick={false}
+          className="  py-0 h-[30px] px-1 !mb-2 text-[14px] font-SemiBold rounded-lg"
+        >
           <SwitchAvailable />
         </Menu.Item>
         <Menu.Item
@@ -53,6 +57,12 @@ function MenuProfile() {
           className=" hover:bg-green/15 py-0 h-[30px] px-1 text-[14px] font-SemiBold rounded-lg"
         >
           <Link href={ROUTES.USER.WALLET}>Wallet</Link>
+        </Menu.Item>
+        <Menu.Item
+          leftSection={<AdsIcon />}
+          className=" hover:bg-green/15 py-0 h-[30px] px-1 text-[14px] font-SemiBold rounded-lg"
+        >
+          Ads
         </Menu.Item>
         <Menu.Item
           leftSection={<SettingsIcon />}

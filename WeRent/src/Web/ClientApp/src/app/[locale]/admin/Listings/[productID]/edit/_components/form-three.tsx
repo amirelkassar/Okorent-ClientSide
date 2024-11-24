@@ -1,4 +1,5 @@
 import CardList from "@/src/components/card-list";
+import ItemDescriptions from "@/src/components/form-list/item-descriptions";
 import Input from "@/src/components/input";
 import React from "react";
 
@@ -7,9 +8,8 @@ function FormThree() {
     <CardList title="Price and Value">
       <div className="flex flex-col lgl:flex-row gap-5">
         <div>
-          <p className="text-base lg:text-xl font-Regular mb-4">
-            Try to add lower price for longer bookings
-          </p>
+          <ItemDescriptions title=" Try to add lower price for longer bookings" />
+
           <div className="flex gap-4 flex-wrap ">
             <Input
               label="Price for 3 Days"
@@ -35,9 +35,7 @@ function FormThree() {
           </div>
         </div>
         <div className="flex-1">
-          <p className="text-base lg:text-xl font-Regular mb-4">
-            Value of the Listing
-          </p>
+          <ItemDescriptions title="Value of the Listing" />
           <div className="flex gap-4 flex-wrap ">
             <Input
               label="."

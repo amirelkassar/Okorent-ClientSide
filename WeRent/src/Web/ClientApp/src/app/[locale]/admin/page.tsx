@@ -97,18 +97,18 @@ function Page() {
   return (
     <div>
       <HeaderDash />
-      <div className="mt-20 mb-20 pb-11  border-b border-grayLight">
-        <div className="flex items-center justify-between gap-4 flex-wrap md:flex-nowrap">
+      <div className=" my-12 lg:my-20 pb-11  border-b border-grayLight">
+        <div className="flex items-center justify-between gap-4 flex-wrap md:flex-nowrap mb-2 lg:mb-0">
           <div>
-            <h2 className="text-[32px] font-Medium leading-7">
+            <h2 className=" text-2xl lg:text-[32px] font-Medium leading-7">
               Platform Performance
             </h2>
-            <p className="text-grayMedium text-[20px]">
+            <p className="text-grayMedium text-base lg:text-[20px]">
               See overview about the website performace
             </p>
           </div>
 
-          <div className="flex items-center gap-5 order-3">
+          <div className="flex items-center gap-3 lg:gap-5 order-3">
             <Button
               className={` text-sm px-2 py-1 h-10 mdl:h-12 ${
                 currentView === "Weekly"

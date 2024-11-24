@@ -3,12 +3,12 @@ import React from "react";
 import { UserData } from "@/src/lib/dataUser";
 import { columns } from "./_components/column";
 import { DataTable } from "@/src/components/data-table";
-import Button from "@/src/components/button";
 import DeleteIcon from "@/src/assets/icons/delete";
 import TrueIcon from "@/src/assets/icons/true";
 import ExportIcon from "@/src/assets/icons/export";
 import NoteTableIcon from "@/src/assets/icons/noteTable";
 import DeactivateIcon from "@/src/assets/icons/Deactivate";
+import CardPhoneAccount from "./_components/card-phone-account";
 
 const functionSelect = [
   {
@@ -54,10 +54,10 @@ function page() {
         title="3665 Account"
         data={UserData}
         columns={columns}
+        Component={CardPhoneAccount}
         addUser
         functionSelect={functionSelect}
       ></DataTable>
-      <Button className={"w-fit mx-auto"}>Load More</Button>
     </div>
   );
 }

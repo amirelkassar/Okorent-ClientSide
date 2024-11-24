@@ -37,10 +37,10 @@ const number = [
 function HeaderDash() {
   return (
     <div>
-      <h2 className="text-grayMedium text-[24px] font-Medium">
+      <h2 className="text-grayMedium text-base lg:text-[24px] font-Medium">
         Welcome Back, Tom 👋{" "}
       </h2>
-      <h3 className="text-[32px] font-Bold mb-8">Here is an overview</h3>
+      <h3 className=" text-2xl lg:text-[32px] font-Bold mb-6 lg:mb-8">Here is an overview</h3>
       <div className="flex  justify-between gap-3 lg:gap-4 flex-wrap">
         {number.map((item) => {
           return (

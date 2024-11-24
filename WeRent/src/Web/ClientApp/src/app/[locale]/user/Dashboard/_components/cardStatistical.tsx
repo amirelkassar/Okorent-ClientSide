@@ -1,4 +1,5 @@
 import Button from "@/src/components/button";
+import LinkGreen from "@/src/components/linkGreen";
 import React from "react";
 interface CardStatisticalProps {
   title: string;
@@ -33,7 +34,7 @@ function CardStatistical({
             +{percentage}%
           </span>
         )}
-        {link && <Button className={"h-10 mt-1 lg:mt-3"}>{titleLink}</Button>}
+        {link && <LinkGreen href={link||'#'} className={"h-10 w-fit mt-1 lg:mt-3"}>{titleLink}</LinkGreen>}
       </div>
       <div className="size-[66px] rounded-full p-4 lg:flex hidden justify-center items-center bg-[#E9F1F8]">
         {icon}

@@ -1,5 +1,6 @@
 import CardList from "@/src/components/card-list";
 import DropImg from "@/src/components/DropImg";
+import ItemDescriptions from "@/src/components/form-list/item-descriptions";
 import React from "react";
 interface FormOneProps {
     setDataList: React.Dispatch<any>;
@@ -8,7 +9,7 @@ interface FormOneProps {
 function FormTwo({ setDataList, dataList }: FormOneProps) {
   return (
     <CardList title="Listing Images">
-      <p className="text-xl font-Regular mb-5">Upload up to 8 images</p>
+      <ItemDescriptions title="Upload up to 8 images" />
       <DropImg setDataList={setDataList} dataList={dataList} />
     </CardList>
   );

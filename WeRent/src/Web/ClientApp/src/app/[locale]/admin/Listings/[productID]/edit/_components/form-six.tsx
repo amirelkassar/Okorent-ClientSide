@@ -1,4 +1,5 @@
 import CardList from "@/src/components/card-list";
+import ItemDescriptions from "@/src/components/form-list/item-descriptions";
 import ItemFaqs from "@/src/components/form-list/item-faqs";
 import ItemPercentage from "@/src/components/form-list/item-percentage";
 import ItemStatus from "@/src/components/form-list/item-status";
@@ -37,18 +38,18 @@ function FormSix({ setDataList, dataList }: StepAvailabilityProps) {
     <CardList title="General Information">
       <div className="flex  justify-between flex-wrap gap-7 mb-10">
         <div>
-          <h3 className="text-base lg:text-xl font-Regular mb-1  ">
-            Availability
-          </h3>
-          <p className="text-xs lg:text-base font-Regular text-grayMedium mb-2 ">
-            Choose when your item will be available for rent
-          </p>
+          <ItemDescriptions
+            title="Availability"
+            description="Choose when your item will be available for rent"
+            titleStyle="mb-1"
+          />
+
           <StepAvailability setDataList={setDataList} dataList={dataList} />
         </div>
         <div className="lg:max-w-[520px] w-full">
-          <h3 className="text-base lg:text-xl font-Regular mb-4 ">
-            Item Status
-          </h3>
+          <ItemDescriptions title="Item Status" />
+
+          <h3 className="text-base lg:text-xl font-Regular mb-4 "></h3>
           <ItemStatus
             selectedCheckbox={selectedCheckbox}
             setSelectedCheckbox={setSelectedCheckbox}
@@ -58,18 +59,19 @@ function FormSix({ setDataList, dataList }: StepAvailabilityProps) {
       </div>
       <div className="flex  justify-between flex-wrap gap-7 pt-12 border-t border-grayMedium/40">
         <div>
-          <h3 className="text-base lg:text-xl font-Regular mb-1 ">FAQs</h3>
-          <p className="text-xs lg:text-base font-Regular text-grayMedium mb-2 ">
-            Add at least two FAQs to make it easier to renters to know more
-            about your product{" "}
-          </p>
+          <ItemDescriptions
+            title="FAQs"
+            description="Add at least two FAQs to make it easier to renters to know more
+            about your product"
+            titleStyle="mb-1"
+          />
           <ItemFaqs
             faqs={faqs}
             setFaqs={setFaqs}
             handleChangeFAQ={handleChangeFAQ}
           />
         </div>
-        <ItemPercentage/>
+        <ItemPercentage />
       </div>
     </CardList>
   );

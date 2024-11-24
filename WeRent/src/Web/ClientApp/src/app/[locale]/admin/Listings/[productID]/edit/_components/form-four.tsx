@@ -1,5 +1,6 @@
 "use client";
 import CardList from "@/src/components/card-list";
+import ItemDescriptions from "@/src/components/form-list/item-descriptions";
 import ItemLocation from "@/src/components/form-list/item-location";
 import Input from "@/src/components/input";
 import React, { useState } from "react";
@@ -37,9 +38,7 @@ function FormFour() {
     <CardList title="Storage and stock">
       <div className="flex justify-between gap-5 flex-wrap">
         <div className="flex-1 ">
-          <h3 className="text-base lg:text-xl font-Regular mb-4  ">
-            Where is the listing storage location
-          </h3>
+          <ItemDescriptions title=" Where is the listing storage location" />
           <ItemLocation
             addLocation={addLocation}
             location={location}
@@ -48,9 +47,7 @@ function FormFour() {
           />
         </div>
         <div className="flex-1">
-          <h3 className="text-base lg:text-xl font-Regular mb-4  ">
-            Available Stock
-          </h3>
+          <ItemDescriptions title="Available Stock" />
           <Input
             placeholder="Ex: 10 "
             labelClassName="!text-xl font-Regular"

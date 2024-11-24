@@ -7,6 +7,7 @@ import { useDisclosure } from "@mantine/hooks";
 import DownIcon from "@/src/assets/icons/down";
 import Button from "@/src/components/button";
 import { DatePickerInput } from "@mantine/dates";
+import DateIcon from "@/src/assets/icons/date";
 const OptionAvailability = [
   {
     value: "always",
@@ -18,32 +19,7 @@ const OptionAvailability = [
     title: "",
   },
 ];
-const OptionTime = [
-  { label: "12:00 AM", value: "00:00" },
-  { label: "1:00 AM", value: "01:00" },
-  { label: "2:00 AM", value: "02:00" },
-  { label: "3:00 AM", value: "03:00" },
-  { label: "4:00 AM", value: "04:00" },
-  { label: "5:00 AM", value: "05:00" },
-  { label: "6:00 AM", value: "06:00" },
-  { label: "7:00 AM", value: "07:00" },
-  { label: "8:00 AM", value: "08:00" },
-  { label: "9:00 AM", value: "09:00" },
-  { label: "10:00 AM", value: "10:00" },
-  { label: "11:00 AM", value: "11:00" },
-  { label: "12:00 PM", value: "12:00" },
-  { label: "1:00 PM", value: "13:00" },
-  { label: "2:00 PM", value: "14:00" },
-  { label: "3:00 PM", value: "15:00" },
-  { label: "4:00 PM", value: "16:00" },
-  { label: "5:00 PM", value: "17:00" },
-  { label: "6:00 PM", value: "18:00" },
-  { label: "7:00 PM", value: "19:00" },
-  { label: "8:00 PM", value: "20:00" },
-  { label: "9:00 PM", value: "21:00" },
-  { label: "10:00 PM", value: "22:00" },
-  { label: "11:00 PM", value: "23:00" },
-];
+
 interface StepAvailabilityProps {
   setDataList: React.Dispatch<any>;
   dataList: any;
@@ -101,11 +77,11 @@ function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
         opened={opened}
         close={close}
       >
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 w-[560px] max-w-full">
           <Select
             data={["1 Day", "3 Day", "Week"]}
             leftSectionPointerEvents="none"
-            rightSection={<DownIcon />}
+            rightSection={<DownIcon className="w-5 h-auto" />}
             placeholder="Select rental duration"
             label={"Minimum rental duration"}
             classNames={{
@@ -120,57 +96,21 @@ function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
             }}
             className="   duration-200 min-h-[64px]  text-grayMedium"
           />
-          <div className="flex  items-center justify-between gap-5">
-            <Select
-              data={OptionTime}
-              leftSectionPointerEvents="none"
-              rightSection={<DownIcon />}
-              placeholder="Select rental duration"
-              label={"Deafult pickup time"}
-              defaultValue={"08:00"}
-              onChange={(e) => {
-                console.log(e);
-              }}
-              classNames={{
-                label: "text-black mb-2",
-                input:
-                  " text-black rounded-2xl text-grayMedium bg-white   rounded-2xl border-2 border-green h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
-
-                wrapper: "h-[64px]",
-                dropdown:
-                  "bg-white text-black rounded-2xl border border-green/50 text-grayDark py-2",
-                option: "hover:bg-green hover:text-white duration-300 ",
-              }}
-              className="flex-1   duration-200 min-h-[64px]  text-grayMedium"
-            />
-            <Select
-              data={OptionTime}
-              leftSectionPointerEvents="none"
-              rightSection={<DownIcon />}
-              placeholder="Select rental duration"
-              label={"Deafult return time"}
-              defaultValue={"08:00"}
-              classNames={{
-                label: "text-black mb-2",
-                input:
-                  " text-black rounded-2xl text-grayMedium bg-white   rounded-2xl border-2 border-green h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
-
-                wrapper: "h-[64px]",
-                dropdown:
-                  "bg-white text-black rounded-2xl border border-green/50 text-grayDark py-2",
-                option: "hover:bg-green hover:text-white duration-300 ",
-              }}
-              className=" flex-1   duration-200 min-h-[64px]  text-grayMedium"
-            />
-          </div>
 
           <DatePickerInput
             type="range"
-            label="Available From - To"
+            label="Availability"
+            leftSection={<DateIcon fill="#344050" />}
             placeholder=".. - .."
             value={value}
             onChange={setValue}
-            popoverProps={{ position: "top" ,classNames:{dropdown:'border-2 border-green  rounded-2xl shadow-lg shadow-green/40'}}}
+            popoverProps={{
+              position: "top",
+              classNames: {
+                dropdown:
+                  "border-2 border-green  rounded-2xl shadow-lg shadow-green/40",
+              },
+            }}
             valueFormat="DD-MM-YYYY"
             classNames={{
               input:

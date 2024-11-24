@@ -1,4 +1,5 @@
 import CardList from "@/src/components/card-list";
+import ItemDescriptions from "@/src/components/form-list/item-descriptions";
 import ItemVariations from "@/src/components/form-list/item-variations";
 import React, { ChangeEvent, useState } from "react";
 interface Variation {
@@ -45,10 +46,10 @@ function FormFive() {
   };
   return (
     <CardList title="Variations">
-      <h3 className="text-base lg:text-xl font-Regular mb-4  ">
-        You can add many variations for the same product or you can skip : Ex.
-        Size and color
-      </h3>
+      <ItemDescriptions
+        title=" You can add many variations for the same product or you can skip : Ex.
+        Size and color"
+      />
       <ItemVariations
         handleInputChange={handleInputChange}
         variations={variations}
