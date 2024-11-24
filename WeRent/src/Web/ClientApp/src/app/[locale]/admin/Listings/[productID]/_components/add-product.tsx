@@ -51,7 +51,6 @@ function AddProduct() {
       >
         <PlusImgIcon className="max-w-full h-auto w-16 mdl:w-24" />
       </div>
-
       <ModalComp opened={opened} close={close} title="Choose Item">
         <div className="max-w-full w-[750px]">
           <div className=" flex items-center gap-2 px-3 rounded-xl border border-grayMedium/50 mb-8">

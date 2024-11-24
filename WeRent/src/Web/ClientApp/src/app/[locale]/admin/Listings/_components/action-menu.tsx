@@ -6,8 +6,8 @@ import DataActions from "@/src/components/DataActions";
 import ROUTES from "@/src/routes";
 import React from "react";
 import { useDisclosure } from "@mantine/hooks";
-import NoteModal from "./NoteModal";
 import BagIcon from "@/src/assets/icons/bag";
+import NoteModal from "@/src/components/NoteModal";
 
 function ActionMenu({ id }: { id: any }) {
   const [opened, { open, close }] = useDisclosure(false);
@@ -15,7 +15,7 @@ function ActionMenu({ id }: { id: any }) {
     {
       label: "Edit Details",
       icon: <EditIcon className="w-3 h-auto" />,
-      link: "#",
+      link: ROUTES.ADMIN.LISTINGSDETAILSEdit(id),
       type: "link",
     },
     {
@@ -41,7 +41,6 @@ function ActionMenu({ id }: { id: any }) {
   return (
     <>
       <DataActions data={options} />
-
       {opened && <NoteModal id={id} opened={opened} close={close} />}
     </>
   );

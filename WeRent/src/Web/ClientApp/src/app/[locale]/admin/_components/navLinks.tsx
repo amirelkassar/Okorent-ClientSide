@@ -37,7 +37,8 @@ function NavLinks() {
         url: ROUTES.ADMIN.LISTINGS,
         active:
           path === ROUTES.ADMIN.LISTINGS ||
-          path === ROUTES.ADMIN.LISTINGSDETAILS(params.productID),
+          path === ROUTES.ADMIN.LISTINGSDETAILS(params.productID) ||
+          path === ROUTES.ADMIN.LISTINGSDETAILSEdit(params.productID),
       },
       {
         id: 4,
@@ -72,7 +73,9 @@ function NavLinks() {
         id: 2,
         name: "Listing Details",
         url: ROUTES.ADMIN.LISTINGSDETAILS(params.productID),
-        active: path === ROUTES.ADMIN.LISTINGSDETAILS(params.productID),
+        active:
+          path === ROUTES.ADMIN.LISTINGSDETAILS(params.productID) ||
+          path === ROUTES.ADMIN.LISTINGSDETAILSEdit(params.productID),
       },
       {
         id: 3,

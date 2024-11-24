@@ -284,31 +284,33 @@ function Page() {
             />
           </Step>
           <Step title="Item Status" active={dataList.Stock} stepNum={9}>
-            <div className="flex flex-col gap-4">
-              <Checkbox
-                checked={selectedCheckbox === "Active"}
-                onChange={(e) => {
-                  handleCheckboxChange(e.target.value, setSelectedCheckbox);
-                }}
-                color="#88BA52"
-                value="Active"
-                label="Active"
-              />
-              <Checkbox
-                checked={selectedCheckbox === "Not"}
-                onChange={(e) => {
-                  handleCheckboxChange(e.target.value, setSelectedCheckbox);
-                }}
-                color="#88BA52"
-                value="Not"
-                label="Not Active"
-              />
-            </div>
+            <div>
+              <div className="flex flex-col gap-4">
+                <Checkbox
+                  checked={selectedCheckbox === "Active"}
+                  onChange={(e) => {
+                    handleCheckboxChange(e.target.value, setSelectedCheckbox);
+                  }}
+                  color="#88BA52"
+                  value="Active"
+                  label="Active"
+                />
+                <Checkbox
+                  checked={selectedCheckbox === "Not"}
+                  onChange={(e) => {
+                    handleCheckboxChange(e.target.value, setSelectedCheckbox);
+                  }}
+                  color="#88BA52"
+                  value="Not"
+                  label="Not Active"
+                />
+              </div>
 
-            <p className="mt-4 text-[14px] text-grayMedium font-Regular">
-              Set as Active to make the item available for rent Set as Not
-              Active to keep the item unavailable for rent
-            </p>
+              <p className="mt-4 text-[14px] text-grayMedium font-Regular">
+                Set as Active to make the item available for rent Set as Not
+                Active to keep the item unavailable for rent
+              </p>
+            </div>
           </Step>
           <StepFAQ
             faqs={faqs}

@@ -1,32 +1,52 @@
-'use client'
+"use client";
 import React from "react";
+import { Link } from "../navigation";
 export interface DataProps {
   title: string;
   icon: React.JSX.Element;
   onclick: (ids: any) => void;
+  link?: string | undefined;
 }
 export interface EventsProps {
   item: DataProps;
-  ids:any;
+  ids: any;
 }
 function Events({ item, ids }: EventsProps) {
-  return (
-    <div
-      onClick={() => {
-        item.onclick(ids);
-      }}
-      className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2"
-    >
-      {item.icon}
-      <p
-        className={`${
-          item.title.toLowerCase() === "delete" ? "text-red" : "text-blue"
-        }  text-[14px]`}
+  if (item.link) {
+    return (
+      <Link
+        href={item.link || "#"}
+        className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2"
       >
-        {item.title}
-      </p>
-    </div>
-  );
+        {item.icon}
+        <p
+          className={`${
+            item.title.toLowerCase() === "delete" ? "text-red" : "text-blue"
+          }  text-[14px]`}
+        >
+          {item.title}
+        </p>
+      </Link>
+    );
+  } else {
+    return (
+      <div
+        onClick={() => {
+          item.onclick(ids);
+        }}
+        className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2"
+      >
+        {item.icon}
+        <p
+          className={`${
+            item.title.toLowerCase() === "delete" ? "text-red" : "text-blue"
+          }  text-[14px]`}
+        >
+          {item.title}
+        </p>
+      </div>
+    );
+  }
 }
 
 export default Events;

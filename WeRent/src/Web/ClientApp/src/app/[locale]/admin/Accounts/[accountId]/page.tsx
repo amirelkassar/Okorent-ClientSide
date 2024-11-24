@@ -17,7 +17,6 @@ function Page({ params }: any) {
         viewProfile={viewProfile}
         setViewProfile={setViewProfile}
       />
-
       {viewProfile === "Profile" ? (
         <>
           <div className="w-full rounded-3xl overflow-hidden h-[180px] lg:h-[356px]">

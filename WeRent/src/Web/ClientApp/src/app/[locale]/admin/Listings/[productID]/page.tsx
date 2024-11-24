@@ -12,11 +12,11 @@ import React, { useState } from "react";
 import HeaderProduct from "./_components/headerProduct";
 import AddProduct from "./_components/add-product";
 
-function Page() {
+function Page({params}:any) {
   const [IsEdit, setIsEdit] = useState(false);
   return (
     <div>
-      <HeaderProduct />
+      <HeaderProduct id={params.productID} />
       <CardProduct />
       <div className="bg-[#D9D9D933] px-3 lg:px-10 lg:rounded-[50px] rounded-[30px] pt-8 lg:pt-11 pb-9 lg:pb-7 mb-11 lg:mb-14">
         <h2 className="text-xl mb-5 px-2 lg:text-2xl">

@@ -1,7 +1,8 @@
 "use client";
 import DeleteIcon from "@/src/assets/icons/delete";
-import EditIcon from "@/src/assets/icons/edit";
 import NoteTableIcon from "@/src/assets/icons/noteTable";
+import TrueIcon from "@/src/assets/icons/true";
+import UnVerifyIcon from "@/src/assets/icons/unVerify";
 import Events from "@/src/components/Events";
 import LinkGreen from "@/src/components/linkGreen";
 import NoteModal from "@/src/components/NoteModal";
@@ -9,9 +10,15 @@ import ROUTES from "@/src/routes";
 import { useDisclosure } from "@mantine/hooks";
 import React from "react";
 
-function HeaderProduct({ id }: any) {
+function HeaderEdit({ id }: any) {
   const [opened, { open, close }] = useDisclosure(false);
   const functionSelect = [
+    {
+      title: "Discard Edits",
+      icon: <UnVerifyIcon fill="#006AFF" />,
+      link: ROUTES.ADMIN.LISTINGSDETAILS(1),
+      onclick: () => {},
+    },
     {
       title: "Send Note",
       icon: <NoteTableIcon />,
@@ -28,11 +35,11 @@ function HeaderProduct({ id }: any) {
   return (
     <div className="flex items-center gap-3 mb-8">
       <LinkGreen
-        href={ROUTES.ADMIN.LISTINGSDETAILSEdit(id)}
-        className={"h-10 px-5 gap-1"}
+        href={ROUTES.ADMIN.LISTINGSDETAILS(id)}
+        className={"h-10 px-5 gap-2"}
       >
-        <EditIcon fill="white" className="w-3 h-auto" />
-        <p className="text-sm">Edit</p>
+        <TrueIcon fill="white" className="w-4 h-auto" />
+        <p className="text-sm">Save Edits</p>
       </LinkGreen>
       {functionSelect.map((item, index) => {
         return <Events key={index} item={item} ids={[1]} />;
@@ -42,4 +49,4 @@ function HeaderProduct({ id }: any) {
   );
 }
 
-export default HeaderProduct;
+export default HeaderEdit;

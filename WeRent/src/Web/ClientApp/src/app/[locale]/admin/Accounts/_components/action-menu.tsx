@@ -11,8 +11,8 @@ import ROUTES from "@/src/routes";
 import React from "react";
 import DeactivateModal from "./DeactivateModal";
 import { useDisclosure } from "@mantine/hooks";
-import NoteModal from "./NoteModal";
 import EditModal from "./EditModal";
+import NoteModal from "@/src/components/NoteModal";
 
 function ActionMenu({ id }: { id: any }) {
   const [opened, { open, close }] = useDisclosure(false);

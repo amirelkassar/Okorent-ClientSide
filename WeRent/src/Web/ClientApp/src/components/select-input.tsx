@@ -24,13 +24,13 @@ const SelectInput: React.FC<SelectInputProps> = ({
       searchable
       leftSectionPointerEvents="none"
       classNames={{
-        input: `text-black rounded-xl h-[54px] h-full text-grayMedium border border-green/30 focus:border-green active:border-green placeholder:text-grayMedium placeholder:opacity-100 ${inputClassName}`,
-        wrapper: "h-full",
+        input: `text-black rounded-xl min-h-[54px] h-[54px] h-full text-grayMedium border border-green/30 focus:border-green active:border-green placeholder:text-grayMedium placeholder:opacity-100 ${inputClassName}`,
+        wrapper: "h-auto",
         label: `text-black mb-2 text-xs lg:text-base ${labelClassName}`,
         dropdown: `bg-white text-black rounded-xl border border-green/50 text-grayDark py-2`,
         option: `hover:bg-green hover:text-white duration-300`,
       }}
-      className={`h-[64px]   duration-200 min-h-[64px] bg-white rounded-2xl  text-grayMedium ${className}`}
+      className={`   duration-200 min-h-[64px] h-auto bg-white rounded-2xl  text-grayMedium ${className}`}
       {...props}
     />
   );

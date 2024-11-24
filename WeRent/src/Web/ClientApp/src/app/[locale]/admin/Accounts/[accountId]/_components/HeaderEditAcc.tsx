@@ -1,3 +1,4 @@
+"use client";
 import DeactivateIcon from "@/src/assets/icons/Deactivate";
 import DeleteIcon from "@/src/assets/icons/delete";
 import ExportIcon from "@/src/assets/icons/export";
@@ -6,53 +7,56 @@ import TrueIcon from "@/src/assets/icons/true";
 import Events from "@/src/components/Events";
 import React, { useState } from "react";
 import SwitchViewProfile from "./switchViewProfile";
+import NoteModal from "@/src/components/NoteModal";
+import { useDisclosure } from "@mantine/hooks";
+import DeactivateModal from "../../_components/DeactivateModal";
 interface HeaderEditAccProps {
   id: number;
   viewProfile: string;
   setViewProfile: (value: string) => void;
 }
-const functionSelect = [
-  {
-    title: "Verify",
-    icon: <TrueIcon />,
-    onclick: (ids: any) => {
-      console.log([...ids]);
-    },
-  },
-  {
-    title: "Export",
-    icon: <ExportIcon />,
-    onclick: (ids: any) => {
-      console.log([...ids]);
-    },
-  },
-  {
-    title: "Deactivate",
-    icon: <DeactivateIcon />,
-    onclick: (ids: any) => {
-      console.log([...ids]);
-    },
-  },
-  {
-    title: "Send Note",
-    icon: <NoteTableIcon />,
-    onclick: (ids: any) => {
-      console.log([...ids]);
-    },
-  },
-  {
-    title: "Delete",
-    icon: <DeleteIcon />,
-    onclick: (ids: any) => {
-      console.log([...ids]);
-    },
-  },
-];
+
 function HeaderEditAcc({
   id,
   viewProfile,
   setViewProfile,
 }: HeaderEditAccProps) {
+  const [opened, { open, close }] = useDisclosure(false);
+  const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
+
+  const functionSelect = [
+    {
+      title: "Verify",
+      icon: <TrueIcon />,
+      onclick: (ids: any) => {
+        console.log([...ids]);
+      },
+    },
+    {
+      title: "Export",
+      icon: <ExportIcon />,
+      onclick: (ids: any) => {
+        console.log([...ids]);
+      },
+    },
+    {
+      title: "Deactivate",
+      icon: <DeactivateIcon />,
+      onclick: open2,
+    },
+    {
+      title: "Send Note",
+      icon: <NoteTableIcon />,
+      onclick: open,
+    },
+    {
+      title: "Delete",
+      icon: <DeleteIcon />,
+      onclick: (ids: any) => {
+        console.log([...ids]);
+      },
+    },
+  ];
   return (
     <div className="flex items-center justify-between gap-7 flex-wrap mb-8">
       <div className="flex items-center gap-5">
@@ -67,6 +71,8 @@ function HeaderEditAcc({
         viewProfile={viewProfile}
         setViewProfile={setViewProfile}
       />
+      {opened2 && <DeactivateModal id={id} opened={opened2} close={close2} />}
+      <NoteModal opened={opened} close={close} />
     </div>
   );
 }
