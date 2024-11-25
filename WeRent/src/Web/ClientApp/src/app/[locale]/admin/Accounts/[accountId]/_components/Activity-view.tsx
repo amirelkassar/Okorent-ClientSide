@@ -122,7 +122,7 @@ function ActivityView() {
           );
         })}
       </div>
-      <div className="flex flex-wrap  justify-center  my-10 gap-8">
+      <div className="flex flex-wrap  justify-center xl:justify-between  my-10 gap-8">
        <ChartRentalsPerformance/>
         <DoughnutChart />
         <div className="max-w-[700px] w-full">

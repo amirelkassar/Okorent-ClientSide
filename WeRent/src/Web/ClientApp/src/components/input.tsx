@@ -1,4 +1,7 @@
-import { TextInput as MantineTextInput,TextInputProps as MantineTextInputProps } from "@mantine/core";
+import {
+  TextInput as MantineTextInput,
+  TextInputProps as MantineTextInputProps,
+} from "@mantine/core";
 import React from "react";
 import NameIcon from "../assets/icons/name";
 import EmailIcon from "../assets/icons/email";
@@ -30,7 +33,9 @@ const Input: React.FC<InputText> = ({
           <NameIcon className="w-auto h-4" />
         ) : sectionType === "email" ? (
           <EmailIcon className="w-auto h-4" />
-        ) : null
+        ) : (
+          props.leftSection
+        )
       }
       classNames={{
         section: "ms-2 max-w-6 w-auto flex items-center",

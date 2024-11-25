@@ -589,7 +589,7 @@ export const ListingsDataAdmin = [
     category: "Electronics",
     status: true,
     rentalCost: 100,
-    location:'Eastern Warehouse'
+    location: "Eastern Warehouse",
   },
   {
     id: 2,
@@ -600,7 +600,7 @@ export const ListingsDataAdmin = [
     category: "Electronics",
     status: false,
     rentalCost: 100,
-    location:'Eastern Warehouse'
+    location: "Eastern Warehouse",
   },
   {
     id: 3,
@@ -611,7 +611,7 @@ export const ListingsDataAdmin = [
     category: "Electronics",
     status: true,
     rentalCost: 100,
-    location:'Eastern Warehouse'
+    location: "Eastern Warehouse",
   },
   {
     id: 4,
@@ -622,7 +622,7 @@ export const ListingsDataAdmin = [
     category: "Electronics",
     status: true,
     rentalCost: 100,
-    location:'Eastern Warehouse'
+    location: "Eastern Warehouse",
   },
   {
     id: 5,
@@ -633,6 +633,98 @@ export const ListingsDataAdmin = [
     category: "Electronics",
     status: true,
     rentalCost: 100,
-    location:'Eastern Warehouse'
+    location: "Eastern Warehouse",
+  },
+];
+
+interface Ticket {
+  id: number;
+  name: string;
+  avatar: StaticImageData;
+  assignee: string;
+  avatarAssignee: StaticImageData;
+  category: string;
+  status: string;
+  description: string;
+  date: string;
+}
+
+export const TICKETS: Ticket[] = [
+  {
+    id: 1,
+    name: "Ahmed Mohamed",
+    avatar: avatar,
+    assignee: "Mark James",
+    avatarAssignee: avatar,
+    category: "Un Assigned",
+    status: "In Progress",
+    description: "I want help in adjusting my listings",
+    date: "Today | 05:30 PM",
+  },
+  {
+    id: 2,
+    name: "Ahmed Mohamed",
+    avatar: avatar,
+    assignee: "Mark James",
+    avatarAssignee: avatar,
+    category: "Sales",
+    status: "New",
+    description: "I want help in adjusting my listings",
+    date: "Today | 05:30 PM",
+  },
+  {
+    id: 3,
+    name: "Ahmed Mohamed",
+    avatar: avatar,
+    assignee: "Mark James",
+    avatarAssignee: avatar,
+    category: "Technical",
+    status: "Solved",
+    description: "I want help in adjusting my listings",
+    date: "Today | 05:30 PM",
+  },
+  {
+    id: 4,
+    name: "Ahmed Mohamed",
+    avatar: avatar,
+    assignee: "Mark James",
+    avatarAssignee: avatar,
+    category: "Feedback",
+    status: "New",
+    description: "I want help in adjusting my listings",
+    date: "Today | 05:30 PM",
+  },
+  {
+    id: 5,
+    name: "Ahmed Mohamed",
+    avatar: avatar,
+    assignee: "Mark James",
+    avatarAssignee: avatar,
+    category: "Un Assigned",
+    status: "New",
+    description: "I want help in adjusting my listings",
+    date: "Today | 05:30 PM",
+  },
+  {
+    id: 6,
+    name: "Ahmed Mohamed",
+    avatar: avatar,
+    assignee: "Mark James",
+    avatarAssignee: avatar,
+    category: "Feedback",
+    status: "New",
+    description: "I want help in adjusting my listings",
+    date: "Today | 05:30 PM",
+  },
+  {
+    id: 7,
+    name: "Ahmed Mohamed",
+    avatar: avatar,
+    assignee: "Mark James",
+    avatarAssignee: avatar,
+    category: "Un Assigned",
+    status: "New",
+    description: "I want help in adjusting my listings",
+    date: "Today | 05:30 PM",
   },
 ];

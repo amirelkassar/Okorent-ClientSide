@@ -45,7 +45,7 @@ function DataActions({ data }: { data: any[] }) {
                   item.action();
                   handleClose();
                 }}
-                className="flex w-full min-h-[30px] h-[30px] rounded-md items-center gap-2 py-2 hover:bg-green/20 duration-200  px-2  "
+                className="flex w-full min-h-[30px] h-[30px] rounded-md items-center gap-2 py-2 hover:bg-green/20 duration-200  ps-2  "
               >
                 {item.icon}
                 <p className={`text-sm text-black font-medium`}>{item.label}</p>
