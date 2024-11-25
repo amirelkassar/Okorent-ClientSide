@@ -46,7 +46,7 @@ function FormFour() {
             handleRemoveLocation={handleRemoveLocation}
           />
         </div>
-        <div className="flex-1">
+        <div className="flex-1 min-w-[200px]">
           <ItemDescriptions title="Available Stock" />
           <Input
             placeholder="Ex: 10 "

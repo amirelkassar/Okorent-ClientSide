@@ -33,7 +33,7 @@ function HeaderEdit({ id }: any) {
     },
   ];
   return (
-    <div className="flex items-center gap-3 mb-8">
+    <div className="flex items-center gap-3 mb-8 flex-wrap">
       <LinkGreen
         href={ROUTES.ADMIN.LISTINGSDETAILS(id)}
         className={"h-10 px-5 gap-2"}

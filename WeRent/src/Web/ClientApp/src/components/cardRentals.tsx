@@ -17,8 +17,8 @@ interface CardRentalsProps {
 function CardRentals({ data, Fav = false, edit = false }: CardRentalsProps) {
 const pathName = usePathname()
   return (
-    <div>
-      <div className="w-full flex-1 max-w-[270px] min-w-[200px] p-2 lg:p-4 bg-white/80 rounded-3xl block border border-black/25 duration-200 hover:shadow-md">
+    <div className="w-full flex-1 max-w-[270px] min-w-[200px] block">
+      <div className=" w-full p-2 lg:p-4 bg-white/80 rounded-3xl  border border-black/25 duration-200 hover:shadow-md">
         <div className=" relative mb-[6px] md:mb-3">
           <Image
             alt="Rentals"
@@ -63,7 +63,7 @@ const pathName = usePathname()
         </Link>
       </div>
       {edit && (
-        <button className="flex items-center gap-2 text-red w-fit mx-auto mt-3 border px-4 py-2 duration-300 hover:shadow-md hover:border-red rounded-xl border-black/20 text-base">
+        <button className="flex items-center gap-2 text-red w-fit mx-auto mt-3 border px-4 py-2 duration-300 h-10 text-sm md:text-base hover:shadow-md hover:border-red rounded-xl border-black/20 ">
           <DeleteIcon className="h-[14px] w-auto" />
           Delete
         </button>

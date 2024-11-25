@@ -16,7 +16,7 @@ function ItemDescriptions({
     <div>
       {title && (
         <h3
-          className={cn("text-base lg:text-xl font-Regular mb-4  ", titleStyle)}
+          className={cn("text-base lg:text-xl font-Regular mb-2 lg:mb-4  ", titleStyle)}
         >
           {title}
         </h3>

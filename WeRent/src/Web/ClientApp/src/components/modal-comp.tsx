@@ -16,9 +16,9 @@ function ModalComp({ opened, close, children, title }: ModalCompProps) {
       size="auto"
       classNames={{
         header: "p-0 h-0 min-h-0 ",
-        body: "min-h-[300px] overflow-y-auto p-0 max-h-[90dvh] min-w-auto md:min-w-[400px] ",
+        body: "min-h-[300px] overflow-y-auto p-0 max-h-[90dvh] min-w-[94%] duration-200  w-full md:min-w-[400px] ",
         content:
-          "rounded-3xl border-2 overflow-hidden   shadow-sidebar   border-main",
+          "rounded-3xl border-2 overflow-hidden   shadow-sidebar w-full md:w-fit duration-200   border-main",
         overlay: "bg-black/50",
         close: `${!title && "!top-5"}`,
       }}

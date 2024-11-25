@@ -16,13 +16,13 @@ function Events({ item, ids }: EventsProps) {
     return (
       <Link
         href={item.link || "#"}
-        className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2"
+        className=" px-3 mdl:px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2"
       >
         {item.icon}
         <p
           className={`${
             item.title.toLowerCase() === "delete" ? "text-red" : "text-blue"
-          }  text-[14px]`}
+          }  text-sm`}
         >
           {item.title}
         </p>
@@ -34,13 +34,13 @@ function Events({ item, ids }: EventsProps) {
         onClick={() => {
           item.onclick(ids);
         }}
-        className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2"
+        className="px-3 mdl:px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2"
       >
         {item.icon}
         <p
           className={`${
             item.title.toLowerCase() === "delete" ? "text-red" : "text-blue"
-          }  text-[14px]`}
+          }  text-sm`}
         >
           {item.title}
         </p>

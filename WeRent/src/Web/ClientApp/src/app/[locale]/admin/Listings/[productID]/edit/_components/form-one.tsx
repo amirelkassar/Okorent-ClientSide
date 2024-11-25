@@ -18,7 +18,7 @@ function FormOne() {
           ]}
           label="Listing Category"
           inputClassName="!h-16"
-          labelClassName="!text-xl font-Regular"
+          labelClassName=" !text-base lg:!text-xl font-Regular"
           placeholder="Select category"
           className="flex-1"
         />
@@ -26,7 +26,7 @@ function FormOne() {
         <Input
           label="Listing Description"
           placeholder="Add bundle title here "
-          labelClassName="!text-xl font-Regular"
+          labelClassName=" !text-base lg:!text-xl font-Regular"
           inputClassName="bg-white h-16 rounded-xl"
           className="flex-1"
         />

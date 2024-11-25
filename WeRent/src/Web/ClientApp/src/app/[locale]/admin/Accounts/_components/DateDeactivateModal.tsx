@@ -1,5 +1,8 @@
 "use client";
+import CalendarIcon from "@/src/assets/icons/Calendar";
+import DateIcon from "@/src/assets/icons/date";
 import Button from "@/src/components/button";
+import Input from "@/src/components/input";
 import ModalComp from "@/src/components/modal-comp";
 import { TextInput } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
@@ -22,44 +25,33 @@ function DateDeactivateModal() {
   };
   return (
     <>
-      <div className="flex items-center flex-col md:flex-row gap-5 mb-8">
-        <TextInput
+      <div className="flex lg:items-center flex-col lg:flex-row gap-3 lg:gap-5 mb-5 lg:mb-8">
+        <Input
           type={"button"}
           label={"From"}
+          leftSection={<DateIcon className="w-5 h-auto" fill="#6F6B7D" />}
           placeholder={"Choose specific starting date"}
-          classNames={{
-            input:
-              "bg-white border-green ps-12 cursor-pointer  h-16  rounded-xl placeholder:text-grayMedium duration-300 focus:border-green focus:bg-white ",
-            label: "text-[16px] mb-2 font-Medium ms-1",
-            wrapper:
-              "relative before:absolute before:content-[''] before:bg-[url('../../assets/icons/Calendar.svg')]  before:bg-[length:22px_22px]   before:bg-center before:bg-no-repeat before:top-1/2 before:-translate-y-1/2 before:start-0     before:w-12 before:h-8 before:place-content-center",
-          }}
-          className=" cursor-pointer flex-1"
-          value={formatDate(value) || "Choose specific starting date"}
+          inputClassName="bg-white border-green cursor-pointer  h-16 rounded-xl"
           onClick={() => {
             setTypeDate("from");
             open2();
           }}
+          value={formatDate(value) || "Choose specific starting date"}
+          className="flex-1"
         />
-        <TextInput
+        <Input
           type={"button"}
           label={"To"}
+          leftSection={<DateIcon className="w-5 h-auto" fill="#6F6B7D" />}
           placeholder={"Choose specific starting date"}
-          classNames={{
-            input:
-              "bg-white border-green ps-12 cursor-pointer  h-16  rounded-xl placeholder:text-grayMedium duration-300 focus:border-green focus:bg-white ",
-            label: "text-[16px] mb-2 font-Medium ms-1",
-            wrapper:
-              "relative before:absolute before:content-[''] before:bg-[url('../../assets/icons/Calendar.svg')]  before:bg-[length:22px_22px]   before:bg-center before:bg-no-repeat before:top-1/2 before:-translate-y-1/2 before:start-0     before:w-12 before:h-8 before:place-content-center",
-          }}
-          className=" cursor-pointer flex-1"
-          value={formatDate(value2) || "Choose specific starting date"}
+          inputClassName="bg-white border-green cursor-pointer  h-16 rounded-xl"
           onClick={() => {
             setTypeDate("to");
             open2();
           }}
+          value={formatDate(value2) || "Choose specific starting date"}
+          className="flex-1"
         />
-        
       </div>
       <ModalComp
         opened={opened}

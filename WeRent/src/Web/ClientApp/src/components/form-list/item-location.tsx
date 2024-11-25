@@ -187,7 +187,7 @@ function ItemLocation({
               open();
             }}
             className={
-              "mt-8 bg-grayBack gap-3 px-7 h-[64px] border-none text-black"
+              " mt-5 lg:mt-8 bg-grayBack gap-3 px-4 lg:px-7 h-12 lg:h-[64px] border-none text-black"
             }
           >
             <LocationIcon fill="#0F2A43" />

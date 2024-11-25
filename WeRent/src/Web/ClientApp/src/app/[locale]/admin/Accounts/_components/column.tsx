@@ -1,18 +1,19 @@
 "use client";
 import FilterIcon from "@/src/assets/icons/filter";
 import StarIcon from "@/src/assets/icons/star";
-import CardStatus from "@/src/components/cardStatus";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import { ColumnDef } from "@tanstack/react-table";
 import Image, { StaticImageData } from "next/image";
 import ActionMenu from "./action-menu";
+import RenderPackage from "../../_components/render-package";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type MedicalTeamTableData = {
   id: number;
   name: string;
+  email: string;
   package: string;
   period: string;
   payment: number;
@@ -75,13 +76,7 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     },
     cell: ({ getValue }) => {
       const packageVal = getValue<string>();
-      return packageVal === "Essential Package" ? (
-        <CardStatus circle title={packageVal} type="green" />
-      ) : packageVal === "Premium Package" ? (
-        <CardStatus circle title={packageVal} type="gray" />
-      ) : (
-        <CardStatus circle title={packageVal} type="blue" />
-      );
+      return <RenderPackage packageVal={packageVal} />;
     },
   },
   {

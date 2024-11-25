@@ -27,31 +27,31 @@ function HeaderEditAcc({
   const functionSelect = [
     {
       title: "Verify",
-      icon: <TrueIcon />,
+      icon: <TrueIcon className="max-h-4 w-auto" />,
       onclick: (ids: any) => {
         console.log([...ids]);
       },
     },
     {
       title: "Export",
-      icon: <ExportIcon />,
+      icon: <ExportIcon className="max-h-4 w-auto" />,
       onclick: (ids: any) => {
         console.log([...ids]);
       },
     },
     {
       title: "Deactivate",
-      icon: <DeactivateIcon />,
+      icon: <DeactivateIcon className="max-h-4 w-auto" />,
       onclick: open2,
     },
     {
       title: "Send Note",
-      icon: <NoteTableIcon />,
+      icon: <NoteTableIcon className="max-h-4 w-auto" />,
       onclick: open,
     },
     {
       title: "Delete",
-      icon: <DeleteIcon />,
+      icon: <DeleteIcon className="max-h-4 w-auto" />,
       onclick: (ids: any) => {
         console.log([...ids]);
       },

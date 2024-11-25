@@ -12,7 +12,7 @@ function AccrountRentals({}) {
 
         <p className="text-white text-[16px] font-Medium">View all</p>
       </div>
-      <div className="flex gap-8 flex-wrap relative z-[1]">
+      <div className="flex gap-3 justify-center md:justify-start lg:gap-8 flex-wrap relative z-[1]">
         {Rentals.map((item) => {
           return <CardRentals data={item} key={item.id} />;
         })}

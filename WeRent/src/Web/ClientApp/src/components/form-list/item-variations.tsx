@@ -40,7 +40,7 @@ function ItemVariations({
               color="#88BA52"
               className={cn(index === 0 && "mt-6")}
             />
-            <div className="flex items-center gap-4">
+            <div className="flex items-center flex-wrap gap-4">
               <TextInput
                 value={`Phone Cass ${index + 1}`}
                 name="name"
@@ -53,7 +53,7 @@ function ItemVariations({
                     " text-black rounded-2xl text-grayMedium  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
                   wrapper: "h-[64px]",
                 }}
-                className=" flex-1  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
+                className=" flex-1 min-w-[150px]  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
               />
               <TextInput
                 value={"Color -" + " " + variation.attribute1}
@@ -67,7 +67,7 @@ function ItemVariations({
                     " text-black rounded-2xl text-grayMedium first:font-Bold  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
                   wrapper: "h-[64px]",
                 }}
-                className=" flex-1  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
+                className=" flex-1 min-w-[150px]  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
               />
               <TextInput
                 value={"Size -" + " " + variation.attribute2}
@@ -81,7 +81,7 @@ function ItemVariations({
                     " text-black rounded-2xl text-grayMedium  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
                   wrapper: "h-[64px]",
                 }}
-                className=" flex-1  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
+                className=" flex-1 min-w-[150px]  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
               />
             </div>
           </div>
@@ -164,11 +164,11 @@ function ItemVariations({
               open();
             }}
             className={
-              "mt-8 bg-grayBack gap-3 px-7 h-[64px] border-none text-black"
+              "mt-8 bg-grayBack gap-2 lg:gap-3 lg:!px-7 h-12 lg:h-[64px] border-none text-black"
             }
           >
-            <PlusIcon fill="#0F2A43" />
-            <p>Add Variations</p>
+            <PlusIcon fill="#0F2A43" className={'w-4 h-auto'} />
+            <p className="text-sm lg:text-lg">Add Variations</p>
           </Button>
         </div>
       )}

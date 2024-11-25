@@ -17,6 +17,7 @@ export type MedicalTeamTableData = {
   id: number;
   name: string;
   package: string;
+  email:string;
   period: string;
   payment: number;
   rating: number;

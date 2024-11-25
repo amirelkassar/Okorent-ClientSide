@@ -5,11 +5,13 @@ import SubscribersIcon from "@/src/assets/icons/Subscribers";
 import CardStatistical from "@/src/components/cardStatistical";
 import avatar from "@/src/assets/images/1.png";
 import PhoneImg from "@/src/assets/images/phone.png";
-
 import React from "react";
 import { DataTable } from "@/src/components/data-table";
 import { columns } from "./column";
 import InventoryReport from "./Inventory-report";
+import CardPhoneAccount from "./card-phone-account";
+import DoughnutChart from "@/src/components/DoughnutChart";
+import ChartRentalsPerformance from "./chart-rentals-performance";
 
 const number = [
   {
@@ -120,7 +122,9 @@ function ActivityView() {
           );
         })}
       </div>
-      <div className="flex items-center  my-10 gap-8">
+      <div className="flex flex-wrap  justify-center  my-10 gap-8">
+       <ChartRentalsPerformance/>
+        <DoughnutChart />
         <div className="max-w-[700px] w-full">
           <InventoryReport />
         </div>
@@ -130,6 +134,7 @@ function ActivityView() {
           title="Recent Transactions"
           data={transactions}
           columns={columns}
+          Component={CardPhoneAccount}
         />
       </div>
     </div>

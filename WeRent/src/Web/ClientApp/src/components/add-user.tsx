@@ -21,19 +21,19 @@ function AddUser() {
         <div className="flex flex-col gap-4 w-[570px] max-w-full">
           <Input
             sectionType="user"
-            inputClassName="bg-white h-16 rounded-xl"
+            inputClassName="bg-white h-12 lg:h-16 rounded-xl"
             label="Name"
             placeholder="Write customer name here"
-            className="flex-1"
+            className="flex-1 min-w-[220px]"
           />
-          <div className="flex gap-7">
+          <div className="flex gap-4 flex-wrap lg:gap-7">
             <Input
               sectionType="email"
               type="email"
-              inputClassName="bg-white h-16 rounded-xl"
+              inputClassName="bg-white h-12 lg:h-16 rounded-xl"
               label="Name"
               placeholder="Write customer email here"
-              className="flex-1"
+              className="flex-1 min-w-[220px]"
             />
             <SelectInput
               data={[
@@ -45,27 +45,27 @@ function AddUser() {
               ]}
               label='Plan'
               defaultValue={'Basic'}
-              className="flex-1"
+              className="flex-1 min-w-[220px]"
             />
           </div>
-          <div className="flex gap-7">
+          <div className="flex gap-4 flex-wrap lg:gap-7">
             <InputPhone
-              boxClassName={"flex-1"}
-              inputClassName="bg-white h-16 !border border-green/30"
+              boxClassName={"flex-1 min-w-[220px]"}
+              inputClassName="bg-white h-12 lg:h-16 !border border-green/30"
               flagBorder={false}
             />
             <Password
               label="Password"
-              inputClassName="h-16 bg-white border-green-30 border"
-              className="flex-1"
+              inputClassName="h-12 lg:h-16 bg-white border-green-30 border"
+              className="flex-1 min-w-[220px]"
               placeholder="Write password here"
             />
           </div>
 
-          <div className="flex items-center gap-7 mt-5 w-full pb-5">
+          <div className="flex items-center gap-4 flex-wrap lg:gap-7 mt-5 w-full pb-5">
             <Button
               onClick={close}
-              className={" flex-1 h-[54px] text-black bg-grayBack border-none"}
+              className={" flex-1  h-[54px] text-black bg-grayBack border-none"}
             >
               Cancel
             </Button>

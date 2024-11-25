@@ -117,8 +117,8 @@ export function DataTable<TData extends { id: any }, TValue>({
   return (
     <div>
       <div className="flex items-center justify-between gap-6 flex-wrap mb-8">
-        <div className="flex items-center gap-5">
-          <h2 className="headTitle min-h-10">{title}</h2>
+        <div className="flex items-center gap-3 mdl:gap-5 flex-wrap">
+          <h2 className="headTitle mdl:min-h-10 text-nowrap">{title}</h2>
           {cardView && (
             <Link
               href={cardView}
@@ -129,28 +129,30 @@ export function DataTable<TData extends { id: any }, TValue>({
             </Link>
           )}
           {}
-          {selectedUsers.size > 0 ? (
-            functionSelect ? (
-              functionSelect.map((item, index) => {
-                return <Events key={index} item={item} ids={selectedUsers} />;
-              })
-            ) : (
-              <div className="flex items-center gap-3 flex-wrap">
-                <div className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
-                  <TrueIcon />
-                  <p className="text-blue text-[14px]">Verify</p>
-                </div>
-                <div className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
-                  <ExportIcon />
-                  <p className="text-blue text-[14px]">Export</p>
-                </div>
-                <div className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
-                  <DeleteIcon className="h-[14px] w-auto" />
-                  <p className="text-red text-[14px]">Delete</p>
-                </div>
-              </div>
-            )
-          ) : null}
+          <div className="flex items-center gap-3 flex-wrap">
+            {selectedUsers.size > 0 ? (
+              functionSelect ? (
+                functionSelect.map((item, index) => {
+                  return <Events key={index} item={item} ids={selectedUsers} />;
+                })
+              ) : (
+                <>
+                  <div className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
+                    <TrueIcon />
+                    <p className="text-blue text-[14px]">Verify</p>
+                  </div>
+                  <div className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
+                    <ExportIcon />
+                    <p className="text-blue text-[14px]">Export</p>
+                  </div>
+                  <div className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
+                    <DeleteIcon className="h-[14px] w-auto" />
+                    <p className="text-red text-[14px]">Delete</p>
+                  </div>
+                </>
+              )
+            ) : null}
+          </div>
         </div>
         {haveRentSwitch && <RentSwitch typeUser="user" />}
         {viewAll && (
@@ -194,15 +196,17 @@ export function DataTable<TData extends { id: any }, TValue>({
           {table.getRowModel().rows.map((row, i) =>
             row.original !== null ? (
               <div key={i} className="w-full flex gap-2">
-                <Checkbox
-                  color="#88BA52"
-                  classNames={{
-                    input: "bg-transparent",
-                  }}
-                  size="xs"
-                  checked={selectedUsers.has(row.original?.id)}
-                  onChange={() => toggleUser(row.original?.id)}
-                />
+                <div className="mt-4">
+                  <Checkbox
+                    color="#88BA52"
+                    classNames={{
+                      input: "bg-transparent",
+                    }}
+                    size="xs"
+                    checked={selectedUsers.has(row.original?.id)}
+                    onChange={() => toggleUser(row.original?.id)}
+                  />
+                </div>
                 <Component dataCard={row.original as TData} />
               </div>
             ) : null

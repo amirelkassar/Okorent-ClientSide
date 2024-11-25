@@ -16,31 +16,31 @@ function FormThree() {
               placeholder={"Add Price Here"}
               labelClassName="text-sm lg:text-base font-Regular text-grayMedium "
               inputClassName="bg-white h-16 rounded-xl md:max-w-[200px]"
-              className="flex-1"
+              className="flex-1 min-w-[160px]"
             />
             <Input
               label="Price for 1 Week"
               placeholder={"Add Price Here"}
               labelClassName="text-sm lg:text-base font-Regular text-grayMedium "
               inputClassName="bg-white h-16 rounded-xl md:max-w-[200px]"
-              className="flex-1"
+              className="flex-1 min-w-[160px]"
             />
             <Input
               label="Price for 1 Month"
               placeholder={"Add Price Here"}
               labelClassName="text-sm lg:text-base font-Regular text-grayMedium "
               inputClassName="bg-white h-16 rounded-xl md:max-w-[200px]"
-              className="flex-1"
+              className="flex-1 min-w-[160px]"
             />
           </div>
         </div>
         <div className="flex-1">
           <ItemDescriptions title="Value of the Listing" />
-          <div className="flex gap-4 flex-wrap ">
+          <div className="flex gap-4 flex-wrap  ">
             <Input
               label="."
               placeholder={"USD"}
-              labelClassName="text-sm lg:text-base  opacity-0 font-Regular text-grayMedium "
+              labelClassName="text-sm lg:text-base  hidden lg:block opacity-0 font-Regular text-grayMedium "
               inputClassName="bg-white h-16 rounded-xl "
               className="flex-1"
             />

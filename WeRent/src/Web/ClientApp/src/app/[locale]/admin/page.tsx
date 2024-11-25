@@ -7,6 +7,7 @@ import { columns } from "./_components/column";
 import { UserData } from "@/src/lib/dataUser";
 import { DataTable } from "@/src/components/data-table";
 import ROUTES from "@/src/routes";
+import CardPhoneAccount from "./_components/card-phone-account";
 const data = [
   {
     date: "January",
@@ -157,6 +158,7 @@ function Page() {
         viewAll={ROUTES.ADMIN.ACCOUNTS}
         data={UserData}
         columns={columns}
+        Component={CardPhoneAccount}
       />
     </div>
   );

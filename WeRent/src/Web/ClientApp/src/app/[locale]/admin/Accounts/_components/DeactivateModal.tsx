@@ -29,7 +29,7 @@ function DeactivateModal({ opened, close, id }: any) {
               setValueDeactivate(e);
             }}
           >
-            <div className="flex my-6 items-center  gap-14 flex-wrap">
+            <div className="flex my-6 lgl:items-center gap-4 flex-col md:flex-row  lgl:gap-14 flex-wrap">
               {OptionAvailability.map((option, inedx) => {
                 return (
                   <Radio

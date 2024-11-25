@@ -2,13 +2,15 @@
 import CardPhone from "@/src/components/card-phone";
 import Image, { StaticImageData } from "next/image";
 import React from "react";
-import ActionMenu from "./action-menu";
+
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import RowCardPhone from "@/src/components/row-card-phone";
 import StarIcon from "@/src/assets/icons/star";
-import RenderPackage from "../../_components/render-package";
-export type MedicalTeamTableData = {
+import RenderPackage from "./render-package";
+import ActionMenu from "./action-menu";
+
+type MedicalTeamTableData = {
   id: number;
   name: string;
   email: string;
@@ -53,11 +55,10 @@ function CardPhoneAccount({ dataCard }: CardDataProps) {
           title="Package"
           cell={() => <RenderPackage packageVal={dataCard.package} />}
         />
+
         <RowCardPhone title="Payment" info={dataCard.payment} />
-        <RowCardPhone
-          title="Status"
-          info={dataCard.verified ? "Verified" : "Un Verified"}
-        />
+        <RowCardPhone title="Ending Date" info={dataCard.date} />
+
         <RowCardPhone
           title="Rating"
           cell={() => (
@@ -73,5 +74,3 @@ function CardPhoneAccount({ dataCard }: CardDataProps) {
 }
 
 export default CardPhoneAccount;
-
-

@@ -1,13 +1,11 @@
 "use client";
 
-import DownloadIcon from "@/src/assets/icons/download";
-import CardStatus from "@/src/components/cardStatus";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
-import { ActionIcon } from "@mantine/core";
 import { ColumnDef } from "@tanstack/react-table";
 import Image, { StaticImageData } from "next/image";
 import ActionMenu from "./action-menu";
+import RenderStatus from "./render-status";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -92,11 +90,7 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     header: "Status",
     cell: ({ getValue }) => {
       const status = getValue<string>();
-      return status ? (
-        <CardStatus type="blue" circle animation title={"Online"} />
-      ) : (
-        <CardStatus type="green" circle title={"Offline"} />
-      );
+      return <RenderStatus status={status} />;
     },
   },
   {
