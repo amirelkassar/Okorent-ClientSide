@@ -11,16 +11,16 @@ function AssignModal({ opened, close, id }: any) {
         <Input
           placeholder="Write assigned to name here"
           inputClassName="bg-white h-12 lg:h-16"
-          leftSection={<AddUserIcon fill="#0F2A43" className="w-6 h-auto" />}
+          leftSection={<AddUserIcon fill="#0F2A43" className=" w-4 md:w-6 h-auto" />}
         />
-        <div className="flex items-center gap-7 w-full mt-12">
+        <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-7 w-full mt-5 md:mt-12">
           <Button
             onClick={close}
-            className={" flex-1 h-[54px] text-black bg-grayBack border-none"}
+            className={" md:flex-1 h-[54px] text-black bg-grayBack border-none"}
           >
             Cancel
           </Button>
-          <Button onClick={close} className={" flex-1 h-[54px]"}>
+          <Button onClick={close} className={" md:flex-1 h-[54px]"}>
             Send
           </Button>
         </div>

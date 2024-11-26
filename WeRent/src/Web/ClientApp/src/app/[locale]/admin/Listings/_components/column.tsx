@@ -7,8 +7,7 @@ import Image, { StaticImageData } from "next/image";
 import ActionMenu from "./action-menu";
 import RenderStatus from "./render-status";
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
+
 export type MedicalTeamTableData = {
   id: number;
   phone: string;

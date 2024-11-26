@@ -3,6 +3,7 @@ import SwitchControl from "@/src/components/switch-control";
 import { TICKETS } from "@/src/lib/dataUser";
 import React from "react";
 import { columns } from "./_components/column";
+import CardPhoneAccount from "./_components/card-phone-account";
 const FilterOptions = [
   {
     label: "Un Assigned",
@@ -29,7 +30,7 @@ const FilterOptions = [
 function page() {
   return (
     <div>
-      <div className="w-fit mx-auto">
+      <div className="w-fit mx-auto mb-5 lgl:mb-0">
         <SwitchControl
           options={[
             { label: "All Tickets", value: "allTickets" },
@@ -47,6 +48,7 @@ function page() {
         filterBy="category"
         filter="buttons"
         filterData={FilterOptions}
+        Component={CardPhoneAccount}
       />
     </div>
   );

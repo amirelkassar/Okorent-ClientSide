@@ -8,8 +8,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import Image, { StaticImageData } from "next/image";
 import phoneImg from "@/src/assets/images/phone.png";
 import CardStatus from "@/src/components/cardStatus";
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
+
 export type RequestsTableData = {
   id: number;
   name: string;

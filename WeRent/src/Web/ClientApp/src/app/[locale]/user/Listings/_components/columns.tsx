@@ -9,8 +9,7 @@ import CardStatus from "@/src/components/cardStatus";
 import BtnBarcode from "./btnBarcode";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
+
 export type RequestsTableData = {
   id: number;
   phone: string;

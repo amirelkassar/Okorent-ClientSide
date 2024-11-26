@@ -1,6 +1,4 @@
 "use client";
-
-import EditIcon from "@/src/assets/icons/edit";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import { ColumnDef } from "@tanstack/react-table";
@@ -8,11 +6,9 @@ import Image, { StaticImageData } from "next/image";
 import ActionMenu from "./action-menu";
 import RenderStatus from "./render-status";
 import RenderCategory from "./render-category";
-import NoteIcon from "@/src/assets/icons/note";
-import NoteTableIcon from "@/src/assets/icons/noteTable";
+import TicketModal from "./ticket-modal";
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
+
 
 interface Ticket {
   id: number;
@@ -104,9 +100,7 @@ export const columns: ColumnDef<Ticket>[] = [
       return (
         <div className="flex items-center gap-5 justify-between">
           <h4 className="text-grayMedium">{date}</h4>
-          <button>
-            <NoteTableIcon className="w-5 h-auto" fill="#6F6B7D" />
-          </button>
+          <TicketModal />
         </div>
       );
     },
