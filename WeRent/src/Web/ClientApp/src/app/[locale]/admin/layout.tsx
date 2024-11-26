@@ -1,8 +1,8 @@
 import React from "react";
 import NavLinks from "./_components/navLinks";
-import Nav from "@/src/components/nav";
 import Footer from "@/src/components/footer";
 import ROUTES from "@/src/routes";
+import Nav from "./_components/nav";
 
 interface layoutProps {
   children: React.ReactNode;

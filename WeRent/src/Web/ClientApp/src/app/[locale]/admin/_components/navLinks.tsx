@@ -38,7 +38,8 @@ function NavLinks() {
         active:
           path === ROUTES.ADMIN.LISTINGS ||
           path === ROUTES.ADMIN.LISTINGSDETAILS(params.productID) ||
-          path === ROUTES.ADMIN.LISTINGSDETAILSEdit(params.productID),
+          path === ROUTES.ADMIN.LISTINGSDETAILSEdit(params.productID) ||
+          path === ROUTES.ADMIN.LISTINGSADD,
       },
       {
         id: 4,
@@ -50,7 +51,9 @@ function NavLinks() {
         id: 7,
         name: "Bookings",
         url: ROUTES.ADMIN.BOOKINGS,
-        active: path === ROUTES.ADMIN.BOOKINGS,
+        active:
+          path === ROUTES.ADMIN.BOOKINGS ||
+          path === ROUTES.ADMIN.BOOKINGSDETAILS(params.bookingsId),
       },
       {
         id: 9,
@@ -82,6 +85,12 @@ function NavLinks() {
         name: "Subscription",
         url: ROUTES.USER.SUBSCRIPTION,
         active: path === ROUTES.USER.SUBSCRIPTION,
+      },
+      {
+        id: 2,
+        name: "Booking Details",
+        url: ROUTES.ADMIN.BOOKINGSDETAILS(params.bookingsId),
+        active: path === ROUTES.ADMIN.BOOKINGSDETAILS(params.bookingsId),
       },
     ],
     [path]

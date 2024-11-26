@@ -1,12 +1,9 @@
 "use client";
-
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import { ColumnDef } from "@tanstack/react-table";
 import Image, { StaticImageData } from "next/image";
 import RenderStatus from "./render-status";
-
-
 
 interface BookingsAdminData {
   id: number;
@@ -32,7 +29,7 @@ export const columns: ColumnDef<BookingsAdminData>[] = [
       const id = row.original.id;
       return (
         <Link
-          href={ROUTES.ADMIN.ACCOUNTSDETAILS(id)}
+          href={ROUTES.ADMIN.BOOKINGSDETAILS(id)}
           className="flex items-center gap-2"
         >
           <Image

@@ -1,16 +1,16 @@
 "use client";
 import React, { useState } from "react";
 import HeaderEdit from "./_components/headerEdit";
-import FormOne from "./_components/form-one";
-import FormTwo from "./_components/form-two";
-import FormThree from "./_components/form-three";
-import FormSix from "./_components/form-six";
-import FormFour from "./_components/form-four";
-import FormFive from "./_components/form-five";
+import FormOne from "../../_components/forms-list/form-one";
+import FormTwo from "../../_components/forms-list/form-two";
+import FormThree from "../../_components/forms-list/form-three";
+import FormFour from "../../_components/forms-list/form-four";
+import FormFive from "../../_components/forms-list/form-five";
+import FormSix from "../../_components/forms-list/form-six";
+
 
 function Page({ params }: any) {
   const [dataList, setDataList] = useState<any>({});
-
   return (
     <div>
       <HeaderEdit id={params.productID} />
