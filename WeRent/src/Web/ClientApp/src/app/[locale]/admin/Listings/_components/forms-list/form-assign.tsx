@@ -1,12 +1,20 @@
+"use client";
 import SearchIcon from "@/src/assets/icons/search";
-import Button from "@/src/components/button";
 import CardList from "@/src/components/card-list";
 import Input from "@/src/components/input";
-import { Popover, Radio } from "@mantine/core";
-import Image from "next/image";
-import React, { useMemo, useState } from "react";
+import { Popover } from "@mantine/core";
+import React, { useState } from "react";
 import avatar from "@/src/assets/images/avatar.png";
-import AssignCardUser from "./assign-card-user";
+import { StaticImageData } from "next/image";
+import DeleteIcon from "@/src/assets/icons/delete";
+import UserCardInfo from "./user-card-info";
+import AssignRadioGroup from "./assign-comp/assign-radio-group";
+interface UserSelectedProps {
+  id: number;
+  name: string;
+  email: string;
+  avatar: StaticImageData;
+}
 const users = [
   {
     id: 1,
@@ -33,62 +41,66 @@ const users = [
     avatar: avatar,
   },
 ];
-function FormAssign() {
-  const [openSearch, setOpenSearch] = useState(false);
-  const [selectedUserId, setSelectedUserId] = useState("1"); // Default selected user (id: 1)
 
-  const cards = useMemo(() => {
-    return users.map((item) => (
-      <Radio.Card
-        radius="md"
-        className="border-none"
-        value={item.id.toString()}
-        key={item.id}
-      >
-        <AssignCardUser
-          image={item.avatar}
-          name={item.name}
-          email={item.email}
-        />
-      </Radio.Card>
-    ));
-  }, [users]);
+function FormAssign() {
+  const [openSearch, setOpenSearch] = useState(false); // Default selected user (id: 1)
+  const [userSelected, setUserSelected] = useState<UserSelectedProps | null>();
 
   return (
     <CardList title="Assign Listing">
-      <Popover
-        width={750}
-        shadow="md"
-        position="top-start"
-        opened={openSearch}
-        classNames={{
-          dropdown: "bg-transparent !p-0 rounded-xl",
-        }}
-        offset={-12}
-        onClose={() => setOpenSearch(false)}
-      >
-        <Popover.Target>
-          <button className="opacity-0 h-0">Popover</button>
-        </Popover.Target>
-        <Popover.Dropdown>
-          <div className="  px-4 py-6 rounded-xl border border-green shadow-md duration-200 bg-white">
-            <Radio.Group value={selectedUserId} onChange={setSelectedUserId}>
-              <div className="flex flex-col gap-4 mb-10">{cards}</div>
-            </Radio.Group>
-            <Button className={"h-10 w-[174px] ms-auto"}>Assign</Button>
+      {userSelected?.id ? (
+        <div className="flex items-center gap-4 md:max-w-[60%] w-full">
+          <div className="px-4 py-2 border border-grayLight rounded-xl flex-1 ">
+            <UserCardInfo
+              image={userSelected.avatar}
+              name={userSelected.name}
+              email={userSelected.email}
+            />
           </div>
-        </Popover.Dropdown>
-      </Popover>
+          <button
+            onClick={() => {
+              setUserSelected(null);
+            }}
+            className="flex items-center justify-center p-2 md:p-3 bg-blueLight rounded-full size-8 md:size-12"
+          >
+            <DeleteIcon className="h-full w-auto" />
+          </button>
+        </div>
+      ) : (
+        <>
+          <Popover
+            width="target"
+            shadow="md"
+            position="top-start"
+            opened={openSearch}
+            classNames={{
+              dropdown: "bg-transparent !p-0 rounded-xl",
+            }}
+            offset={-12}
+            onClose={() => setOpenSearch(false)}
+          >
+            <Popover.Target>
+              <button className="opacity-0 h-0 md:max-w-[60%] w-full">Popover</button>
+            </Popover.Target>
+            <Popover.Dropdown>
+              <AssignRadioGroup
+                users={users}
+                setUserSelected={setUserSelected}
+              />
+            </Popover.Dropdown>
+          </Popover>
 
-      <Input
-        placeholder="Search by Name"
-        leftSection={<SearchIcon className="w-4 h-auto" fill="#0F2A43" />}
-        inputClassName="bg-white h-16 rounded-xl"
-        className="max-w-[60%]"
-        onFocus={() => {
-          setOpenSearch(true);
-        }}
-      />
+          <Input
+            placeholder="Search by Name"
+            leftSection={<SearchIcon className="w-4 h-auto" fill="#0F2A43" />}
+            inputClassName="bg-white h-11 md:h-16 rounded-xl"
+            className="md:max-w-[60%]"
+            onFocus={() => {
+              setOpenSearch(true);
+            }}
+          />
+        </>
+      )}
     </CardList>
   );
 }

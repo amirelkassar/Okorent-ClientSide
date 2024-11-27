@@ -8,10 +8,19 @@ import React from "react";
 import { useDisclosure } from "@mantine/hooks";
 import BagIcon from "@/src/assets/icons/bag";
 import NoteModal from "@/src/components/NoteModal";
+import AssignIcon from "@/src/assets/icons/assign";
+import AssignModal from "./forms-list/assign-comp/assign-modal";
 
 function ActionMenu({ id }: { id: any }) {
   const [opened, { open, close }] = useDisclosure(false);
+  const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
   const options = [
+    {
+      label: "Assign Listing ",
+      icon: <AssignIcon className="w-3 h-auto" />,
+      type: "btn",
+      action: open2,
+    },
     {
       label: "Edit Details",
       icon: <EditIcon className="w-3 h-auto" />,
@@ -42,6 +51,7 @@ function ActionMenu({ id }: { id: any }) {
     <>
       <DataActions data={options} />
       {opened && <NoteModal id={id} opened={opened} close={close} />}
+      {opened2 && <AssignModal id={id} opened={opened2} close={close2} />}
     </>
   );
 }
