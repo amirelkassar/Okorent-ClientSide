@@ -39,7 +39,10 @@ function Events({ item, ids }: EventsProps) {
         {item.icon}
         <p
           className={`${
-            item.title.toLowerCase() === "delete" ? "text-red" : "text-blue"
+            item.title.toLowerCase() === "delete" ||
+            item.title.toLowerCase() === "cancel"
+              ? "text-red"
+              : "text-blue"
           }  text-sm`}
         >
           {item.title}

@@ -6,6 +6,7 @@ import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import RowCardPhone from "@/src/components/row-card-phone";
 import RenderStatus from "./render-status";
+import ActionMenu from "./action-menu";
 
 export type MedicalTeamTableData = {
   id: number;
@@ -29,6 +30,9 @@ function CardPhoneAccount({ dataCard }: CardDataProps) {
   return (
     <CardPhone>
       <div className="border-b border-grayLight/50 pb-2">
+        <div className=" absolute top-4 end-3">
+          <ActionMenu id={dataCard?.id} />
+        </div>
         <Link
           href={ROUTES.ADMIN.BOOKINGSDETAILS(dataCard.id)}
           className="flex items-center w-full gap-3 "
@@ -42,7 +46,9 @@ function CardPhoneAccount({ dataCard }: CardDataProps) {
               className=" size-10 h-full  object-contain "
             />
 
-            <h2 className="text-[16px] font-SemiBold text-center">{dataCard.lessor}</h2>
+            <h2 className="text-[16px] font-SemiBold text-center">
+              {dataCard.lessor}
+            </h2>
             <p className="text-sm text-grayMedium ">Lessor</p>
           </div>
           <span className="h-16 w-[1px] block bg-green"></span>
@@ -55,7 +61,9 @@ function CardPhoneAccount({ dataCard }: CardDataProps) {
               className=" size-10 h-full  object-contain "
             />
 
-            <h2 className="text-[16px] font-SemiBold text-center">{dataCard.renter}</h2>
+            <h2 className="text-[16px] font-SemiBold text-center">
+              {dataCard.renter}
+            </h2>
             <p className="text-sm text-grayMedium ">Renter</p>
           </div>
         </Link>

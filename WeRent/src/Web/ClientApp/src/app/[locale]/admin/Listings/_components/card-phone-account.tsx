@@ -6,7 +6,6 @@ import ActionMenu from "./action-menu";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import RowCardPhone from "@/src/components/row-card-phone";
-import StarIcon from "@/src/assets/icons/star";
 import RenderStatus from "./render-status";
 
 export type MedicalTeamTableData = {
