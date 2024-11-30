@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function LogoutIcon() {
+function LogoutIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="14"
@@ -8,6 +9,7 @@ function LogoutIcon() {
       viewBox="0 0 14 14"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path
         d="M12.1973 10C11.1598 11.7934 9.22082 13 6.99998 13C3.68628 13 1 10.3137 1 7C1 3.68629 3.68628 1 6.99998 1C9.22082 1 11.1598 2.2066 12.1973 4M7.00002 4.6L4.60003 7M4.60003 7L7.00002 9.4M4.60003 7H13"

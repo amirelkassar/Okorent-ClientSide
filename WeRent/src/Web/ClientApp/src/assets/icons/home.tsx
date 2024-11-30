@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function HomeIcon({ className }: any) {
+function HomeIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="31"

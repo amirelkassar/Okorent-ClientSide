@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function RecordIcon() {
+function RecordIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="223"
@@ -8,6 +9,7 @@ function RecordIcon() {
       viewBox="0 0 223 18"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <line
         x1="0.5"

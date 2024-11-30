@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function VisaTitleIcon({ className }: { className?: string }) {
+function VisaTitleIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="80"

@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function ArrowWhiteIcon({className}:any) {
+function ArrowWhiteIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="24"

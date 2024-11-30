@@ -1,9 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
-interface iconProps {
-  className?: string;
-  fill?: string;
-}
-function DownloadIcon({ className }: iconProps) {
+
+function DownloadIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="22"

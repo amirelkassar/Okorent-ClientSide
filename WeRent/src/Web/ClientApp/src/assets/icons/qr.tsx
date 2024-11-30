@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function QrIcon({className}:any) {
+function QrIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="224"

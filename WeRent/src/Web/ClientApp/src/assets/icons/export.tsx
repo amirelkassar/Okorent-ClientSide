@@ -1,12 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function ExportIcon({
-  className,
-  fill = "#006AFF",
-}: {
-  className?: string;
-  fill?: string;
-}) {
+function ExportIcon({ className = "", fill = "#006AFF" }: IconProps) {
   return (
     <svg
       width="15"

@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function LockIcon() {
+function LockIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="16"
@@ -8,6 +9,7 @@ function LockIcon() {
       viewBox="0 0 16 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path
         opacity="0.6"

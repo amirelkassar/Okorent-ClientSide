@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function ListRemove() {
+function ListRemove({ className = "" }: IconProps) {
   return (
     <svg
       width="200"
@@ -9,6 +10,7 @@ function ListRemove() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
+      className={className}
     >
       <rect
         x="17.3047"

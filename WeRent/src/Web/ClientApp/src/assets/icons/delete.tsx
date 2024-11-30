@@ -1,8 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
-interface iconProps {
-  className?: string;
-}
-function DeleteIcon({ className }: iconProps) {
+
+function DeleteIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="17"

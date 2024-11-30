@@ -1,9 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
-interface iconProps {
-  className?: string;
-  fill?: string;
-}
-function CloseIcon({className, fill='#0F2A43'}: iconProps) {
+
+function CloseIcon({ className = "", fill = "#0F2A43" }: IconProps) {
   return (
     <svg
       width="30"

@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function AvailableIcon({ className }: { className?: string }) {
+function AvailableIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="14"

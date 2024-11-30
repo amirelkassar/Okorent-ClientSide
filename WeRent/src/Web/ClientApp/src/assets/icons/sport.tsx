@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function SportIcon({ className }: any) {
+function SportIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="31"

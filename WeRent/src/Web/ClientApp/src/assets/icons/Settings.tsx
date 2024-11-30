@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function SettingsIcon() {
+function SettingsIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="14"
@@ -8,6 +9,7 @@ function SettingsIcon() {
       viewBox="0 0 14 14"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path
         d="M7 8.8C7.99411 8.8 8.8 7.99411 8.8 7C8.8 6.00589 7.99411 5.2 7 5.2C6.00589 5.2 5.2 6.00589 5.2 7C5.2 7.99411 6.00589 8.8 7 8.8Z"

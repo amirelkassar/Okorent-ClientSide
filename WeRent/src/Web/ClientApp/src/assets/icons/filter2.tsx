@@ -1,12 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function Filter2Icon({
-  className,
-  fill = "#0F2A43",
-}: {
-  className?: string;
-  fill?: string;
-}) {
+function Filter2Icon({ className = "", fill = "#0F2A43" }: IconProps) {
   return (
     <svg
       width="17"

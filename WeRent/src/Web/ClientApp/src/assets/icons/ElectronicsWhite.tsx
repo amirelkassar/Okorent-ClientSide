@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function ElectronicsWhiteIcon({ className }: { className?: string }) {
+function ElectronicsWhiteIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="14"

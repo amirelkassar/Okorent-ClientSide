@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function ToDwonIcon() {
+function ToDownIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="24"
@@ -8,6 +9,7 @@ function ToDwonIcon() {
       viewBox="0 0 24 33"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path
         d="M1.51562 2C11.9556 6.58585 17.5052 13.6379 16.648 29.2856M10.6478 24.5353L16.7928 31.3638L22.4849 24.7603"
@@ -20,4 +22,4 @@ function ToDwonIcon() {
   );
 }
 
-export default ToDwonIcon;
+export default ToDownIcon;

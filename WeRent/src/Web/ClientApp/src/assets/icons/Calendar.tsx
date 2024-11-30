@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function CalendarIcon() {
+function CalendarIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="23"
@@ -8,6 +9,7 @@ function CalendarIcon() {
       viewBox="0 0 23 22"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path
         d="M1.5 10.7296C1.5 6.86187 1.5 4.9275 2.70206 3.72647C3.90411 2.52544 5.83746 2.52441 9.70517 2.52441H13.8078C17.6755 2.52441 19.6098 2.52441 20.8109 3.72647C22.0119 4.92853 22.0129 6.86187 22.0129 10.7296V12.7809C22.0129 16.6486 22.0129 18.583 20.8109 19.784C19.6088 20.985 17.6755 20.986 13.8078 20.986H9.70517C5.83746 20.986 3.90309 20.986 2.70206 19.784C1.50103 18.5819 1.5 16.6486 1.5 12.7809V10.7296Z"

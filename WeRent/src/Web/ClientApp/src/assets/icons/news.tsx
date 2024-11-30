@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function NewsIcon({className}:{className?:string}) {
+function NewsIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="632"
@@ -21,7 +22,7 @@ function NewsIcon({className}:{className?:string}) {
       />
       <mask
         id="mask0_1274_2994"
-       style={{ maskType: "luminance" }}
+        style={{ maskType: "luminance" }}
         maskUnits="userSpaceOnUse"
         x="0"
         y="35"
@@ -30,7 +31,7 @@ function NewsIcon({className}:{className?:string}) {
       >
         <mask
           id="mask1_1274_2994"
-         style={{ maskType: "luminance" }}
+          style={{ maskType: "luminance" }}
           maskUnits="userSpaceOnUse"
           x="0"
           y="35"
@@ -262,7 +263,7 @@ function NewsIcon({className}:{className?:string}) {
       />
       <mask
         id="mask2_1274_2994"
-       style={{ maskType: "luminance" }}
+        style={{ maskType: "luminance" }}
         maskUnits="userSpaceOnUse"
         x="308"
         y="110"
@@ -373,7 +374,7 @@ function NewsIcon({className}:{className?:string}) {
         />
         <mask
           id="mask3_1274_2994"
-         style={{ maskType: "luminance" }}
+          style={{ maskType: "luminance" }}
           maskUnits="userSpaceOnUse"
           x="252"
           y="105"
@@ -472,7 +473,7 @@ function NewsIcon({className}:{className?:string}) {
       />
       <mask
         id="mask4_1274_2994"
-       style={{ maskType: "luminance" }}
+        style={{ maskType: "luminance" }}
         maskUnits="userSpaceOnUse"
         x="251"
         y="104"
@@ -564,7 +565,7 @@ function NewsIcon({className}:{className?:string}) {
       />
       <mask
         id="mask5_1274_2994"
-       style={{ maskType: "luminance" }}
+        style={{ maskType: "luminance" }}
         maskUnits="userSpaceOnUse"
         x="568"
         y="172"

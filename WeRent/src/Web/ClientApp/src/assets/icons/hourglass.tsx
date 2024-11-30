@@ -1,9 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
-interface iconProps {
-  className?: string;
-  fill?: string;
-}
-function HourGlassIcon({ className }: iconProps) {
+
+function HourGlassIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="10"

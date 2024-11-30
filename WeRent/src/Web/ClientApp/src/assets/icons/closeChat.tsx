@@ -1,9 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
-interface CloseChatIconProps{
-  fill?:string,
-  className?:string
-}
-function CloseChatIcon({fill="#88BA52",className}:CloseChatIconProps) {
+
+function CloseChatIcon({ className = "", fill = "#88BA52" }: IconProps) {
   return (
     <svg
       width="11"
@@ -11,6 +9,7 @@ function CloseChatIcon({fill="#88BA52",className}:CloseChatIconProps) {
       viewBox="0 0 11 11"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path
         d="M10 1L1 10M1 1L10 10"

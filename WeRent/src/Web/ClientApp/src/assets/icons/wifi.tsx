@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function WifiIcon({ className }: { className?: string }) {
+function WifiIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="32"

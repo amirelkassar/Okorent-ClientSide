@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function BackIcon({className}:any) {
+function BackIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="20"

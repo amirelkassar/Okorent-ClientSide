@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function DeactivateIcon({ className }: { className?: string }) {
+function DeactivateIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="18"

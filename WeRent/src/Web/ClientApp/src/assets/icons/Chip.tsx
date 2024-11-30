@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function ChipIcon({ className }: { className?: string }) {
+function ChipIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="61"

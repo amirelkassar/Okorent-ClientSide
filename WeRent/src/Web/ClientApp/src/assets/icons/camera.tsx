@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function CameraIcon({ className }: { className?: string }) {
+function CameraIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="16"

@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function AppStoreIcon() {
+function AppStoreIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="29"
@@ -8,6 +9,7 @@ function AppStoreIcon() {
       viewBox="0 0 29 35"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path
         fillRule="evenodd"

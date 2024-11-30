@@ -1,9 +1,6 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
-interface iconProps {
-  className?:string,
-  fill?:string
-}
-function EditIcon({className,fill="#6F6B7D"}:iconProps) {
+function EditIcon({ className = "", fill = "#6F6B7D" }: IconProps) {
   return (
     <svg
       width="23"

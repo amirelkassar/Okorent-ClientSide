@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function ListingsIcon() {
+function ListingsIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="23"
@@ -8,6 +9,7 @@ function ListingsIcon() {
       viewBox="0 0 23 22"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path
         d="M1.5 2.75103C1.5 1.77456 2.28823 0.986328 3.2647 0.986328C4.24117 0.986328 5.0294 1.77456 5.0294 2.75103C5.0294 3.72749 4.24117 4.51573 3.2647 4.51573C2.28823 4.51573 1.5 3.72749 1.5 2.75103Z"

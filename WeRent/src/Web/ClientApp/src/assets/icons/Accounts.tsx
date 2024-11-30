@@ -1,9 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
-interface iconProps {
-  className?: string;
-  fill?: string;
-}
-function AccountsIcon({ className }: iconProps) {
+
+function AccountsIcon({ className }: IconProps) {
   return (
     <svg
       width="30"

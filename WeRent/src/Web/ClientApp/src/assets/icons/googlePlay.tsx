@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function GooglePlayIcon() {
+function GooglePlayIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="25"
@@ -8,6 +9,7 @@ function GooglePlayIcon() {
       viewBox="0 0 25 31"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path
         d="M24.0871 13.6127C25.2326 14.466 25.2326 16.3878 24.1588 17.2412L21.1367 18.9525L16.6582 15.427L21.1477 11.9688L24.0871 13.6127Z"

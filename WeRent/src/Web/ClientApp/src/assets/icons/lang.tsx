@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function LangIcon({ className }: { className?: string }) {
+function LangIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="20"

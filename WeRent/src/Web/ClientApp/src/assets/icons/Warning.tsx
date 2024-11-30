@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function Warning({className}:{className?:string}) {
+function Warning({ className = "" }: IconProps) {
   return (
     <svg
       width="33"

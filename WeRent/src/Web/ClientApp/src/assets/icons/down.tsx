@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function DownIcon({className,fill='#0F2A43'}:{className?:string,fill?:string}) {
+function DownIcon({ className = "", fill = "#0F2A43" }: IconProps) {
   return (
     <svg
       width="12"

@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function PlusImgIcon({className}:{className?:string}) {
+function PlusImgIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="61"

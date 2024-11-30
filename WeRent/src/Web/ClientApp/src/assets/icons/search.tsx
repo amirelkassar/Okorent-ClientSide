@@ -1,9 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
-interface SearchIconProps {
-  className?: string;
-  fill?: string;
-}
-function SearchIcon({ className, fill = "#E9F1F8" }: SearchIconProps) {
+
+function SearchIcon({ className = "", fill = "#E9F1F8" }: IconProps) {
   return (
     <svg
       width="23"

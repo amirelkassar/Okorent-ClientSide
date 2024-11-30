@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function BarcodeIcon({className}:any) {
+function BarcodeIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="24"

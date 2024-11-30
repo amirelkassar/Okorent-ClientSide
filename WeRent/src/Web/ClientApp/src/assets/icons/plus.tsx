@@ -1,9 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
-interface PlusIconProps{
-  className?:any,
-  fill?:string
-}
-function PlusIcon({className,fill='white'}:PlusIconProps) {
+
+function PlusIcon({ className = "", fill = "white" }: IconProps) {
   return (
     <svg
       width="19"

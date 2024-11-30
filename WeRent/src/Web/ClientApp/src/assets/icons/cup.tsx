@@ -1,9 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
-interface CupIconProps{
-  className?:any,
-  fill?:string
-}
-function CupIcon({className,fill="#006AFF"}:CupIconProps) {
+
+function CupIcon({ className, fill = "#006AFF" }: IconProps) {
   return (
     <svg
       width="22"

@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function CardIcon() {
+function CardIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="19"
@@ -8,6 +9,7 @@ function CardIcon() {
       viewBox="0 0 19 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path d="M6.30859 1.16797V18.8318" stroke="#0F2A43" strokeWidth="1.5" />
       <rect

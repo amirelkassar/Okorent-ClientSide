@@ -9,6 +9,7 @@ import { StaticImageData } from "next/image";
 import DeleteIcon from "@/src/assets/icons/delete";
 import UserCardInfo from "./user-card-info";
 import AssignRadioGroup from "./assign-comp/assign-radio-group";
+import ButtonDelete from "@/src/components/button-delete";
 interface UserSelectedProps {
   id: number;
   name: string;
@@ -57,14 +58,12 @@ function FormAssign() {
               email={userSelected.email}
             />
           </div>
-          <button
+
+          <ButtonDelete
             onClick={() => {
               setUserSelected(null);
             }}
-            className="flex items-center justify-center p-2 md:p-3 bg-blueLight rounded-full size-8 md:size-12"
-          >
-            <DeleteIcon className="h-full w-auto" />
-          </button>
+          />
         </div>
       ) : (
         <>
@@ -80,7 +79,9 @@ function FormAssign() {
             onClose={() => setOpenSearch(false)}
           >
             <Popover.Target>
-              <button className="opacity-0 h-0 md:max-w-[60%] w-full">Popover</button>
+              <button className="opacity-0 h-0 md:max-w-[60%] w-full">
+                Popover
+              </button>
             </Popover.Target>
             <Popover.Dropdown>
               <AssignRadioGroup

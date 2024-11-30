@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function FilmIcon({ className }: any) {
+function FilmIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="32"

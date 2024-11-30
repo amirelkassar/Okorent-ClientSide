@@ -1,9 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
-interface iconProps {
-  className?: string;
-  fill?: string;
-}
-function QuickEditIcon({ className }: iconProps) {
+
+function QuickEditIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="18"

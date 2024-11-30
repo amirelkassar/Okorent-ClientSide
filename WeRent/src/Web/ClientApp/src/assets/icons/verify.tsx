@@ -1,9 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
-interface iconProps {
-  className?: string;
-  fill?: string;
-}
-function VerifyIcon({ className, fill = "#88BA52" }: iconProps) {
+
+function VerifyIcon({ className = "", fill = "#88BA52" }: IconProps) {
   return (
     <svg
       width="30"

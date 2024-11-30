@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function SpeakIcon({ className }: { className?: string }) {
+function SpeakIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="26"

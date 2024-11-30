@@ -9,6 +9,7 @@ import { useDisclosure } from "@mantine/hooks";
 import LocationIcon from "@/src/assets/icons/location";
 import GoogleMapLoc from "@/src/components/GoogleMap";
 import DeleteIcon from "@/src/assets/icons/delete";
+import ButtonDelete from "@/src/components/button-delete";
 
 interface LocationProps {
   id: number;
@@ -133,12 +134,11 @@ function StepLocation({
                       {loc.address}
                     </p>
                   </div>
-                  <div
+
+                  <ButtonDelete
                     onClick={() => handleRemoveLocation(loc.id)}
-                    className="bg-grayBack mt-6 flex items-center cursor-pointer duration-300 hover:shadow-md justify-center size-7 lg:size-11 p-2 rounded-full"
-                  >
-                    <DeleteIcon className=" h-auto w-3 lg:w-5" />
-                  </div>
+                    className={"!size-7 mt-6 lg:!size-11 bg-grayBack"}
+                  />
                 </div>
               </div>
             ))}
@@ -181,12 +181,11 @@ function StepLocation({
                     {loc.address}
                   </p>
                 </div>
-                <div
+
+                <ButtonDelete
                   onClick={() => handleRemoveLocation(loc.id)}
-                  className="bg-grayBack mt-6 flex items-center cursor-pointer duration-300 hover:shadow-md justify-center size-7 lg:size-11 p-2 rounded-full"
-                >
-                  <DeleteIcon className=" h-auto w-3 lg:w-5" />
-                </div>
+                  className={"!size-7 mt-6 lg:!size-11 bg-grayBack"}
+                />
               </div>
             </div>
           ))}

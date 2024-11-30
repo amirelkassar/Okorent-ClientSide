@@ -1,9 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
-interface iconProps {
-  className?: string;
-  fill?: string;
-}
-function SendIcon({ className = "" }: iconProps) {
+
+function SendIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="27"

@@ -8,6 +8,7 @@ import DeleteIcon from "@/src/assets/icons/delete";
 import Button from "@/src/components/button";
 import UserCardInfo from "../user-card-info";
 import AssignRadioGroup from "./assign-radio-group";
+import ButtonDelete from "@/src/components/button-delete";
 
 interface UserSelectedProps {
   id: number;
@@ -61,14 +62,11 @@ function AssignModal({ opened, close, id }: any) {
                   email={userSelected.email}
                 />
               </div>
-              <button
+              <ButtonDelete
                 onClick={() => {
                   setUserSelected(null);
                 }}
-                className="flex items-center justify-center p-2 md:p-3 bg-blueLight rounded-full size-8 md:size-12"
-              >
-                <DeleteIcon className="h-full w-auto" />
-              </button>
+              />
             </div>
             <div className="flex items-center gap-7 w-full mt-10">
               <Button

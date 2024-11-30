@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function OthersIcon({ className }: any) {
+function OthersIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="33"

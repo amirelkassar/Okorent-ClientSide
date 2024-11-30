@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function PasswordIconHide() {
+function PasswordIconHide({ className = "" }: IconProps) {
   return (
     <svg
       width="14"
@@ -8,6 +9,7 @@ function PasswordIconHide() {
       viewBox="0 0 14 13"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path
         d="M6.99818 3.2712C8.75414 3.2712 10.1793 4.69633 10.1793 6.4523C10.1793 6.86266 10.0966 7.25393 9.95343 7.61338L11.8144 9.47432C12.775 8.67268 13.5322 7.63566 13.9998 6.4523C12.8959 3.65931 10.1825 1.68066 6.99821 1.68066C6.10749 1.68066 5.25498 1.83971 4.46289 2.12601L5.83712 3.49705C6.19654 3.35709 6.58782 3.2712 6.99818 3.2712Z"

@@ -10,6 +10,7 @@ import DeleteIcon from "@/src/assets/icons/delete";
 import Button from "@/src/components/button";
 import ListRemove from "@/src/assets/icons/listRemove";
 import DiscardIcon from "@/src/assets/icons/Discard";
+import ButtonDelete from "@/src/components/button-delete";
 interface Props {
   croppedImage: string | null;
   setCroppedImage: React.Dispatch<React.SetStateAction<string | null>>;
@@ -80,12 +81,10 @@ function UploadAndCropImg({ croppedImage, setCroppedImage }: Props) {
 
       {croppedImage && (
         <div className="mt-4  h-[125px] w-fit relative mb-8">
-          <div
-            className=" absolute top-0 -end-11 bg-grayLight cursor-pointer duration-200 hover:shadow-md size-9 p-2 flex- items-center justify-center rounded-full  "
+          <ButtonDelete
             onClick={() => handleReset()}
-          >
-            <DeleteIcon className="w-auto h-full" />
-          </div>
+            className={"bg-grayLight !size-9  absolute top-0 -end-11 !p-2"}
+          />
           <Image
             src={croppedImage}
             alt="Cropped"

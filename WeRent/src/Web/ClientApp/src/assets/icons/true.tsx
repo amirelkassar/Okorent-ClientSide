@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function TrueIcon({ className ,fill='#006AFF' }: { className?: string,fill?:string }) {
+function TrueIcon({ className = "", fill = "#006AFF" }: IconProps) {
   return (
     <svg
       width="18"

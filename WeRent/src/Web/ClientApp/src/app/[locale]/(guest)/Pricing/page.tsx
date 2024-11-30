@@ -1,4 +1,4 @@
-import ToDwonIcon from "@/src/assets/icons/ToDwon";
+import ToDownIcon from "@/src/assets/icons/ToDown";
 import Included from "@/src/components/subscription/included";
 import PricingPlans from "@/src/components/subscription/PricingPlans";
 import SwitchPlan from "@/src/components/subscription/switchPlan";
@@ -16,7 +16,7 @@ function page() {
         <span className="text-green relative">
           Up to 49%
           <span className=" absolute animate-bounce start-full rotate-12 -bottom-4">
-            <ToDwonIcon />
+            <ToDownIcon />
           </span>
         </span>
       </h2>

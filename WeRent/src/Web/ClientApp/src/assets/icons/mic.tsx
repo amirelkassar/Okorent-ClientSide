@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function MicIcon({className}:{className?:string}) {
+function MicIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="16"

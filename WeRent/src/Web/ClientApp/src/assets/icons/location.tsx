@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function LocationIcon({fill="#88BA52",className}:any) {
+function LocationIcon({ className = "", fill = "#88BA52" }: IconProps) {
   return (
     <svg
       width="17"

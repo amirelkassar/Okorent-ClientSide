@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function ArrowDownIcon({ className }:{ className?: string }) {
+function ArrowDownIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="15"

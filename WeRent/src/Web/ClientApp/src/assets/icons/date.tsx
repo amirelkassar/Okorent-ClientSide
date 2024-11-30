@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function DateIcon({ fill = "#006AFF" ,className=''}) {
+function DateIcon({ className = "", fill = "#006AFF" }: IconProps) {
   return (
     <svg
       width="16"

@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function ImgDash({ className }: { className?: string }) {
+function ImgDash({ className = "" }: IconProps) {
   return (
     <svg
       width="813"

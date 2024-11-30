@@ -275,3 +275,6 @@ li.search::before {
 .TopBarChart:hover .nameLine {
   @apply block;
 }
+.mantine-Stepper-step[data-completed='true'] .mantine-Stepper-stepLabel{
+  @apply text-green
+}

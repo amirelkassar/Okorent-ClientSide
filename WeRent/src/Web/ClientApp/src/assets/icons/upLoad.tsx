@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function UpLoadIcon({ className }: any) {
+function UpLoadIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="20"

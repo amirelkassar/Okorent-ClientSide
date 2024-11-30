@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function TwoLineIcon({className}: {className?: string}) {
+function TwoLineIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="95"

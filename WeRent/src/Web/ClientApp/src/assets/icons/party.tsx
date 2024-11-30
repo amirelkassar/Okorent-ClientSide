@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function PartyIcon({ className }: any) {
+function PartyIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="34"

@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function BusIcon({ className }: any) {
+function BusIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="30"

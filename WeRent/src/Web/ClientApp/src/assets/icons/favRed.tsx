@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function FavRedIcon({ className }: { className?: string }) {
+function FavRedIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="26"
@@ -20,7 +21,6 @@ function FavRedIcon({ className }: { className?: string }) {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      
     </svg>
   );
 }

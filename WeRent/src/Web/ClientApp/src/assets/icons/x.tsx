@@ -1,8 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
-interface XIconProps{
-    fill?:string
-}
-function XIcon({fill='white'}:XIconProps) {
+
+function XIcon({ className = "", fill = "white" }: IconProps) {
   return (
     <svg
       width="10"
@@ -10,6 +9,7 @@ function XIcon({fill='white'}:XIconProps) {
       viewBox="0 0 10 10"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path
         d="M8.40002 2L2 8.40002M2.00002 2L8.40004 8.40002"

@@ -1,9 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
-interface TrueGreenIconProps {
-  fill?: string;
-  className?: string;
-}
-function TrueGreenIcon({ fill = "#88BA52", className }: TrueGreenIconProps) {
+
+function TrueGreenIcon({ className = "", fill = "#88BA52" }: IconProps) {
   return (
     <svg
       width="20"

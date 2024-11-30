@@ -1,12 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function AddUserIcon({
-  className,
-  fill = "white",
-}: {
-  className?: string;
-  fill?: string;
-}) {
+function AddUserIcon({ className='', fill = "white" }: IconProps) {
   return (
     <svg
       width="21"

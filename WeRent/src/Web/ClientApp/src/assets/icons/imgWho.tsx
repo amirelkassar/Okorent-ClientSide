@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function ImgWho({ className }: { className?: string }) {
+function ImgWho({ className = "" }: IconProps) {
   return (
     <svg
       width="644"

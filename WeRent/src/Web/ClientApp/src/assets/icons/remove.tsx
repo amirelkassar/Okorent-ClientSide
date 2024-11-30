@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function RemoveIcon() {
+function RemoveIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="17"
@@ -8,6 +9,7 @@ function RemoveIcon() {
       viewBox="0 0 17 18"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <g opacity="0.6">
         <path

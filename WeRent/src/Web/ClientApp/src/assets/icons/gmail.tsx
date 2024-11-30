@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function GmailIcon({ className }: { className?: string }) {
+function GmailIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="27"

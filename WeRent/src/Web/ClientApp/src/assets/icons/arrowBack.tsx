@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function ArrowBackIcon({className}:{className?:string}) {
+function ArrowBackIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="20"

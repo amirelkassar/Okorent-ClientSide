@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function OfflineIcon({ className }: { className?: string }) {
+function OfflineIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="11"

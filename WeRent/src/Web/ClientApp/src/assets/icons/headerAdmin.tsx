@@ -1,6 +1,7 @@
+import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function HeaderAdminIcon({className}:any) {
+function HeaderAdminIcon({ className = "" }: IconProps) {
   return (
     <svg
       width="661"
