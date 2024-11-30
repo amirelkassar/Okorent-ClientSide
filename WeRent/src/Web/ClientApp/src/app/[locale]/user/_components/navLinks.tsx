@@ -135,7 +135,7 @@ function NavLinks() {
   return (
     path !== ROUTES.USER.CHECKOUT &&
     path !== ROUTES.USER.CHECKOUTID(params.checkoutID) && (
-      <div className="mt-10 max-w-full hidden lg:block ">
+      <div className="mt-2 max-w-full hidden lg:block ">
         {newPath.find((item) => item.active) ? (
           <div className="flex mb-11  items-center gap-3">
             <button
@@ -151,7 +151,7 @@ function NavLinks() {
             </h1>
           </div>
         ) : (
-          <h1 className="mb-11 text-[32px] font-Bold">
+          <h1 className="mb-6 text-[32px] font-Bold">
             {LinksNav.find((item) => item.active)?.name}
             {path === ROUTES.USER.ADDLIST && "List an item"}
             <span className="mx-3">
@@ -160,7 +160,7 @@ function NavLinks() {
           </h1>
         )}
 
-        <div className=" max-w-full overflow-x-auto overflow-y-hidden mb-12 pb-4">
+        <div className=" max-w-full overflow-x-auto overflow-y-hidden mb-5 pb-4">
           <ul className=" border-b-[1.5px] flex items-center gap-6 justify-between ">
             {LinksNav.map((link) => {
               return (

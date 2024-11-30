@@ -3,7 +3,7 @@ import Button from "@/src/components/button";
 import ImgWho from "@/src/assets/icons/imgWho";
 function HeaderWho() {
   return (
-    <div className="flex items-center gap-5 mb-12 lg:mb-28 justify-between relative lg:mt-32">
+    <div className="flex items-center gap-5 mb-9 lg:mb-10 justify-between relative lg:mt-32">
       <div className="w-full lgl:max-w-[610px] ">
         <span className="text-grayMedium  font-Regular mb-3 block text-base lg:text-2xl ">
           Who we are

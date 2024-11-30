@@ -5,7 +5,7 @@ import SelectLocation from "./selectLocation";
 import ImgDash from "@/src/assets/icons/imgDash";
 function HeaderAdmin() {
   return (
-    <div className="flex items-center gap-5 mb-12 lg:mb-28 justify-between">
+    <div className="flex items-center gap-5 mb-9 lg:mb-10 justify-between">
       <div className="w-full lgl:max-w-[650px] ">
         <h2 className="text-[32px] lg:text-[56px] text-center lg:text-start font-Medium mb-3 lg:mb-5 leading-[46px] lg:leading-[66px]">
           Empowering <span className="text-blue">Renting</span> <br />

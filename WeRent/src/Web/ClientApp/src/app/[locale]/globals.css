@@ -77,14 +77,15 @@ p{
   @apply rtl:rotate-180 size-[32px] after:size-[100%] after:content-[''] after:bg-contain top-auto left-auto right-auto bottom-9 end-[54px];
 }
 .swiperAuth .swiper-button-next::after {
-  background-image: url("../../assets/icons/arrowRight.svg");
+  background-image: url("/icons/arrowRight.svg");
 }
 .swiperAuth .swiper-button-prev,
 .swiperAuth .swiper-rtl .swiper-button-next {
   @apply size-[32px]  top-auto left-auto right-auto bottom-9  rtl:rotate-180 end-[120px] size-[32px] after:size-[100%] after:content-[''] after:bg-contain;
 }
 .swiperAuth .swiper-button-prev::after {
-  background-image: url("../../assets/icons/arrowLeft.svg");
+  background-image: url("/icons/arrowLeft.svg");
+
 }
 .swiperAuth .swiper-slide h2 {
   transform: translateY(15px);
@@ -166,11 +167,11 @@ p{
 }
 /*phone input*/
 li.search {
-  @apply !border-b relative border-[#CCCCCC] !p-0 !ps-8 before:size-3  before:absolute before:top-1/2 before:-translate-y-1/2 before:start-5;
+  @apply !border-b relative border-[#CCCCCC] !p-0 !ps-8 before:size-3 bg-red  before:absolute before:top-1/2 before:-translate-y-1/2 before:start-5;
 }
 li.search::before {
   content: "";
-  background-image: url("../../assets/icons/search.svg");
+  background-image: url("/icons/search.svg");
   background-size: 12px;
 }
 .react-tel-input .country-list .search-emoji {
@@ -221,7 +222,7 @@ li.search::before {
 }
 .fc-toolbar-chunk div .fc-button span::before {
   content: "";
-  background-image: url("../../assets//icons/arrowRightBlack.svg");
+  background-image: url("/icons/arrowRightBlack.svg");
   background-size: 24px;
   @apply w-6 h-6 block absolute  bg-no-repeat;
 }

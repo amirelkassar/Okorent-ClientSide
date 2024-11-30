@@ -96,7 +96,7 @@ function NavLinks() {
     [path]
   );
   return (
-    <div className="mt-5 max-w-full hidden lg:block">
+    <div className="mt-3 max-w-full hidden lg:block">
       {newPath.find((item) => item.active) ? (
         <div className="flex mb-11  items-center gap-3">
           <button
@@ -112,7 +112,7 @@ function NavLinks() {
           </h1>
         </div>
       ) : (
-        <h1 className="mb-11 text-[32px] font-Bold">
+        <h1 className="mb-5 text-[32px] font-Bold">
           {LinksNav.find((item) => item.active)?.name}
 
           <span className="mx-3">
@@ -122,7 +122,7 @@ function NavLinks() {
       )}
 
       <div className=" max-w-full overflow-x-auto overflow-y-hidden mb-6 pb-4">
-        <ul className=" border-b-[1.5px] flex items-center gap-6 lgl:gap-12 justify-between lgl:justify-start ">
+        <ul className=" border-b-[1.5px] flex items-center gap-6 lgl:gap-12 justify-between  ">
           {LinksNav.map((link, i) => {
             return (
               <li

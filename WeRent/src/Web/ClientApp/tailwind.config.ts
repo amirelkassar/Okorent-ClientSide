@@ -58,6 +58,10 @@ module.exports = {
         SemiBold: 'IBMPlexSansArabicSemiBold', // 600
         Bold: 'IBMPlexSansArabicBold', // 700
       },
+      margin: {
+        section: '40px', // Use with "m-web"
+        phone: '20px', // Use with "m-phone"
+      },
     },
   },
   plugins: [],

@@ -7,7 +7,7 @@ interface PriceRowProps {
 function PriceRow({ label = "", value = "", currency = "USD" }: PriceRowProps) {
   return (
     <div
-      className={`flex gap-2 mb-2 ${
+      className={`flex items-center gap-2 mb-2 ${
         label.toLowerCase() === "total" ? "border-b py-1 border-black/20" : ""
       }`}
     >
@@ -22,7 +22,7 @@ function PriceRow({ label = "", value = "", currency = "USD" }: PriceRowProps) {
       </h4>
       <p
         className={`font-semibold ${
-          label.toLowerCase() === "Discount" ? "text-green" : ""
+          label.toLowerCase() === "discount" ? "text-green" : ""
         }`}
       >
         {currency + " " + value}

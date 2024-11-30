@@ -14,7 +14,7 @@ export default function OrderStepper({
   active = 0,
 }: OrderStepperProps) {
   return (
-    <div className="min-h-[150px]   place-content-center  bg-white rounded-lg px-7 py-3 mt-12">
+    <div className="min-h-[150px]   place-content-center  bg-white rounded-lg px-7 py-3 mt-6">
       <Stepper
         active={active}
         color="#88BA52"
