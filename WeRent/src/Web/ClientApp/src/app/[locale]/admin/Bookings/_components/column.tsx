@@ -4,6 +4,7 @@ import ROUTES from "@/src/routes";
 import { ColumnDef } from "@tanstack/react-table";
 import Image, { StaticImageData } from "next/image";
 import RenderStatus from "./render-status";
+import ActionMenu from "./action-menu";
 
 interface BookingsAdminData {
   id: number;
@@ -110,5 +111,16 @@ export const columns: ColumnDef<BookingsAdminData>[] = [
   {
     accessorKey: "payment",
     header: "Payment",
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => {
+      const id = row.original.id;
+      return (
+        <div className="flex items-center gap-3 justify-end">
+          <ActionMenu id={id} />
+        </div>
+      );
+    },
   },
 ];
