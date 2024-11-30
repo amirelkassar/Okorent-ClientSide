@@ -6,15 +6,15 @@ import React from "react";
 
 function OrderPayment() {
   return (
-    <div className="flex flex-col gap-4 max-w-[520px] w-full py-6 mdl:py-9 px-3 mdl:px-4 bg-white rounded-xl border border-green/30">
+    <div className="flex flex-col gap-4 max-w-[520px] items-start justify-start w-full py-6 mdl:py-9 px-3 mdl:px-4 bg-white rounded-xl border border-green/30">
       <CardInfoOrder
-        classNameBox="!w-full flex-1"
+        classNameBox="!w-full !flex-none"
         label="Payment Method"
         info="Card ending with 0566"
         iconRender={() => <MasterCardIcon className="w-6 h-auto" />}
       />
       <CardInfoOrder
-        classNameBox="!w-full flex-1"
+        classNameBox="!w-full !flex-none"
         info="Invoice OR02245082"
         iconRender={() => (
           <div className=" rounded-full bg-blueLight/50 size-10 p-1">
@@ -25,7 +25,7 @@ function OrderPayment() {
         )}
       />
       <CardInfoOrder
-        classNameBox="!w-full flex-1"
+        classNameBox="!w-full !flex-none"
         iconRender={() => (
           <div className=" rounded-full bg-blueLight/50 size-10 p-1">
             <div className="bg-blueLight rounded-full w-full h-full p-1 flex items-center justify-center">

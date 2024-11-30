@@ -8,7 +8,7 @@ function PriceRow({ label = "", value = "", currency = "USD" }: PriceRowProps) {
   return (
     <div
       className={`flex items-center gap-2 mb-2 ${
-        label.toLowerCase() === "total" ? "border-b py-1 border-black/20" : ""
+        label.toLowerCase() === "total" ? "border-y py-2 border-black/20" : ""
       }`}
     >
       <h4
