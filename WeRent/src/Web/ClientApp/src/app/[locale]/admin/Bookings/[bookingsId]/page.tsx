@@ -33,7 +33,7 @@ const STEPS_DATA = [
 ];
 function page() {
   return (
-    <div className="mb-20">
+    <div className="mb-section">
       <div className="flex items-center justify-between gap-3 flex-wrap">
         <h2 className=" text-2xl font-Bold">Order Information</h2>
         <Button className={"w-[340px] max-w-full gap-2"}>
@@ -42,7 +42,7 @@ function page() {
         </Button>
       </div>
       <OrderStepper active={2} data={STEPS_DATA} />
-      <div className="mt-11 flex gap-10 lgl:flex-row flex-col ">
+      <div className="mt-section flex gap-10 lgl:flex-row flex-col ">
         <div className="flex flex-col gap-4">
           <OrderInformation />
           <OrderDetails />

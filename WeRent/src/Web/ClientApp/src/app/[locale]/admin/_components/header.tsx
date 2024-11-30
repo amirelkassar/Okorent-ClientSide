@@ -36,7 +36,7 @@ const number = [
 ];
 function HeaderDash() {
   return (
-    <div>
+    <div className=" mb-phone lg:mb-section">
       <h2 className="text-grayMedium text-base lg:text-[24px] font-Medium">
         Welcome Back, Tom 👋{" "}
       </h2>

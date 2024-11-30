@@ -46,7 +46,7 @@ function QuestionView() {
   };
 
   return (
-    <div className="w-full pb-5 border-b border-[#B6BFC64D] mb-8">
+    <div className="w-full pb-5 border-b border-[#B6BFC64D]">
       <h3 className="text-base mb-2 font-SemiBold lg:text-xl">Looking for specific info?</h3>
       <div className="flex flex-wrap gap-2 lg:gap-4 mb-6">
         {questions.map((item) => (

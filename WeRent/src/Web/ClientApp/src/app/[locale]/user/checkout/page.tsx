@@ -7,7 +7,7 @@ function Page() {
   const router = useRouter();
   return (
     <div>
-      <div className="flex mb-11  items-center gap-3">
+      <div className="flex mb-5  items-center gap-3">
         <button
           className=" size-5"
           onClick={() => {

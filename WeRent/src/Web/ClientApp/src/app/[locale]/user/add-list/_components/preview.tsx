@@ -8,7 +8,7 @@ function Preview() {
   return (
     <div>
       <CardProduct />
-      <div className="bg-[#D9D9D933] px-3 lg:px-10 lg:rounded-[50px] rounded-[30px] pt-8 lg:pt-11 pb-9 lg:pb-7 mb-11 lg:mb-14">
+      <div className="bg-[#D9D9D933] px-3 lg:px-10 lg:rounded-[50px] rounded-[30px] pt-8 lg:pt-11 pb-9 lg:pb-7 mb-section">
         <h2 className="text-xl mb-5 px-2 lg:text-2xl">
           How to receive this item
         </h2>
@@ -21,7 +21,7 @@ function Preview() {
         </p>
       </div>
      
-      <div className="flex flex-col gap-5 mb-5">
+      <div className="flex flex-col gap-5 mb-section">
         <Description
           title="Guarantee"
           description="Oko Rent damages up to £25,000 per item"

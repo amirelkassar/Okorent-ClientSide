@@ -1,12 +1,10 @@
 "use client";
-
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import { ColumnDef } from "@tanstack/react-table";
 import Image, { StaticImageData } from "next/image";
 import ActionMenu from "./action-menu";
 import RenderStatus from "./render-status";
-
 
 export type MedicalTeamTableData = {
   id: number;
@@ -30,7 +28,7 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
       const id = row.original.id;
       return (
         <Link
-          href={ROUTES.ADMIN.ACCOUNTSDETAILS(id)}
+          href={ROUTES.ADMIN.LISTINGSDETAILS(id)}
           className="flex items-center gap-2"
         >
           <div className="size-[50px] rounded-[50%] p-[6px] bg-grayBack flex justify-center items-center">

@@ -78,7 +78,7 @@ const items = processItems.map((item, i) => (
 ));
 function FAQ() {
   return (
-    <div className="mb-16">
+    <div className="mb-section">
       <h2 className=" relative text-[20px] mb-4">FAQ</h2>
       <Accordion classNames={{control:'hover:bg-transparent'}}>{items}</Accordion>
     </div>

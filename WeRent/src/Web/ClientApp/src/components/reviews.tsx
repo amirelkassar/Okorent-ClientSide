@@ -8,7 +8,7 @@ import ProgressRev from "./product/ProgressRev";
 function Reviews({ editAdmin = false }: { editAdmin?: boolean }) {
   const [IsEdit, setIsEdit] = useState(false);
   return (
-    <div className="flex gap-5 justify-between flex-wrap pb-9 border-b border-grayMedium/20 mb-10">
+    <div className="flex gap-5 justify-between flex-wrap pb-9 border-b border-grayMedium/20 mb-section">
       <div className="w-full lg:w-[410px]">
         <h2 className=" relative text-xl lg:text-[24px] mb-3">
           Customer reviews

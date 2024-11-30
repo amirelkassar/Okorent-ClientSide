@@ -4,7 +4,7 @@ import CardRentals from "@/src/components/cardRentals";
 
 function AccrountRentals({}) {
   return (
-    <div className=" mt-20 pb-14 relative ">
+    <div className=" my-section  relative ">
       <div className="flex items-center justify-between gap-4 mb-5 relative z-[1]">
         <div className="flex items-center gap-4 mb-6">
           <h2 className="headTitle">Mark Rentals</h2>

@@ -214,7 +214,7 @@ export function DataTable<TData extends { id: any }, TValue>({
         </div>
       )}
 
-      <div className="space-y-5 border hidden mdl:block border-[#dee2e6] rounded-3xl pt-3 pb-6 mb-20">
+      <div className="space-y-5 border hidden mdl:block border-[#dee2e6] rounded-3xl pt-3 pb-6 mb-phone lg:mb-section">
         {/* Table */}
         <Table>
           <Table.Thead className="  ">

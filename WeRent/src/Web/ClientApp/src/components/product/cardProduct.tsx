@@ -11,7 +11,7 @@ import ProductClient from "./productClient";
 import ShowMore from "@/src/components/showMore";
 function CardProduct() {
   return (
-    <div className=" mb-14">
+    <div className=" mb-section">
       <ImagesProduct />
 
       <div className=" w-full  border-b border-grayMedium/40 pb-6">
@@ -31,7 +31,7 @@ function CardProduct() {
 
         <FeaturesProduct />
       </div>
-      <div className="flex mt-10 items-start justify-between flex-col lg:flex-row gap-11">
+      <div className="flex mt-section items-start justify-between flex-col lg:flex-row gap-11">
         <div className="lg:max-w-[650px] w-full flex-1">
           <div>
             <h3 className="text-base font-SemiBold mb-1 lg:mb-2 lg:text-xl">

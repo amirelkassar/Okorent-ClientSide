@@ -98,7 +98,7 @@ function Page() {
   return (
     <div>
       <HeaderDash />
-      <div className=" my-12 lg:my-20 pb-11  border-b border-grayLight">
+      <div className=" mb-phone lg:mb-section  pb-11  border-b border-grayLight">
         <div className="flex items-center justify-between gap-4 flex-wrap md:flex-nowrap mb-2 lg:mb-0">
           <div>
             <h2 className=" text-2xl lg:text-[32px] font-Medium leading-7">

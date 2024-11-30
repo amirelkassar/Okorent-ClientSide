@@ -60,7 +60,7 @@ module.exports = {
       },
       margin: {
         section: '40px', // Use with "m-web"
-        phone: '20px', // Use with "m-phone"
+        phone: '40px', // Use with "m-phone"
       },
     },
   },
