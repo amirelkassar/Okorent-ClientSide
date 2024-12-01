@@ -12,6 +12,7 @@ import NoteModal from "@/src/components/NoteModal";
 import SuspendModal from "./_components/SuspendModal";
 import CancelModal from "./_components/cancel-modal";
 import ChangePlanModal from "./_components/change-plan-modal";
+import CardPhoneMemberships from "./_components/card-phone-account";
 
 const FilterOptions = [
   {
@@ -40,7 +41,7 @@ function Page() {
     {
       title: "Change Plan",
       icon: <ChangeIcon fill="#006AFF" className="max-h-4 w-auto " />,
-      onclick:open4,
+      onclick: open4,
     },
     {
       title: "Suspend Plan",
@@ -68,6 +69,7 @@ function Page() {
         filter="buttons"
         filterData={FilterOptions}
         functionSelect={functionSelect}
+        Component={CardPhoneMemberships}
       />
       <NoteModal opened={opened} close={close} />
       <SuspendModal opened={opened2} close={close2} />
