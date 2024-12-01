@@ -730,7 +730,7 @@ export const TICKETS: Ticket[] = [
 ];
 
 interface BookingsAdminData {
-  id:number,
+  id: number;
   renter: string;
   lessor: string;
   product: string;
@@ -746,9 +746,9 @@ interface BookingsAdminData {
 
 export const BOOKINGS_ADMIN: BookingsAdminData[] = [
   {
-    id:1,
+    id: 1,
     renter: "Ahmed Mohamed",
-    lessor:'Ahmed Ali',
+    lessor: "Ahmed Ali",
     product: "iPhone 15 Pro",
     startDate: "3 August 2024",
     endingDate: "3 August 2024",
@@ -760,9 +760,9 @@ export const BOOKINGS_ADMIN: BookingsAdminData[] = [
     productImg: phoneImg, // Link to product image
   },
   {
-    id:2,
+    id: 2,
     renter: "Ahmed Mohamed",
-    lessor:'Ahmed Ali',
+    lessor: "Ahmed Ali",
     product: "iPhone 15 Pro",
     startDate: "4 August 2024",
     endingDate: "4 August 2024",
@@ -774,9 +774,9 @@ export const BOOKINGS_ADMIN: BookingsAdminData[] = [
     productImg: phoneImg, // Link to product image
   },
   {
-    id:3,
+    id: 3,
     renter: "Ahmed Mohamed",
-    lessor:'Ahmed Ali',
+    lessor: "Ahmed Ali",
     product: "iPhone 15 Pro",
     startDate: "5 August 2024",
     endingDate: "5 August 2024",
@@ -788,9 +788,9 @@ export const BOOKINGS_ADMIN: BookingsAdminData[] = [
     productImg: phoneImg, // Link to product image
   },
   {
-    id:4,
+    id: 4,
     renter: "Ahmed Mohamed",
-    lessor:'Ahmed Ali',
+    lessor: "Ahmed Ali",
     product: "iPhone 15 Pro",
     startDate: "6 August 2024",
     endingDate: "6 August 2024",
@@ -802,9 +802,9 @@ export const BOOKINGS_ADMIN: BookingsAdminData[] = [
     productImg: phoneImg, // Link to product image
   },
   {
-    id:5,
+    id: 5,
     renter: "Ahmed Mohamed",
-    lessor:'Ahmed Ali',
+    lessor: "Ahmed Ali",
     product: "iPhone 15 Pro",
     startDate: "7 August 2024",
     endingDate: "7 August 2024",
@@ -816,9 +816,9 @@ export const BOOKINGS_ADMIN: BookingsAdminData[] = [
     productImg: phoneImg, // Link to product image
   },
   {
-    id:6,
+    id: 6,
     renter: "Ahmed Mohamed",
-    lessor:'Ahmed Ali',
+    lessor: "Ahmed Ali",
     product: "iPhone 15 Pro",
     startDate: "8 August 2024",
     endingDate: "8 August 2024",
@@ -830,9 +830,9 @@ export const BOOKINGS_ADMIN: BookingsAdminData[] = [
     productImg: phoneImg, // Link to product image
   },
   {
-    id:7,
+    id: 7,
     renter: "Ahmed Mohamed",
-    lessor:'Ahmed Ali',
+    lessor: "Ahmed Ali",
     product: "iPhone 15 Pro",
     startDate: "9 August 2024",
     endingDate: "9 August 2024",
@@ -842,5 +842,107 @@ export const BOOKINGS_ADMIN: BookingsAdminData[] = [
     lessorImg: avatar, // Link to user 1 image
     renterImg: avatar, // Link to user 1 image
     productImg: phoneImg, // Link to product image
+  },
+];
+type MembershipsDataProps = {
+  id: number;
+  name: string;
+  date: string;
+  email: string;
+  package: string;
+  payment: string;
+  endingDate: string;
+  status: string;
+  image: StaticImageData;
+};
+
+export const MembershipsData: MembershipsDataProps[] = [
+  {
+    id:0,
+    name: "Ahmed Mohamed",
+    date: "15/8/2024",
+    email: "marchmanx@gmail.com",
+    package: "Essential Package",
+    payment: "100$",
+    endingDate: "15/10/2025",
+    status: "Trial",
+    image: avatar,
+  },
+  {
+    id:1,
+    name: "Ahmed Mohamed",
+    date: "15/8/2024",
+    email: "marchmanx@gmail.com",
+    package: "Pro Package",
+    payment: "250$",
+    endingDate: "15/10/2025",
+    status: "Active",
+    image: avatar,
+  },
+  {
+    id:2,
+    name: "Ahmed Mohamed",
+    date: "15/8/2024",
+    email: "marchmanx@gmail.com",
+    package: "Premium Package",
+    payment: "100$",
+    endingDate: "15/10/2025",
+    status: "Canceled",
+    image: avatar,
+  },
+  {
+    id:3,
+    name: "Ahmed Mohamed",
+    date: "15/8/2024",
+    email: "marchmanx@gmail.com",
+    package: "Pro Package",
+    payment: "35$",
+    endingDate: "15/10/2025",
+    status: "Expired",
+    image: avatar,
+  },
+  {
+    id:4,
+    name: "Ahmed Mohamed",
+    date: "15/8/2024",
+    email: "marchmanx@gmail.com",
+    package: "Premium Package",
+    payment: "100$",
+    endingDate: "15/10/2025",
+    status: "Past Due",
+    image: avatar,
+  },
+  {
+    id:5,
+    name: "Ahmed Mohamed",
+    date: "15/8/2024",
+    email: "marchmanx@gmail.com",
+    package: "Pro Package",
+    payment: "100$",
+    endingDate: "15/10/2025",
+    status: "Active",
+    image: avatar,
+  },
+  {
+    id:6,
+    name: "Ahmed Mohamed",
+    date: "15/8/2024",
+    email: "marchmanx@gmail.com",
+    package: "Essential Package",
+    payment: "100$",
+    endingDate: "15/10/2025",
+    status: "Active",
+    image: avatar,
+  },
+  {
+    id:7,
+    name: "Ahmed Mohamed",
+    date: "15/8/2024",
+    email: "marchmanx@gmail.com",
+    package: "Essential Package",
+    payment: "100$",
+    endingDate: "15/10/2025",
+    status: "Active",
+    image: avatar,
   },
 ];

@@ -40,7 +40,7 @@ function Events({ item, ids }: EventsProps) {
         <p
           className={`${
             item.title.toLowerCase() === "delete" ||
-            item.title.toLowerCase() === "cancel"
+            item.title.toLowerCase().includes("cancel")
               ? "text-red"
               : "text-blue"
           }  text-sm`}

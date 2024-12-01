@@ -9,6 +9,7 @@ import React from "react";
 import OrderInformation from "./_components/order-information";
 import OrderPayment from "./_components/order-payment";
 import OrderDetails from "./_components/order-details";
+
 const STEPS_DATA = [
   {
     label: "Accepted request",
@@ -31,6 +32,7 @@ const STEPS_DATA = [
     icon: <ReturnedIcon className="h-[23px] w-auto" />,
   },
 ];
+
 function page() {
   return (
     <div className="mb-section">
