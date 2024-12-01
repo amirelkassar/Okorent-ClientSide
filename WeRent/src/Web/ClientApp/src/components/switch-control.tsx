@@ -35,10 +35,10 @@ const SwitchControl: React.FC<SwitchControlProps> = ({
           `!bg-transparent pt-[2px] ps-[2px] w-[158px] lg:w-[158px] items-center h-8 border !border-green `,
           rootClassName
         ),
-        control: "h-full items-center bg-transparent",
+        control: "h-full items-center bg-transparent before:hidden",
       }}
       radius={props.radius || "6px"}
-      size={props.size||"xs"}
+      size={props.size || "xs"}
       styles={(theme) => ({
         root: {
           backgroundColor: theme.colors.gray[0],

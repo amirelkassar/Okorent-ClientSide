@@ -73,6 +73,12 @@ function NavLinks() {
         url: ROUTES.ADMIN.MEMBERSHIPS,
         active: path === ROUTES.ADMIN.MEMBERSHIPS,
       },
+      {
+        id: 12,
+        name: "Master Data",
+        url: ROUTES.ADMIN.MASTERDATA,
+        active: path === ROUTES.ADMIN.MASTERDATA,
+      },
     ],
     [path]
   );

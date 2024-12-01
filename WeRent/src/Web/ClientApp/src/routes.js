@@ -29,7 +29,11 @@ const ROUTES = {
     REPORTS: "/admin/Reports",
     MEMBERSHIPS: "/admin/Memberships",
     INBOX: "/admin/Inbox",
-    MANAGEMENT: "/admin/Management",
+    MASTERDATA: "/admin/master-data",
+    PLANS: "/admin/master-data/Plans",
+    CATEGORIES: "/admin/master-data/Categories",
+    CATEGORYADD: "/admin/master-data/Categories/add",
+    BANNERS: "/admin/master-data/Banners",
   },
   USER: {
     HOMEPAGE: "/user",

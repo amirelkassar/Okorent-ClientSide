@@ -859,7 +859,7 @@ type MembershipsDataProps = {
 
 export const MembershipsData: MembershipsDataProps[] = [
   {
-    id:0,
+    id: 0,
     name: "Ahmed Mohamed",
     date: "15/8/2024",
     email: "marchmanx@gmail.com",
@@ -870,7 +870,7 @@ export const MembershipsData: MembershipsDataProps[] = [
     image: avatar,
   },
   {
-    id:1,
+    id: 1,
     name: "Ahmed Mohamed",
     date: "15/8/2024",
     email: "marchmanx@gmail.com",
@@ -881,7 +881,7 @@ export const MembershipsData: MembershipsDataProps[] = [
     image: avatar,
   },
   {
-    id:2,
+    id: 2,
     name: "Ahmed Mohamed",
     date: "15/8/2024",
     email: "marchmanx@gmail.com",
@@ -892,7 +892,7 @@ export const MembershipsData: MembershipsDataProps[] = [
     image: avatar,
   },
   {
-    id:3,
+    id: 3,
     name: "Ahmed Mohamed",
     date: "15/8/2024",
     email: "marchmanx@gmail.com",
@@ -903,7 +903,7 @@ export const MembershipsData: MembershipsDataProps[] = [
     image: avatar,
   },
   {
-    id:4,
+    id: 4,
     name: "Ahmed Mohamed",
     date: "15/8/2024",
     email: "marchmanx@gmail.com",
@@ -914,7 +914,7 @@ export const MembershipsData: MembershipsDataProps[] = [
     image: avatar,
   },
   {
-    id:5,
+    id: 5,
     name: "Ahmed Mohamed",
     date: "15/8/2024",
     email: "marchmanx@gmail.com",
@@ -925,7 +925,7 @@ export const MembershipsData: MembershipsDataProps[] = [
     image: avatar,
   },
   {
-    id:6,
+    id: 6,
     name: "Ahmed Mohamed",
     date: "15/8/2024",
     email: "marchmanx@gmail.com",
@@ -936,7 +936,7 @@ export const MembershipsData: MembershipsDataProps[] = [
     image: avatar,
   },
   {
-    id:7,
+    id: 7,
     name: "Ahmed Mohamed",
     date: "15/8/2024",
     email: "marchmanx@gmail.com",
@@ -947,8 +947,6 @@ export const MembershipsData: MembershipsDataProps[] = [
     image: avatar,
   },
 ];
-
-
 
 interface ChatsDataProps {
   id: number;
@@ -1066,5 +1064,55 @@ export const ChatsGroupData: ChatsDataProps[] = [
     identifier: 0,
     image: avatar,
   },
+];
 
+export const CategoriesAdminData = [
+  {
+    id: 1,
+    title: "Electronics",
+    subcategories: "15",
+    img: <ElectronicsIcon className={"h-[30px] w-auto"} />,
+  },
+  {
+    id: 2,
+    title: "Tools",
+    subcategories: "15",
+    img: <ToolsIcon className={"h-[30px] w-auto"} />,
+  },
+  {
+    id: 3,
+    title: "Hobbies & Sports",
+    subcategories: "15",
+    img: <SportIcon className={"h-[30px] w-auto"} />,
+  },
+  {
+    id: 4,
+    title: "Home & Garden",
+    subcategories: "15",
+    img: <HomeIcon className={"h-[30px] w-auto"} />,
+  },
+  {
+    id: 5,
+    title: "Vehicle",
+    subcategories: "15",
+    img: <BusIcon className={"h-[30px] w-auto"} />,
+  },
+  {
+    id: 6,
+    title: "Party",
+    subcategories: "15",
+    img: <PartyIcon className={"h-[30px] w-auto"} />,
+  },
+  {
+    id: 7,
+    title: "Film & Photography",
+    subcategories: "15",
+    img: <FilmIcon className={"h-[30px] w-auto"} />,
+  },
+  {
+    id: 8,
+    title: "Others",
+    subcategories: "15",
+    img: <OthersIcon className={"h-[30px] w-auto"} />,
+  },
 ];
