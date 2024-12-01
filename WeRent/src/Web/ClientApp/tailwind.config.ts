@@ -15,7 +15,7 @@ module.exports = {
           lgl: '3rem',
         },
       },
-      
+
       fontSize: {
         small: ['14px', '14px'],
         medium: ['16px', '16px'],
@@ -28,15 +28,15 @@ module.exports = {
       colors: {
         green: '#88BA52',
         grayLight: '#D9D9D980',
-        grayBack:'#E9F1F8',
+        grayBack: '#E9F1F8',
         grayMedium: '#6F6B7D',
         grayDark: '#344050',
         purple: '#8A22A0',
         red: '#E31B1B',
         blue: '#006AFF',
-        blueLight:'#DFEBF4',
+        blueLight: '#DFEBF4',
         black: '#0F2A43',
-  
+
       },
       screens: {
         xs: '320px',
@@ -49,6 +49,10 @@ module.exports = {
         xl: '1280px',
         xxl: '1536px',
       },
+      margin: {
+        section: '40px', // Use with "m-web"
+        phone: '40px', // Use with "m-phone"
+      },
       fontFamily: {
         Thin: 'IBMPlexSansArabicThin', // 100
         ExtraLight: 'IBMPlexSansArabicExtraLight', // 200
@@ -58,10 +62,7 @@ module.exports = {
         SemiBold: 'IBMPlexSansArabicSemiBold', // 600
         Bold: 'IBMPlexSansArabicBold', // 700
       },
-      margin: {
-        section: '40px', // Use with "m-web"
-        phone: '40px', // Use with "m-phone"
-      },
+
     },
   },
   plugins: [],

@@ -28,6 +28,7 @@ const ROUTES = {
     RESERVATIONS: "/admin/Reservations",
     REPORTS: "/admin/Reports",
     MEMBERSHIPS: "/admin/Memberships",
+    INBOX: "/admin/Inbox",
     MANAGEMENT: "/admin/Management",
   },
   USER: {

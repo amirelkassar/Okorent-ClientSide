@@ -11,6 +11,7 @@ import PartyIcon from "../assets/icons/party";
 import FilmIcon from "../assets/icons/film";
 import OthersIcon from "../assets/icons/others";
 import { StaticImageData } from "next/image";
+import avatarUser from "@/src/assets/images/avatar.png";
 
 export const UserData = [
   {
@@ -945,4 +946,125 @@ export const MembershipsData: MembershipsDataProps[] = [
     status: "Active",
     image: avatar,
   },
+];
+
+
+
+interface ChatsDataProps {
+  id: number;
+  name: string;
+  date: string;
+  time: string;
+  identifier: number;
+  image: StaticImageData;
+}
+
+export const ChatsData: ChatsDataProps[] = [
+  {
+    id: 1,
+    name: "Ahmed Mohamed Badr",
+    date: "Today",
+    time: "05:30 PM",
+    identifier: 1,
+    image: avatarUser,
+  },
+  {
+    id: 2,
+    name: "Ahmed Mohamed Badr",
+    date: "Today",
+    time: "05:30 PM",
+    identifier: 0,
+    image: avatarUser,
+  },
+  {
+    id: 3,
+    name: "Ahmed Mohamed Badr",
+    date: "Today",
+    time: "05:30 PM",
+    identifier: 0,
+    image: avatarUser,
+  },
+  {
+    id: 4,
+    name: "Ahmed Mohamed Badr",
+    date: "Today",
+    time: "05:30 PM",
+    identifier: 1,
+    image: avatarUser,
+  },
+  {
+    id: 5,
+    name: "Ahmed Mohamed Badr",
+    date: "Today",
+    time: "05:30 PM",
+    identifier: 1,
+    image: avatarUser,
+  },
+  {
+    id: 6,
+    name: "Ahmed Mohamed Badr",
+    date: "Today",
+    time: "05:30 PM",
+    identifier: 0,
+    image: avatarUser,
+  },
+  {
+    id: 7,
+    name: "Ahmed Mohamed Badr",
+    date: "Today",
+    time: "05:30 PM",
+    identifier: 0,
+    image: avatarUser,
+  },
+  {
+    id: 8,
+    name: "Ahmed Mohamed Badr",
+    date: "Today",
+    time: "05:30 PM",
+    identifier: 1,
+    image: avatarUser,
+  },
+  {
+    id: 9,
+    name: "Ahmed Mohamed Badr",
+    date: "Today",
+    time: "05:30 PM",
+    identifier: 0,
+    image: avatarUser,
+  },
+  {
+    id: 10,
+    name: "Ahmed Mohamed Badr",
+    date: "Today",
+    time: "05:30 PM",
+    identifier: 1,
+    image: avatarUser,
+  },
+  {
+    id: 11,
+    name: "Ahmed Mohamed Badr",
+    date: "Today",
+    time: "05:30 PM",
+    identifier: 1,
+    image: avatarUser,
+  },
+];
+export const ChatsGroupData: ChatsDataProps[] = [
+  {
+    id: 154,
+    name: "All Users ",
+    date: "Today",
+    time: "05:30 PM",
+    identifier: 1,
+    image: avatar,
+  },
+  {
+    id: 240,
+    name: "ًWork",
+    date: "Today",
+    time: "05:30 PM",
+    identifier: 0,
+    image: avatar,
+  },
+
 ];

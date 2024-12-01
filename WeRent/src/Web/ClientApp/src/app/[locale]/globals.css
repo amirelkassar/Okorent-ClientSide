@@ -60,6 +60,9 @@
 }
 @media (prefers-color-scheme: dark) {
 }
+*{
+  @apply font-Medium
+}
 h1,
 h2,
 h3,
