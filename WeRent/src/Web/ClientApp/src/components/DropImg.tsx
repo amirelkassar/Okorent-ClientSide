@@ -18,7 +18,7 @@ function DropImg({ dataList, setDataList }: DropImgProps) {
     setFiles(newFiles);
     setDataList({
       ...dataList,
-      pictures: [...(dataList.pictures || []), ...acceptedFiles],
+      ProductImageFiles: [...(dataList.ProductImageFiles || []), ...acceptedFiles],
     });
   };
 
@@ -27,7 +27,7 @@ function DropImg({ dataList, setDataList }: DropImgProps) {
     setFiles(newFiles);
     setDataList({
       ...dataList,
-      pictures: newFiles,
+      ProductImageFiles: newFiles,
     });
   };
 

@@ -8,6 +8,7 @@ import DownIcon from "@/src/assets/icons/down";
 import Button from "@/src/components/button";
 import { DatePickerInput } from "@mantine/dates";
 import DateIcon from "@/src/assets/icons/date";
+import { formatDate, getDate } from "@/src/lib/utils";
 const OptionAvailability = [
   {
     value: "always",
@@ -26,10 +27,8 @@ interface StepAvailabilityProps {
 }
 function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
   const [opened, { open, close }] = useDisclosure(false);
-  const [value, setValue] = useState<[Date | null, Date | null]>([
-    new Date(),
-    new Date(),
-  ]);
+  console.log(getDate(dataList?.AvailableFrom, "en").fullMonthNameWithDayName);
+
   return (
     <Step
       title="Availability"
@@ -40,7 +39,10 @@ function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
       <Radio.Group
         name="OptionAvailability"
         onChange={(e) => {
-          setDataList({ ...dataList, Availability: e });
+          setDataList({
+            ...dataList,
+            IsAvailable: e === "always" ? true : false,
+          });
           if (e === "pick") {
             open();
           }
@@ -66,7 +68,9 @@ function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
         <p className="mt-4 text-[12px] md:text-[14px] text-grayMedium font-Regular">
           Your item is available for rent{" "}
           <span className="text-blue font-Medium">
-            from August 9 to August 24.
+            from{" "}
+            {getDate(dataList?.AvailableFrom, "en").fullMonthNameWithDayName} to{" "}
+            {getDate(dataList?.AvailableTo, "en").fullMonthNameWithDayName}
           </span>{" "}
           <br />
           Availability automatically updates to reflect rental periods.
@@ -102,8 +106,15 @@ function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
             label="Availability"
             leftSection={<DateIcon fill="#344050" />}
             placeholder=".. - .."
-            value={value}
-            onChange={setValue}
+            defaultValue={[dataList.AvailableFrom, dataList.AvailableTo]}
+            onChange={(e) => {
+              console.log(e);
+              setDataList({
+                ...dataList,
+                AvailableFrom: e[0],
+                AvailableTo: e[1],
+              });
+            }}
             popoverProps={{
               position: "top",
               classNames: {

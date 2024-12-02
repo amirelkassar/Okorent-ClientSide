@@ -1,24 +1,43 @@
 "use client";
-import Button from "@/src/components/button";
-import Logo from "@/src/components/logo";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import React, { useState } from "react";
-import avatar1 from "@/src/assets/images/1.png";
-import DoneAuth from "./_components/doneAuth";
+import avatar1 from "@/src/assets/images/avatar.png";
 import { cn } from "@/src/lib/utils";
-import UploadAndCropImg from "./_components/uploadAndCropImg";
+import UploadAndCropImg from "./comp-make/uploadAndCropImg";
 const dataAvatar = [avatar1, avatar1, avatar1, avatar1];
-function Page() {
-  const [selectedTheme, setSelectedTheme] = useState("");
-  const [Done, setDone] = useState(false);
+interface MakeHomeProps {
+  formData: any;
+  setFormData: (e: any) => void;
+  children?: React.ReactNode;
+}
+function MakeHome({ setFormData, formData, children }: MakeHomeProps) {
   const [active, setActive] = useState(0);
-  const [croppedImage, setCroppedImage] = useState<string | null>(null);
+
+  const handleAvatarSelection = async (
+    item: StaticImageData,
+    index: number
+  ) => {
+    setActive(index + 1);
+
+    // Simulate the blob URL for static image
+    const response = await fetch(item.src);
+    const blob = await response.blob();
+    const file = new File([blob], `${formData.Name || "user"}.png`, {
+      type: blob.type,
+    });
+
+    setFormData((prevData: any) => ({
+      ...prevData,
+      AvatarFile: file, // Store the File object in formData
+    }));
+  };
   return (
-    <div className="flex-1 pt-4 lgl:pt-20  pb-8 md:pb-16  flex  min-h-full justify-center lgl:justify-start">
-      <div className="max-w-[450px] w-full flex flex-col gap-4 pb-8">
-        <Logo theme="green" />
+    <div className="flex-1 pt-4 lgl:pt-6    flex  min-h-full justify-center lgl:justify-start">
+      <div className="max-w-[450px] w-full flex flex-col gap-4 pb-12">
         <div className="flex-1 content-center">
-          <h1 className=" font-Bold text-xLarge">Make yourself at home</h1>
+          <h1 className=" font-Bold text-xLarge">
+            Final Step, Make yourself at home
+          </h1>
           <p className="text-grayMedium text-medium mb-10">
             Pick your avatar and choose your theme
           </p>
@@ -31,13 +50,11 @@ function Page() {
                     key={i}
                     className={cn(
                       " cursor-pointer rounded-full",
-                      active === i
+                      active === i + 1
                         ? "outline-offset-2 outline outline-2 outline-green"
                         : ""
                     )}
-                    onClick={() => {
-                      setActive(i);
-                    }}
+                    onClick={() => handleAvatarSelection(item, i)}
                   >
                     <Image src={item} width={38} height={38} alt="avatar" />
                   </button>
@@ -46,19 +63,19 @@ function Page() {
             </div>
           </div>
           {/* crup */}
-          <UploadAndCropImg croppedImage={croppedImage} setCroppedImage={setCroppedImage} />
+          <UploadAndCropImg setFormData={setFormData} formData={formData} />
           <div className="mt-2 mb-9 ">
             <h2 className="font-Medium text-medium">Choose your theme</h2>
             <div className="flex w-full gap-7 mt-2">
               <div
                 className="flex-1 cursor-pointer "
                 onClick={() => {
-                  setSelectedTheme("light");
+                  setFormData({ ...formData, Theme: "light" });
                 }}
               >
                 <div
                   className={`bg-[#d7dbde] w-full h-[120px] max-w-[210px] rounded-lg pt-[22px] ps-[38px] overflow-hidden relative z-[1] ${
-                    selectedTheme === "light"
+                    formData?.Theme === "light"
                       ? "outline-offset-2 outline outline-2 outline-green"
                       : ""
                   } `}
@@ -72,12 +89,12 @@ function Page() {
               <div
                 className="flex-1 cursor-pointer"
                 onClick={() => {
-                  setSelectedTheme("dark");
+                  setFormData({ ...formData, Theme: "dark" });
                 }}
               >
                 <div
                   className={`bg-[#022e2de3] w-full h-[120px] max-w-[210px] rounded-lg pt-[22px] ps-[38px] overflow-hidden relative z-[1] ${
-                    selectedTheme === "dark"
+                    formData?.Theme === "dark"
                       ? "outline-offset-2 outline outline-2 outline-green"
                       : ""
                   } `}
@@ -90,22 +107,12 @@ function Page() {
               </div>
             </div>
           </div>
-          <div className={"w-full mt-10 flex flex-col gap-2"}>
-            <Button
-              className={"w-full "}
-              onClick={() => {
-                setDone(true);
-              }}
-            >
-              Next
-            </Button>
-          </div>
-          
+          <div className={"w-full mt-10 flex flex-col gap-2"}>{children}</div>
         </div>
       </div>
-      {Done ? <DoneAuth done={Done} /> : null}
+    
     </div>
   );
 }
 
-export default Page;
+export default MakeHome;

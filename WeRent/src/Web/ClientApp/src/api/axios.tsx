@@ -3,7 +3,7 @@ import { getToken } from "../lib/token";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-export const api = getAxiosInstance("/auth");
+export const api = getAxiosInstance("");
 
 function getAxiosInstance(URL: string) {
   const axiosInstance = axios.create({

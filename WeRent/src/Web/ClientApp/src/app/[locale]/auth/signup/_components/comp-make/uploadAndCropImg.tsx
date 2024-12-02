@@ -6,16 +6,15 @@ import UpLoadIcon from "@/src/assets/icons/upLoad";
 import Image from "next/image";
 import ModalComp from "@/src/components/modal-comp";
 import { useDisclosure } from "@mantine/hooks";
-import DeleteIcon from "@/src/assets/icons/delete";
 import Button from "@/src/components/button";
-import ListRemove from "@/src/assets/icons/listRemove";
 import DiscardIcon from "@/src/assets/icons/Discard";
 import ButtonDelete from "@/src/components/button-delete";
+import { blobUrlToFile } from "@/src/lib/utils";
 interface Props {
-  croppedImage: string | null;
-  setCroppedImage: React.Dispatch<React.SetStateAction<string | null>>;
+  formData: any;
+  setFormData: (e: any) => void;
 }
-function UploadAndCropImg({ croppedImage, setCroppedImage }: Props) {
+function UploadAndCropImg({ formData, setFormData }: Props) {
   const [opened, { open, close }] = useDisclosure(false);
   const [openedChanges, { open: openChanges, close: closeChanges }] =
     useDisclosure(false);
@@ -31,10 +30,22 @@ function UploadAndCropImg({ croppedImage, setCroppedImage }: Props) {
     },
     []
   );
+  const handleProfileImageChange = async (blobUrl: string) => {
+    try {
+      const file = await blobUrlToFile(
+        blobUrl,
+        formData.Name || "user" + ".png"
+      ).then((file) => file);
 
+      setFormData((prevData: any) => ({
+        ...prevData,
+        ProfileImageFile: file,
+      }));
+    } catch (error) {
+      console.error("Failed to convert Blob URL to File:", error);
+    }
+  };
   const handleFileChange = async (event: any) => {
-    console.log(event);
-    console.log(imageSrc);
     handleReset();
     if (event?.size) {
       const imageDataUrl = await readFile(event);
@@ -47,7 +58,7 @@ function UploadAndCropImg({ croppedImage, setCroppedImage }: Props) {
 
     try {
       const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels);
-      setCroppedImage(croppedImage);
+      handleProfileImageChange(croppedImage);
       close();
     } catch (e) {
       console.error(e);
@@ -55,10 +66,12 @@ function UploadAndCropImg({ croppedImage, setCroppedImage }: Props) {
   }, [imageSrc, croppedAreaPixels]);
   const handleReset = () => {
     setImageSrc(null);
-    setCroppedImage(null);
+    setFormData({ ...formData, ProfileImageFile: null });
     setZoom(1);
     setCrop({ x: 0, y: 0 });
   };
+  console.log(formData);
+
   return (
     <div>
       {!imageSrc && (
@@ -79,14 +92,14 @@ function UploadAndCropImg({ croppedImage, setCroppedImage }: Props) {
         </div>
       )}
 
-      {croppedImage && (
+      {formData?.ProfileImageFile && (
         <div className="mt-4  h-[125px] w-fit relative mb-8">
           <ButtonDelete
             onClick={() => handleReset()}
             className={"bg-grayLight !size-9  absolute top-0 -end-11 !p-2"}
           />
           <Image
-            src={croppedImage}
+            src={URL.createObjectURL(formData?.ProfileImageFile)}
             alt="Cropped"
             width={294}
             height={294}
@@ -104,7 +117,7 @@ function UploadAndCropImg({ croppedImage, setCroppedImage }: Props) {
         title="Upload your profile picture"
       >
         <div className="flex justify-center items-center flex-col px-10 lg:min-w-[490px] ">
-          {!croppedImage && (
+          {!formData?.ProfileImageFile && (
             <>
               {imageSrc && (
                 <>

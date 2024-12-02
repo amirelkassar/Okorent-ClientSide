@@ -3,11 +3,9 @@ const ROUTES = {
   AUTH: {
     LOGIN: "/auth/login",
     SIGNUP: "/auth/signup",
-    SIGNUP_EMAIL_CONFIRM: "/auth/signup-email-confirm",
     FORGOT_PASSWORD: "/auth/forgot-password",
     RESET_PASSWORD: "/auth/reset-password",
     CONFIRM: "/auth/confirm",
-    MAKE_HOME: "/auth/make-home",
   },
 
   ADMIN: {

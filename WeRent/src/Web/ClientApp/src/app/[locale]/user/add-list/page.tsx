@@ -12,6 +12,10 @@ import Preview from "./_components/preview";
 import LinkGreen from "@/src/components/linkGreen";
 import { useSearchParams } from "next/navigation";
 import InputTextarea from "@/src/components/InputTextarea";
+import {
+  GetCategory,
+  useCreateListingMutation,
+} from "@/src/hooks/queries/user/add-lisiting";
 
 interface LocationProps {
   id: number;
@@ -70,6 +74,12 @@ function Page() {
     setFaqs(newFaqs);
     setDataList({ ...dataList, FAQ: newFaqs });
   };
+  const { data: dataCategory } = GetCategory();
+  console.log(dataCategory);
+  const { mutateAsync: createListing } = useCreateListingMutation();
+  const handleSubmit = async () => {
+    await createListing(dataList);
+  };
   return (
     <div
       className={`"w-full  ${
@@ -82,19 +92,15 @@ function Page() {
         <div className="w-full">
           <Step title="Choose item category" active stepNum={1}>
             <Select
-              data={[
-                "category",
-                "category2",
-                "category3",
-                "category4",
-                "category5",
-              ]}
+              data={dataCategory?.data.map((item: any) => {
+                return { label: item.name, value: item.id };
+              })}
               leftSectionPointerEvents="none"
               rightSection={<DownIcon />}
               placeholder="Select category"
               searchable
               onChange={(e) => {
-                setDataList({ ...dataList, category: e });
+                setDataList({ ...dataList, CategoryId: e });
               }}
               classNames={{
                 input:
@@ -110,7 +116,7 @@ function Page() {
           </Step>
           <Step
             title="Describe your item"
-            active={dataList?.category ? true : false}
+            active={dataList?.CategoryId ? true : false}
             stepNum={2}
           >
             <TextInput
@@ -118,10 +124,8 @@ function Page() {
               onChange={(e) => {
                 setDataList({
                   ...dataList,
-                  Describe: {
-                    ...dataList.Describe,
-                    title: e.target.value,
-                  },
+                  Name: e.target.value,
+                 
                 });
               }}
               classNames={{
@@ -147,7 +151,7 @@ function Page() {
           </Step>
           <Step
             title="Upload item pictures here"
-            active={dataList.Describe?.title && dataList.Describe?.dec}
+            active={dataList.Name && dataList.Describe?.dec}
             stepNum={3}
             dec="You can upload up to 8 images"
           >
@@ -156,8 +160,8 @@ function Page() {
           <Step
             title="Add item price"
             active={
-              dataList.pictures
-                ? dataList.pictures.length > 0
+              dataList.ProductImageFiles
+                ? dataList.ProductImageFiles.length > 0
                   ? true
                   : false
                 : false
@@ -168,36 +172,12 @@ function Page() {
             <div className="flex items-center flex-wrap gap-4">
               <TextInput
                 name="name"
-                label={"Price for 1 Day"}
-                placeholder={"Add Price Here"}
-                onChange={(e) => {
-                  setDataList({
-                    ...dataList,
-                    priceItems: {
-                      ...dataList.priceItems,
-                      OneDay: e.target.value,
-                    },
-                  });
-                }}
-                classNames={{
-                  label: "text-sm lg:text-[16px] text-grayMedium mb-2",
-                  input:
-                    " text-black md:max-w-[200px] rounded-2xl text-grayMedium bg-white  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
-                  wrapper: "h-[64px]",
-                }}
-                className=" flex-1 min-w-[170px] w-full  duration-200 md:max-w-[200px] min-h-[64px] rounded-2xl text-grayMedium"
-              />
-              <TextInput
                 label={"Price for 3 Days"}
-                name="attribute1"
                 placeholder={"Add Price Here"}
                 onChange={(e) => {
                   setDataList({
                     ...dataList,
-                    priceItems: {
-                      ...dataList.priceItems,
-                      ThreeDay: e.target.value,
-                    },
+                    DailyPrice: e.target.value,
                   });
                 }}
                 classNames={{
@@ -210,15 +190,30 @@ function Page() {
               />
               <TextInput
                 label={"Price for 1 Week"}
+                name="attribute1"
+                placeholder={"Add Price Here"}
+                onChange={(e) => {
+                  setDataList({
+                    ...dataList,
+                    WeeklyPrice: e.target.value,
+                  });
+                }}
+                classNames={{
+                  label: "text-sm lg:text-[16px] text-grayMedium mb-2",
+                  input:
+                    " text-black md:max-w-[200px] rounded-2xl text-grayMedium bg-white  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+                  wrapper: "h-[64px]",
+                }}
+                className=" flex-1 min-w-[170px] w-full  duration-200 md:max-w-[200px] min-h-[64px] rounded-2xl text-grayMedium"
+              />
+              <TextInput
+                label={"Price for 1 Month"}
                 name="attribute2"
                 placeholder={"Add Price Here"}
                 onChange={(e) => {
                   setDataList({
                     ...dataList,
-                    priceItems: {
-                      ...dataList.priceItems,
-                      Week: e.target.value,
-                    },
+                    MonthlyPrice: e.target.value,
                   });
                 }}
                 classNames={{
@@ -233,9 +228,9 @@ function Page() {
           </Step>
           <StepLocation
             active={
-              dataList.priceItems?.OneDay &&
-              dataList.priceItems?.ThreeDay &&
-              dataList.priceItems?.Week
+              dataList.DailyPrice &&
+              dataList.WeeklyPrice &&
+              dataList.MonthlyPrice
             }
             addLocation={addLocation}
             location={location}
@@ -269,7 +264,14 @@ function Page() {
           </Step>
           <StepAvailability dataList={dataList} setDataList={setDataList} />
 
-          <Step title="Stock" active={dataList.Availability} stepNum={8}>
+          <Step
+            title="Stock"
+            active={
+              dataList.IsAvailable ||
+              (dataList.AvailableFrom && dataList.AvailableTo)
+            }
+            stepNum={8}
+          >
             <TextInput
               placeholder="Add available stock number here"
               onChange={(e) => {
@@ -322,7 +324,12 @@ function Page() {
       )}
 
       <div className="flex items-center mt-16 gap-7 md:flex-row flex-col">
-        <Button className={"w-full lg:w-[208px] h-[64px]"}>Save</Button>
+        <Button
+          onClick={handleSubmit}
+          className={"w-full lg:w-[208px] h-[64px]"}
+        >
+          Save
+        </Button>
         {searchparams.get("preview") === "true" ? (
           <LinkGreen
             href={"?preview=false"}

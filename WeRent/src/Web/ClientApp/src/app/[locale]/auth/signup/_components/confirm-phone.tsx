@@ -1,21 +1,22 @@
 "use client";
 import Button from "@/src/components/button";
-import Logo from "@/src/components/logo";
+import LinkGreen from "@/src/components/linkGreen";
 import Timer from "@/src/components/timer";
 import { useRouter } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import { PinInput } from "@mantine/core";
 import React, { useState } from "react";
-
-function PageLogin() {
+interface ConfirmPhoneProps {
+  setCurrentPage: (page: string) => void;
+}
+function ConfirmPhone({ setCurrentPage }: ConfirmPhoneProps) {
   const router = useRouter();
   const [seconds, setSeconds] = useState(60);
   const [start, setStart] = useState(false);
   return (
-    <div className="flex-1 pt-4 lgl:pt-20  pb-8 md:pb-16  flex  min-h-full justify-center lgl:justify-start">
+    <div className="flex-1 pt-4   pb-8 md:pb-16  flex  min-h-full justify-center lgl:justify-start">
       <div className=" w-full max-w-[470px] flex flex-col gap-4">
-        <Logo theme="green" />
-        <div className="flex-1 content-center">
+        <div className="flex-1 content-center ">
           <h1 className=" font-Bold  text-xLarge">Confirm Your number</h1>
           <p className="text-grayMedium max-w-[390px] font-Light leading-5 text-medium mb-16 md:mb-6 ">
             We have sent you a code to +20 1067373528 please enter it below to
@@ -63,7 +64,11 @@ function PageLogin() {
               </h3>
             </div>
 
-            <div className={"w-full mt-16 flex flex-col-reverse md:flex-row  gap-6 flex-wrap"}>
+            <div
+              className={
+                "w-full mt-16 flex flex-col-reverse md:flex-row  gap-6 flex-wrap"
+              }
+            >
               <Button
                 className={"md:w-[156px] w-full bg-white border text-green "}
                 onClick={() => {
@@ -81,14 +86,12 @@ function PageLogin() {
               >
                 Next
               </Button>
-              <Button
+              <LinkGreen
+                href={ROUTES.AUTH.SIGNUP + "?step=makeHome"}
                 className={"md:w-[156px] w-full "}
-                onClick={() => {
-                  router.push(ROUTES.AUTH.MAKE_HOME);
-                }}
               >
                 Next
-              </Button>
+              </LinkGreen>
             </div>
           </form>
         </div>
@@ -97,4 +100,4 @@ function PageLogin() {
   );
 }
 
-export default PageLogin;
+export default ConfirmPhone;

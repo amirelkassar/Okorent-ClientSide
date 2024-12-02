@@ -23,10 +23,3 @@ export const TokenProvider = ({ children, value }: TokenProviderProps) => {
   );
 };
 
-export const useToken = (): TokenContextType => {
-  const context = useContext(TokenContext);
-  if (context === null) {
-    throw new Error('useToken must be used within a TokenProvider');
-  }
-  return context;
-};

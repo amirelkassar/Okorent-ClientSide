@@ -56,7 +56,7 @@ function StepLocation({
   return (
     <Step
       title="Where is the item storage location "
-      active={true}
+      active={active}
       stepNum={5}
       dec="Add storage location that we will pickup the item from"
     >

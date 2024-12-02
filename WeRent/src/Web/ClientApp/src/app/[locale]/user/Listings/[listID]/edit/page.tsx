@@ -237,7 +237,7 @@ function Page() {
         <div className="flex items-center flex-wrap gap-4">
           <TextInput
             name="name"
-            label={"Price for 1 Day"}
+            label={"Price for 3 Days"}
             placeholder={"Add Price Here"}
             defaultValue={data.priceItems.OneDay}
             onChange={(e) => {
@@ -258,7 +258,7 @@ function Page() {
             className=" flex-1  min-w-[170px] w-full duration-200 md:max-w-[200px] min-h-[64px] rounded-2xl text-grayMedium"
           />
           <TextInput
-            label={"Price for 3 Days"}
+            label={"Price for 1 Week"}
             name="attribute1"
             placeholder={"Add Price Here"}
             defaultValue={data.priceItems.ThreeDay}
@@ -280,7 +280,7 @@ function Page() {
             className=" flex-1  min-w-[170px] w-full duration-200 md:max-w-[200px] min-h-[64px] rounded-2xl text-grayMedium"
           />
           <TextInput
-            label={"Price for 1 Week"}
+            label={"Price for 1 Month"}
             name="attribute2"
             placeholder={"Add Price Here"}
             defaultValue={data.priceItems.Week}

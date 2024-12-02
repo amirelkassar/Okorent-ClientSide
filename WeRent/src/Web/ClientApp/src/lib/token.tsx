@@ -3,18 +3,18 @@
 import { cookies } from "next/headers";
 interface TokenData {
   accessToken: string;
-  expirationTime: string;
+  tokenExpireDate: string;
 }
-export async function storeToken(data: TokenData): Promise<boolean> {
+export async function storeToken(data: any) {
   const cookie = cookies();
 
   try {
-    cookie.set("accessToken", data.accessToken, {
+    cookie.set("accessToken", data, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
       path: "/",
-      expires: new Date(data.expirationTime),
+      //expires: new Date(data),
     });
 
     return true;
