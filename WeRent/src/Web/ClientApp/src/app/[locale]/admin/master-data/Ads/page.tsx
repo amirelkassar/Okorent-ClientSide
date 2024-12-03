@@ -5,7 +5,6 @@ import { DataTable } from "@/src/components/data-table";
 import { AdsData } from "@/src/lib/dataUser";
 import EditIcon from "@/src/assets/icons/edit";
 import DeleteIcon from "@/src/assets/icons/delete";
-import ROUTES from "@/src/routes";
 import { columns } from "./_components/column";
 import VerifyIcon from "@/src/assets/icons/verify";
 import PauseIcon from "@/src/assets/icons/pause";
