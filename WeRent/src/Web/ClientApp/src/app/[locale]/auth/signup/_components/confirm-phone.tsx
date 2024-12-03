@@ -6,10 +6,8 @@ import { useRouter } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import { PinInput } from "@mantine/core";
 import React, { useState } from "react";
-interface ConfirmPhoneProps {
-  setCurrentPage: (page: string) => void;
-}
-function ConfirmPhone({ setCurrentPage }: ConfirmPhoneProps) {
+
+function ConfirmPhone() {
   const router = useRouter();
   const [seconds, setSeconds] = useState(60);
   const [start, setStart] = useState(false);

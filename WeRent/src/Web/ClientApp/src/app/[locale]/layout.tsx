@@ -12,6 +12,7 @@ import { MantineProvider } from "@mantine/core";
 import ReactQueryConfig from "@/src/config/react-query-config";
 import { TokenProvider } from "@/src/hooks/use-token";
 import { getToken } from "@/src/lib/token";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -39,7 +40,10 @@ export default async function RootLayout({
         <div className=" relative">
           <TokenProvider value={token ? token : null}>
             <ReactQueryConfig>
-              <MantineProvider>{children}</MantineProvider>
+              <MantineProvider>
+                {children}
+                <Toaster />
+              </MantineProvider>
             </ReactQueryConfig>
           </TokenProvider>
         </div>

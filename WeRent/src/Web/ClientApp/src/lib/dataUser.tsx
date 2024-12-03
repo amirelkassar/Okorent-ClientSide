@@ -12,6 +12,7 @@ import FilmIcon from "../assets/icons/film";
 import OthersIcon from "../assets/icons/others";
 import { StaticImageData } from "next/image";
 import avatarUser from "@/src/assets/images/avatar.png";
+import bannerImg from "@/src/assets/images/offer.png";
 
 export const UserData = [
   {
@@ -1114,5 +1115,43 @@ export const CategoriesAdminData = [
     title: "Others",
     subcategories: "15",
     img: <OthersIcon className={"h-[30px] w-auto"} />,
+  },
+];
+
+interface BannerProps {
+  id: number;
+  title: string;
+  link: string;
+  status: string;
+  bannerImage: StaticImageData;
+}
+export const BannersData: BannerProps[] = [
+  {
+    id: 1,
+    title: "Special offer on electronic devices",
+    link: "https://www.example.com/special-offer",
+    status: "Visible",
+    bannerImage: bannerImg,
+  },
+  {
+    id: 2,
+    title: "Best Sellers",
+    link: "https://www.example.com/special-offer",
+    status: "Visible",
+    bannerImage: bannerImg,
+  },
+  {
+    id: 3,
+    title: "Special offer on electronic devices",
+    link: "https://www.example.com/special-offer",
+    status: "Hide",
+    bannerImage: bannerImg,
+  },
+  {
+    id: 4,
+    title: "On Sale",
+    link: "https://www.example.com/special-offer",
+    status: "Hide",
+    bannerImage: bannerImg,
   },
 ];

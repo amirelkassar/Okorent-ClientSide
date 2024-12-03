@@ -32,6 +32,7 @@ const ROUTES = {
     CATEGORIES: "/admin/master-data/Categories",
     CATEGORYADD: "/admin/master-data/Categories/add",
     BANNERS: "/admin/master-data/Banners",
+    BANNERSADD: "/admin/master-data/Banners/add",
     ADS: "/admin/master-data/Ads",
   },
   USER: {

@@ -7,44 +7,16 @@ import GetErrorMsg from "@/src/components/getErrorMsg";
 import Input from "@/src/components/input";
 import Logo from "@/src/components/logo";
 import Password from "@/src/components/password";
-import { useLoginMutation } from "@/src/hooks/queries/auth";
-import { Link, useRouter } from "@/src/navigation";
 import ROUTES from "@/src/routes";
-import React, { useCallback, useState } from "react";
-interface LoginData {
-  username: string;
-  password: string;
-}
+import React from "react";
+import { useLogin } from "./_hooks/use-login";
+import { Link } from "@/src/navigation";
+
 function PageLogin() {
-  const [formData, setFormData] = useState<LoginData>({
-    username: "",
-    password: "",
-  });
-  const router = useRouter();
-
-  const {
-    mutateAsync: login,
-    error,
-    isLoading,
-    isError,
-    reset,
-  } = useLoginMutation(formData);
-  const onChange = useCallback(
-    (e: any) => {
-      const { name, value } = e.target;
-
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-
-      if (isError) reset();
-    },
-    [isError, reset]
-  );
-  const onSubmit = async () => {
-    login();
-  };
+  const { form, status } = useLogin();
+  // Destructure the form and status objects
+  const {onChange, onSubmit, error } = form;
+  const { isPaused, isError } = status;
 
   return (
     <div className="flex-1 pt-4 lgl:pt-20  pb-8 md:pb-16  flex  min-h-full justify-center lgl:justify-start">
@@ -63,7 +35,6 @@ function PageLogin() {
               placeholder="Write you email here"
               onChange={onChange}
               error={GetErrorMsg(error, "general")}
-           
             />
             <Password
               label="Password"

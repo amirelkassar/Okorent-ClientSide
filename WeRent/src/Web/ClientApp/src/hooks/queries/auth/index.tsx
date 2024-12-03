@@ -28,13 +28,13 @@ export const useLogout = () => {
 
 export const initialQueryKey = "auth.login";
 
-export const useLoginMutation = (data: any) => {
+export const useLoginMutation = () => {
   const router = useRouter();
 
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async () => {
+    mutationFn: async (data:any) => {
       const response = await api.post(auth.login.base, data, {});
       return response.data;
     },
@@ -67,6 +67,7 @@ export const useCreateAccountMutation = () => {
       return response.data;
     },
     onSuccess: (res) => {
+     
       console.log(res);
       storeToken(res?.data);
       console.log(

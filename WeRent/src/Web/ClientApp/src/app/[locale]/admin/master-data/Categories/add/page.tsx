@@ -62,7 +62,7 @@ function Page() {
           <Button className={" flex-1 h-10 text-base !px-8"}>Save </Button>
         </div>
       </div>
-      <div className="flex gap-6 flex-col lgl:flex-row items-start  ">
+      <div className="flex gap-6 flex-col lgl:flex-row lgl:items-start  ">
         <Card className="px-8 py-10 flex-1">
           <Image src={""} alt="" />
 
