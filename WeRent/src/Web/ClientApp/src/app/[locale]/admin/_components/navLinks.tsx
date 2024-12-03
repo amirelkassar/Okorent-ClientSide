@@ -99,10 +99,16 @@ function NavLinks() {
         active: path === ROUTES.USER.SUBSCRIPTION,
       },
       {
-        id: 2,
+        id: 4,
         name: "Booking Details",
         url: ROUTES.ADMIN.BOOKINGSDETAILS(params.bookingsId),
         active: path === ROUTES.ADMIN.BOOKINGSDETAILS(params.bookingsId),
+      },
+      {
+        id: 5,
+        name: "Ads Details ",
+        url: ROUTES.ADMIN.ADSDETAILS(params.adsId),
+        active: path === ROUTES.ADMIN.ADSDETAILS(params.adsId),
       },
     ],
     [path]

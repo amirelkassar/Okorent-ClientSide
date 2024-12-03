@@ -1155,3 +1155,94 @@ export const BannersData: BannerProps[] = [
     bannerImage: bannerImg,
   },
 ];
+
+interface AdsDataProps {
+  id: number;
+  product: string;
+  user: string;
+  startDate: string;
+  endDate: string;
+  price: string;
+  status: string;
+  userImg: StaticImageData;
+  productImg: StaticImageData;
+}
+export const AdsData: AdsDataProps[] = [
+  {
+    id: 1,
+    product: "iPhone 15 Pro",
+    user: "Ahmed Mohamed",
+    startDate: "3 August 2024",
+    endDate: "3 August 2024",
+    price: "100$",
+    userImg: avatar,
+    productImg: phoneImg,
+    status: "Suspend",
+  },
+  {
+    id: 2,
+    product: "iPhone 15 Pro",
+    user: "Ahmed Mohamed",
+    startDate: "4 August 2024",
+    endDate: "4 August 2024",
+    price: "250$",
+    userImg: avatar,
+    productImg: phoneImg,
+    status: "Suspend",
+  },
+  {
+    id: 3,
+    product: "iPhone 15 Pro",
+    user: "Ahmed Mohamed",
+    startDate: "5 August 2024",
+    endDate: "5 August 2024",
+    price: "100$",
+    userImg: avatar,
+    productImg: phoneImg,
+    status: "Suspend",
+  },
+  {
+    id: 4,
+    product: "iPhone 15 Pro",
+    user: "Ahmed Mohamed",
+    startDate: "5 August 2024",
+    endDate: "5 August 2024",
+    price: "100$",
+    userImg: avatar,
+    productImg: phoneImg,
+    status: "Suspend",
+  },
+  {
+    id: 5,
+    product: "iPhone 15 Pro",
+    user: "Ahmed Mohamed",
+    startDate: "7 August 2024",
+    endDate: "7 August 2024",
+    price: "100$",
+    userImg: avatar,
+    productImg: phoneImg,
+    status: "Activate",
+  },
+  {
+    id: 6,
+    product: "iPhone 15 Pro",
+    user: "Ahmed Mohamed",
+    startDate: "8 August 2024",
+    endDate: "8 August 2024",
+    price: "100$",
+    userImg: avatar,
+    productImg: phoneImg,
+    status: "Suspend",
+  },
+  {
+    id: 7,
+    product: "iPhone 15 Pro",
+    user: "Ahmed Mohamed",
+    startDate: "9 August 2024",
+    endDate: "9 August 2024",
+    price: "100$",
+    userImg: avatar,
+    productImg: phoneImg,
+    status: "Activate",
+  },
+];

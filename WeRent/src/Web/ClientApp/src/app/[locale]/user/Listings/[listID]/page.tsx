@@ -1,7 +1,6 @@
 import EditIcon from "@/src/assets/icons/edit";
 import Button from "@/src/components/button";
 import CardDetailsList from "@/src/components/cardDetailsList";
-import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import Image from "next/image";
 import React from "react";
