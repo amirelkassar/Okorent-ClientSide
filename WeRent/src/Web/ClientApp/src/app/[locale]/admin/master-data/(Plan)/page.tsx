@@ -10,7 +10,7 @@ function page() {
         <div className="flex items-center justify-between gap-4 flex-wrap mb-section">
           <TitleMaster title="Plans" num={3} />
         </div>
-        <PricingPlans />
+        <PricingPlans withBtn={false} />
       </div>
     </LayoutMaster>
   );

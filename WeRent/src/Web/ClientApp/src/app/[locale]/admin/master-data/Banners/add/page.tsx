@@ -1,9 +1,15 @@
-import React from 'react'
+import Card from "@/src/components/card";
+import Input from "@/src/components/input";
+import Image from "next/image";
+import React from "react";
 
 function page() {
   return (
-    <div>page</div>
-  )
+    <Card>
+      <Image src={""} alt="" />
+      <Input label=" Category Name" placeholder="electronics" />
+    </Card>
+  );
 }
 
-export default page
+export default page;

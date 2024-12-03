@@ -7,7 +7,7 @@ const PricingPlansData = [
     name: "Essential",
     description:
       "Basic features for starting rental businesses and small teams.",
-      numMore:52,
+    numMore: 52,
     price: {
       original: "$35",
       discounted: "$29",
@@ -35,7 +35,7 @@ const PricingPlansData = [
     description:
       "The best value for medium-sized and growing rental businesses.",
     badge: "MOST POPULAR",
-    numMore:60,
+    numMore: 60,
     price: {
       original: "$35",
       discounted: "$29",
@@ -57,7 +57,7 @@ const PricingPlansData = [
   {
     name: "Premium",
     description: "Advanced features for large rental companies.",
-    numMore:75,
+    numMore: 75,
     price: {
       original: "$35",
       discounted: "$29",
@@ -77,8 +77,10 @@ const PricingPlansData = [
     buttonLabel: "Choose this plan",
   },
 ];
-
-function PricingPlans() {
+interface PricingPlansProps {
+  withBtn?: boolean;
+}
+function PricingPlans({ withBtn = true }: PricingPlansProps) {
   return (
     <div className="flex justify-between gap-4 lg:gap-12 hideScroll max-w-full overflow-x-auto mb-11 lg:mb-20">
       {PricingPlansData.map((plan, i) => {
@@ -132,9 +134,11 @@ function PricingPlans() {
             <button className=" text-center flex items-center justify-center mx-auto  px-5 text-blue py-4 text-sm md:text-base font-Regular">
               See all {plan.numMore} features
             </button>
-            <Button className={"w-[280px] max-w-[96%] mx-auto"}>
-              Choose this plan
-            </Button>
+            {withBtn && (
+              <Button className={"w-[280px] max-w-[96%] mx-auto"}>
+                Choose this plan
+              </Button>
+            )}
           </div>
         );
       })}

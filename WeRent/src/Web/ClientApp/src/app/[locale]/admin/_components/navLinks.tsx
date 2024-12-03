@@ -77,7 +77,7 @@ function NavLinks() {
         id: 12,
         name: "Master Data",
         url: ROUTES.ADMIN.MASTERDATA,
-        active: path === ROUTES.ADMIN.MASTERDATA,
+        active: path.includes(ROUTES.ADMIN.MASTERDATA),
       },
     ],
     [path]
