@@ -1,3 +1,4 @@
+"use client";
 import CardRentals from "@/src/components/cardRentals";
 import FAQ from "@/src/components/faq";
 import MapComponent from "@/src/components/map";
@@ -5,10 +6,14 @@ import CardProduct from "@/src/components/product/cardProduct";
 import Description from "@/src/components/product/description";
 import QuestionView from "@/src/components/question";
 import Reviews from "@/src/components/reviews";
+import { GetProductsByID } from "@/src/hooks/queries/user/home";
 import { Rentals } from "@/src/lib/dataUser";
 import React from "react";
 
-function page() {
+function page({ params }: any) {
+  const {data} = GetProductsByID(params.productID);
+  console.log(data);
+  
   return (
     <div>
       <CardProduct />

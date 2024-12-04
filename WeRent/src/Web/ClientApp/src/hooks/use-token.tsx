@@ -3,14 +3,14 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
 
 // Define the context type
-type TokenContextType = string | null;
+type TokenContextType = string | any;
 
 // Create the context with the appropriate type
-const TokenContext = createContext<TokenContextType>(null);
+export const TokenContext = createContext<TokenContextType>(null);
 
 interface TokenProviderProps {
   children: ReactNode;
-  value: string | null;
+  value: string | any;
 }
 
 export const TokenProvider = ({ children, value }: TokenProviderProps) => {

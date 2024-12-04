@@ -8,7 +8,6 @@ import Button from "@/src/components/button";
 import LinkGreen from "@/src/components/linkGreen";
 import ROUTES from "@/src/routes";
 import { Dropzone, MIME_TYPES } from "@mantine/dropzone";
-import RemoveIcon from "@/src/assets/icons/remove";
 import electronics from "@/public/icons/electronics.svg";
 import CameraIcon from "@/src/assets/icons/camera";
 function Page() {

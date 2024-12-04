@@ -13,6 +13,7 @@ import ReactQueryConfig from "@/src/config/react-query-config";
 import { TokenProvider } from "@/src/hooks/use-token";
 import { getToken } from "@/src/lib/token";
 import { Toaster } from "react-hot-toast";
+import { authDecodedToken } from "@/token";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,7 +27,9 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }>) {
-  const token = await getToken();
+  const token = await authDecodedToken();
+  console.log(token);
+  
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body className=" overflow-x-hidden relative">

@@ -2,6 +2,10 @@ import PricingPlans from "@/src/components/subscription/PricingPlans";
 import React from "react";
 import TitleMaster from "../_components/title-master";
 import LayoutMaster from "../_components/layout-master";
+import LinkGreen from "@/src/components/linkGreen";
+import ROUTES from "@/src/routes";
+import PlusIcon from "@/src/assets/icons/plus";
+import AddFeatureModal from "./_components/add-feature-modal";
 
 function page() {
   return (
@@ -9,6 +13,17 @@ function page() {
       <div>
         <div className="flex items-center justify-between gap-4 flex-wrap mb-section">
           <TitleMaster title="Plans" num={3} />
+          <div className="flex items-center gap-3">
+            <AddFeatureModal />
+
+            <LinkGreen
+              href={ROUTES.ADMIN.PLANSADD}
+              className={"gap-2 h-10 !px-5"}
+            >
+              <PlusIcon className="w-4 h-auto" />
+              <p className="text-base font-Regular font-medium">Create Plan</p>
+            </LinkGreen>
+          </div>
         </div>
         <PricingPlans withBtn={false} />
       </div>

@@ -28,7 +28,7 @@ const ROUTES = {
     MEMBERSHIPS: "/admin/Memberships",
     INBOX: "/admin/Inbox",
     MASTERDATA: "/admin/master-data",
-    PLANS: "/admin/master-data/Plans",
+    PLANSADD: "/admin/master-data/add",
     CATEGORIES: "/admin/master-data/Categories",
     CATEGORYADD: "/admin/master-data/Categories/add",
     BANNERS: "/admin/master-data/Banners",
