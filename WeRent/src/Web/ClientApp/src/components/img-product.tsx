@@ -10,7 +10,7 @@ interface ImgProductProps {
 }
 function ImgProduct({
   src,
-  productName,
+  productName='Product',
   classNameBox = "",
   classNameBImg = "",
   classNameBTitle = "",

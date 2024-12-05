@@ -579,6 +579,28 @@ export const RequestsData: RequestData[] = [
     imgUser: avatar,
     imgHome: house,
   },
+  {
+    id: 11,
+    name: "Ahmed Mohamed Badr 11",
+    phone: "OnePlus 11",
+    memberSince: "March, 2024",
+    statusUser: "Available",
+    status: "new",
+    rating: 4.52,
+    rentedItems: 320,
+    leasedItems: 320,
+    product: "Apple Laptop",
+    payment: "100$",
+    quantity: 50,
+    paymentStatus: "Pending",
+    rentalPeriod: 5,
+    startDate: "11-10-2024",
+    endDate: "20-8-2024",
+    country: "Netherlands",
+    action: "Ongoing",
+    imgUser: avatar,
+    imgHome: house,
+  },
 ];
 
 export const ListingsDataAdmin = [

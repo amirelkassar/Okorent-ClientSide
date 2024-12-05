@@ -8,15 +8,58 @@ import QuestionView from "@/src/components/question";
 import Reviews from "@/src/components/reviews";
 import { GetProductsByID } from "@/src/hooks/queries/user/home";
 import { Rentals } from "@/src/lib/dataUser";
-import React from "react";
-
-function page({ params }: any) {
-  const {data} = GetProductsByID(params.productID);
+import { Radio } from "@mantine/core";
+import React, { useState } from "react";
+const OptionAddresses = [
+  {
+    value: "store",
+    label: "In store",
+  },
+  {
+    value: "Delivery",
+    label: "Delivery",
+  },
+  {
+    value: "pickup",
+    label: "pickup location",
+  },
+];
+function Page({ params }: any) {
+  const { data } = GetProductsByID(params.productID);
   console.log(data);
-  
+  const [valueSuspend, setValueSuspend] = useState("");
+
   return (
     <div>
       <CardProduct />
+      <Radio.Group
+        name="OptionAddresses"
+        label="Choose Adress type"
+        defaultValue={"permanently"}
+        classNames={{
+          label:'text-xl'
+        }}
+        onChange={(e) => {
+          setValueSuspend(e);
+        }}
+      >
+        <div className="flex my-6  flex-col gap-6">
+          {OptionAddresses.map((option, inedx) => {
+            return (
+              <Radio
+                color="#88BA52"
+                key={inedx}
+                value={option.value}
+                label={option.label}
+                className="flex-1"
+                classNames={{
+                  icon: "w-3 h-3 left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2",
+                }}
+              />
+            );
+          })}
+        </div>
+      </Radio.Group>
       <div className="bg-[#D9D9D933] px-3 lg:px-10 lg:rounded-[50px] rounded-[30px] pt-8 lg:pt-11 pb-9 lg:pb-7 mb-section">
         <h2 className="text-xl mb-5 px-2 lg:text-2xl">
           How to receive this item
@@ -56,4 +99,4 @@ function page({ params }: any) {
   );
 }
 
-export default page;
+export default Page;

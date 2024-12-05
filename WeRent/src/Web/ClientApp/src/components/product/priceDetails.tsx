@@ -1,11 +1,16 @@
-import Button from "@/src/components/button";
+"use client";
 import React from "react";
+import LinkGreen from "../linkGreen";
+import ROUTES from "@/src/routes";
+import { useParams } from "next/navigation";
 
 function PriceDetails() {
+  const params = useParams();
+  console.log(params);
+
   return (
     <div className=" border rounded-lg bg-white/50 pt-4 pb-2  border-green/30">
       <div className="px-5 mb-3">
-        
         <h4 className="text-[14px] font-Regular text-grayMedium mb-2">
           Price details
         </h4>
@@ -29,7 +34,12 @@ function PriceDetails() {
         <p className="font-Bold text-[14px]">₣230.82</p>
       </div>
       <div className="flex items-center px-5 justify-between gap-4 pb-4 flex-wrap mt-5">
-        <Button className={"w-full "}>Request this item</Button>
+        <LinkGreen
+          href={ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID||0)}
+          className={"w-full "}
+        >
+          Request this item
+        </LinkGreen>
       </div>
     </div>
   );

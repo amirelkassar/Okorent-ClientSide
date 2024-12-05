@@ -5,8 +5,6 @@ import product2 from "@/src/assets/images/item.png";
 import Image from "next/image";
 const images = [product, product2];
 function ImagesProduct() {
-
-
   return (
     <div className="w-full flex items-start gap-4 hideScroll lg:gap-8 max-w-full overflow-x-auto ">
       <div className="flex-1 min-w-[90%]  sml:min-w-[400px]">
@@ -28,7 +26,7 @@ function ImagesProduct() {
               src={src}
               alt={`Thumbnail ${index + 1}`}
               width={970}
-          height={440}
+              height={440}
               className="w-full h-full object-cover object-top"
             />
           </div>

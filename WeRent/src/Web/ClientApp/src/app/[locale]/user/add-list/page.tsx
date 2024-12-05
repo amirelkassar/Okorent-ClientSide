@@ -92,7 +92,7 @@ function Page() {
         <div className="w-full">
           <Step title="Choose item category" active stepNum={1}>
             <Select
-              data={dataCategory?.data.map((item: any) => {
+              data={dataCategory?.data?.map((item: any) => {
                 return { label: item.name, value: item.id };
               })}
               leftSectionPointerEvents="none"
