@@ -5,6 +5,7 @@ import ROUTES from "@/src/routes";
 import { useCreateAccountMutation } from "@/src/hooks/queries/auth";
 import { useRouter } from "@/src/navigation";
 import { Toast } from "@/src/components/toast";
+import { useUserStore } from "@/src/store/sign-up-store";
 
 // Define the type for the form data
 interface FormDataProps {
@@ -12,10 +13,6 @@ interface FormDataProps {
   Email: string;
   Password: string;
   PhoneNumber: string;
-  Theme: "dark" | "light";
-  Language: "en" | "ar";
-  ProfileImageFile: File | null;
-  AvatarFile: File | null;
 }
 
 // Define the type for the form state and handlers
@@ -25,7 +22,6 @@ interface FormProps {
   onSubmit: () => void;
   data: FormDataProps;
   error: any; // You can replace 'any' with a more specific type based on your error structure
-  Done: boolean;
 }
 
 // Define the type for the status state
@@ -39,17 +35,12 @@ interface SignUpReturn {
 }
 export const useSignUp = (): SignUpReturn => {
   const router = useRouter();
-  const [Done, setDone] = useState(false);
-
+  const { setUser } = useUserStore(); 
   const [formData, setFormData] = useState<FormDataProps>({
     Name: "",
     Email: "",
     Password: "",
     PhoneNumber: "",
-    Theme: "light",
-    Language: "en",
-    ProfileImageFile: null,
-    AvatarFile: null,
   });
 
   const {
@@ -63,8 +54,6 @@ export const useSignUp = (): SignUpReturn => {
   const onChange = useCallback(
     (e: any) => {
       const { name, value } = e.target;
-      console.log(formData);
-
       setFormData((prevData) => ({
         ...prevData,
         [name]: value,
@@ -76,6 +65,8 @@ export const useSignUp = (): SignUpReturn => {
   );
 
   const onSubmit = useCallback(async () => {
+    console.log(formData);
+    setUser(formData);
     const requestData = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
       if (value !== null) {
@@ -84,9 +75,21 @@ export const useSignUp = (): SignUpReturn => {
     });
     Toast.Promise(CreateAccount(requestData), {
       success: "تم التسجيل بنجاج",
-      onSuccess: () => {
-        setDone(true);
-        router.replace(ROUTES.AUTH.LOGIN);
+      onSuccess: (res) => {
+        console.log(res);
+        console.log(formData);
+        setUser(formData);
+      },
+
+      onError: (error) => {
+        console.log("error");
+        console.log(error);
+        if (error?.response?.data?.code === 200) {
+          setUser({...formData, id: error?.response?.data?.data?.id});
+          router.replace(
+            ROUTES.AUTH.VERIFY_PHONE + `?phone_number=${formData.PhoneNumber}`
+          );
+        }
       },
     });
   }, [CreateAccount, formData, router]);
@@ -97,7 +100,6 @@ export const useSignUp = (): SignUpReturn => {
     onSubmit,
     data: formData,
     error,
-    Done,
   };
 
   const status = {

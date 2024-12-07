@@ -34,7 +34,7 @@ export const useLoginMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (data:any) => {
+    mutationFn: async (data: any) => {
       const response = await api.post(auth.login.base, data, {});
       return response.data;
     },
@@ -67,11 +67,33 @@ export const useCreateAccountMutation = () => {
       return response.data;
     },
     onSuccess: (res) => {
-     
       console.log(res);
       storeToken(res?.data);
       console.log(
         decodedToken(res?.data).then((res2) => {
+          console.log(res2);
+        })
+      );
+    },
+    onError: () => {},
+  });
+};
+
+export const useVerifyPhoneMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.post(auth.register.verify_phone, data, {
+        headers: {},
+      });
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      storeToken(res);
+      console.log(
+        decodedToken(res).then((res2) => {
           console.log(res2);
         })
       );
@@ -81,3 +103,5 @@ export const useCreateAccountMutation = () => {
     },
   });
 };
+
+

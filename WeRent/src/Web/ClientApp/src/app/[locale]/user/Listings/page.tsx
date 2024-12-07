@@ -9,12 +9,12 @@ import CardView from "./_components/cardView";
 import CardViewPhoneListing from "./_components/CardViewPhoneLisiting";
 const FilterOptions = [
   {
-    label: "Active",
+    label: "online",
     type: "filter",
     key: true,
   },
   {
-    label: "Not Active",
+    label: "offline",
     type: "filter",
     key: false,
   },
@@ -24,21 +24,41 @@ function Page() {
   return (
     <div>
       {searchParams.get("list") === "true" ? (
-        <DataTable
-        Component={CardViewPhoneListing}
-          title="My Listings"
-          cardView={ROUTES.USER.LISTINGS}
-          search
-          data={ListingsData}
-          filterBy="status"
-          filter="buttons"
-          filterData={FilterOptions}
-          columns={columns}
-        />
+        <>
+          <div className=" hidden mdl:block">
+            <DataTable
+              //Component={CardViewPhoneListing}
+              title="My Listings"
+              cardView={ROUTES.USER.LISTINGS}
+              data={ListingsData}
+              filterBy="status"
+              filter="buttons"
+              filterData={FilterOptions}
+              columns={columns}
+            />
+          </div>
+          <div className=" block mdl:hidden">
+            <CardView
+              title={"Online"}
+              data={ListingsData.filter((item) => item.status === true)}
+            />
+            <CardView
+              title={"Ofline"}
+              data={ListingsData.filter((item) => item.status === false)}
+            />
+          </div>
+        </>
       ) : (
         <div>
-          <CardView first title={"Active"} />
-          <CardView title={"Not Active"} />
+          <CardView
+            title={"Online"}
+            first
+            data={ListingsData.filter((item) => item.status === true)}
+          />
+          <CardView
+            title={"Offline"}
+            data={ListingsData.filter((item) => item.status === false)}
+          />
         </div>
       )}
     </div>

@@ -2,18 +2,18 @@
 import AppleIcon from "@/src/assets/icons/apple";
 import GoogleIcon from "@/src/assets/icons/google";
 import Input from "@/src/components/input";
-import LinkGreen from "@/src/components/linkGreen";
 import Password from "@/src/components/password";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import React from "react";
 import PhoneInput from "react-phone-input-2";
-interface SignupViewProps {
-  onChange: (e: any) => void;
-  setFormData: (val: any) => void;
-  formData: any;
-}
-function SignupView({ onChange, formData, setFormData }: SignupViewProps) {
+import { useSignUp } from "../_hooks/use-sign-up";
+import Button from "@/src/components/button";
+
+function SignupView() {
+  const { form, status } = useSignUp();
+  const { setFormData, onChange, onSubmit, data: formData, error } = form;
+
   return (
     <div className="flex-1  content-center">
       <h1 className="mt-1 font-Bold text-lg lg:text-xLarge">
@@ -68,19 +68,16 @@ function SignupView({ onChange, formData, setFormData }: SignupViewProps) {
               dropdownClass="top-full !shadow-none border overflow-x-hidden  !rounded-lg border-black/20 left-0 !overflow-y-auto border border-gray-300 rounded-lg bg-white" // Dropdown menu styling
               searchClass="w-full relative  !py-2 !border-0 !px-3 text-sm ps-10 placeholder:text-xs " // Search input in dropdown
               onChange={(phone) => {
-                setFormData({ ...formData, PhoneNumber: phone });
                 console.log(phone);
+                setFormData({ ...formData, PhoneNumber: phone });
               }}
             />
           </div>
         </div>
         <div className={"w-full mt-2 flex flex-col gap-2"}>
-          <LinkGreen
-            href={ROUTES.AUTH.SIGNUP + "?step=confirmPhone"}
-            className={"w-full "}
-          >
+          <Button onClick={onSubmit} className={"w-full "}>
             Create an account
-          </LinkGreen>
+          </Button>
           <button
             className={
               "w-full flex items-center justify-center gap-2 py-3 h-[52px] border border-black rounded-xl"

@@ -3,5 +3,6 @@ export type AuthResponse = {
  userFirstName: string;
   //userLastName: string;
   userEmail: string;
+  userID:string;
   userRole: "Administrator" | "Client";
 } | null;

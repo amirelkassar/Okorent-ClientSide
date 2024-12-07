@@ -3,16 +3,15 @@ import Image, { StaticImageData } from "next/image";
 import React, { useState } from "react";
 import avatar1 from "@/src/assets/images/avatar.png";
 import { cn } from "@/src/lib/utils";
-import UploadAndCropImg from "./comp-make/uploadAndCropImg";
+import UploadAndCropImg from "./_components/uploadAndCropImg";
+import { useUserEdit } from "./_hooks/use-user-edit";
+import Button from "@/src/components/button";
+import DoneAuth from "./_components/doneAuth";
 const dataAvatar = [avatar1, avatar1, avatar1, avatar1];
-interface MakeHomeProps {
-  formData: any;
-  setFormData: (e: any) => void;
-  children?: React.ReactNode;
-}
-function MakeHome({ setFormData, formData, children }: MakeHomeProps) {
+function page() {
   const [active, setActive] = useState(0);
-
+  const { form, status } = useUserEdit();
+  const { setFormData,  onSubmit, data: formData, error, Done } = form;
   const handleAvatarSelection = async (
     item: StaticImageData,
     index: number
@@ -22,7 +21,7 @@ function MakeHome({ setFormData, formData, children }: MakeHomeProps) {
     // Simulate the blob URL for static image
     const response = await fetch(item.src);
     const blob = await response.blob();
-    const file = new File([blob], `${formData.Name || "user"}.png`, {
+    const file = new File([blob], `"userImg.png`, {
       type: blob.type,
     });
 
@@ -107,12 +106,16 @@ function MakeHome({ setFormData, formData, children }: MakeHomeProps) {
               </div>
             </div>
           </div>
-          <div className={"w-full mt-10 flex flex-col gap-2"}>{children}</div>
+          <div className={"w-full mt-10 flex flex-col gap-2"}>
+            <Button className={"w-full "} onClick={onSubmit}>
+              Next
+            </Button>{" "}
+          </div>
+          {Done ? <DoneAuth done={Done} /> : null}
         </div>
       </div>
-    
     </div>
   );
 }
 
-export default MakeHome;
+export default page;

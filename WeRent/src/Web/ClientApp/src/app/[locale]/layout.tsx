@@ -28,8 +28,6 @@ export default async function RootLayout({
   params: { locale: string };
 }>) {
   const token = await authDecodedToken();
-  console.log(token);
-  
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body className=" overflow-x-hidden relative">

@@ -8,6 +8,10 @@ export const user = {
   },
   product: {
     base: "/Product",
-    getById: (id:any) => `/Product/${id}`,
+    getById: (id: any) => `/Product/${id}`,
+  },
+  information: {
+    base: (id: any) => `/User/${id}`,
+    user_edit: (id: any) => `/User/${id}`,
   },
 };

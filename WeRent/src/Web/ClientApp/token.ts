@@ -8,9 +8,10 @@ type DecodedToken = {
   "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": string;
   Surname: string;
   "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress": string;
+  'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier': string
   "http://schemas.microsoft.com/ws/2008/06/identity/claims/role":
-    | "Administrator"
-    | "Client";
+  | "Administrator"
+  | "Client";
   exp: number;
   ClientId: string;
 };
@@ -27,7 +28,7 @@ export const decodedToken = async (token: string): Promise<DecodeResponse> => {
     return {
       userRole:
         decodedToken[
-          "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
         ],
       tokenExpireDate: new Date(decodedToken.exp * 1000),
     };
@@ -53,16 +54,17 @@ export const authDecodedToken = async (): Promise<AuthResponse> => {
       //userId: decodedToken.ClientId,
       userFirstName:
         decodedToken[
-          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
         ],
       //userLastName: decodedToken.Surname,
       userEmail:
         decodedToken[
-          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
+        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
         ],
+      userID: decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'],
       userRole:
         decodedToken[
-          "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
         ],
     };
   } catch {

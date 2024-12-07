@@ -5,6 +5,8 @@ export const auth = {
     base: "/Auth/login",
   },
   register: {
-    base: "/User/register",
+    base: "/Auth/register",
+    verify_phone: "/Auth/verify-phone",
+   
   },
 };

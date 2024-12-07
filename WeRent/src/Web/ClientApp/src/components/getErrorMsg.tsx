@@ -4,6 +4,7 @@ const generalErrorKeys = [
   "NotFoundError",
   "UnknownError",
   "error",
+  "Error",
 ];
 
 const GetErrorMsg = (error: any, title: string = "") => {
@@ -16,7 +17,8 @@ const GetErrorMsg = (error: any, title: string = "") => {
   if (!Object?.keys(messages)?.length) return "";
 
   if (title === "general") {
-    return messages?.error;
+    const generalError = generalErrorKeys.find((key) => messages[key]);
+    return messages[generalError || "error"];
   }
 
   if (messages[title]) return messages[title]?.join(", ");

@@ -3,6 +3,8 @@ const ROUTES = {
   AUTH: {
     LOGIN: "/auth/login",
     SIGNUP: "/auth/signup",
+    VERIFY_PHONE: "/auth/verify-phone",
+    MAKE_HOME: "/auth/make-home",
     FORGOT_PASSWORD: "/auth/forgot-password",
     RESET_PASSWORD: "/auth/reset-password",
     CONFIRM: "/auth/confirm",

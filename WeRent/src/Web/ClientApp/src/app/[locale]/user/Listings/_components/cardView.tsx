@@ -1,7 +1,7 @@
 import ListIcon from "@/src/assets/icons/list";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import OneCardView from "./oneCardView";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
@@ -10,8 +10,9 @@ import ArrowRightIcon from "@/src/assets/icons/ArrowRight";
 interface CardViewProps {
   title: string;
   first?: boolean;
+  data: any[];
 }
-function CardView({ title, first = false }: CardViewProps) {
+function CardView({ title, first = false, data = [] }: CardViewProps) {
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
 
@@ -24,35 +25,45 @@ function CardView({ title, first = false }: CardViewProps) {
     }
   };
   return (
-    <div className="swiperList pt-14 pb-16border-t border-black first-of-type:border-none first-of-type:pt-0">
+    <div className="swiperList mb-section">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-5">
           <h2 className="text-2xl lg:text-[32px] font-Bold">{title}</h2>
           {first && (
             <Link
               href={`${ROUTES.USER.LISTINGS}?list=true`}
-              className="px-3 duration-300 hover:shadow-md w-fit py-2 rounded-xl border border-black flex items-center justify-center gap-2"
+              className="px-3 duration-300 hover:shadow-md w-fit py-2 rounded-xl border border-black hidden mdl:flex items-center justify-center gap-2"
             >
               <ListIcon />
               <p className="lg:text-[16px] text-sm">List View</p>
             </Link>
           )}
         </div>
-        <Link href={ROUTES.USER.LISTINGS} className=" underline text-lg font-medium">View all</Link>
+        <Link
+          href={ROUTES.USER.LISTINGS}
+          className=" underline text-lg font-medium"
+        >
+          View all
+        </Link>
       </div>
-      <div className=" relative w-full">
-        <div className="max-w-full lgl:max-w-[calc(100%-80px)] my-4 relative flex-wrap-reverse flex items-center">
+      <div className=" relative w-full flex items-center">
+      <div className=" my-4 w-full xl:max-w-[calc(100%-80px)]">
           <Swiper
             onSwiper={handleSwiper}
             slidesPerView={1.1}
-            spaceBetween={18}
+            spaceBetween={10}
             navigation={{
               prevEl: prevRef.current,
               nextEl: nextRef.current,
             }}
             breakpoints={{
+              0: {
+                slidesPerView: 1.05,
+                spaceBetween: 10,
+              },
               450: {
                 slidesPerView: 1.5,
+                spaceBetween: 10,
               },
               600: {
                 slidesPerView: 2,
@@ -69,21 +80,11 @@ function CardView({ title, first = false }: CardViewProps) {
             modules={[Navigation]}
             className={"mySwiper "}
           >
-            <SwiperSlide>
-              <OneCardView />
-            </SwiperSlide>
-            <SwiperSlide>
-              <OneCardView />
-            </SwiperSlide>
-            <SwiperSlide>
-              <OneCardView />
-            </SwiperSlide>
-            <SwiperSlide>
-              <OneCardView />
-            </SwiperSlide>
-            <SwiperSlide>
-              <OneCardView />
-            </SwiperSlide>
+            {data.map((item, index) => (
+              <SwiperSlide key={index}>
+                <OneCardView data={item} />
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
         <div className="lgl:flex hidden gap-3  absolute top-1/2 -translate-y-1/2 right-0">
