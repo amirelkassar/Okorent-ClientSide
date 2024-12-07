@@ -11,7 +11,6 @@ import "./globals.css";
 import { MantineProvider } from "@mantine/core";
 import ReactQueryConfig from "@/src/config/react-query-config";
 import { TokenProvider } from "@/src/hooks/use-token";
-import { getToken } from "@/src/lib/token";
 import { Toaster } from "react-hot-toast";
 import { authDecodedToken } from "@/token";
 

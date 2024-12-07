@@ -8,7 +8,7 @@ import { useUserEdit } from "./_hooks/use-user-edit";
 import Button from "@/src/components/button";
 import DoneAuth from "./_components/doneAuth";
 const dataAvatar = [avatar1, avatar1, avatar1, avatar1];
-function page() {
+function Page() {
   const [active, setActive] = useState(0);
   const { form, status } = useUserEdit();
   const { setFormData,  onSubmit, data: formData, error, Done } = form;
@@ -118,4 +118,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

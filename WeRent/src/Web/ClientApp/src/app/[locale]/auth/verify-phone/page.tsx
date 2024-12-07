@@ -9,7 +9,7 @@ import { useSearchParams } from "next/navigation";
 import { useRouter } from "@/src/navigation";
 import GetErrorMsg from "@/src/components/getErrorMsg";
 
-function page() {
+function Page() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { form } = useVerifyPhone();
@@ -85,4 +85,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

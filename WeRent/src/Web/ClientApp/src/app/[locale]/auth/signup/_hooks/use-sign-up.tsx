@@ -1,5 +1,4 @@
 "use client";
-
 import { useCallback, useState } from "react";
 import ROUTES from "@/src/routes";
 import { useCreateAccountMutation } from "@/src/hooks/queries/auth";
