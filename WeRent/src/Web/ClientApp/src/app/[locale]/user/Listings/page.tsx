@@ -43,7 +43,7 @@ function Page() {
               data={ListingsData.filter((item) => item.status === true)}
             />
             <CardView
-              title={"Ofline"}
+              title={"Offline"}
               data={ListingsData.filter((item) => item.status === false)}
             />
           </div>

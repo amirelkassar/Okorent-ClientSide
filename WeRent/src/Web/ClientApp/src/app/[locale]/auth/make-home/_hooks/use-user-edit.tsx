@@ -39,11 +39,11 @@ export const useUserEdit = (): UserEditReturn => {
     isPaused,
     isError,
     reset,
-  } = useUserEditMutation(user?.id);
+  } = useUserEditMutation();
 
   const onSubmit = useCallback(async () => {
     const requestData = new FormData();
-    Object.entries({ ...formData, ...user }).forEach(([key, value]) => {
+    Object.entries({ ...formData, ...user,OldPassword:user.Password }).forEach(([key, value]) => {
       if (value !== null) {
         requestData.append(key, value as any); // Append each field
       }

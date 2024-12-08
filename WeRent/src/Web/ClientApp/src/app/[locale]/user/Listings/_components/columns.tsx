@@ -1,14 +1,11 @@
 "use client";
-import DeleteIcon from "@/src/assets/icons/delete";
-import EditIcon from "@/src/assets/icons/edit";
-import { ActionIcon } from "@mantine/core";
 import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
 import phoneImg from "@/src/assets/images/phone.png";
 import CardStatus from "@/src/components/cardStatus";
-import BtnBarcode from "./btnBarcode";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
+import ActionMenu from "./action-menu";
 
 export type RequestsTableData = {
   id: number;
@@ -98,13 +95,7 @@ export const columns: ColumnDef<RequestsTableData>[] = [
       const id = row.original.id;
       return (
         <div className="flex items-center gap-3 w-fit">
-          <BtnBarcode />
-          <Link href={ROUTES.USER.LISTINGSDETAILS(id) + "/edit"}>
-            <EditIcon className="w-5 h-auto" />
-          </Link>
-          <ActionIcon variant="transparent">
-            <DeleteIcon className="w-5 h-auto" />
-          </ActionIcon>
+          <ActionMenu id={id} />
         </div>
       );
     },

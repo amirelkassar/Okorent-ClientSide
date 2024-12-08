@@ -31,7 +31,7 @@ function DoneAuth({ done }: DoneProps) {
             {" "}
             Ready to rent and lease some cool items?
           </p>
-          <LinkGreen href={ROUTES.AUTH.LOGIN} className="px-10 w-fit mt-8">
+          <LinkGreen href={ROUTES.USER.HOMEPAGE} className="px-10 w-fit mt-8">
             Let’s Go
           </LinkGreen>
         </div>

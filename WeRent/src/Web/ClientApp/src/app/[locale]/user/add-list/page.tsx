@@ -1,8 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Step from "./_components/step";
-import { Checkbox, Select, Textarea, TextInput } from "@mantine/core";
-import DownIcon from "@/src/assets/icons/down";
+import { Checkbox } from "@mantine/core";
 import DropImg from "@/src/components/DropImg";
 import Button from "@/src/components/button";
 import StepLocation from "./_components/stepLocation";
@@ -14,8 +13,11 @@ import { useSearchParams } from "next/navigation";
 import InputTextarea from "@/src/components/InputTextarea";
 import {
   GetCategory,
+  GetSubCategory,
   useCreateListingMutation,
 } from "@/src/hooks/queries/user/add-lisiting";
+import SelectInput from "@/src/components/select-input";
+import Input from "@/src/components/input";
 
 interface LocationProps {
   id: number;
@@ -75,11 +77,16 @@ function Page() {
     setDataList({ ...dataList, FAQ: newFaqs });
   };
   const { data: dataCategory } = GetCategory();
-  console.log(dataCategory);
+  const { data: dataSubCategory, refetch: RefetchGetSubCategory } =
+    GetSubCategory(dataList?.CategoryId);
+  console.log(dataSubCategory);
   const { mutateAsync: createListing } = useCreateListingMutation();
   const handleSubmit = async () => {
     await createListing(dataList);
   };
+  useEffect(() => {
+    RefetchGetSubCategory();
+  }, [dataList?.CategoryId]);
   return (
     <div
       className={`"w-full  ${
@@ -91,27 +98,28 @@ function Page() {
       ) : (
         <div className="w-full">
           <Step title="Choose item category" active stepNum={1}>
-            <Select
+            <SelectInput
               data={dataCategory?.data?.map((item: any) => {
                 return { label: item.name, value: item.id };
               })}
-              leftSectionPointerEvents="none"
-              rightSection={<DownIcon />}
               placeholder="Select category"
-              searchable
               onChange={(e) => {
                 setDataList({ ...dataList, CategoryId: e });
               }}
-              classNames={{
-                input:
-                  " text-black rounded-2xl text-grayMedium  h-full border border-green/30 focus:border-green active:border-green placeholder:text-grayMedium placeholder:opacity-100 ",
-
-                wrapper: "h-full",
-                dropdown:
-                  "bg-white text-black rounded-2xl border border-green/50 text-grayDark py-2",
-                option: "hover:bg-green hover:text-white duration-300 ",
+              inputClassName="!rounded-2xl text-grayMedium  !h-16 "
+              className=" bg-white "
+            />
+            <SelectInput
+              label="Select SubCategory"
+              data={dataSubCategory?.data?.map((item: any) => {
+                return { label: item.name, value: item.id };
+              })}
+              placeholder="Select SubCategory"
+              onChange={(e) => {
+                setDataList({ ...dataList, SubCategoryId: e });
               }}
-              className="h-[64px]   duration-200 min-h-[64px] bg-white rounded-2xl  text-grayMedium"
+              inputClassName="!rounded-2xl text-grayMedium  !h-16 "
+              className="mt-4"
             />
           </Step>
           <Step
@@ -119,30 +127,22 @@ function Page() {
             active={dataList?.CategoryId ? true : false}
             stepNum={2}
           >
-            <TextInput
+            <Input
               placeholder="Add item title here"
               onChange={(e) => {
                 setDataList({
                   ...dataList,
                   Name: e.target.value,
-                 
                 });
               }}
-              classNames={{
-                input:
-                  " text-black rounded-2xl text-grayMedium  h-full border border-green/30 focus:border-green active:border-green placeholder:text-grayMedium placeholder:opacity-100 ",
-                wrapper: "h-full",
-              }}
-              className="h-[64px] mb-6 duration-200 min-h-[64px] bg-white rounded-2xl  text-grayMedium"
+              inputClassName="  !rounded-2xl   bg-white !h-16 border"
+              className=" mb-6 "
             />
             <InputTextarea
               onChange={(e) => {
                 setDataList({
                   ...dataList,
-                  Describe: {
-                    ...dataList.Describe,
-                    dec: e.target.value,
-                  },
+                  Description: e.target.value,
                 });
               }}
               autosize
@@ -151,7 +151,7 @@ function Page() {
           </Step>
           <Step
             title="Upload item pictures here"
-            active={dataList.Name && dataList.Describe?.dec}
+            active={dataList.Name && dataList.Description}
             stepNum={3}
             dec="You can upload up to 8 images"
           >
@@ -170,7 +170,7 @@ function Page() {
             dec="Try to add lower price for longer bookings"
           >
             <div className="flex items-center flex-wrap gap-4">
-              <TextInput
+              <Input
                 name="name"
                 label={"Price for 3 Days"}
                 placeholder={"Add Price Here"}
@@ -180,15 +180,11 @@ function Page() {
                     DailyPrice: e.target.value,
                   });
                 }}
-                classNames={{
-                  label: "text-sm lg:text-[16px] text-grayMedium mb-2",
-                  input:
-                    " text-black md:max-w-[200px] rounded-2xl text-grayMedium bg-white  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
-                  wrapper: "h-[64px]",
-                }}
-                className=" flex-1 min-w-[170px] w-full  duration-200 md:max-w-[200px] min-h-[64px] rounded-2xl text-grayMedium"
+                inputClassName="  w-full !rounded-2xl bg-white  border-2   h-16  "
+                labelClassName="text-sm lg:text-[16px]  mb-2 text-grayMedium"
+                className=" flex-1 min-w-[170px] w-full  md:max-w-[200px] "
               />
-              <TextInput
+              <Input
                 label={"Price for 1 Week"}
                 name="attribute1"
                 placeholder={"Add Price Here"}
@@ -198,15 +194,11 @@ function Page() {
                     WeeklyPrice: e.target.value,
                   });
                 }}
-                classNames={{
-                  label: "text-sm lg:text-[16px] text-grayMedium mb-2",
-                  input:
-                    " text-black md:max-w-[200px] rounded-2xl text-grayMedium bg-white  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
-                  wrapper: "h-[64px]",
-                }}
-                className=" flex-1 min-w-[170px] w-full  duration-200 md:max-w-[200px] min-h-[64px] rounded-2xl text-grayMedium"
+                inputClassName="  w-full !rounded-2xl bg-white  border-2   h-16  "
+                labelClassName="text-sm lg:text-[16px]  mb-2 text-grayMedium"
+                className=" flex-1 min-w-[170px] w-full  md:max-w-[200px] "
               />
-              <TextInput
+              <Input
                 label={"Price for 1 Month"}
                 name="attribute2"
                 placeholder={"Add Price Here"}
@@ -216,13 +208,9 @@ function Page() {
                     MonthlyPrice: e.target.value,
                   });
                 }}
-                classNames={{
-                  label: "text-sm lg:text-[16px] text-grayMedium mb-2",
-                  input:
-                    " text-black md:max-w-[200px] rounded-2xl text-grayMedium bg-white  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
-                  wrapper: "h-[64px]",
-                }}
-                className=" flex-1 min-w-[170px] w-full  duration-200 md:max-w-[200px] min-h-[64px] rounded-2xl text-grayMedium"
+                inputClassName="  w-full !rounded-2xl bg-white  border-2   h-16  "
+                labelClassName="text-sm lg:text-[16px]  mb-2 text-grayMedium"
+                className=" flex-1 min-w-[170px] w-full  md:max-w-[200px] "
               />
             </div>
           </Step>
@@ -249,17 +237,13 @@ function Page() {
             }
             stepNum={6}
           >
-            <TextInput
+            <Input
               onChange={(e) => {
                 setDataList({ ...dataList, value: e.target.value });
               }}
               placeholder="Add item value here"
-              classNames={{
-                input:
-                  " text-black text-sm lg:text-base rounded-2xl text-grayMedium  h-full border-none placeholder:text-grayMedium placeholder:opacity-100 ",
-                wrapper: "h-full",
-              }}
-              className="h-[64px] mb-6 duration-200 min-h-[64px] bg-white rounded-2xl border-2 border-green text-grayMedium"
+              inputClassName="!rounded-2xl bg-white  !h-16 border-2 "
+              className="mb-6 "
             />
           </Step>
           <StepAvailability dataList={dataList} setDataList={setDataList} />
@@ -272,17 +256,13 @@ function Page() {
             }
             stepNum={8}
           >
-            <TextInput
+            <Input
               placeholder="Add available stock number here"
               onChange={(e) => {
                 setDataList({ ...dataList, Stock: e.target.value });
               }}
-              classNames={{
-                input:
-                  " text-black rounded-2xl text-grayMedium  h-full  border border-green/30 focus:border-green active:border-green placeholder:text-grayMedium placeholder:opacity-100 ",
-                wrapper: "h-full",
-              }}
-              className="h-[64px] mb-6 duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
+               inputClassName="!rounded-2xl bg-white  !h-16 border-2 "
+              className="mb-6 "
             />
           </Step>
           <Step title="Item Status" active={dataList.Stock} stepNum={9}>

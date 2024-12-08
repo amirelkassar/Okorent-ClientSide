@@ -2,6 +2,7 @@ export const user = {
   addListing: {
     base: "/Product",
     category: "/Category",
+    subCategory_by_category: (id:any) => `/SubCategory/by-parent/${id}`,
   },
   register: {
     base: "/User/register",
@@ -12,6 +13,6 @@ export const user = {
   },
   information: {
     base: (id: any) => `/User/${id}`,
-    user_edit: (id: any) => `/User/${id}`,
+    user_edit:  `/User`,
   },
 };

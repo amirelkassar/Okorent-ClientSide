@@ -34,7 +34,7 @@ interface SignUpReturn {
 }
 export const useSignUp = (): SignUpReturn => {
   const router = useRouter();
-  const { setUser } = useUserStore(); 
+  const { setUser } = useUserStore();
   const [formData, setFormData] = useState<FormDataProps>({
     Name: "",
     Email: "",
@@ -77,18 +77,17 @@ export const useSignUp = (): SignUpReturn => {
       onSuccess: (res) => {
         console.log(res);
         console.log(formData);
-        setUser(formData);
+        if (res?.code === 200) {
+          setUser({ ...formData, id: res?.data?.id });
+          router.replace(
+            ROUTES.AUTH.VERIFY_PHONE + `?phone_number=${formData.PhoneNumber}`
+          );
+        }
       },
 
       onError: (error) => {
         console.log("error");
         console.log(error);
-        if (error?.response?.data?.code === 200) {
-          setUser({...formData, id: error?.response?.data?.data?.id});
-          router.replace(
-            ROUTES.AUTH.VERIFY_PHONE + `?phone_number=${formData.PhoneNumber}`
-          );
-        }
       },
     });
   }, [CreateAccount, formData, router]);

@@ -1,7 +1,7 @@
 import { api } from "@/src/api/axios";
 import { user } from "@/src/api/user";
 import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
-export const initialQueryKey = "user.addListing";
+export const initialQueryKey = "user.productsAll";
 
 //getAllProducts
 export const GetProductsAll = () => {
@@ -14,22 +14,6 @@ export const GetProductsAll = () => {
     },
   });
 };
-
-
-export const getComplaints = async () =>
-  (await api.get(user.product.base))
-    .data;
-
-export const prefetchComplaints = async () => {
-  const queryClient = new QueryClient();
-
-  await queryClient.prefetchQuery({
-    queryKey: [initialQueryKey],
-    queryFn: () => getComplaints(),
-  });
-
-  return queryClient;
-}
 
 
 

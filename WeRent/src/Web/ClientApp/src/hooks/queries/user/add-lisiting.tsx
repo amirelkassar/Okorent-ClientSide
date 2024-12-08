@@ -10,7 +10,20 @@ export const GetCategory = () => {
   return useQuery({
     queryKey: [initialQueryKey],
     queryFn: async () => {
-      const response = await api.get(user.addListing.category);
+      const response = await api.get(user.addListing.category+'?CategoryType=Category');
+      return response.data;
+    },
+  });
+};
+export const GetSubCategory = (id: any) => {
+  const queryClient = useQueryClient();
+
+  return useQuery({
+    queryKey: [initialQueryKey, id],
+    queryFn: async () => {
+      const response = await api.get(
+        user.addListing.subCategory_by_category(id)
+      );
       return response.data;
     },
   });

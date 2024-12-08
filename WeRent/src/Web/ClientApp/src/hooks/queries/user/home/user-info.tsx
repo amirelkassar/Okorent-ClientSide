@@ -17,11 +17,11 @@ export const GetUserInfo = (id: any) => {
   });
 };
 //edit user
-export const useUserEditMutation = (id: any) => {
+export const useUserEditMutation = () => {
   const router = useRouter();
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await api.put(user.information.user_edit(id), data, {
+      const response = await api.put(user.information.user_edit, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -30,7 +30,7 @@ export const useUserEditMutation = (id: any) => {
     },
     onSuccess: (res) => {
       console.log(res);
-      storeToken(res);
+      
     },
     onError: () => {},
   });

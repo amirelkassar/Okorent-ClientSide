@@ -8,7 +8,7 @@ interface SelectInputProps extends Omit<MantineSelectProps, "classNames"> {
 }
 const SelectInput: React.FC<SelectInputProps> = ({
   data,
-  label = "Select an option",
+  label = "",
   placeholder = "Choose...",
   inputClassName = "",
   labelClassName = "",
@@ -30,7 +30,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
         dropdown: `bg-white text-black rounded-xl border border-green/50 text-grayDark py-2`,
         option: `hover:bg-green hover:text-white duration-300`,
       }}
-      className={`   duration-200 min-h-[64px] h-auto bg-white rounded-2xl  text-grayMedium ${className}`}
+      className={`   duration-200 min-h-[64px] h-auto  rounded-2xl  text-grayMedium ${className}`}
       {...props}
     />
   );

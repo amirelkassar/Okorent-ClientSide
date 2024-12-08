@@ -47,7 +47,7 @@ function CardView({ title, first = false, data = [] }: CardViewProps) {
         </Link>
       </div>
       <div className=" relative w-full flex items-center">
-      <div className=" my-4 w-full xl:max-w-[calc(100%-80px)]">
+        <div className=" my-4 w-full xl:max-w-[calc(100%-80px)]">
           <Swiper
             onSwiper={handleSwiper}
             slidesPerView={1.1}
@@ -82,7 +82,7 @@ function CardView({ title, first = false, data = [] }: CardViewProps) {
           >
             {data.map((item, index) => (
               <SwiperSlide key={index}>
-                <OneCardView data={item} />
+                <OneCardView data={item} offline={title === "Offline"} />
               </SwiperSlide>
             ))}
           </Swiper>
