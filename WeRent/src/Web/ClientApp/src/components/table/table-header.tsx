@@ -39,7 +39,7 @@ export const TableHeader: React.FC<TableHeaderProps> & {
 };
 
 const First: React.FC<FirstProps> = ({ children, functionSelect,title }) => (
-  <div className="flex items-center space-x-4 flex-1">
+  <div className="flex items-center space-x-4 lg:flex-1">
    {title && <h2 className="headTitle mdl:min-h-10 text-nowrap">{title}</h2>}
     {children}
     {functionSelect &&
@@ -54,7 +54,7 @@ const Middle: React.FC<SectionProps> = ({ children }) => (
 );
 
 const Last: React.FC<LastProps> = ({ children, options }) => (
-  <div className="flex items-center gap-4 flex-wrap flex-1  lg:justify-end">
+  <div className="flex items-center gap-4 flex-wrap w-fit lg:flex-1  justify-end">
     <TableFilter data={options} />
     {children}
   </div>
