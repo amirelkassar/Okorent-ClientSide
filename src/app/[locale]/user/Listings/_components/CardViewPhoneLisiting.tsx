@@ -3,14 +3,12 @@ import React from "react";
 import phoneImg from "@/src/assets/images/phone.png";
 import Image from "next/image";
 import CardStatus from "@/src/components/cardStatus";
-import { Menu, Popover } from "@mantine/core";
+import { Popover } from "@mantine/core";
 import DeleteIcon from "@/src/assets/icons/delete";
 import DotsIcon from "@/src/assets/icons/dots";
 import EditIcon from "@/src/assets/icons/edit";
-import BarcodeIcon from "@/src/assets/icons/barcode";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
-import BtnBarcode from "./btnBarcode";
 interface PhoneProps {
   id: number;
   phone: string;
@@ -51,9 +49,6 @@ function CardViewPhoneListing({ dataCard }: CardDataProps) {
                     Edit
                   </p>
                 </Link>
-                <div className="py-1 px-2  ">
-                  <BtnBarcode title=" Bar Code" />
-                </div>
               </div>
             </Popover.Dropdown>
           </Popover>
