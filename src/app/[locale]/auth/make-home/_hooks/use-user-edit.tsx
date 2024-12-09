@@ -49,7 +49,7 @@ export const useUserEdit = (): UserEditReturn => {
       }
     });
     Toast.Promise(CreateAccount(requestData), {
-      success: "تم التسجيل بنجاج",
+      success: "Successfully registered",
       onSuccess: (res) => {
         console.log(res);
         setDone(true);

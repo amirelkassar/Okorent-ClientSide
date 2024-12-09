@@ -7,6 +7,7 @@ export const auth = {
   register: {
     base: "/Auth/register",
     verify_phone: "/Auth/verify-phone",
+    resend_otp: "/Auth/reset-phone",
    
   },
 };

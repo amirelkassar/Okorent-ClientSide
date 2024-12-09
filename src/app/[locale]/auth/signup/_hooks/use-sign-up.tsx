@@ -73,7 +73,7 @@ export const useSignUp = (): SignUpReturn => {
       }
     });
     Toast.Promise(CreateAccount(requestData), {
-      success: "تم التسجيل بنجاج",
+      success: "Successfully registered",
       onSuccess: (res) => {
         console.log(res);
         console.log(formData);

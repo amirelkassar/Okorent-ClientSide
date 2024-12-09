@@ -1,7 +1,7 @@
 import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function FavIcon({ className = "" }: IconProps) {
+function FavIcon({ className = "", fill = "" }: IconProps) {
   return (
     <svg
       width="20"

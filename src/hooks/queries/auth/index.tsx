@@ -5,6 +5,7 @@ import { useRouter } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import { authDecodedToken, decodedToken } from "@/token";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useToken } from "../../use-token";
 
 export const useLogout = () => {
   const router = useRouter();
@@ -30,7 +31,7 @@ export const initialQueryKey = "auth.login";
 
 export const useLoginMutation = () => {
   const router = useRouter();
-
+  const { setToken } = useToken();
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -38,16 +39,10 @@ export const useLoginMutation = () => {
       const response = await api.post(auth.login.base, data, {});
       return response.data;
     },
-    onSuccess: (res) => {
+    onSuccess: async (res) => {
       console.log(res);
       storeToken(res?.data);
-      console.log(
-        authDecodedToken().then((res) => {
-          if (res?.userEmail) {
-            router.push(ROUTES.USER.HOMEPAGE);
-          }
-        })
-      );
+      setToken(await authDecodedToken());
     },
     onError: () => {
       clearToken();
@@ -104,4 +99,21 @@ export const useVerifyPhoneMutation = () => {
   });
 };
 
+export const useReSendOTP = () => {
+  const queryClient = useQueryClient();
 
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.post(auth.register.resend_otp, data, {
+        headers: {},
+      });
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+    },
+    onError: (req) => {
+      console.log(req);
+    },
+  });
+};

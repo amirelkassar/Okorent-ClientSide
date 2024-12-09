@@ -15,7 +15,6 @@ import SupportIcon from "@/src/assets/icons/Support";
 import ClientsIcon from "@/src/assets/icons/Clients";
 import PricingIcon from "@/src/assets/icons/pricing";
 import HowIcon from "@/src/assets/icons/how";
-import AddIcon from "@/src/assets/icons/add";
 import LoginIcon from "@/src/assets/icons/login";
 
 function NavLinks() {
@@ -40,13 +39,6 @@ function NavLinks() {
           pathname === ROUTES.GUEST.PRODUCTSDETAILS(params.productID),
       },
 
-      {
-        id: 2,
-        name: "Add a listing",
-        icon: <AddIcon />,
-        url: ROUTES.GUEST.ADDLISTING,
-        active: pathname.includes(ROUTES.GUEST.ADDLISTING),
-      },
       {
         id: 3,
         name: "Who we are",

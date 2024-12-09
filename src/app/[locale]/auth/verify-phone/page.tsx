@@ -13,7 +13,7 @@ function Page() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { form } = useVerifyPhone();
-  const { setFormData, onSubmit, error } = form;
+  const { setFormData, onSubmit,onSubmitReSendOTP, error } = form;
 
   return (
     <div className="flex-1 pt-4   pb-8 md:pb-16  flex  min-h-full justify-center lgl:justify-start">
@@ -54,7 +54,7 @@ function Page() {
                 {GetErrorMsg(error, "general")}
               </p>
             )}
-            <TimerOtp />
+            <TimerOtp onSubmitReSendOTP={onSubmitReSendOTP} />
 
             <div
               className={

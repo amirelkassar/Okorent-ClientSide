@@ -36,6 +36,7 @@ export const useLogin = (): SignUpReturn => {
     password: "",
   });
 
+
   const {
     mutateAsync: Login,
     error,
@@ -61,8 +62,11 @@ export const useLogin = (): SignUpReturn => {
 
   const onSubmit = useCallback(async () => {
     Toast.Promise(Login(formData), {
-      success: "تم الدخول بنجاج",
-      onSuccess: () => {
+      success: "successfully logged in",
+      onSuccess: (res) => {
+        console.log(res);
+
+        //setToken(await authDecodedToken());
         router.replace(ROUTES.USER.HOMEPAGE);
       },
     });

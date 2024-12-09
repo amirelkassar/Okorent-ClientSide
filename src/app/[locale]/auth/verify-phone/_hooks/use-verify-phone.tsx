@@ -1,10 +1,9 @@
 "use client";
 import { useCallback, useState } from "react";
 import ROUTES from "@/src/routes";
-import { useVerifyPhoneMutation } from "@/src/hooks/queries/auth";
+import { useReSendOTP, useVerifyPhoneMutation } from "@/src/hooks/queries/auth";
 import { useRouter } from "@/src/navigation";
 import { Toast } from "@/src/components/toast";
-import { useUserStore } from "@/src/store/sign-up-store";
 import { useToken } from "@/src/hooks/use-token";
 import { authDecodedToken } from "@/token";
 
@@ -18,7 +17,9 @@ interface FormDataProps {
 interface FormProps {
   setFormData: React.Dispatch<React.SetStateAction<FormDataProps>>;
   onSubmit: () => void;
+  onSubmitReSendOTP: () => void;
   error: any; // You can replace 'any' with a more specific type based on your error structure
+  errorReSend: any;
 }
 
 // Define the type for the status state
@@ -32,8 +33,10 @@ interface VerifyPhoneReturn {
 }
 export const useVerifyPhone = (): VerifyPhoneReturn => {
   const router = useRouter();
-  const [formData, setFormData] = useState({});
-  const { setUser } = useUserStore();
+  const [formData, setFormData] = useState<FormDataProps>({
+    otp: "",
+    phoneNumber: null,
+  });
   const { setToken } = useToken();
 
   const {
@@ -43,10 +46,23 @@ export const useVerifyPhone = (): VerifyPhoneReturn => {
     isError,
     reset,
   } = useVerifyPhoneMutation();
+  const { mutateAsync: ReSendOTP, error: errorReSend } = useReSendOTP();
 
+  const onSubmitReSendOTP = useCallback(async () => {
+    Toast.Promise(ReSendOTP({ phone: formData.phoneNumber }), {
+      success: "OTP sent successfully",
+      onSuccess: async (res) => {
+        console.log(res);
+      },
+      onError: (error) => {
+        console.log("error");
+        console.log(error);
+      },
+    });
+  }, [ReSendOTP]);
   const onSubmit = useCallback(async () => {
     Toast.Promise(VerifyPhone(formData), {
-      success: "تم التسجيل بنجاج",
+      success: "OTP sent successfully",
       onSuccess: async (res) => {
         console.log(res);
         setToken(await authDecodedToken());
@@ -55,7 +71,6 @@ export const useVerifyPhone = (): VerifyPhoneReturn => {
       onError: (error) => {
         console.log("error");
         console.log(error);
-        setUser({});
       },
     });
   }, [VerifyPhone, formData, router]);
@@ -63,7 +78,9 @@ export const useVerifyPhone = (): VerifyPhoneReturn => {
   const form: FormProps = {
     setFormData,
     onSubmit,
+    onSubmitReSendOTP,
     error,
+    errorReSend,
   };
 
   const status = {

@@ -111,7 +111,7 @@ const Submit = (
     loading: (
       <div className="flex flex-col items-center gap-2 *:shrink-0 relative">
         <p className="text-xs mdl:text-base font-medium">
-          {options.loading || "جاري الارسال"}
+          {options.loading || "Sending Request"}
         </p>
       </div>
     ),
@@ -119,9 +119,8 @@ const Submit = (
       if (options?.onSuccess) options?.onSuccess(res);
       return (
         <div className="flex items-center gap-5 *:shrink-0 relative">
-          <TrueGreenIcon className="text-greenMain" />
           <p className="text-xs mdl:text-base font-medium">
-            {options.success || "تم الارسال بنجاح"}
+            {options.success || "Operation Finished Successfully!"}
           </p>
         </div>
       );
@@ -132,7 +131,7 @@ const Submit = (
       return (
         <div className="flex items-center gap-5 *:shrink-0 relative">
           <p className="text-xs mdl:text-base font-medium">
-            {generalError || options.error || "حدث خطأ ما"}
+            {generalError || options.error || "Request failed"}
           </p>
         </div>
       );

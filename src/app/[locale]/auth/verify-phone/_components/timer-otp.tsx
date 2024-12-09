@@ -1,10 +1,12 @@
-'use client'
+"use client";
 import Timer from "@/src/components/timer";
 import React, { useState } from "react";
-
-function TimerOtp() {
-    const [seconds, setSeconds] = useState(60);
-    const [start, setStart] = useState(false);
+interface TimerOtpProps {
+  onSubmitReSendOTP: () => void;
+}
+function TimerOtp({ onSubmitReSendOTP }: TimerOtpProps) {
+  const [seconds, setSeconds] = useState(60);
+  const [start, setStart] = useState(true);
   return (
     <div className="flex items-center  py-5">
       <h3 className="flex items-center flex-wrap gap-1 font-Light">
@@ -25,6 +27,9 @@ function TimerOtp() {
           <button
             onClick={(e) => {
               e.preventDefault();
+              onSubmitReSendOTP();
+              setSeconds(60);
+              setStart(true);
               console.log("send agin");
             }}
             className="text-blue font-Bold"

@@ -8,19 +8,15 @@ import Input from "@/src/components/input";
 import Logo from "@/src/components/logo";
 import Password from "@/src/components/password";
 import ROUTES from "@/src/routes";
-import React, { useContext } from "react";
+import React from "react";
 import { useLogin } from "./_hooks/use-login";
 import { Link } from "@/src/navigation";
-import { TokenContext } from "@/src/hooks/use-token";
-import { authDecodedToken } from "@/token";
 
 function PageLogin() {
   const { form, status } = useLogin();
   // Destructure the form and status objects
   const {onChange, onSubmit, error } = form;
   const { isPaused, isError } = status;
-  const value = useContext(TokenContext);
-  console.log(value);
 
   return (
     <div className="flex-1 pt-4 lgl:pt-20  pb-8 md:pb-16  flex  min-h-full justify-center lgl:justify-start">
