@@ -116,9 +116,11 @@ export function DataTable<TData extends { id: any }, TValue>({
 
   return (
     <div>
-      <div className="flex items-center justify-between gap-6 flex-wrap mb-8">
+      <div className="flex items-center justify-between gap-6 flex-wrap ">
         <div className="flex items-center gap-3 mdl:gap-5 flex-wrap">
-          <h2 className="headTitle mdl:min-h-10 text-nowrap">{title}</h2>
+          {title && (
+            <h2 className="headTitle mdl:min-h-10 text-nowrap">{title}</h2>
+          )}
           {cardView && (
             <Link
               href={cardView}
@@ -128,31 +130,34 @@ export function DataTable<TData extends { id: any }, TValue>({
               <p>Card View</p>
             </Link>
           )}
-          {}
-          <div className="flex items-center gap-3 flex-wrap">
-            {selectedUsers.size > 0 ? (
-              functionSelect ? (
-                functionSelect.map((item, index) => {
-                  return <Events key={index} item={item} ids={selectedUsers} />;
-                })
-              ) : (
-                <>
-                  <div className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
-                    <TrueIcon />
-                    <p className="text-blue text-[14px]">Verify</p>
-                  </div>
-                  <div className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
-                    <ExportIcon />
-                    <p className="text-blue text-[14px]">Export</p>
-                  </div>
-                  <div className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
-                    <DeleteIcon className="h-[14px] w-auto" />
-                    <p className="text-red text-[14px]">Delete</p>
-                  </div>
-                </>
-              )
-            ) : null}
-          </div>
+          {selectedUsers.size > 0 ? (
+            <>
+              <div className={`flex items-center gap-3 flex-wrap mb-5`}>
+                {functionSelect ? (
+                  functionSelect.map((item, index) => {
+                    return (
+                      <Events key={index} item={item} ids={selectedUsers} />
+                    );
+                  })
+                ) : (
+                  <>
+                    <div className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
+                      <TrueIcon />
+                      <p className="text-blue text-[14px]">Verify</p>
+                    </div>
+                    <div className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
+                      <ExportIcon />
+                      <p className="text-blue text-[14px]">Export</p>
+                    </div>
+                    <div className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
+                      <DeleteIcon className="h-[14px] w-auto" />
+                      <p className="text-red text-[14px]">Delete</p>
+                    </div>
+                  </>
+                )}
+              </div>
+            </>
+          ) : null}
         </div>
         {haveRentSwitch && <RentSwitch typeUser="user" />}
         {viewAll && (

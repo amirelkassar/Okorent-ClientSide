@@ -9,21 +9,30 @@ import { Tile as TileLayer, Vector as VectorLayer } from "ol/layer";
 import VectorSource from "ol/source/Vector";
 import Circle from "ol/geom/Circle";
 import Feature from "ol/Feature";
-import MarkerIcon from "@/src/assets/images/location.png"; 
+import MarkerIcon from "@/src/assets/images/location.png";
 import Point from "ol/geom/Point";
 import { Slider } from "@mantine/core";
+import { fetchLocationDetails } from "../lib/utils";
 
 const MapOl: React.FC = () => {
   const mapElement = useRef<HTMLDivElement | null>(null);
-  const mapRef = useRef<Map | null>(null); 
-  const [selectedLocation, setSelectedLocation] = useState<number[]>([]); 
-  const [radius, setRadius] = useState<number>(500); 
+  const mapRef = useRef<Map | null>(null);
+  const [selectedLocation, setSelectedLocation] = useState<number[]>([]);
+  const [radius, setRadius] = useState<number>(500);
   console.log(selectedLocation);
+  useEffect(() => {
+    // Example usage
+    if (selectedLocation.length > 0) {
+      fetchLocationDetails(selectedLocation[1], selectedLocation[0])
+        .then((details) => console.log(details))
+        .catch((error) => console.error(error));
+    }
+  }, [selectedLocation]);
   console.log(radius);
   useEffect(() => {
     if (!mapRef.current && mapElement.current) {
       const initialView = new View({
-        center: fromLonLat([31.2357, 30.0444]), 
+        center: fromLonLat([31.2357, 30.0444]),
         zoom: 12,
       });
       mapRef.current = new Map({
@@ -38,7 +47,7 @@ const MapOl: React.FC = () => {
 
       mapRef.current.on("singleclick", function (evt) {
         const coords = toLonLat(evt.coordinate);
-        setSelectedLocation(coords); 
+        setSelectedLocation(coords);
       });
     }
   }, []);
@@ -49,15 +58,15 @@ const MapOl: React.FC = () => {
       });
       const iconStyle = new Style({
         image: new Icon({
-          src: MarkerIcon.src, 
+          src: MarkerIcon.src,
           scale: 1,
         }),
       });
       const circleGeometry = new Circle(fromLonLat(selectedLocation), radius);
-      const circleFeature = new Feature(circleGeometry); 
+      const circleFeature = new Feature(circleGeometry);
       const circleStyle = new Style({
         fill: new Fill({
-          color: "#88ba5247", 
+          color: "#88ba5247",
         }),
         stroke: new Stroke({
           color: "#88ba5247",

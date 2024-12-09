@@ -32,7 +32,7 @@ export const TableHeader: React.FC<TableHeaderProps> & {
   Last: React.FC<LastProps>;
 } = ({ children }) => {
   return (
-    <div className="flex items-center justify-between gap-6 flex-wrap mb-8">
+    <div className={`flex items-center justify-between gap-6 flex-wrap mb-8 `}>
       {children}
     </div>
   );

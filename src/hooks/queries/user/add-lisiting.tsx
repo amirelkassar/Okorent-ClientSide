@@ -6,7 +6,6 @@ export const initialQueryKey = "user.addListing";
 //getCategory
 export const GetCategory = () => {
   const queryClient = useQueryClient();
-
   return useQuery({
     queryKey: [initialQueryKey],
     queryFn: async () => {
@@ -17,7 +16,6 @@ export const GetCategory = () => {
 };
 export const GetSubCategory = (id: any) => {
   const queryClient = useQueryClient();
-
   return useQuery({
     queryKey: [initialQueryKey, id],
     queryFn: async () => {
@@ -31,7 +29,6 @@ export const GetSubCategory = (id: any) => {
 
 export const useCreateListingMutation = () => {
   const queryClient = useQueryClient();
-
   return useMutation({
     mutationFn: async (data: any) => {
       const response = await api.post(user.addListing.base, data, {

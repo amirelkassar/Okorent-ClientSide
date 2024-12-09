@@ -25,13 +25,13 @@ function CardView({ title, first = false, data = [] }: CardViewProps) {
     }
   };
   return (
-    <div className="swiperList mb-section">
-      <div className="flex items-center justify-between mb-6">
+    <div className="swiperList mb-4 lg:mb-section">
+      <div className="flex items-center justify-between mb-2 lg:mb-6">
         <div className="flex items-center gap-5">
           <h2 className="text-2xl lg:text-[32px] font-Bold">{title}</h2>
           {first && (
             <Link
-              href={`${ROUTES.USER.LISTINGS}?list=true`}
+              href={ROUTES.USER.LISTINGS}
               className="px-3 duration-300 hover:shadow-md w-fit py-2 rounded-xl border border-black hidden mdl:flex items-center justify-center gap-2"
             >
               <ListIcon />

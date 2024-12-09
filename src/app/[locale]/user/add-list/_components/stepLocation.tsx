@@ -8,8 +8,8 @@ import ModalComp from "@/src/components/modal-comp";
 import { useDisclosure } from "@mantine/hooks";
 import LocationIcon from "@/src/assets/icons/location";
 import GoogleMapLoc from "@/src/components/GoogleMap";
-import DeleteIcon from "@/src/assets/icons/delete";
 import ButtonDelete from "@/src/components/button-delete";
+import { GetMyStock } from "@/src/hooks/queries/user/lisitings/stock";
 
 interface LocationProps {
   id: number;
@@ -52,7 +52,12 @@ function StepLocation({
   const [indexSelect, setIndexSelect] = useState<number>(0);
 
   console.log(location[location.length - 1]?.id);
-
+  const { data } = GetMyStock();
+  console.log(data);
+  const formattedLocations = oldLocations.map((loc) => ({
+    value: loc.id, // Use the `id` as the value
+    label: loc.address, // Use the `address` as the label
+  }));
   return (
     <Step
       title="Where is the item storage location "
@@ -63,15 +68,20 @@ function StepLocation({
       <div>
         <div className="flex flex-col gap-5 lg:gap-6">
           <MultiSelect
-            data={oldLocations.map((loc) => loc.name)}
-            value={SelectLocation}
+            data={data?.data.map((loc:any) => ({
+              value: loc.id, // Use the `id` as the value
+              label: loc.address, // Use the `address` as the label
+            }))}
+            //value={SelectLocation}
             onChange={(value) => {
-              handleInputChangeLocation(
-                oldLocations?.find((location) => location.name === value[0])
-                  ?.id || 2,
-                value[0],
-                "name"
-              );
+              console.log(value);
+              
+              // handleInputChangeLocation(
+              //   oldLocations?.find((location) => location.name === value[0])
+              //     ?.id || 2,
+              //   value[0],
+              //   "name"
+              // );
             }}
             placeholder="Choose Location"
             searchable

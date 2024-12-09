@@ -2,7 +2,7 @@
 import DownIcon from "@/src/assets/icons/down";
 import { Menu } from "@mantine/core";
 import Image from "next/image";
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import profile from "@/src/assets/images/Shape.png";
 import ProfileIcon from "../assets/icons/Profile";
 import LogoutIcon from "../assets/icons/Logout";
@@ -18,11 +18,7 @@ import { useToken } from "../hooks/use-token";
 function MenuProfile() {
   const [opened, setOpened] = useState(false);
   const locale = useLocale();
-  useMemo(() => {
-    console.log(locale);
-  }, [locale]);
-  const { token, setToken } = useToken();
-  console.log(token);
+  const { setToken } = useToken();
 
   const handleLogout = () => {
     setToken(null); // Clear token from the state

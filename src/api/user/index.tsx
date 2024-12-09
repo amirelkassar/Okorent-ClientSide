@@ -1,3 +1,5 @@
+import { buildQuery } from "@/src/lib/utils";
+
 export const user = {
   addListing: {
     base: "/Product",
@@ -9,10 +11,16 @@ export const user = {
   },
   product: {
     base: "/Product",
+    my_products: (queries = {}) =>
+      buildQuery('/Product/my-products', queries),
     getById: (id: any) => `/Product/${id}`,
   },
   information: {
     base: (id: any) => `/User/${id}`,
     user_edit:  `/User`,
   },
+  stock:{
+    base: "/Stock",
+  },
+ 
 };

@@ -9,36 +9,38 @@ import ActionMenu from "./action-menu";
 
 export type RequestsTableData = {
   id: number;
-  phone: string;
+  name: string;
   quantity: number;
   status: boolean;
   inStock: number;
   rented: number;
-  rentalCost: number;
+  dailyPrice: number;
 };
 
 export const columns: ColumnDef<RequestsTableData>[] = [
   {
-    accessorKey: "phone",
+    accessorKey: "name",
     header: "Product",
     cell: ({ getValue, row }) => {
-      const phone = getValue<string>();
+      const name = getValue<string>();
       const id = row.original.id;
       return (
         <Link
           href={ROUTES.USER.LISTINGSDETAILS(id)}
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 w-fit"
         >
           <div className="size-[50px] rounded-[50%] p-[6px] bg-grayBack flex justify-center items-center">
             <Image
               src={phoneImg}
-              alt={phone}
+              alt={name}
               width={50}
               height={50}
               className="w-auto h-full  object-contain "
             />
           </div>
-          <h2 className="text-[16px] font-SemiBold">{phone}</h2>
+          <h2 className="text-[16px] font-SemiBold max-w-[220px] truncate">
+            {name}
+          </h2>
         </Link>
       );
     },
@@ -49,7 +51,7 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     header: "Quantity",
     cell: ({ getValue }) => {
       const quantity = getValue<number>();
-      return <p className="text-grayMedium text-[16px]">{quantity}</p>;
+      return <p className="text-grayMedium text-[16px]">{quantity || 0}</p>;
     },
   },
   {
@@ -57,7 +59,7 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     header: "In Stock ",
     cell: ({ getValue }) => {
       const inStock = getValue<number>();
-      return <p className="text-grayMedium text-[16px]">{inStock}</p>;
+      return <p className="text-grayMedium text-[16px]">{inStock || 0}</p>;
     },
   },
   {
@@ -65,16 +67,16 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     header: "Rented",
     cell: ({ getValue }) => {
       const rented = getValue<number>();
-      return <p className="text-grayMedium text-[16px]">{rented}</p>;
+      return <p className="text-grayMedium text-[16px]">{rented || 0}</p>;
     },
   },
 
   {
-    accessorKey: "rentalCost",
+    accessorKey: "dailyPrice",
     header: "Rental Cost per day",
     cell: ({ getValue }) => {
-      const rentalCost = getValue<number>();
-      return <p className="font-SemiBold text-[16px]">{rentalCost}$</p>;
+      const dailyPrice = getValue<number>();
+      return <p className="font-SemiBold text-[16px]">{dailyPrice}$</p>;
     },
   },
   {

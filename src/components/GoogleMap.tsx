@@ -1,9 +1,11 @@
-import React, { ChangeEvent, useCallback, useState } from "react";
+import React, { ChangeEvent, useCallback, useMemo, useState } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import Button from "@/src/components/button";
 import LocationIcon from "@/src/assets/icons/location";
 import { TextInput } from "@mantine/core";
 import SearchIcon from "../assets/icons/search";
+import { fetchLocationDetails } from "../lib/utils";
+import { useCreateStockMutation } from "../hooks/queries/user/lisitings/stock";
 const containerStyle = {
   width: "100%",
   height: "390px",
@@ -22,7 +24,12 @@ interface GoogleMapProps {
   close?: any;
   setLocation?: React.Dispatch<React.SetStateAction<string>>;
 }
-
+interface LocationDetailsProps {
+  address: string;
+  country: string;
+  city: string;
+  state: string;
+}
 function GoogleMapLoc({
   close,
   index,
@@ -31,33 +38,20 @@ function GoogleMapLoc({
 }: GoogleMapProps) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyCdBmOtAFzrgkikmCDsk_lb0z2EU_eYSbY",
+    googleMapsApiKey: "AIzaSyAdseC43NWVi8d4BAjCOFByov7bFdVQr1M",
   });
+
   const [selectedLocation, setSelectedLocation] = useState<{
     lat: number;
     lng: number;
   } | null>(null);
-  const [placeName, setPlaceName] = useState<string>(""); // Store place name
 
-  // Function to fetch place name from lat/lng
-  const fetchPlaceName = async (lat: number, lng: number) => {
-    const response = await fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyDDbeB2JCI9I77iwI6SdzeHpcq2bx0qeQE`
-    );
-    const data = await response.json();
-    if (data.results && data.results[0]) {
-      const place = data.results[0];
-      const name = place.formatted_address || ""; // Store formatted address as place name
-      setLocation && setLocation(name);
-      setPlaceName(name);
-
-      if (handleInputChangeLocation && index) {
-        console.log(index, `place ${index}`, "address");
-
-        handleInputChangeLocation(index, `place ${index}`, "address");
-      }
-    }
-  };
+  const [placeName, setPlaceName] = useState<LocationDetailsProps>({
+    address: "",
+    country: "",
+    city: "",
+    state: "",
+  }); // Store place name
 
   // Callback when the user clicks on the map
   const onMapClick = useCallback((event: google.maps.MapMouseEvent) => {
@@ -65,9 +59,26 @@ function GoogleMapLoc({
       const lat = event.latLng.lat();
       const lng = event.latLng.lng();
       setSelectedLocation({ lat, lng });
-      fetchPlaceName(lat, lng); // Fetch and store place name
     }
   }, []);
+  useMemo(() => {
+    if (selectedLocation?.lat) {
+      fetchLocationDetails(selectedLocation.lat, selectedLocation.lng)
+        .then((details) => setPlaceName(details))
+        .catch((error) => console.error(error));
+    }
+  }, [selectedLocation]);
+
+  const { mutateAsync: createStock } = useCreateStockMutation();
+  const handleSubmit = async () => {
+    await createStock({
+      location: selectedLocation,
+      address: placeName.address,
+      country: placeName.country,
+      city: placeName.city,
+      state: placeName.state,
+    });
+  };
 
   if (!isLoaded) {
     return <div>Loading...</div>;
@@ -109,16 +120,15 @@ function GoogleMapLoc({
             className={"min-w-[10px] h-auto w-[10px]"}
           />
           <h3 className="  truncate text-[12px]  text-grayMedium">
-            {placeName || "--"}
+            {placeName.address || "--"}
           </h3>
         </div>
 
         <Button
           onClick={() => {
             if (handleInputChangeLocation && index) {
-              console.log(index, `place ${index}`, "address");
-
-              handleInputChangeLocation(index, `place ${index}`, "address");
+              handleSubmit();
+              handleInputChangeLocation(index, ` ${placeName.address||'place .. '}`, "address");
             }
             close();
           }}

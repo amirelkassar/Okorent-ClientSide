@@ -32,7 +32,7 @@ function NavLinks() {
       {
         id: 3,
         name: "My Listings",
-        url: ROUTES.USER.LISTINGS,
+        url: ROUTES.USER.LISTINGS+'?card=true',
         active: path.includes(ROUTES.USER.LISTINGS),
         activeDetails:
           path === ROUTES.USER.LISTINGSDETAILS(params.listID)
