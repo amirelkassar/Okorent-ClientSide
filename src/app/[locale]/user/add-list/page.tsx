@@ -36,29 +36,16 @@ function Page() {
   const searchparams = useSearchParams();
   console.log(dataList);
 
-  const handleInputChangeLocation = (
-    index: number,
-    value: string,
-    name: string
-  ) => {
-    const updatedLocation = location.map((loc, i) =>
-      loc.id === index ? { ...loc, [name]: value } : loc
-    );
-    setLocation(updatedLocation);
-    setDataList({ ...dataList, addresses: updatedLocation });
+  const handleInputChangeLocation = (ids: any[]) => {
+    setLocation(ids);
+    setDataList({ ...dataList, addresses: ids });
   };
-  const handleRemoveLocation = (index: number) => {
-    const updatedLocations = location.filter((loc, i) => loc.id !== index);
+  const handleRemoveLocation = (index: any) => {
+    const updatedLocations = location.filter((loc) => loc !== index);
     setLocation(updatedLocations);
     setDataList({ ...dataList, addresses: updatedLocations });
   };
 
-  const addLocation = () => {
-    setLocation([
-      ...location,
-      { id: Math.floor(Math.random() * 100) + 1, name: "", address: "" },
-    ]);
-  };
   const handleCheckboxChange = (
     value: string,
     setState: React.Dispatch<React.SetStateAction<string | null>>
@@ -67,7 +54,7 @@ function Page() {
       setState(null);
     } else {
       setState(value);
-      setDataList({ ...dataList, Status: value });
+      setDataList({ ...dataList, IsActive: value === "true" ? true : false });
     }
   };
   const handleChangeFAQ = (index: number, field: keyof FAQ, value: string) => {
@@ -79,7 +66,6 @@ function Page() {
   const { data: dataCategory } = GetCategory();
   const { data: dataSubCategory, refetch: RefetchGetSubCategory } =
     GetSubCategory(dataList?.CategoryId);
-  console.log(dataSubCategory);
   const { mutateAsync: createListing } = useCreateListingMutation();
   const handleSubmit = async () => {
     await createListing(dataList);
@@ -220,11 +206,10 @@ function Page() {
               dataList.WeeklyPrice &&
               dataList.MonthlyPrice
             }
-            addLocation={addLocation}
+            handleRemoveLocation={handleRemoveLocation}
             location={location}
             handleInputChangeLocation={handleInputChangeLocation}
           />
-
           <Step
             title="Value of the item"
             active={
@@ -238,7 +223,7 @@ function Page() {
           >
             <Input
               onChange={(e) => {
-                setDataList({ ...dataList, value: e.target.value });
+                setDataList({ ...dataList, Cost: e.target.value });
               }}
               placeholder="Add item value here"
               inputClassName="!rounded-2xl bg-white  !h-16 border-2 "
@@ -246,7 +231,6 @@ function Page() {
             />
           </Step>
           <StepAvailability dataList={dataList} setDataList={setDataList} />
-
           <Step
             title="Stock"
             active={
@@ -268,21 +252,21 @@ function Page() {
             <div>
               <div className="flex flex-col gap-4">
                 <Checkbox
-                  checked={selectedCheckbox === "Active"}
+                  checked={selectedCheckbox === "true"}
                   onChange={(e) => {
                     handleCheckboxChange(e.target.value, setSelectedCheckbox);
                   }}
                   color="#88BA52"
-                  value="Active"
+                  value={"true"}
                   label="Active"
                 />
                 <Checkbox
-                  checked={selectedCheckbox === "Not"}
+                  checked={selectedCheckbox === "false"}
                   onChange={(e) => {
                     handleCheckboxChange(e.target.value, setSelectedCheckbox);
                   }}
                   color="#88BA52"
-                  value="Not"
+                  value={"false"}
                   label="Not Active"
                 />
               </div>
@@ -296,7 +280,7 @@ function Page() {
           <StepFAQ
             faqs={faqs}
             setFaqs={setFaqs}
-            active={dataList.Status}
+            active={dataList.IsActive === true || dataList.IsActive === false}
             handleChangeFAQ={handleChangeFAQ}
           />
         </div>

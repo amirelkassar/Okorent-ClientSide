@@ -8,7 +8,7 @@ import DownIcon from "@/src/assets/icons/down";
 import Button from "@/src/components/button";
 import { DatePickerInput } from "@mantine/dates";
 import DateIcon from "@/src/assets/icons/date";
-import { formatDate, getDate } from "@/src/lib/utils";
+import { getDate } from "@/src/lib/utils";
 const OptionAvailability = [
   {
     value: "always",
@@ -27,12 +27,11 @@ interface StepAvailabilityProps {
 }
 function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
   const [opened, { open, close }] = useDisclosure(false);
-  console.log(getDate(dataList?.AvailableFrom, "en").fullMonthNameWithDayName);
 
   return (
     <Step
       title="Availability"
-      active={dataList.value}
+      active={dataList.Cost}
       stepNum={7}
       dec="Choose when your item will be available for rent"
     >

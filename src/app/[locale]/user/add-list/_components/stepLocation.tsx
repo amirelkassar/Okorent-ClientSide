@@ -1,57 +1,37 @@
 "use client";
 import React, { useState } from "react";
 import Step from "./step";
-import {  MultiSelect } from "@mantine/core";
+import { Checkbox, MultiSelect, TextInput } from "@mantine/core";
 import Button from "@/src/components/button";
+import { cn } from "@/src/lib/utils";
 import ModalComp from "@/src/components/modal-comp";
 import { useDisclosure } from "@mantine/hooks";
 import LocationIcon from "@/src/assets/icons/location";
-import GoogleMapLoc from "@/src/components/GoogleMap";import { GetMyStock } from "@/src/hooks/queries/user/lisitings/stock";
+import GoogleMapLoc from "@/src/components/GoogleMap";
+import ButtonDelete from "@/src/components/button-delete";
+import { GetMyStock } from "@/src/hooks/queries/user/lisitings/stock";
 
 interface LocationProps {
   id: number;
   name: string;
   address: string;
 }
-const oldLocations: LocationProps[] = [
-  {
-    id: Math.floor(Math.random() * 100) + 1,
-    name: "test1",
-    address: "test address",
-  },
 
-  {
-    id: Math.floor(Math.random() * 100) + 1,
-    name: "test2",
-    address: "test address",
-  },
-];
 interface StepLocationProps {
   location: LocationProps[];
-  addLocation: () => void;
-  handleInputChangeLocation: (
-    index: number,
-    value: string,
-    name: string
-  ) => void;
+  handleInputChangeLocation: (ids: any[]) => void;
   active: boolean;
+  handleRemoveLocation: (index: number) => void;
 }
 function StepLocation({
   location,
-  addLocation,
   handleInputChangeLocation,
   active = false,
+  handleRemoveLocation,
 }: StepLocationProps) {
   const [opened, { open, close }] = useDisclosure(false);
-  const [indexSelect, setIndexSelect] = useState<number>(0);
-
-  console.log(location[location.length - 1]?.id);
+  const [indexSelect, setIndexSelect] = useState<any>(0);
   const { data } = GetMyStock();
-  console.log(data);
-  const formattedLocations = oldLocations.map((loc) => ({
-    value: loc.id, // Use the `id` as the value
-    label: loc.address, // Use the `address` as the label
-  }));
   return (
     <Step
       title="Where is the item storage location "
@@ -62,19 +42,13 @@ function StepLocation({
       <div>
         <div className="flex flex-col gap-5 lg:gap-6">
           <MultiSelect
-            data={data?.data.map((loc:any) => ({
+            data={data?.data.map((loc: any) => ({
               value: loc.id, // Use the `id` as the value
-              label: loc.address, // Use the `address` as the label
+              label: loc.name, // Use the `address` as the label
             }))}
-            //value={SelectLocation}
-            onChange={(value) => {
-              console.log(value);
-              // handleInputChangeLocation(
-              //   oldLocations?.find((location) => location.name === value[0])
-              //     ?.id || 2,
-              //   value[0],
-              //   "name"
-              // );
+            value={location.map((loc) => `${loc}`)}
+            onChange={(selectedValues) => {
+              handleInputChangeLocation(selectedValues);
             }}
             placeholder="Choose Location"
             searchable
@@ -96,42 +70,74 @@ function StepLocation({
             clearable
             className="block " // Visible on mobile, hidden on larger screens
           />
-    
+
+          {data?.data
+            ?.filter((item: any) => location.includes(item.id))
+            .map((loc: any, index: number) => (
+              <div key={index} className="flex items-center gap-3">
+                <Checkbox
+                  checked={true}
+                  readOnly
+                  color="#88BA52"
+                  className={cn("mt-6")}
+                />
+                <div className="flex items-center flex-wrap lg:flex-nowrap flex-1 gap-4">
+                  <TextInput
+                    value={loc.name}
+                    name="name"
+                    label={"Location Name"}
+                    placeholder={`Location ${index + 1}`}
+                    readOnly
+                    classNames={{
+                      label: "text-sm md:text-[16px] text-grayMedium mb-2",
+                      input:
+                        " text-black text-[12px] md:text-[16px] rounded-2xl text-grayMedium  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+                      wrapper: "h-[64px]",
+                    }}
+                    className=" flex-1 min-w-[144px]  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
+                  />
+                  <div
+                    onClick={() => {
+                      setIndexSelect(loc.id);
+                      open();
+                    }}
+                    className=" cursor-pointer flex-1 min-w-[156px]"
+                  >
+                    <h3 className="text-sm md:text-[16px] text-grayMedium mb-2">
+                      Address
+                    </h3>
+                    <p className=" flex items-center px-2 py-3 flex-1 text-nowrap truncate  max-w-[260px] text-[12px] md:text-[16px] rounded-2xl text-grayMedium first:font-Bold  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100">
+                      {loc.address}
+                    </p>
+                  </div>
+
+                  <ButtonDelete
+                    onClick={() => handleRemoveLocation(loc.id)}
+                    className={"!size-7 mt-6 lg:!size-11 bg-grayBack"}
+                  />
+                </div>
+              </div>
+            ))}
         </div>
 
-        {location.length < 3 && (
-          <div className="variations-header">
-            <Button
-              onClick={() => {
-                addLocation();
-                open();
-              }}
-              className={
-                "mt-8 bg-grayBack gap-3 px-7 h-[64px] border-none text-black"
-              }
-            >
-              <LocationIcon fill="#0F2A43" />
-              <p>Add location</p>
-            </Button>
-          </div>
-        )}
-        {opened && indexSelect ? (
-          <ModalComp title="Add a variation" opened={opened} close={close}>
-            <GoogleMapLoc
-              close={close}
-              index={indexSelect}
-              handleInputChangeLocation={handleInputChangeLocation}
-            />
-          </ModalComp>
-        ) : (
-          <ModalComp title="Add a variation" opened={opened} close={close}>
-            <GoogleMapLoc
-              close={close}
-              index={location[location.length - 1]?.id}
-              handleInputChangeLocation={handleInputChangeLocation}
-            />
-          </ModalComp>
-        )}
+        <div className="variations-header">
+          <Button
+            onClick={() => {
+              setIndexSelect(null);
+              open();
+            }}
+            className={
+              "mt-8 bg-grayBack gap-3 px-7 h-[64px] border-none text-black"
+            }
+          >
+            <LocationIcon fill="#0F2A43" />
+            <p>Add location</p>
+          </Button>
+        </div>
+
+        <ModalComp title="Add a variation" opened={opened} close={close}>
+          <GoogleMapLoc close={close} index={indexSelect} />
+        </ModalComp>
       </div>
     </Step>
   );

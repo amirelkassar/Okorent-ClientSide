@@ -21,6 +21,9 @@ export const user = {
   },
   stock:{
     base: "/Stock",
+    actions:{
+      edit: (id: any) => `/Stock/${id}`,
+    }
   },
  
 };

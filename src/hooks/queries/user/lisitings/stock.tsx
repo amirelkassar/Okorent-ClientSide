@@ -15,7 +15,6 @@ export const GetMyStock = () => {
   });
 };
 
-
 //Post New Stock
 export const useCreateStockMutation = () => {
   const queryClient = useQueryClient();
@@ -24,7 +23,29 @@ export const useCreateStockMutation = () => {
       const response = await api.post(user.stock.base, data, {});
       return response.data;
     },
+
     onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKey]);
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+}
+
+
+//Edit New Stock
+export const useEditStockMutation = (id: any) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data:any) => {
+      const response = await api.put(user.stock.actions.edit(id), data, {});
+      return response.data;
+    },
+
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKey]);
       console.log(res);
     },
     onError: (res) => {

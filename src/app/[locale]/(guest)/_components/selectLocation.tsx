@@ -1,6 +1,7 @@
 "use client";
 import LocationIcon from "@/src/assets/icons/location";
 import GoogleMapLoc from "@/src/components/GoogleMap";
+import MapOl from "@/src/components/mapOl";
 import ModalComp from "@/src/components/modal-comp";
 import { useDisclosure } from "@mantine/hooks";
 import React, { useState } from "react";
@@ -30,7 +31,7 @@ function SelectLocation() {
       {opened && (
         <ModalComp opened={opened} close={close} title={"Select rental period"}>
           <div className="lg:w-[640px] w-full">
-            <GoogleMapLoc close={close} setLocation={setLocation} />
+            <MapOl />
           </div>
         </ModalComp>
       )}
