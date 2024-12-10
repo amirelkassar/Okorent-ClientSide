@@ -223,7 +223,6 @@ function Page() {
             addLocation={addLocation}
             location={location}
             handleInputChangeLocation={handleInputChangeLocation}
-            handleRemoveLocation={handleRemoveLocation}
           />
 
           <Step
@@ -261,7 +260,7 @@ function Page() {
               onChange={(e) => {
                 setDataList({ ...dataList, Stock: e.target.value });
               }}
-               inputClassName="!rounded-2xl bg-white  !h-16 border-2 "
+              inputClassName="!rounded-2xl bg-white  !h-16 border-2 "
               className="mb-6 "
             />
           </Step>

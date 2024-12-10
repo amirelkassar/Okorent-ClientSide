@@ -114,9 +114,9 @@ function NavLinks() {
     [path]
   );
   return (
-    <div className="mt-3 max-w-full hidden lg:block">
+    <div className="mt-2 max-w-full hidden lg:block">
       {newPath.find((item) => item.active) ? (
-        <div className="flex mb-5  items-center gap-3">
+        <div className="flex mb-5  items-center gap-3 max-w-[1600px] px-4 xl:px-[60px] mx-auto">
           <button
             className=" size-5"
             onClick={() => {
@@ -130,7 +130,7 @@ function NavLinks() {
           </h1>
         </div>
       ) : (
-        <h1 className="mb-5 text-[32px] font-Bold">
+        <h1 className="mb-6 text-[32px] font-Bold max-w-[1600px] px-4 xl:px-[60px] mx-auto">
           {LinksNav.find((item) => item.active)?.name}
 
           <span className="mx-3">
@@ -138,27 +138,28 @@ function NavLinks() {
           </span>
         </h1>
       )}
-
-      <div className=" max-w-full overflow-x-auto overflow-y-hidden mb-6 pb-4">
-        <ul className=" border-b-[1.5px] flex items-center gap-6 lgl:gap-12 justify-between  ">
-          {LinksNav.map((link, i) => {
-            return (
-              <li
-                key={link.id}
-                className={` pb-[14px] -mb-[2px] ${
-                  link.active && "border-b-[3px] border-green"
-                } `}
-              >
-                <Link
-                  href={link.url}
-                  className="text-[16px] text-nowrap font-SemiBold duration-200 text-black/80 hover:text-black"
+      <div className="overflow-x-auto overflow-y-hidden">
+        <div className=" border-b-[1.5px]  max-w-full   mb-5 ">
+          <ul className=" max-w-[1600px] px-4 xl:px-[60px] mx-auto flex items-center gap-6 justify-between ">
+            {LinksNav.map((link, i) => {
+              return (
+                <li
+                  key={link.id}
+                  className={` pb-3 -mb-[2px] ${
+                    link.active && "border-b-[3px] border-green"
+                  } `}
                 >
-                  {link.name}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+                  <Link
+                    href={link.url}
+                    className="text-[16px] text-nowrap font-SemiBold duration-200 text-black/80 hover:text-black"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     </div>
   );

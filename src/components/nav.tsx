@@ -134,7 +134,7 @@ function Nav({ linkLogo = "#" }: NavProps) {
     [pathname]
   );
   return (
-    <nav className="px-4 lg:px-16 py-5 lg:py-8 flex items-center justify-between gap-4">
+    <nav className="px-4 lg:px-16 py-5 lg:py-7 flex items-center justify-between gap-4 max-w-[1600px] mx-auto ">
       <Link href={linkLogo}>
         <Image
           src={logo}

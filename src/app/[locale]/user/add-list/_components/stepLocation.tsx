@@ -1,15 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import Step from "./step";
-import { Checkbox, MultiSelect, TextInput } from "@mantine/core";
+import {  MultiSelect } from "@mantine/core";
 import Button from "@/src/components/button";
-import { cn } from "@/src/lib/utils";
 import ModalComp from "@/src/components/modal-comp";
 import { useDisclosure } from "@mantine/hooks";
 import LocationIcon from "@/src/assets/icons/location";
-import GoogleMapLoc from "@/src/components/GoogleMap";
-import ButtonDelete from "@/src/components/button-delete";
-import { GetMyStock } from "@/src/hooks/queries/user/lisitings/stock";
+import GoogleMapLoc from "@/src/components/GoogleMap";import { GetMyStock } from "@/src/hooks/queries/user/lisitings/stock";
 
 interface LocationProps {
   id: number;
@@ -38,17 +35,14 @@ interface StepLocationProps {
     name: string
   ) => void;
   active: boolean;
-  handleRemoveLocation: (index: number) => void;
 }
 function StepLocation({
   location,
   addLocation,
   handleInputChangeLocation,
   active = false,
-  handleRemoveLocation,
 }: StepLocationProps) {
   const [opened, { open, close }] = useDisclosure(false);
-  const [SelectLocation, setSelectLocation] = useState<string[]>([]);
   const [indexSelect, setIndexSelect] = useState<number>(0);
 
   console.log(location[location.length - 1]?.id);
@@ -75,7 +69,6 @@ function StepLocation({
             //value={SelectLocation}
             onChange={(value) => {
               console.log(value);
-              
               // handleInputChangeLocation(
               //   oldLocations?.find((location) => location.name === value[0])
               //     ?.id || 2,
@@ -103,102 +96,7 @@ function StepLocation({
             clearable
             className="block " // Visible on mobile, hidden on larger screens
           />
-          {oldLocations
-            .filter((loc) => SelectLocation.includes(loc.name))
-            .map((loc, index) => (
-              <div key={index} className="flex items-center gap-3">
-                <Checkbox
-                  checked={true}
-                  readOnly
-                  color="#88BA52"
-                  className={cn("mt-6")}
-                />
-                <div className="flex items-center flex-wrap lg:flex-nowrap flex-1 gap-4">
-                  <TextInput
-                    value={loc.name}
-                    name="name"
-                    label={"Location Name"}
-                    placeholder={`Location ${index + 1}`}
-                    onChange={(e) =>
-                      handleInputChangeLocation(loc.id, e.target.value, "name")
-                    }
-                    classNames={{
-                      label: "text-sm md:text-[16px] text-grayMedium mb-2",
-                      input:
-                        " text-black text-[12px] md:text-[16px] rounded-2xl text-grayMedium  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
-                      wrapper: "h-[64px]",
-                    }}
-                    className=" flex-1 min-w-[144px]  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
-                  />
-                  <div
-                    onClick={() => {
-                      setIndexSelect(loc.id);
-                      open();
-                    }}
-                    className=" cursor-pointer flex-1 min-w-[156px]"
-                  >
-                    <h3 className="text-sm md:text-[16px] text-grayMedium mb-2">
-                      Address
-                    </h3>
-                    <p className=" flex items-center px-2 py-3 flex-1 text-nowrap truncate  max-w-[260px] text-[12px] md:text-[16px] rounded-2xl text-grayMedium first:font-Bold  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100">
-                      {loc.address}
-                    </p>
-                  </div>
-
-                  <ButtonDelete
-                    onClick={() => handleRemoveLocation(loc.id)}
-                    className={"!size-7 mt-6 lg:!size-11 bg-grayBack"}
-                  />
-                </div>
-              </div>
-            ))}
-          {location.map((loc, index) => (
-            <div key={index} className="flex items-center gap-3">
-              <Checkbox
-                checked={true}
-                readOnly
-                color="#88BA52"
-                className={cn("mt-6")}
-              />
-              <div className="flex items-center flex-wrap lg:flex-nowrap flex-1 gap-4">
-                <TextInput
-                  value={loc.name}
-                  name="name"
-                  label={"Location Name"}
-                  placeholder={`Location ${index + 1}`}
-                  onChange={(e) =>
-                    handleInputChangeLocation(loc.id, e.target.value, "name")
-                  }
-                  classNames={{
-                    label: "text-sm md:text-[16px] text-grayMedium mb-2",
-                    input:
-                      " text-black text-[12px] md:text-[16px] rounded-2xl text-grayMedium  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
-                    wrapper: "h-[64px]",
-                  }}
-                  className=" flex-1 min-w-[144px]  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
-                />
-                <div
-                  onClick={() => {
-                    setIndexSelect(loc.id);
-                    open();
-                  }}
-                  className=" cursor-pointer flex-1 min-w-[156px]"
-                >
-                  <h3 className="text-sm md:text-[16px] text-grayMedium mb-2">
-                    Address
-                  </h3>
-                  <p className=" flex items-center px-2 py-3 flex-1 text-nowrap truncate  max-w-[260px] text-[12px] md:text-[16px] rounded-2xl text-grayMedium first:font-Bold  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100">
-                    {loc.address}
-                  </p>
-                </div>
-
-                <ButtonDelete
-                  onClick={() => handleRemoveLocation(loc.id)}
-                  className={"!size-7 mt-6 lg:!size-11 bg-grayBack"}
-                />
-              </div>
-            </div>
-          ))}
+    
         </div>
 
         {location.length < 3 && (

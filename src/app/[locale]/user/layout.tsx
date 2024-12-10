@@ -10,10 +10,10 @@ interface layoutProps {
 function layout({ children }: layoutProps) {
   return (
     <div className="font-Medium min-h-[100vh]  text-black   mx-auto ">
+      <Nav linkLogo={ROUTES.USER.HOMEPAGE} />
+      <NavLinks />
       <div className="max-w-[1600px] mx-auto ">
-        <Nav linkLogo={ROUTES.USER.HOMEPAGE} />
         <main className="px-4 xl:px-[60px] min-h-[calc(100vh-130px)] md:min-h-[calc(100vh-150px)] mt-6 lg:mt-0">
-          <NavLinks />
           {children}
         </main>
       </div>
