@@ -84,7 +84,7 @@ export const buildQuery = (baseUrl: string, params: Record<string, any> = {}): s
 
 type PageNum = number | 'all';
 type Params = Record<string, any> & any;
-type InitialQueries = { maxCount: number }|any;
+type InitialQueries = { maxCount: number } | any;
 
 export const getSkipCountFromPageNum = (
   pageNum: PageNum | undefined,
@@ -138,7 +138,7 @@ export const fetchLocationDetails = async (lat: number, lng: number): Promise<{
 }> => {
   const apiKey = "AIzaSyAdseC43NWVi8d4BAjCOFByov7bFdVQr1M";
   const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${apiKey}`;
-  
+
   try {
     const response = await axios.get(url);
     const results = response.data.results;
@@ -165,5 +165,16 @@ export const fetchLocationDetails = async (lat: number, lng: number): Promise<{
   } catch (error) {
     console.error("Error fetching location details:", error);
     throw error;
+  }
+};
+
+export const useSearchParams = () => {
+  let params = new URLSearchParams(window.location.search);
+  console.log(params.toString());
+  if (!params.toString()) {
+    return '';
+  } else {
+    return params.toString();
+
   }
 };

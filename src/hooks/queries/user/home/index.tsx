@@ -4,21 +4,17 @@ import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
 export const initialQueryKey = "user.productsAll";
 
 //getAllProducts
-export const GetProductsAll = () => {
-
+export const GetProductsAll = (queries?: any) => {
   return useQuery({
     queryKey: [initialQueryKey],
     queryFn: async () => {
-      const response = await api.get(user.product.base);
+      const response = await api.get(
+        `${user.product.base}`
+      );
       return response.data;
     },
   });
 };
-
-
-
-
-
 
 //getProductByID
 export const GetProductsByID = (id: any) => {
@@ -32,4 +28,3 @@ export const GetProductsByID = (id: any) => {
     },
   });
 };
-

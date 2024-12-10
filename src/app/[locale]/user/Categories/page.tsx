@@ -9,6 +9,8 @@ import { Rentals } from "@/src/lib/dataUser";
 import { MultiSelect } from "@mantine/core";
 import CantFind from "./_components/CantFind";
 import ProductList from "@/src/components/product/productList";
+import { GetProductsAll } from "@/src/hooks/queries/user/home";
+import { useSearchParams } from "next/navigation";
 
 const subcategories: string[] = [
   "TV",
@@ -52,7 +54,12 @@ function Page() {
   const handleSortClick = (sortOption: string) => {
     setSelectedSort(sortOption);
   };
-
+  const searchParams = useSearchParams()
+  console.log(searchParams.toString());
+  
+  const { data } = GetProductsAll(searchParams.toString());
+  console.log(data);
+  
   return (
     <div className="mb-20">
       <SearchItem />
@@ -163,7 +170,7 @@ function Page() {
 
           <ProductList data={Rentals} />
           <div>
-            <CantFind/>
+            <CantFind />
           </div>
         </div>
       </div>
