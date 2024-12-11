@@ -1,36 +1,19 @@
 "use client";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import SearchItem from "../_components/searchItem";
 import SelectLocation from "../_components/selectLocation";
 import SelectDate from "../_components/selectDate";
 import CloseIcon from "@/src/assets/icons/close";
 import { Rentals } from "@/src/lib/dataUser";
-
 import { MultiSelect } from "@mantine/core";
 import CantFind from "./_components/CantFind";
 import ProductList from "@/src/components/product/productList";
 import { GetProductsAll } from "@/src/hooks/queries/user/home";
 import { useSearchParams } from "next/navigation";
-
-const subcategories: string[] = [
-  "TV",
-  "DVD",
-  "Home Audio",
-  "Satellite",
-  "Computers",
-  "Laptops",
-  "Spare Parts",
-  "Video Game",
-  "Console",
-  "Cameras",
-  "Refrigerators",
-  "Dishwashers",
-  "Cooking Tools",
-  "Oven",
-  "Water Coolers",
-  "Heater",
-  "Air Conditioner",
-];
+import { useRouter } from "@/src/navigation";
+import ROUTES from "@/src/routes";
+import { GetSubCategory } from "@/src/hooks/queries/user/add-lisiting";
+import { useUpdateQueryParams } from "@/src/lib/utils";
 
 const sortingOptions: string[] = [
   "Lowest Price",
@@ -40,28 +23,69 @@ const sortingOptions: string[] = [
 ];
 
 function Page() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const [selectedSubcategories, setSelectedSubcategories] = useState<string[]>(
-    []
+    searchParams.getAll("SubCategoryId") || []
   );
-  const [selectedSort, setSelectedSort] = useState<string | null>(null);
 
-  const handleRemoveClick = (subcategory: string) => {
-    setSelectedSubcategories(
-      selectedSubcategories.filter((item) => item !== subcategory)
-    );
-  };
-
-  const handleSortClick = (sortOption: string) => {
-    setSelectedSort(sortOption);
-  };
-  const searchParams = useSearchParams()
-  console.log(searchParams.toString());
-  
   const { data } = GetProductsAll(searchParams.toString());
+  const { data: dataSubCategories } = GetSubCategory(
+    searchParams.get("CategoryId")
+  );
+  const updateQuerySearchParams = useUpdateQueryParams();
   console.log(data);
-  
+
+  // Utility: Update the URL query params
+  const updateQueryParams = useCallback(
+    (key: any, values: any) => {
+      updateQuerySearchParams(key, values);
+    },
+    [updateQuerySearchParams]
+  );
+
+  // Handle toggling subcategory selection
+  const handleSubcategoryToggle = useCallback(
+    (subcategoryId: any) => {
+      const updatedSubcategories = selectedSubcategories.includes(subcategoryId)
+        ? selectedSubcategories.filter((id) => id !== subcategoryId)
+        : [...selectedSubcategories, subcategoryId];
+
+      setSelectedSubcategories(updatedSubcategories);
+      updateQueryParams("SubCategoryId", updatedSubcategories);
+    },
+    [selectedSubcategories, updateQueryParams]
+  );
+
+  // Remove a specific subcategory
+  const handleRemoveFromSearch = useCallback(
+    (subcategoryId: any) => {
+      handleSubcategoryToggle(subcategoryId);
+    },
+    [handleSubcategoryToggle]
+  );
+  const handleSearchBySort = (option: any) => {
+    const currentSort = searchParams.get("sort");
+
+    const newSort =
+      currentSort === option.split(" ").join("")
+        ? ""
+        : option.split(" ").join("");
+    updateQueryParams("sort", newSort ? [newSort] : []);
+  };
+
   return (
     <div className="mb-20">
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          router.replace(
+            `${ROUTES.USER.CATEGORIESPATH}?${searchParams.toString()}`
+          );
+        }}
+      >
+        replace
+      </button>
       <SearchItem />
       <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 lg:gap-5 mt-7 mb-6 lg:mb-10">
         <SelectLocation />
@@ -69,7 +93,12 @@ function Page() {
       </div>
       <div className="pt-8 border-t flex flex-col lgl:flex-row lgl:items-start gap-4 border-grayMedium/30">
         <MultiSelect
-          data={subcategories}
+          data={
+            dataSubCategories?.data.map((item: any) => ({
+              value: item.id,
+              label: item.name,
+            })) || []
+          }
           value={selectedSubcategories}
           onChange={setSelectedSubcategories}
           placeholder="Subcategories"
@@ -96,27 +125,24 @@ function Page() {
           {/* MultiSelect for mobile */}
 
           {/* List for larger screens */}
-          <ul className=" flex-col flex gap-5">
-            {subcategories.map((subcategory) => (
-              <li
-                key={subcategory}
+          <div className=" flex-col flex gap-5">
+            {dataSubCategories?.data.map((subcategory: any, index: number) => (
+              <div
+                key={index}
                 className={`${
-                  selectedSubcategories.includes(subcategory)
+                  selectedSubcategories.includes(subcategory.id)
                     ? "bg-green/15"
                     : ""
                 } cursor-pointer px-4 py-1 rounded-lg`}
-                onClick={() =>
-                  setSelectedSubcategories((prev) =>
-                    prev.includes(subcategory)
-                      ? prev.filter((item) => item !== subcategory)
-                      : [...prev, subcategory]
-                  )
-                }
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleSubcategoryToggle(subcategory.id);
+                }}
               >
-                {subcategory}
-              </li>
+                {subcategory.name}
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
 
         <div className="flex-1">
@@ -129,9 +155,11 @@ function Page() {
                 {sortingOptions.map((option) => (
                   <button
                     key={option}
-                    onClick={() => handleSortClick(option)}
+                    onClick={() => {
+                      handleSearchBySort(option);
+                    }}
                     className={`${
-                      selectedSort === option
+                      searchParams.get("sort") === option.split(" ").join("")
                         ? "bg-green text-white"
                         : "bg-grayBack text-blue"
                     } px-3 py-2 gap-2 flex items-center duration-200 hover:shadow-md text-xs lg:text-sm justify-center w-fit rounded-xl`}
@@ -147,22 +175,28 @@ function Page() {
                   Filtered By
                 </h3>
                 <div className="flex items-center gap-3 flex-wrap">
-                  {selectedSubcategories.map((subcategory) => (
-                    <div
-                      key={subcategory}
-                      className="bg-green duration-200 hover:shadow-md px-3 py-2 gap-2 flex items-center justify-center w-fit rounded-xl"
-                    >
-                      <p className="text-white text-xs lg:text-sm font-Medium">
-                        {subcategory}
-                      </p>
-                      <button
-                        onClick={() => handleRemoveClick(subcategory)}
-                        className="remove-button"
+                  {dataSubCategories?.data
+                    ?.filter((item: any) =>
+                      selectedSubcategories.includes(item.id)
+                    )
+                    .map((subcategory: any, index: any) => (
+                      <div
+                        key={index}
+                        className="bg-green duration-200 hover:shadow-md px-3 py-2 gap-2 flex items-center justify-center w-fit rounded-xl"
                       >
-                        <CloseIcon fill="white" className="w-4 h-auto" />
-                      </button>
-                    </div>
-                  ))}
+                        <p className="text-white text-xs lg:text-sm font-Medium">
+                          {subcategory?.name}
+                        </p>
+                        <button
+                          onClick={() =>
+                            handleRemoveFromSearch(subcategory?.id)
+                          }
+                          className="remove-button"
+                        >
+                          <CloseIcon fill="white" className="w-4 h-auto" />
+                        </button>
+                      </div>
+                    ))}
                 </div>
               </div>
             )}

@@ -6,16 +6,16 @@ export const initialQueryKey = "user.productsAll";
 //getAllProducts
 export const GetProductsAll = (queries?: any) => {
   return useQuery({
-    queryKey: [initialQueryKey],
+    queryKey: [initialQueryKey, queries], // إضافة queries إلى queryKey
     queryFn: async () => {
       const response = await api.get(
-        `${user.product.base}`
+        `${user.product.base(queries)}`
       );
       return response.data;
     },
+    // يمكنك إضافة خيارات مثل refetchOnWindowFocus أو staleTime حسب الحاجة
   });
 };
-
 //getProductByID
 export const GetProductsByID = (id: any) => {
   const queryClient = useQueryClient();

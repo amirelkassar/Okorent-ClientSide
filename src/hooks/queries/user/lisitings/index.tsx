@@ -13,7 +13,7 @@ export const GetMyProductsAll = () => {
   return useQuery({
     queryKey: [initialQueryKey],
     queryFn: async () => {
-      const response = await api.get(user.product.my_products({}));
+      const response = await api.get(user.product.my_products());
       return response.data;
     },
   });

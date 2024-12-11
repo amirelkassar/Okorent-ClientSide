@@ -4,6 +4,8 @@ import 'dayjs/locale/ar';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { twMerge } from 'tailwind-merge';
 import axios from "axios";
+import { useRouter } from '../navigation';
+import ROUTES from '../routes';
 
 
 
@@ -66,16 +68,8 @@ export function getDate(date = '', locale = 'en') {
 
 
 // Utility to build a query string from a base URL and parameters
-export const buildQuery = (baseUrl: string, params: Record<string, any> = {}): string => {
-  const queryString = Object.entries(params)
-    .filter(([_, value]) => value !== undefined && value !== null) // Remove undefined or null values
-    .map(
-      ([key, value]) =>
-        `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
-    )
-    .join('&');
-
-  return queryString ? `${baseUrl}?${queryString}` : baseUrl;
+export const buildQuery = (baseUrl: string, params: string): string => {
+  return params ? `${baseUrl}?${params}` : baseUrl;
 };
 
 
@@ -177,4 +171,22 @@ export const useSearchParams = () => {
     return params.toString();
 
   }
+};
+export const useUpdateQueryParams = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Utility: Update the URL query params
+  const updateQueryParams = (key: string, values: string[]) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete(key);
+
+    values.forEach((value) => {
+      if (value) params.append(key, value);
+    });
+
+    router.replace(`${ROUTES.USER.CATEGORIESPATH}?${params.toString()}`);
+  };
+
+  return updateQueryParams;
 };
