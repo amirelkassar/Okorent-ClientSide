@@ -63,7 +63,9 @@ function CardViewReq({
     <div className="swiperList pt-4 lg:pt-14 pb-5 lg:pb-16 lg:border-t border-black first-of-type:border-none first-of-type:pt-0">
       <div
         className={`flex  justify-start md:justify-between mb-2 lg:mb-6 gap-7  ${
-          first ? "flex-col-reverse lg:items-center lg:flex-row" : " items-center"
+          first
+            ? "flex-col-reverse lg:items-center lg:flex-row"
+            : " items-center"
         } `}
       >
         <div className="flex items-center gap-5 w-full md:w-fit md:justify-start justify-between">
@@ -71,7 +73,7 @@ function CardViewReq({
 
           {first && (
             <Link
-              href={`${ROUTES.USER.BOOKINGS}?list=true`}
+              href={ROUTES.USER.BOOKINGS}
               className="px-3 duration-300 hover:shadow-md w-fit py-2 rounded-xl border border-black flex items-center justify-center gap-2"
             >
               <ListIcon className="w-auto h-4 lg:h-5" />
@@ -81,13 +83,15 @@ function CardViewReq({
         </div>
         {first && haveRentSwitch && (
           <div className="mx-auto">
-            <RentSwitch typeUser='user' />
+            <RentSwitch typeUser="user" />
           </div>
         )}
         <Link
           href={ROUTES.USER.BOOKINGSID(title.split(" ").join("-"))}
           className={` underline text-sm lg:text-lg min-w-fit ${
-            first ? "order-first w-full lg:w-fit lg:order-none -mt-5 lg:mt-0  text-end" : ""
+            first
+              ? "order-first w-full lg:w-fit lg:order-none -mt-5 lg:mt-0  text-end"
+              : ""
           }     font-medium`}
         >
           View all

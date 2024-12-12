@@ -44,7 +44,7 @@ function NavLinks() {
       {
         id: 4,
         name: "Bookings",
-        url: ROUTES.USER.BOOKINGS,
+        url: ROUTES.USER.BOOKINGS + "?card=true",
         active:
           path === ROUTES.USER.BOOKINGS ||
           path === ROUTES.USER.BOOKINGSID(params.BookingID),
