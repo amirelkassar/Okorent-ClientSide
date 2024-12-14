@@ -3,7 +3,7 @@ import { buildQuery } from "@/src/lib/utils";
 export const home = {
   header: {
     base: "/home",
-    list: (queries = {}) => buildQuery("/home/list", queries),
+    list: (queries:any) => buildQuery("/home/list", queries),
     actions: {
       add: "/home",
       addFile: "/home/bulk",
