@@ -1,6 +1,5 @@
 import { api } from "@/src/api/axios";
 import { user } from "@/src/api/user";
-import { storeToken } from "@/src/lib/token";
 import { useRouter } from "@/src/navigation";
 import { useMutation, useQuery } from "@tanstack/react-query";
 

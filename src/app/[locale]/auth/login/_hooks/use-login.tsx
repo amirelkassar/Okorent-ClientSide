@@ -5,6 +5,7 @@ import ROUTES from "@/src/routes";
 import { useLoginMutation } from "@/src/hooks/queries/auth";
 import { useRouter } from "@/src/navigation";
 import { Toast } from "@/src/components/toast";
+import { authDecodedToken, decodedToken } from "@/token";
 
 // Define the type for the form data
 interface FormDataProps {
@@ -36,7 +37,6 @@ export const useLogin = (): SignUpReturn => {
     password: "",
   });
 
-
   const {
     mutateAsync: Login,
     error,
@@ -63,11 +63,18 @@ export const useLogin = (): SignUpReturn => {
   const onSubmit = useCallback(async () => {
     Toast.Promise(Login(formData), {
       success: "successfully logged in",
-      onSuccess: (res) => {
+      onSuccess: async (res) => {
         console.log(res);
-
         //setToken(await authDecodedToken());
-        router.replace(ROUTES.USER.HOMEPAGE);
+        const userRole = await decodedToken(res?.data).then((res2) => {
+          return res2?.userRole;
+        });
+        console.log(userRole);
+        if (userRole === "Administrator") {
+          router.replace(ROUTES.ADMIN.DASHBOARD);
+        } else {
+          router.replace(ROUTES.USER.HOMEPAGE);
+        }
       },
     });
   }, [Login, formData, router]);

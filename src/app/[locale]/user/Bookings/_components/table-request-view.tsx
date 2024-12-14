@@ -68,7 +68,7 @@ function TableRequestView({ setID, open }: { setID: any; open: any }) {
         <TableHeader.Middle>
           <RentSwitch typeUser="user" />
         </TableHeader.Middle>
-        <TableHeader.Last typeData="filter" options={FilterOptionsReq} />
+        <TableHeader.Last  options={FilterOptionsReq} />
       </TableHeader>
       <DataTable title="" data={RequestsData} columns={columnsWithOpen} />
     </div>

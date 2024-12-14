@@ -11,7 +11,7 @@ export const user = {
   },
   product: {
     base: (queries:any) => buildQuery("/Product", queries),
-    my_products: (queries = "") => buildQuery("/Product/my-products", queries),
+    my_products: (queries:any) => buildQuery("/Product/my-products", queries),
     getById: (id: any) => `/Product/${id}`,
   },
   information: {

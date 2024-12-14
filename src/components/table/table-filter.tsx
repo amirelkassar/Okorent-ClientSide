@@ -15,6 +15,7 @@ export interface FilterData {
   label: string;
   type: string;
   key: string | boolean;
+  value?: any;
 }
 interface TableFilterProps {
   data: FilterData[];
@@ -24,12 +25,12 @@ function TableFilter({ data }: TableFilterProps) {
   const path = usePathname();
   console.log(path);
 
-  const ToggleFilterLink = (newFilterLabel: string) => {
+  const ToggleFilterLink = (newFilterLabel: string, searchBy = "filter") => {
     // Remove filter if the same, otherwise apply the new filter
-    if (searchParams.get("filter") === newFilterLabel) {
+    if (searchParams.get(searchBy) === newFilterLabel) {
       return path;
     }
-    return `${path}?filter=${newFilterLabel}`;
+    return `${path}?${searchBy}=${newFilterLabel}`;
   };
 
   return (
@@ -44,14 +45,20 @@ function TableFilter({ data }: TableFilterProps) {
           {data.map((item, i) => {
             return (
               <Link
-                href={ToggleFilterLink(item.label.replace(" ", "_"))}
+                href={ToggleFilterLink(
+                  item.value?.toString().replace(" ", "_") ||
+                    item.label.replace(" ", "_"),
+                  item.type || "filter"
+                )}
                 onClick={() => {
                   console.log(item.label);
                 }}
                 key={i}
                 className={cn(
                   "bg-grayBack cursor-pointer duration-300 hover:shadow-md hover:bg-green/20 px-[10px] rounded-xl text-blue flex items-center justify-center h-10 text-[14px] font-SemiBold",
-                  searchParams.get("filter") === item.label.replace(" ", "_")
+                  searchParams.get(item.type || "filter") ===
+                    (item.value?.toString().replace(" ", "_") ||
+                      item.label.replace(" ", "_"))
                     ? "bg-green text-white hover:!bg-green"
                     : ""
                 )}

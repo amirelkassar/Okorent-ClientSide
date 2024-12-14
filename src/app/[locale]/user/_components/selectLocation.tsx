@@ -1,6 +1,5 @@
 "use client";
 import LocationIcon from "@/src/assets/icons/location";
-import GoogleMapLoc from "@/src/components/GoogleMap";
 import MapOl from "@/src/components/mapOl";
 import ModalComp from "@/src/components/modal-comp";
 import { useDisclosure } from "@mantine/hooks";

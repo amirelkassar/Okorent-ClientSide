@@ -50,7 +50,7 @@ function page() {
             />
           </div>
         </TableHeader.Middle>
-        <TableHeader.Last typeData="filter" options={FilterOptions} />
+        <TableHeader.Last  options={FilterOptions} />
       </TableHeader>
       <DataTable
         title="All Tickets"

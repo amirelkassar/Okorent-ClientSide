@@ -8,7 +8,8 @@ import { GetMyProductsAll } from "@/src/hooks/queries/user/lisitings";
 
 function Page() {
   const searchParams = useSearchParams();
-  const { data } = GetMyProductsAll();
+
+  const { data } = GetMyProductsAll(searchParams.toString());
 
   return (
     <div>

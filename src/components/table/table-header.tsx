@@ -22,7 +22,6 @@ interface FirstProps {
 
 interface LastProps {
   children?: ReactNode;
-  typeData: "sort" | "filter";
   options: any;
 }
 

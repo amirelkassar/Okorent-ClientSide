@@ -45,7 +45,7 @@ export function getDate(date = '', locale = 'en') {
 
   const fullYear = dayjs(date)
     .locale(locale)
-    .format('YYYY/MM/DD');
+    .format('YYYY-MM-DD');
   const time = dayjs(date).locale(locale).format('hh:mm A');
   const fullYearWithMonthName = dayjs(date)
     .locale(locale)
@@ -164,7 +164,6 @@ export const fetchLocationDetails = async (lat: number, lng: number): Promise<{
 
 export const useSearchParams = () => {
   let params = new URLSearchParams(window.location.search);
-  console.log(params.toString());
   if (!params.toString()) {
     return '';
   } else {
@@ -174,13 +173,11 @@ export const useSearchParams = () => {
 };
 export const useUpdateQueryParams = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
-
   // Utility: Update the URL query params
   const updateQueryParams = (key: string, values: string[]) => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(window.location.search);
+    console.log(params);
     params.delete(key);
-
     values.forEach((value) => {
       if (value) params.append(key, value);
     });

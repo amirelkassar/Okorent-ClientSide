@@ -51,7 +51,7 @@ function TableRentalsView() {
         <TableHeader.Middle>
           <RentSwitch typeUser="user" />
         </TableHeader.Middle>
-        <TableHeader.Last typeData="filter" options={FilterOptions} />
+        <TableHeader.Last  options={FilterOptions} />
       </TableHeader>
       <DataTable title="" data={RentalsData} columns={columns} />
     </div>

@@ -4,7 +4,6 @@ import SearchItem from "../_components/searchItem";
 import SelectLocation from "../_components/selectLocation";
 import SelectDate from "../_components/selectDate";
 import CloseIcon from "@/src/assets/icons/close";
-import { Rentals } from "@/src/lib/dataUser";
 import { MultiSelect } from "@mantine/core";
 import CantFind from "./_components/CantFind";
 import ProductList from "@/src/components/product/productList";
@@ -15,18 +14,30 @@ import ROUTES from "@/src/routes";
 import { GetSubCategory } from "@/src/hooks/queries/user/add-lisiting";
 import { useUpdateQueryParams } from "@/src/lib/utils";
 
-const sortingOptions: string[] = [
-  "Lowest Price",
-  "Highest Price",
-  "Verified Accounts",
-  "Newly Added",
+const sortingOptions: any[] = [
+  {
+    value: "PriceAsc",
+    label: "Lowest Price",
+  },
+  {
+    value: "PriceDesc",
+    label: "Highest Price",
+  },
+  {
+    value: "VerifiedDesc",
+    label: "Verified Accounts",
+  },
+  {
+    value: "CreationDesc",
+    label: "Newly Added",
+  },
 ];
 
 function Page() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [selectedSubcategories, setSelectedSubcategories] = useState<string[]>(
-    searchParams.getAll("SubCategoryId") || []
+    searchParams.getAll("SubCategoryIds") || []
   );
 
   const { data } = GetProductsAll(searchParams.toString());
@@ -50,9 +61,10 @@ function Page() {
       const updatedSubcategories = selectedSubcategories.includes(subcategoryId)
         ? selectedSubcategories.filter((id) => id !== subcategoryId)
         : [...selectedSubcategories, subcategoryId];
-
-      setSelectedSubcategories(updatedSubcategories);
-      updateQueryParams("SubCategoryId", updatedSubcategories);
+      if (selectedSubcategories) {
+        setSelectedSubcategories(updatedSubcategories);
+        updateQueryParams("SubCategoryIds", updatedSubcategories);
+      }
     },
     [selectedSubcategories, updateQueryParams]
   );
@@ -65,13 +77,13 @@ function Page() {
     [handleSubcategoryToggle]
   );
   const handleSearchBySort = (option: any) => {
-    const currentSort = searchParams.get("sort");
+    const currentSort = searchParams.get("SortField");
 
     const newSort =
       currentSort === option.split(" ").join("")
         ? ""
         : option.split(" ").join("");
-    updateQueryParams("sort", newSort ? [newSort] : []);
+    updateQueryParams("SortField", newSort ? [newSort] : []);
   };
 
   return (
@@ -152,19 +164,20 @@ function Page() {
                 Sort By
               </h3>
               <div className="flex items-center gap-2 lg:gap-3 flex-wrap">
-                {sortingOptions.map((option) => (
+                {sortingOptions.map((option, index) => (
                   <button
-                    key={option}
+                    key={index}
                     onClick={() => {
-                      handleSearchBySort(option);
+                      handleSearchBySort(option.value);
                     }}
                     className={`${
-                      searchParams.get("sort") === option.split(" ").join("")
+                      searchParams.get("SortField") ===
+                      option.value.split(" ").join("")
                         ? "bg-green text-white"
                         : "bg-grayBack text-blue"
                     } px-3 py-2 gap-2 flex items-center duration-200 hover:shadow-md text-xs lg:text-sm justify-center w-fit rounded-xl`}
                   >
-                    {option}
+                    {option.label}
                   </button>
                 ))}
               </div>
@@ -202,7 +215,7 @@ function Page() {
             )}
           </div>
 
-          <ProductList data={Rentals} />
+          <ProductList data={data?.data || []} />
           <div>
             <CantFind />
           </div>
