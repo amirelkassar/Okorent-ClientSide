@@ -9,7 +9,6 @@ import { useSearchParams } from "next/navigation";
 import { DataTable } from "@/src/components/data-table";
 import { columns } from "../_components/columns";
 import { RentalsData } from "@/src/lib/dataUser";
-import CardBookPhone from "../_components/CardBookPhone";
 import CardIcon from "@/src/assets/icons/card";
 
 function Page({ params }: any) {
@@ -50,12 +49,7 @@ function Page({ params }: any) {
         </div>
       </div>
       {searchParams.get("list") === "true" ? (
-        <DataTable
-          title=""
-          data={RentalsData}
-          columns={columns}
-          Component={CardBookPhone}
-        />
+        <DataTable title="" data={RentalsData} columns={columns} />
       ) : (
         <div className="w-full flex-wrap gap-6 my-4 relative flex items-center">
           <OneCardView />
