@@ -4,7 +4,7 @@ import 'dayjs/locale/ar';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { twMerge } from 'tailwind-merge';
 import axios from "axios";
-import { useRouter } from '../navigation';
+import { usePathname, useRouter } from '../navigation';
 import ROUTES from '../routes';
 
 
@@ -173,6 +173,9 @@ export const useSearchParams = () => {
 };
 export const useUpdateQueryParams = () => {
   const router = useRouter();
+  const pathName = usePathname();
+  console.log(pathName);
+  
   // Utility: Update the URL query params
   const updateQueryParams = (key: string, values: string[]) => {
     const params = new URLSearchParams(window.location.search);
@@ -182,7 +185,7 @@ export const useUpdateQueryParams = () => {
       if (value) params.append(key, value);
     });
 
-    router.replace(`${ROUTES.USER.CATEGORIESPATH}?${params.toString()}`);
+    router.replace(`${pathName}?${params.toString()}`);
   };
 
   return updateQueryParams;
