@@ -9,6 +9,7 @@ import house1 from "@/src/assets/images/house1.png";
 import house2 from "@/src/assets/images/house2.png";
 import LinkGreen from "@/src/components/linkGreen";
 import { GetProductsByID } from "@/src/hooks/queries/user/home";
+import FAQ from "@/src/components/faq";
 
 const data = {
   category: "category3",
@@ -67,7 +68,8 @@ function page({ params }: any) {
         <EditIcon fill="white" className="w-[16px]" />
         <p className="text-white">Edit</p>
       </LinkGreen>
-      <CardDetailsList title="Item category" decs={data.category} />
+      <CardDetailsList title="Item Category" decs={ProductDerails?.data.categoryName} />
+      <CardDetailsList title="Item Subcategory" decs={ProductDerails?.data.subCategoryName} />
       <CardDetailsList title="Title" decs={ProductDerails?.data?.name} />
       <CardDetailsList
         title="Describtion"
@@ -75,9 +77,9 @@ function page({ params }: any) {
       />
       <div className="pb-4 border-b border-grayMedium/40 last-of-type:border-none">
         <h3 className="text-base lg:text-[24px] mb-1">Item Images</h3>
-        {data.pictures.length > 0 && (
+        {ProductDerails?.data?.images.length > 0 && (
           <div className="h-fit  gap-2 flex-wrap  p-1 relative flex  overflow-hidden  rounded-2xl">
-            {data.pictures.map((file: any, index: number) => (
+            {ProductDerails?.data?.pictures.map((file: any, index: number) => (
               <Image
                 key={index}
                 src={file}
@@ -157,8 +159,9 @@ function page({ params }: any) {
         </div>
       ) : null}
 
-      <CardDetailsList title="Available Stock" decs={data.Stock} />
-      <CardDetailsList title="Item Status" decs={data.Status} />
+      <CardDetailsList title="Available Stock" decs={ProductDerails?.data?.totalQuantity} />
+      <CardDetailsList title="Item Status" decs={ProductDerails?.data?.isActive? "Active" : "Not Active"} />
+      <FAQ dataFAQ={ProductDerails?.data?.faqs} />
       <Button className={"w-fit px-11 h-[64px] mt-8"}>Promote Listing</Button>
     </div>
   );

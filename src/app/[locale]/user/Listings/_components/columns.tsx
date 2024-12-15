@@ -10,10 +10,10 @@ import ActionMenu from "./action-menu";
 export type RequestsTableData = {
   id: number;
   name: string;
-  quantity: number;
-  status: boolean;
+  totalQuantity: number;
+  isActive: boolean;
   inStock: number;
-  rented: number;
+  rentedQuantity: number;
   dailyPrice: number;
 };
 
@@ -47,7 +47,7 @@ export const columns: ColumnDef<RequestsTableData>[] = [
   },
 
   {
-    accessorKey: "quantity",
+    accessorKey: "totalQuantity",
     header: "Quantity",
     cell: ({ getValue }) => {
       const quantity = getValue<number>();
@@ -57,13 +57,19 @@ export const columns: ColumnDef<RequestsTableData>[] = [
   {
     accessorKey: "inStock",
     header: "In Stock ",
-    cell: ({ getValue }) => {
+    cell: ({ getValue, row }) => {
       const inStock = getValue<number>();
-      return <p className="text-grayMedium text-[16px]">{inStock || 0}</p>;
+      const totalQuantity = row.original.totalQuantity;
+      const rentedQuantity = row.original.rentedQuantity;
+      return (
+        <p className="text-grayMedium text-[16px]">
+          {totalQuantity - rentedQuantity || 0}
+        </p>
+      );
     },
   },
   {
-    accessorKey: "rented",
+    accessorKey: "rentedQuantity",
     header: "Rented",
     cell: ({ getValue }) => {
       const rented = getValue<number>();
@@ -80,7 +86,7 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     },
   },
   {
-    accessorKey: "status",
+    accessorKey: "isActive",
     header: "Status",
     cell: ({ getValue }) => {
       const status = getValue<string>();

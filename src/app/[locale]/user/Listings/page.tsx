@@ -1,5 +1,4 @@
 "use client";
-import { ListingsData } from "@/src/lib/dataUser";
 import React from "react";
 import { useSearchParams } from "next/navigation";
 import CardView from "./_components/cardView";
@@ -12,34 +11,33 @@ function Page() {
 
   const { data } = GetMyProductsAll(searchParams.toString());
   console.log(data);
-
+  const DataIsActive = data?.data?.filter(
+    (item: any) => item.isActive === true
+  );
+  const DataIsNotActive = data?.data?.filter(
+    (item: any) => item.isActive === false
+  );
   return (
     <div>
       {searchParams.get("card") === "true" ? (
         <>
           {searchParams.get("active") === "true" ? (
-            <CardView
-              title={"Online"}
-              data={data?.data?.filter((item:any) => item.isNew === true)}
-              withStatus
-            />
+            <CardView title={"Online"} data={DataIsActive} withStatus />
           ) : searchParams.get("active") === "false" ? (
-            <CardView
-              title={"Offline"}
-              data={data?.data?.filter((item:any) => item.isNew === false)}
-              withStatus
-            />
+            <CardView title={"Offline"} data={DataIsNotActive} withStatus />
           ) : (
             <div>
               <CardView
                 title={"Online"}
                 first
-                data={ListingsData.filter((item) => item.status === true)}
+                data={DataIsActive}
                 viewAllLink={`${ROUTES.USER.LISTINGS}?card=true&active=true`}
               />
               <CardView
                 title={"Offline"}
-                data={ListingsData.filter((item) => item.status === false)}
+                data={data?.data?.filter(
+                  (item: any) => item.isActive === false
+                )}
                 viewAllLink={`${ROUTES.USER.LISTINGS}?card=true&active=false`}
               />
             </div>
@@ -49,14 +47,8 @@ function Page() {
         <>
           <TableViewListings data={data?.data || []} />
           <div className=" block mdl:hidden">
-            <CardView
-              title={"Online"}
-              data={ListingsData.filter((item) => item.status === true)}
-            />
-            <CardView
-              title={"Offline"}
-              data={ListingsData.filter((item) => item.status === false)}
-            />
+            <CardView title={"Online"} data={DataIsActive} />
+            <CardView title={"Offline"} data={DataIsNotActive} />
           </div>
         </>
       )}

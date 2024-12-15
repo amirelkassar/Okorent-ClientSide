@@ -84,7 +84,7 @@ function Page({ params }: any) {
         />
         <QuestionView />
       </div>
-      <FAQ />
+      <FAQ dataFAQ={data?.data?.faQs || []} />
       <div className="bg-grayBack max-w-full  pt-5 pb-8 lg:pb-10 relative before:content-[''] before:w-[calc(100%+32px)] lg:before:w-[calc(100%+130px)] before:bg-grayBack before:absolute before:bottom-0 before:-translate-x-1/2   before:h-full before:left-[50%]">
         <h2 className=" relative text-xl lg:text-[24px] mb-8">
           Customers who rent this item also rent
