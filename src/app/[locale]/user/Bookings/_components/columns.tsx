@@ -88,14 +88,18 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     cell: ({ getValue }) => {
       const status = getValue<string>();
       switch (status.toLowerCase()) {
-        case "ongoing":
-          return <CardStatus animation circle type="green" title={status} />;
-        case "declined":
-          return <CardStatus circle type="red" title={status} />;
-        case "upcoming":
+        case "out for delivery":
           return <CardStatus animation circle type="blue" title={status} />;
+        case "pending":
+          return <CardStatus circle type="blue" title={status} />;
+        case "accepted":
+          return <CardStatus animation circle type="green" title={status} />;
         case "completed":
           return <CardStatus circle type="gray" title={status} />;
+        case "rejected":
+          return <CardStatus circle type="red" title={status} />;
+        case "received by client":
+          return <CardStatus circle type="green" title={status} />;
         default:
           return <CardStatus circle type="gray" title="--" />;
       }

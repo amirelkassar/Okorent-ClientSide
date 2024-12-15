@@ -1,22 +1,16 @@
 "use client";
 import { RequestsData } from "@/src/lib/dataUser";
-import React, { useState } from "react";
+import React from "react";
 import { useSearchParams } from "next/navigation";
 import CardView from "./_components/cardView";
 import { useSwitchRent } from "@/src/store/rent-slice";
 import CardViewReq from "./_components/cardViewReq";
-import { Modal } from "@mantine/core";
-import CloseIcon from "@/src/assets/icons/close";
-import { useDisclosure } from "@mantine/hooks";
-import CardRequest from "@/src/components/cardRequest";
 import TableRequestView from "./_components/table-request-view";
 import TableRentalsView from "./_components/table-rentals-view";
 
 function Page() {
   const searchParams = useSearchParams();
   const { isRent } = useSwitchRent();
-  const [opened, { open, close }] = useDisclosure(false);
-  const [getID, setID] = useState(0);
 
   return isRent === "rent" ? (
     <div>
@@ -76,7 +70,7 @@ function Page() {
         </div>
       ) : (
         <>
-          <TableRequestView setID={setID} open={open} />
+          <TableRequestView />
           <div className=" block mdl:hidden">
             <CardViewReq
               title="New Requests"
@@ -103,26 +97,6 @@ function Page() {
           </div>
         </>
       )}
-      <Modal
-        opened={opened}
-        onClose={close}
-        size="auto"
-        classNames={{
-          header: "p-0 h-0 min-h-0",
-          body: "min-h-[300px] p-0",
-          content: "rounded-3xl ",
-        }}
-        closeButtonProps={{
-          icon: <CloseIcon className="lg:w-6 w-5 h-auto" />,
-          className: "mb-[-40px] absolute end-4 top-3",
-        }}
-        centered
-      >
-        <CardRequest
-          data={RequestsData.find((item) => item.id === getID)}
-          dataByModal={true}
-        />
-      </Modal>
     </div>
   );
 }

@@ -31,13 +31,13 @@ function Page({ params }: any) {
 
   return (
     <div>
-      <CardProduct />
+      <CardProduct data={data?.data || []} />
       <Radio.Group
         name="OptionAddresses"
         label="Choose Adress type"
         defaultValue={"permanently"}
         classNames={{
-          label:'text-xl'
+          label: "text-xl",
         }}
         onChange={(e) => {
           setValueSuspend(e);

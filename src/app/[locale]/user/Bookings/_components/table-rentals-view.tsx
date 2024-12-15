@@ -8,6 +8,15 @@ import { Link } from "@/src/navigation";
 import CardIcon from "@/src/assets/icons/card";
 import RentSwitch from "@/src/components/RentSwitch";
 import { columns } from "./columns";
+import DeleteIcon from "@/src/assets/icons/delete";
+import EditIcon from "@/src/assets/icons/edit";
+import NoteTableIcon from "@/src/assets/icons/noteTable";
+import ReorderIcon from "@/src/assets/icons/reorder";
+import RentAgainIcon from "@/src/assets/icons/rentAgain";
+import ReviewIcon from "@/src/assets/icons/review";
+import ReturnedIcon from "@/src/assets/icons/returned";
+import CarReturn from "@/src/assets/icons/car-return";
+import BarcodeIcon from "@/src/assets/icons/barcode";
 const FilterOptions = [
   {
     label: "Pending Approval",
@@ -35,6 +44,50 @@ const FilterOptions = [
     value: "Rejected",
   },
 ];
+const functionSelect = [
+  {
+    title: "Scan For Return",
+    icon: <BarcodeIcon fill="#006AFF" className="max-h-4 w-auto" />,
+    onclick: (ids: any) => {
+      console.log([...ids]);
+    },
+  },
+  {
+    title: "Request to return",
+    icon: <CarReturn fill="#006AFF" className="max-h-4 w-auto" />,
+    onclick: (ids: any) => {
+      console.log([...ids]);
+    },
+  },
+  {
+    title: "Review",
+    icon: <ReviewIcon fill="#006AFF" className="max-h-4 w-auto" />,
+    onclick: (ids: any) => {
+      console.log([...ids]);
+    },
+  },
+  {
+    title: "Rent again",
+    icon: <RentAgainIcon fill="#006AFF" className="max-h-4 w-auto" />,
+    onclick: (ids: any) => {
+      console.log([...ids]);
+    },
+  },
+  {
+    title: "Reorder",
+    icon: <ReorderIcon fill="#006AFF" className="max-h-4 w-auto" />,
+    onclick: (ids: any) => {
+      console.log([...ids]);
+    },
+  },
+  {
+    title: "Delete",
+    icon: <DeleteIcon className="max-h-4 w-auto" />,
+    onclick: (ids: any) => {
+      console.log([...ids]);
+    },
+  },
+];
 function TableRentalsView() {
   return (
     <div className=" hidden mdl:block">
@@ -53,7 +106,12 @@ function TableRentalsView() {
         </TableHeader.Middle>
         <TableHeader.Last options={FilterOptions} />
       </TableHeader>
-      <DataTable title="" data={RentalsData} columns={columns} />
+      <DataTable
+        title=""
+        data={RentalsData}
+        columns={columns}
+        functionSelect={functionSelect}
+      />
     </div>
   );
 }

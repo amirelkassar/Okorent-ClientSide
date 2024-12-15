@@ -2,12 +2,16 @@
 import { DataTable } from "@/src/components/data-table";
 import { RequestsData } from "@/src/lib/dataUser";
 import ROUTES from "@/src/routes";
-import React from "react";
+import React, { useState } from "react";
 import { columnsReq } from "../../Bookings/_components/columnsReq";
 import { TableHeader } from "@/src/components/table/table-header";
 import { Link } from "@/src/navigation";
 import CardIcon from "@/src/assets/icons/card";
 import RentSwitch from "@/src/components/RentSwitch";
+import CloseIcon from "@/src/assets/icons/close";
+import CardRequest from "@/src/components/cardRequest";
+import { Modal } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 const FilterOptionsReq = [
   {
     label: "New",
@@ -45,7 +49,9 @@ const FilterOptionsReq = [
     value: "Canceled",
   },
 ];
-function TableRequestView({ setID, open }: { setID: any; open: any }) {
+function TableRequestView() {
+  const [opened, { open, close }] = useDisclosure(false);
+  const [getID, setID] = useState(0);
   const openModalWithId = (id: number) => {
     setID(id);
     console.log("Row ID:", id);
@@ -71,6 +77,26 @@ function TableRequestView({ setID, open }: { setID: any; open: any }) {
         <TableHeader.Last options={FilterOptionsReq} />
       </TableHeader>
       <DataTable title="" data={RequestsData} columns={columnsWithOpen} />
+      <Modal
+        opened={opened}
+        onClose={close}
+        size="auto"
+        classNames={{
+          header: "p-0 h-0 min-h-0",
+          body: "min-h-[300px] p-0",
+          content: "rounded-3xl ",
+        }}
+        closeButtonProps={{
+          icon: <CloseIcon className="lg:w-6 w-5 h-auto" />,
+          className: "mb-[-40px] absolute end-4 top-3",
+        }}
+        centered
+      >
+        <CardRequest
+          data={RequestsData.find((item) => item.id === getID)}
+          dataByModal={true}
+        />
+      </Modal>
     </div>
   );
 }
