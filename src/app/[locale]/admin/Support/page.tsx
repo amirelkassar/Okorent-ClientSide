@@ -10,33 +10,31 @@ import { TableHeader } from "@/src/components/table/table-header";
 const FilterOptions = [
   {
     label: "Un Assigned",
-    type: "filter",
-    key: "Un Assigned",
+    key: "filter",
+    value: "Un Assigned",
   },
   {
     label: "Sales",
-    type: "filter",
-    key: "Sales",
+    key: "filter",
+    value: "Sales",
   },
   {
     label: "Technical",
-    type: "filter",
-    key: "Technical",
+    key: "filter",
+    value: "Technical",
   },
   {
     label: "Feedback",
-    type: "filter",
-    key: "Feedback",
+    key: "filter",
+    value: "Feedback",
   },
-
 ];
 
 function page() {
   return (
     <div>
       <TableHeader>
-        <TableHeader.First title="All Tickets" >
-        </TableHeader.First>
+        <TableHeader.First title="All Tickets"></TableHeader.First>
         <TableHeader.Middle>
           <div className="w-fit mx-auto mb-5 lgl:mb-0">
             <SwitchControl
@@ -50,15 +48,15 @@ function page() {
             />
           </div>
         </TableHeader.Middle>
-        <TableHeader.Last  options={FilterOptions} />
+        <TableHeader.Last options={FilterOptions} />
       </TableHeader>
       <DataTable
-        title="All Tickets"
+        title=""
         data={TICKETS}
         columns={columns}
-        filterBy="category"
-        filter="buttons"
-        filterData={FilterOptions}
+        //filterBy="category"
+        //filter="buttons"
+        //filterData={FilterOptions}
         Component={CardPhoneAccount}
       />
     </div>

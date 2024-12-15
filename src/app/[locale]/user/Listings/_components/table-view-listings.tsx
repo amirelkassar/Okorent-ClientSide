@@ -9,14 +9,12 @@ import DeleteIcon from "@/src/assets/icons/delete";
 const FilterOptions = [
   {
     label: "online",
-    type: "active",
-    key: true,
+    key: "active",
     value: true,
   },
   {
     label: "offline",
-    type: "active",
-    key: false,
+    key: "active",
     value: false,
   },
 ];
@@ -44,7 +42,7 @@ function TableViewListings({ data }: { data: any }) {
             <p>Card View</p>
           </Link>
         </TableHeader.First>
-        <TableHeader.Last  options={FilterOptions} />
+        <TableHeader.Last options={FilterOptions} />
       </TableHeader>
       <DataTable
         //Component={CardViewPhoneListing}

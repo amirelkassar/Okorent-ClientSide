@@ -11,28 +11,28 @@ import { columns } from "./columns";
 const FilterOptions = [
   {
     label: "Pending Approval",
-    type: "filter",
-    key: "Pending Approval",
+    key: "filter",
+    value: "Pending Approval",
   },
   {
     label: "Accepted",
-    type: "filter",
-    key: "Accepted",
+    key: "filter",
+    value: "Accepted",
   },
   {
     label: "Out for delivery",
-    type: "filter",
-    key: "Out for delivery",
+    key: "filter",
+    value: "Out for delivery",
   },
   {
     label: "Completed",
-    type: "filter",
-    key: "Completed",
+    key: "filter",
+    value: "Completed",
   },
   {
     label: "Rejected",
-    type: "filter",
-    key: "Rejected",
+    key: "filter",
+    value: "Rejected",
   },
 ];
 function TableRentalsView() {
@@ -51,7 +51,7 @@ function TableRentalsView() {
         <TableHeader.Middle>
           <RentSwitch typeUser="user" />
         </TableHeader.Middle>
-        <TableHeader.Last  options={FilterOptions} />
+        <TableHeader.Last options={FilterOptions} />
       </TableHeader>
       <DataTable title="" data={RentalsData} columns={columns} />
     </div>

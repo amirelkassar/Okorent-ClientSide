@@ -11,38 +11,38 @@ import RentSwitch from "@/src/components/RentSwitch";
 const FilterOptionsReq = [
   {
     label: "New",
-    type: "filter",
-    key: "New",
+    key: "filter",
+    value: "New",
   },
   {
     label: "Out for delivery",
-    type: "filter",
-    key: "Out for delivery",
+    key: "filter",
+    value: "Out for delivery",
   },
   {
     label: "Received",
-    type: "filter",
-    key: "Received",
+    key: "filter",
+    value: "Received",
   },
   {
     label: "Out For return",
-    type: "filter",
-    key: "Out For return",
+    key: "filter",
+    value: "Out For return",
   },
   {
     label: "Returned",
-    type: "filter",
-    key: "Returned",
+    key: "filter",
+    value: "Returned",
   },
   {
     label: "Rejected",
-    type: "filter",
-    key: "Rejected",
+    key: "filter",
+    value: "Rejected",
   },
   {
     label: "Canceled",
-    type: "filter",
-    key: "Canceled",
+    key: "filter",
+    value: "Canceled",
   },
 ];
 function TableRequestView({ setID, open }: { setID: any; open: any }) {
@@ -68,7 +68,7 @@ function TableRequestView({ setID, open }: { setID: any; open: any }) {
         <TableHeader.Middle>
           <RentSwitch typeUser="user" />
         </TableHeader.Middle>
-        <TableHeader.Last  options={FilterOptionsReq} />
+        <TableHeader.Last options={FilterOptionsReq} />
       </TableHeader>
       <DataTable title="" data={RequestsData} columns={columnsWithOpen} />
     </div>
