@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import ImagesProduct from "./imagesProduct";
 import PricingOptions from "./PricingOptions";
 import RentalDuration from "./rentalDuration";
@@ -9,14 +9,79 @@ import FavRedIcon from "@/src/assets/icons/favRed";
 import FeaturesProduct from "./FeaturesProduct";
 import ProductClient from "./productClient";
 import ShowMore from "@/src/components/showMore";
+import ChooseAddressType from "./choose-address-type";
+import { useCreateOrder } from "@/src/hooks/create-order";
+import Button from "../button";
+
 function CardProduct({ data = [] }: { data?: any }) {
   const [daysNumber, setDaysNumber] = useState(0);
-  console.log(daysNumber);
+  const [valueDate, setValueDate] = useState<[Date | null, Date | null]>([
+    new Date(),
+    new Date(),
+  ]);
+  const [valueAddressType, setValueAddressType] = useState("");
+  const [location, setLocation] = useState<any>({});
+  const priceOptions = useMemo(
+    () => ({
+      Daily: data?.dailyPrice || 0,
+      Weekly: data?.weeklyPrice || 0,
+      Monthly: data?.monthlyPrice || 0,
+    }),
+    [data]
+  );
+  const PriceBYDays = useMemo(() => {
+    if (daysNumber > 28) return priceOptions.Monthly;
+    if (daysNumber > 6) return priceOptions.Weekly;
+    return priceOptions.Daily;
+  }, [daysNumber, priceOptions]);
+  const TotalPriceOrder = useMemo(
+    () => PriceBYDays * daysNumber - 50.82,
+    [PriceBYDays, daysNumber]
+  );
+  const { form, status } = useCreateOrder();
+  const { onSubmit } = form;
+  const handleCreateOrder = () => {
+    const formData = {
+      orderItems: [
+        {
+          productId: data?.id,
+          quantity: 1,
+          from: valueDate[0]?.toISOString(),
+          to: valueDate[1]?.toISOString(),
+          price: TotalPriceOrder,
+        },
+      ],
+      handlingType: 1,
+      deliveryType:
+        valueAddressType === "store"
+          ? 1
+          : valueAddressType === "delivery"
+          ? 2
+          : valueAddressType === "pickup"
+          ? 3
+          : 1,
+      paymentMethod: 1,
+      paymentAmount: TotalPriceOrder,
+      handler: "4444",
+      paymentAction: 1,
+      customerId: "",
+      isQuotation: true,
+      ...(valueAddressType === "store" && {
+        stockId: location,
+      }),
+      ...(valueAddressType === "delivery" && {
+        renterAddress: location,
+      }),
+      ...(valueAddressType === "pickup" && {
+        pickUpAddress: location,
+      }),
+    };
 
+    onSubmit(formData);
+  };
   return (
     <div className=" mb-section">
       <ImagesProduct />
-
       <div className=" w-full  border-b border-grayMedium/40 pb-6">
         <div className="flex w-full items-center  justify-between gap-3 mb-7 mt-section ">
           <h2 className="text-2xl lg:text-[32px] font-SemiBold ">
@@ -34,6 +99,7 @@ function CardProduct({ data = [] }: { data?: any }) {
 
         <FeaturesProduct />
       </div>
+
       <div className="flex mt-section items-start justify-between flex-col lg:flex-row gap-11">
         <div className="lg:max-w-[650px] w-full flex-1">
           <div>
@@ -47,28 +113,41 @@ function CardProduct({ data = [] }: { data?: any }) {
               </ShowMore>
             </div>
           </div>
-          <PricingOptions
-            daysNumber={daysNumber}
-            priceOptions={{
-              Daily: data.dailyPrice || 0,
-              Weekly: data?.weeklyPrice || 0,
-              Monthly: data?.monthlyPrice || 0,
-            }}
+          <PricingOptions daysNumber={daysNumber} priceOptions={priceOptions} />
+          <RentalDuration
+            setDaysNumber={setDaysNumber}
+            setValue={setValueDate}
+            value={valueDate}
           />
-          <RentalDuration setDaysNumber={setDaysNumber} />
         </div>
+
         <div className="flex-1 flex flex-col gap-8 lg:max-w-[620px] w-full">
           <ProductClient />
           <PriceDetails
             daysNumber={daysNumber}
-            priceOptions={{
-              Daily: data.dailyPrice || 0,
-              Weekly: data?.weeklyPrice || 0,
-              Monthly: data?.monthlyPrice || 0,
-            }}
-          />
+            TotalPriceOrder={TotalPriceOrder}
+            PriceBYDays={PriceBYDays}
+          >
+            <div className="flex items-center px-5 justify-between gap-4 pb-4 flex-wrap mt-5">
+              <Button
+                onClick={() => {
+                  handleCreateOrder();
+                }}
+                className={"w-full "}
+              >
+                Request this item
+              </Button>
+            </div>
+          </PriceDetails>
         </div>
       </div>
+      <ChooseAddressType
+        setValueAddressType={setValueAddressType}
+        valueAddressType={valueAddressType}
+        setLocation={setLocation}
+        location={location}
+        stocks={data?.stocks || []}
+      />
     </div>
   );
 }

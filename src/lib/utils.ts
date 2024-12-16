@@ -175,7 +175,7 @@ export const useUpdateQueryParams = () => {
   const router = useRouter();
   const pathName = usePathname();
   console.log(pathName);
-  
+
   // Utility: Update the URL query params
   const updateQueryParams = (key: string, values: string[]) => {
     const params = new URLSearchParams(window.location.search);
@@ -189,4 +189,12 @@ export const useUpdateQueryParams = () => {
   };
 
   return updateQueryParams;
+};
+
+export const calculateDurationRange = (valueDateFrom: Date | null, valueDateTo: Date | null) => {
+  if (valueDateFrom && valueDateTo) {
+    const diffTime = Math.abs(valueDateTo.getTime() - valueDateFrom.getTime());
+    return Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Convert the difference to days
+  }
+  return 0;
 };

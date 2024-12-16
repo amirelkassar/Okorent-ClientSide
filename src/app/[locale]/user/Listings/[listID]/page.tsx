@@ -8,8 +8,8 @@ import React from "react";
 import house1 from "@/src/assets/images/house1.png";
 import house2 from "@/src/assets/images/house2.png";
 import LinkGreen from "@/src/components/linkGreen";
-import { GetProductsByID } from "@/src/hooks/queries/user/home";
 import FAQ from "@/src/components/faq";
+import { GetMyProductsByID } from "@/src/hooks/queries/user/lisitings";
 
 const data = {
   category: "category3",
@@ -54,7 +54,7 @@ const data = {
   Status: "Not",
 };
 function page({ params }: any) {
-  const { data: ProductDerails } = GetProductsByID(params.listID);
+  const { data: ProductDerails } = GetMyProductsByID(params.listID);
   console.log(ProductDerails);
 
   return (
@@ -161,7 +161,7 @@ function page({ params }: any) {
 
       <CardDetailsList title="Available Stock" decs={ProductDerails?.data?.totalQuantity} />
       <CardDetailsList title="Item Status" decs={ProductDerails?.data?.isActive? "Active" : "Not Active"} />
-      <FAQ dataFAQ={ProductDerails?.data?.faqs} />
+      <FAQ dataFAQ={ProductDerails?.data?.faQs} />
       <Button className={"w-fit px-11 h-[64px] mt-8"}>Promote Listing</Button>
     </div>
   );

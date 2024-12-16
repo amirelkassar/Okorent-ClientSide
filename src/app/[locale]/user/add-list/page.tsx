@@ -158,7 +158,7 @@ function Page() {
             <div className="flex items-center flex-wrap gap-4">
               <Input
                 name="name"
-                label={"Price for 3 Days"}
+                label={"Price for 1 Day"}
                 placeholder={"Add Price Here"}
                 onChange={(e) => {
                   setDataList({

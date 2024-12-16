@@ -50,6 +50,7 @@ const ROUTES = {
     REQUESTS: "/user/Requests",
     BOOKINGS: "/user/Bookings",
     BOOKINGSID: (id) => `/user/Bookings/${id}`,
+    ORDERID: (id) => `/user/Bookings/order/${id}`,
     INBOX: "/user/Inbox",
     CLIENTS: "/user/Clients",
     WISHLIST: "/user/Wishlist",

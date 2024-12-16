@@ -1,6 +1,5 @@
 "use client";
 import { DataTable } from "@/src/components/data-table";
-import { RentalsData } from "@/src/lib/dataUser";
 import ROUTES from "@/src/routes";
 import React from "react";
 import { TableHeader } from "@/src/components/table/table-header";
@@ -9,14 +8,12 @@ import CardIcon from "@/src/assets/icons/card";
 import RentSwitch from "@/src/components/RentSwitch";
 import { columns } from "./columns";
 import DeleteIcon from "@/src/assets/icons/delete";
-import EditIcon from "@/src/assets/icons/edit";
-import NoteTableIcon from "@/src/assets/icons/noteTable";
 import ReorderIcon from "@/src/assets/icons/reorder";
 import RentAgainIcon from "@/src/assets/icons/rentAgain";
 import ReviewIcon from "@/src/assets/icons/review";
-import ReturnedIcon from "@/src/assets/icons/returned";
 import CarReturn from "@/src/assets/icons/car-return";
 import BarcodeIcon from "@/src/assets/icons/barcode";
+import { GetMyOrderAll } from "@/src/hooks/queries/user/booking";
 const FilterOptions = [
   {
     label: "Pending Approval",
@@ -89,6 +86,8 @@ const functionSelect = [
   },
 ];
 function TableRentalsView() {
+  const {data} = GetMyOrderAll();
+  console.log(data);
   return (
     <div className=" hidden mdl:block">
       <TableHeader>
@@ -108,7 +107,7 @@ function TableRentalsView() {
       </TableHeader>
       <DataTable
         title=""
-        data={RentalsData}
+        data={data?.data || []}
         columns={columns}
         functionSelect={functionSelect}
       />

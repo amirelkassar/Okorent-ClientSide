@@ -8,7 +8,10 @@ import { ColumnDef } from "@tanstack/react-table";
 import Image, { StaticImageData } from "next/image";
 import phoneImg from "@/src/assets/images/phone.png";
 import CardStatus from "@/src/components/cardStatus";
-
+import avatar from "@/src/assets/images/avatar.png";
+import { getDate } from "@/src/lib/utils";
+import { Link } from "@/src/navigation";
+import ROUTES from "@/src/routes";
 export type RequestsTableData = {
   id: number;
   name: string;
@@ -17,44 +20,55 @@ export type RequestsTableData = {
   end: string;
   quantity: number;
   status: string;
-  payment: number;
+  amount: number;
   paymentStatus: string;
   img: StaticImageData;
+  orderId: any;
 };
 
 export const columns: ColumnDef<RequestsTableData>[] = [
   {
-    accessorKey: "phone",
+    accessorKey: "productName",
     header: "Product",
     cell: ({ getValue, row }) => {
-      const phone = getValue<string>();
+      const productName = getValue<string>();
+      const id = row.original.orderId;
       return (
-        <div className="flex items-center gap-2">
+        <Link
+          href={ROUTES.USER.ORDERID(id)}
+          className="flex items-center gap-2"
+        >
           <div className="size-[50px] rounded-[50%] p-[6px] bg-grayBack flex justify-center items-center">
             <Image
               src={phoneImg}
-              alt={phone}
+              alt={productName}
               width={50}
               height={50}
               className="w-auto h-full  object-contain "
             />
           </div>
-          <h2 className="text-[16px] font-SemiBold">{phone}</h2>
-        </div>
+          <h2 className="text-[16px] font-SemiBold max-w-[170px] truncate">
+            {productName}
+          </h2>
+        </Link>
       );
     },
   },
   {
-    accessorKey: "end",
+    accessorKey: "to",
     header: "Rental Ending Date",
     cell: ({ getValue }) => {
-      const end = getValue<string>();
+      const to = getValue<string>();
 
-      return <p className="text-grayMedium text-[16px]">{end}</p>;
+      return (
+        <p className="text-grayMedium text-[16px]">
+          {getDate(to).fullYearWithMonthName}
+        </p>
+      );
     },
   },
   {
-    accessorKey: "name",
+    accessorKey: "lessorName",
     header: () => {
       return (
         <div className="flex items-center gap-1 cursor-pointer">
@@ -64,19 +78,17 @@ export const columns: ColumnDef<RequestsTableData>[] = [
       );
     },
     cell: ({ getValue, row }) => {
-      const name = getValue<string>();
-      const img = row.original.img;
-
+      const lessorName = getValue<string>();
       return (
         <div className="flex items-center gap-2">
           <Image
-            src={img}
-            alt={name}
+            src={avatar}
+            alt={lessorName}
             width={50}
             height={50}
             className="w-12 h-12 rounded-[50%] object-cover object-top"
           />
-          <h2 className="text-[16px] font-SemiBold">{name}</h2>
+          <h2 className="text-[16px] font-SemiBold">{lessorName}</h2>
         </div>
       );
     },
@@ -87,11 +99,11 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     header: "Status",
     cell: ({ getValue }) => {
       const status = getValue<string>();
-      switch (status.toLowerCase()) {
+      switch (status.toString()) {
         case "out for delivery":
           return <CardStatus animation circle type="blue" title={status} />;
-        case "pending":
-          return <CardStatus circle type="blue" title={status} />;
+        case "1":
+          return <CardStatus circle type="blue" title={"pending"} />;
         case "accepted":
           return <CardStatus animation circle type="green" title={status} />;
         case "completed":
@@ -106,11 +118,11 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     },
   },
   {
-    accessorKey: "payment",
+    accessorKey: "amount",
     header: "Payment",
     cell: ({ getValue }) => {
-      const payment = getValue<number>();
-      return <p className=" text-[16px] font-SemiBold">{payment}$</p>;
+      const amount = getValue<number>();
+      return <p className=" text-[16px] font-SemiBold">{amount}$</p>;
     },
   },
   {
@@ -118,13 +130,13 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     header: "Payment Status",
     cell: ({ getValue }) => {
       const paymentStatus = getValue<string>();
-      switch (paymentStatus.toLowerCase()) {
+      switch (paymentStatus.toString()) {
         case "completed":
           return <CardStatus circle type="blue" title={paymentStatus} />;
         case "canceled":
           return <CardStatus circle type="red" title={paymentStatus} />;
-        case "pending":
-          return <CardStatus circle type="green" title={paymentStatus} />;
+        case "1":
+          return <CardStatus circle type="green" title={"pending"} />;
         default:
           return <CardStatus circle type="gray" title="--" />;
       }

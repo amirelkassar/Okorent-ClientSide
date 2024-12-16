@@ -18,6 +18,17 @@ export const GetMyProductsAll = (queries?: any) => {
     },
   });
 };
+//getProductByID
+export const GetMyProductsByID = (id: any) => {
+  return useQuery({
+    queryKey: [initialQueryKey, id],
+    queryFn: async () => {
+      const response = await api.get(user.product.getMyProductsById(id));
+      return response.data;
+    },
+  });
+};
+
 //Delete Product
 export const useDeleteMutation = () => {
   const queryClient = useQueryClient();

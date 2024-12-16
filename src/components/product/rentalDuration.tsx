@@ -3,11 +3,8 @@ import { DatePicker } from "@mantine/dates";
 import { useMediaQuery } from "@mantine/hooks";
 import React, { useState } from "react";
 
-function RentalDuration({setDaysNumber}:any) {
-  const [value, setValue] = useState<[Date | null, Date | null]>([
-    new Date(),
-    new Date(),
-  ]);
+function RentalDuration({setDaysNumber,setValue,value}:{setDaysNumber:any,setValue:any,value:any}) {
+  
   const isMobile = useMediaQuery("(max-width: 550px)");
   const calculateDuration = (valueDate: [Date | null, Date | null]) => {
     if (valueDate[0] && valueDate[1]) {

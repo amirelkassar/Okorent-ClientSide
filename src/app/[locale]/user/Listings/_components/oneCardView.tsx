@@ -19,7 +19,7 @@ function OneCardView({ data, offline }: { data: any; offline: boolean }) {
           <h3 className="text-grayMedium mb-1 font-Regular lg:text-[16px] text-sm">
             Product Name
           </h3>
-          <p className="lg:text-[16px] text-sm font-SemiBold">
+          <p className="lg:text-[16px] text-sm font-SemiBold truncate max-w-[130px]">
             {data?.name || "Product Name"}
           </p>
         </div>
