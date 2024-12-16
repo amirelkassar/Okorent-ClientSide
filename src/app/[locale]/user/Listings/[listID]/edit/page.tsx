@@ -1,39 +1,24 @@
 "use client";
-import React, { ChangeEvent, useEffect, useState } from "react";
-import { Checkbox, Radio, Select, Textarea, TextInput } from "@mantine/core";
-import DownIcon from "@/src/assets/icons/down";
+import React, { useEffect, useState } from "react";
+import { Checkbox, TextInput } from "@mantine/core";
 import DropImg from "@/src/components/DropImg";
 import Button from "@/src/components/button";
 import StepLocation from "./_components/stepLocation";
 import StepAvailability from "./_components/stepAvailability";
 import house1 from "@/src/assets/images/house1.png";
 import house2 from "@/src/assets/images/house2.png";
+import { GetMyProductsByID } from "@/src/hooks/queries/user/lisitings";
+import SelectInput from "@/src/components/select-input";
+import {
+  GetCategory,
+  GetSubCategory,
+} from "@/src/hooks/queries/user/add-lisiting";
+import InputTextarea from "@/src/components/InputTextarea";
+import Input from "@/src/components/input";
+import StepFAQ from "./_components/stepFAQ";
 
-const OptionTerms = [
-  {
-    value: "Flexible",
-    label: "Flexible",
-    title:
-      "Flexible - In case of cancellation 2 days before the rental period, 100% of the rental amount is refunded. If canceled one day before the rental period, 50% of the rental amount is refunded.",
-  },
-  {
-    value: "Medium",
-    label: "Medium",
-    title: "",
-  },
-  {
-    value: "Strict",
-    label: "Strict",
-    title: "",
-  },
-];
-
-interface Variation {
-  name: string;
-  attribute1: string;
-  attribute2: string;
-}
 interface LocationProps {
+  id: number;
   name: string;
   address: string;
 }
@@ -79,57 +64,38 @@ const data = {
   Stock: "500",
   Status: "Not",
 };
-function Page() {
+interface FAQ {
+  question: string;
+  answer: string;
+}
+function Page({ params }: any) {
+  const { data: ProductDerails, isLoading } = GetMyProductsByID(params.listID);
+  console.log(ProductDerails);
+  const [dataList, setDataList] = useState<any>(ProductDerails?.data || {});
+  const { data: dataCategory } = GetCategory();
+  const [faqs, setFaqs] = useState<FAQ[]>([{ question: "", answer: "" }]);
+
+  const { data: dataSubCategory, refetch: RefetchGetSubCategory } =
+    GetSubCategory(dataList?.categoryId);
   const [selectedCheckbox, setSelectedCheckbox] = useState<string | null>(null);
-  const [variations, setVariations] = useState<Variation[]>([]);
   const [location, setLocation] = useState<LocationProps[]>([]);
-  const [countValueInput, setCountValueInput] = useState(0);
-  const [dataList, setDataList] = useState<any>({});
   useEffect(() => {
-    setDataList(data);
-    setLocation(data.addresses);
-    setVariations(data.Variations);
-    setSelectedCheckbox(data.Status);
-  }, []);
+    console.log("goo");
+
+    RefetchGetSubCategory();
+  }, [dataList?.categoryId]);
+  useEffect(() => {
+    if (ProductDerails?.data) {
+      console.log("goo");
+      setDataList(ProductDerails?.data);
+      RefetchGetSubCategory();
+      setSelectedCheckbox(ProductDerails?.data?.isActive ? "true" : "false");
+      setFaqs(ProductDerails?.data.faQs || []);
+      setLocation(ProductDerails?.data.stocks);
+    }
+  }, [isLoading]);
   console.log(dataList);
-  const handleInputChangeLocation = (
-    index: number,
-    value: string,
-    name: string
-  ) => {
-    const updatedVariations = location.map((loc, i) =>
-      i === index ? { ...loc, [name]: value } : loc
-    );
-    setLocation(updatedVariations);
-    setDataList({ ...dataList, addresses: updatedVariations });
-  };
-  const addLocation = () => {
-    setLocation([...location, { name: "", address: "" }]);
-  };
-  const addVariation = () => {
-    setVariations([
-      ...variations,
-      { name: "", attribute1: "", attribute2: "" },
-    ]);
-  };
-  const handleInputChange = (
-    index: number,
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    const { name, value } = event.target;
-    const updatedVariations = variations.map((variation, i) =>
-      i === index ? { ...variation, [name]: value } : variation
-    );
-    setVariations(updatedVariations);
-    setDataList({ ...dataList, Variations: updatedVariations });
-  };
-  const handleInputChangeSelect = (index: number, value: any, name: string) => {
-    const updatedVariations = variations.map((variation, i) =>
-      i === index ? { ...variation, [name]: value } : variation
-    );
-    setVariations(updatedVariations);
-    setDataList({ ...dataList, Variations: updatedVariations });
-  };
+
   const handleCheckboxChange = (
     value: string,
     setState: React.Dispatch<React.SetStateAction<string | null>>
@@ -141,83 +107,82 @@ function Page() {
       setDataList({ ...dataList, Status: value });
     }
   };
-
+  const handleInputChangeLocation = (ids: any[]) => {
+    setLocation(ids);
+    setDataList({ ...dataList, stocks: ids });
+  };
+  const handleRemoveLocation = (index: any) => {
+    const updatedLocations = location.filter((loc) => loc !== index);
+    setLocation(updatedLocations);
+    setDataList({ ...dataList, UserStockIds: updatedLocations });
+  };
+  if (isLoading && !dataList) {
+    return <div>Loading...</div>;
+  }
+  const handleChangeFAQ = (index: number, field: keyof FAQ, value: string) => {
+    const newFaqs = [...faqs];
+    newFaqs[index][field] = value;
+    setFaqs(newFaqs);
+    setDataList({ ...dataList, faQs: newFaqs });
+  };
   return (
     <div className="w-full lg:w-[810px] mb-20 flex flex-col gap-4">
       <div className="mt-[7px] pb-8 flex-1">
         <h3 className={"text-base lg:text-[24px] mb-2 lg:mb-3 "}>
           Choose item category
         </h3>
-        <Select
-          data={[
-            "category",
-            "category2",
-            "category3",
-            "category4",
-            "category5",
-          ]}
-          defaultValue={data.category}
-          leftSectionPointerEvents="none"
-          rightSection={<DownIcon />}
+        <SelectInput
+          data={dataCategory?.data?.map((item: any) => {
+            return { label: item.name, value: item.id };
+          })}
           placeholder="Select category"
-          searchable
           onChange={(e) => {
-            setDataList({ ...dataList, category: e });
+            setDataList({ ...dataList, categoryId: e });
           }}
-          classNames={{
-            input:
-              " text-black rounded-2xl text-grayMedium  h-full border-none placeholder:text-grayMedium placeholder:opacity-100 ",
-
-            wrapper: "h-full",
-            dropdown:
-              "bg-white text-black rounded-2xl border border-green/50 text-grayDark py-2",
-            option: "hover:bg-green hover:text-white duration-300 ",
+          value={dataList?.categoryId}
+          inputClassName="!rounded-2xl text-grayMedium !border-2  !h-16 "
+          className=" bg-white "
+        />
+        <SelectInput
+          label="Select SubCategory"
+          data={dataSubCategory?.data?.map((item: any) => {
+            return { label: item.name, value: item.id };
+          })}
+          value={dataList?.subCategoryId}
+          placeholder="Select SubCategory"
+          onChange={(e) => {
+            setDataList({ ...dataList, subCategoryId: e });
           }}
-          className="h-[64px]   duration-200 min-h-[64px] bg-white rounded-2xl border-2 border-green text-grayMedium"
+          inputClassName="!rounded-2xl text-grayMedium !border-2  !h-16 "
+          className="mt-4"
         />
       </div>
       <div className="mt-[7px] pb-8 flex-1">
         <h3 className={"text-base lg:text-[24px] mb-2 lg:mb-3 "}>
           Describtion
         </h3>
-        <TextInput
+        <Input
           placeholder="Add item title here"
-          defaultValue={data.Describe.title}
           onChange={(e) => {
             setDataList({
               ...dataList,
-              Describe: {
-                ...dataList.Describe,
-                title: e.target.value,
-              },
+              name: e.target.value,
             });
           }}
-          classNames={{
-            input:
-              " text-black rounded-2xl text-grayMedium  h-full border-none placeholder:text-grayMedium placeholder:opacity-100 ",
-            wrapper: "h-full",
-          }}
-          className="h-[64px] mb-6 duration-200 min-h-[64px] bg-white rounded-2xl border-2 border-green text-grayMedium"
+          defaultValue={dataList?.name}
+          inputClassName="  !rounded-2xl   bg-white !h-16 border"
+          className=" mb-6 "
         />
-        <Textarea
-          defaultValue={data.Describe.dec}
+        <InputTextarea
           onChange={(e) => {
             setDataList({
               ...dataList,
-              Describe: {
-                ...dataList.Describe,
-                dec: e.target.value,
-              },
+              description: e.target.value,
             });
           }}
+          defaultValue={dataList?.description}
           autosize
           placeholder="Add as much details as you can here about your item "
-          classNames={{
-            input:
-              " text-black rounded-2xl text-grayMedium  h-full border-none placeholder:text-grayMedium placeholder:opacity-100 ",
-            wrapper: "h-full",
-          }}
-          className="  lg:mb-6 duration-200 min-h-[190px] bg-white rounded-2xl border-2 border-green text-grayMedium"
         />
       </div>
       <div className="mt-[7px] pb-8 flex-1">
@@ -235,118 +200,65 @@ function Page() {
           Try to add lower price for longer bookings
         </p>
         <div className="flex items-center flex-wrap gap-4">
-          <TextInput
+          <Input
             name="name"
-            label={"Price for 3 Days"}
+            label={"Price for 1 Day"}
             placeholder={"Add Price Here"}
-            defaultValue={data.priceItems.OneDay}
             onChange={(e) => {
               setDataList({
                 ...dataList,
-                priceItems: {
-                  ...dataList.priceItems,
-                  OneDay: e.target.value,
-                },
+                dailyPrice: e.target.value,
               });
             }}
-            classNames={{
-              label: "text-sm lg:text-[16px] text-grayMedium mb-2",
-              input:
-                " text-black md:max-w-[200px] rounded-2xl text-grayMedium bg-white  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
-              wrapper: "h-[64px]",
-            }}
-            className=" flex-1  min-w-[170px] w-full duration-200 md:max-w-[200px] min-h-[64px] rounded-2xl text-grayMedium"
+            defaultValue={dataList?.dailyPrice}
+            inputClassName="  w-full !rounded-2xl bg-white  border-2   h-16  "
+            labelClassName="text-sm lg:text-[16px]  mb-2 text-grayMedium"
+            className=" flex-1 min-w-[170px] w-full  md:max-w-[200px] "
           />
-          <TextInput
+          <Input
             label={"Price for 1 Week"}
             name="attribute1"
             placeholder={"Add Price Here"}
-            defaultValue={data.priceItems.ThreeDay}
             onChange={(e) => {
               setDataList({
                 ...dataList,
-                priceItems: {
-                  ...dataList.priceItems,
-                  ThreeDay: e.target.value,
-                },
+                weeklyPrice: e.target.value,
               });
             }}
-            classNames={{
-              label: "text-sm lg:text-[16px] text-grayMedium mb-2",
-              input:
-                " text-black md:max-w-[200px] rounded-2xl text-grayMedium bg-white  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
-              wrapper: "h-[64px]",
-            }}
-            className=" flex-1  min-w-[170px] w-full duration-200 md:max-w-[200px] min-h-[64px] rounded-2xl text-grayMedium"
+            defaultValue={dataList?.weeklyPrice}
+            inputClassName="  w-full !rounded-2xl bg-white  border-2   h-16  "
+            labelClassName="text-sm lg:text-[16px]  mb-2 text-grayMedium"
+            className=" flex-1 min-w-[170px] w-full  md:max-w-[200px] "
           />
-          <TextInput
+          <Input
             label={"Price for 1 Month"}
             name="attribute2"
             placeholder={"Add Price Here"}
-            defaultValue={data.priceItems.Week}
             onChange={(e) => {
               setDataList({
                 ...dataList,
-                priceItems: {
-                  ...dataList.priceItems,
-                  Week: e.target.value,
-                },
+                monthlyPrice: e.target.value,
               });
             }}
-            classNames={{
-              label: "text-sm lg:text-[16px] text-grayMedium mb-2",
-              input:
-                " text-black md:max-w-[200px] rounded-2xl text-grayMedium bg-white  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
-              wrapper: "h-[64px]",
-            }}
-            className=" flex-1  min-w-[170px] w-full duration-200 md:max-w-[200px] min-h-[64px] rounded-2xl text-grayMedium"
+            defaultValue={dataList?.monthlyPrice}
+            inputClassName="  w-full !rounded-2xl bg-white  border-2   h-16  "
+            labelClassName="text-sm lg:text-[16px]  mb-2 text-grayMedium"
+            className=" flex-1 min-w-[170px] w-full  md:max-w-[200px] "
           />
         </div>
       </div>
       <StepLocation
-        addLocation={addLocation}
-        location={location}
+        handleRemoveLocation={handleRemoveLocation}
+        location={dataList?.stocks || []}
         handleInputChangeLocation={handleInputChangeLocation}
       />
-      <div className="mt-[7px] pb-8 flex-1">
-        <h3 className={"text-base lg:text-[24px] mb-2 lg:mb-3 "}>
-          Cancellation Terms
-        </h3>
-        <Radio.Group
-          defaultValue={data.Terms}
-          onChange={(e) => {
-            setDataList({ ...dataList, Terms: e });
-          }}
-          name="OptionTerms"
-        >
-          <div className="flex  items-center my-6 justify-between gap-3 flex-wrap">
-            {OptionTerms.map((option, inedx) => {
-              return (
-                <Radio
-                  color="#88BA52"
-                  key={inedx}
-                  value={option.value}
-                  label={option.label}
-                  classNames={{
-                    icon: "w-3 h-3 left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2",
-                  }}
-                />
-              );
-            })}
-          </div>
-        </Radio.Group>
-        <div>
-          <p className="mt-4 text-[14px] text-grayMedium">
-            {OptionTerms[0].title}
-          </p>
-        </div>
-      </div>
+
       <div className="mt-[7px] pb-8 flex-1">
         <h3 className={"text-base lg:text-[24px] mb-2 lg:mb-3 "}>
           Value of the item
         </h3>
         <TextInput
-          defaultValue={data.value}
+          defaultValue={dataList?.cost}
           onChange={(e) => {
             setDataList({ ...dataList, value: e.target.value });
           }}
@@ -360,16 +272,12 @@ function Page() {
         />
       </div>
 
-      <StepAvailability
-        defaultValue={data.Availability}
-        dataList={dataList}
-        setDataList={setDataList}
-      />
+      <StepAvailability dataList={dataList} setDataList={setDataList} />
       <div className="mt-[7px] pb-8 flex-1">
         <h3 className={"text-base lg:text-[24px] mb-2 lg:mb-3 "}>Stock</h3>
         <TextInput
           placeholder="Add available stock number here"
-          defaultValue={data.Stock}
+          defaultValue={dataList?.totalQuantity}
           onChange={(e) => {
             setDataList({ ...dataList, Stock: e.target.value });
           }}
@@ -388,21 +296,21 @@ function Page() {
         </h3>
         <div className="flex flex-col gap-4">
           <Checkbox
-            checked={selectedCheckbox === "Active"}
+            checked={selectedCheckbox === "true"}
             onChange={(e) => {
               handleCheckboxChange(e.target.value, setSelectedCheckbox);
             }}
             color="#88BA52"
-            value="Active"
+            value={"true"}
             label="Active"
           />
           <Checkbox
-            checked={selectedCheckbox === "Not"}
+            checked={selectedCheckbox === "false"}
             onChange={(e) => {
               handleCheckboxChange(e.target.value, setSelectedCheckbox);
             }}
             color="#88BA52"
-            value="Not"
+            value={"false"}
             label="Not Active"
           />
         </div>
@@ -412,7 +320,11 @@ function Page() {
           keep the item unavailable for rent
         </p>
       </div>
-
+      <StepFAQ
+        faqs={faqs}
+        setFaqs={setFaqs}
+        handleChangeFAQ={handleChangeFAQ}
+      />
       <div className="flex items-center mt-8 gap-7 md:flex-row flex-col">
         <Button className={"w-full lg:w-[208px] h-[64px]"}>Save Edits</Button>
         <Button

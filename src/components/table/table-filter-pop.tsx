@@ -7,8 +7,8 @@ import { useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 export interface FilterData {
   label: string;
-  type: string;
-  key: string | boolean;
+  key: string;
+  value: any;
 }
 interface TableFilterProps {
   data: FilterData[];

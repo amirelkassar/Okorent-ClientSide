@@ -1,7 +1,7 @@
 import { api } from "@/src/api/axios";
 import { user } from "@/src/api/user";
 import { getQueries } from "@/src/lib/utils";
-import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
+import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { initialSiteQueries } from "../../initials";
 
 const initialCustomQueries = null;
@@ -9,15 +9,44 @@ export const initialQueries = initialCustomQueries || initialSiteQueries;
 export const initialQueryKey = "user.myProductsAll";
 
 //getMyAllProducts
-export const GetMyProductsAll = () => {
+export const GetMyProductsAll = (queries?: any) => {
   return useQuery({
-    queryKey: [initialQueryKey],
+    queryKey: [initialQueryKey, queries],
     queryFn: async () => {
-      const response = await api.get(user.product.my_products());
+      const response = await api.get(user.product.my_products(queries));
       return response.data;
     },
   });
 };
+//getProductByID
+export const GetMyProductsByID = (id: any) => {
+  return useQuery({
+    queryKey: [initialQueryKey, id],
+    queryFn: async () => {
+      const response = await api.get(user.product.getMyProductsById(id));
+      return response.data;
+    },
+  });
+};
+
+//Delete Product
+export const useDeleteMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: any) => {
+      const response = await api.delete(user.product.getById(id));
+      return response.data;
+    },
+
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKey]);
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+}
 
 export const getComplaints = async (queries: any) =>
   (await api.get(user.product.my_products(queries))).data;

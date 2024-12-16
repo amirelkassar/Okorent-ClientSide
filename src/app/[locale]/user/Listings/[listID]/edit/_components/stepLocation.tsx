@@ -1,100 +1,124 @@
 "use client";
-import React from "react";
-import { Checkbox, TextInput } from "@mantine/core";
+import React, { useState } from "react";
+import { Checkbox, MultiSelect, TextInput } from "@mantine/core";
 import Button from "@/src/components/button";
 import { cn } from "@/src/lib/utils";
 import ModalComp from "@/src/components/modal-comp";
 import { useDisclosure } from "@mantine/hooks";
 import LocationIcon from "@/src/assets/icons/location";
 import GoogleMapLoc from "@/src/components/GoogleMap";
+import ButtonDelete from "@/src/components/button-delete";
+import { GetMyStock } from "@/src/hooks/queries/user/lisitings/stock";
 
-interface LocationProps {
-  name: string;
-  address: string;
-}
+
+
 interface StepLocationProps {
-  location: LocationProps[];
-  addLocation: () => void;
-  handleInputChangeLocation: (
-    index: number,
-    value: string,
-    name: string
-  ) => void;
+  location: any[];
+  handleInputChangeLocation: (ids: any[]) => void;
+  handleRemoveLocation: (index: number) => void;
 }
 function StepLocation({
   location,
-  addLocation,
   handleInputChangeLocation,
+  handleRemoveLocation,
 }: StepLocationProps) {
   const [opened, { open, close }] = useDisclosure(false);
+  const [indexSelect, setIndexSelect] = useState<any>(0);
+  const { data } = GetMyStock();
+  console.log(location);
+  console.log(data);
+  
   return (
     <div className="mt-[7px] pb-8 lg:pb-12 flex-1">
       <h3 className={"text-base lg:text-[24px] mb-1 "}>Storage Location</h3>
       <p className="text-grayMedium mb-4 text-sm lg:text-base font-Regular">
         Add storage location that we will pickup the item from
       </p>
+      <div>
+        <div className="flex flex-col gap-5 lg:gap-6">
+          <MultiSelect
+            data={data?.data.map((loc: any) => ({
+              value: loc.id, // Use the `id` as the value
+              label: loc.name, // Use the `address` as the label
+            }))}
+            defaultValue={['7e8ad53d-0b9f-422c-b5f8-a7c26529f1db','2840cc65-d635-48d8-b6ec-03c509477011']}
+            onChange={(selectedValues) => {
+              handleInputChangeLocation(selectedValues);
+            }}
+            placeholder="Choose Location"
+            searchable
+            size="lg"
+            classNames={{
+              input:
+                " bg-white text-black flex items-center rounded-xl text-grayMedium  min-h-[64px] border border-green",
 
-      <div className="flex flex-col gap-6">
-        {location.map((loc, index) => (
-          <div key={index} className="flex items-center gap-3">
-            <Checkbox
-              checked={true}
-              readOnly
-              color="#88BA52"
-              className={cn("mt-6")}
-            />
-            <div className="flex items-center gap-4">
-              <TextInput
-                value={`Location ${index + 1}`}
-                name="name"
-                label={"Location Name"}
-                placeholder={`Location ${index + 1}`}
-                readOnly
-                classNames={{
-                  label: "text-sm lg:text-base text-grayMedium mb-2",
-                  input:
-                    " text-black rounded-2xl text-[12px] md:text-[16px] text-grayMedium  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
-                  wrapper: "h-[64px]",
-                }}
-                className=" flex-1  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
-              />
-              <TextInput
-                value={loc.address}
-                label={"Address"}
-                name="attribute1"
-                placeholder={`Saffron Walden, England`}
-                onChange={(event) =>
-                  handleInputChangeLocation(
-                    index,
-                    "address",
-                    event.target.value
-                  )
-                }
-                classNames={{
-                  label: "text-sm lg:text-base text-grayMedium mb-2",
-                  input:
-                    " text-black rounded-2xl text-[12px] md:text-[16px] text-grayMedium first:font-Bold  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
-                  wrapper: "h-[64px]",
-                }}
-                className=" flex-1  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
-              />
-              <ModalComp title="Add a variation" opened={opened} close={close}>
-                <GoogleMapLoc
-                  close={close}
-                  index={index}
-                  handleInputChangeLocation={handleInputChangeLocation}
+              inputField:
+                "placeholder:text-base  h-full placeholder:text-grayMedium placeholder:opacity-100   ",
+              pillsList: "h-full",
+              dropdown:
+                "bg-white text-black rounded-lg border border-green/50 text-grayDark py-2",
+              option:
+                "hover:bg-green hover:text-white duration-300   flex items-center ",
+              pill: "bg-green text-white h-auto py-2 flex items-center rounded-lg gap-2 text-base",
+              label: "text-grayMedium",
+            }}
+            clearable
+            className="block " // Visible on mobile, hidden on larger screens
+          />
+
+          {data?.data
+            ?.filter((item: any) => location.includes(item.id))
+            .map((loc: any, index: number) => (
+              <div key={index} className="flex items-center gap-3">
+                <Checkbox
+                  checked={true}
+                  readOnly
+                  color="#88BA52"
+                  className={cn("mt-6")}
                 />
-              </ModalComp>
-            </div>
-          </div>
-        ))}
-      </div>
+                <div className="flex items-center flex-wrap lg:flex-nowrap flex-1 gap-4">
+                  <TextInput
+                    value={loc.name}
+                    name="name"
+                    label={"Location Name"}
+                    placeholder={`Location ${index + 1}`}
+                    readOnly
+                    classNames={{
+                      label: "text-sm md:text-[16px] text-grayMedium mb-2",
+                      input:
+                        " text-black text-[12px] md:text-[16px] rounded-2xl text-grayMedium  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+                      wrapper: "h-[64px]",
+                    }}
+                    className=" flex-1 min-w-[144px]  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
+                  />
+                  <div
+                    onClick={() => {
+                      setIndexSelect(loc.id);
+                      open();
+                    }}
+                    className=" cursor-pointer flex-1 min-w-[156px]"
+                  >
+                    <h3 className="text-sm md:text-[16px] text-grayMedium mb-2">
+                      Address
+                    </h3>
+                    <p className=" flex items-center px-2 py-3 flex-1 text-nowrap truncate  max-w-[260px] text-[12px] md:text-[16px] rounded-2xl text-grayMedium first:font-Bold  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100">
+                      {loc.address}
+                    </p>
+                  </div>
 
-      {location.length < 3 && (
+                  <ButtonDelete
+                    onClick={() => handleRemoveLocation(loc.id)}
+                    className={"!size-7 mt-6 lg:!size-11 bg-grayBack"}
+                  />
+                </div>
+              </div>
+            ))}
+        </div>
+
         <div className="variations-header">
           <Button
             onClick={() => {
-              addLocation();
+              setIndexSelect(null);
               open();
             }}
             className={
@@ -105,7 +129,11 @@ function StepLocation({
             <p>Add location</p>
           </Button>
         </div>
-      )}
+
+        <ModalComp title="Add a variation" opened={opened} close={close}>
+          <GoogleMapLoc close={close} index={indexSelect} />
+        </ModalComp>
+      </div>
     </div>
   );
 }

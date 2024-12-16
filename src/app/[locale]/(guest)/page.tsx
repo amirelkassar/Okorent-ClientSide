@@ -1,11 +1,18 @@
+"use client";
 import React from "react";
-import { Rentals } from "@/src/lib/dataUser";
 import ProductList from "@/src/components/product/productList";
 import HeaderAdmin from "./_components/headerAdmin";
 import LookingFor from "./_components/lookingFor";
 import Categories from "./_components/categories";
+import { GetProductsAll } from "@/src/hooks/queries/user/home";
+import LoadingProductsRow from "@/src/components/product/loading-products-row";
+import { useSearchParams } from "next/navigation";
 
-function page() {
+function Page() {
+  const searchParams = useSearchParams();
+  const { data, isLoading, isFetching } = GetProductsAll(
+    searchParams.toString()
+  );
   return (
     <div>
       <HeaderAdmin />
@@ -13,11 +20,15 @@ function page() {
         <LookingFor />
       </div>
       <Categories />
-      <div className="mt-10 lg:my-20 mx-auto">
-        <ProductList more={false} title="" data={Rentals} />
-      </div>
+      <>
+        {isLoading ? (
+          <LoadingProductsRow number={5} />
+        ) : (
+          <ProductList more={false} data={data?.data || []} />
+        )}
+      </>
     </div>
   );
 }
 
-export default page;
+export default Page;

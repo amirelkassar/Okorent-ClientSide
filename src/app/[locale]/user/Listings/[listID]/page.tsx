@@ -1,3 +1,4 @@
+"use client";
 import EditIcon from "@/src/assets/icons/edit";
 import Button from "@/src/components/button";
 import CardDetailsList from "@/src/components/cardDetailsList";
@@ -7,6 +8,8 @@ import React from "react";
 import house1 from "@/src/assets/images/house1.png";
 import house2 from "@/src/assets/images/house2.png";
 import LinkGreen from "@/src/components/linkGreen";
+import FAQ from "@/src/components/faq";
+import { GetMyProductsByID } from "@/src/hooks/queries/user/lisitings";
 
 const data = {
   category: "category3",
@@ -51,7 +54,8 @@ const data = {
   Status: "Not",
 };
 function page({ params }: any) {
-
+  const { data: ProductDerails } = GetMyProductsByID(params.listID);
+  console.log(ProductDerails);
 
   return (
     <div className="flex flex-col lgl:mt-[-30px] gap-3 mb-20">
@@ -64,14 +68,18 @@ function page({ params }: any) {
         <EditIcon fill="white" className="w-[16px]" />
         <p className="text-white">Edit</p>
       </LinkGreen>
-      <CardDetailsList title="Item category" decs={data.category} />
-      <CardDetailsList title="Title" decs={data.Describe.title} />
-      <CardDetailsList title="Describtion" decs={data.Describe.dec} />
+      <CardDetailsList title="Item Category" decs={ProductDerails?.data.categoryName} />
+      <CardDetailsList title="Item Subcategory" decs={ProductDerails?.data.subCategoryName} />
+      <CardDetailsList title="Title" decs={ProductDerails?.data?.name} />
+      <CardDetailsList
+        title="Describtion"
+        decs={ProductDerails?.data?.description}
+      />
       <div className="pb-4 border-b border-grayMedium/40 last-of-type:border-none">
         <h3 className="text-base lg:text-[24px] mb-1">Item Images</h3>
-        {data.pictures.length > 0 && (
+        {ProductDerails?.data?.images.length > 0 && (
           <div className="h-fit  gap-2 flex-wrap  p-1 relative flex  overflow-hidden  rounded-2xl">
-            {data.pictures.map((file, index) => (
+            {ProductDerails?.data?.pictures.map((file: any, index: number) => (
               <Image
                 key={index}
                 src={file}
@@ -86,24 +94,31 @@ function page({ params }: any) {
       </div>
       <div className="pb-4 border-b border-grayMedium/40 last-of-type:border-none">
         <h3 className="text-base lg:text-[24px] mb-1">Item Price</h3>
+
         <p className="text-base border-b border-grayMedium/40 py-2 last-of-type:border-none text-grayMedium font-Regular">
-          Per hour:{" "}
-          <span className="font-Medium">{data.priceItems.OneDay}</span>
-        </p>
-        <p className="text-base border-b border-grayMedium/40 py-2 last-of-type:border-none text-grayMedium font-Regular">
-          Per Day: <span className="font-Medium">{data.priceItems.OneDay}</span>
+          Per Day:{" "}
+          <span className="font-Medium">
+            {ProductDerails?.data?.dailyPrice}
+          </span>
         </p>
         <p className="text-base border-b border-grayMedium/40 py-2 last-of-type:border-none text-grayMedium font-Regular">
           Per 3 Days:{" "}
-          <span className="font-Medium"> {data.priceItems.ThreeDay} </span>
+          <span className="font-Medium">
+            {" "}
+            {ProductDerails?.data?.weeklyPrice}{" "}
+          </span>
         </p>
         <p className="text-base border-b border-grayMedium/40 py-2 last-of-type:border-none text-grayMedium font-Regular">
-          Per Week: <span className="font-Medium"> {data.priceItems.Week}</span>
+          Per Week:{" "}
+          <span className="font-Medium">
+            {" "}
+            {ProductDerails?.data?.monthlyPrice}{" "}
+          </span>
         </p>
       </div>
       <div className="pb-4 border-b border-grayMedium/40 last-of-type:border-none">
         <h3 className="text-base lg:text-[24px] mb-1">Storage Location</h3>
-        {data.addresses.map((address, i) => {
+        {data.addresses.map((address: any, i: number) => {
           return (
             <p
               key={i}
@@ -115,32 +130,38 @@ function page({ params }: any) {
           );
         })}
       </div>
+
       <CardDetailsList
-        title="Cancellation Terms"
-        decs="Flexible - In case of cancellation 2 days before the rental period, 100% of the rental amount is refunded. If canceled one day before the rental period, 50% of the rental amount is refunded."
+        title="Item Value"
+        decs={`${ProductDerails?.data?.dailyPrice}$`}
       />
-      <CardDetailsList title="Item Value" decs={`${data.value}$`} />
-      <CardDetailsList title="Availability" decs={data.Availability} />
-      <div className="pb-4 border-b border-grayMedium/40 last-of-type:border-none">
-        <h3 className="text-base lg:text-[24px] mb-1">Variations</h3>
-        {data.Variations.map((variation, i) => {
-          return (
-            <div
-              key={i}
-              className="text-base flex gap-10 items-center border-b border-grayMedium/40 py-2 last-of-type:border-none text-grayMedium font-Regular"
-            >
-              <h4> Phone Case ${i}: </h4>
-              <span className="font-Medium">
-                {" "}
-                Color - {variation.attribute1}
-              </span>
-              <span className="font-Medium">Size - {variation.attribute2}</span>
-            </div>
-          );
-        })}
-      </div>
-      <CardDetailsList title="Available Stock" decs={data.Stock} />
-      <CardDetailsList title="Item Status" decs={data.Status} />
+      <CardDetailsList title="Availability" decs={` form ${ProductDerails?.data?.availableFrom} - to ${ProductDerails?.data?.availableTo} `} />
+      {ProductDerails?.data?.variations?.length > 0 ? (
+        <div className="pb-4 border-b border-grayMedium/40 last-of-type:border-none">
+          <h3 className="text-base lg:text-[24px] mb-1">Variations</h3>
+          {ProductDerails?.data?.variations.map((variation: any, i: number) => {
+            return (
+              <div
+                key={i}
+                className="text-base flex gap-10 items-center border-b border-grayMedium/40 py-2 last-of-type:border-none text-grayMedium font-Regular"
+              >
+                <h4> Phone Case ${i}: </h4>
+                <span className="font-Medium">
+                  {" "}
+                  Color - {variation.attribute1}
+                </span>
+                <span className="font-Medium">
+                  Size - {variation.attribute2}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      ) : null}
+
+      <CardDetailsList title="Available Stock" decs={ProductDerails?.data?.totalQuantity} />
+      <CardDetailsList title="Item Status" decs={ProductDerails?.data?.isActive? "Active" : "Not Active"} />
+      <FAQ dataFAQ={ProductDerails?.data?.faQs} />
       <Button className={"w-fit px-11 h-[64px] mt-8"}>Promote Listing</Button>
     </div>
   );

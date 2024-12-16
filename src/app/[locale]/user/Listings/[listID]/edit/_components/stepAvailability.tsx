@@ -5,6 +5,9 @@ import ModalComp from "@/src/components/modal-comp";
 import { useDisclosure } from "@mantine/hooks";
 import DownIcon from "@/src/assets/icons/down";
 import Button from "@/src/components/button";
+import { DatePickerInput } from "@mantine/dates";
+import DateIcon from "@/src/assets/icons/date";
+import { getDate } from "@/src/lib/utils";
 const OptionAvailability = [
   {
     value: "always",
@@ -16,38 +19,12 @@ const OptionAvailability = [
     title: "",
   },
 ];
-const OptionTime = [
-  { label: "12:00 AM", value: "00:00" },
-  { label: "1:00 AM", value: "01:00" },
-  { label: "2:00 AM", value: "02:00" },
-  { label: "3:00 AM", value: "03:00" },
-  { label: "4:00 AM", value: "04:00" },
-  { label: "5:00 AM", value: "05:00" },
-  { label: "6:00 AM", value: "06:00" },
-  { label: "7:00 AM", value: "07:00" },
-  { label: "8:00 AM", value: "08:00" },
-  { label: "9:00 AM", value: "09:00" },
-  { label: "10:00 AM", value: "10:00" },
-  { label: "11:00 AM", value: "11:00" },
-  { label: "12:00 PM", value: "12:00" },
-  { label: "1:00 PM", value: "13:00" },
-  { label: "2:00 PM", value: "14:00" },
-  { label: "3:00 PM", value: "15:00" },
-  { label: "4:00 PM", value: "16:00" },
-  { label: "5:00 PM", value: "17:00" },
-  { label: "6:00 PM", value: "18:00" },
-  { label: "7:00 PM", value: "19:00" },
-  { label: "8:00 PM", value: "20:00" },
-  { label: "9:00 PM", value: "21:00" },
-  { label: "10:00 PM", value: "22:00" },
-  { label: "11:00 PM", value: "23:00" },
-];
+
 interface StepAvailabilityProps {
   setDataList: React.Dispatch<any>;
   dataList: any;
-  defaultValue:string
 }
-function StepAvailability({ setDataList, dataList ,defaultValue}: StepAvailabilityProps) {
+function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
   const [opened, { open, close }] = useDisclosure(false);
   return (
     <div className="mt-[7px] pb-8 lg:pb-12 flex-1">
@@ -57,15 +34,19 @@ function StepAvailability({ setDataList, dataList ,defaultValue}: StepAvailabili
       </p>
       <Radio.Group
         name="OptionAvailability"
-        defaultValue={defaultValue}
+        defaultValue={dataList?.alwaysAvailable ? "always" : "pick"}
+        
         onChange={(e) => {
-          setDataList({ ...dataList, Availability: e });
+          setDataList({
+            ...dataList,
+            AlwaysAvailable: e === "always" ? true : false,
+          });
           if (e === "pick") {
             open();
           }
         }}
       >
-        <div className="flex my-6 items-center  gap-14 flex-wrap">
+        <div className="flex my-6 items-center justify-between gap-1 lg:gap-3 flex-wrap">
           {OptionAvailability.map((option, inedx) => {
             return (
               <Radio
@@ -82,10 +63,12 @@ function StepAvailability({ setDataList, dataList ,defaultValue}: StepAvailabili
         </div>
       </Radio.Group>
       <div>
-        <p className="mt-4 text-[12px] lg:text-[14px] text-grayMedium font-Regular">
+        <p className="mt-4 text-[12px] md:text-[14px] text-grayMedium font-Regular">
           Your item is available for rent{" "}
           <span className="text-blue font-Medium">
-            from August 9 to August 24.
+            from{" "}
+            {getDate(dataList?.availableFrom, "en").fullMonthNameWithDayName} to{" "}
+            {getDate(dataList?.availableTo, "en").fullMonthNameWithDayName}
           </span>{" "}
           <br />
           Availability automatically updates to reflect rental periods.
@@ -96,11 +79,11 @@ function StepAvailability({ setDataList, dataList ,defaultValue}: StepAvailabili
         opened={opened}
         close={close}
       >
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 w-[560px] max-w-full">
           <Select
             data={["1 Day", "3 Day", "Week"]}
             leftSectionPointerEvents="none"
-            rightSection={<DownIcon />}
+            rightSection={<DownIcon className="w-5 h-auto" />}
             placeholder="Select rental duration"
             label={"Minimum rental duration"}
             classNames={{
@@ -115,95 +98,49 @@ function StepAvailability({ setDataList, dataList ,defaultValue}: StepAvailabili
             }}
             className="   duration-200 min-h-[64px]  text-grayMedium"
           />
-          <div className="flex items-center justify-between gap-5">
-            <Select
-              data={OptionTime}
-              leftSectionPointerEvents="none"
-              rightSection={<DownIcon />}
-              placeholder="Select rental duration"
-              label={"Deafult pickup time"}
-              defaultValue={"08:00"}
-              onChange={(e) => {
-                console.log(e);
-              }}
-              classNames={{
-                label: "text-black mb-2",
-                input:
-                  " text-black rounded-2xl text-grayMedium bg-white   rounded-2xl border-2 border-green h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
 
-                wrapper: "h-[64px]",
+          <DatePickerInput
+            type="range"
+            label="Availability"
+            leftSection={<DateIcon fill="#344050" />}
+            placeholder=".. - .."
+            defaultValue={[
+              dataList.AvailableFrom
+                ? new Date(dataList.AvailableFrom)
+                : new Date(),
+              dataList.AvailableTo
+                ? new Date(dataList.AvailableTo)
+                : new Date(),
+            ]}
+            onChange={(e) => {
+              console.log(e);
+              setDataList({
+                ...dataList,
+                AvailableFrom: getDate(e[0]?.toString(), "en").fullYear,
+                AvailableTo: getDate(e[1]?.toString(), "en").fullYear,
+              });
+            }}
+            popoverProps={{
+              position: "top",
+              classNames: {
                 dropdown:
-                  "bg-white text-black rounded-2xl border border-green/50 text-grayDark py-2",
-                option: "hover:bg-green hover:text-white duration-300 ",
-              }}
-              className="flex-1   duration-200 min-h-[64px]  text-grayMedium"
-            />
-            <Select
-              data={OptionTime}
-              leftSectionPointerEvents="none"
-              rightSection={<DownIcon />}
-              placeholder="Select rental duration"
-              label={"Deafult return time"}
-              defaultValue={"08:00"}
-              classNames={{
-                label: "text-black mb-2",
-                input:
-                  " text-black rounded-2xl text-grayMedium bg-white   rounded-2xl border-2 border-green h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
-
-                wrapper: "h-[64px]",
-                dropdown:
-                  "bg-white text-black rounded-2xl border border-green/50 text-grayDark py-2",
-                option: "hover:bg-green hover:text-white duration-300 ",
-              }}
-              className=" flex-1   duration-200 min-h-[64px]  text-grayMedium"
-            />
-          </div>
-          <div className="flex items-center justify-between gap-5">
-            <Select
-              data={OptionTime}
-              leftSectionPointerEvents="none"
-              rightSection={<DownIcon />}
-              placeholder="Select rental duration"
-              label={"Available from"}
-              defaultValue={"08:00"}
-              onChange={(e) => {
-                console.log(e);
-              }}
-              classNames={{
-                label: "text-black mb-2",
-                input:
-                  " text-black rounded-2xl text-grayMedium bg-white   rounded-2xl border-2 border-green h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
-
-                wrapper: "h-[64px]",
-                dropdown:
-                  "bg-white text-black rounded-2xl border border-green/50 text-grayDark py-2",
-                option: "hover:bg-green hover:text-white duration-300 ",
-              }}
-              className="flex-1   duration-200 min-h-[64px]  text-grayMedium"
-            />
-            <Select
-              data={OptionTime}
-              leftSectionPointerEvents="none"
-              rightSection={<DownIcon />}
-              placeholder="Select rental duration"
-              label={"Available to"}
-              defaultValue={"08:00"}
-              classNames={{
-                label: "text-black mb-2",
-                input:
-                  " text-black rounded-2xl text-grayMedium bg-white   rounded-2xl border-2 border-green h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
-
-                wrapper: "h-[64px]",
-                dropdown:
-                  "bg-white text-black rounded-2xl border border-green/50 text-grayDark py-2",
-                option: "hover:bg-green hover:text-white duration-300 ",
-              }}
-              className=" flex-1   duration-200 min-h-[64px]  text-grayMedium"
-            />
-          </div>
+                  "border-2 border-green  rounded-2xl shadow-lg shadow-green/40",
+              },
+            }}
+            valueFormat="DD-MM-YYYY"
+            classNames={{
+              input:
+                " text-black rounded-2xl text-grayMedium bg-white   rounded-2xl border-2 border-green h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+              day: "data-[in-range]:bg-green data-[last-in-range]:rounded-e-[14px]  data-[first-in-range]:rounded-s-[14px] p-0 rounded-3 data-[in-range]:text-white",
+              monthCell: "px-0",
+              levelsGroup: "justify-center mb-3",
+              weekday: "text-black",
+              calendarHeader: "text-grayMedium",
+            }}
+          />
         </div>
 
-        <Button className={"w-full h-[64px] mt-12"} onClick={close}>
+        <Button className={"w-full h-[64px] mt-8 lg:mt-12"} onClick={close}>
           Save and close
         </Button>
       </ModalComp>

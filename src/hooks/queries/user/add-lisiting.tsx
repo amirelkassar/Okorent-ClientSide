@@ -2,7 +2,7 @@ import { api } from "@/src/api/axios";
 import { user } from "@/src/api/user";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 export const initialQueryKey = "user.addListing";
-
+export const initialQueryKeyMyProduct = "user.myProductsAll";
 //getCategory
 export const GetCategory = () => {
   const queryClient = useQueryClient();
@@ -40,6 +40,7 @@ export const useCreateListingMutation = () => {
     },
     onSuccess: (res) => {
       console.log(res);
+      queryClient.invalidateQueries([initialQueryKeyMyProduct]);
     },
     onError: (res) => {
       console.log(res);

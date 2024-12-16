@@ -38,12 +38,12 @@ function Page() {
 
   const handleInputChangeLocation = (ids: any[]) => {
     setLocation(ids);
-    setDataList({ ...dataList, addresses: ids });
+    setDataList({ ...dataList, UserStockIds: ids });
   };
   const handleRemoveLocation = (index: any) => {
     const updatedLocations = location.filter((loc) => loc !== index);
     setLocation(updatedLocations);
-    setDataList({ ...dataList, addresses: updatedLocations });
+    setDataList({ ...dataList, UserStockIds: updatedLocations });
   };
 
   const handleCheckboxChange = (
@@ -61,7 +61,7 @@ function Page() {
     const newFaqs = [...faqs];
     newFaqs[index][field] = value;
     setFaqs(newFaqs);
-    setDataList({ ...dataList, FAQ: newFaqs });
+    setDataList({ ...dataList, FAQs: newFaqs });
   };
   const { data: dataCategory } = GetCategory();
   const { data: dataSubCategory, refetch: RefetchGetSubCategory } =
@@ -158,7 +158,7 @@ function Page() {
             <div className="flex items-center flex-wrap gap-4">
               <Input
                 name="name"
-                label={"Price for 3 Days"}
+                label={"Price for 1 Day"}
                 placeholder={"Add Price Here"}
                 onChange={(e) => {
                   setDataList({
@@ -213,8 +213,8 @@ function Page() {
           <Step
             title="Value of the item"
             active={
-              dataList.addresses
-                ? dataList.addresses.length > 0
+              dataList.UserStockIds
+                ? dataList.UserStockIds.length > 0
                   ? true
                   : false
                 : false
@@ -234,7 +234,7 @@ function Page() {
           <Step
             title="Stock"
             active={
-              dataList.IsAvailable ||
+              dataList.AlwaysAvailable ||
               (dataList.AvailableFrom && dataList.AvailableTo)
             }
             stepNum={8}
@@ -242,13 +242,13 @@ function Page() {
             <Input
               placeholder="Add available stock number here"
               onChange={(e) => {
-                setDataList({ ...dataList, Stock: e.target.value });
+                setDataList({ ...dataList, TotalQuantity: e.target.value });
               }}
               inputClassName="!rounded-2xl bg-white  !h-16 border-2 "
               className="mb-6 "
             />
           </Step>
-          <Step title="Item Status" active={dataList.Stock} stepNum={9}>
+          <Step title="Item Status" active={dataList.TotalQuantity} stepNum={9}>
             <div>
               <div className="flex flex-col gap-4">
                 <Checkbox

@@ -11,8 +11,16 @@ interface CardViewProps {
   title: string;
   first?: boolean;
   data: any[];
+  viewAllLink?: string;
+  withStatus?: boolean;
 }
-function CardView({ title, first = false, data = [] }: CardViewProps) {
+function CardView({
+  title,
+  first = false,
+  data = [],
+  viewAllLink = "",
+  withStatus = false,
+}: CardViewProps) {
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
 
@@ -39,70 +47,77 @@ function CardView({ title, first = false, data = [] }: CardViewProps) {
             </Link>
           )}
         </div>
-        <Link
-          href={ROUTES.USER.LISTINGS}
-          className=" underline text-lg font-medium"
-        >
-          View all
-        </Link>
+        {viewAllLink && (
+          <Link href={viewAllLink} className=" underline text-lg font-medium">
+            View all
+          </Link>
+        )}
       </div>
-      <div className=" relative w-full flex items-center">
-        <div className=" my-4 w-full xl:max-w-[calc(100%-80px)]">
-          <Swiper
-            onSwiper={handleSwiper}
-            slidesPerView={1.1}
-            spaceBetween={10}
-            navigation={{
-              prevEl: prevRef.current,
-              nextEl: nextRef.current,
-            }}
-            breakpoints={{
-              0: {
-                slidesPerView: 1.05,
-                spaceBetween: 10,
-              },
-              450: {
-                slidesPerView: 1.5,
-                spaceBetween: 10,
-              },
-              600: {
-                slidesPerView: 2,
-                spaceBetween: 18,
-              },
-              900: {
-                slidesPerView: 2.5,
-              },
-              1100: {
-                slidesPerView: 3,
-                spaceBetween: 30,
-              },
-            }}
-            modules={[Navigation]}
-            className={"mySwiper "}
-          >
-            {data.map((item, index) => (
-              <SwiperSlide key={index}>
-                <OneCardView data={item} offline={title === "Offline"} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+      {withStatus ? (
+        <div className="w-full flex-wrap gap-6 my-4 relative flex items-center">
+          {data?.map((item: any, index: number) => (
+            <OneCardView key={index} data={item} offline={false} />
+          ))}
         </div>
-        <div className="lgl:flex hidden gap-3  absolute top-1/2 -translate-y-1/2 right-0">
-          <div
-            ref={prevRef}
-            className={`cursor-pointer duration-200 swiper-button-prev-${title}`}
-          >
-            <ArrowLeftIcon fill="#0F2A43" />
+      ) : (
+        <div className=" relative w-full flex items-center">
+          <div className=" my-4 w-full xl:max-w-[calc(100%-80px)]">
+            <Swiper
+              onSwiper={handleSwiper}
+              slidesPerView={1.1}
+              spaceBetween={10}
+              navigation={{
+                prevEl: prevRef.current,
+                nextEl: nextRef.current,
+              }}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1.05,
+                  spaceBetween: 10,
+                },
+                450: {
+                  slidesPerView: 1.5,
+                  spaceBetween: 10,
+                },
+                600: {
+                  slidesPerView: 2,
+                  spaceBetween: 18,
+                },
+                900: {
+                  slidesPerView: 2.5,
+                },
+                1100: {
+                  slidesPerView: 3,
+                  spaceBetween: 30,
+                },
+              }}
+              modules={[Navigation]}
+              className={"mySwiper "}
+            >
+              {data.map((item, index) => (
+                <SwiperSlide key={index}>
+                  <OneCardView data={item} offline={title === "Offline"} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
+          <div className="lgl:flex hidden gap-3  absolute top-1/2 -translate-y-1/2 right-0">
+            <div
+              ref={prevRef}
+              className={`cursor-pointer duration-200 swiper-button-prev-${title}`}
+            >
+              <ArrowLeftIcon fill="#0F2A43" />
+            </div>
 
-          <div
-            ref={nextRef}
-            className={`cursor-pointer duration-200 swiper-button-next-${title}`}
-          >
-            <ArrowRightIcon fill="#0F2A43" />
+            <div
+              ref={nextRef}
+              className={`cursor-pointer duration-200 swiper-button-next-${title}`}
+            >
+              <ArrowRightIcon fill="#0F2A43" />
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

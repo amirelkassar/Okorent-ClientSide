@@ -2,7 +2,7 @@ import { api } from "@/src/api/axios";
 import { user } from "@/src/api/user";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-export const initialQueryKey = "user.myProductsAll";
+export const initialQueryKey = "user.myStock";
 
 //getMyAllProducts
 export const GetMyStock = () => {

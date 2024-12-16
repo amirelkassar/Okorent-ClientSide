@@ -8,11 +8,14 @@ import { ColumnDef } from "@tanstack/react-table";
 import Image, { StaticImageData } from "next/image";
 import phoneImg from "@/src/assets/images/phone.png";
 import CardStatus from "@/src/components/cardStatus";
-
+import avatar from "@/src/assets/images/avatar.png";
+import { getDate } from "@/src/lib/utils";
+import { Link } from "@/src/navigation";
+import ROUTES from "@/src/routes";
 export type RequestsTableData = {
   id: number;
-  name: string;
-  phone: string;
+  renterName: string;
+  productName: string;
   memberSince: string;
   statusUser: string;
   status: string;
@@ -30,13 +33,12 @@ export type RequestsTableData = {
   action: string;
   imgUser: StaticImageData;
   imgHome: StaticImageData;
+  orderId: any;
 };
 
-export const columnsReq = (
-  openModal: (id: number) => void
-): ColumnDef<RequestsTableData>[] => [
+export const columnsReq: ColumnDef<RequestsTableData>[] = [
   {
-    accessorKey: "name",
+    accessorKey: "renterName",
     header: () => {
       return (
         <div className="flex items-center gap-1 cursor-pointer">
@@ -47,73 +49,72 @@ export const columnsReq = (
     },
     cell: ({ getValue, row }) => {
       const name = getValue<string>();
-      const img = row.original.imgUser;
-      const id = row.original.id;
-
+      const id = row.original.orderId;
       return (
-        <button
-          className="flex items-center gap-2"
-          onClick={() => {
-            openModal(id);
-          }}
-        >
+        <Link href={ROUTES.USER.ORDERID(id)} className="flex items-center gap-2">
+          
           <Image
-            src={img}
+            src={avatar}
             alt={name}
             width={50}
             height={50}
             className="w-12 h-12 rounded-[50%] object-cover object-top"
           />
           <h2 className="text-[16px] font-SemiBold">{name}</h2>
-        </button>
+        </Link>
       );
     },
   },
 
   {
-    accessorKey: "phone",
+    accessorKey: "productName",
     header: "Product",
     cell: ({ getValue, row }) => {
-      const phone = getValue<string>();
+      const productName = getValue<string>();
       const id = row.original.id;
 
       return (
-        <button
-          onClick={() => {
-            openModal(id);
-          }}
-          className="flex items-center gap-2"
-        >
+        <button className="flex items-center gap-2">
           <div className="size-[50px] rounded-[50%] p-[6px] bg-grayBack flex justify-center items-center">
             <Image
               src={phoneImg}
-              alt={phone}
+              alt={productName}
               width={50}
               height={50}
               className="w-auto h-full  object-contain "
             />
           </div>
-          <h2 className="text-[16px] font-SemiBold">{phone}</h2>
+          <h2 className="text-[16px] font-SemiBold max-w-[200px] truncate">
+            {productName}
+          </h2>
         </button>
       );
     },
   },
   {
-    accessorKey: "startDate",
+    accessorKey: "from",
     header: "Start Date",
     cell: ({ getValue }) => {
-      const start = getValue<string>();
+      const from = getValue<string>();
 
-      return <p className="text-grayMedium text-[16px]">{start}</p>;
+      return (
+        <p className="text-grayMedium text-[16px]">
+          {getDate(from).fullYearWithMonthName}
+        </p>
+      );
     },
   },
   {
-    accessorKey: "endDate",
+    accessorKey: "to",
     header: "Ending Date",
     cell: ({ getValue }) => {
-      const end = getValue<string>();
+      const to = getValue<string>();
 
-      return <p className="text-grayMedium text-[16px]">{end}</p>;
+      return (
+        <p className="text-grayMedium text-[16px]">
+          {getDate(to).fullYearWithMonthName}
+        </p>
+      );
     },
   },
   {
@@ -129,9 +130,9 @@ export const columnsReq = (
     header: "Status",
     cell: ({ getValue }) => {
       const status = getValue<string>();
-      switch (status.toLowerCase()) {
-        case "new":
-          return <CardStatus circle type="blue" title={status} />;
+      switch (status.toString()) {
+        case "1":
+          return <CardStatus circle type="blue" title={"new"} />;
         case "completed":
           return <CardStatus circle type="blue" title={status} />;
         case "ongoing":
@@ -144,11 +145,11 @@ export const columnsReq = (
     },
   },
   {
-    accessorKey: "payment",
+    accessorKey: "amount",
     header: "Payment",
     cell: ({ getValue }) => {
-      const payment = getValue<number>();
-      return <p className=" text-[16px] font-semibold">{payment}</p>;
+      const amount = getValue<number>();
+      return <p className=" text-[16px] font-semibold">{amount} $</p>;
     },
   },
   {
@@ -156,13 +157,13 @@ export const columnsReq = (
     header: "Payment Status",
     cell: ({ getValue }) => {
       const paymentStatus = getValue<string>();
-      switch (paymentStatus.toLowerCase()) {
+      switch (paymentStatus.toString()) {
         case "completed":
           return <CardStatus circle type="blue" title={paymentStatus} />;
         case "canceled":
           return <CardStatus circle type="red" title={paymentStatus} />;
-        case "pending":
-          return <CardStatus circle type="green" title={paymentStatus} />;
+        case "1":
+          return <CardStatus circle type="green" title={"pending"} />;
         default:
           return <CardStatus circle type="gray" title="--" />;
       }

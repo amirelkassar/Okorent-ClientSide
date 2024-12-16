@@ -1,4 +1,5 @@
 "use client";
+import LoadingProductsRow from "@/src/components/product/loading-products-row";
 import ProductList from "@/src/components/product/productList";
 import { GetProductsAll } from "@/src/hooks/queries/user/home";
 import { useToken } from "@/src/hooks/use-token";
@@ -16,7 +17,15 @@ function ProductHome() {
 
   console.log({ isFetching: isFetching, isLoading: isLoading });
 
-  return <ProductList title="Items you may like" data={data?.data || []} />;
+  return (
+    <>
+      {isLoading  ? (
+        <LoadingProductsRow number={5} />
+      ) : (
+        <ProductList title="Items you may like" data={data?.data || []} />
+      )}
+    </>
+  );
 }
 
 export default ProductHome;

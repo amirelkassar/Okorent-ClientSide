@@ -4,7 +4,7 @@ import 'dayjs/locale/ar';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { twMerge } from 'tailwind-merge';
 import axios from "axios";
-import { useRouter } from '../navigation';
+import { usePathname, useRouter } from '../navigation';
 import ROUTES from '../routes';
 
 
@@ -45,7 +45,7 @@ export function getDate(date = '', locale = 'en') {
 
   const fullYear = dayjs(date)
     .locale(locale)
-    .format('YYYY/MM/DD');
+    .format('YYYY-MM-DD');
   const time = dayjs(date).locale(locale).format('hh:mm A');
   const fullYearWithMonthName = dayjs(date)
     .locale(locale)
@@ -164,7 +164,6 @@ export const fetchLocationDetails = async (lat: number, lng: number): Promise<{
 
 export const useSearchParams = () => {
   let params = new URLSearchParams(window.location.search);
-  console.log(params.toString());
   if (!params.toString()) {
     return '';
   } else {
@@ -174,19 +173,28 @@ export const useSearchParams = () => {
 };
 export const useUpdateQueryParams = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const pathName = usePathname();
+  console.log(pathName);
 
   // Utility: Update the URL query params
   const updateQueryParams = (key: string, values: string[]) => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(window.location.search);
+    console.log(params);
     params.delete(key);
-
     values.forEach((value) => {
       if (value) params.append(key, value);
     });
 
-    router.replace(`${ROUTES.USER.CATEGORIESPATH}?${params.toString()}`);
+    router.replace(`${pathName}?${params.toString()}`);
   };
 
   return updateQueryParams;
+};
+
+export const calculateDurationRange = (valueDateFrom: Date | null, valueDateTo: Date | null) => {
+  if (valueDateFrom && valueDateTo) {
+    const diffTime = Math.abs(valueDateTo.getTime() - valueDateFrom.getTime());
+    return Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Convert the difference to days
+  }
+  return 0;
 };

@@ -199,48 +199,7 @@ export const Rentals = [
     details: "For rent luxury villa,315 Meter , 3 Floors",
   },
 ];
-export const CategoriesData = [
-  {
-    id: 1,
-    title: "Electronics",
-    img: <ElectronicsIcon className={"h-[30px] w-auto"} />,
-  },
-  {
-    id: 2,
-    title: "Tools",
-    img: <ToolsIcon className={"h-[30px] w-auto"} />,
-  },
-  {
-    id: 3,
-    title: "Hobbies & Sports",
-    img: <SportIcon className={"h-[30px] w-auto"} />,
-  },
-  {
-    id: 4,
-    title: "Home & Garden",
-    img: <HomeIcon className={"h-[30px] w-auto"} />,
-  },
-  {
-    id: 5,
-    title: "Vehicle",
-    img: <BusIcon className={"h-[30px] w-auto"} />,
-  },
-  {
-    id: 6,
-    title: "Party",
-    img: <PartyIcon className={"h-[30px] w-auto"} />,
-  },
-  {
-    id: 7,
-    title: "Film & Photography",
-    img: <FilmIcon className={"h-[30px] w-auto"} />,
-  },
-  {
-    id: 8,
-    title: "Others",
-    img: <OthersIcon className={"h-[30px] w-auto"} />,
-  },
-];
+
 
 export const ListingsData = [
   {
@@ -325,7 +284,7 @@ export const RentalsData = [
     start: "3 August 2024",
     end: "3 August 2024",
     quantity: 100,
-    status: "Ongoing",
+    status: "out for delivery",
     payment: 100,
     paymentStatus: "Pending",
     img: avatar,
@@ -337,7 +296,7 @@ export const RentalsData = [
     start: "5 August 2024",
     end: "10 August 2024",
     quantity: 200,
-    status: "Declined",
+    status: "Pending",
     payment: 250,
     paymentStatus: "Completed",
     img: avatar,
@@ -349,7 +308,7 @@ export const RentalsData = [
     start: "1 August 2024",
     end: "3 August 2024",
     quantity: 150,
-    status: "Completed",
+    status: "Accepted",
     payment: 150,
     paymentStatus: "Canceled",
     img: avatar,
@@ -361,7 +320,7 @@ export const RentalsData = [
     start: "12 August 2024",
     end: "15 August 2024",
     quantity: 50,
-    status: "Ongoing",
+    status: "Completed",
     payment: 50,
     paymentStatus: "Pending",
     img: avatar,
@@ -373,7 +332,19 @@ export const RentalsData = [
     start: "7 August 2024",
     end: "9 August 2024",
     quantity: 300,
-    status: "Upcoming",
+    status: "Rejected",
+    payment: 300,
+    paymentStatus: "Completed",
+    img: avatar,
+  },
+  {
+    id: 6,
+    name: "Omar Hassan",
+    phone: "Xiaomi Mi 13",
+    start: "7 August 2024",
+    end: "9 August 2024",
+    quantity: 300,
+    status: "Received by client",
     payment: 300,
     paymentStatus: "Completed",
     img: avatar,

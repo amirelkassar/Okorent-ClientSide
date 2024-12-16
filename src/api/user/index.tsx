@@ -4,15 +4,16 @@ export const user = {
   addListing: {
     base: "/Product",
     category: "/Category",
-    subCategory_by_category: (id: any) => `/SubCategory/by-parent/${id}`,
+    subCategory_by_category: (id: any) => `/SubCategory/list?ParentId=${id}`,
   },
   register: {
     base: "/User/register",
   },
   product: {
-    base: (queries:any) => buildQuery("/Product", queries),
-    my_products: (queries = "") => buildQuery("/Product/my-products", queries),
+    base: (queries: any) => buildQuery("/Product", queries),
+    my_products: (queries: any) => buildQuery("/Product/my-products", queries),
     getById: (id: any) => `/Product/${id}`,
+    getMyProductsById: (id: any) => `/Product/my-product/${id}`,
   },
   information: {
     base: (id: any) => `/User/${id}`,
@@ -23,5 +24,15 @@ export const user = {
     actions: {
       edit: (id: any) => `/Stock/${id}`,
     },
+  },
+  order: {
+    base: "/Order/direct-order",
+    booking: {
+      i_rent: (queries: any) =>
+        buildQuery("/Order?OrderType=myorders", queries),
+      i_rentOut: (queries: any) =>
+        buildQuery("/Order?OrderType=myordersout", queries),
+    },
+    getById: (id: any) => `/Order/${id}`,
   },
 };

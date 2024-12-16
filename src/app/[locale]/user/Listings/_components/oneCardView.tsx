@@ -19,8 +19,8 @@ function OneCardView({ data, offline }: { data: any; offline: boolean }) {
           <h3 className="text-grayMedium mb-1 font-Regular lg:text-[16px] text-sm">
             Product Name
           </h3>
-          <p className="lg:text-[16px] text-sm font-SemiBold">
-            {data?.phone || "Product Name"}
+          <p className="lg:text-[16px] text-sm font-SemiBold truncate max-w-[130px]">
+            {data?.name || "Product Name"}
           </p>
         </div>
         <span className=" block h-[34px] w-[1px] bg-green"></span>
@@ -29,7 +29,7 @@ function OneCardView({ data, offline }: { data: any; offline: boolean }) {
             Payment
           </h3>
           <p className="lg:text-[16px] text-sm text-center font-SemiBold">
-            100$
+           {data?.dailyPrice||'0'}$
           </p>
         </div>
         <span className=" block h-[34px] w-[1px] bg-green"></span>
@@ -37,8 +37,8 @@ function OneCardView({ data, offline }: { data: any; offline: boolean }) {
           <h3 className="text-grayMedium mb-1 font-Regular lg:text-[16px] text-sm">
             Quantity
           </h3>
-          <p className="lg:text-[16px] text-sm font-SemiBold">
-            {data?.quantity}
+          <p className="lg:text-[16px] text-sm text-center font-SemiBold">
+            {data?.quantity||'0'}
           </p>
         </div>
       </div>

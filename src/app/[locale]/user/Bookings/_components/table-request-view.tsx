@@ -1,57 +1,53 @@
 "use client";
 import { DataTable } from "@/src/components/data-table";
-import { RequestsData } from "@/src/lib/dataUser";
 import ROUTES from "@/src/routes";
 import React from "react";
-import { columnsReq } from "../../Bookings/_components/columnsReq";
 import { TableHeader } from "@/src/components/table/table-header";
 import { Link } from "@/src/navigation";
 import CardIcon from "@/src/assets/icons/card";
 import RentSwitch from "@/src/components/RentSwitch";
+import {  GetMyOrderOutAll } from "@/src/hooks/queries/user/booking";
+import { columnsReq } from "./columnsReq";
 const FilterOptionsReq = [
   {
     label: "New",
-    type: "filter",
-    key: "New",
+    key: "filter",
+    value: "New",
   },
   {
     label: "Out for delivery",
-    type: "filter",
-    key: "Out for delivery",
+    key: "filter",
+    value: "Out for delivery",
   },
   {
     label: "Received",
-    type: "filter",
-    key: "Received",
+    key: "filter",
+    value: "Received",
   },
   {
     label: "Out For return",
-    type: "filter",
-    key: "Out For return",
+    key: "filter",
+    value: "Out For return",
   },
   {
     label: "Returned",
-    type: "filter",
-    key: "Returned",
+    key: "filter",
+    value: "Returned",
   },
   {
     label: "Rejected",
-    type: "filter",
-    key: "Rejected",
+    key: "filter",
+    value: "Rejected",
   },
   {
     label: "Canceled",
-    type: "filter",
-    key: "Canceled",
+    key: "filter",
+    value: "Canceled",
   },
 ];
-function TableRequestView({ setID, open }: { setID: any; open: any }) {
-  const openModalWithId = (id: number) => {
-    setID(id);
-    console.log("Row ID:", id);
-    open();
-  };
-  const columnsWithOpen = columnsReq(openModalWithId);
+function TableRequestView() {
+
+  const {data} = GetMyOrderOutAll();
 
   return (
     <div className=" hidden mdl:block">
@@ -68,9 +64,10 @@ function TableRequestView({ setID, open }: { setID: any; open: any }) {
         <TableHeader.Middle>
           <RentSwitch typeUser="user" />
         </TableHeader.Middle>
-        <TableHeader.Last typeData="filter" options={FilterOptionsReq} />
+        <TableHeader.Last options={FilterOptionsReq} />
       </TableHeader>
-      <DataTable title="" data={RequestsData} columns={columnsWithOpen} />
+      <DataTable title="" data={data?.data||[]} columns={columnsReq} />
+      
     </div>
   );
 }

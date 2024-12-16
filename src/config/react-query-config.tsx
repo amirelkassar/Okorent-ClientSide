@@ -1,13 +1,10 @@
-'use client';
+"use client";
 
-import React from 'react';
-import {
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query';
+import React from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Utility to detect server-side rendering
-const isServer = typeof window === 'undefined';
+const isServer = typeof window === "undefined";
 
 // Function to create a new QueryClient instance
 function makeQueryClient(): QueryClient {
@@ -39,13 +36,13 @@ function getQueryClient(): QueryClient {
 }
 
 // React component to provide the QueryClient to the application
-const ReactQueryConfig: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const ReactQueryConfig: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const queryClient = getQueryClient();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      {children}
-    </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
 

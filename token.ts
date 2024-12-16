@@ -17,7 +17,7 @@ type DecodedToken = {
 };
 
 type DecodeResponse = {
-  userRole: "Administrator" | "Client";
+  userRole: "Administrator" | "Client" | 'User';
   tokenExpireDate: Date;
 } | null;
 
