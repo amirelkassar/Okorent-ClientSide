@@ -43,7 +43,7 @@ function Timer({ time, seconds, setSeconds ,setStart}: TimerProps) {
             strokeDasharray={circleCircumference}
             strokeDashoffset={progressOffset}
             style={{
-              transition: "stroke-dashoffset 1s linear",
+              transition: "strokeDashoffset 1s linear",
             }}
           ></circle>
         </svg>

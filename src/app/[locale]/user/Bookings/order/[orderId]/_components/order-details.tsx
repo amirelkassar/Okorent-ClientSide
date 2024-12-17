@@ -8,20 +8,18 @@ import PriceOrderTable from "@/src/components/price-order-table";
 import { calculateDurationRange } from "@/src/lib/utils";
 
 function OrderDetails({ ProductDetails }: { ProductDetails: any }) {
- 
-
   // تحويل المنتجات إلى مكونات الجدول
   const data = ProductDetails.map((product: any) => [
     <ImgProduct
       key={`product-img-${product.productId}`}
       src={phoneImg}
-      productName={product.name}
+      productName={product.productName}
     />,
     product.quantity || 0,
     <PriceOrderTable
       key={`product-price-${product.id}`}
       price={
-        product.price /
+        (product.price + 50.82) /
         calculateDurationRange(new Date(product.from), new Date(product.to))
       }
       days={calculateDurationRange(

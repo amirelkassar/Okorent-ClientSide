@@ -16,6 +16,7 @@ import {
 import InputTextarea from "@/src/components/InputTextarea";
 import Input from "@/src/components/input";
 import StepFAQ from "./_components/stepFAQ";
+import Loading from "@/src/components/loading";
 
 interface LocationProps {
   id: number;
@@ -116,15 +117,16 @@ function Page({ params }: any) {
     setLocation(updatedLocations);
     setDataList({ ...dataList, UserStockIds: updatedLocations });
   };
-  if (isLoading && !dataList) {
-    return <div>Loading...</div>;
-  }
   const handleChangeFAQ = (index: number, field: keyof FAQ, value: string) => {
     const newFaqs = [...faqs];
     newFaqs[index][field] = value;
     setFaqs(newFaqs);
     setDataList({ ...dataList, faQs: newFaqs });
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div className="w-full lg:w-[810px] mb-20 flex flex-col gap-4">
       <div className="mt-[7px] pb-8 flex-1">

@@ -13,6 +13,7 @@ import OrderDetails from "./_components/order-details";
 import RentSwitch from "@/src/components/RentSwitch";
 import { useSwitchRent } from "@/src/store/rent-slice";
 import { GetOrderByID } from "@/src/hooks/queries/user/order";
+import Loading from "@/src/components/loading";
 
 const STEPS_DATA = [
   {
@@ -39,26 +40,37 @@ const STEPS_DATA = [
 
 function Page({ params }: any) {
   const { isRent } = useSwitchRent();
-  const { data } = GetOrderByID(params.orderId);
-  console.log(data);
-
+  const { data, isLoading } = GetOrderByID(params.orderId);
+  console.log(isRent);
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div className="mb-section">
       <div className="flex items-center justify-between gap-3 flex-wrap">
         <h2 className=" text-2xl font-Bold">Order Information</h2>
-        <RentSwitch typeUser="user" />
-        <Button className={"w-[340px] max-w-full gap-2"}>
-          <CarReturn />
-          Request to return
-        </Button>
+        <div className=" pointer-events-none opacity-85 flex-1 mx-auto flex items-center justify-center">
+          <RentSwitch typeUser="user" />
+        </div>
+        {isRent === "rent" && (
+          <Button className={"w-[340px] max-w-full gap-2"}>
+            <CarReturn />
+            Request to return
+          </Button>
+        )}
       </div>
-      <OrderStepper active={2} data={STEPS_DATA} />
+      <OrderStepper
+        active={data?.data?.orderTrackers.at(-1)?.newOrderStatus === 1 ? 0 : 1}
+        data={STEPS_DATA}
+      />
       <div className="mt-section flex gap-10 lgl:flex-row flex-col ">
         <div className="flex flex-col gap-4">
-          <OrderInformation data={data?.data} />
-          <OrderDetails  ProductDetails={data?.data?.orderItems||[]}/>
+          <OrderInformation data={data?.data} isRent={isRent} />
+          <OrderDetails ProductDetails={data?.data?.orderItems || []} />
         </div>
-        <OrderPayment ProductDetailsPayment={data?.data?.paymentRecord[0]||[]} />
+        <OrderPayment
+          ProductDetailsPayment={data?.data?.paymentRecord[0] || []}
+        />
       </div>
     </div>
   );

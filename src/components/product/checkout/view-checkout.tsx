@@ -1,25 +1,30 @@
-"use client";
-import React from "react";
-import HeaderCheckout from "./_components/headerCheckout";
-import NewCard from "./_components/newCard";
-import Input from "@/src/components/input";
-import Visa from "./_components/visa";
-import Button from "@/src/components/button";
-import ImgProduct from "@/src/components/img-product";
-import phoneImg from "@/src/assets/images/phone.png";
 import { useDisclosure } from "@mantine/hooks";
+import React from "react";
+import NewCard from "./newCard";
+import Input from "@/src/components/input";
+import Visa from "./visa";
+import ImgProduct from "@/src/components/img-product";
+import Button from "@/src/components/button";
 import ModalComp from "@/src/components/modal-comp";
+import Image from "next/image";
 import moneySendImg from "@/src/assets/images/moneySend.png";
 import successful from "@/src/assets/images/successful.png";
-import Image from "next/image";
-function Page() {
-  const [opened, { open, close }] = useDisclosure(false);
-  const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
+import phoneImg from "@/src/assets/images/phone.png";
+import { useCreateOrder } from "@/src/hooks/create-order";
+import { Link } from "@/src/navigation";
+import ROUTES from "@/src/routes";
 
+function ViewCheckout({ data = {} }: { data: any }) {
+  const [opened, { open, close }] = useDisclosure(false);
+  console.log(data);
+  const { form, status } = useCreateOrder();
+  const { onSubmit, opened2, close2 } = form;
+  const handleCreateOrder = () => {
+    onSubmit(data);
+  };
   return (
     <div className="mt-8 flex-col xl:flex-row flex justify-between gap-7 mb-20">
       <div className="xl:max-w-[700px] w-full flex-1 ">
-        <HeaderCheckout />
         <h3 className="text-lg lg:text-2xl font-SemiBold mb-5 md:px-2">
           Enter your card
         </h3>
@@ -52,7 +57,9 @@ function Page() {
             <h3 className="text-base font-Regular text-grayMedium ">
               Essential
             </h3>
-            <p className="text-base font-Regular text-grayMedium">USD 150 </p>
+            <p className="text-base font-Regular text-grayMedium">
+              USD {data?.orderItems[0].price}{" "}
+            </p>
           </li>
           <li className="flex items-center justify-between ">
             <h3 className="text-base font-Regular text-grayMedium ">
@@ -62,7 +69,7 @@ function Page() {
           </li>
           <li className="flex items-center justify-between pt-4 border-t border-x-grayMedium/40 ">
             <h3 className="text-base  ">Total</h3>
-            <p className="text-base ">USD 150</p>
+            <p className="text-base ">USD {data?.orderItems[0].price * 0.9}</p>
           </li>
         </ul>
         <Button onClick={open} className={"w-full mt-6"}>
@@ -88,7 +95,7 @@ function Page() {
           </p>
           <Button
             onClick={() => {
-              open2();
+              handleCreateOrder();
               close();
             }}
             className={"h-16 w-full"}
@@ -111,16 +118,19 @@ function Page() {
           <p className=" text-center mb-6 text-base">
             Your request has been successfully submitted.
           </p>
-          <Button
+          <Link
+            href={ROUTES.USER.BOOKINGS}
             onClick={close2}
-            className={"h-16 w-full bg-blueLight border-none hover:shadow-md text-black"}
+            className={
+              "!h-16 w-full flex items-center justify-center rounded-xl duration-200 bg-blueLight border-none hover:shadow-md text-black"
+            }
           >
             Close
-          </Button>
+          </Link>
         </div>
       </ModalComp>
     </div>
   );
 }
 
-export default Page;
+export default ViewCheckout;

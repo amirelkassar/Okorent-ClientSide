@@ -14,6 +14,7 @@ import ReviewIcon from "@/src/assets/icons/review";
 import CarReturn from "@/src/assets/icons/car-return";
 import BarcodeIcon from "@/src/assets/icons/barcode";
 import { GetMyOrderAll } from "@/src/hooks/queries/user/booking";
+import Loading from "@/src/components/loading";
 const FilterOptions = [
   {
     label: "Pending Approval",
@@ -86,8 +87,11 @@ const functionSelect = [
   },
 ];
 function TableRentalsView() {
-  const {data} = GetMyOrderAll();
+  const { data, isLoading } = GetMyOrderAll();
   console.log(data);
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div className=" hidden mdl:block">
       <TableHeader>

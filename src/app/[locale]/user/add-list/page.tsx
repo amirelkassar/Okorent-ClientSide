@@ -18,6 +18,10 @@ import {
 } from "@/src/hooks/queries/user/add-lisiting";
 import SelectInput from "@/src/components/select-input";
 import Input from "@/src/components/input";
+import { getFormData } from "@/src/lib/utils";
+import { Toast } from "@/src/components/toast";
+import { useRouter } from "@/src/navigation";
+import ROUTES from "@/src/routes";
 
 interface LocationProps {
   id: number;
@@ -29,6 +33,7 @@ interface FAQ {
   answer: string;
 }
 function Page() {
+  const router =useRouter()
   const [selectedCheckbox, setSelectedCheckbox] = useState<string | null>(null);
   const [location, setLocation] = useState<LocationProps[]>([]);
   const [faqs, setFaqs] = useState<FAQ[]>([{ question: "", answer: "" }]);
@@ -68,8 +73,14 @@ function Page() {
     GetSubCategory(dataList?.CategoryId);
   const { mutateAsync: createListing } = useCreateListingMutation();
   const handleSubmit = async () => {
-    await createListing(dataList);
+    await Toast.Promise(createListing(getFormData(dataList)), {
+      success: "successfully Create Product",
+      onSuccess: async (res) => {
+        router.push(ROUTES.USER.LISTINGS)
+      },
+    });
   };
+
   useEffect(() => {
     RefetchGetSubCategory();
   }, [dataList?.CategoryId]);

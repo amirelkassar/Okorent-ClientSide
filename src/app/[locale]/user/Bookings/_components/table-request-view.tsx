@@ -6,8 +6,9 @@ import { TableHeader } from "@/src/components/table/table-header";
 import { Link } from "@/src/navigation";
 import CardIcon from "@/src/assets/icons/card";
 import RentSwitch from "@/src/components/RentSwitch";
-import {  GetMyOrderOutAll } from "@/src/hooks/queries/user/booking";
+import { GetMyOrderOutAll } from "@/src/hooks/queries/user/booking";
 import { columnsReq } from "./columnsReq";
+import Loading from "@/src/components/loading";
 const FilterOptionsReq = [
   {
     label: "New",
@@ -46,9 +47,10 @@ const FilterOptionsReq = [
   },
 ];
 function TableRequestView() {
-
-  const {data} = GetMyOrderOutAll();
-
+  const { data, isLoading } = GetMyOrderOutAll();
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div className=" hidden mdl:block">
       <TableHeader>
@@ -66,8 +68,7 @@ function TableRequestView() {
         </TableHeader.Middle>
         <TableHeader.Last options={FilterOptionsReq} />
       </TableHeader>
-      <DataTable title="" data={data?.data||[]} columns={columnsReq} />
-      
+      <DataTable title="" data={data?.data || []} columns={columnsReq} />
     </div>
   );
 }
