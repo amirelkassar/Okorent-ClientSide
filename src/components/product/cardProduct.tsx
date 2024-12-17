@@ -10,14 +10,18 @@ import FeaturesProduct from "./FeaturesProduct";
 import ProductClient from "./productClient";
 import ShowMore from "@/src/components/showMore";
 import ChooseAddressType from "./choose-address-type";
-import { useCreateOrder } from "@/src/hooks/create-order";
-import Button from "../button";
 import { useParams, useSearchParams } from "next/navigation";
 import ViewCheckout from "./checkout/view-checkout";
 import LinkGreen from "../linkGreen";
 import ROUTES from "@/src/routes";
 
-function CardProduct({ data = [] }: { data?: any }) {
+function CardProduct({
+  data = [],
+  guest = false,
+}: {
+  data?: any;
+  guest?: boolean;
+}) {
   const params = useParams();
   const searchparams = useSearchParams();
   const [daysNumber, setDaysNumber] = useState(0);
@@ -44,7 +48,7 @@ function CardProduct({ data = [] }: { data?: any }) {
     () => PriceBYDays * daysNumber - 50.82,
     [PriceBYDays, daysNumber]
   );
-console.log(location);
+  console.log(location);
 
   const formData = {
     orderItems: [
@@ -136,12 +140,12 @@ console.log(location);
           >
             <div className="flex items-center px-5 justify-between gap-4 pb-4 flex-wrap mt-5">
               <LinkGreen
-                href={ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID)}
+                href={guest?ROUTES.AUTH.LOGIN:ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID)}
                 className={`w-full  ${
-                  valueAddressType && TotalPriceOrder&&location
+                  valueAddressType && TotalPriceOrder && location 
                     ? "opacity-100"
-                    : "opacity-50 pointer-events-none"
-                } duration-300  `}
+                    :guest? "opacity-100" :"opacity-50 pointer-events-none"
+                 }  duration-300  `}
               >
                 Request this item
               </LinkGreen>
