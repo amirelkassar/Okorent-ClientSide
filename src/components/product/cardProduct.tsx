@@ -106,8 +106,8 @@ function CardProduct({ data = [] }: { data?: any }) {
             <h3 className="text-base font-SemiBold mb-1 lg:mb-2 lg:text-xl">
               Description
             </h3>
-            <div className="text-sm font-Regular lg:text-base text-grayMedium">
-              <ShowMore lines={3}>
+            <div className="text-sm font-Regular lg:text-base text-grayMedium whitespace-pre-wrap">
+              <ShowMore lines={3} >
                 {data.description ||
                   " Hbada F3 Air ergonomic office chair combines the latest technologies to help you maintain a comfortable posture and live a healthy lifestyle. This office chair comes with elastic lumbar support, 3D adjustable headrest and armrests, durable and breathable mesh, 140-degree reclining, adjustable seat depth, and gravity-sensing chassis, offering lasting comfort even after all-day sitting."}
               </ShowMore>

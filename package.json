@@ -14,6 +14,7 @@
     "@fullcalendar/interaction": "^6.1.15",
     "@fullcalendar/react": "^6.1.15",
     "@fullcalendar/resource-timeline": "^6.1.15",
+    "@hookform/resolvers": "^3.9.1",
     "@mantine/charts": "^7.12.0",
     "@mantine/core": "^7.12.0",
     "@mantine/dates": "^7.12.1",
@@ -33,12 +34,14 @@
     "react": "^18",
     "react-dom": "^18",
     "react-easy-crop": "^5.0.8",
+    "react-hook-form": "^7.54.1",
     "react-hot-toast": "^2.4.1",
     "react-phone-input-2": "^2.15.1",
     "react-show-more-text": "^1.7.1",
     "recharts": "^2.12.7",
     "swiper": "^11.1.9",
     "tailwind-merge": "^2.4.0",
+    "yup": "^1.6.0",
     "zustand": "^4.5.5"
   },
   "devDependencies": {

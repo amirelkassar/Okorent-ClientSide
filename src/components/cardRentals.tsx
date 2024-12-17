@@ -61,9 +61,9 @@ function CardRentals({ data, Fav = false, edit = false }: CardRentalsProps) {
             {data?.description||data.details||"--"}
           </h5>
           <div className="flex md:items-center gap-1 lg:gap-2 mt-1 md:mt-2">
-            <LocationIcon className="w-3 md:w-[18px] h-auto" />
+            <LocationIcon className="w-3 min-w-3 md:w-[18px] h-auto" />
             <div>
-              <h6 className="text-[10px] md:text-[12px] font-Medium text-black/80">
+              <h6 className="text-[10px] md:text-[12px] font-Medium text-black/80 line-clamp-2 min-h-9 place-content-center">
                 {data.address||data.location||"--"}
               </h6>
               {/* <p className="text-[10px] md:text-[12px] font-Light  text-black/60">

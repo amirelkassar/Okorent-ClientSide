@@ -50,7 +50,7 @@ export const useVerifyPhone = (): VerifyPhoneReturn => {
 
   const onSubmitReSendOTP = useCallback(async () => {
     Toast.Promise(ReSendOTP({ phone: formData.phoneNumber }), {
-      success: "OTP sent successfully",
+      success: "The OTP has been sent again",
       onSuccess: async (res) => {
         console.log(res);
       },

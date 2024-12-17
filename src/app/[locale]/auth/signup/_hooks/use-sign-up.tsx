@@ -16,10 +16,7 @@ interface FormDataProps {
 
 // Define the type for the form state and handlers
 interface FormProps {
-  setFormData: React.Dispatch<React.SetStateAction<FormDataProps>>;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: () => void;
-  data: FormDataProps;
+  onSubmit: (data:any) => void;
   error: any; // You can replace 'any' with a more specific type based on your error structure
 }
 
@@ -35,12 +32,7 @@ interface SignUpReturn {
 export const useSignUp = (): SignUpReturn => {
   const router = useRouter();
   const { setUser } = useUserStore();
-  const [formData, setFormData] = useState<FormDataProps>({
-    Name: "",
-    Email: "",
-    Password: "",
-    PhoneNumber: "",
-  });
+;
 
   const {
     mutateAsync: CreateAccount,
@@ -50,20 +42,7 @@ export const useSignUp = (): SignUpReturn => {
     reset,
   } = useCreateAccountMutation();
 
-  const onChange = useCallback(
-    (e: any) => {
-      const { name, value } = e.target;
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-
-      if (isError) reset();
-    },
-    [isError, reset]
-  );
-
-  const onSubmit = useCallback(async () => {
+  const onSubmit = useCallback(async (formData:any) => {
     console.log(formData);
     setUser(formData);
     const requestData = new FormData();
@@ -90,13 +69,10 @@ export const useSignUp = (): SignUpReturn => {
         console.log(error);
       },
     });
-  }, [CreateAccount, formData, router]);
+  }, [CreateAccount, router]);
 
   const form: FormProps = {
-    setFormData,
-    onChange,
     onSubmit,
-    data: formData,
     error,
   };
 
