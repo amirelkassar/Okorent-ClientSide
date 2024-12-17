@@ -26,13 +26,13 @@ export const user = {
     },
   },
   order: {
-    base: "/Order/direct-order",
+    base: "/BookingOrder/Direct-Order",
     booking: {
       i_rent: (queries: any) =>
-        buildQuery("/Order?OrderType=myorders", queries),
+        buildQuery("/BookingOrder?OrderType=myorders", queries),
       i_rentOut: (queries: any) =>
-        buildQuery("/Order?OrderType=myordersout", queries),
+        buildQuery("/BookingOrder?OrderType=myordersout", queries),
     },
-    getById: (id: any) => `/Order/${id}`,
+    getById: (id: any) => `/BookingOrder/${id}`,
   },
 };

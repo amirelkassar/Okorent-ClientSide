@@ -1,6 +1,7 @@
 import Button from "@/src/components/button";
 import CardRentals from "@/src/components/cardRentals";
 import { StaticImageData } from "next/image";
+import { parseAsInteger, useQueryState } from "nuqs";
 import React from "react";
 interface dataProps {
   id: number;
@@ -18,7 +19,11 @@ interface ProductListProps {
   data: dataProps[];
   more?: boolean;
 }
-function ProductList({ link, title, data, more=true }: ProductListProps) {
+function ProductList({ link, title, data, more = true }: ProductListProps) {
+  const [PageNumber, setPageNumber] = useQueryState(
+    "PageSize",
+    parseAsInteger.withDefault(10)
+  );
   return (
     <div className="mb-11">
       {title && (
@@ -33,7 +38,14 @@ function ProductList({ link, title, data, more=true }: ProductListProps) {
         </div>
       )}
       {more && (
-        <Button className={"gap-2 mx-auto mt-11 h-10"}>View more items</Button>
+        <Button
+          className={"gap-2 mx-auto mt-11 h-10"}
+          onClick={() => {
+            setPageNumber(+PageNumber + 10);
+          }}
+        >
+          View more items
+        </Button>
       )}
     </div>
   );

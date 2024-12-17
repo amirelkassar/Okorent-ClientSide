@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import rental from "@/src/assets/images/house1.png";
+import rental from "@/src/assets/images/placProduct.png";
 import LocationIcon from "@/src/assets/icons/location";
 import StarIcon from "@/src/assets/icons/star";
 import FavIcon from "../assets/icons/fav";
@@ -23,8 +23,12 @@ function CardRentals({ data, Fav = false, edit = false }: CardRentalsProps) {
         <div className=" relative mb-[6px] md:mb-3">
           <Image
             alt="Rentals"
-            src={rental}
-            className="w-full h-[124px] md:h-[160px] object-cover object-top rounded-[18px]"
+            src={data?.heroImage || rental}
+            width={252}
+            height={160}
+            priority
+            property="10000000"
+            className="w-full h-[124px] md:h-[160px] object-cover object-center rounded-[18px]"
           />
           {Fav && (
             <button className="p-[5px] md:p-2 rounded-lg bg-grayBack size-6 md:size-8 flex items-center justify-center absolute bottom-3 end-2 z-[2]">
@@ -56,15 +60,17 @@ function CardRentals({ data, Fav = false, edit = false }: CardRentalsProps) {
               </div>
             )}
           </div>
-          <h4 className="text-blue text-sm lg:text-base font-medium capitalize  w-full max-w-full truncate ">{data?.name||data.title}</h4>
+          <h4 className="text-blue text-sm lg:text-base font-medium capitalize  w-full max-w-full truncate ">
+            {data?.name || data.title}
+          </h4>
           <h5 className="text-grayMedium text-[10px] md:text-[12px] pb-[6px] border-b border-black/20 min-h-7 max-w-full truncate">
-            {data?.description||data.details||"--"}
+            {data?.description || data.details || "--"}
           </h5>
           <div className="flex md:items-center gap-1 lg:gap-2 mt-1 md:mt-2">
-            <LocationIcon className="w-3 md:w-[18px] h-auto" />
+            <LocationIcon className="w-3 min-w-3 md:w-[18px] h-auto" />
             <div>
-              <h6 className="text-[10px] md:text-[12px] font-Medium text-black/80">
-                {data.address||data.location||"--"}
+              <h6 className="text-[10px] md:text-[12px] font-Medium text-black/80 line-clamp-2 min-h-9 place-content-center">
+                {data.address || data.location || "--"}
               </h6>
               {/* <p className="text-[10px] md:text-[12px] font-Light  text-black/60">
                 {data.locationDetails}

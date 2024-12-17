@@ -11,12 +11,12 @@ import ROUTES from "@/src/routes";
 import { useDeleteMutation } from "@/src/hooks/queries/user/lisitings";
 import { Toast } from "@/src/components/toast";
 
-function ActionMenu({ id }: { id: any }) {
+function ActionMenuRent({ id }: { id: any }) {
   const [opened, { open, close }] = useDisclosure(false);
   const { mutateAsync: DeleteProduct } = useDeleteMutation();
   const onSubmitDelete = useCallback(async () => {
     Toast.Promise(DeleteProduct(id), {
-      success: "Deleted Done",
+      success: "Deleted Product Done",
       onSuccess: async (res) => {},
     });
   }, [DeleteProduct]);
@@ -62,4 +62,4 @@ function ActionMenu({ id }: { id: any }) {
   );
 }
 
-export default ActionMenu;
+export default ActionMenuRent;

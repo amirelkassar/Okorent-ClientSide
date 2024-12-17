@@ -12,15 +12,21 @@ import ShowMore from "@/src/components/showMore";
 import ChooseAddressType from "./choose-address-type";
 import { useCreateOrder } from "@/src/hooks/create-order";
 import Button from "../button";
+import { useParams, useSearchParams } from "next/navigation";
+import ViewCheckout from "./checkout/view-checkout";
+import LinkGreen from "../linkGreen";
+import ROUTES from "@/src/routes";
 
 function CardProduct({ data = [] }: { data?: any }) {
+  const params = useParams();
+  const searchparams = useSearchParams();
   const [daysNumber, setDaysNumber] = useState(0);
   const [valueDate, setValueDate] = useState<[Date | null, Date | null]>([
     new Date(),
     new Date(),
   ]);
   const [valueAddressType, setValueAddressType] = useState("");
-  const [location, setLocation] = useState<any>({});
+  const [location, setLocation] = useState<any>(null);
   const priceOptions = useMemo(
     () => ({
       Daily: data?.dailyPrice || 0,
@@ -38,47 +44,47 @@ function CardProduct({ data = [] }: { data?: any }) {
     () => PriceBYDays * daysNumber - 50.82,
     [PriceBYDays, daysNumber]
   );
-  const { form, status } = useCreateOrder();
-  const { onSubmit } = form;
-  const handleCreateOrder = () => {
-    const formData = {
-      orderItems: [
-        {
-          productId: data?.id,
-          quantity: 1,
-          from: valueDate[0]?.toISOString(),
-          to: valueDate[1]?.toISOString(),
-          price: TotalPriceOrder,
-        },
-      ],
-      handlingType: 1,
-      deliveryType:
-        valueAddressType === "store"
-          ? 1
-          : valueAddressType === "delivery"
-          ? 2
-          : valueAddressType === "pickup"
-          ? 3
-          : 1,
-      paymentMethod: 1,
-      paymentAmount: TotalPriceOrder,
-      handler: "4444",
-      paymentAction: 1,
-      customerId: "",
-      isQuotation: true,
-      ...(valueAddressType === "store" && {
-        stockId: location,
-      }),
-      ...(valueAddressType === "delivery" && {
-        renterAddress: location,
-      }),
-      ...(valueAddressType === "pickup" && {
-        pickUpAddress: location,
-      }),
-    };
+console.log(location);
 
-    onSubmit(formData);
+  const formData = {
+    orderItems: [
+      {
+        productId: data?.id,
+        quantity: 1,
+        from: valueDate[0]?.toISOString(),
+        to: valueDate[1]?.toISOString(),
+        price: TotalPriceOrder,
+      },
+    ],
+    handlingType: 1,
+    deliveryType:
+      valueAddressType === "store"
+        ? 1
+        : valueAddressType === "delivery"
+        ? 2
+        : valueAddressType === "pickup"
+        ? 3
+        : 1,
+    paymentMethod: 1,
+    paymentAmount: TotalPriceOrder,
+    handler: "4444",
+    paymentAction: 1,
+    customerId: "",
+    isQuotation: true,
+    ...(valueAddressType === "store" && {
+      stockId: location,
+    }),
+    ...(valueAddressType === "delivery" && {
+      renterAddress: location,
+    }),
+    ...(valueAddressType === "pickup" && {
+      pickUpAddress: location,
+    }),
   };
+
+  if (searchparams.get("checkout") === "true") {
+    return <ViewCheckout data={formData} />;
+  }
   return (
     <div className=" mb-section">
       <ImagesProduct />
@@ -106,7 +112,7 @@ function CardProduct({ data = [] }: { data?: any }) {
             <h3 className="text-base font-SemiBold mb-1 lg:mb-2 lg:text-xl">
               Description
             </h3>
-            <div className="text-sm font-Regular lg:text-base text-grayMedium">
+            <div className="text-sm font-Regular lg:text-base text-grayMedium whitespace-pre-wrap">
               <ShowMore lines={3}>
                 {data.description ||
                   " Hbada F3 Air ergonomic office chair combines the latest technologies to help you maintain a comfortable posture and live a healthy lifestyle. This office chair comes with elastic lumbar support, 3D adjustable headrest and armrests, durable and breathable mesh, 140-degree reclining, adjustable seat depth, and gravity-sensing chassis, offering lasting comfort even after all-day sitting."}
@@ -129,14 +135,16 @@ function CardProduct({ data = [] }: { data?: any }) {
             PriceBYDays={PriceBYDays}
           >
             <div className="flex items-center px-5 justify-between gap-4 pb-4 flex-wrap mt-5">
-              <Button
-                onClick={() => {
-                  handleCreateOrder();
-                }}
-                className={"w-full "}
+              <LinkGreen
+                href={ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID)}
+                className={`w-full  ${
+                  valueAddressType && TotalPriceOrder&&location
+                    ? "opacity-100"
+                    : "opacity-50 pointer-events-none"
+                } duration-300  `}
               >
                 Request this item
-              </Button>
+              </LinkGreen>
             </div>
           </PriceDetails>
         </div>

@@ -17,7 +17,7 @@ function ActionMenu({ id }: { id: any }) {
   const { mutateAsync: DeleteProduct } = useDeleteMutation();
   const onSubmitDelete = useCallback(async () => {
     Toast.Promise(DeleteProduct(id), {
-      success: "Deleted Done",
+      success: "Deleted Product Done",
       onSuccess: async (res) => {},
     });
   }, [DeleteProduct]);

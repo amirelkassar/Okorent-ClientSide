@@ -100,7 +100,7 @@ function ChooseAddressType({
                     color="#88BA52"
                     key={inedx}
                     value={option.id}
-                    label={option.id}
+                    label={option.name}
                     className="flex-1"
                     classNames={{
                       icon: "w-3 h-3 left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2",

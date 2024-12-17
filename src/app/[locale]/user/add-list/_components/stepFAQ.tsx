@@ -43,13 +43,14 @@ function StepFAQ({ faqs, setFaqs, active, handleChangeFAQ }: StepFAQProps) {
             <Textarea
               placeholder="Answer"
               value={faq.answer}
+              autosize
               onChange={(e) => handleChangeFAQ(index, "answer", e.target.value)}
               classNames={{
                 input:
-                  " text-black rounded-2xl text-grayMedium flex items-center  h-full border border-green/30 focus:border-green active:border-green  placeholder:text-grayMedium placeholder:pt-3 placeholder:block placeholder:opacity-100 ",
+                  " text-black rounded-2xl text-grayMedium flex items-center min-h-16  h-full border border-green/30 focus:border-green active:border-green  placeholder:text-grayMedium placeholder:pt-3 placeholder:block placeholder:opacity-100 ",
                 wrapper: "h-full",
               }}
-              className="h-[64px] mb-4 duration-200 min-h-[64px] bg-white rounded-2xl  text-grayMedium"
+              className=" mb-4 duration-200 min-h-[64px] bg-white rounded-2xl  text-grayMedium"
             />
           </div>
         ))}

@@ -16,7 +16,6 @@ function getAxiosInstance(URL: string) {
 
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
-        config.headers.Accept = "application/json";
       }
 
       return config;

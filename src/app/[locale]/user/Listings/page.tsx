@@ -5,11 +5,12 @@ import CardView from "./_components/cardView";
 import TableViewListings from "./_components/table-view-listings";
 import { GetMyProductsAll } from "@/src/hooks/queries/user/lisitings";
 import ROUTES from "@/src/routes";
+import Loading from "@/src/components/loading";
 
 function Page() {
   const searchParams = useSearchParams();
 
-  const { data } = GetMyProductsAll(searchParams.toString());
+  const { data ,isLoading } = GetMyProductsAll(searchParams.toString());
   console.log(data);
   const DataIsActive = data?.data?.filter(
     (item: any) => item.isActive === true
@@ -17,6 +18,9 @@ function Page() {
   const DataIsNotActive = data?.data?.filter(
     (item: any) => item.isActive === false
   );
+if(isLoading){
+  return <Loading/>
+}
   return (
     <div>
       {searchParams.get("card") === "true" ? (

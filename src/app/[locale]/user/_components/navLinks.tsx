@@ -105,35 +105,54 @@ function NavLinks() {
           .split("-")
           .join("  ")}`,
         url: ROUTES.USER.BOOKINGS,
-        active: path === ROUTES.USER.BOOKINGSID(params.BookingID),
+        active:
+          path === ROUTES.USER.BOOKINGSID(params.BookingID) &&
+          path + "?checkout=true" !==
+            ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID),
       },
+
       {
-        id: 2,
+        id: 3,
         name: "Product Details ",
         url: ROUTES.USER.PRODUCTDETAILS(params.productID),
         active: path === ROUTES.USER.PRODUCTDETAILS(params.productID),
       },
       {
-        id: 3,
+        id: 4,
         name: "Subscription",
         url: ROUTES.USER.SUBSCRIPTION,
         active: path === ROUTES.USER.SUBSCRIPTION,
       },
       {
-        id: 4,
+        id: 5,
         name: "My Profile",
         url: ROUTES.USER.PROFILE,
         active: path === ROUTES.USER.PROFILE,
       },
       {
-        id: 5,
+        id: 6,
         name: "Wallet",
         url: ROUTES.USER.WALLET,
         active: path === ROUTES.USER.WALLET,
       },
+      {
+        id: 7,
+        name: `Order Details`,
+        url: ROUTES.USER.BOOKINGS,
+        active: path === ROUTES.USER.ORDERID(params.orderId),
+      },
+      {
+        id: 8,
+        name: `Checkout`,
+        url: ROUTES.USER.PRODUCTDETAILS(params.productID),
+        active:
+          path + "?checkout=true" ===
+          ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID),
+      },
     ],
     [path]
   );
+
   return (
     path !== ROUTES.USER.CHECKOUT &&
     path !== ROUTES.USER.CHECKOUTID(params.checkoutID) && (

@@ -5,7 +5,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import { twMerge } from 'tailwind-merge';
 import axios from "axios";
 import { usePathname, useRouter } from '../navigation';
-import ROUTES from '../routes';
+import { serialize } from 'object-to-formdata';
 
 
 
@@ -197,4 +197,10 @@ export const calculateDurationRange = (valueDateFrom: Date | null, valueDateTo: 
     return Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Convert the difference to days
   }
   return 0;
+};
+export const getFormData = (data:any) => {
+  return serialize(data, {
+    indices: true,
+    nullsAsUndefineds: true,
+  });
 };

@@ -13,6 +13,7 @@ export const useCreateOrderMutation = () => {
     },
     onSuccess: async (res) => {
       console.log(res);
+      queryClient.invalidateQueries([initialQueryKey]);
     },
     onError: (res) => {
         console.log(res);

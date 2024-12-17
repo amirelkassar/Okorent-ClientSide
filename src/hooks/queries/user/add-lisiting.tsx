@@ -9,7 +9,9 @@ export const GetCategory = () => {
   return useQuery({
     queryKey: [initialQueryKey],
     queryFn: async () => {
-      const response = await api.get(user.addListing.category+'?CategoryType=Category');
+      const response = await api.get(
+        user.addListing.category + "?CategoryType=Category"
+      );
       return response.data;
     },
   });
@@ -33,6 +35,7 @@ export const useCreateListingMutation = () => {
     mutationFn: async (data: any) => {
       const response = await api.post(user.addListing.base, data, {
         headers: {
+          Accept: "text/plain",
           "Content-Type": "multipart/form-data",
         },
       });

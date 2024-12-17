@@ -9,8 +9,7 @@ import LocationIcon from "@/src/assets/icons/location";
 import GoogleMapLoc from "@/src/components/GoogleMap";
 import ButtonDelete from "@/src/components/button-delete";
 import { GetMyStock } from "@/src/hooks/queries/user/lisitings/stock";
-
-
+import { it } from "node:test";
 
 interface StepLocationProps {
   location: any[];
@@ -27,7 +26,10 @@ function StepLocation({
   const { data } = GetMyStock();
   console.log(location);
   console.log(data);
-  
+  if (location.length === 0) {
+    return null;
+  }
+
   return (
     <div className="mt-[7px] pb-8 lg:pb-12 flex-1">
       <h3 className={"text-base lg:text-[24px] mb-1 "}>Storage Location</h3>
@@ -41,7 +43,7 @@ function StepLocation({
               value: loc.id, // Use the `id` as the value
               label: loc.name, // Use the `address` as the label
             }))}
-            defaultValue={['7e8ad53d-0b9f-422c-b5f8-a7c26529f1db','2840cc65-d635-48d8-b6ec-03c509477011']}
+            defaultValue={location.map((loc) => loc.id)}
             onChange={(selectedValues) => {
               handleInputChangeLocation(selectedValues);
             }}
@@ -66,53 +68,51 @@ function StepLocation({
             className="block " // Visible on mobile, hidden on larger screens
           />
 
-          {data?.data
-            ?.filter((item: any) => location.includes(item.id))
-            .map((loc: any, index: number) => (
-              <div key={index} className="flex items-center gap-3">
-                <Checkbox
-                  checked={true}
+          {location?.map((loc: any, index: number) => (
+            <div key={index} className="flex items-center gap-3">
+              <Checkbox
+                checked={true}
+                readOnly
+                color="#88BA52"
+                className={cn("mt-6")}
+              />
+              <div className="flex items-center flex-wrap lg:flex-nowrap flex-1 gap-4">
+                <TextInput
+                  value={loc.name}
+                  name="name"
+                  label={"Location Name"}
+                  placeholder={`Location ${index + 1}`}
                   readOnly
-                  color="#88BA52"
-                  className={cn("mt-6")}
+                  classNames={{
+                    label: "text-sm md:text-[16px] text-grayMedium mb-2",
+                    input:
+                      " text-black text-[12px] md:text-[16px] rounded-2xl text-grayMedium  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+                    wrapper: "h-[64px]",
+                  }}
+                  className=" flex-1 min-w-[144px]  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
                 />
-                <div className="flex items-center flex-wrap lg:flex-nowrap flex-1 gap-4">
-                  <TextInput
-                    value={loc.name}
-                    name="name"
-                    label={"Location Name"}
-                    placeholder={`Location ${index + 1}`}
-                    readOnly
-                    classNames={{
-                      label: "text-sm md:text-[16px] text-grayMedium mb-2",
-                      input:
-                        " text-black text-[12px] md:text-[16px] rounded-2xl text-grayMedium  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
-                      wrapper: "h-[64px]",
-                    }}
-                    className=" flex-1 min-w-[144px]  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
-                  />
-                  <div
-                    onClick={() => {
-                      setIndexSelect(loc.id);
-                      open();
-                    }}
-                    className=" cursor-pointer flex-1 min-w-[156px]"
-                  >
-                    <h3 className="text-sm md:text-[16px] text-grayMedium mb-2">
-                      Address
-                    </h3>
-                    <p className=" flex items-center px-2 py-3 flex-1 text-nowrap truncate  max-w-[260px] text-[12px] md:text-[16px] rounded-2xl text-grayMedium first:font-Bold  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100">
-                      {loc.address}
-                    </p>
-                  </div>
-
-                  <ButtonDelete
-                    onClick={() => handleRemoveLocation(loc.id)}
-                    className={"!size-7 mt-6 lg:!size-11 bg-grayBack"}
-                  />
+                <div
+                  onClick={() => {
+                    setIndexSelect(loc.id);
+                    open();
+                  }}
+                  className=" cursor-pointer flex-1 min-w-[156px]"
+                >
+                  <h3 className="text-sm md:text-[16px] text-grayMedium mb-2">
+                    Address
+                  </h3>
+                  <p className=" flex items-center px-2 py-3 flex-1 text-nowrap truncate  max-w-[260px] text-[12px] md:text-[16px] rounded-2xl text-grayMedium first:font-Bold  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100">
+                    {loc.address}
+                  </p>
                 </div>
+
+                <ButtonDelete
+                  onClick={() => handleRemoveLocation(loc.id)}
+                  className={"!size-7 mt-6 lg:!size-11 bg-grayBack"}
+                />
               </div>
-            ))}
+            </div>
+          ))}
         </div>
 
         <div className="variations-header">
