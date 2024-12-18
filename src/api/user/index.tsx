@@ -29,9 +29,9 @@ export const user = {
     base: "/BookingOrder/Direct-Order",
     booking: {
       i_rent: (queries: any) =>
-        buildQuery("/BookingOrder?OrderType=myorders", queries),
+        buildQuery("/BookingOrder", queries),
       i_rentOut: (queries: any) =>
-        buildQuery("/BookingOrder?OrderType=myordersout", queries),
+        buildQuery("/BookingOrder", queries),
     },
     getById: (id: any) => `/BookingOrder/${id}`,
   },

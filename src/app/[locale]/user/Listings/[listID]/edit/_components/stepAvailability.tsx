@@ -39,7 +39,7 @@ function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
         onChange={(e) => {
           setDataList({
             ...dataList,
-            AlwaysAvailable: e === "always" ? true : false,
+            alwaysAvailable: e === "always" ? true : false,
           });
           if (e === "pick") {
             open();
@@ -105,19 +105,19 @@ function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
             leftSection={<DateIcon fill="#344050" />}
             placeholder=".. - .."
             defaultValue={[
-              dataList.AvailableFrom
-                ? new Date(dataList.AvailableFrom)
+              dataList.availableFrom
+                ? new Date(dataList.availableFrom)
                 : new Date(),
-              dataList.AvailableTo
-                ? new Date(dataList.AvailableTo)
+              dataList.availableTo
+                ? new Date(dataList.availableTo)
                 : new Date(),
             ]}
             onChange={(e) => {
               console.log(e);
               setDataList({
                 ...dataList,
-                AvailableFrom: getDate(e[0]?.toString(), "en").fullYear,
-                AvailableTo: getDate(e[1]?.toString(), "en").fullYear,
+                availableFrom: getDate(e[0]?.toString(), "en").fullYear,
+                availableTo: getDate(e[1]?.toString(), "en").fullYear,
               });
             }}
             popoverProps={{

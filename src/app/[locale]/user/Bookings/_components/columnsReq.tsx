@@ -12,6 +12,8 @@ import avatar from "@/src/assets/images/avatar.png";
 import { getDate } from "@/src/lib/utils";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
+import ImgProduct from "@/src/components/img-product";
+import ActionMenuRentOut from "./action-menu-rent-out";
 export type RequestsTableData = {
   id: number;
   renterName: string;
@@ -32,7 +34,7 @@ export type RequestsTableData = {
   country: string;
   action: string;
   imgUser: StaticImageData;
-  imgHome: StaticImageData;
+  heroImage: StaticImageData;
   orderId: any;
 };
 
@@ -52,7 +54,7 @@ export const columnsReq: ColumnDef<RequestsTableData>[] = [
       const id = row.original.orderId;
       return (
         <Link href={ROUTES.USER.ORDERID(id)} className="flex items-center gap-2">
-          
+
           <Image
             src={avatar}
             alt={name}
@@ -72,22 +74,9 @@ export const columnsReq: ColumnDef<RequestsTableData>[] = [
     cell: ({ getValue, row }) => {
       const productName = getValue<string>();
       const id = row.original.id;
-
+      const image = row.original.heroImage
       return (
-        <button className="flex items-center gap-2">
-          <div className="size-[50px] rounded-[50%] p-[6px] bg-grayBack flex justify-center items-center">
-            <Image
-              src={phoneImg}
-              alt={productName}
-              width={50}
-              height={50}
-              className="w-auto h-full  object-contain "
-            />
-          </div>
-          <h2 className="text-[16px] font-SemiBold max-w-[200px] truncate">
-            {productName}
-          </h2>
-        </button>
+        <ImgProduct productName={productName} src={image} />
       );
     },
   },
@@ -171,15 +160,11 @@ export const columnsReq: ColumnDef<RequestsTableData>[] = [
   },
   {
     id: "actions",
-    cell: () => {
+    cell: ({ row }) => {
+      const orderId = row.original.id
       return (
         <div className="flex items-center gap-3 w-fit">
-          <ActionIcon variant="transparent">
-            <EditIcon className="w-5 h-auto" />
-          </ActionIcon>
-          <ActionIcon variant="transparent">
-            <DeleteIcon className="w-5 h-auto" />
-          </ActionIcon>
+          <ActionMenuRentOut id={orderId} />
         </div>
       );
     },

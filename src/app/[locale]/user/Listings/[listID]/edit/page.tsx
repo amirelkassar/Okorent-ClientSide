@@ -12,11 +12,13 @@ import SelectInput from "@/src/components/select-input";
 import {
   GetCategory,
   GetSubCategory,
+  useEditListingMutation,
 } from "@/src/hooks/queries/user/add-lisiting";
 import InputTextarea from "@/src/components/InputTextarea";
 import Input from "@/src/components/input";
 import StepFAQ from "./_components/stepFAQ";
 import Loading from "@/src/components/loading";
+import { Toast } from "@/src/components/toast";
 
 interface LocationProps {
   id: number;
@@ -71,7 +73,6 @@ interface FAQ {
 }
 function Page({ params }: any) {
   const { data: ProductDerails, isLoading } = GetMyProductsByID(params.listID);
-  console.log(ProductDerails);
   const [dataList, setDataList] = useState<any>(ProductDerails?.data || {});
   const { data: dataCategory } = GetCategory();
   const [faqs, setFaqs] = useState<FAQ[]>([{ question: "", answer: "" }]);
@@ -81,13 +82,11 @@ function Page({ params }: any) {
   const [selectedCheckbox, setSelectedCheckbox] = useState<string | null>(null);
   const [location, setLocation] = useState<LocationProps[]>([]);
   useEffect(() => {
-    console.log("goo");
 
     RefetchGetSubCategory();
   }, [dataList?.categoryId]);
   useEffect(() => {
     if (ProductDerails?.data) {
-      console.log("goo");
       setDataList(ProductDerails?.data);
       RefetchGetSubCategory();
       setSelectedCheckbox(ProductDerails?.data?.isActive ? "true" : "false");
@@ -95,7 +94,6 @@ function Page({ params }: any) {
       setLocation(ProductDerails?.data.stocks);
     }
   }, [isLoading]);
-  console.log(dataList);
 
   const handleCheckboxChange = (
     value: string,
@@ -105,7 +103,7 @@ function Page({ params }: any) {
       setState(null);
     } else {
       setState(value);
-      setDataList({ ...dataList, Status: value });
+      setDataList({ ...dataList, isActive: value });
     }
   };
   const handleInputChangeLocation = (ids: any[]) => {
@@ -121,9 +119,20 @@ function Page({ params }: any) {
     const newFaqs = [...faqs];
     newFaqs[index][field] = value;
     setFaqs(newFaqs);
-    setDataList({ ...dataList, faQs: newFaqs });
+    setDataList({ ...dataList, FAQs: newFaqs });
   };
+  console.log(dataList);
 
+  const { mutateAsync: createListing } = useEditListingMutation();
+  const handleSubmit = async () => {
+    await Toast.Promise(createListing(dataList), {
+      success: "successfully Edit Product",
+      onSuccess: async (res) => {
+        console.log(res);
+
+      },
+    });
+  };
   if (isLoading) {
     return <Loading />;
   }
@@ -262,7 +271,7 @@ function Page({ params }: any) {
         <TextInput
           defaultValue={dataList?.cost}
           onChange={(e) => {
-            setDataList({ ...dataList, value: e.target.value });
+            setDataList({ ...dataList, cost: e.target.value });
           }}
           placeholder="Add item value here"
           classNames={{
@@ -281,7 +290,7 @@ function Page({ params }: any) {
           placeholder="Add available stock number here"
           defaultValue={dataList?.totalQuantity}
           onChange={(e) => {
-            setDataList({ ...dataList, Stock: e.target.value });
+            setDataList({ ...dataList, totalQuantity: e.target.value });
           }}
           classNames={{
             input:
@@ -328,7 +337,7 @@ function Page({ params }: any) {
         handleChangeFAQ={handleChangeFAQ}
       />
       <div className="flex items-center mt-8 gap-7 md:flex-row flex-col">
-        <Button className={"w-full lg:w-[208px] h-[64px]"}>Save Edits</Button>
+        <Button onClick={handleSubmit} className={"w-full lg:w-[208px] h-[64px]"}>Save Edits</Button>
         <Button
           className={
             "w-full lg:w-[208px] h-[64px] text-black bg-grayBack border-none"

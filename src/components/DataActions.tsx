@@ -12,7 +12,7 @@ function DataActions({ data }: { data: any[] }) {
   };
   return (
     <Popover
-      width={172}
+      width={176}
       position="bottom-end"
       onClose={() => setOpened(false)}
       opened={opened}
@@ -48,7 +48,7 @@ function DataActions({ data }: { data: any[] }) {
                 className="flex w-full min-h-[30px] h-[30px] rounded-md items-center gap-2 py-2 hover:bg-green/20 duration-200  ps-2  "
               >
                 {item.icon}
-                <p className={`text-sm text-black font-medium`}>{item.label}</p>
+                <p className={`text-sm text-start text-black font-medium`}>{item.label}</p>
               </button>
             ) : null;
           })}

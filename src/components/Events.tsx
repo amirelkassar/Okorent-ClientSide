@@ -20,9 +20,8 @@ function Events({ item, ids }: EventsProps) {
       >
         {item.icon}
         <p
-          className={`${
-            item.title.toLowerCase() === "delete" ? "text-red" : "text-blue"
-          }  text-sm`}
+          className={`${item.title.toLowerCase() === "delete" ? "text-red" : "text-blue"
+            }  text-sm`}
         >
           {item.title}
         </p>
@@ -38,12 +37,11 @@ function Events({ item, ids }: EventsProps) {
       >
         {item.icon}
         <p
-          className={`${
-            item.title.toLowerCase() === "delete" ||
-            item.title.toLowerCase().includes("cancel")
+          className={`${item.title.toLowerCase() === "delete" ||
+              item.title.toLowerCase().includes("cancel") || item.title.toLowerCase().includes("reject")
               ? "text-red"
               : "text-blue"
-          }  text-sm`}
+            }  text-sm`}
         >
           {item.title}
         </p>

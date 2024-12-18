@@ -1,13 +1,17 @@
 "use client";
 import { api } from "@/src/api/axios";
 import { user } from "@/src/api/user";
-import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useToken } from "@/src/hooks/use-token";
+import { getToken } from "@/token";
+import { useQuery } from "@tanstack/react-query";
 export const initialQueryKey = "user.productsAll";
-
+export const initialQueryKeyUser = "user.productsAllUser";
+const token = getToken()
 //getAllProducts
 export const GetProductsAll = (queries?: any) => {
+  const { token } = useToken();
   return useQuery({
-    queryKey: [initialQueryKey, queries], // إضافة queries إلى queryKey
+    queryKey: [token?.userID ? initialQueryKeyUser : initialQueryKey, queries], // إضافة queries إلى queryKey
     queryFn: async () => {
       const response = await api.get(`${user.product.base(queries)}`);
       return response.data;
@@ -17,8 +21,9 @@ export const GetProductsAll = (queries?: any) => {
 };
 //getProductByID
 export const GetProductsByID = (id: any) => {
+  const { token } = useToken();
   return useQuery({
-    queryKey: [initialQueryKey, id],
+    queryKey: [token?.userID ? initialQueryKeyUser : initialQueryKey, id],
     queryFn: async () => {
       const response = await api.get(user.product.getById(id));
       return response.data;

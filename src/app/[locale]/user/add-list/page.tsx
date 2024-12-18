@@ -33,7 +33,7 @@ interface FAQ {
   answer: string;
 }
 function Page() {
-  const router =useRouter()
+  const router = useRouter()
   const [selectedCheckbox, setSelectedCheckbox] = useState<string | null>(null);
   const [location, setLocation] = useState<LocationProps[]>([]);
   const [faqs, setFaqs] = useState<FAQ[]>([{ question: "", answer: "" }]);
@@ -73,10 +73,11 @@ function Page() {
     GetSubCategory(dataList?.CategoryId);
   const { mutateAsync: createListing } = useCreateListingMutation();
   const handleSubmit = async () => {
-    await Toast.Promise(createListing(getFormData(dataList)), {
+    await Toast.Promise(createListing(dataList), {
       success: "successfully Create Product",
       onSuccess: async (res) => {
-        router.push(ROUTES.USER.LISTINGS)
+        console.log(res);
+
       },
     });
   };
@@ -86,9 +87,8 @@ function Page() {
   }, [dataList?.CategoryId]);
   return (
     <div
-      className={`"w-full  ${
-        searchparams.get("preview") === "true" ? "" : "lg:w-[810px]"
-      }`}
+      className={`"w-full  ${searchparams.get("preview") === "true" ? "" : "lg:w-[810px]"
+        }`}
     >
       {searchparams.get("preview") === "true" ? (
         <Preview />

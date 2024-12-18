@@ -13,7 +13,7 @@ export const GetMyOrderOutAll = (queries?: any) => {
   return useQuery({
     queryKey: [initialQueryKeyOut, queries],
     queryFn: async () => {
-      const response = await api.get(user.order.booking.i_rentOut(queries));
+      const response = await api.get(user.order.booking.i_rentOut('OrderType=myordersout&'+queries));
       return response.data;
     },
   });
@@ -23,7 +23,7 @@ export const GetMyOrderAll = (queries?: any) => {
     return useQuery({
       queryKey: [initialQueryKey, queries],
       queryFn: async () => {
-        const response = await api.get(user.order.booking.i_rent(queries));
+        const response = await api.get(user.order.booking.i_rent('OrderType=myorders&'+queries));
         return response.data;
       },
     });

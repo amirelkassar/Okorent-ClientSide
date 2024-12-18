@@ -3,7 +3,6 @@ import CloseIcon from "@/src/assets/icons/close";
 import { GetSubCategory } from "@/src/hooks/queries/user/add-lisiting";
 import { GetProductsAll } from "@/src/hooks/queries/user/home";
 import { useUpdateQueryParams } from "@/src/lib/utils";
-import { useRouter } from "@/src/navigation";
 import { useSearchParams } from "next/navigation";
 import React, { useCallback, useState } from "react";
 import LoadingProductsRow from "./loading-products-row";
@@ -31,7 +30,6 @@ const sortingOptions: any[] = [
 ];
 function PageCategoryProducts({ children }: { children: React.ReactNode }) {
   const searchParams = useSearchParams();
-  const router = useRouter();
   const [selectedSubcategories, setSelectedSubcategories] = useState<string[]>(
     searchParams.getAll("SubCategoryIds") || []
   );

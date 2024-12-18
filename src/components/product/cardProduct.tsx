@@ -91,17 +91,17 @@ function CardProduct({
   }
   return (
     <div className=" mb-section">
-      <ImagesProduct />
+      <ImagesProduct dataImages={data?.images||[]} />
       <div className=" w-full  border-b border-grayMedium/40 pb-6">
-        <div className="flex w-full items-center  justify-between gap-3 mb-7 mt-section ">
-          <h2 className="text-2xl lg:text-[32px] font-SemiBold ">
+        <div className="flex w-full items-center  justify-between gap-3 mb-7 mt-5 md:mt-section ">
+          <h2 className="text-lg lg:text-[32px] font-SemiBold ">
             {data.name || "Hbada E3 Air Ergonomic Office Chair"}
           </h2>
-          <div className="flex items-center gap-5">
-            <button className=" size-[46px] lg:size-[60px] rounded-full bg-grayBack flex items-center justify-center p-3 duration-300 hover:shadow-md">
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-5">
+            <button className=" size-9 md:size-11 lg:size-[60px] rounded-full bg-grayBack flex items-center justify-center p-2 md:p-3 duration-300 hover:shadow-md">
               <ShareIcon />
             </button>
-            <button className=" size-[46px] lg:size-[60px] rounded-full bg-grayBack flex items-center justify-center p-3 duration-300 hover:shadow-md">
+            <button className=" size-9 md:size-11 lg:size-[60px] rounded-full bg-grayBack flex items-center justify-center p-2 md:p-3 duration-300 hover:shadow-md">
               <FavRedIcon />
             </button>
           </div>
@@ -110,7 +110,7 @@ function CardProduct({
         <FeaturesProduct />
       </div>
 
-      <div className="flex mt-section items-start justify-between flex-col lg:flex-row gap-11">
+      <div className="flex mt-5 md:mt-section items-start justify-between flex-col lg:flex-row gap-11">
         <div className="lg:max-w-[650px] w-full flex-1">
           <div>
             <h3 className="text-base font-SemiBold mb-1 lg:mb-2 lg:text-xl">

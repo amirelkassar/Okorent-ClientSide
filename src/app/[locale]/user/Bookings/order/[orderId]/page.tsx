@@ -41,7 +41,6 @@ const STEPS_DATA = [
 function Page({ params }: any) {
   const { isRent } = useSwitchRent();
   const { data, isLoading } = GetOrderByID(params.orderId);
-  console.log(isRent);
   if (isLoading) {
     return <Loading />;
   }

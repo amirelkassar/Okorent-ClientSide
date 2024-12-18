@@ -15,31 +15,32 @@ import CarReturn from "@/src/assets/icons/car-return";
 import BarcodeIcon from "@/src/assets/icons/barcode";
 import { GetMyOrderAll } from "@/src/hooks/queries/user/booking";
 import Loading from "@/src/components/loading";
+import { useSearchParams } from "next/navigation";
 const FilterOptions = [
   {
     label: "Pending Approval",
-    key: "filter",
-    value: "Pending Approval",
+    key: "OrderStatus",
+    value: 1,
   },
   {
     label: "Accepted",
-    key: "filter",
-    value: "Accepted",
+    key: "OrderStatus",
+    value: 2,
   },
   {
     label: "Out for delivery",
-    key: "filter",
-    value: "Out for delivery",
+    key: "OrderStatus",
+    value: 3
   },
   {
     label: "Completed",
-    key: "filter",
-    value: "Completed",
+    key: "OrderStatus",
+    value: 4,
   },
   {
     label: "Rejected",
-    key: "filter",
-    value: "Rejected",
+    key: "OrderStatus",
+    value: 5,
   },
 ];
 const functionSelect = [
@@ -87,7 +88,9 @@ const functionSelect = [
   },
 ];
 function TableRentalsView() {
-  const { data, isLoading } = GetMyOrderAll();
+  const searchParams = useSearchParams();
+
+  const { data, isLoading } = GetMyOrderAll(searchParams.toString());
   console.log(data);
   if (isLoading) {
     return <Loading />;
