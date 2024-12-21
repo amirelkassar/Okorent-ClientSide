@@ -8,7 +8,6 @@ import CardIcon from "@/src/assets/icons/card";
 import RentSwitch from "@/src/components/RentSwitch";
 import { GetMyOrderOutAll } from "@/src/hooks/queries/user/booking";
 import { columnsReq } from "./columnsReq";
-import Loading from "@/src/components/loading";
 import { useSearchParams } from "next/navigation";
 import AcceptedIcon from "@/src/assets/icons/accepted";
 import CarReturn from "@/src/assets/icons/car-return";
@@ -18,6 +17,7 @@ import NoteTableIcon from "@/src/assets/icons/noteTable";
 import CancelIcon from "@/src/assets/icons/cancel";
 import BarcodeIcon from "@/src/assets/icons/barcode";
 import RejectOrderIcon from "@/src/assets/icons/RejectOrder";
+import { QueryWrapper } from "@/src/components/query-wrapper";
 const FilterOptionsReq = [
   {
     label: "New",
@@ -116,12 +116,8 @@ const functionSelect = [
 function TableRequestView() {
   const searchParams = useSearchParams();
 
-  const { data, isLoading } = GetMyOrderOutAll(searchParams.toString());
-  console.log(data);
+  const query = GetMyOrderOutAll(searchParams.toString());
 
-  if (isLoading) {
-    return <Loading />;
-  }
   return (
     <div className=" hidden mdl:block">
       <TableHeader>
@@ -139,7 +135,19 @@ function TableRequestView() {
         </TableHeader.Middle>
         <TableHeader.Last options={FilterOptionsReq} />
       </TableHeader>
-      <DataTable title="" data={data?.data || []} columns={columnsReq} functionSelect={functionSelect} />
+      <QueryWrapper query={query}>
+        {({ data }: { data: any }) => {
+          console.log(data);
+          return (
+            <DataTable
+              title=""
+              data={data || []}
+              columns={columnsReq}
+              functionSelect={functionSelect}
+            />
+          );
+        }}
+      </QueryWrapper>
     </div>
   );
 }

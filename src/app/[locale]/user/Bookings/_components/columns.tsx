@@ -136,11 +136,11 @@ export const columns: ColumnDef<RequestsTableData>[] = [
   },
   {
     id: "actions",
-    cell: ({row}) => {
-      const orderId =row.original.orderId
+    cell: ({ row }) => {
+      const orderId = row.original.orderId;
       return (
         <div className="flex items-center gap-3 w-fit">
-         <ActionMenuRent id={orderId}/>
+          <ActionMenuRent id={orderId} />
         </div>
       );
     },

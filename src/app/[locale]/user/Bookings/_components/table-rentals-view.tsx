@@ -14,8 +14,8 @@ import ReviewIcon from "@/src/assets/icons/review";
 import CarReturn from "@/src/assets/icons/car-return";
 import BarcodeIcon from "@/src/assets/icons/barcode";
 import { GetMyOrderAll } from "@/src/hooks/queries/user/booking";
-import Loading from "@/src/components/loading";
 import { useSearchParams } from "next/navigation";
+import { QueryWrapper } from "@/src/components/query-wrapper";
 const FilterOptions = [
   {
     label: "Pending Approval",
@@ -30,7 +30,7 @@ const FilterOptions = [
   {
     label: "Out for delivery",
     key: "OrderStatus",
-    value: 3
+    value: 3,
   },
   {
     label: "Completed",
@@ -91,10 +91,8 @@ function TableRentalsView() {
   const searchParams = useSearchParams();
 
   const { data, isLoading } = GetMyOrderAll(searchParams.toString());
+  const query = GetMyOrderAll(searchParams.toString());
   console.log(data);
-  if (isLoading) {
-    return <Loading />;
-  }
   return (
     <div className=" hidden mdl:block">
       <TableHeader>
@@ -112,12 +110,19 @@ function TableRentalsView() {
         </TableHeader.Middle>
         <TableHeader.Last options={FilterOptions} />
       </TableHeader>
-      <DataTable
-        title=""
-        data={data?.data || []}
-        columns={columns}
-        functionSelect={functionSelect}
-      />
+      <QueryWrapper query={query}>
+        {({ data }: { data: any }) => {
+          console.log(data);
+          return (
+            <DataTable
+              title=""
+              data={data || []}
+              columns={columns}
+              functionSelect={functionSelect}
+            />
+          );
+        }}
+      </QueryWrapper>
     </div>
   );
 }
