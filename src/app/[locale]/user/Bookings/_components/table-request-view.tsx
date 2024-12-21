@@ -85,20 +85,6 @@ const functionSelect = [
     },
   },
   {
-    title: "Version History",
-    icon: <ClockIcon fill="#006AFF" className="max-h-4 w-auto" />,
-    onclick: (ids: any) => {
-      console.log([...ids]);
-    },
-  },
-  {
-    title: "Message",
-    icon: <NoteTableIcon fill="#006AFF" className="max-h-4 w-auto" />,
-    onclick: (ids: any) => {
-      console.log([...ids]);
-    },
-  },
-  {
     title: "Cancel",
     icon: <CancelIcon className="max-h-4 w-auto" />,
     onclick: (ids: any) => {

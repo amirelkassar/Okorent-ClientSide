@@ -4,6 +4,8 @@ import { useRouter } from "@/src/navigation";
 import { Toast } from "@/src/components/toast";
 import { useUserEditMutation } from "@/src/hooks/queries/user/home/user-info";
 import { useUserStore } from "@/src/store/sign-up-store";
+import { useToken } from "@/src/hooks/use-token";
+import { authDecodedToken } from "@/token";
 
 // Define the type for the form state and handlers
 interface FormProps {
@@ -25,6 +27,8 @@ interface UserEditReturn {
 }
 export const useUserEdit = (): UserEditReturn => {
   const router = useRouter();
+  const { setToken } = useToken();
+
   const [Done, setDone] = useState(false);
   const { user, setUser } = useUserStore();
   const [formData, setFormData] = useState({
@@ -33,25 +37,28 @@ export const useUserEdit = (): UserEditReturn => {
     ProfileImageFile: null,
     AvatarFile: null,
   });
+  console.log(user);
+  
   const {
     mutateAsync: CreateAccount,
     error,
     isPaused,
     isError,
     reset,
-  } = useUserEditMutation();
+  } = useUserEditMutation(user?.token||'');
 
   const onSubmit = useCallback(async () => {
     const requestData = new FormData();
-    Object.entries({ ...formData, ...user,OldPassword:user.Password }).forEach(([key, value]) => {
+    Object.entries({ ...formData, ...user.user,OldPassword:user.user.Password }).forEach(([key, value]) => {
       if (value !== null) {
         requestData.append(key, value as any); // Append each field
       }
     });
     Toast.Promise(CreateAccount(requestData), {
       success: "Successfully registered",
-      onSuccess: (res) => {
+      onSuccess: async(res) => {
         console.log(res);
+        setToken(await authDecodedToken());
         setDone(true);
         setUser({});
       },

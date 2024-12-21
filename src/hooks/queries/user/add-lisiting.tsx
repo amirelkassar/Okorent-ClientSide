@@ -60,7 +60,7 @@ export const useEditListingMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await api.post(user.addListing.base, getFormData(data), {
+      const response = await api.put(user.addListing.base, getFormData(data), {
         headers: {
           Accept: "text/plain",
           "Content-Type": "multipart/form-data",

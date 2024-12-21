@@ -5,8 +5,6 @@ import DropImg from "@/src/components/DropImg";
 import Button from "@/src/components/button";
 import StepLocation from "./_components/stepLocation";
 import StepAvailability from "./_components/stepAvailability";
-import house1 from "@/src/assets/images/house1.png";
-import house2 from "@/src/assets/images/house2.png";
 import { GetMyProductsByID } from "@/src/hooks/queries/user/lisitings";
 import SelectInput from "@/src/components/select-input";
 import {
@@ -25,48 +23,7 @@ interface LocationProps {
   name: string;
   address: string;
 }
-const data = {
-  category: "category3",
-  Describe: {
-    title: "item title",
-    dec: "dec for item",
-  },
-  pictures: [house1, house2, house1],
-  priceItems: {
-    OneDay: "10",
-    ThreeDay: "70",
-    Week: "110",
-  },
-  addresses: [
-    {
-      name: "",
-      address:
-        "8 Ibn Snan, ADH Dhahereyah WA Izbat as Safih, El Raml 1, Alexandria Governorate 5450045, Egypt",
-    },
-    {
-      name: "",
-      address:
-        "مسجد علي إبن أبي طالب 26، السيوف قبلي (تشمل عزبة درباÙ، قسم ثان المنتزة،، السيوف قبلي (تشمل عزبة درباÙ، اول المنتزه، الإسكندرية،، As Soyouf Qebli (Include Izbat Derbanah), Third Al Montazah, Alexandria Governorate 5515260, Egypt",
-    },
-  ],
-  Terms: "Flexible",
-  value: "800",
-  Availability: "pick",
-  Variations: [
-    {
-      name: "",
-      attribute1: "Color2",
-      attribute2: "dsfdf",
-    },
-    {
-      name: "",
-      attribute1: "Color5",
-      attribute2: "ahemd",
-    },
-  ],
-  Stock: "500",
-  Status: "Not",
-};
+
 interface FAQ {
   question: string;
   answer: string;

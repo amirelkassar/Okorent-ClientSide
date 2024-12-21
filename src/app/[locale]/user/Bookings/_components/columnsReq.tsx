@@ -1,12 +1,7 @@
 "use client";
-
-import DeleteIcon from "@/src/assets/icons/delete";
-import EditIcon from "@/src/assets/icons/edit";
 import FilterIcon from "@/src/assets/icons/filter";
-import { ActionIcon } from "@mantine/core";
 import { ColumnDef } from "@tanstack/react-table";
 import Image, { StaticImageData } from "next/image";
-import phoneImg from "@/src/assets/images/phone.png";
 import CardStatus from "@/src/components/cardStatus";
 import avatar from "@/src/assets/images/avatar.png";
 import { getDate } from "@/src/lib/utils";
@@ -51,10 +46,12 @@ export const columnsReq: ColumnDef<RequestsTableData>[] = [
     },
     cell: ({ getValue, row }) => {
       const name = getValue<string>();
-      const id = row.original.orderId;
+      const id = row.original.id;
       return (
-        <Link href={ROUTES.USER.ORDERID(id)} className="flex items-center gap-2">
-
+        <Link
+          href={ROUTES.USER.ORDERID(id)}
+          className="flex items-center gap-2"
+        >
           <Image
             src={avatar}
             alt={name}
@@ -74,10 +71,8 @@ export const columnsReq: ColumnDef<RequestsTableData>[] = [
     cell: ({ getValue, row }) => {
       const productName = getValue<string>();
       const id = row.original.id;
-      const image = row.original.heroImage
-      return (
-        <ImgProduct productName={productName} src={image} />
-      );
+      const image = row.original.heroImage;
+      return <ImgProduct productName={productName} src={image} />;
     },
   },
   {
@@ -122,12 +117,27 @@ export const columnsReq: ColumnDef<RequestsTableData>[] = [
       switch (status.toString()) {
         case "1":
           return <CardStatus circle type="blue" title={"new"} />;
-        case "completed":
-          return <CardStatus circle type="blue" title={status} />;
-        case "ongoing":
-          return <CardStatus circle type="green" title={status} />;
-        case "declined":
-          return <CardStatus circle type="red" title={status} />;
+        case "3":
+          return <CardStatus circle type="green" title={"Accepted"} />;
+        case "4":
+          return <CardStatus circle type="blue" title={"Out For Delivery"} />;
+        case "6":
+          return <CardStatus circle type="green" title={"Received"} />;
+        case "7":
+          return <CardStatus circle type="gray" title={"Returned"} />;
+        case "8":
+          return <CardStatus circle type="red" title={"Rejected"} />;
+        case "9":
+          return <CardStatus circle type="red" title={"Canceled"} />;
+        case "10":
+          return <CardStatus circle type="green" title={"Compeleted"} />;
+        case "11":
+          return (
+            <CardStatus circle type="gray" title={"Request for returned"} />
+          );
+        case "12":
+          return <CardStatus circle type="gray" title={"out for return"} />;
+
         default:
           return <CardStatus circle type="gray" title="--" />;
       }
@@ -161,10 +171,11 @@ export const columnsReq: ColumnDef<RequestsTableData>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const orderId = row.original.id
+      const id = row.original.id;
+      const status = row.original.status;
       return (
         <div className="flex items-center gap-3 w-fit">
-          <ActionMenuRentOut id={orderId} />
+          <ActionMenuRentOut id={id} status={status} />
         </div>
       );
     },

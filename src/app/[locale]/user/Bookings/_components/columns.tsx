@@ -1,12 +1,7 @@
 "use client";
-
-import DeleteIcon from "@/src/assets/icons/delete";
-import EditIcon from "@/src/assets/icons/edit";
 import FilterIcon from "@/src/assets/icons/filter";
-import { ActionIcon } from "@mantine/core";
 import { ColumnDef } from "@tanstack/react-table";
 import Image, { StaticImageData } from "next/image";
-import phoneImg from "@/src/assets/images/phone.png";
 import CardStatus from "@/src/components/cardStatus";
 import avatar from "@/src/assets/images/avatar.png";
 import { getDate } from "@/src/lib/utils";
@@ -34,7 +29,7 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     header: "Product",
     cell: ({ getValue, row }) => {
       const productName = getValue<string>();
-      const id = row.original.orderId;
+      const id = row.original.id;
       const image = row.original.heroImage;
       return (
         <Link
@@ -85,25 +80,35 @@ export const columns: ColumnDef<RequestsTableData>[] = [
       );
     },
   },
-
   {
     accessorKey: "status",
     header: "Status",
     cell: ({ getValue }) => {
       const status = getValue<string>();
       switch (status.toString()) {
-        case "out for delivery":
-          return <CardStatus animation circle type="blue" title={status} />;
         case "1":
-          return <CardStatus circle type="blue" title={"pending"} />;
-        case "accepted":
-          return <CardStatus animation circle type="green" title={status} />;
-        case "completed":
-          return <CardStatus circle type="gray" title={status} />;
-        case "rejected":
-          return <CardStatus circle type="red" title={status} />;
-        case "received by client":
-          return <CardStatus circle type="green" title={status} />;
+          return <CardStatus circle type="blue" title={"new"} />;
+        case "3":
+          return <CardStatus circle type="green" title={"Accepted"} />;
+        case "4":
+          return <CardStatus circle type="blue" title={"Out For Delivery"} />;
+        case "6":
+          return <CardStatus circle type="green" title={"Received"} />;
+        case "7":
+          return <CardStatus circle type="gray" title={"Returned"} />;
+        case "8":
+          return <CardStatus circle type="red" title={"Rejected"} />;
+        case "9":
+          return <CardStatus circle type="red" title={"Canceled"} />;
+        case "10":
+          return <CardStatus circle type="green" title={"Compeleted"} />;
+        case "11":
+          return (
+            <CardStatus circle type="gray" title={"Request for returned"} />
+          );
+        case "12":
+          return <CardStatus circle type="gray" title={"out for return"} />;
+
         default:
           return <CardStatus circle type="gray" title="--" />;
       }
@@ -137,10 +142,11 @@ export const columns: ColumnDef<RequestsTableData>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const orderId = row.original.orderId;
+      const id = row.original.id;
+      const status = row.original.status;
       return (
         <div className="flex items-center gap-3 w-fit">
-          <ActionMenuRent id={orderId} />
+          <ActionMenuRent id={id} status={status} />
         </div>
       );
     },

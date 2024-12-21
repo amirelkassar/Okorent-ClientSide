@@ -46,8 +46,7 @@ export const QueryWrapper = <T extends unknown>({
   }, [items]);
 
   const onRetry = useCallback(() => query.refetch?.(), [query]);
-  console.log(query?.isLoading);
-  console.log(query?.isPaused);
+
   if (query?.isPaused) return <MemowizedServerError />;
   if (query?.isLoading) return <MemowizedLoader />;
   if (query?.isError && query?.failureReason?.status === 404)
