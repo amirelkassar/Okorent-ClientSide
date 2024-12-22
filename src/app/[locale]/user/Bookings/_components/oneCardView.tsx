@@ -7,7 +7,7 @@ import LinkGreen from "@/src/components/linkGreen";
 import ROUTES from "@/src/routes";
 import { getDate } from "@/src/lib/utils";
 
-function OneCardView({ product }: { product: any }) {
+function OneCardView({ product }: { product?: any }) {
   return (
     <div className="bg-white border border-green/50 rounded-3xl px-3 lg:px-5 py-3 lg:py-4 max-w-[400px] mb-3 w-full mdl:min-w-[320px] shadow-sidebar relative">
       <div className="flex items-center justify-center gap-2 bg-[#FF0E0E] rounded-xl absolute top-5 lg:top-7 start-6 p-2  lg:p-3">
