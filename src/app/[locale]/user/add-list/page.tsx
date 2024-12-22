@@ -18,10 +18,7 @@ import {
 } from "@/src/hooks/queries/user/add-lisiting";
 import SelectInput from "@/src/components/select-input";
 import Input from "@/src/components/input";
-import { getFormData } from "@/src/lib/utils";
 import { Toast } from "@/src/components/toast";
-import { useRouter } from "@/src/navigation";
-import ROUTES from "@/src/routes";
 
 interface LocationProps {
   id: number;
@@ -33,10 +30,9 @@ interface FAQ {
   answer: string;
 }
 function Page() {
-  const router = useRouter()
   const [selectedCheckbox, setSelectedCheckbox] = useState<string | null>(null);
   const [location, setLocation] = useState<LocationProps[]>([]);
-  const [faqs, setFaqs] = useState<FAQ[]>([{ question: "", answer: "" }]);
+  const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [dataList, setDataList] = useState<any>({});
   const searchparams = useSearchParams();
   console.log(dataList);

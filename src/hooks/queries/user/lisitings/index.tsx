@@ -9,7 +9,7 @@ export const initialQueries = initialCustomQueries || initialSiteQueries;
 export const initialQueryKey = "user.myProductsAll";
 
 //getMyAllProducts
-export const GetMyProductsAll = (queries?: any) => {
+export const GetMyProductsAll = (queries?: any):any => {
   return useQuery({
     queryKey: [initialQueryKey, queries],
     queryFn: async () => {

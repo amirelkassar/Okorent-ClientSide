@@ -202,7 +202,7 @@ export const getFormData = (data: Record<string, any>) => {
   const formData = new FormData();
 
   Object.entries(data).forEach(([key, value]) => {
-    if (key === "ProductImageFiles" && Array.isArray(value)) {
+    if ((key === "ProductImageFiles"||key === "images") && Array.isArray(value)) {
       // Handle ProductImageFiles as files
       value.forEach((file) => {
         if (file instanceof File) {
@@ -212,7 +212,7 @@ export const getFormData = (data: Record<string, any>) => {
           formData.append(key, mockFile, file.path);
         }
       });
-    } else if (key === "FAQs" && Array.isArray(value)) {
+    } else if ((key === "FAQs"||key === "faQs") && Array.isArray(value)) {
       // Handle FAQs as indexed structure
       value.forEach((faq, index) => {
         Object.entries(faq).forEach(([faqKey, faqValue]) => {

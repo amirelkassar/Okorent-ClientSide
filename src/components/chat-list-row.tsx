@@ -22,7 +22,7 @@ function ChatListRow({ data }: ChatListRowProps) {
 
   return (
     <Link
-      href={ROUTES.ADMIN.INBOX + "?chat=" + data.id}
+      href={ROUTES.USER.INBOX + "?chat=" + data.id}
       className={cn(
         "py-1 px-2 flex items-center gap-3 cursor-pointer duration-300 hover:bg-grayBack/50 justify-between  w-full rounded-[18px] ",
         data.identifier > 0 ? "bg-grayBack hover:bg-grayBack" : null,

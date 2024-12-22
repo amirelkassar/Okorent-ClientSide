@@ -3,6 +3,7 @@ import { buildQuery } from "@/src/lib/utils";
 export const user = {
   addListing: {
     base: "/Product",
+    edit_listing:(id:any)=> `/Product/${id}`,
     category: "/Category",
     subCategory_by_category: (id: any) => `/SubCategory/list?ParentId=${id}`,
   },

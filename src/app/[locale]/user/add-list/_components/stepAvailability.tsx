@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Step from "./step";
 import { Radio, Select } from "@mantine/core";
 import ModalComp from "@/src/components/modal-comp";

@@ -12,6 +12,7 @@ import ReorderIcon from "@/src/assets/icons/reorder";
 import ScanQrModal from "./modal-rent/scan-qr-modale";
 import RequestReturnModale from "./modal-rent/request-return-modale";
 import CancelIcon from "@/src/assets/icons/cancel";
+import ROUTES from "@/src/routes";
 
 function ActionMenuRent({ id, status = 0 }: { id: any; status: any }) {
   const [opened, { open, close }] = useDisclosure(false);
@@ -61,8 +62,8 @@ function ActionMenuRent({ id, status = 0 }: { id: any; status: any }) {
     {
       label: "Message",
       icon: <NoteTableIcon fill="#6F6B7D" className="w-3 h-auto" />,
-      type: "btn",
-      action: () => {},
+      link:ROUTES.USER.INBOX + "?chat=" + id,
+      type: "link",
     },
     //6
     {

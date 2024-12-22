@@ -3,7 +3,6 @@ import DataActions from "@/src/components/DataActions";
 import React, { memo, useCallback } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import BarcodeIcon from "@/src/assets/icons/barcode";
-import { Toast } from "@/src/components/toast";
 import CarReturn from "@/src/assets/icons/car-return";
 import NoteTableIcon from "@/src/assets/icons/noteTable";
 import RejectOrderIcon from "@/src/assets/icons/RejectOrder";
@@ -17,6 +16,8 @@ import TrueIcon from "@/src/assets/icons/true";
 import CloseIcon from "@/src/assets/icons/close";
 import DeleteIcon from "@/src/assets/icons/delete";
 import VersionHistoryModal from "./modal-rentOut/version-history-modal";
+import ROUTES from "@/src/routes";
+import { Toast } from "@/src/components/toast";
 
 function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
   const [opened, { open, close }] = useDisclosure(false);
@@ -24,9 +25,11 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
   const { mutateAsync: ChaneStatusProduct } = ChangeStautsByID(id);
   const onSubmitChaneStatus = useCallback(async () => {
     Toast.Promise(ChaneStatusProduct(id), {
-      success: "Deleted Product Done",
-      onSuccess: async (res) => {},
+      loading: "Processing...",
+      success: "Operation completed!",
+      error: "Failed to complete operation",
     });
+    
   }, [ChaneStatusProduct]);
   const options = [
     //0
@@ -65,10 +68,12 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
     },
     //4
     {
-      label: "Mark as Out for delivery",
+      label: "Out for delivery",
       icon: <CarIcon fill="#6F6B7D" className="w-3 h-auto" />,
       type: "btn",
-      action: () => {},
+      action: () => {
+        onSubmitChaneStatus();
+      },
     },
     //5
     {
@@ -83,8 +88,8 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
     {
       label: "Message",
       icon: <NoteTableIcon fill="#6F6B7D" className="w-3 h-auto" />,
-      type: "btn",
-      action: () => {},
+      link:ROUTES.USER.INBOX + "?chat=" + id,
+      type: "link",
     },
     //7
     {
