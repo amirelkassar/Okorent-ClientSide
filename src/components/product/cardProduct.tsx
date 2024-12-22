@@ -132,7 +132,7 @@ function CardProduct({
         </div>
 
         <div className="flex-1 flex flex-col gap-8 lg:max-w-[620px] w-full">
-          <ProductClient />
+          <ProductClient clientID={data?.createdBy} />
           <PriceDetails
             daysNumber={daysNumber}
             TotalPriceOrder={TotalPriceOrder}

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import StarIcon from "@/src/assets/icons/star";
 import VerifyBlackIcon from "@/src/assets/icons/verifyBlack";
 import Image from "next/image";
@@ -8,8 +8,16 @@ import ROUTES from "@/src/routes";
 import LinkGreen from "@/src/components/linkGreen";
 import UserAvailable from "@/src/components/userAvailable";
 import { useParams } from "next/navigation";
-function ProductClient() {
-  const params = useParams()
+import { GetUserProductsByID } from "@/src/hooks/queries/user/lisitings";
+import SkeletonLoading from "../skeleton-loading";
+import { getDate } from "@/src/lib/utils";
+function ProductClient({ clientID }: { clientID: any }) {
+  const params = useParams();
+  const { data, isLoading } = GetUserProductsByID(clientID);
+  console.log(data);
+  if (isLoading) {
+    return <SkeletonLoading className="md:!w-full md:!h-[218px]" />;
+  }
   return (
     <div className="border border-green/30 mt-6 rounded-lg py-6 px-5 bg-white/50">
       <div className=" flex items-center lg:items-start gap-4 flex-col lg:flex-row lg:gap-6 w-full pb-3 border-b border-grayLight">
@@ -24,17 +32,17 @@ function ProductClient() {
         </div>
         <div className="flex-1">
           <div className="flex gap-3  lg:gap-5 justify-center lg:justify-between mb-3 lg:mb-1 ">
-            <h3 className="text-xl lg:text-[24px]">Ahmed Mohamed Badr</h3>
+            <h3 className="text-xl lg:text-[24px]">{data?.data?.name}</h3>
             <div className="flex items-center justify-center">
-              <VerifyBlackIcon className=" size-5 lg:size-[26px]"  />
+              <VerifyBlackIcon className=" size-5 lg:size-[26px]" />
             </div>
           </div>
           <h4 className="text-grayMedium text-center lg:text-start text-sm lg:text-[16px] font-Regular -mt-2 mb-2">
-            Member Since March, 2024
+            Member Since {getDate(data?.data?.created).fullYearWithMonthName}
           </h4>
           <div className="flex items-center ">
             <div className="flex items-center gap-1 pe-2 lg:pe-4">
-              <p className="font-Bold text-lg lg:text-xl ">4.52</p>
+              <p className="font-Bold text-lg lg:text-xl ">{data?.data?.rating}</p>
               <StarIcon className="w-[18px] lg:w-[20px] h-auto" />
             </div>
             <div className="flex items-center md:items-end gap-1 pe-2 lg:pe-4 ps-2 border-s border-green">
@@ -55,12 +63,15 @@ function ProductClient() {
       </div>
       <div className="flex items-center gap-6 flex-wrap mt-5">
         <LinkGreen
-          href={ROUTES.USER.INBOX}
+          href={ROUTES.USER.INBOX + "?chat=" + clientID}
           className={"flex-1 h-10 bg-transparent text-green border "}
         >
           Message Ahmed
         </LinkGreen>
-        <LinkGreen href={ROUTES.GUEST.PROFILE(params.productID,1)} className={"flex-1 h-10 bg-grayBack text-black border-none"}>
+        <LinkGreen
+          href={ROUTES.GUEST.PROFILE(params.productID, 1)}
+          className={"flex-1 h-10 bg-grayBack text-black border-none"}
+        >
           {" "}
           View Profile
         </LinkGreen>

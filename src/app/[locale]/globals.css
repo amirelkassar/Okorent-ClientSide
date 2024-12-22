@@ -157,7 +157,7 @@ p {
 .map-label {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 
-  @apply text-base font-Regular text-center rounded-xl px-2 py-1 text-white bg-green absolute -top-14 left-1/2 -translate-x-1/2;
+  @apply text-base text-nowrap font-Regular text-center rounded-xl px-2 py-1 text-white bg-green absolute -top-14 left-1/2 -translate-x-1/2;
 }
 .map-label::before {
   content: "";

@@ -47,6 +47,16 @@ export const useDeleteMutation = () => {
     },
   });
 }
+//getProductByID
+export const GetUserProductsByID = (id: any) => {
+  return useQuery({
+    queryKey: [initialQueryKey, id],
+    queryFn: async () => {
+      const response = await api.get(user.user.getByID(id));
+      return response.data;
+    },
+  });
+};
 
 export const getComplaints = async (queries: any) =>
   (await api.get(user.product.my_products(queries))).data;
