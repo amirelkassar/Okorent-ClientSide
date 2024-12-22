@@ -128,14 +128,16 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     cell: ({ getValue }) => {
       const paymentStatus = getValue<string>();
       switch (paymentStatus.toString()) {
-        case "completed":
-          return <CardStatus circle type="blue" title={paymentStatus} />;
-        case "canceled":
-          return <CardStatus circle type="red" title={paymentStatus} />;
-        case "1":
-          return <CardStatus circle type="green" title={"pending"} />;
+        case "6":
+          return <CardStatus circle type="green" title={"Pending"} />;
+        case "7":
+          return <CardStatus circle type="blue" title={"Completed"} />;
+        case "8":
+          return <CardStatus circle type="red" title={"Refunded"} />;
+        case "2":
+          return <CardStatus circle type="gray" title={"Partial Payment"} />;
         default:
-          return <CardStatus circle type="gray" title="--" />;
+          return <CardStatus type="gray" title="--" />;
       }
     },
   },

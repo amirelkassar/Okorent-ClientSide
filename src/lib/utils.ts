@@ -238,3 +238,25 @@ export const getFormData = (data: Record<string, any>) => {
   return formData;
 };
 
+export const GetUniqueValues = (data: any[], key: string) => {
+  if (!key) return null; // Return null if no key is provided
+
+  const uniqueValues = new Set(data.map((item: any) => item[key]));
+
+  return uniqueValues.size === 1
+    ? Array.from(uniqueValues)[0]
+    : null;
+};
+
+
+export const GetIdsValues = (data: any[] = []) => {
+  if (!Array.isArray(data) || data.length === 0) {
+    return null; // Return null if data is not an array or is empty
+  }
+
+  const ids = data
+    .filter((item) => item && item.id) // Ensure each item and id exist
+    .map((item) => item.id); // Extract ids
+
+  return ids.length > 0 ? ids : null; // Return ids if any, else null
+};

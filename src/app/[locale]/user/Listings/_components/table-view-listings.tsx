@@ -5,7 +5,7 @@ import { columns } from "./columns";
 import { TableHeader } from "@/src/components/table/table-header";
 import { Link } from "@/src/navigation";
 import CardIcon from "@/src/assets/icons/card";
-import DeleteIcon from "@/src/assets/icons/delete";
+import { useActionTable } from "../_hooks/use-action-table";
 const FilterOptions = [
   {
     label: "online",
@@ -18,17 +18,10 @@ const FilterOptions = [
     value: false,
   },
 ];
-const functionSelect = [
-  {
-    title: "Delete",
-    icon: <DeleteIcon className="max-h-4 w-auto" />,
-    onclick: (ids: any) => {
-      console.log([...ids]);
-    },
-  },
-];
+
 function TableViewListings({ data }: { data: any }) {
-  console.log(data);
+  const { functionSelectView, setSelectedFromTable } =
+    useActionTable();
 
   return (
     <div className=" hidden mdl:block">
@@ -49,7 +42,8 @@ function TableViewListings({ data }: { data: any }) {
         title=""
         data={data}
         columns={columns}
-        functionSelect={functionSelect}
+        functionSelect={functionSelectView}
+        setSelectedFromTable={setSelectedFromTable}
       />
     </div>
   );

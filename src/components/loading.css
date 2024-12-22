@@ -7,8 +7,8 @@
     margin-bottom: 80px;
   }
   .pl {
-    width: 6em;
     height: 6em;
+    @apply w-[4em] mdl:w-[6em] 
   }
   
   .pl__ring {
