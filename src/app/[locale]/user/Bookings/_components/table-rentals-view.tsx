@@ -7,15 +7,12 @@ import { Link } from "@/src/navigation";
 import CardIcon from "@/src/assets/icons/card";
 import RentSwitch from "@/src/components/RentSwitch";
 import { columns } from "./columns";
-import { GetMyOrderAll } from "@/src/hooks/queries/user/booking";
-import { useSearchParams } from "next/navigation";
+
 import { QueryWrapper } from "@/src/components/query-wrapper";
 import { useActionTableIRent } from "../_hooks/use-action-table-iRent";
 import { FilterOptionsBooking } from "./filter-data";
 
-function TableRentalsView() {
-  const searchParams = useSearchParams();
-  const query = GetMyOrderAll(searchParams.toString());
+function TableRentalsView({query}:{query:any}) {
   const { functionSelectView, setSelectedFromTable } = useActionTableIRent();
   console.log(functionSelectView);
 

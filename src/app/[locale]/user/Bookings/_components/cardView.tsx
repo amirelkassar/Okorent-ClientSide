@@ -13,18 +13,22 @@ interface CardViewProps {
   title: string;
   first?: boolean;
   haveRentSwitch?: boolean;
-  filterBy: "completed" | "decline" | "upcoming" | "ongoing";
+  filterBy: number;
+  proudcts?: any[];
 }
 function CardView({
   title,
   first = false,
   haveRentSwitch = false,
   filterBy,
+  proudcts = [],
 }: CardViewProps) {
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
 
   const handleSwiper = (swiper: any) => {
+    console.log(proudcts);
+
     if (prevRef.current && nextRef.current) {
       swiper.params.navigation.prevEl = prevRef.current;
       swiper.params.navigation.nextEl = nextRef.current;
@@ -32,6 +36,9 @@ function CardView({
       swiper.navigation.update();
     }
   };
+  if (proudcts.length === 0) {
+    return null;
+  }
   return (
     <div className="swiperList pt-4 lg:pt-14 pb-3 lg:pb-16 lg:border-t border-black first-of-type:border-none first-of-type:pt-0">
       <div className="flex lg:items-center flex-col-reverse lg:flex-row lg:gap-4 gap-8  justify-between mb-6">
@@ -93,21 +100,13 @@ function CardView({
               },
             }}
           >
-            <SwiperSlide>
-              <OneCardView />
-            </SwiperSlide>
-            <SwiperSlide>
-              <OneCardView />
-            </SwiperSlide>
-            <SwiperSlide>
-              <OneCardView />
-            </SwiperSlide>
-            <SwiperSlide>
-              <OneCardView />
-            </SwiperSlide>
-            <SwiperSlide>
-              <OneCardView />
-            </SwiperSlide>
+            {proudcts?.map((item,i) => {
+              return (
+                <SwiperSlide key={i}>
+                  <OneCardView product={item} />
+                </SwiperSlide>
+              );
+            })}
           </Swiper>
         </div>
         <div className="xl:flex hidden gap-3  absolute top-1/2 -translate-y-1/2 -right-10">

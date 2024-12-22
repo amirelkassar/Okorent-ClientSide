@@ -2,41 +2,27 @@
 import { RequestsData } from "@/src/lib/dataUser";
 import React from "react";
 import { useSearchParams } from "next/navigation";
-import CardView from "./_components/cardView";
 import { useSwitchRent } from "@/src/store/rent-slice";
 import CardViewReq from "./_components/cardViewReq";
 import TableRequestView from "./_components/table-request-view";
 import TableRentalsView from "./_components/table-rentals-view";
+import { GetMyOrderAll } from "@/src/hooks/queries/user/booking";
+import PageCardRent from "./_components/page-card-rent";
 
 function Page() {
   const searchParams = useSearchParams();
   const { isRent } = useSwitchRent();
+  const query = GetMyOrderAll(searchParams.toString());
 
   return isRent === "rent" ? (
     <div>
       {searchParams.get("card") === "true" ? (
-        <div>
-          <CardView
-            filterBy="completed"
-            first
-            title={"Ongoing Bookings"}
-            haveRentSwitch
-          />
-          <CardView filterBy="completed" title={"Upcoming Rentals"} />
-          <CardView filterBy="completed" title={"Closed Rentals"} />
-        </div>
+        <PageCardRent query={query} />
       ) : (
         <>
-          <TableRentalsView />
+          <TableRentalsView query={query} />
           <div className=" block mdl:hidden">
-            <CardView
-              filterBy="completed"
-              first
-              title={"Ongoing Bookings"}
-              haveRentSwitch
-            />
-            <CardView filterBy="completed" title={"Upcoming Rentals"} />
-            <CardView filterBy="completed" title={"Closed Rentals"} />
+            <PageCardRent query={query} />
           </div>
         </>
       )}
