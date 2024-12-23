@@ -1,6 +1,5 @@
 "use client";
 import LangIcon from "@/src/assets/icons/lang";
-import NotificationIcon from "@/src/assets/icons/notfication";
 import React, { useEffect, useMemo, useState } from "react";
 import MenuProfile from "./menuProfile";
 import { useLocale } from "next-intl";
@@ -25,6 +24,7 @@ import BillingIcon from "../assets/icons/Billing";
 import SupportIcon from "../assets/icons/Support";
 import InboxIcon from "../assets/icons/Inbox";
 import NotificationsIcon from "../assets/icons/Notifications";
+import Notifications from "./Notifications";
 interface NavProps {
   linkLogo: string;
 }
@@ -154,12 +154,7 @@ function Nav({ linkLogo = "#" }: NavProps) {
           <PlusIcon className={"w-[16px] h-auto"} />
           <p className="text-base">List an item</p>
         </Link>
-        <div className="w-10 h-10 rounded-[50%] bg-[#E5F1FB] p-2 relative flex items-center justify-center  cursor-pointer duration-300 hover:shadow-lg">
-          <p className="text-white text-[8px] flex items-center border border-[#E5F1FB] justify-center bg-red min-w-[12px] w-fit h-[12px] aspect-[1/1] rounded-[50%] p-[2px] absolute top-2 right-2">
-            1
-          </p>
-          <NotificationIcon />
-        </div>
+        <Notifications />
         <Link
           href={pathname}
           locale={locale === "en" ? "ar" : "en"}
@@ -226,7 +221,7 @@ function Nav({ linkLogo = "#" }: NavProps) {
                       </div>
                     );
                   })}
-                  <div  onClick={() => setShowMenu(false)}>
+                  <div onClick={() => setShowMenu(false)}>
                     <Link
                       href={pathname}
                       locale={locale === "en" ? "ar" : "en"}
