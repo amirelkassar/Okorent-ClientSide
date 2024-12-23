@@ -1,10 +1,6 @@
 "use client";
-
 import { toast, Toaster as HotToaster, ToastBar } from "react-hot-toast";
-import CloseIcon from "../assets/icons/close";
-import XIcon from "../assets/icons/x";
 import CloseNotficationsIcon from "../assets/icons/closeNotfications";
-import DeleteIcon from "../assets/icons/delete";
 import SuccessIcon from "../assets/icons/success";
 import ErrorNotficationIcon from "../assets/icons/error-notfication";
 
@@ -45,12 +41,14 @@ const Toast = {
             </div>
           );
         },
-        error: (err: Error) => {
+        error: (err: any) => {
+          console.log(err);
+          
           if (options?.onError) options.onError(err);
           return (
             <div className="flex items-center justify-between w-full ">
               <p className="text-xs mdl:text-base font-medium">
-                {options.error || err.message || "Request failed"}
+                {options.error || err?.response?.data.errors.Error || "Request failed"}
               </p>
             </div>
           );
@@ -92,6 +90,7 @@ export function Toaster() {
           style={{ padding: 0, width: "100%", maxWidth: "100%" }}
         >
           {({ icon, message }) => (
+            
             <div className="flex items-center justify-between w-full">
               <div className="flex items-center">
                 {t.type === "error" ? (
@@ -101,6 +100,7 @@ export function Toaster() {
                 ) : (
                   icon
                 )}
+                
                 <div className="md:ml-2">{message}</div>
               </div>
               {t.type !== "loading" && (

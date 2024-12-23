@@ -92,9 +92,10 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     id: "actions",
     cell: ({ row }) => {
       const id = row.original.id;
+      const status = row.original.isActive
       return (
         <div className="flex items-center gap-3 w-fit">
-          <ActionMenu id={id} />
+          <ActionMenu id={id} status={status} />
         </div>
       );
     },

@@ -14,6 +14,7 @@ export const user = {
     base: (queries: any) => buildQuery("/Product", queries),
     my_products: (queries: any) => buildQuery("/Product/my-products", queries),
     getById: (id: any) => `/Product/${id}`,
+    upDateToOnlineById: (id: any) => `/Product/${id}/availability`,
     getMyProductsById: (id: any) => `/Product/my-product/${id}`,
   },
   information: {
@@ -35,6 +36,7 @@ export const user = {
     },
     getById: (id: any) => `/BookingOrder/${id}`,
     order_tracker: (id: any) => `/OrderTracker/${id}`,
+    cancel_iRent: `/OrderRequest/Cancel Order Request`,
   },
   user: {
     getByID: (id: any) => `User/${id}`,

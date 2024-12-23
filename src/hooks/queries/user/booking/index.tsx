@@ -62,3 +62,39 @@ export const ChangeStautsByID = (id: any) => {
     },
   });
 };
+
+//Delete Product
+export const useDeleteOrderOutMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: any) => {
+      const response = await api.delete(user.order.getById(id));
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKeyOut]);
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
+//Cancel Order
+export const useCancelOrderMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data:any) => {
+      const response = await api.post(user.order.cancel_iRent,data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKeyOut]);
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};

@@ -14,27 +14,17 @@ function PageCardRent({ query }: { query: any }) {
         return (
           <div>
             <CardView
-              filterBy={1}
               first
               title={"Pending Approval"}
               haveRentSwitch
               proudcts={getDataByStatus(1)}
             />
+            <CardView title={"Accepted"} proudcts={getDataByStatus(3)} />
             <CardView
-              filterBy={1}
-              title={"Accepted"}
-              proudcts={getDataByStatus(3)}
-            />
-            <CardView
-              filterBy={1}
               title={"Out for Delivery "}
               proudcts={getDataByStatus(4)}
             />
-            <CardView
-              filterBy={1}
-              title={"Completed"}
-              proudcts={getDataByStatus(10)}
-            />
+            <CardView title={"Completed"} proudcts={getDataByStatus(10)} />
           </div>
         );
       }}

@@ -13,14 +13,12 @@ interface CardViewProps {
   title: string;
   first?: boolean;
   haveRentSwitch?: boolean;
-  filterBy: number;
   proudcts?: any[];
 }
 function CardView({
   title,
   first = false,
   haveRentSwitch = false,
-  filterBy,
   proudcts = [],
 }: CardViewProps) {
   const prevRef = useRef<HTMLDivElement>(null);

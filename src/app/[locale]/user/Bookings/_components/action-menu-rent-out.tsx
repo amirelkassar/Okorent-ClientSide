@@ -10,7 +10,10 @@ import CancelIcon from "@/src/assets/icons/cancel";
 import ClockIcon from "@/src/assets/icons/clock";
 import CarIcon from "@/src/assets/icons/car";
 import AcceptedIcon from "@/src/assets/icons/accepted";
-import { ChangeStautsByID } from "@/src/hooks/queries/user/booking";
+import {
+  ChangeStautsByID,
+  useDeleteOrderOutMutation,
+} from "@/src/hooks/queries/user/booking";
 import ViewQrModal from "./modal-rentOut/view-qr-modale";
 import TrueIcon from "@/src/assets/icons/true";
 import CloseIcon from "@/src/assets/icons/close";
@@ -23,13 +26,19 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
   const [opened, { open, close }] = useDisclosure(false);
   const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
   const { mutateAsync: ChaneStatusProduct } = ChangeStautsByID(id);
+  const { mutateAsync: DeleteOrderOut } = useDeleteOrderOutMutation();
+  const onSubmitDelete = useCallback(async () => {
+    Toast.Promise(DeleteOrderOut(id), {
+      success: "Deleted Product Done",
+      onSuccess: async (res) => {},
+    });
+  }, [DeleteOrderOut]);
   const onSubmitChaneStatus = useCallback(async () => {
     Toast.Promise(ChaneStatusProduct(id), {
       loading: "Processing...",
       success: "Operation completed!",
       error: "Failed to complete operation",
     });
-    
   }, [ChaneStatusProduct]);
   const options = [
     //0
@@ -88,7 +97,7 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
     {
       label: "Message",
       icon: <NoteTableIcon fill="#6F6B7D" className="w-3 h-auto" />,
-      link:ROUTES.USER.INBOX + "?chat=" + id,
+      link: ROUTES.USER.INBOX + "?chat=" + id,
       type: "link",
     },
     //7
@@ -124,7 +133,9 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
       label: "Delete",
       icon: <DeleteIcon fill="#FF1D45" className="w-3 h-auto" />,
       type: "btn",
-      action: () => {},
+      action: () => {
+        onSubmitDelete();
+      },
     },
   ];
   const optionView = () => {
@@ -134,7 +145,7 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
       case "3":
         return [options[1], options[4], options[5], options[6], options[9]];
       case "4":
-        return [options[5], options[6], options[9]];
+        return [options[5], options[6]];
       case "6":
         return [options[5], options[6]];
       case "7":
@@ -158,7 +169,9 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
     <>
       <DataActions data={optionView() || []} />
       {opened && <ViewQrModal opened={opened} close={close} />}
-      {opened2 && <VersionHistoryModal opened={opened2} close={close2} id={id} />}
+      {opened2 && (
+        <VersionHistoryModal opened={opened2} close={close2} id={id} />
+      )}
     </>
   );
 }

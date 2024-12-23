@@ -22,6 +22,7 @@ const FilterOptions = [
 function TableViewListings({ data }: { data: any }) {
   const { functionSelectView, setSelectedFromTable } =
     useActionTable();
+console.log(data);
 
   return (
     <div className=" hidden mdl:block">

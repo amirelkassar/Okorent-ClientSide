@@ -113,8 +113,6 @@ export const useActionTableIRentOut = (): ActionTableIRentOutProps => {
           return [functionSelect[0], functionSelect[5]];
         case "3":
           return [functionSelect[3], functionSelect[4]];
-        case "4":
-          return [functionSelect[0], functionSelect[1]];
         case "7":
           return [functionSelect[6]];
         case "8":
