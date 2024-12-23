@@ -8,11 +8,11 @@ import RentAgainIcon from "@/src/assets/icons/rentAgain";
 import ReorderIcon from "@/src/assets/icons/reorder";
 import CancelIcon from "@/src/assets/icons/cancel";
 
-interface SignUpReturn {
+interface ActionTableIRentProps {
   functionSelectView: any[];
   setSelectedFromTable: any;
 }
-export const useActionTableIRent = (): SignUpReturn => {
+export const useActionTableIRent = (): ActionTableIRentProps => {
   const [selectedFromTable, setSelectedFromTable] = useState([]);
   const functionSelect = useMemo(
     () => [

@@ -4,6 +4,7 @@ import { getFormData } from "@/src/lib/utils";
 import { useRouter } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 export const initialQueryKey = "user.addListing";
 export const initialQueryKeyMyProduct = "user.myProductsAll";
 
@@ -36,7 +37,7 @@ export const GetSubCategory = (id: any) => {
 export const useCreateListingMutation = () => {
   const router = useRouter()
   const queryClient = useQueryClient();
-  return useMutation({
+  return useMutation<void, any, Record<string, any>>({
     mutationFn: async (data: any) => {
       const response = await api.post(user.addListing.base, getFormData(data), {
         headers: {

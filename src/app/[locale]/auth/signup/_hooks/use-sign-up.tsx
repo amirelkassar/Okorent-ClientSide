@@ -1,18 +1,12 @@
 "use client";
-import { useCallback, useState } from "react";
+import { useCallback  } from "react";
 import ROUTES from "@/src/routes";
 import { useCreateAccountMutation } from "@/src/hooks/queries/auth";
 import { useRouter } from "@/src/navigation";
 import { Toast } from "@/src/components/toast";
 import { useUserStore } from "@/src/store/sign-up-store";
 
-// Define the type for the form data
-interface FormDataProps {
-  Name: string;
-  Email: string;
-  Password: string;
-  PhoneNumber: string;
-}
+
 
 // Define the type for the form state and handlers
 interface FormProps {

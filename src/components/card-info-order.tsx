@@ -15,7 +15,7 @@ function CardInfoOrder({
   classNameBox=''
 }: CardInfoOrderProps) {
   return (
-    <div className={cn('w-[50%] min-w-[40%]   flex-1 ${props.className',classNameBox)}>
+    <div className={cn(' w-full mdl:w-[50%] min-w-[40%]   flex-1 ${props.className',classNameBox)}>
       {label && (
         <h3 className="text-sm mdl:text-base font-SemiBold mb-2 mdl:mb-4">
           {label}

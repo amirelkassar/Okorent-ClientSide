@@ -13,7 +13,9 @@ import Style from "ol/style/Style";
 import { Circle as CircleStyle, Fill, Stroke } from "ol/style";
 import Overlay from "ol/Overlay";
 
-const MapComponent = ({ stocks }: { stocks?: any[] }) => {
+const MapComponent = ({ stocks }: { stocks: any[] }) => {
+  console.log(stocks);
+  
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<Map | null>(null); // Allow Map or null
   // Points data
@@ -22,11 +24,14 @@ const MapComponent = ({ stocks }: { stocks?: any[] }) => {
     lon: item.location.longitude,
     label: item.name,
   }));
-  const points = transformedData || [
-    { lat: 24.9262, lon: 67.0226, label: "Vianden" },
-    { lat: 24.9435, lon: 67.0822, label: "Remich" },
-    { lat: 24.93, lon: 67.05, label: "Berdorf" },
-  ];
+
+  const points =
+    transformedData?.length > 0
+      ? transformedData
+      : [
+          { lat: 24.9262, lon: 67.0226, label: "Vianden" },
+          { lat: 24.9435, lon: 67.0822, label: "Remich" },
+        ];
   useEffect(() => {
     if (!mapContainerRef.current) return;
 

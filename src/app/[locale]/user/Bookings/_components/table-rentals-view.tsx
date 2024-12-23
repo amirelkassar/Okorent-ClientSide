@@ -7,7 +7,6 @@ import { Link } from "@/src/navigation";
 import CardIcon from "@/src/assets/icons/card";
 import RentSwitch from "@/src/components/RentSwitch";
 import { columns } from "./columns";
-
 import { QueryWrapper } from "@/src/components/query-wrapper";
 import { useActionTableIRent } from "../_hooks/use-action-table-iRent";
 import { FilterOptionsBooking } from "./filter-data";

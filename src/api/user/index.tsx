@@ -34,6 +34,7 @@ export const user = {
       changeStatusById: (id: any) => `/BookingOrder/OrderStatus/${id}`,
     },
     getById: (id: any) => `/BookingOrder/${id}`,
+    order_tracker: (id: any) => `/OrderTracker/${id}`,
   },
   user: {
     getByID: (id: any) => `User/${id}`,

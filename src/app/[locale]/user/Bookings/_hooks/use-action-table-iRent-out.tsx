@@ -11,11 +11,11 @@ import RejectOrderIcon from "@/src/assets/icons/RejectOrder";
 import TrueIcon from "@/src/assets/icons/true";
 import CloseIcon from "@/src/assets/icons/close";
 
-interface SignUpReturn {
+interface ActionTableIRentOutProps {
   functionSelectView: any[];
   setSelectedFromTable: any;
 }
-export const useActionTableIRentOut = (): SignUpReturn => {
+export const useActionTableIRentOut = (): ActionTableIRentOutProps => {
   const [selectedFromTable, setSelectedFromTable] = useState([]);
   const functionSelect = useMemo(
     () => [

@@ -76,7 +76,8 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
 
   const { mutateAsync: createListing } = useEditListingMutation(dataList?.id);
   const handleSubmit = async () => {
-    await Toast.Promise(createListing(dataList), {
+    const formData={...dataList}
+    await Toast.Promise(createListing(formData), {
       success: "successfully Edit Product",
       onSuccess: async (res) => {
         console.log(res);

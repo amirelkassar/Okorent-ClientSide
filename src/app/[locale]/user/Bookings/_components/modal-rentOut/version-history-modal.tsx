@@ -1,8 +1,7 @@
 import Button from "@/src/components/button";
 import ModalComp from "@/src/components/modal-comp";
-import { GetUserInfo } from "@/src/hooks/queries/user/home/user-info";
-import { useToken } from "@/src/hooks/use-token";
-import { UserData } from "@/src/lib/dataUser";
+import SkeletonLoading from "@/src/components/skeleton-loading";
+import { GetOrderTrackerByID } from "@/src/hooks/queries/user/order";
 import {
   createColumnHelper,
   flexRender,
@@ -52,14 +51,17 @@ const bookingHistoryData: BookingHistory[] = [
 function VersionHistoryModal({
   opened,
   close,
+  id,
 }: {
   opened: boolean;
   close: any;
+  id: any;
 }) {
-  const columnHelper = createColumnHelper<BookingHistory>();
-const {token} = useToken()
-console.log(token);
+  const { data, isLoading } = GetOrderTrackerByID(id);
+  console.log(data);
 
+  const columnHelper = createColumnHelper<BookingHistory>();
+  console.log(id);
   const columns = [
     columnHelper.accessor("modifiedBy", {
       header: "Modified By",
@@ -80,7 +82,7 @@ console.log(token);
   ];
 
   const table = useReactTable({
-    data: bookingHistoryData,
+    data: data?.data || [],
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
@@ -88,44 +90,62 @@ console.log(token);
     <ModalComp title="Version History" opened={opened} close={close}>
       <div className="w-[850px] max-w-full">
         <div className=" my-section  border border-[#dee2e6] rounded-3xl  pb-2 mb-phone ">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="">
-              {table.getHeaderGroups().map((headerGroup) => (
-                <tr key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => (
-                    <th
-                      key={header.id}
-                      className="px-6 py-3 text-left text-base font-medium    "
-                    >
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
+          {isLoading ? (
+            <div className="flex flex-col gap-3 w-full py-5 px-5">
+              <SkeletonLoading className="md:!w-full w-full !h-8 md:!h-9 rounded-xl" />
+              <SkeletonLoading className="md:!w-full w-full !h-8 md:!h-9 rounded-xl" />
+            </div>
+          ) : (
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="">
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <tr key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => (
+                      <th
+                        key={header.id}
+                        className="px-6 py-3 text-left text-base font-medium    "
+                      >
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                      </th>
+                    ))}
+                  </tr>
+                ))}
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {table.getRowModel().rows?.length ? (
+                  table.getRowModel().rows.map((row) => (
+                    <tr key={row.id}>
+                      {row.getVisibleCells().map((cell) => (
+                        <td
+                          key={cell.id}
+                          className="px-6 py-4 whitespace-nowrap text-sm text-grayMedium first-of-type:text-black"
+                        >
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
                           )}
-                    </th>
-                  ))}
-                </tr>
-              ))}
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {table.getRowModel().rows.map((row) => (
-                <tr key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
+                        </td>
+                      ))}
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
                     <td
-                      key={cell.id}
-                      className="px-6 py-4 whitespace-nowrap text-sm text-grayMedium first-of-type:text-black"
+                      colSpan={columns.length}
+                      className="h-24 text-center"
                     >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
+                      No results.
                     </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          )}
         </div>
 
         <div className="flex items-center gap-7 w-full">

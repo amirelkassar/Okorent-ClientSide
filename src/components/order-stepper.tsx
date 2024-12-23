@@ -1,22 +1,65 @@
 "use client";
 import { Stepper } from "@mantine/core";
-interface OrderStepperDataProps {
-  label: string;
-  date: string;
-  icon: JSX.Element;
-}
+import AcceptedIcon from "../assets/icons/accepted";
+import CarIcon from "../assets/icons/car";
+import ReceivedIcon from "../assets/icons/received";
+import ReturnedIcon from "../assets/icons/returned";
+import { getDate } from "../lib/utils";
+
 interface OrderStepperProps {
-  data: OrderStepperDataProps[];
   active: number;
+  data: any[];
 }
 export default function OrderStepper({
-  data = [],
   active = 0,
+  data = [],
 }: OrderStepperProps) {
+  const getDateChane = (num: number) => {
+    return getDate(
+      data?.find((item) => item.newOrderStatus === num)?.changeDate
+    ).fullMonthNameWithDayName;
+  };
+  const numTracker =
+    active === 3
+      ? 1
+      : active === 4
+      ? 2
+      : active === 6
+      ? 3
+      : active === 10
+      ? 4
+      : active === 11
+      ? 4
+      : 0;
+  const STEPS_DATA = [
+    {
+      label: "Accepted request",
+      date: getDateChane(3),
+      icon: <AcceptedIcon className="h-[23px] w-auto" />,
+    },
+    {
+      label: "Out for Delivery",
+      date: getDateChane(4),
+      icon: <CarIcon className="h-[23px] w-auto" />,
+    },
+    {
+      label: "Received by client",
+      date: getDateChane(6),
+      icon: <ReceivedIcon className="h-[23px] w-auto" />,
+    },
+    {
+      label: "Returned",
+      date: getDateChane(10) || getDateChane(11),
+      icon: <ReturnedIcon className="h-[23px] w-auto" />,
+    },
+  ];
+
+  console.log(numTracker);
+
   return (
     <div className="min-h-[150px]   place-content-center  bg-white rounded-lg px-7 py-3 mt-6">
       <Stepper
-        active={active}
+        active={numTracker}
         color="#88BA52"
         classNames={{
           separator: "mx-1",
@@ -25,7 +68,7 @@ export default function OrderStepper({
             "w-full h-full p-2 bg-[#B6BFC6] border-none  data-[completed]:bg-green data-[completed]:border-1",
         }}
       >
-        {data.map((step, index) => {
+        {STEPS_DATA.map((step, index) => {
           return (
             <Stepper.Step
               key={index}

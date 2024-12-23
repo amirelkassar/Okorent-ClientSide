@@ -1,67 +1,119 @@
 "use client";
-import toast from "react-hot-toast";
+
+import { toast, Toaster as HotToaster, ToastBar } from "react-hot-toast";
 import CloseIcon from "../assets/icons/close";
+import XIcon from "../assets/icons/x";
+import CloseNotficationsIcon from "../assets/icons/closeNotfications";
+import DeleteIcon from "../assets/icons/delete";
+import SuccessIcon from "../assets/icons/success";
+import ErrorNotficationIcon from "../assets/icons/error-notfication";
+
+interface ToastOptions {
+  success?: string;
+  loading?: string;
+  error?: string;
+  onSuccess?: (res: any) => void;
+  onError?: (err: any) => void;
+}
 
 const Toast = {
-  // Dismiss Toast
   dismiss: toast.dismiss,
 
-  // Submit function with promise handling and toast updates
-  Promise: (
-    promise: Promise<any>,
-    options: {
-      success?: string;
-      loading?: string;
-      error?: string;
-      onSuccess?: (res: any) => void;
-      onError?: (err: any) => void;
-    } = {
-      success: "",
-      loading: "",
-      error: "",
-      onSuccess: () => {},
-      onError: () => {},
-    }
-  ) => {
-    if (!promise) return;
+  Promise: <T,>(
+    promise: Promise<T>,
+    options: ToastOptions = {}
+  ): Promise<T> => {
+    if (!promise) return Promise.reject(new Error("No promise provided"));
 
-    return toast.promise(promise, {
-      loading: (
-        <div className="flex flex-col items-center gap-2 *:shrink-0 relative">
-          <p className="text-xs mdl:text-base font-medium">
-            {options.loading || "Sending Request"}
-          </p>
-        </div>
-      ),
-      success: (res: any) => {
-        if (options?.onSuccess) options?.onSuccess(res);
-        return (
-          <div className="flex items-center gap-5 *:shrink-0 relative">
+    return toast.promise(
+      promise,
+      {
+        loading: (
+          <div className="flex flex-col items-center gap-2 *:shrink-0 relative">
             <p className="text-xs mdl:text-base font-medium">
-              {options.success || "Operation Finished Successfully!"}
+              {options.loading || "Sending Request"}
             </p>
           </div>
-        );
-      },
-      error: (err: any) => {
-        if (options?.onError) options?.onError(err);
-        return (
-          <div className="flex items-center gap-5 *:shrink-0 relative">
-            <div className="flex bg-white items-center justify-between gap-4 w-[550px]">
-              <div>
-                <p className="text-xs mdl:text-base font-medium">
-                  {options.error || "Request failed"}
-                </p>
-              </div>
-              <button className="w-10 h-10 bg-red">
-                <CloseIcon />
-              </button>
+        ),
+        success: (res: T) => {
+          if (options?.onSuccess) options.onSuccess(res);
+          return (
+            <div className="flex items-center gap-5 *:shrink-0 relative">
+              <p className="text-xs mdl:text-base font-medium">
+                {options.success || "Operation Finished Successfully!"}
+              </p>
             </div>
-          </div>
-        );
+          );
+        },
+        error: (err: Error) => {
+          if (options?.onError) options.onError(err);
+          return (
+            <div className="flex items-center justify-between w-full ">
+              <p className="text-xs mdl:text-base font-medium">
+                {options.error || err.message || "Request failed"}
+              </p>
+            </div>
+          );
+        },
       },
-    });
+      {
+        success: {
+          duration: 5000,
+        },
+        error: {
+          duration: 15000,
+        },
+      }
+    );
   },
 };
+
+export function Toaster() {
+  return (
+    <HotToaster
+      position="top-center"
+      gutter={8}
+      containerClassName="w-[550px] mx-auto justify-center max-w-full !left-0 !right-0"
+      toastOptions={{
+        className: " max-w-full !rounded-xl",
+        duration: 5000,
+        style: {
+          background: "#fff",
+          color: "#363636",
+          padding: "16px",
+          maxWidth: "94%",
+          width: "550px",
+        },
+      }}
+    >
+      {(t) => (
+        <ToastBar
+          toast={t}
+          style={{ padding: 0, width: "100%", maxWidth: "100%" }}
+        >
+          {({ icon, message }) => (
+            <div className="flex items-center justify-between w-full">
+              <div className="flex items-center">
+                {t.type === "error" ? (
+                  <ErrorNotficationIcon />
+                ) : t.type === "success" ? (
+                  <SuccessIcon />
+                ) : (
+                  icon
+                )}
+                <div className="md:ml-2">{message}</div>
+              </div>
+              {t.type !== "loading" && (
+                <button onClick={() => toast.dismiss(t.id)} className="">
+                  <CloseNotficationsIcon className="w-4 h-auto" />
+                </button>
+              )}
+            </div>
+          )}
+        </ToastBar>
+      )}
+    </HotToaster>
+  );
+}
 
 export { Toast };

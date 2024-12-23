@@ -1,7 +1,5 @@
 "use client";
 import { ColumnDef } from "@tanstack/react-table";
-import Image from "next/image";
-import phoneImg from "@/src/assets/images/phone.png";
 import CardStatus from "@/src/components/cardStatus";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";

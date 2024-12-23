@@ -73,7 +73,6 @@ function CardProduct({
     paymentAmount: TotalPriceOrder,
     handler: "4444",
     paymentAction: 1,
-    customerId: "",
     isQuotation: true,
     ...(valueAddressType === "store" && {
       stockId: location,

@@ -19,6 +19,7 @@ import {
 import SelectInput from "@/src/components/select-input";
 import Input from "@/src/components/input";
 import { Toast } from "@/src/components/toast";
+import GetErrorMsg from "@/src/components/getErrorMsg";
 
 interface LocationProps {
   id: number;
@@ -67,24 +68,30 @@ function Page() {
   const { data: dataCategory } = GetCategory();
   const { data: dataSubCategory, refetch: RefetchGetSubCategory } =
     GetSubCategory(dataList?.CategoryId);
-  const { mutateAsync: createListing } = useCreateListingMutation();
+  const {
+    mutateAsync: createListing,
+    error,
+    isError,
+  } = useCreateListingMutation();
   const handleSubmit = async () => {
     await Toast.Promise(createListing(dataList), {
       success: "successfully Create Product",
       onSuccess: async (res) => {
         console.log(res);
-
       },
     });
   };
+  const errorMsg = error?.response?.data?.errors;
+  console.log(error?.response?.data?.errors);
 
   useEffect(() => {
     RefetchGetSubCategory();
   }, [dataList?.CategoryId]);
   return (
     <div
-      className={`"w-full  ${searchparams.get("preview") === "true" ? "" : "lg:w-[810px]"
-        }`}
+      className={`"w-full  ${
+        searchparams.get("preview") === "true" ? "" : "lg:w-[810px]"
+      }`}
     >
       {searchparams.get("preview") === "true" ? (
         <Preview />
@@ -99,8 +106,8 @@ function Page() {
               onChange={(e) => {
                 setDataList({ ...dataList, CategoryId: e });
               }}
-              inputClassName="!rounded-2xl text-grayMedium  !h-16 "
-              className=" bg-white "
+              inputClassName="!rounded-2xl text-grayMedium  !h-16 bg-white"
+              error={GetErrorMsg(error, "CategoryId")}
             />
             <SelectInput
               label="Select SubCategory"
@@ -113,6 +120,7 @@ function Page() {
               }}
               inputClassName="!rounded-2xl text-grayMedium  !h-16 "
               className="mt-4"
+              error={GetErrorMsg(error, "SubCategoryId")}
             />
           </Step>
           <Step
@@ -130,6 +138,7 @@ function Page() {
               }}
               inputClassName="  !rounded-2xl   bg-white !h-16 border"
               className=" mb-6 "
+              error={GetErrorMsg(error, "Name")}
             />
             <InputTextarea
               onChange={(e) => {
@@ -176,6 +185,7 @@ function Page() {
                 inputClassName="  w-full !rounded-2xl bg-white  border-2   h-16  "
                 labelClassName="text-sm lg:text-[16px]  mb-2 text-grayMedium"
                 className=" flex-1 min-w-[170px] w-full  md:max-w-[200px] "
+                error={GetErrorMsg(error, "DailyPrice")}
               />
               <Input
                 label={"Price for 1 Week"}
@@ -190,6 +200,7 @@ function Page() {
                 inputClassName="  w-full !rounded-2xl bg-white  border-2   h-16  "
                 labelClassName="text-sm lg:text-[16px]  mb-2 text-grayMedium"
                 className=" flex-1 min-w-[170px] w-full  md:max-w-[200px] "
+                error={GetErrorMsg(error, "WeeklyPrice")}
               />
               <Input
                 label={"Price for 1 Month"}
@@ -204,6 +215,7 @@ function Page() {
                 inputClassName="  w-full !rounded-2xl bg-white  border-2   h-16  "
                 labelClassName="text-sm lg:text-[16px]  mb-2 text-grayMedium"
                 className=" flex-1 min-w-[170px] w-full  md:max-w-[200px] "
+                error={GetErrorMsg(error, "MonthlyPrice")}
               />
             </div>
           </Step>

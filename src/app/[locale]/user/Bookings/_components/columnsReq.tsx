@@ -47,6 +47,8 @@ export const columnsReq: ColumnDef<RequestsTableData>[] = [
     cell: ({ getValue, row }) => {
       const name = getValue<string>();
       const id = row.original.id;
+      const image = row.original.heroImage;
+
       return (
         <Link
           href={ROUTES.USER.ORDERID(id)}
@@ -72,7 +74,7 @@ export const columnsReq: ColumnDef<RequestsTableData>[] = [
       const productName = getValue<string>();
       const id = row.original.id;
       const image = row.original.heroImage;
-      return <ImgProduct productName={productName} src={image} />;
+      return <ImgProduct productName={productName} src={""} />;
     },
   },
   {

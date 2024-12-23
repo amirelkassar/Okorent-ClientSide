@@ -288,3 +288,37 @@ li.search::before {
   background-image: url("/icons/error.svg");
 }
 
+:root {
+  --toastify-color-success: #22c55e;
+  --toastify-color-error: #ef4444;
+  --toastify-icon-color-success: var(--toastify-color-success);
+  --toastify-icon-color-error: var(--toastify-color-error);
+}
+
+.Toastify__toast {
+  border-radius: 0.5rem;
+  padding: 16px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.Toastify__toast--error {
+  background: white;
+  color: #1f2937;
+  border: 1px solid #fee2e2;
+}
+
+.Toastify__toast--success {
+  background: white;
+  color: #1f2937;
+  border: 1px solid #dcfce7;
+}
+
+.Toastify__close-button {
+  color: #6b7280;
+  opacity: 1;
+}
+
+.Toastify__toast-icon {
+  margin-right: 12px;
+}
+
