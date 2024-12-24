@@ -2,7 +2,6 @@ import Image from "next/image";
 import React from "react";
 import homeImg from "@/src/assets/images/house1.png";
 import userImg from "@/src/assets/images/avatar.png";
-import NoteIcon from "@/src/assets/icons/note";
 import { getDate } from "@/src/lib/utils";
 import BottomCardRent from "./bottom-card-rent";
 

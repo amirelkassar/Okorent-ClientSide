@@ -14,11 +14,11 @@ function Page({ params }: any) {
         </div>
       </div>
       <div className="w-full flex-wrap gap-6 my-4 relative flex items-center">
+        {/* <OneCardView />
         <OneCardView />
         <OneCardView />
         <OneCardView />
-        <OneCardView />
-        <OneCardView />
+        <OneCardView /> */}
       </div>
     </div>
   );
