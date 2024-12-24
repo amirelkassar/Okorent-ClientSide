@@ -12,7 +12,7 @@ import { useActionTableIRent } from "../_hooks/use-action-table-iRent";
 import { FilterOptionsBooking } from "./filter-data";
 import { Pagination } from "@/src/components/pagination";
 
-function TableRentalsView({ query }: { query: any }) {
+function TableRent({ query }: { query: any }) {
   const { functionSelectView, setSelectedFromTable } = useActionTableIRent();
   console.log(functionSelectView);
 
@@ -56,4 +56,4 @@ function TableRentalsView({ query }: { query: any }) {
   );
 }
 
-export default TableRentalsView;
+export default TableRent;

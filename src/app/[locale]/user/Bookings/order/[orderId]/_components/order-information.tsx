@@ -71,7 +71,7 @@ function OrderInformation({
     });
   };
   return (
-    <div className="w-full mdl:min-w-[560px] flex-1 py-6 mdl:py-9 px-3 mdl:px-4 bg-white rounded-xl border border-green/30">
+    <div className="w-full mdl:min-w-[400px] flex-1 py-6 mdl:py-9 px-3 mdl:px-4 bg-white rounded-xl border border-green/30">
       <div className="flex w-full flex-1 mdl:flex-row flex-col flex-wrap gap-y-5 gap-x-8">
         <CardInfoOrder
           label={isRent === "rent" ? "Lessor Name" : "Client Name"}
@@ -199,8 +199,8 @@ function OrderInformation({
           <CardInfoOrder
             label="Delivery Addressee"
             info={
-              typeof data?.address === "string"
-                ? data?.address || "--"
+              typeof data?.address.address === "string"
+                ? data?.address.address || "--"
                 : data?.address?.state
             }
           />

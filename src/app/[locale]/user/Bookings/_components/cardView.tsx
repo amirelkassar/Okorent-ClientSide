@@ -13,19 +13,21 @@ interface CardViewProps {
   title: string;
   first?: boolean;
   haveRentSwitch?: boolean;
-  proudcts?: any[];
+  products?: any[];
+  status: number|any;
 }
 function CardView({
   title,
   first = false,
   haveRentSwitch = false,
-  proudcts = [],
+  products = [],
+  status
 }: CardViewProps) {
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
 
   const handleSwiper = (swiper: any) => {
-    console.log(proudcts);
+    console.log(products);
 
     if (prevRef.current && nextRef.current) {
       swiper.params.navigation.prevEl = prevRef.current;
@@ -34,7 +36,7 @@ function CardView({
       swiper.navigation.update();
     }
   };
-  if (proudcts.length === 0) {
+  if (products.length === 0) {
     return null;
   }
   return (
@@ -98,10 +100,10 @@ function CardView({
               },
             }}
           >
-            {proudcts?.map((item,i) => {
+            {products?.map((item:any,i:number) => {
               return (
                 <SwiperSlide key={i}>
-                  <OneCardView product={item} />
+                  <OneCardView product={item} status={status} />
                 </SwiperSlide>
               );
             })}

@@ -23,8 +23,8 @@ function Page({ params }: any) {
   }
   return (
     <div className="mb-section">
-      <div className="flex items-center justify-between gap-3 flex-wrap">
-        <h2 className=" text-2xl font-Bold">Order Information</h2>
+      <div className="flex md:items-center justify-between gap-3 flex-col md:flex-row flex-wrap">
+        <h2 className=" text-xl lg:text-2xl font-Bold">Order Information</h2>
         <div className=" pointer-events-none opacity-85 flex-1 mx-auto flex items-center justify-center">
           <RentSwitch typeUser="user" />
         </div>
@@ -33,7 +33,7 @@ function Page({ params }: any) {
             onClick={() => {
               setEdit(true);
             }}
-            className={"w-fit !px-6 gap-2"}
+            className={"w-fit !px-6 gap-2 !h-10"}
           >
             <EditIcon fill="white" className="w-4 h-auto" />
             Edit
@@ -41,7 +41,7 @@ function Page({ params }: any) {
         )}
         {isRent === "rent" && (
           <div className="flex items-center gap-3">
-            <Button className={"w-[340px] max-w-full gap-2"}>
+            <Button className={"w-[340px] max-w-full !h-10 gap-2"}>
               <CarReturn />
               Request to return
             </Button>
@@ -53,7 +53,7 @@ function Page({ params }: any) {
         data={data.data?.orderTrackers || []}
       />
       <div className="mt-section flex gap-10 lgl:flex-row flex-col ">
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4  max-w-[930px]">
           <OrderInformation
             edit={edit}
             setEdit={setEdit}

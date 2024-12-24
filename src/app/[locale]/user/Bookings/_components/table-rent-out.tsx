@@ -6,16 +6,12 @@ import { TableHeader } from "@/src/components/table/table-header";
 import { Link } from "@/src/navigation";
 import CardIcon from "@/src/assets/icons/card";
 import RentSwitch from "@/src/components/RentSwitch";
-import { GetMyOrderOutAll } from "@/src/hooks/queries/user/booking";
 import { columnsReq } from "./columnsReq";
-import { useSearchParams } from "next/navigation";
 import { QueryWrapper } from "@/src/components/query-wrapper";
 import { useActionTableIRentOut } from "../_hooks/use-action-table-iRent-out";
 import { FilterOptionsBooking } from "./filter-data";
 
-function TableRequestView() {
-  const searchParams = useSearchParams();
-  const query = GetMyOrderOutAll(searchParams.toString());
+function TableRentOut({ query }: { query: any }) {
   const { setSelectedFromTable, functionSelectView } = useActionTableIRentOut();
   return (
     <div className=" hidden mdl:block">
@@ -52,4 +48,4 @@ function TableRequestView() {
   );
 }
 
-export default TableRequestView;
+export default TableRentOut;

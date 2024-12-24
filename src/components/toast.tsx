@@ -48,7 +48,7 @@ const Toast = {
           return (
             <div className="flex items-center justify-between w-full ">
               <p className="text-xs mdl:text-base font-medium">
-                {options.error || err?.response?.data.errors.Error || "Request failed"}
+                {options.error || err?.response?.data?.errors?.Error || "Request failed"}
               </p>
             </div>
           );

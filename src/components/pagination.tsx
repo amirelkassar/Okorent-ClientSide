@@ -48,7 +48,7 @@ export const Pagination = ({
           color='#88BA52'
           dir="ltr"
           classNames={{
-            control: " data-[active]:!bg-green bg-green/70 text-white hover:bg-green/90  !transition",
+            control: " data-[active]:!bg-green border-green border  hover:bg-green/80 hover:text-white duration-300  !transition",
             
           }}
           size="sm"

@@ -10,7 +10,7 @@ function OrderPayment({
   ProductDetailsPayment: any;
 }) {
   return (
-    <div className="flex flex-col gap-4 max-w-[520px] items-start justify-start w-full py-6 mdl:py-9 px-3 mdl:px-4 bg-white rounded-xl border border-green/30">
+    <div className="flex flex-col gap-4 flex-1  min-w-[300px] items-start justify-start py-6 mdl:py-9 px-3 mdl:px-4 bg-white rounded-xl border border-green/30">
       <CardInfoOrder
         classNameBox="!w-full !flex-none"
         label="Payment Method"

@@ -1,8 +1,8 @@
 import React from "react";
-import CardView from "./cardView";
 import { QueryWrapper } from "@/src/components/query-wrapper";
+import CardViewReq from "./cardViewReq";
 
-function PageCardRent({ query }: { query: any }) {
+function PageCardRentOut({ query }: { query: any }) {
   return (
     <QueryWrapper query={query}>
       {({ data }: { data: any }) => {
@@ -13,57 +13,57 @@ function PageCardRent({ query }: { query: any }) {
 
         return (
           <div>
-            <CardView
+            <CardViewReq
+              title="New"
               first
-              title={"New"}
-              haveRentSwitch
               products={getDataByStatus(1)}
               status={1}
+              haveRentSwitch
             />
-            <CardView
-              title={"Accepted"}
-              products={getDataByStatus(1)}
+            <CardViewReq
+              title="Accepted"
+              products={getDataByStatus(3)}
               status={3}
             />
-            <CardView
-              title={"Out for Delivery "}
+            <CardViewReq
+              title="Out for Delivery "
               products={getDataByStatus(4)}
               status={4}
             />
-            <CardView
-              title={"Received"}
-              products={getDataByStatus(1)}
+            <CardViewReq
+              title="Received by Client"
+              products={getDataByStatus(4)}
               status={6}
             />
-            <CardView
-              title={"Request for return"}
-              products={getDataByStatus(1)}
-              status={11}
-            />
-            <CardView
-              title={"Out for return"}
+            <CardViewReq
+              title="Out For return"
               products={getDataByStatus(1)}
               status={12}
             />
-            <CardView
-              title={"Completed"}
+             <CardViewReq
+              title="Request for return"
+              products={getDataByStatus(1)}
+              status={11}
+            />
+            <CardViewReq
+              title="Completed"
               products={getDataByStatus(1)}
               status={10}
             />
-            <CardView
-              title={"Returned"}
+            <CardViewReq
+              title="Returned"
               products={getDataByStatus(1)}
               status={7}
             />
-            <CardView
-              title={"Rejected"}
-              products={getDataByStatus(1)}
-              status={8}
-            />
-            <CardView
-              title={"Canceled"}
+            <CardViewReq
+              title="Canceled"
               products={getDataByStatus(1)}
               status={9}
+            />
+            <CardViewReq
+              title="Rejected"
+              products={getDataByStatus(1)}
+              status={8}
             />
           </div>
         );
@@ -72,4 +72,4 @@ function PageCardRent({ query }: { query: any }) {
   );
 }
 
-export default PageCardRent;
+export default PageCardRentOut;

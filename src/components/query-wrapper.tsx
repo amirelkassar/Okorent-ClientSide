@@ -1,5 +1,4 @@
 "use client";
-
 import React, { memo, useCallback, useMemo } from "react";
 import NoDataYet from "./noDataYet";
 import Loading from "./loading";
@@ -48,7 +47,7 @@ export const QueryWrapper = <T extends unknown>({
   }, [items]);
 
   const onRetry = useCallback(() => query.refetch?.(), [query]);
-console.log(query?.isFetching);
+  console.log(query?.isFetching);
 
   if (query?.isPaused) return <MemowizedServerError />;
   if (query?.isLoading) return <MemowizedLoader />;

@@ -2,15 +2,14 @@ import ListIcon from "@/src/assets/icons/list";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import React, { useRef } from "react";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import ArrowLeftIcon from "@/src/assets/icons/arrowLeft";
 import ArrowRightIcon from "@/src/assets/icons/ArrowRight";
-
 import { StaticImageData } from "next/image";
 import RentSwitch from "@/src/components/RentSwitch";
 import CardRequest from "@/src/components/cardRequest";
+
 interface RequestData {
   id: number;
   name: string;
@@ -33,19 +32,18 @@ interface RequestData {
   imgUser: StaticImageData;
   imgHome: StaticImageData;
 }
-
 interface CardViewProps {
-  data?: RequestData[];
-  filterBy: "accept" | "decline" | "upcoming" | "ongoing";
   title: string;
+  products?: RequestData[];
+  status: number|any;
   first?: boolean;
   haveRentSwitch?: boolean;
 }
 function CardViewReq({
   title,
   first = false,
-  data,
-  filterBy,
+  products,
+  status,
   haveRentSwitch = false,
 }: CardViewProps) {
   const prevRef = useRef<HTMLDivElement>(null);
@@ -131,12 +129,10 @@ function CardViewReq({
             modules={[Navigation]}
             className={"mySwiper "}
           >
-            {data
-              ?.filter((item) => item.action.toLocaleLowerCase() === filterBy)
-              .map((item) => {
+            {products?.map((item) => {
                 return (
                   <SwiperSlide key={item.id}>
-                    <CardRequest data={item} declined={filterBy} />
+                    <CardRequest data={item} status={status} />
                   </SwiperSlide>
                 );
               })}

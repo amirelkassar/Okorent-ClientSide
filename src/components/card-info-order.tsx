@@ -23,7 +23,7 @@ function CardInfoOrder({
       )}
       <div className=" border border-green/30 rounded-xl h-16 px-4 py-3 flex items-center gap-2  min-h-14">
         {iconRender&& iconRender()}
-        {info && <p className="text-sm mdl:text-base font-SemiBold">{info}</p>}
+        {info && <p className="text-sm mdl:text-base font-SemiBold max-w-full truncate">{info}</p>}
         {children}
       </div>
     </div>
