@@ -90,6 +90,23 @@ export const useCancelOrderMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKey]);
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
+
+//Delete Product
+export const useRejectOrderOutMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.post(user.order.reject_iRent,data);
+      return response.data;
+    },
+    onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKeyOut]);
       console.log(res);
     },

@@ -13,6 +13,7 @@ import AcceptedIcon from "@/src/assets/icons/accepted";
 import {
   ChangeStautsByID,
   useDeleteOrderOutMutation,
+  useRejectOrderOutMutation,
 } from "@/src/hooks/queries/user/booking";
 import ViewQrModal from "./modal-rentOut/view-qr-modale";
 import TrueIcon from "@/src/assets/icons/true";
@@ -27,6 +28,7 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
   const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
   const { mutateAsync: ChaneStatusProduct } = ChangeStautsByID(id);
   const { mutateAsync: DeleteOrderOut } = useDeleteOrderOutMutation();
+  const { mutateAsync: RejectOrderOut } = useRejectOrderOutMutation();
   const onSubmitDelete = useCallback(async () => {
     Toast.Promise(DeleteOrderOut(id), {
       success: "Deleted Product Done",
@@ -40,6 +42,18 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
       error: "Failed to complete operation",
     });
   }, [ChaneStatusProduct]);
+  const onSubmitReject = useCallback(async () => {
+    Toast.Promise(
+      RejectOrderOut({
+        orderId: id,
+        answer: true,
+      }),
+      {
+        success: "Rejected Product Done",
+        onSuccess: async (res) => {},
+      }
+    );
+  }, [RejectOrderOut]);
   const options = [
     //0
     {
@@ -126,7 +140,9 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
       label: "Reject",
       icon: <RejectOrderIcon fill="#FF1D45" className="w-3 h-auto" />,
       type: "btn",
-      action: () => {},
+      action: () => {
+        onSubmitReject();
+      },
     },
     //11
     {

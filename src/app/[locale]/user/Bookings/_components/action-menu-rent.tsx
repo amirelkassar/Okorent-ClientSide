@@ -24,7 +24,7 @@ function ActionMenuRent({ id, status = 0 }: { id: any; status: any }) {
     Toast.Promise(
       CancelOrder({
         orderId: id,
-        renterMessage: "string",
+        renterMessage: "    ",
       }),
       {
         success: "Canceled Order",

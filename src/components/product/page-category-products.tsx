@@ -10,6 +10,7 @@ import ProductList from "./productList";
 import SkeletonLoading from "../skeleton-loading";
 import { MultiSelect } from "@mantine/core";
 import CantFind from "./CantFind";
+import { Pagination } from "../pagination";
 const sortingOptions: any[] = [
   {
     value: "PriceAsc",
@@ -35,6 +36,7 @@ function PageCategoryProducts({ children }: { children: React.ReactNode }) {
   );
 
   const { data, isLoading } = GetProductsAll(searchParams.toString());
+  const query = GetProductsAll(searchParams.toString());
   const { data: dataSubCategories, isLoading: isLoadingSubCategory } =
     GetSubCategory(searchParams.get("CategoryId"));
   const updateQuerySearchParams = useUpdateQueryParams();
@@ -206,12 +208,16 @@ function PageCategoryProducts({ children }: { children: React.ReactNode }) {
               </div>
             )}
           </div>
+
           {isLoading ? (
             <LoadingProductsRow />
           ) : data?.data?.length === 0 ? (
             <CantFind />
           ) : (
-            <ProductList data={data?.data || []} />
+            <div>
+              <ProductList data={data?.data.items || []} />
+              <Pagination totalPages={4} />
+            </div>
           )}
         </div>
       </div>

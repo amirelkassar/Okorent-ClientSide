@@ -10,8 +10,9 @@ import { columns } from "./columns";
 import { QueryWrapper } from "@/src/components/query-wrapper";
 import { useActionTableIRent } from "../_hooks/use-action-table-iRent";
 import { FilterOptionsBooking } from "./filter-data";
+import { Pagination } from "@/src/components/pagination";
 
-function TableRentalsView({query}:{query:any}) {
+function TableRentalsView({ query }: { query: any }) {
   const { functionSelectView, setSelectedFromTable } = useActionTableIRent();
   console.log(functionSelectView);
 
@@ -36,13 +37,18 @@ function TableRentalsView({query}:{query:any}) {
         {({ data }: { data: any }) => {
           console.log(data);
           return (
-            <DataTable
-              title=""
-              data={data || []}
-              columns={columns}
-              functionSelect={functionSelectView}
-              setSelectedFromTable={setSelectedFromTable}
-            />
+            <div>
+              <DataTable
+                title=""
+                data={data || []}
+                columns={columns}
+                functionSelect={functionSelectView}
+                setSelectedFromTable={setSelectedFromTable}
+              />
+              <Pagination
+              totalPages={5}
+              />
+            </div>
           );
         }}
       </QueryWrapper>

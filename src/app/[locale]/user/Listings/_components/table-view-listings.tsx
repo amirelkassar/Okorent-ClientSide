@@ -6,6 +6,7 @@ import { TableHeader } from "@/src/components/table/table-header";
 import { Link } from "@/src/navigation";
 import CardIcon from "@/src/assets/icons/card";
 import { useActionTable } from "../_hooks/use-action-table";
+import { Pagination } from "@/src/components/pagination";
 const FilterOptions = [
   {
     label: "online",
@@ -20,9 +21,8 @@ const FilterOptions = [
 ];
 
 function TableViewListings({ data }: { data: any }) {
-  const { functionSelectView, setSelectedFromTable } =
-    useActionTable();
-console.log(data);
+  const { functionSelectView, setSelectedFromTable } = useActionTable();
+  console.log(data);
 
   return (
     <div className=" hidden mdl:block">
@@ -46,6 +46,7 @@ console.log(data);
         functionSelect={functionSelectView}
         setSelectedFromTable={setSelectedFromTable}
       />
+      <Pagination totalPages={5} />
     </div>
   );
 }

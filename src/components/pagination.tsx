@@ -3,85 +3,75 @@
 import { Pagination as MantinePagination } from "@mantine/core";
 import Button from "./button";
 import ArrowLeftIcon from "../assets/icons/arrowLeft";
-import ArrowRightIcon from "../assets/icons/ArrowRight";
 import SpinnerIcon from "../assets/icons/spinner";
-import { useRouter } from "../navigation";
+import { parseAsInteger, useQueryState } from "nuqs";
 
 interface PaginationProps {
-  pageSize: any;
-  totalCount: any;
-  pageNumber?: number | undefined;
+  totalPages?: number | undefined;
   disabled?: boolean | undefined;
-  setPageNumber: any;
 }
-
 export const Pagination = ({
-  pageSize,
-  totalCount,
-  pageNumber = 1,
+  totalPages = 0,
   disabled = false,
-  setPageNumber,
 }: PaginationProps) => {
-  const router = useRouter();
+  const [PageNumber, setPageNumber] = useQueryState(
+    "PageNumber",
+    parseAsInteger.withDefault(1)
+  );
 
-  const totalPages = Math.ceil(totalCount / pageSize);
-  const hasPagination = totalPages > 1;
-  const currentPage = Number(pageNumber) || 1;
+  const hasPagination = +totalPages > 1;
+  const currentPage = Number(PageNumber) || 1;
+
+
+
 
   if (!hasPagination) return null;
-
-  const updatePage = (newPage:any) => {
-    if (typeof window === undefined) return;
-    const searchParams = new URLSearchParams(window.location.search);
-    searchParams.set("page", newPage.toString());
-    router.replace(`?${searchParams.toString()}`, {
-      scroll: false,
-    });
-  };
-
   return (
-    <div className="font-bold flex ltr:flex-row-reverse items-center justify-between">
+    <div className="font-bold flex ltr:flex-row-reverse items-center justify-between mb-section">
       <Button
-        className="py-1.5 text-xs lg:text-base px-3 lg:px-6 gap-2 lg:gap-4 rounded-lg"
+        className={`py-1 text-xs font-Regular  px-2 lg:px-5 gap-2 lg:gap-4 rounded-xl ${
+          currentPage === 4 || disabled ? "opacity-55 pointer-events-none" : ""
+        }`}
         onClick={() => {
-          if (setPageNumber) return setPageNumber(currentPage + 1);
-          updatePage(currentPage + 1);
+          if (setPageNumber) return setPageNumber(+PageNumber + 1);
         }}
-        disabled={currentPage === totalPages || disabled}
+        disabled={PageNumber === totalPages || disabled}
       >
-        <ArrowRightIcon className="rotate-180 size-3 mdl:size-5" />
-        التالي
+        Next
+        <ArrowLeftIcon className="rotate-180 size-3 mdl:size-5" />
       </Button>
 
       {disabled && <SpinnerIcon className=" size-9 animate-spin" />}
       {!disabled && (
         <MantinePagination
           total={totalPages}
+          color='#88BA52'
           dir="ltr"
           classNames={{
-            control: "!bg-white hover:!bg-black/5 !transition",
+            control: " data-[active]:!bg-green bg-green/70 text-white hover:bg-green/90  !transition",
+            
           }}
-          size="xs"
-          radius="xl"
+          size="sm"
+          radius="md"
           withControls={false}
           value={currentPage}
           onChange={(value) => {
             if (setPageNumber) return setPageNumber(value);
-            updatePage(value);
           }}
         />
       )}
 
       <Button
-        className="py-1.5 px-3 lg:px-6 gap-2 text-xs lg:text-base lg:gap-4 rounded-lg"
+        className={`py-1 text-xs font-Regular  px-2 lg:px-5 gap-2 lg:gap-4 rounded-xl ${
+          currentPage === 1 || disabled ? "opacity-55 pointer-events-none" : ""
+        }`}
         onClick={() => {
-          if (setPageNumber) return setPageNumber(currentPage - 1);
-          updatePage(currentPage - 1);
+          if (setPageNumber) return setPageNumber(+PageNumber - 1);
         }}
         disabled={currentPage === 1 || disabled}
       >
         <ArrowLeftIcon className="size-3 mdl:size-5" />
-        السابق
+        Prev
       </Button>
     </div>
   );

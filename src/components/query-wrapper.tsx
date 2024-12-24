@@ -21,6 +21,7 @@ interface QueryWrapperProps<T> {
     data: T[] | Record<string, any>;
     pageSize?: number;
     totalCount?: number;
+    totalPages?: number;
     isPlaceholderData?: boolean;
     hasData: boolean;
   }) => React.ReactNode;
@@ -37,6 +38,7 @@ export const QueryWrapper = <T extends unknown>({
   const items = query.data?.data?.items ?? query.data?.data ?? {};
   const pageSize = query.data?.data?.pageSize;
   const totalCount = query.data?.data?.totalCount;
+  const totalPages = query.data?.data?.totalPages;
 
   const hasData = useMemo(() => {
     if (Array.isArray(items)) return items.length > 0;
@@ -46,6 +48,7 @@ export const QueryWrapper = <T extends unknown>({
   }, [items]);
 
   const onRetry = useCallback(() => query.refetch?.(), [query]);
+console.log(query?.isFetching);
 
   if (query?.isPaused) return <MemowizedServerError />;
   if (query?.isLoading) return <MemowizedLoader />;
@@ -64,6 +67,7 @@ export const QueryWrapper = <T extends unknown>({
           data: items as T[] | Record<string, any>, // Ensuring type safety with explicit casting
           pageSize,
           totalCount,
+          totalPages,
           isPlaceholderData: query.isPlaceholderData,
           hasData,
         })}
