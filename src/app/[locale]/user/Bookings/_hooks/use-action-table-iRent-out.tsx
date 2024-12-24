@@ -10,6 +10,7 @@ import CarIcon from "@/src/assets/icons/car";
 import RejectOrderIcon from "@/src/assets/icons/RejectOrder";
 import TrueIcon from "@/src/assets/icons/true";
 import CloseIcon from "@/src/assets/icons/close";
+import PrintIcon from "@/src/assets/icons/print";
 
 interface ActionTableIRentOutProps {
   functionSelectView: any[];
@@ -99,6 +100,14 @@ export const useActionTableIRentOut = (): ActionTableIRentOutProps => {
           console.log([...ids]);
         },
       },
+      //10
+      {
+        title: "Print shipping label",
+        icon: <PrintIcon fill="#006AFF" className="max-h-4 w-auto" />,
+        onclick: (ids: any) => {
+          console.log([...ids]);
+        },
+      },
     ],
     [selectedFromTable]
   );
@@ -113,6 +122,8 @@ export const useActionTableIRentOut = (): ActionTableIRentOutProps => {
           return [functionSelect[0], functionSelect[5]];
         case "3":
           return [functionSelect[3], functionSelect[4]];
+        case "4":
+          return [functionSelect[10]];
         case "7":
           return [functionSelect[6]];
         case "8":

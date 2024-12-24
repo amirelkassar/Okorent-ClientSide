@@ -22,6 +22,7 @@ import DeleteIcon from "@/src/assets/icons/delete";
 import VersionHistoryModal from "./modal-rentOut/version-history-modal";
 import ROUTES from "@/src/routes";
 import { Toast } from "@/src/components/toast";
+import PrintIcon from "@/src/assets/icons/print";
 
 function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
   const [opened, { open, close }] = useDisclosure(false);
@@ -153,6 +154,13 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
         onSubmitDelete();
       },
     },
+    //12
+    {
+      label: "Print shipping label",
+      icon: <PrintIcon className="w-3 h-auto" />,
+      type: "btn",
+      action: () => {},
+    },
   ];
   const optionView = () => {
     switch (status.toString()) {
@@ -161,7 +169,7 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
       case "3":
         return [options[1], options[4], options[5], options[6], options[9]];
       case "4":
-        return [options[5], options[6]];
+        return [options[12], options[5], options[6]];
       case "6":
         return [options[5], options[6]];
       case "7":
