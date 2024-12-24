@@ -16,6 +16,8 @@ export const user = {
     getById: (id: any) => `/Product/${id}`,
     upDateToOnlineById: (id: any) => `/Product/${id}/availability`,
     getMyProductsById: (id: any) => `/Product/my-product/${id}`,
+    favoriteProducts: `/FavouriteProduct`,
+    DeleteFavoriteProducts: (id: any) => `/FavouriteProduct/${id}`,
   },
   information: {
     base: (id: any) => `/User/${id}`,

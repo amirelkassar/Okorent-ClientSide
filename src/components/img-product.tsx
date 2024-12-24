@@ -32,7 +32,7 @@ function ImgProduct({
           className={cn("w-auto h-full rounded-full  object-cover object-center ", classNameBImg)}
         />
       </div>
-      <h2 className={cn("text-[16px] font-SemiBold max-w-[220px] truncate", classNameBTitle)}>
+      <h2 className={cn("text-[16px] font-SemiBold max-w-[260px] sml:max-w-[220px] truncate", classNameBTitle)}>
         {productName}
       </h2>
     </div>

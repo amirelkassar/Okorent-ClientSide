@@ -17,7 +17,7 @@ function Page({ params }: any) {
   const { data, isLoading } = GetOrderByID(params.orderId);
   const [edit, setEdit] = useState(false);
   console.log(data);
-
+  const statusOrder = data?.data?.orderTrackers?.at(-1)?.newOrderStatus || 0;
   if (isLoading) {
     return <Loading />;
   }
@@ -28,7 +28,7 @@ function Page({ params }: any) {
         <div className=" pointer-events-none opacity-85 flex-1 mx-auto flex items-center justify-center">
           <RentSwitch typeUser="user" />
         </div>
-        {!edit && (
+        {!edit && (statusOrder === 1 || statusOrder === 3) && (
           <Button
             onClick={() => {
               setEdit(true);
@@ -39,7 +39,7 @@ function Page({ params }: any) {
             Edit
           </Button>
         )}
-        {isRent === "rent" && (
+        {isRent === "rent" && (statusOrder === 4 || statusOrder === 6) && (
           <div className="flex items-center gap-3">
             <Button className={"w-[340px] max-w-full !h-10 gap-2"}>
               <CarReturn />
