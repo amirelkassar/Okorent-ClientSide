@@ -83,9 +83,9 @@ const DropImg = memo(function DropImg({
 
   // Render Image Preview
   const renderImagePreview = useCallback(
-    (src: string, onRemove: () => void) => (
+    (src: string, onRemove: () => void,index: number) => (
       <div
-        key={src}
+        key={index}
         className="h-[146px] w-[146px] relative overflow-hidden rounded-md shadow-md"
       >
         <Image
@@ -110,14 +110,14 @@ const DropImg = memo(function DropImg({
     <div>
       {images.length > 0 || files.length > 0 ? (
         <div className="flex gap-4 p-1 flex-wrap relative items-center">
-          {images.map((image) =>
+          {images.map((image,index) =>
             renderImagePreview(image.path, () =>
-              handleRemoveExistingImage(image.id)
+              handleRemoveExistingImage(image.id),index
             )
           )}
           {files.map((file, index) =>
             renderImagePreview(URL.createObjectURL(file), () =>
-              handleRemoveFile(index)
+              handleRemoveFile(index),index*5
             )
           )}
           <Dropzone

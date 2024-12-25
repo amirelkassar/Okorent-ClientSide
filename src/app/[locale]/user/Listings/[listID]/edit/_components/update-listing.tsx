@@ -27,6 +27,8 @@ interface FAQ {
   answer: string;
 }
 function UpdateListing({ initialValues }: { initialValues: any }) {
+  console.log(initialValues);
+
   const [dataList, setDataList] = useState<any>({
     ...initialValues,
     stocks: GetIdsValues(initialValues.stocks),
@@ -76,7 +78,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
 
   const { mutateAsync: createListing } = useEditListingMutation(dataList?.id);
   const handleSubmit = async () => {
-    const formData={...dataList}
+    const formData = { ...dataList };
     await Toast.Promise(createListing(formData), {
       success: "successfully Edit Product",
       onSuccess: async (res) => {

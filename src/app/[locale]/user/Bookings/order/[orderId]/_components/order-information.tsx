@@ -40,7 +40,9 @@ function OrderInformation({
   const [valueAddressType, setValueAddressType] = useState("");
   const [location, setLocation] = useState<any>(null);
   const [opened, { open, close }] = useDisclosure(false);
-  const { data: productData } = GetProductsByID(data?.orderItems[0].productId);
+  const { data: productData } = GetProductsByID(data?.getOrderItemDtos[0]?.productId);
+  console.log(data);
+  
   const { mutateAsync: EditOrderDetails } = useEditOrderByIDMutation(data?.id);
   const handelEditOrder = () => {
     const formData = {

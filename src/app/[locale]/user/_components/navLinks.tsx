@@ -101,7 +101,7 @@ function NavLinks() {
       },
       {
         id: 1,
-        name: `Bookings / ${params.BookingID?.toString()
+        name: `Bookings / ${searchParams.get("statusTitle")?.toString()
           .split("-")
           .join("  ")}`,
         url: ROUTES.USER.BOOKINGS,

@@ -60,7 +60,7 @@ function Page({ params }: any) {
             data={data?.data}
             isRent={isRent}
           />
-          <OrderDetails ProductDetails={data?.data?.orderItems || []} />
+          <OrderDetails ProductDetails={data?.data?.getOrderItemDtos || []} />
         </div>
         <OrderPayment
           ProductDetailsPayment={data?.data?.paymentRecord[0] || []}
