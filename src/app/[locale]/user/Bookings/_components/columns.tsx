@@ -19,7 +19,7 @@ export type RequestsTableData = {
   status: string;
   amount: number;
   paymentStatus: string;
-  heroImage: StaticImageData;
+  //heroImage: StaticImageData;
   orderId: any;
 };
 
@@ -30,13 +30,21 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     cell: ({ getValue, row }) => {
       const productName = getValue<string>();
       const id = row.original.id;
-      const image = row.original.heroImage;
+      //const image = row.original.heroImage;
       return (
         <Link
           href={ROUTES.USER.ORDERID(id)}
           className="flex items-center gap-2"
         >
-          <ImgProduct productName={productName} src={image} />
+           <Image
+            src={avatar}
+            alt={productName}
+            width={50}
+            height={50}
+            className="w-12 h-12 rounded-[50%] object-cover object-top"
+          />
+          <h2 className="text-[16px] font-SemiBold max-w-[260px] sml:max-w-[220px] truncate">{productName}</h2>
+          {/* <ImgProduct productName={productName} src={image} /> */}
         </Link>
       );
     },

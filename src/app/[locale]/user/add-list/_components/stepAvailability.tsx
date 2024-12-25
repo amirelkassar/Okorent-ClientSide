@@ -47,7 +47,7 @@ function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
           }
         }}
       >
-        <div className="flex my-6 items-center justify-between gap-1 lg:gap-3 flex-wrap">
+        <div className="flex my-6 mdl:items-center flex-col mdl:flex-row justify-between gap-3 flex-wrap">
           {OptionAvailability.map((option, inedx) => {
             return (
               <Radio
@@ -57,6 +57,7 @@ function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
                 label={option.label}
                 classNames={{
                   icon: "w-3 h-3 left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2",
+                  label: " text-xs lg:text-sm",
                 }}
               />
             );

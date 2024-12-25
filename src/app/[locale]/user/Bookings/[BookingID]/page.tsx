@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import OneCardView from "../_components/oneCardView";
 import { useSearchParams } from "next/navigation";
 import PageIRentId from "./_components/page-iRent-id";
 import PageIRentOutId from "./_components/page-iRent-out-id";

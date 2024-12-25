@@ -43,7 +43,7 @@ function StepLocation({
     >
       <div>
         {data?.data.length > 0 ? (
-          <div className="flex flex-col gap-5 lg:gap-6">
+          <div className="flex flex-col gap-5 lg:gap-6 max-w-full">
             <MultiSelect
               data={data?.data.map((loc: any) => ({
                 value: loc.id, // Use the `id` as the value
@@ -58,10 +58,10 @@ function StepLocation({
               size="lg"
               classNames={{
                 input:
-                  " bg-white text-black flex items-center rounded-xl text-grayMedium  min-h-[64px] border border-green",
+                  " bg-white text-black flex items-center rounded-xl text-grayMedium min-h-12 w-full min-w-full  md:min-h-[64px] border border-green",
 
                 inputField:
-                  "placeholder:text-base  h-full placeholder:text-grayMedium placeholder:opacity-100   ",
+                  "placeholder:text-xs md:placeholder:text-base max-w-full min-w-full  h-full placeholder:text-grayMedium placeholder:opacity-100   ",
                 pillsList: "h-full",
                 dropdown:
                   "bg-white text-black rounded-lg border border-green/50 text-grayDark py-2",
@@ -71,7 +71,7 @@ function StepLocation({
                 label: "text-grayMedium",
               }}
               clearable
-              className="block " // Visible on mobile, hidden on larger screens
+              className="block max-w-full" // Visible on mobile, hidden on larger screens
             />
 
             {data?.data
@@ -94,17 +94,17 @@ function StepLocation({
                       classNames={{
                         label: "text-sm md:text-[16px] text-grayMedium mb-2",
                         input:
-                          " text-black text-[12px] md:text-[16px] rounded-2xl text-grayMedium  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+                          " text-black text-[12px] md:text-[16px] rounded-xl md:rounded-2xl text-grayMedium  border-2 border-green h-12  md:h-[64px] placeholder:text-xs md:placeholder:text-base  placeholder:text-grayMedium placeholder:opacity-100 ",
                         wrapper: "h-[64px]",
                       }}
-                      className=" flex-1 min-w-[144px]  duration-200 min-h-[64px] bg-white rounded-2xl text-grayMedium"
+                      className=" flex-1 md:min-w-[144px]  duration-200 md:min-h-[64px] bg-white rounded-2xl text-grayMedium"
                     />
                     <div
                       onClick={() => {
                         setIndexSelect(loc.id);
                         open();
                       }}
-                      className=" cursor-pointer flex-1 min-w-[156px]"
+                      className=" cursor-pointer flex-1 max-w-full min-w-[156px]"
                     >
                       <h3 className="text-sm md:text-[16px] text-grayMedium mb-2">
                         Address
@@ -131,10 +131,10 @@ function StepLocation({
               open();
             }}
             className={
-              "mt-8 bg-grayBack gap-3 px-7 h-[64px] border-none text-black"
+              "mt-8 bg-grayBack gap-3 px-7 h-12 text-xs md:text-base md:h-[64px] border-none text-black"
             }
           >
-            <LocationIcon fill="#0F2A43" />
+            <LocationIcon fill="#0F2A43" className=" w-3 md:w-5 h-auto" />
             <p>Add location</p>
           </Button>
         </div>

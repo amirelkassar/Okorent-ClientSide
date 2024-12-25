@@ -1,7 +1,7 @@
 "use client";
 import DeleteIcon from "@/src/assets/icons/delete";
 import DataActions from "@/src/components/DataActions";
-import React, { useCallback } from "react";
+import React from "react";
 import { useDisclosure } from "@mantine/hooks";
 import BarcodeIcon from "@/src/assets/icons/barcode";
 import CarReturn from "@/src/assets/icons/car-return";
@@ -13,25 +13,18 @@ import ScanQrModal from "./modal-rent/scan-qr-modale";
 import RequestReturnModale from "./modal-rent/request-return-modale";
 import CancelIcon from "@/src/assets/icons/cancel";
 import ROUTES from "@/src/routes";
-import { useCancelOrderMutation } from "@/src/hooks/queries/user/booking";
-import { Toast } from "@/src/components/toast";
+import { useChangeStatusRent } from "../_hooks/use-change-status-rent";
 
 function ActionMenuRent({ id, status = 0 }: { id: any; status: any }) {
   const [opened, { open, close }] = useDisclosure(false);
   const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
-  const { mutateAsync: CancelOrder } = useCancelOrderMutation();
-  const onSubmitCancel = useCallback(async () => {
-    Toast.Promise(
-      CancelOrder({
-        orderId: id,
-        renterMessage: "    ",
-      }),
-      {
-        success: "Canceled Order",
-        onSuccess: async (res) => {},
-      }
-    );
-  }, [CancelOrder]);
+
+  const {
+    onSubmitCancel,
+    onSubmitDelete,
+    onSubmitRefund,
+    onSubmitChangeStatus,
+  } = useChangeStatusRent(id);
   const options = [
     //0
     {
@@ -60,7 +53,8 @@ function ActionMenuRent({ id, status = 0 }: { id: any; status: any }) {
       icon: <BarcodeIcon className="w-3 h-auto" />,
       type: "btn",
       action: () => {
-        open();
+        // open();
+        onSubmitChangeStatus();
       },
     },
     //4
@@ -69,7 +63,8 @@ function ActionMenuRent({ id, status = 0 }: { id: any; status: any }) {
       icon: <CarReturn fill="#6F6B7D" className="w-3 h-auto" />,
       type: "btn",
       action: () => {
-        open2();
+        //open2();
+        onSubmitRefund();
       },
     },
     //5
@@ -93,7 +88,9 @@ function ActionMenuRent({ id, status = 0 }: { id: any; status: any }) {
       label: "Delete",
       icon: <DeleteIcon fill="#FF1D45" className="w-3 h-auto" />,
       type: "btn",
-      action: () => {},
+      action: () => {
+        onSubmitDelete();
+      },
     },
   ];
   const optionView = () => {

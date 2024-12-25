@@ -216,7 +216,7 @@ function PageCategoryProducts({ children }: { children: React.ReactNode }) {
           ) : (
             <div>
               <ProductList data={data?.data.items || []} />
-              <Pagination totalPages={4} />
+              <Pagination totalPages={data?.data?.totalPages} />
             </div>
           )}
         </div>

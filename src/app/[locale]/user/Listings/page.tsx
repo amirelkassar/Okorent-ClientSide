@@ -15,6 +15,8 @@ function Page() {
     <div>
       <QueryWrapper query={query}>
         {({ data }) => {
+          console.log(data);
+          
           const DataIsActive = data?.filter(
             (item: any) => item.isActive === true
           );

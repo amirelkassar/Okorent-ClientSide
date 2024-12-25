@@ -50,7 +50,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
         <div className="flex flex-col gap-2 justify-center ">
           <Image
             alt="user"
-            src={data?.heroImage || imageUser}
+            src={ imageUser||data?.heroImage}
             className=" lgl:size-[104px] size-[70x] lgl:min-w-[104px] min-w-[70px] rounded-[50%] object-cover object-top"
             priority
           />

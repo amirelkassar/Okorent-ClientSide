@@ -89,7 +89,7 @@ function Page() {
   }, [dataList?.CategoryId]);
   return (
     <div
-      className={`"w-full  ${
+      className={`"w-full max-w-full ${
         searchparams.get("preview") === "true" ? "" : "lg:w-[810px]"
       }`}
     >
@@ -106,7 +106,7 @@ function Page() {
               onChange={(e) => {
                 setDataList({ ...dataList, CategoryId: e });
               }}
-              inputClassName="!rounded-2xl text-grayMedium  !h-16 bg-white"
+              inputClassName=" !rounded-xl md:!rounded-2xl text-grayMedium !h-12  md:!h-16 bg-white"
               error={GetErrorMsg(error, "CategoryId")}
             />
             <SelectInput
@@ -118,7 +118,7 @@ function Page() {
               onChange={(e) => {
                 setDataList({ ...dataList, SubCategoryId: e });
               }}
-              inputClassName="!rounded-2xl text-grayMedium  !h-16 "
+              inputClassName=" !rounded-xl md:!rounded-2xl text-grayMedium !h-12  md:!h-16 "
               className="mt-4"
               error={GetErrorMsg(error, "SubCategoryId")}
             />
@@ -136,7 +136,7 @@ function Page() {
                   Name: e.target.value,
                 });
               }}
-              inputClassName="  !rounded-2xl   bg-white !h-16 border"
+              inputClassName="   !rounded-xl md:!rounded-2xl   bg-white !h-12 md:!h-16 border"
               className=" mb-6 "
               error={GetErrorMsg(error, "Name")}
             />
@@ -182,7 +182,7 @@ function Page() {
                     DailyPrice: e.target.value,
                   });
                 }}
-                inputClassName="  w-full !rounded-2xl bg-white  border-2   h-16  "
+                inputClassName="  w-full  !rounded-xl md:!rounded-2xl bg-white  border-2  h-12 md:h-16  "
                 labelClassName="text-sm lg:text-[16px]  mb-2 text-grayMedium"
                 className=" flex-1 min-w-[170px] w-full  md:max-w-[200px] "
                 error={GetErrorMsg(error, "DailyPrice")}
@@ -197,7 +197,7 @@ function Page() {
                     WeeklyPrice: e.target.value,
                   });
                 }}
-                inputClassName="  w-full !rounded-2xl bg-white  border-2   h-16  "
+                inputClassName="  w-full  !rounded-xl md:!rounded-2xl bg-white  border-2  h-12 md:h-16  "
                 labelClassName="text-sm lg:text-[16px]  mb-2 text-grayMedium"
                 className=" flex-1 min-w-[170px] w-full  md:max-w-[200px] "
                 error={GetErrorMsg(error, "WeeklyPrice")}
@@ -212,7 +212,7 @@ function Page() {
                     MonthlyPrice: e.target.value,
                   });
                 }}
-                inputClassName="  w-full !rounded-2xl bg-white  border-2   h-16  "
+                inputClassName="  w-full  !rounded-xl md:!rounded-2xl bg-white  border-2  h-12 md:h-16  "
                 labelClassName="text-sm lg:text-[16px]  mb-2 text-grayMedium"
                 className=" flex-1 min-w-[170px] w-full  md:max-w-[200px] "
                 error={GetErrorMsg(error, "MonthlyPrice")}
@@ -245,7 +245,7 @@ function Page() {
                 setDataList({ ...dataList, Cost: e.target.value });
               }}
               placeholder="Add item value here"
-              inputClassName="!rounded-2xl bg-white  !h-16 border-2 "
+              inputClassName=" !rounded-xl md:!rounded-2xl bg-white !h-12  md:!h-16 border-2 "
               className="mb-6 "
             />
           </Step>
@@ -263,12 +263,12 @@ function Page() {
               onChange={(e) => {
                 setDataList({ ...dataList, TotalQuantity: e.target.value });
               }}
-              inputClassName="!rounded-2xl bg-white  !h-16 border-2 "
+              inputClassName=" !rounded-xl md:!rounded-2xl bg-white !h-12  md:!h-16 border-2 "
               className="mb-6 "
             />
           </Step>
           <Step title="Item Status" active={dataList.TotalQuantity} stepNum={9}>
-            <div>
+            <div className="max-w-full">
               <div className="flex flex-col gap-4">
                 <Checkbox
                   checked={selectedCheckbox === "true"}
@@ -290,7 +290,7 @@ function Page() {
                 />
               </div>
 
-              <p className="mt-4 text-[14px] text-grayMedium font-Regular">
+              <p className="mt-4 text-xs md:text-[14px] text-grayMedium font-Regular">
                 Set as Active to make the item available for rent Set as Not
                 Active to keep the item unavailable for rent
               </p>

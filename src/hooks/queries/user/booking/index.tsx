@@ -98,7 +98,7 @@ export const useCancelOrderMutation = () => {
   });
 };
 
-//Delete Product
+//Reject Product
 export const useRejectOrderOutMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -108,6 +108,58 @@ export const useRejectOrderOutMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKeyOut]);
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
+
+//Cancel Order Out
+export const useCancelOrderOutMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data:any) => {
+      const response = await api.post(user.order.cancel_iRent_out,data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKeyOut]);
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
+//Delete Product iRent
+export const useDeleteOrderMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: any) => {
+      const response = await api.delete(user.order.getById(id));
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKey]);
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
+//Refund Product iRent
+export const useRefundOrderMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.post(user.order.refund_iRent,data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKey]);
       console.log(res);
     },
     onError: (res) => {

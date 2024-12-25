@@ -39,6 +39,8 @@ export const user = {
     getById: (id: any) => `/BookingOrder/${id}`,
     order_tracker: (id: any) => `/OrderTracker/${id}`,
     cancel_iRent: `/OrderRequest/Cancel Order Request`,
+    cancel_iRent_out: `/OrderRequest/Cancel Order Response`,
+    refund_iRent: `/OrderRequest/Refund Order Response`,
     reject_iRent: `/OrderRequest/Reject Order`,
   },
   user: {

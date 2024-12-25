@@ -1,6 +1,6 @@
 "use client";
 import DataActions from "@/src/components/DataActions";
-import React, { memo, useCallback } from "react";
+import React, { memo } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import BarcodeIcon from "@/src/assets/icons/barcode";
 import CarReturn from "@/src/assets/icons/car-return";
@@ -10,51 +10,25 @@ import CancelIcon from "@/src/assets/icons/cancel";
 import ClockIcon from "@/src/assets/icons/clock";
 import CarIcon from "@/src/assets/icons/car";
 import AcceptedIcon from "@/src/assets/icons/accepted";
-import {
-  ChangeStautsByID,
-  useDeleteOrderOutMutation,
-  useRejectOrderOutMutation,
-} from "@/src/hooks/queries/user/booking";
 import ViewQrModal from "./modal-rentOut/view-qr-modale";
 import TrueIcon from "@/src/assets/icons/true";
 import CloseIcon from "@/src/assets/icons/close";
 import DeleteIcon from "@/src/assets/icons/delete";
 import VersionHistoryModal from "./modal-rentOut/version-history-modal";
 import ROUTES from "@/src/routes";
-import { Toast } from "@/src/components/toast";
 import PrintIcon from "@/src/assets/icons/print";
+import { useChangeStatusRentOut } from "../_hooks/use-change-status-rentOut";
 
 function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
   const [opened, { open, close }] = useDisclosure(false);
   const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
-  const { mutateAsync: ChaneStatusProduct } = ChangeStautsByID(id);
-  const { mutateAsync: DeleteOrderOut } = useDeleteOrderOutMutation();
-  const { mutateAsync: RejectOrderOut } = useRejectOrderOutMutation();
-  const onSubmitDelete = useCallback(async () => {
-    Toast.Promise(DeleteOrderOut(id), {
-      success: "Deleted Product Done",
-      onSuccess: async (res) => {},
-    });
-  }, [DeleteOrderOut]);
-  const onSubmitChaneStatus = useCallback(async () => {
-    Toast.Promise(ChaneStatusProduct(id), {
-      loading: "Processing...",
-      success: "Operation completed!",
-      error: "Failed to complete operation",
-    });
-  }, [ChaneStatusProduct]);
-  const onSubmitReject = useCallback(async () => {
-    Toast.Promise(
-      RejectOrderOut({
-        orderId: id,
-        answer: true,
-      }),
-      {
-        success: "Rejected Product Done",
-        onSuccess: async (res) => {},
-      }
-    );
-  }, [RejectOrderOut]);
+  const {
+    onSubmitDelete,
+    onSubmitChangeStatus,
+    onSubmitReject,
+    onSubmitCancel,
+  } = useChangeStatusRentOut(id);
+
   const options = [
     //0
     {
@@ -62,7 +36,7 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
       icon: <AcceptedIcon fill="#6F6B7D" className="w-3 h-auto" />,
       type: "btn",
       action: () => {
-        onSubmitChaneStatus();
+        onSubmitChangeStatus();
       },
     },
     //1
@@ -88,7 +62,9 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
       label: "Mark as returned",
       icon: <CarReturn fill="#6F6B7D" className="w-3 h-auto" />,
       type: "btn",
-      action: () => {},
+      action: () => {
+        onSubmitChangeStatus();
+      },
     },
     //4
     {
@@ -96,7 +72,7 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
       icon: <CarIcon fill="#6F6B7D" className="w-3 h-auto" />,
       type: "btn",
       action: () => {
-        onSubmitChaneStatus();
+        onSubmitChangeStatus();
       },
     },
     //5
@@ -134,7 +110,9 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
       label: "Cancel",
       icon: <CancelIcon fill="#FF1D45" className="w-3 h-auto" />,
       type: "btn",
-      action: () => {},
+      action: () => {
+        onSubmitCancel();
+      },
     },
     //10
     {
@@ -165,7 +143,7 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
   const optionView = () => {
     switch (status.toString()) {
       case "1":
-        return [options[0], options[5], options[6], options[10]];
+        return [options[0], options[5], options[6], options[10],options[9]];
       case "3":
         return [options[1], options[4], options[5], options[6], options[9]];
       case "4":

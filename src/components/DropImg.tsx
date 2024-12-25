@@ -86,7 +86,7 @@ const DropImg = memo(function DropImg({
     (src: string, onRemove: () => void,index: number) => (
       <div
         key={index}
-        className="h-[146px] w-[146px] relative overflow-hidden rounded-md shadow-md"
+        className="md:h-[146px] h-[100px] w-[100px] md:w-[146px] relative overflow-hidden rounded-md shadow-md"
       >
         <Image
           src={src}
@@ -96,7 +96,7 @@ const DropImg = memo(function DropImg({
           className="object-cover h-full w-full"
         />
         <Button
-          className="absolute bottom-3 end-3 bg-white hover:border-red border-grayLight border-2 !p-[4px] size-[30px] rounded-full hover:bg-red-200"
+          className="absolute bottom-3 end-3 bg-white hover:border-red border-grayLight border-2 !p-[4px] size-6 md:size-[30px] rounded-full hover:bg-red-200"
           onClick={onRemove}
         >
           <RemoveIcon />
@@ -126,9 +126,9 @@ const DropImg = memo(function DropImg({
             maxSize={3 * 1024 ** 2} // 3MB
             accept={[MIME_TYPES.jpeg, MIME_TYPES.png, MIME_TYPES.pdf]}
             multiple
-            className="h-[146px] w-[146px] border-green overflow-hidden border-solid border rounded-md"
+            className=" h-[100px] md:h-[146px] w-[100px] md:w-[146px] border-green overflow-hidden border-solid border rounded-md"
           >
-            <div className="h-full absolute w-full inset-0 flex justify-center items-center flex-col gap-3">
+            <div className="h-full absolute p-8 w-full inset-0 flex justify-center items-center flex-col gap-3">
               <PlusImgIcon />
             </div>
           </Dropzone>
@@ -140,7 +140,7 @@ const DropImg = memo(function DropImg({
           maxSize={3 * 1024 ** 2} // 3MB
           accept={[MIME_TYPES.jpeg, MIME_TYPES.png, MIME_TYPES.pdf]}
           multiple
-          className="h-[146px] lg:h-[340px] border-green overflow-hidden border-solid border-2 rounded-2xl"
+          className=" h-[100px] md:h-[146px] lg:h-[340px] border-green overflow-hidden border-solid border-2 rounded-2xl"
         >
           <div className="h-full absolute w-full inset-0 flex justify-center items-center flex-col gap-3">
             <UpLoadIcon className={"w-9 h-auto"} />
