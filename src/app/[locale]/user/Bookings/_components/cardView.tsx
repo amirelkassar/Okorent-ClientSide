@@ -27,7 +27,6 @@ function CardView({
   const nextRef = useRef<HTMLDivElement>(null);
 
   const handleSwiper = (swiper: any) => {
-    console.log(products);
 
     if (prevRef.current && nextRef.current) {
       swiper.params.navigation.prevEl = prevRef.current;

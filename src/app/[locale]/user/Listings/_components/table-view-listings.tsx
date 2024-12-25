@@ -20,7 +20,13 @@ const FilterOptions = [
   },
 ];
 
-function TableViewListings({ data }: { data: any }) {
+function TableViewListings({
+  data,
+  totalPages,
+}: {
+  data: any;
+  totalPages: any;
+}) {
   const { functionSelectView, setSelectedFromTable } = useActionTable();
   console.log(data);
 
@@ -46,7 +52,7 @@ function TableViewListings({ data }: { data: any }) {
         functionSelect={functionSelectView}
         setSelectedFromTable={setSelectedFromTable}
       />
-      <Pagination totalPages={5} />
+      <Pagination totalPages={totalPages} />
     </div>
   );
 }

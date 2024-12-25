@@ -9,7 +9,6 @@ function PageCardRent({ query }: { query: any }) {
         const getDataByStatus = (status: number) => {
           return data.filter((item: any) => item.status === status);
         };
-        console.log(data);
 
         return (
           <div>

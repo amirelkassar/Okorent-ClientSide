@@ -14,8 +14,9 @@ function Page() {
   return (
     <div>
       <QueryWrapper query={query}>
-        {({ data }) => {
+        {({ data,totalPages }) => {
           console.log(data);
+          console.log(totalPages);
           
           const DataIsActive = data?.filter(
             (item: any) => item.isActive === true
@@ -59,7 +60,7 @@ function Page() {
             </>
           ) : (
             <>
-              <TableViewListings data={data || []} />
+              <TableViewListings data={data || []} totalPages={totalPages} />
               <div className=" block mdl:hidden">
                 <CardView title={"Online"} data={DataIsActive} />
                 <CardView title={"Offline"} data={DataIsNotActive} />

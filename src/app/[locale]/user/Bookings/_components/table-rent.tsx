@@ -14,7 +14,6 @@ import { Pagination } from "@/src/components/pagination";
 
 function TableRent({ query }: { query: any }) {
   const { functionSelectView, setSelectedFromTable } = useActionTableIRent();
-  console.log(functionSelectView);
 
   return (
     <div className=" hidden mdl:block">
@@ -34,8 +33,9 @@ function TableRent({ query }: { query: any }) {
         <TableHeader.Last options={FilterOptionsBooking} />
       </TableHeader>
       <QueryWrapper query={query}>
-        {({ data }: { data: any }) => {
+        {({ data, totalPages }: { data: any, totalPages?:number }) => {
           console.log(data);
+          console.log(totalPages);
           return (
             <div>
               <DataTable
@@ -45,9 +45,9 @@ function TableRent({ query }: { query: any }) {
                 functionSelect={functionSelectView}
                 setSelectedFromTable={setSelectedFromTable}
               />
-              <Pagination
-              totalPages={5}
-              />
+              {/* <Pagination
+              totalPages={totalPages}
+              /> */}
             </div>
           );
         }}
