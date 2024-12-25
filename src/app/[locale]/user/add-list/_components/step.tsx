@@ -19,7 +19,7 @@ function Step({
   return (
     <div
       className={cn(
-        "flex gap-4 w-full",
+        "flex gap-4 w-full max-w-full",
         !active && "opacity-40 pointer-events-none  "
       )}
     >
@@ -32,7 +32,7 @@ function Step({
         )}
       </div>
       <div className="mt-[7px] pb-5 lg:pb-12 flex-1">
-        <h3 className={cn("text-base lg:text-[24px] lg:mb-1 ", !dec && "!mb-3 lg:!mb-6")}>{title}</h3>
+        <h3 className={cn("text-sm lg:text-[24px] lg:mb-1 ", !dec && "!mb-3 lg:!mb-6")}>{title}</h3>
         {dec && (
           <p className="text-grayMedium mb-3 lg:mb-4 text-sm lg:text-base font-Regular">{dec}</p>
         )}

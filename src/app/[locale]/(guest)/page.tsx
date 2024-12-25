@@ -24,7 +24,7 @@ function Page() {
         {isLoading ? (
           <LoadingProductsRow number={5} />
         ) : (
-          <ProductList more={false} data={data?.data || []} />
+          <ProductList more={false} data={data?.data?.items || []} />
         )}
       </>
     </div>

@@ -22,7 +22,7 @@ function ProductHome() {
       {isLoading  ? (
         <LoadingProductsRow number={5} />
       ) : (
-        <ProductList title="Items you may like" data={data?.data || []} />
+        <ProductList title="Items you may like" data={data?.data?.items || []} />
       )}
     </>
   );

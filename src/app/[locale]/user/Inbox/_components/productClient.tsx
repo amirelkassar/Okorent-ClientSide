@@ -135,7 +135,7 @@ function ProductClient() {
         }}
         centered
       >
-        <CardRequest data={RequestsData[0]} dataByModal={true} />
+        <CardRequest data={RequestsData[0]}  />
       </Modal>
     </div>
   );

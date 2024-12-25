@@ -12,7 +12,8 @@ export interface EventsProps {
   ids: any;
 }
 function Events({ item, ids }: EventsProps) {
-  if (item.link) {
+  if(!item) return null
+  if (item?.link) {
     return (
       <Link
         href={item.link || "#"}
@@ -20,9 +21,8 @@ function Events({ item, ids }: EventsProps) {
       >
         {item.icon}
         <p
-          className={`${
-            item.title.toLowerCase() === "delete" ? "text-red" : "text-blue"
-          }  text-sm`}
+          className={`${item.title.toLowerCase() === "delete" ? "text-red" : "text-blue"
+            }  text-sm`}
         >
           {item.title}
         </p>
@@ -36,14 +36,13 @@ function Events({ item, ids }: EventsProps) {
         }}
         className="px-3 mdl:px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2"
       >
-        {item.icon}
+        {item?.icon}
         <p
-          className={`${
-            item.title.toLowerCase() === "delete" ||
-            item.title.toLowerCase().includes("cancel")
+          className={`${item.title?.toLowerCase() === "delete" ||
+              item.title?.toLowerCase().includes("cancel") || item.title?.toLowerCase().includes("reject")
               ? "text-red"
               : "text-blue"
-          }  text-sm`}
+            }  text-sm`}
         >
           {item.title}
         </p>

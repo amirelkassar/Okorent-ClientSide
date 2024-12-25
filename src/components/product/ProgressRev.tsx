@@ -5,7 +5,7 @@ interface ProgressRev {
 function ProgressRev({ val }: ProgressRev) {
   return (
     <div className="flex items-center gap-4 flex-1">
-      <div className="flex-1 w-[290px] h-8 rounded-lg border overflow-hidden border-green/50">
+      <div className="flex-1 max-w-full  h-8 rounded-lg border overflow-hidden border-green/50">
         <span
           style={{ width: `${val}%` }}
           className={`block duration-300 bg-green h-full `}

@@ -1,8 +1,13 @@
 import { api } from "@/src/api/axios";
 import { user } from "@/src/api/user";
+import { getFormData } from "@/src/lib/utils";
+import { useRouter } from "@/src/navigation";
+import ROUTES from "@/src/routes";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 export const initialQueryKey = "user.addListing";
 export const initialQueryKeyMyProduct = "user.myProductsAll";
+
 //getCategory
 export const GetCategory = () => {
   const queryClient = useQueryClient();
@@ -30,10 +35,11 @@ export const GetSubCategory = (id: any) => {
 };
 
 export const useCreateListingMutation = () => {
+  const router = useRouter()
   const queryClient = useQueryClient();
-  return useMutation({
+  return useMutation<void, any, Record<string, any>>({
     mutationFn: async (data: any) => {
-      const response = await api.post(user.addListing.base, data, {
+      const response = await api.post(user.addListing.base, getFormData(data), {
         headers: {
           Accept: "text/plain",
           "Content-Type": "multipart/form-data",
@@ -43,7 +49,31 @@ export const useCreateListingMutation = () => {
     },
     onSuccess: (res) => {
       console.log(res);
-      queryClient.invalidateQueries([initialQueryKeyMyProduct]);
+      queryClient.refetchQueries([initialQueryKeyMyProduct]);
+      router.push(ROUTES.USER.LISTINGS)
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
+export const useEditListingMutation = (id:any) => {
+  const router = useRouter()
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.put(user.addListing.edit_listing(id), getFormData(data), {
+        headers: {
+          Accept: "text/plain",
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      queryClient.refetchQueries([initialQueryKeyMyProduct]);
+      router.push(ROUTES.USER.LISTINGS)
     },
     onError: (res) => {
       console.log(res);

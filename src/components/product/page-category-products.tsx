@@ -3,7 +3,6 @@ import CloseIcon from "@/src/assets/icons/close";
 import { GetSubCategory } from "@/src/hooks/queries/user/add-lisiting";
 import { GetProductsAll } from "@/src/hooks/queries/user/home";
 import { useUpdateQueryParams } from "@/src/lib/utils";
-import { useRouter } from "@/src/navigation";
 import { useSearchParams } from "next/navigation";
 import React, { useCallback, useState } from "react";
 import LoadingProductsRow from "./loading-products-row";
@@ -11,6 +10,7 @@ import ProductList from "./productList";
 import SkeletonLoading from "../skeleton-loading";
 import { MultiSelect } from "@mantine/core";
 import CantFind from "./CantFind";
+import { Pagination } from "../pagination";
 const sortingOptions: any[] = [
   {
     value: "PriceAsc",
@@ -31,12 +31,12 @@ const sortingOptions: any[] = [
 ];
 function PageCategoryProducts({ children }: { children: React.ReactNode }) {
   const searchParams = useSearchParams();
-  const router = useRouter();
   const [selectedSubcategories, setSelectedSubcategories] = useState<string[]>(
     searchParams.getAll("SubCategoryIds") || []
   );
 
   const { data, isLoading } = GetProductsAll(searchParams.toString());
+  const query = GetProductsAll(searchParams.toString());
   const { data: dataSubCategories, isLoading: isLoadingSubCategory } =
     GetSubCategory(searchParams.get("CategoryId"));
   const updateQuerySearchParams = useUpdateQueryParams();
@@ -208,12 +208,16 @@ function PageCategoryProducts({ children }: { children: React.ReactNode }) {
               </div>
             )}
           </div>
+
           {isLoading ? (
             <LoadingProductsRow />
           ) : data?.data?.length === 0 ? (
             <CantFind />
           ) : (
-            <ProductList data={data?.data || []} />
+            <div>
+              <ProductList data={data?.data.items || []} />
+              <Pagination totalPages={data?.data?.totalPages} />
+            </div>
           )}
         </div>
       </div>

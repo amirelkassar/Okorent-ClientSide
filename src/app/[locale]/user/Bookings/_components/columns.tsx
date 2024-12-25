@@ -1,17 +1,14 @@
 "use client";
-
-import DeleteIcon from "@/src/assets/icons/delete";
-import EditIcon from "@/src/assets/icons/edit";
 import FilterIcon from "@/src/assets/icons/filter";
-import { ActionIcon } from "@mantine/core";
 import { ColumnDef } from "@tanstack/react-table";
 import Image, { StaticImageData } from "next/image";
-import phoneImg from "@/src/assets/images/phone.png";
 import CardStatus from "@/src/components/cardStatus";
 import avatar from "@/src/assets/images/avatar.png";
 import { getDate } from "@/src/lib/utils";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
+import ImgProduct from "@/src/components/img-product";
+import ActionMenuRent from "./action-menu-rent";
 export type RequestsTableData = {
   id: number;
   name: string;
@@ -22,7 +19,7 @@ export type RequestsTableData = {
   status: string;
   amount: number;
   paymentStatus: string;
-  img: StaticImageData;
+  //heroImage: StaticImageData;
   orderId: any;
 };
 
@@ -32,24 +29,22 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     header: "Product",
     cell: ({ getValue, row }) => {
       const productName = getValue<string>();
-      const id = row.original.orderId;
+      const id = row.original.id;
+      //const image = row.original.heroImage;
       return (
         <Link
           href={ROUTES.USER.ORDERID(id)}
           className="flex items-center gap-2"
         >
-          <div className="size-[50px] rounded-[50%] p-[6px] bg-grayBack flex justify-center items-center">
-            <Image
-              src={phoneImg}
-              alt={productName}
-              width={50}
-              height={50}
-              className="w-auto h-full  object-contain "
-            />
-          </div>
-          <h2 className="text-[16px] font-SemiBold max-w-[170px] truncate">
-            {productName}
-          </h2>
+           <Image
+            src={avatar}
+            alt={productName}
+            width={50}
+            height={50}
+            className="w-12 h-12 rounded-[50%] object-cover object-top"
+          />
+          <h2 className="text-[16px] font-SemiBold max-w-[260px] sml:max-w-[220px] truncate">{productName}</h2>
+          {/* <ImgProduct productName={productName} src={image} /> */}
         </Link>
       );
     },
@@ -93,25 +88,35 @@ export const columns: ColumnDef<RequestsTableData>[] = [
       );
     },
   },
-
   {
     accessorKey: "status",
     header: "Status",
     cell: ({ getValue }) => {
       const status = getValue<string>();
       switch (status.toString()) {
-        case "out for delivery":
-          return <CardStatus animation circle type="blue" title={status} />;
         case "1":
-          return <CardStatus circle type="blue" title={"pending"} />;
-        case "accepted":
-          return <CardStatus animation circle type="green" title={status} />;
-        case "completed":
-          return <CardStatus circle type="gray" title={status} />;
-        case "rejected":
-          return <CardStatus circle type="red" title={status} />;
-        case "received by client":
-          return <CardStatus circle type="green" title={status} />;
+          return <CardStatus circle type="blue" title={"new"} />;
+        case "3":
+          return <CardStatus circle type="green" title={"Accepted"} />;
+        case "4":
+          return <CardStatus circle type="blue" title={"Out For Delivery"} />;
+        case "6":
+          return <CardStatus circle type="green" title={"Received"} />;
+        case "7":
+          return <CardStatus circle type="gray" title={"Returned"} />;
+        case "8":
+          return <CardStatus circle type="red" title={"Rejected"} />;
+        case "9":
+          return <CardStatus circle type="red" title={"Canceled"} />;
+        case "10":
+          return <CardStatus circle type="green" title={"Compeleted"} />;
+        case "11":
+          return (
+            <CardStatus circle type="gray" title={"Request for returned"} />
+          );
+        case "12":
+          return <CardStatus circle type="gray" title={"out for return"} />;
+
         default:
           return <CardStatus circle type="gray" title="--" />;
       }
@@ -131,28 +136,27 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     cell: ({ getValue }) => {
       const paymentStatus = getValue<string>();
       switch (paymentStatus.toString()) {
-        case "completed":
-          return <CardStatus circle type="blue" title={paymentStatus} />;
-        case "canceled":
-          return <CardStatus circle type="red" title={paymentStatus} />;
-        case "1":
-          return <CardStatus circle type="green" title={"pending"} />;
+        case "6":
+          return <CardStatus circle type="green" title={"Pending"} />;
+        case "7":
+          return <CardStatus circle type="blue" title={"Completed"} />;
+        case "8":
+          return <CardStatus circle type="red" title={"Refunded"} />;
+        case "2":
+          return <CardStatus circle type="gray" title={"Partial Payment"} />;
         default:
-          return <CardStatus circle type="gray" title="--" />;
+          return <CardStatus type="gray" title="--" />;
       }
     },
   },
   {
     id: "actions",
-    cell: () => {
+    cell: ({ row }) => {
+      const id = row.original.id;
+      const status = row.original.status;
       return (
         <div className="flex items-center gap-3 w-fit">
-          <ActionIcon variant="transparent">
-            <EditIcon className="w-5 h-auto" />
-          </ActionIcon>
-          <ActionIcon variant="transparent">
-            <DeleteIcon className="w-5 h-auto" />
-          </ActionIcon>
+          <ActionMenuRent id={id} status={status} />
         </div>
       );
     },

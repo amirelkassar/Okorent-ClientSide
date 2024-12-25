@@ -1,23 +1,44 @@
+'use client'
 import CardRentals from "@/src/components/cardRentals";
 import FAQ from "@/src/components/faq";
+import Loading from "@/src/components/loading";
 import MapComponent from "@/src/components/map";
 import CardProduct from "@/src/components/product/cardProduct";
 import Description from "@/src/components/product/description";
 import QuestionView from "@/src/components/question";
 import Reviews from "@/src/components/reviews";
+import { GetProductsByID } from "@/src/hooks/queries/user/home";
 import { Rentals } from "@/src/lib/dataUser";
+import { useSearchParams } from "next/navigation";
 import React from "react";
 
-function page() {
+function Page({ params }: any) {
+  const searchparams = useSearchParams();
+  console.log('sdff');
+  
+  const { data, isLoading, isError } = GetProductsByID(params.productID);
+  console.log(data);
+  if (isLoading) {
+    return <Loading />;
+  }
+  if (isError) {
+    return <div>Product not found</div>;
+  }
+  if (!data?.data) {
+    return <div>Product not found</div>;
+  }
+
   return (
     <div>
-      <CardProduct />
+     <CardProduct data={data?.data || []} guest />
       <div className="bg-[#D9D9D933] px-3 lg:px-10 lg:rounded-[50px] rounded-[30px] pt-8 lg:pt-11 pb-9 lg:pb-7 mb-section">
         <h2 className="text-xl mb-5 px-2 lg:text-2xl">
           How to receive this item
         </h2>
 
-        <MapComponent />
+        <MapComponent
+              stocks={data?.data.stocks.lenght > 0 ? data.data.stocks : []}
+            />
         <p className="text-sm lg:text-base text-grayMedium font-Regular mt-5">
           This item is available for in-store pickup. Request it from the lessor
           and select your preferred pickup location. Once the lessor approves,
@@ -51,4 +72,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

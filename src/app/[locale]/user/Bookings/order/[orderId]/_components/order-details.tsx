@@ -6,6 +6,7 @@ import React from "react";
 import phoneImg from "@/src/assets/images/phone.png";
 import PriceOrderTable from "@/src/components/price-order-table";
 import { calculateDurationRange } from "@/src/lib/utils";
+import OrderCardPhone from "@/src/components/order-card-phone";
 
 function OrderDetails({ ProductDetails }: { ProductDetails: any }) {
   // تحويل المنتجات إلى مكونات الجدول
@@ -30,11 +31,17 @@ function OrderDetails({ ProductDetails }: { ProductDetails: any }) {
     `USD ${product.price.toFixed(2)}`,
   ]);
   return (
-    <div className="flex mdl:min-w-[560px] flex-1 flex-wrap gap-y-5 gap-x-8 py-3 mdl:py-4 px-3 mdl:px-4 bg-white rounded-xl border border-green/30">
-      <div className="flex mdl:min-w-[560px] flex-1 flex-wrap gap-y-5 gap-x-8 py-3 mdl:py-4 px-3 mdl:px-4 bg-white rounded-xl border border-green/50">
-        <OrderTable data={data} />
-
-        <div className="flex flex-col gap-2 ms-auto w-fit lg:me-20">
+    <div className="flex mdl:min-w-[400px] flex-1 flex-wrap gap-y-5 gap-x-8 py-3 mdl:py-4 px-3 mdl:px-4 bg-white rounded-xl border border-green/30">
+      <div className="flex mdl:min-w-[400px] flex-1 flex-wrap gap-y-5 gap-x-8 py-3 mdl:py-4 px-3 mdl:px-4 bg-white rounded-xl border border-green/50">
+        <div className="w-full hidden mdl:block">
+          <OrderTable data={data} />
+        </div>
+        <div className="flex flex-col gap-4 w-full mdl:hidden  ">
+          {ProductDetails.map((product: any, index: number) => (
+            <OrderCardPhone key={index} data={product} />
+          ))}
+        </div>
+        <div className="flex flex-col gap-2 md:ms-auto w-fit lg:me-20">
           <PriceRow label="Total" value={ProductDetails[0]?.price} />
         </div>
       </div>

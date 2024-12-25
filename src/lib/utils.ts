@@ -198,9 +198,65 @@ export const calculateDurationRange = (valueDateFrom: Date | null, valueDateTo: 
   }
   return 0;
 };
-export const getFormData = (data:any) => {
-  return serialize(data, {
-    indices: true,
-    nullsAsUndefineds: true,
+export const getFormData = (data: Record<string, any>) => {
+  const formData = new FormData();
+
+  Object.entries(data).forEach(([key, value]) => {
+    if ((key === "ProductImageFiles"||key === "images") && Array.isArray(value)) {
+      // Handle ProductImageFiles as files
+      value.forEach((file) => {
+        if (file instanceof File) {
+          formData.append(key, file, file.name); // Append File objects
+        } else if (file.path) {
+          const mockFile = new File([], file.path); // Create a mock File for path strings
+          formData.append(key, mockFile, file.path);
+        }
+      });
+    } else if ((key === "FAQs"||key === "faQs") && Array.isArray(value)) {
+      // Handle FAQs as indexed structure
+      value.forEach((faq, index) => {
+        Object.entries(faq).forEach(([faqKey, faqValue]) => {
+          formData.append(`${key}[${index}][${faqKey}]`, String(faqValue));
+        });
+      });
+    } else if (Array.isArray(value)) {
+      // Handle other arrays
+      value.forEach((item) => {
+        formData.append(key, String(item));
+      });
+    } else if (typeof value === "object" && value !== null) {
+      // Handle objects
+      Object.entries(value).forEach(([innerKey, innerValue]) => {
+        formData.append(`${key}[${innerKey}]`, String(innerValue));
+      });
+    } else if (value !== undefined && value !== null) {
+      // Handle primitive values
+      formData.append(key, String(value));
+    }
   });
+
+  return formData;
+};
+
+export const GetUniqueValues = (data: any[], key: string) => {
+  if (!key) return null; // Return null if no key is provided
+
+  const uniqueValues = new Set(data.map((item: any) => item[key]));
+
+  return uniqueValues.size === 1
+    ? Array.from(uniqueValues)[0]
+    : null;
+};
+
+
+export const GetIdsValues = (data: any[] = []) => {
+  if (!Array.isArray(data) || data.length === 0) {
+    return null; // Return null if data is not an array or is empty
+  }
+
+  const ids = data
+    .filter((item) => item && item.id) // Ensure each item and id exist
+    .map((item) => item.id); // Extract ids
+
+  return ids.length > 0 ? ids : null; // Return ids if any, else null
 };

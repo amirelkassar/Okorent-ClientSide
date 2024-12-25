@@ -9,7 +9,7 @@ import {
   getSortedRowModel,
 } from "@tanstack/react-table";
 import { Checkbox, Table } from "@mantine/core";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import ArrowWhiteIcon from "../assets/icons/arrowWhite";
 import FilterBy from "./filterBy";
 import { Link } from "../navigation";
@@ -54,6 +54,7 @@ interface DataTableProps<TData extends { id: any }, TValue> {
   Component?: React.ComponentType<{ dataCard: TData }>;
   children?: React.ReactNode;
   functionSelect?: functionSelectProps[];
+  setSelectedFromTable?: any;
 }
 export function DataTable<TData extends { id: any }, TValue>({
   columns,
@@ -73,26 +74,16 @@ export function DataTable<TData extends { id: any }, TValue>({
   Component,
   children,
   functionSelect,
+  setSelectedFromTable,
 }: DataTableProps<TData, TValue>) {
-  const [selectedUsers, setSelectedUsers] = useState<Set<number>>(new Set());
-
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
+    //getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
   });
-  const toggleUser = (index: number) => {
-    const newSelectedUsers = new Set(selectedUsers);
-    if (newSelectedUsers.has(index)) {
-      newSelectedUsers.delete(index);
-    } else {
-      newSelectedUsers.add(index);
-    }
-    setSelectedUsers(newSelectedUsers);
-  };
 
   const handelFilter = (key: string | boolean) => {
     table.getColumn(filterBy)?.setFilterValue(key);
@@ -104,16 +95,45 @@ export function DataTable<TData extends { id: any }, TValue>({
     return table.getColumn(key)?.getIsSorted();
   };
 
-  const toggleAll = () => {
-    if (selectedUsers.size === table.getRowModel().rows.length) {
-      setSelectedUsers(new Set());
-    } else {
-      setSelectedUsers(
-        new Set(table.getRowModel().rows.map((item) => item.original.id))
+  const [selectedUsers, setSelectedUsers] = useState<any[]>([]);
+
+  const toggleUser = useCallback((row: any) => {
+    setSelectedUsers((prev) => {
+      const existingIndex = prev.findIndex((user) => user.id === row.id);
+      if (existingIndex !== -1) {
+        // Remove user
+        return prev.filter((_, index) => index !== existingIndex);
+      }
+      // Add user
+      return [...prev, row];
+    });
+    if (setSelectedFromTable) {
+      setSelectedFromTable((prev: any) => {
+        const existingIndex = prev.findIndex((user: any) => user.id === row.id);
+        if (existingIndex !== -1) {
+          // Remove user
+          return prev.filter((_: any, index: any) => index !== existingIndex);
+        }
+        // Add user
+        return [...prev, row];
+      });
+    }
+  }, []);
+
+  const toggleAll = useCallback(() => {
+    setSelectedUsers((prev) =>
+      prev.length === table.getRowModel().rows.length
+        ? []
+        : table.getRowModel().rows.map((row) => row.original)
+    );
+    if (setSelectedFromTable) {
+      setSelectedFromTable((prev: any) =>
+        prev.length === table.getRowModel().rows.length
+          ? []
+          : table.getRowModel().rows.map((row) => row.original)
       );
     }
-  };
-
+  }, [table]);
   return (
     <div>
       <div className="flex items-center justify-between gap-6 flex-wrap ">
@@ -130,7 +150,7 @@ export function DataTable<TData extends { id: any }, TValue>({
               <p>Card View</p>
             </Link>
           )}
-          {selectedUsers.size > 0 ? (
+          {selectedUsers.length > 0 ? (
             <>
               <div className={`flex items-center gap-3 flex-wrap mb-5`}>
                 {functionSelect ? (
@@ -208,8 +228,10 @@ export function DataTable<TData extends { id: any }, TValue>({
                       input: "bg-transparent",
                     }}
                     size="xs"
-                    checked={selectedUsers.has(row.original?.id)}
-                    onChange={() => toggleUser(row.original?.id)}
+                    checked={selectedUsers.some(
+                      (user) => user.id === row.original.id
+                    )}
+                    onChange={() => toggleUser(row.original)}
                   />
                 </div>
                 <Component dataCard={row.original as TData} />
@@ -233,11 +255,11 @@ export function DataTable<TData extends { id: any }, TValue>({
                       input: "bg-transparent",
                     }}
                     checked={
-                      selectedUsers.size === table.getRowModel().rows.length
+                      selectedUsers.length === table.getRowModel().rows.length
                     }
                     indeterminate={
-                      selectedUsers.size > 0 &&
-                      selectedUsers.size < table.getRowModel().rows.length
+                      selectedUsers.length > 0 &&
+                      selectedUsers.length < table.getRowModel().rows.length
                     }
                     onChange={toggleAll}
                   />
@@ -273,8 +295,10 @@ export function DataTable<TData extends { id: any }, TValue>({
                         input: "bg-transparent",
                       }}
                       size="xs"
-                      checked={selectedUsers.has(row.original?.id)}
-                      onChange={() => toggleUser(row.original?.id)}
+                      checked={selectedUsers.some(
+                        (user) => user.id === row.original.id
+                      )}
+                      onChange={() => toggleUser(row.original)}
                     />
                   </Table.Td>
                   {row.getVisibleCells().map((cell, i) => (

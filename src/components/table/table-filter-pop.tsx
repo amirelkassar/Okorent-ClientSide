@@ -21,13 +21,14 @@ function TableFilterPop({ data }: TableFilterProps) {
   const handleClose = () => {
     setOpened(false); // Close the Popover
   };
-  const ToggleFilterLink = (newFilterLabel: string) => {
+  const ToggleFilterLink = (newFilterLabel: string, searchBy = "filter") => {
     // Remove filter if the same, otherwise apply the new filter
-    if (searchParams.get("filter") === newFilterLabel) {
+    if (searchParams.get(searchBy) === newFilterLabel) {
       return path;
     }
-    return `${path}?filter=${newFilterLabel}`;
+    return `${path}?${searchBy}=${newFilterLabel}`;
   };
+
   return (
     <Popover
       width={180}
@@ -51,14 +52,19 @@ function TableFilterPop({ data }: TableFilterProps) {
           {data.map((item: any, index: number) => {
             return (
               <Link
-                href={ToggleFilterLink(item.label.replace(" ", "_"))}
+                href={ToggleFilterLink(
+                  item.value?.toString().replace(" ", "_") ||
+                  item.label.replace(" ", "_"),
+                  item.key || "filter"
+                )}
                 onClick={() => {
                   handleClose();
                 }}
                 key={index}
                 className={cn(
                   " cursor-pointer duration-300 hover:shadow-md hover:bg-green/15 px-2 py-2 rounded-xl h-8 place-content-center  text-sm ",
-                  searchParams.get("filter") === item.label.replace(" ", "_")
+                  searchParams.get(item.key || "filter") === (item.value?.toString().replace(" ", "_") ||
+                    item.label.replace(" ", "_"))
                     ? "bg-green/25  hover:!bg-green/25"
                     : ""
                 )}

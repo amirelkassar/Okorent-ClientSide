@@ -8,7 +8,7 @@ import { cn } from "../lib/utils";
 
 interface SwitchControlProps
   extends Omit<SegmentedControlProps, "classNames" | "styles" | "data"> {
-  options: { label: string; value: string }[];
+  options: { label: string|any; value: string }[];
   color?: string;
   rootClassName?: string;
   optionClassName?: string;

@@ -61,7 +61,9 @@ function ProductClient() {
           <span className="w-[1px] h-[36px] block bg-[#B6BFC6]"></span>
           <Button
             onClick={open}
-            className={"h-[34px] w-[90px] text-sm lg:text-base font-Regular px-5 mdl:px-7 "}
+            className={
+              "h-[34px] w-[90px] text-sm lg:text-base font-Regular px-5 mdl:px-7 "
+            }
           >
             View{" "}
           </Button>
@@ -105,12 +107,16 @@ function ProductClient() {
                     <h4 className="text-grayMedium text-center min-w-[66px] text-[10px] mdl:text-[12px]">
                       Payment
                     </h4>
-                    <p className=" text-[12px] mdl:text-[14px] text-center">100$</p>
+                    <p className=" text-[12px] mdl:text-[14px] text-center">
+                      100$
+                    </p>
                   </div>
                   <span className="w-[1px] h-[36px] block bg-[#B6BFC6]"></span>
                   <Button
                     onClick={open}
-                    className={"h-[34px] w-[90px] text-sm lg:text-base font-Regular px-5 mdl:px-7 "}
+                    className={
+                      "h-[34px] w-[90px] text-sm lg:text-base font-Regular px-5 mdl:px-7 "
+                    }
                   >
                     View{" "}
                   </Button>
@@ -135,7 +141,7 @@ function ProductClient() {
         }}
         centered
       >
-        <CardRequest data={RequestsData[0]} dataByModal={true} />
+        <CardRequest data={RequestsData[0]} />
       </Modal>
     </div>
   );

@@ -13,18 +13,28 @@ import Style from "ol/style/Style";
 import { Circle as CircleStyle, Fill, Stroke } from "ol/style";
 import Overlay from "ol/Overlay";
 
-const MapComponent = () => {
+const MapComponent = ({ stocks }: { stocks: any[] }) => {
+  console.log(stocks);
+  
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<Map | null>(null); // Allow Map or null
- // Points data
- const points = [
-  { lat: 24.9262, lon: 67.0226, label: "Vianden" },
-  { lat: 24.9435, lon: 67.0822, label: "Remich" },
-  { lat: 24.93, lon: 67.05, label: "Berdorf" },
-];
+  // Points data
+  const transformedData = stocks?.map((item: any) => ({
+    lat: item.location.latitude,
+    lon: item.location.longitude,
+    label: item.name,
+  }));
+
+  const points =
+    transformedData?.length > 0
+      ? transformedData
+      : [
+          { lat: 24.9262, lon: 67.0226, label: "Vianden" },
+          { lat: 24.9435, lon: 67.0822, label: "Remich" },
+        ];
   useEffect(() => {
     if (!mapContainerRef.current) return;
-   
+
     // Initialize the map
     const map = new Map({
       target: mapContainerRef.current,
@@ -60,7 +70,7 @@ const MapComponent = () => {
       // Create an overlay for the label
       const labelElement = document.createElement("div");
       labelElement.className = "map-label";
-      labelElement.innerHTML = `<span>${point.label}</span>`;
+      labelElement.innerHTML = `<span className="text-wrap ">${point.label}</span>`;
 
       const overlay = new Overlay({
         position: coordinate,
@@ -96,13 +106,18 @@ const MapComponent = () => {
 
   return (
     <div>
-      <div ref={mapContainerRef} className="w-full h-[366px] rounded-2xl mb-8 overflow-hidden"></div>
+      <div
+        ref={mapContainerRef}
+        className="w-full h-[366px] rounded-2xl mb-8 overflow-hidden"
+      ></div>
       <div className="flex items-center gap-1 flex-wrap">
-       {
-          points.map((point,i) => {
-            return <p key={i} className="text-base lg:text-xl">{point.label},</p>
-          })
-       }
+        {points.map((point, i) => {
+          return (
+            <p key={i} className="text-base lg:text-xl">
+              {point.label},
+            </p>
+          );
+        })}
       </div>
     </div>
   );

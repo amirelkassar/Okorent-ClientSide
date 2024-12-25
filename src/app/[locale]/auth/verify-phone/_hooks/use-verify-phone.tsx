@@ -4,8 +4,7 @@ import ROUTES from "@/src/routes";
 import { useReSendOTP, useVerifyPhoneMutation } from "@/src/hooks/queries/auth";
 import { useRouter } from "@/src/navigation";
 import { Toast } from "@/src/components/toast";
-import { useToken } from "@/src/hooks/use-token";
-import { authDecodedToken } from "@/token";
+import { useUserStore } from "@/src/store/sign-up-store";
 
 // Define the type for the form data
 interface FormDataProps {
@@ -37,8 +36,7 @@ export const useVerifyPhone = (): VerifyPhoneReturn => {
     otp: "",
     phoneNumber: null,
   });
-  const { setToken } = useToken();
-
+  const { user ,setUser } = useUserStore();
   const {
     mutateAsync: VerifyPhone,
     error,
@@ -63,9 +61,9 @@ export const useVerifyPhone = (): VerifyPhoneReturn => {
   const onSubmit = useCallback(async () => {
     Toast.Promise(VerifyPhone(formData), {
       success: "OTP sent successfully",
-      onSuccess: async (res) => {
+      onSuccess: (res) => {
         console.log(res);
-        setToken(await authDecodedToken());
+        setUser({ user, token: res });
         router.replace(ROUTES.AUTH.MAKE_HOME);
       },
       onError: (error) => {

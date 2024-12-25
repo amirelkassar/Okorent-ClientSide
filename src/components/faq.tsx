@@ -11,51 +11,6 @@ type ProcessItem = {
   details: SubItem[];
 };
 
-const processItems: ProcessItem[] = [
-  {
-    id: 1,
-    title: "What is the Process",
-    details: [
-      {
-        title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-      },
-      {
-        title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-    details: [
-      {
-        title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-      },
-      {
-        title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-      },
-    ],
-  },
-  {
-    id: 3,
-    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit2",
-    details: [
-      {
-        title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-      },
-    ],
-  },
-];
 
 function FAQ({ dataFAQ = [] }: { dataFAQ?: ProcessItem[] }) {
   const items = dataFAQ.map((item: any, i: number) => (

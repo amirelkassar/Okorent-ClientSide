@@ -13,18 +13,21 @@ interface CardViewProps {
   title: string;
   first?: boolean;
   haveRentSwitch?: boolean;
-  filterBy: "completed" | "decline" | "upcoming" | "ongoing";
+  products?: any[];
+  status: number|any;
 }
 function CardView({
   title,
   first = false,
   haveRentSwitch = false,
-  filterBy,
+  products = [],
+  status
 }: CardViewProps) {
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
 
   const handleSwiper = (swiper: any) => {
+
     if (prevRef.current && nextRef.current) {
       swiper.params.navigation.prevEl = prevRef.current;
       swiper.params.navigation.nextEl = nextRef.current;
@@ -32,6 +35,9 @@ function CardView({
       swiper.navigation.update();
     }
   };
+  if (products.length === 0) {
+    return null;
+  }
   return (
     <div className="swiperList pt-4 lg:pt-14 pb-3 lg:pb-16 lg:border-t border-black first-of-type:border-none first-of-type:pt-0">
       <div className="flex lg:items-center flex-col-reverse lg:flex-row lg:gap-4 gap-8  justify-between mb-6">
@@ -53,7 +59,7 @@ function CardView({
           </div>
         )}
         <Link
-          href={ROUTES.USER.BOOKINGSID(title.split(" ").join("-"))}
+          href={ROUTES.USER.BOOKINGSID(status)+'?typeUser=IRent&statusTitle='+title.split(" ").join("-")}
           className={` underline text-sm lg:text-lg min-w-fit ${
             first
               ? "order-first w-full lg:w-fit lg:order-none -mt-5 lg:mt-0  text-end"
@@ -93,21 +99,13 @@ function CardView({
               },
             }}
           >
-            <SwiperSlide>
-              <OneCardView />
-            </SwiperSlide>
-            <SwiperSlide>
-              <OneCardView />
-            </SwiperSlide>
-            <SwiperSlide>
-              <OneCardView />
-            </SwiperSlide>
-            <SwiperSlide>
-              <OneCardView />
-            </SwiperSlide>
-            <SwiperSlide>
-              <OneCardView />
-            </SwiperSlide>
+            {products?.map((item:any,i:number) => {
+              return (
+                <SwiperSlide key={i}>
+                  <OneCardView product={item} status={status} />
+                </SwiperSlide>
+              );
+            })}
           </Swiper>
         </div>
         <div className="xl:flex hidden gap-3  absolute top-1/2 -translate-y-1/2 -right-10">

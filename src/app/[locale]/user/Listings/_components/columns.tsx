@@ -1,11 +1,10 @@
 "use client";
 import { ColumnDef } from "@tanstack/react-table";
-import Image from "next/image";
-import phoneImg from "@/src/assets/images/phone.png";
 import CardStatus from "@/src/components/cardStatus";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import ActionMenu from "./action-menu";
+import ImgProduct from "@/src/components/img-product";
 
 export type RequestsTableData = {
   id: number;
@@ -15,6 +14,7 @@ export type RequestsTableData = {
   inStock: number;
   rentedQuantity: number;
   dailyPrice: number;
+  heroImage:string
 };
 
 export const columns: ColumnDef<RequestsTableData>[] = [
@@ -24,23 +24,14 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     cell: ({ getValue, row }) => {
       const name = getValue<string>();
       const id = row.original.id;
+      const image = row.original.heroImage;
       return (
         <Link
           href={ROUTES.USER.LISTINGSDETAILS(id)}
           className="flex items-center gap-2 w-fit"
         >
-          <div className="size-[50px] rounded-[50%] p-[6px] bg-grayBack flex justify-center items-center">
-            <Image
-              src={phoneImg}
-              alt={name}
-              width={50}
-              height={50}
-              className="w-auto h-full  object-contain "
-            />
-          </div>
-          <h2 className="text-[16px] font-SemiBold max-w-[220px] truncate">
-            {name}
-          </h2>
+          <ImgProduct productName={name} src={image}/>
+         
         </Link>
       );
     },
@@ -101,9 +92,10 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     id: "actions",
     cell: ({ row }) => {
       const id = row.original.id;
+      const status = row.original.isActive
       return (
         <div className="flex items-center gap-3 w-fit">
-          <ActionMenu id={id} />
+          <ActionMenu id={id} status={status} />
         </div>
       );
     },

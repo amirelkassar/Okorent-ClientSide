@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import homeImg from "@/src/assets/images/house1.png";
+import placCardProductImg from "@/src/assets/images/placCardProduct.png";
 import LinkGreen from "@/src/components/linkGreen";
 import ROUTES from "@/src/routes";
 import Button from "@/src/components/button";
@@ -11,8 +11,10 @@ function OneCardView({ data, offline }: { data: any; offline: boolean }) {
       <Image
         alt="home"
         priority
-        src={homeImg}
-        className="w-full rounded-xl h-40 object-cover object-top"
+        height={160}
+        width={365}
+        src={data?.heroImage||placCardProductImg}
+        className="w-full rounded-xl h-40 object-cover bg-blueLight object-center"
       />
       <div className="flex items-end justify-between lg:gap-3 gap-2 mt-5">
         <div>

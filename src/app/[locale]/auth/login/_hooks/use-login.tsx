@@ -62,11 +62,12 @@ export const useLogin = (): SignUpReturn => {
 
   const onSubmit = useCallback(async () => {
     Toast.Promise(Login(formData), {
-      success: "successfully logged in",
+      loading: "Logging in... " ,
+      success: "Successfully logged ",
+      error: "Login failed ",
       onSuccess: async (res) => {
         console.log(res);
-        //setToken(await authDecodedToken());
-        const userRole = await decodedToken(res?.data).then((res2) => {
+        const userRole = await decodedToken(res.data.token).then((res2) => {
           return res2?.userRole;
         });
         console.log(userRole);
@@ -75,6 +76,9 @@ export const useLogin = (): SignUpReturn => {
         } else {
           router.replace(ROUTES.USER.HOMEPAGE);
         }
+      },
+      onError: (err) => {
+        console.error("Login error:", err);
       },
     });
   }, [Login, formData, router]);

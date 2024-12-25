@@ -10,14 +10,18 @@ import FeaturesProduct from "./FeaturesProduct";
 import ProductClient from "./productClient";
 import ShowMore from "@/src/components/showMore";
 import ChooseAddressType from "./choose-address-type";
-import { useCreateOrder } from "@/src/hooks/create-order";
-import Button from "../button";
 import { useParams, useSearchParams } from "next/navigation";
 import ViewCheckout from "./checkout/view-checkout";
 import LinkGreen from "../linkGreen";
 import ROUTES from "@/src/routes";
 
-function CardProduct({ data = [] }: { data?: any }) {
+function CardProduct({
+  data = [],
+  guest = false,
+}: {
+  data?: any;
+  guest?: boolean;
+}) {
   const params = useParams();
   const searchparams = useSearchParams();
   const [daysNumber, setDaysNumber] = useState(0);
@@ -44,7 +48,7 @@ function CardProduct({ data = [] }: { data?: any }) {
     () => PriceBYDays * daysNumber - 50.82,
     [PriceBYDays, daysNumber]
   );
-console.log(location);
+  console.log(location);
 
   const formData = {
     orderItems: [
@@ -69,7 +73,6 @@ console.log(location);
     paymentAmount: TotalPriceOrder,
     handler: "4444",
     paymentAction: 1,
-    customerId: "",
     isQuotation: true,
     ...(valueAddressType === "store" && {
       stockId: location,
@@ -87,17 +90,17 @@ console.log(location);
   }
   return (
     <div className=" mb-section">
-      <ImagesProduct />
+      <ImagesProduct dataImages={data?.images||[]} />
       <div className=" w-full  border-b border-grayMedium/40 pb-6">
-        <div className="flex w-full items-center  justify-between gap-3 mb-7 mt-section ">
-          <h2 className="text-2xl lg:text-[32px] font-SemiBold ">
+        <div className="flex w-full items-center  justify-between gap-3 mb-7 mt-5 md:mt-section ">
+          <h2 className="text-lg lg:text-[32px] font-SemiBold ">
             {data.name || "Hbada E3 Air Ergonomic Office Chair"}
           </h2>
-          <div className="flex items-center gap-5">
-            <button className=" size-[46px] lg:size-[60px] rounded-full bg-grayBack flex items-center justify-center p-3 duration-300 hover:shadow-md">
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-5">
+            <button className=" size-9 md:size-11 lg:size-[60px] rounded-full bg-grayBack flex items-center justify-center p-2 md:p-3 duration-300 hover:shadow-md">
               <ShareIcon />
             </button>
-            <button className=" size-[46px] lg:size-[60px] rounded-full bg-grayBack flex items-center justify-center p-3 duration-300 hover:shadow-md">
+            <button className=" size-9 md:size-11 lg:size-[60px] rounded-full bg-grayBack flex items-center justify-center p-2 md:p-3 duration-300 hover:shadow-md">
               <FavRedIcon />
             </button>
           </div>
@@ -106,7 +109,7 @@ console.log(location);
         <FeaturesProduct />
       </div>
 
-      <div className="flex mt-section items-start justify-between flex-col lg:flex-row gap-11">
+      <div className="flex mt-5 md:mt-section items-start justify-between flex-col lg:flex-row gap-11">
         <div className="lg:max-w-[650px] w-full flex-1">
           <div>
             <h3 className="text-base font-SemiBold mb-1 lg:mb-2 lg:text-xl">
@@ -128,7 +131,7 @@ console.log(location);
         </div>
 
         <div className="flex-1 flex flex-col gap-8 lg:max-w-[620px] w-full">
-          <ProductClient />
+          <ProductClient clientID={data?.createdBy} />
           <PriceDetails
             daysNumber={daysNumber}
             TotalPriceOrder={TotalPriceOrder}
@@ -136,12 +139,12 @@ console.log(location);
           >
             <div className="flex items-center px-5 justify-between gap-4 pb-4 flex-wrap mt-5">
               <LinkGreen
-                href={ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID)}
+                href={guest?ROUTES.AUTH.LOGIN:ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID)}
                 className={`w-full  ${
-                  valueAddressType && TotalPriceOrder&&location
+                  valueAddressType && TotalPriceOrder && location 
                     ? "opacity-100"
-                    : "opacity-50 pointer-events-none"
-                } duration-300  `}
+                    :guest? "opacity-100" :"opacity-50 pointer-events-none"
+                 }  duration-300  `}
               >
                 Request this item
               </LinkGreen>

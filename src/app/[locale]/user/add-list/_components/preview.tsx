@@ -13,7 +13,7 @@ function Preview() {
           How to receive this item
         </h2>
 
-        <MapComponent />
+        <MapComponent stocks={[]} />
         <p className="text-sm lg:text-base text-grayMedium font-Regular mt-5">
           This item is available for in-store pickup. Request it from the lessor
           and select your preferred pickup location. Once the lessor approves,

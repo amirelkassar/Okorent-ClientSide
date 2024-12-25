@@ -9,6 +9,7 @@ import DeleteIcon from "../assets/icons/delete";
 import { Link, usePathname } from "../navigation";
 import ROUTES from "../routes";
 import FavRedIcon from "../assets/icons/favRed";
+import FavoriteProduct from "./favorite-product";
 
 interface CardRentalsProps {
   data: any;
@@ -30,11 +31,7 @@ function CardRentals({ data, Fav = false, edit = false }: CardRentalsProps) {
             property="10000000"
             className="w-full h-[124px] md:h-[160px] object-cover object-center rounded-[18px]"
           />
-          {Fav && (
-            <button className="p-[5px] md:p-2 rounded-lg bg-grayBack size-6 md:size-8 flex items-center justify-center absolute bottom-3 end-2 z-[2]">
-              {data?.favorite ? <FavRedIcon /> : <FavIcon />}
-            </button>
-          )}
+          {Fav && <FavoriteProduct id={data?.id} favorite={data?.favorite||false} />}
         </div>
         <Link
           href={
