@@ -167,3 +167,21 @@ export const useRefundOrderMutation = () => {
     },
   });
 };
+
+//Refund Product iRent Out
+export const useRefundOrderOutMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.post(user.order.refund_iRent_out,data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKeyOut]);
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};

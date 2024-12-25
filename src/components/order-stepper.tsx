@@ -24,11 +24,9 @@ export default function OrderStepper({
       ? 1
       : active === 4
       ? 2
-      : active === 6
+      : (active === 6 || active === 11 || active === 12)
       ? 3
-      : active === 10
-      ? 4
-      : active === 11
+      : active === 10 || active === 7
       ? 4
       : 0;
   const STEPS_DATA = [

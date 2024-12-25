@@ -40,7 +40,8 @@ export const user = {
     order_tracker: (id: any) => `/OrderTracker/${id}`,
     cancel_iRent: `/OrderRequest/Cancel Order Request`,
     cancel_iRent_out: `/OrderRequest/Cancel Order Response`,
-    refund_iRent: `/OrderRequest/Refund Order Response`,
+    refund_iRent: `/OrderRequest/Refund Order Request`,
+    refund_iRent_out: `/OrderRequest/Refund Order Response`,
     reject_iRent: `/OrderRequest/Reject Order`,
   },
   user: {
