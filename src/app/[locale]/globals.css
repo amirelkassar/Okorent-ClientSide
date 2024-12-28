@@ -117,7 +117,13 @@ p {
 .swiperList .swiper-button-disabled {
   @apply opacity-70 cursor-not-allowed;
 }
-
+.swiperListBooking:not(:first-of-type) .linkView {
+  display: none;
+  
+}
+.swiperListBooking:first-of-type .headBooking {
+  @apply  lg:items-center;
+}
 .inputChat {
   display: flex;
   justify-content: space-between;
@@ -321,4 +327,3 @@ li.search::before {
 .Toastify__toast-icon {
   margin-right: 12px;
 }
-

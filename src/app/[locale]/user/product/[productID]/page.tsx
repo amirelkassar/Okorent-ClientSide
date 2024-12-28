@@ -1,7 +1,6 @@
 "use client";
 import CardRentals from "@/src/components/cardRentals";
 import FAQ from "@/src/components/faq";
-import Loading from "@/src/components/loading";
 import MapComponent from "@/src/components/map";
 import CardProduct from "@/src/components/product/cardProduct";
 import Description from "@/src/components/product/description";

@@ -1,3 +1,4 @@
+'use client';
 import Button from "@/src/components/button";
 import CardRentals from "@/src/components/cardRentals";
 import { StaticImageData } from "next/image";

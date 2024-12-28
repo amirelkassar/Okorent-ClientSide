@@ -11,7 +11,7 @@ function ErrorView({
   children,
 }: ErrorViewProps) {
   return (
-    <div className="my-section">
+    <div className="my-section py-4">
       <h2 className="text-xl text-center mx-auto mdl:text-3xl my-section">
         {title}
       </h2>

@@ -21,7 +21,7 @@ function CardFavView({ product }: { product?: any }) {
 
   const onSubmitRemoveFavoriteProduct = useCallback(async () => {
     Toast.Promise(DeleteFavoriteProduct(product?.id), {
-      success: "The product has been added to Favorites",
+      success: "The product has been Removed from Favorites",
       onError: async (res) => {
         close();
       },

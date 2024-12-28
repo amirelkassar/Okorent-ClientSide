@@ -38,7 +38,7 @@ export const useCreateListingMutation = () => {
   const queryClient = useQueryClient();
   return useMutation<void, any, Record<string, any>>({
     mutationFn: async (data: any) => {
-      const response = await api.post(user.addListing.base, getFormData(data), {
+      const response = await api.post(user.addListing.base, await getFormData(data), {
         headers: {
           Accept: "text/plain",
           "Content-Type": "multipart/form-data",
