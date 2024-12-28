@@ -57,8 +57,11 @@ function CardViewReq({
       swiper.navigation.update();
     }
   };
+  if (products?.length === 0) {
+    return null;
+  }
   return (
-    <div className="swiperList pt-4 lg:pt-14 pb-5 lg:pb-16 lg:border-t border-black first-of-type:border-none first-of-type:pt-0">
+    <div className="swiperList pt-4 lg:pt-10 pb-5 lg:pb-10 lg:border-t border-black first-of-type:border-none first-of-type:pt-0">
       <div
         className={`flex  justify-start md:justify-between mb-2 lg:mb-6 gap-7  ${
           first

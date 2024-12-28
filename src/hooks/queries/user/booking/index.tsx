@@ -55,6 +55,7 @@ export const ChangeStautsByID = (id: any) => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKeyOut]);
+      queryClient.invalidateQueries([initialQueryKey]);
       console.log(res);
     },
     onError: (res) => {

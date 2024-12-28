@@ -6,6 +6,7 @@ import StarIcon from "@/src/assets/icons/star";
 import VerifyBlackIcon from "@/src/assets/icons/verifyBlack";
 import { getDate } from "../lib/utils";
 import BottomCardRentOut from "../app/[locale]/user/Bookings/_components/bottom-card-rent-out";
+import { useChangeStatusRentOut } from "../app/[locale]/user/Bookings/_hooks/use-change-status-rentOut";
 interface RequestData {
   id: number;
   renterName: string;
@@ -39,18 +40,26 @@ interface CardRequestProps {
 }
 
 function CardRequest({ data, status = 1 }: CardRequestProps) {
+  const {
+    onSubmitDelete,
+    onSubmitChangeStatus,
+    onSubmitReject,
+    onSubmitCancel,
+    onSubmitRefundNo,
+    onSubmitRefundYes,
+  } = useChangeStatusRentOut(data.id);
+
   if (!data) {
     return <p>No data available</p>; // Handle missing data case
   }
   const FirstLessorName = data?.renterName?.split(" ")[0];
-
   return (
     <div className="bg-white pt-8 lgl:pt-10 pb-6 px-3 lgl:px-9 max-w-[670px]  rounded-3xl border border-green">
       <div className=" flex items-start gap-3 lgl:gap-6 w-full pb-5 lg:pb-7 border-b border-black/20">
         <div className="flex flex-col gap-2 justify-center ">
           <Image
             alt="user"
-            src={ imageUser||data?.heroImage}
+            src={imageUser || data?.heroImage}
             className=" lgl:size-[104px] size-[70x] lgl:min-w-[104px] min-w-[70px] rounded-[50%] object-cover object-top"
             priority
           />
@@ -168,16 +177,13 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
             <BottomCardRentOut.Accept
               style="w-full min-w-full"
               id={data?.id || "undefined"}
-              onClick={() => console.log("Reorder clicked")}
+              onClick={() => onSubmitChangeStatus()}
             />
             <BottomCardRentOut.Reject
               id={data?.id || "undefined"}
-              onClick={() => console.log("Reorder clicked")}
+              onClick={() => onSubmitReject()}
             />
-            <BottomCardRentOut.ViewDetailsLink
-              id={data?.id || "undefined"}
-              onClick={() => console.log("Reorder clicked")}
-            />
+            <BottomCardRentOut.ViewDetailsLink id={data?.id || "undefined"} />
           </>
         )}
         {status === 3 && (
@@ -185,7 +191,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
             <BottomCardRentOut.OutForDelivery
               style="w-full min-w-full"
               id={data?.id || "undefined"}
-              onClick={() => console.log("Reorder clicked")}
+              onClick={() => onSubmitChangeStatus()}
             />
             <BottomCardRentOut.MessageLink
               id={data?.id || "undefined"}
@@ -193,7 +199,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
             />
             <BottomCardRentOut.CancelBookings
               id={data?.id || "undefined"}
-              onClick={() => console.log("Reorder clicked")}
+              onClick={() => onSubmitCancel()}
             />
           </>
         )}
@@ -211,7 +217,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
             <BottomCardRentOut.OutForReturn
               style="w-full min-w-full"
               id={data?.id || "undefined"}
-              onClick={() => console.log("Reorder clicked")}
+              onClick={() => onSubmitChangeStatus()}
             />
             <BottomCardRentOut.MessageLink
               id={data?.id || "undefined"}
@@ -227,8 +233,8 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
               name={FirstLessorName || "User"}
             />
             <BottomCardRentOut.MarkAsCompleted
-              onClick={() => console.log("Reorder clicked")}
               id={data?.id || "undefined"}
+              onClick={() => onSubmitChangeStatus()}
             />
           </>
         )}
@@ -239,7 +245,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
               name={FirstLessorName || "User"}
             />
             <BottomCardRentOut.Delete
-              onClick={() => console.log("Reorder clicked")}
+              onClick={() => onSubmitDelete()}
               id={data?.id || "undefined"}
             />
           </>
@@ -249,7 +255,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
             <BottomCardRentOut.Approve
               style="w-full min-w-full"
               id={data?.id || "undefined"}
-              onClick={() => console.log("Reorder clicked")}
+              onClick={() => onSubmitRefundYes()}
             />
             <BottomCardRentOut.MessageLink
               id={data?.id || "undefined"}
@@ -257,7 +263,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
             />
             <BottomCardRentOut.RejectReturn
               id={data?.id || "undefined"}
-              onClick={() => console.log("Reorder clicked")}
+              onClick={() => onSubmitRefundNo()}
             />
           </>
         )}

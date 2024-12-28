@@ -30,7 +30,7 @@ export const columns: ColumnDef<RequestsTableData>[] = [
           href={ROUTES.USER.LISTINGSDETAILS(id)}
           className="flex items-center gap-2 w-fit"
         >
-          <ImgProduct productName={name} src={image}/>
+          <ImgProduct productName={name} src={''}/>
          
         </Link>
       );

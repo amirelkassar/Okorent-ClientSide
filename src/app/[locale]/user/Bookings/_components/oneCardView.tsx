@@ -4,9 +4,13 @@ import homeImg from "@/src/assets/images/house1.png";
 import userImg from "@/src/assets/images/avatar.png";
 import { getDate } from "@/src/lib/utils";
 import BottomCardRent from "./bottom-card-rent";
+import { useChangeStatusRent } from "../_hooks/use-change-status-rent";
 
 function OneCardView({ product, status }: { product?: any; status: any }) {
   const FirstLessorName = product?.lessorName?.split(" ")[0];
+  const {
+    onSubmitChangeStatus,
+  } = useChangeStatusRent(product?.id);
   return (
     <div className="bg-white border border-green/50 rounded-3xl px-3 lg:px-5 py-3 lg:py-4 max-w-[400px] mb-3 w-full mdl:min-w-[320px] shadow-sidebar relative">
       {/* <div className="flex items-center justify-center gap-2 bg-[#FF0E0E] rounded-xl absolute top-5 lg:top-7 start-6 p-2  lg:p-3">
@@ -82,6 +86,7 @@ function OneCardView({ product, status }: { product?: any; status: any }) {
         {status === 4 && (
           <>
             <BottomCardRent.ScanForReceiving
+              onClick={onSubmitChangeStatus}
               id={product?.id || "undefined"}
               style="w-full min-w-full"
             />
@@ -93,7 +98,7 @@ function OneCardView({ product, status }: { product?: any; status: any }) {
             />
           </>
         )}
-         {status === 7 && (
+        {status === 7 && (
           <>
             <BottomCardRent.Review
               id={product?.id || "undefined"}
