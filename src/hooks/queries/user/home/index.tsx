@@ -54,7 +54,9 @@ export const useDeleteFavoriteProductMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (id: any) => {
-      const response = await api.delete(user.product.DeleteFavoriteProducts(id));
+      const response = await api.delete(
+        user.product.DeleteFavoriteProducts(id)
+      );
       return response.data;
     },
     onSuccess: (res) => {
@@ -63,6 +65,17 @@ export const useDeleteFavoriteProductMutation = () => {
     },
     onError: (res) => {
       console.log(res);
+    },
+  });
+};
+
+//getAllProductsFavorite
+export const GetProductsFavoriteAll = (queries?: any) => {
+  return useQuery({
+    queryKey: [initialQueryKeyUser, queries], // إضافة queries إلى queryKey
+    queryFn: async () => {
+      const response = await api.get(`${user.product.base(queries)}`);
+      return response.data;
     },
   });
 };

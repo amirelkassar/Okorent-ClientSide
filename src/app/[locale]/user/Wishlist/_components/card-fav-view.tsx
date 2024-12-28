@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useCallback } from "react";
 import iphone from "@/src/assets/images/iphone.png";
 import userImg from "@/src/assets/images/avatar.png";
 import Button from "@/src/components/button";
@@ -11,9 +11,27 @@ import FavRedIcon from "@/src/assets/icons/favRed";
 import { useDisclosure } from "@mantine/hooks";
 import ModalComp from "@/src/components/modal-comp";
 import ListRemove from "@/src/assets/icons/listRemove";
+import { useDeleteFavoriteProductMutation } from "@/src/hooks/queries/user/home";
+import { Toast } from "@/src/components/toast";
 
-function OneCardView() {
+function CardFavView({ product }: { product?: any }) {
   const [opened, { open, close }] = useDisclosure(false);
+  const { mutateAsync: DeleteFavoriteProduct } =
+    useDeleteFavoriteProductMutation();
+
+  const onSubmitRemoveFavoriteProduct = useCallback(async () => {
+    Toast.Promise(DeleteFavoriteProduct(product?.id), {
+      success: "The product has been added to Favorites",
+      onError: async (res) => {
+        close();
+      },
+      onSuccess: async (res) => {
+        close();
+      },
+    });
+  }, [DeleteFavoriteProduct, product?.id]);
+
+
   return (
     <>
       <div className="bg-white border border-green/50 rounded-3xl px-3 lg:px-5 py-3 lg:py-4 max-w-[400px] mb-3 w-full mdl:min-w-[320px] shadow-sidebar relative">
@@ -52,7 +70,9 @@ function OneCardView() {
             <h3 className="text-grayMedium mb-1 font-Regular text-sm lg:text-base">
               Product Name
             </h3>
-            <p className="text-sm lg:text-base font-SemiBold">Iphone 15 Pro</p>
+            <p className="text-sm lg:text-base font-SemiBold">
+              {product?.name || " product name"}
+            </p>
           </div>
           <span className=" block h-[34px] w-[1px] bg-green"></span>
           <div>
@@ -60,7 +80,7 @@ function OneCardView() {
               Starting Price
             </h3>
             <p className="text-sm lg:text-base text-center font-SemiBold">
-              100$
+              {product?.dailyPrice || " 0"} $
             </p>
           </div>
           <span className=" block h-[34px] w-[1px] bg-green"></span>
@@ -75,11 +95,10 @@ function OneCardView() {
           </div>
         </div>
         <div className="flex items-center gap-2 lg:gap-5 mt-8">
-          <Button className={"h-10 bg-grayBack flex-1 text-black border-none"}>
+          <LinkGreen href={ROUTES.USER.PRODUCTDETAILS(product?.id)} className={"h-10 bg-grayBack flex-1 text-black border-none"}>
             View Details
-          </Button>
+          </LinkGreen>
           <LinkGreen href={ROUTES.USER.INBOX} className={"h-10 flex-1"}>
-            {" "}
             Request This Item
           </LinkGreen>
         </div>
@@ -87,10 +106,10 @@ function OneCardView() {
       {opened && (
         <ModalComp title="" opened={opened} close={close}>
           <div className="mt-8">
-            <div  className="w-[200px] h-[200px] mb-2 block mx-auto">
-              <ListRemove/>
+            <div className="w-[200px] h-[200px] mb-2 block mx-auto">
+              <ListRemove />
             </div>
-            
+
             <h3 className="text-xl text-center mb-1 font-SemiBold">
               Want to remove?
             </h3>
@@ -99,12 +118,19 @@ function OneCardView() {
             </p>
             <div className="flex items-center gap-2 lg:gap-5 ">
               <Button
-              onClick={close}
-                className={"h-10  flex-1 font-Medium text-green bg-white border-2 hover:bg-green duration-300 hover:text-white"}
+                onClick={close}
+                className={
+                  "h-10  flex-1 font-Medium text-green bg-white border-2 hover:bg-green duration-300 hover:text-white"
+                }
               >
                 No
               </Button>
-              <Button className={"h-10 font-Medium flex-1"}>Yes</Button>
+              <Button
+                onClick={() => onSubmitRemoveFavoriteProduct()}
+                className={"h-10 font-Medium flex-1"}
+              >
+                Yes
+              </Button>
             </div>
           </div>
         </ModalComp>
@@ -113,4 +139,4 @@ function OneCardView() {
   );
 }
 
-export default OneCardView;
+export default CardFavView;
