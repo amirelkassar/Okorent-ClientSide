@@ -12,7 +12,7 @@ function NoDataIcon({ className = "", fill = "" }: IconProps) {
       xmlnsXlink="http://www.w3.org/1999/xlink"
       className={className}
     >
-      <g opacity="0.2" clip-path="url(#clip0_4508_513)">
+      <g opacity="0.2" clipPath="url(#clip0_4508_513)">
         <rect
           x="-0.0794678"
           y="245.888"
@@ -91,10 +91,10 @@ function NoDataIcon({ className = "", fill = "" }: IconProps) {
           y2="270.957"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.04" stop-color="#849DB9" />
-          <stop offset="0.32" stop-color="#9DB2CB" />
-          <stop offset="0.92" stop-color="#DCE9F9" />
-          <stop offset="1" stop-color="#E5F0FF" />
+          <stop offset="0.04" stopColor="#849DB9" />
+          <stop offset="0.32" stopColor="#9DB2CB" />
+          <stop offset="0.92" stopColor="#DCE9F9" />
+          <stop offset="1" stopColor="#E5F0FF" />
         </linearGradient>
         <radialGradient
           id="paint1_radial_4508_513"
@@ -104,13 +104,13 @@ function NoDataIcon({ className = "", fill = "" }: IconProps) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(161.091 233.23) scale(19.6894)"
         >
-          <stop stop-color="#EBEBEB" />
-          <stop offset="0.4" stop-color="#E9E9E9" />
-          <stop offset="0.59" stop-color="#E1E2E4" />
-          <stop offset="0.74" stop-color="#D4D5DA" />
-          <stop offset="0.86" stop-color="#C2C4CB" />
-          <stop offset="0.97" stop-color="#AAAEB9" />
-          <stop offset="1" stop-color="#A2A6B3" />
+          <stop stopColor="#EBEBEB" />
+          <stop offset="0.4" stopColor="#E9E9E9" />
+          <stop offset="0.59" stopColor="#E1E2E4" />
+          <stop offset="0.74" stopColor="#D4D5DA" />
+          <stop offset="0.86" stopColor="#C2C4CB" />
+          <stop offset="0.97" stopColor="#AAAEB9" />
+          <stop offset="1" stopColor="#A2A6B3" />
         </radialGradient>
         <linearGradient
           id="paint2_linear_4508_513"
@@ -120,8 +120,8 @@ function NoDataIcon({ className = "", fill = "" }: IconProps) {
           y2="238.297"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#242934" />
-          <stop offset="1" stop-color="#2F3440" />
+          <stop stopColor="#242934" />
+          <stop offset="1" stopColor="#2F3440" />
         </linearGradient>
         <radialGradient
           id="paint3_radial_4508_513"
@@ -131,13 +131,13 @@ function NoDataIcon({ className = "", fill = "" }: IconProps) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(110.523 233.23) scale(19.6894)"
         >
-          <stop stop-color="#EBEBEB" />
-          <stop offset="0.4" stop-color="#E9E9E9" />
-          <stop offset="0.59" stop-color="#E1E2E4" />
-          <stop offset="0.74" stop-color="#D4D5DA" />
-          <stop offset="0.86" stop-color="#C2C4CB" />
-          <stop offset="0.97" stop-color="#AAAEB9" />
-          <stop offset="1" stop-color="#A2A6B3" />
+          <stop stopColor="#EBEBEB" />
+          <stop offset="0.4" stopColor="#E9E9E9" />
+          <stop offset="0.59" stopColor="#E1E2E4" />
+          <stop offset="0.74" stopColor="#D4D5DA" />
+          <stop offset="0.86" stopColor="#C2C4CB" />
+          <stop offset="0.97" stopColor="#AAAEB9" />
+          <stop offset="1" stopColor="#A2A6B3" />
         </radialGradient>
         <linearGradient
           id="paint4_linear_4508_513"
@@ -147,8 +147,8 @@ function NoDataIcon({ className = "", fill = "" }: IconProps) {
           y2="240.291"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#242934" />
-          <stop offset="1" stop-color="#2F3440" />
+          <stop stopColor="#242934" />
+          <stop offset="1" stopColor="#2F3440" />
         </linearGradient>
         <linearGradient
           id="paint5_linear_4508_513"
@@ -158,11 +158,11 @@ function NoDataIcon({ className = "", fill = "" }: IconProps) {
           y2="88.6678"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#88BA52" />
-          <stop offset="0.16" stop-color="#98C663" />
-          <stop offset="0.5" stop-color="#B4DD81" />
-          <stop offset="0.79" stop-color="#C6EA93" />
-          <stop offset="1" stop-color="#CCEF9A" />
+          <stop stopColor="#88BA52" />
+          <stop offset="0.16" stopColor="#98C663" />
+          <stop offset="0.5" stopColor="#B4DD81" />
+          <stop offset="0.79" stopColor="#C6EA93" />
+          <stop offset="1" stopColor="#CCEF9A" />
         </linearGradient>
         <linearGradient
           id="paint6_linear_4508_513"
@@ -172,11 +172,11 @@ function NoDataIcon({ className = "", fill = "" }: IconProps) {
           y2="179.785"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#88BA52" />
-          <stop offset="0.16" stop-color="#98C663" />
-          <stop offset="0.5" stop-color="#B4DD81" />
-          <stop offset="0.79" stop-color="#C6EA93" />
-          <stop offset="1" stop-color="#CCEF9A" />
+          <stop stopColor="#88BA52" />
+          <stop offset="0.16" stopColor="#98C663" />
+          <stop offset="0.5" stopColor="#B4DD81" />
+          <stop offset="0.79" stopColor="#C6EA93" />
+          <stop offset="1" stopColor="#CCEF9A" />
         </linearGradient>
         <linearGradient
           id="paint7_linear_4508_513"
@@ -186,12 +186,12 @@ function NoDataIcon({ className = "", fill = "" }: IconProps) {
           y2="37.482"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#B5BAC7" />
-          <stop offset="0.02" stop-color="#B8BDC9" />
-          <stop offset="0.28" stop-color="#D7DAE1" />
-          <stop offset="0.54" stop-color="#EDEEF1" />
-          <stop offset="0.78" stop-color="#FAFBFC" />
-          <stop offset="1" stop-color="white" />
+          <stop stopColor="#B5BAC7" />
+          <stop offset="0.02" stopColor="#B8BDC9" />
+          <stop offset="0.28" stopColor="#D7DAE1" />
+          <stop offset="0.54" stopColor="#EDEEF1" />
+          <stop offset="0.78" stopColor="#FAFBFC" />
+          <stop offset="1" stopColor="white" />
         </linearGradient>
         <linearGradient
           id="paint8_linear_4508_513"
@@ -201,12 +201,12 @@ function NoDataIcon({ className = "", fill = "" }: IconProps) {
           y2="129.998"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#B5BAC7" />
-          <stop offset="0.14" stop-color="#CDD1D9" />
-          <stop offset="0.31" stop-color="#E3E5EA" />
-          <stop offset="0.49" stop-color="#F3F4F6" />
-          <stop offset="0.7" stop-color="#FCFCFD" />
-          <stop offset="1" stop-color="white" />
+          <stop stopColor="#B5BAC7" />
+          <stop offset="0.14" stopColor="#CDD1D9" />
+          <stop offset="0.31" stopColor="#E3E5EA" />
+          <stop offset="0.49" stopColor="#F3F4F6" />
+          <stop offset="0.7" stopColor="#FCFCFD" />
+          <stop offset="1" stopColor="white" />
         </linearGradient>
         <linearGradient
           id="paint9_linear_4508_513"
@@ -216,14 +216,14 @@ function NoDataIcon({ className = "", fill = "" }: IconProps) {
           y2="181.759"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#38A857" />
-          <stop offset="0.08" stop-color="#52B36D" />
-          <stop offset="0.25" stop-color="#86CA99" />
-          <stop offset="0.42" stop-color="#B1DDBD" />
-          <stop offset="0.58" stop-color="#D3ECDA" />
-          <stop offset="0.73" stop-color="#EBF6EE" />
-          <stop offset="0.88" stop-color="#FAFDFB" />
-          <stop offset="1" stop-color="white" />
+          <stop stopColor="#38A857" />
+          <stop offset="0.08" stopColor="#52B36D" />
+          <stop offset="0.25" stopColor="#86CA99" />
+          <stop offset="0.42" stopColor="#B1DDBD" />
+          <stop offset="0.58" stopColor="#D3ECDA" />
+          <stop offset="0.73" stopColor="#EBF6EE" />
+          <stop offset="0.88" stopColor="#FAFDFB" />
+          <stop offset="1" stopColor="white" />
         </linearGradient>
         <radialGradient
           id="paint10_radial_4508_513"
@@ -233,12 +233,12 @@ function NoDataIcon({ className = "", fill = "" }: IconProps) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(147.612 89.323) rotate(54.7276) scale(98.3818 2.73066)"
         >
-          <stop stop-color="#EBEBEB" />
-          <stop offset="0.09" stop-color="#E3E3E3" />
-          <stop offset="0.23" stop-color="#CBCBCB" />
-          <stop offset="0.41" stop-color="#A6A6A6" />
-          <stop offset="0.62" stop-color="#717171" />
-          <stop offset="0.85" stop-color="#2F2F2F" />
+          <stop stopColor="#EBEBEB" />
+          <stop offset="0.09" stopColor="#E3E3E3" />
+          <stop offset="0.23" stopColor="#CBCBCB" />
+          <stop offset="0.41" stopColor="#A6A6A6" />
+          <stop offset="0.62" stopColor="#717171" />
+          <stop offset="0.85" stopColor="#2F2F2F" />
           <stop offset="1" />
         </radialGradient>
         <clipPath id="clip0_4508_513">

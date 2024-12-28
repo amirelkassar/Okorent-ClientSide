@@ -59,7 +59,7 @@ export const useUpdateToOnlineMutation = () => {
     mutationFn: async (id: any) => {
       const response = await api.put(user.product.upDateToOnlineById(id), {
         productId: id,
-        AlwaysAvailable: true,
+        isAvailable: true,
       });
       return response.data;
     },
