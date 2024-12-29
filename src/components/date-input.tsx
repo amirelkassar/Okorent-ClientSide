@@ -22,6 +22,7 @@ const InputDate = <T extends "default" | "range" | "multiple">({
 }: InputDateProps<T>) => {
   return (
     <DatePickerInput
+      minDate={new Date()}
       {...props}
       label={label}
       placeholder={placeholder}

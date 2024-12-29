@@ -13,6 +13,7 @@ import ErrorMsg from "@/src/components/error-msg";
 import InputSubmit from "@/src/components/input-submit";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaSignUp } from "@/src/hooks/schema/auth-schema";
+import GetErrorMsg from "@/src/components/getErrorMsg";
 
 interface FormData {
   Name: string;
@@ -23,7 +24,7 @@ interface FormData {
 
 function SignupView() {
   const { form } = useSignUp();
-  const { onSubmit } = form;
+  const { onSubmit,error } = form;
 
   // استخدام useForm للتحقق من صحة البيانات باستخدام yup
   const {
@@ -40,6 +41,7 @@ function SignupView() {
     console.log("Form Submitted", data);
     onSubmit(data); // استدعاء دالة onSubmit من useSignUp
   };
+console.log(error);
 
   return (
     <div className="flex-1 content-center">
@@ -70,7 +72,7 @@ function SignupView() {
           id="Email"
           label="Email"
           placeholder="Write your email here"
-          error={errors.Email?.message}
+          error={errors.Email?.message||GetErrorMsg(error,'Email')}
         />
 
         {/* Password Input */}

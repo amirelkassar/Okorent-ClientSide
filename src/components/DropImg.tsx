@@ -142,9 +142,9 @@ const DropImg = memo(function DropImg({
           multiple
           className=" h-[100px] md:h-[146px] lg:h-[340px] border-green overflow-hidden border-solid border-2 rounded-2xl"
         >
-          <div className="h-full absolute w-full inset-0 flex justify-center items-center flex-col gap-3">
-            <UpLoadIcon className={"w-9 h-auto"} />
-            <h4 className="max-w-[200px] text-center mx-auto text-grayMedium leading-5 font-Regular">
+          <div className="h-full absolute w-full inset-0 flex justify-center items-center flex-col gap-2 mdl:gap-3">
+            <UpLoadIcon className={" w-5 mdl:w-9 h-auto"} />
+            <h4 className="max-w-[200px] text-center mx-auto text-xs mdl:text-base text-grayMedium leading-5 font-Regular">
               Drag and drop image here Or click to upload
             </h4>
           </div>

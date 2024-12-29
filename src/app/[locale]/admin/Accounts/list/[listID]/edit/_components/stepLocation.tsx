@@ -8,7 +8,6 @@ import { useDisclosure } from "@mantine/hooks";
 import LocationIcon from "@/src/assets/icons/location";
 import GoogleMapLoc from "@/src/components/GoogleMap";
 
-
 interface LocationProps {
   name: string;
   address: string;
@@ -92,20 +91,18 @@ function StepLocation({
       </div>
 
       {location.length < 3 && (
-        <div className="variations-header">
-          <Button
-            onClick={() => {
-              addLocation();
-              open();
-            }}
-            className={
-              "mt-8 bg-grayBack gap-3 px-7 h-[64px] border-none text-black"
-            }
-          >
-            <LocationIcon fill="#0F2A43" />
-            <p>Add location</p>
-          </Button>
-        </div>
+        <Button
+          onClick={() => {
+            addLocation();
+            open();
+          }}
+          className={
+            "mt-8 bg-grayBack gap-3 px-7 h-[64px] border-none text-black"
+          }
+        >
+          <LocationIcon fill="#0F2A43" />
+          <p>Add location</p>
+        </Button>
       )}
     </div>
   );

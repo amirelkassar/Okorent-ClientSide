@@ -57,7 +57,7 @@ function StepFAQ({ faqs, setFaqs, active, handleChangeFAQ }: StepFAQProps) {
 
         <Button
           className={
-            "mt-8 bg-grayBack gap-3 w-[196px] max-w-full px-7 h-[64px] border-none text-black"
+            "mt-8 bg-grayBack gap-3 w-[196px] max-w-full text-xs px-7 h-12 mdl:h-[64px] border-none text-black"
           }
           onClick={addQuestion}
         >

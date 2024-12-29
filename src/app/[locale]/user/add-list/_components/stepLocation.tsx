@@ -1,9 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import Step from "./step";
-import { Checkbox, MultiSelect, TextInput } from "@mantine/core";
+import { MultiSelect } from "@mantine/core";
 import Button from "@/src/components/button";
-import { cn } from "@/src/lib/utils";
 import ModalComp from "@/src/components/modal-comp";
 import { useDisclosure } from "@mantine/hooks";
 import LocationIcon from "@/src/assets/icons/location";
@@ -33,7 +32,10 @@ function StepLocation({
   const [indexSelect, setIndexSelect] = useState<any>(0);
   const { data } = GetMyStock();
   console.log(data);
-
+  console.log(location);
+  const handelValueWhenAddNewLocation = (newLocation: any) => {
+    handleInputChangeLocation([...location, newLocation]);
+  };
   return (
     <Step
       title="Where is the item storage location "
@@ -62,12 +64,12 @@ function StepLocation({
 
                 inputField:
                   "placeholder:text-xs md:placeholder:text-base max-w-full min-w-full  h-full placeholder:text-grayMedium placeholder:opacity-100   ",
-                pillsList: "h-full",
+                pillsList: "h-full min-w-full  ",
                 dropdown:
                   "bg-white text-black rounded-lg border border-green/50 text-grayDark py-2",
                 option:
-                  "hover:bg-green hover:text-white duration-300   flex items-center ",
-                pill: "bg-green text-white h-auto py-2 flex items-center rounded-lg gap-2 text-base",
+                  "hover:bg-green hover:text-white duration-300 px-2 py-2 mdl:py-3 mdl:rounded-xl    flex items-center text-sm mdl:text-base ",
+                pill: "bg-green text-white h-auto py-1 mdl:py-2 flex items-center rounded-lg gap-2 text-sm mdl:text-base",
                 label: "text-grayMedium",
               }}
               clearable
@@ -77,28 +79,11 @@ function StepLocation({
             {data?.data
               ?.filter((item: any) => location.includes(item.id))
               .map((loc: any, index: number) => (
-                <div key={index} className="flex items-center gap-3">
-                  <Checkbox
-                    checked={true}
-                    readOnly
-                    color="#88BA52"
-                    className={cn("mt-6")}
-                  />
-                  <div className="flex items-center flex-wrap lg:flex-nowrap flex-1 gap-4">
-                    <TextInput
-                      value={loc.name}
-                      name="name"
-                      label={"Location Name"}
-                      placeholder={`Location ${index + 1}`}
-                      readOnly
-                      classNames={{
-                        label: "text-sm md:text-[16px] text-grayMedium mb-2",
-                        input:
-                          " text-black text-[12px] md:text-[16px] rounded-xl md:rounded-2xl text-grayMedium  border-2 border-green h-12  md:h-[64px] placeholder:text-xs md:placeholder:text-base  placeholder:text-grayMedium placeholder:opacity-100 ",
-                        wrapper: "h-[64px]",
-                      }}
-                      className=" flex-1 md:min-w-[144px]  duration-200 md:min-h-[64px] bg-white rounded-2xl text-grayMedium"
-                    />
+                <div
+                  key={index}
+                  className="flex items-center  max-w-full  flex-1 gap-2 mdl:gap-4 justify-between"
+                >
+                  <div className="flex mdl:items-center max-w-[calc(100%-40px)] mdl:max-w-[calc(100%-80px)] flex-col mdl:flex-row flex-1 gap-2 mdl:gap-4">
                     <div
                       onClick={() => {
                         setIndexSelect(loc.id);
@@ -106,41 +91,59 @@ function StepLocation({
                       }}
                       className=" cursor-pointer flex-1 max-w-full min-w-[156px]"
                     >
-                      <h3 className="text-sm md:text-[16px] text-grayMedium mb-2">
+                      <h3 className="text-sm md:text-[16px] text-grayMedium mb-1 md:mb-2">
+                        Location Name
+                      </h3>
+                      <p className=" flex items-center px-2 mdl:py-3 flex-1 text-nowrap truncate w-full   text-[12px] md:text-[16px] rounded-xl mdl:rounded-2xl text-grayMedium first:font-Bold  border-2 border-green h-12  mdl:h-[64px]  placeholder:text-grayMedium placeholder:opacity-100">
+                        {loc.name}
+                      </p>
+                    </div>
+                    <div
+                      onClick={() => {
+                        setIndexSelect(loc.id);
+                        open();
+                      }}
+                      className=" cursor-pointer flex-1 max-w-full min-w-[156px]"
+                    >
+                      <h3 className="text-sm md:text-[16px] text-grayMedium mb-1 md:mb-2">
                         Address
                       </h3>
-                      <p className=" flex items-center px-2 py-3 flex-1 text-nowrap truncate  max-w-[260px] text-[12px] md:text-[16px] rounded-2xl text-grayMedium first:font-Bold  border-2 border-green  h-[64px]  placeholder:text-grayMedium placeholder:opacity-100">
+                      <p className=" flex items-center px-2 mdl:py-3 flex-1 text-nowrap truncate w-full text-[12px] md:text-[16px] rounded-xl mdl:rounded-2xl text-grayMedium first:font-Bold  border-2 border-green h-12  mdl:h-[64px]  placeholder:text-grayMedium placeholder:opacity-100">
                         {loc.address}
                       </p>
                     </div>
-
-                    <ButtonDelete
-                      onClick={() => handleRemoveLocation(loc.id)}
-                      className={"!size-7 mt-6 lg:!size-11 bg-grayBack"}
-                    />
                   </div>
+
+                  <ButtonDelete
+                    onClick={() => handleRemoveLocation(loc.id)}
+                    className={
+                      "!size-7 mt-6 md:!size-11 min-w-7 md:min-w-11 bg-grayBack"
+                    }
+                  />
                 </div>
               ))}
           </div>
         ) : null}
 
-        <div className="variations-header">
-          <Button
-            onClick={() => {
-              setIndexSelect(null);
-              open();
-            }}
-            className={
-              "mt-8 bg-grayBack gap-3 px-7 h-12 text-xs md:text-base md:h-[64px] border-none text-black"
-            }
-          >
-            <LocationIcon fill="#0F2A43" className=" w-3 md:w-5 h-auto" />
-            <p>Add location</p>
-          </Button>
-        </div>
+        <Button
+          onClick={() => {
+            setIndexSelect(null);
+            open();
+          }}
+          className={
+            "mt-8 bg-grayBack gap-3 px-7 h-12 text-xs md:text-base md:h-[64px] border-none text-black"
+          }
+        >
+          <LocationIcon fill="#0F2A43" className=" w-3 md:w-5 h-auto" />
+          <p>Add location</p>
+        </Button>
 
         <ModalComp title="Add a variation" opened={opened} close={close}>
-          <GoogleMapLoc close={close} index={indexSelect} />
+          <GoogleMapLoc
+            close={close}
+            index={indexSelect}
+            handelValueWhenAddNewLocation={handelValueWhenAddNewLocation}
+          />
         </ModalComp>
       </div>
     </Step>

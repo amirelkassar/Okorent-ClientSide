@@ -36,13 +36,20 @@ function Page() {
   const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [dataList, setDataList] = useState<any>({});
   const searchparams = useSearchParams();
-  console.log(dataList);
+  const {
+    mutateAsync: createListing,
+    error,
+    isError,
+    reset,
+  } = useCreateListingMutation();
 
   const handleInputChangeLocation = (ids: any[]) => {
+    reset();
     setLocation(ids);
     setDataList({ ...dataList, UserStockIds: ids });
   };
   const handleRemoveLocation = (index: any) => {
+    reset();
     const updatedLocations = location.filter((loc) => loc !== index);
     setLocation(updatedLocations);
     setDataList({ ...dataList, UserStockIds: updatedLocations });
@@ -52,6 +59,7 @@ function Page() {
     value: string,
     setState: React.Dispatch<React.SetStateAction<string | null>>
   ) => {
+    reset();
     if (selectedCheckbox === value) {
       setState(null);
     } else {
@@ -60,6 +68,7 @@ function Page() {
     }
   };
   const handleChangeFAQ = (index: number, field: keyof FAQ, value: string) => {
+    reset();
     const newFaqs = [...faqs];
     newFaqs[index][field] = value;
     setFaqs(newFaqs);
@@ -68,12 +77,9 @@ function Page() {
   const { data: dataCategory } = GetCategory();
   const { data: dataSubCategory, refetch: RefetchGetSubCategory } =
     GetSubCategory(dataList?.CategoryId);
-  const {
-    mutateAsync: createListing,
-    error,
-    isError,
-  } = useCreateListingMutation();
+
   const handleSubmit = async () => {
+    reset();
     await Toast.Promise(createListing(dataList), {
       success: "successfully Create Product",
       onSuccess: async (res) => {
@@ -81,8 +87,6 @@ function Page() {
       },
     });
   };
-  const errorMsg = error?.response?.data?.errors;
-  console.log(error?.response?.data?.errors);
 
   useEffect(() => {
     RefetchGetSubCategory();
@@ -104,6 +108,7 @@ function Page() {
               })}
               placeholder="Select category"
               onChange={(e) => {
+                reset();
                 setDataList({ ...dataList, CategoryId: e });
               }}
               inputClassName=" !rounded-xl md:!rounded-2xl text-grayMedium !h-12  md:!h-16 bg-white"
@@ -116,6 +121,7 @@ function Page() {
               })}
               placeholder="Select SubCategory"
               onChange={(e) => {
+                reset();
                 setDataList({ ...dataList, SubCategoryId: e });
               }}
               inputClassName=" !rounded-xl md:!rounded-2xl text-grayMedium !h-12  md:!h-16 "
@@ -131,6 +137,7 @@ function Page() {
             <Input
               placeholder="Add item title here"
               onChange={(e) => {
+                reset();
                 setDataList({
                   ...dataList,
                   Name: e.target.value,
@@ -142,6 +149,7 @@ function Page() {
             />
             <InputTextarea
               onChange={(e) => {
+                reset();
                 setDataList({
                   ...dataList,
                   Description: e.target.value,
@@ -177,6 +185,7 @@ function Page() {
                 label={"Price for 1 Day"}
                 placeholder={"Add Price Here"}
                 onChange={(e) => {
+                  reset();
                   setDataList({
                     ...dataList,
                     DailyPrice: e.target.value,
@@ -192,6 +201,7 @@ function Page() {
                 name="attribute1"
                 placeholder={"Add Price Here"}
                 onChange={(e) => {
+                  reset();
                   setDataList({
                     ...dataList,
                     WeeklyPrice: e.target.value,
@@ -207,6 +217,7 @@ function Page() {
                 name="attribute2"
                 placeholder={"Add Price Here"}
                 onChange={(e) => {
+                  reset();
                   setDataList({
                     ...dataList,
                     MonthlyPrice: e.target.value,
@@ -242,6 +253,7 @@ function Page() {
           >
             <Input
               onChange={(e) => {
+                reset();
                 setDataList({ ...dataList, Cost: e.target.value });
               }}
               placeholder="Add item value here"
@@ -249,7 +261,12 @@ function Page() {
               className="mb-6 "
             />
           </Step>
-          <StepAvailability dataList={dataList} setDataList={setDataList} />
+          <StepAvailability
+            error={error}
+            reset={reset}
+            dataList={dataList}
+            setDataList={setDataList}
+          />
           <Step
             title="Stock"
             active={
@@ -261,6 +278,7 @@ function Page() {
             <Input
               placeholder="Add available stock number here"
               onChange={(e) => {
+                reset();
                 setDataList({ ...dataList, TotalQuantity: e.target.value });
               }}
               inputClassName=" !rounded-xl md:!rounded-2xl bg-white !h-12  md:!h-16 border-2 "
@@ -273,6 +291,7 @@ function Page() {
                 <Checkbox
                   checked={selectedCheckbox === "true"}
                   onChange={(e) => {
+                    reset();
                     handleCheckboxChange(e.target.value, setSelectedCheckbox);
                   }}
                   color="#88BA52"
@@ -282,6 +301,7 @@ function Page() {
                 <Checkbox
                   checked={selectedCheckbox === "false"}
                   onChange={(e) => {
+                    reset();
                     handleCheckboxChange(e.target.value, setSelectedCheckbox);
                   }}
                   color="#88BA52"
@@ -305,10 +325,10 @@ function Page() {
         </div>
       )}
 
-      <div className="flex items-center mt-16 gap-7 md:flex-row flex-col">
+      <div className="flex items-center mt-10 mdl:mt-16 gap-4 mdl:gap-7 md:flex-row flex-col">
         <Button
           onClick={handleSubmit}
-          className={"w-full lg:w-[208px] h-[64px]"}
+          className={"w-full lg:w-[208px] h-12 mdl:h-[64px]"}
         >
           Save
         </Button>
@@ -316,7 +336,7 @@ function Page() {
           <LinkGreen
             href={"?preview=false"}
             className={
-              "w-full lg:w-[208px] h-[64px] text-black bg-grayBack border-none"
+              "w-full lg:w-[208px] h-12 mdl:h-[64px] text-black bg-grayBack border-none"
             }
           >
             Back
@@ -325,7 +345,7 @@ function Page() {
           <LinkGreen
             href={"?preview=true"}
             className={
-              "w-full lg:w-[208px] h-[64px] text-black bg-grayBack border-none"
+              "w-full lg:w-[208px] h-12 mdl:h-[64px] text-black bg-grayBack border-none"
             }
           >
             Preview

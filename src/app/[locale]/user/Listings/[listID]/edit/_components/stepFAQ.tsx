@@ -16,8 +16,8 @@ function StepFAQ({ faqs, setFaqs, handleChangeFAQ }: StepFAQProps) {
   };
 
   return (
-    <div className="mt-[7px] pb-8 lg:pb-12 flex-1">
-      <h3 className={"text-base lg:text-[24px] mb-2 lg:mb-3 "}>FAQs</h3>
+    <div className="mt-1 mdl:mt-2 mdl:pb-8 flex-1">
+      <h3 className={"text-sm lg:text-[24px] mb-2 lg:mb-3 "}>FAQs</h3>
       <p className="text-grayMedium mb-4 text-sm lg:text-base font-Regular">
         Add at least two FAQs to make it easier to renters to know more about
         your product
@@ -55,7 +55,7 @@ function StepFAQ({ faqs, setFaqs, handleChangeFAQ }: StepFAQProps) {
 
         <Button
           className={
-            "mt-8 bg-grayBack gap-3 w-[196px] max-w-full px-7 h-[64px] border-none text-black"
+          "mt-8 bg-grayBack gap-3 w-[196px] max-w-full text-xs px-7 h-12 mdl:h-[64px] border-none text-black"
           }
           onClick={addQuestion}
         >

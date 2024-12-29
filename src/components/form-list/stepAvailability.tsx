@@ -181,6 +181,7 @@ function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
               weekday: "text-black",
               calendarHeader: "text-grayMedium",
             }}
+            minDate={new Date()}
           />
         </div>
 
