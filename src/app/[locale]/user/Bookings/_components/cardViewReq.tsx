@@ -36,15 +36,11 @@ interface CardViewProps {
   title: string;
   products?: RequestData[];
   status: number | any;
-  first?: boolean;
-  haveRentSwitch?: boolean;
 }
 function CardViewReq({
   title,
-  first = false,
   products,
   status,
-  haveRentSwitch = false,
 }: CardViewProps) {
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
@@ -60,6 +56,8 @@ function CardViewReq({
   if (products?.length === 0) {
     return null;
   }
+
+  
   return (
     <div className="swiperList swiperListBooking pt-4 lg:pt-10 pb-5 lg:pb-10 lg:border-t border-black first-of-type:border-none first-of-type:pt-0">
       <div

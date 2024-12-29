@@ -14,6 +14,7 @@ function Page() {
   const query = GetMyOrderAll(searchParams.toString());
   const queryOut = GetMyOrderOutAll(searchParams.toString());
 
+
   return isRent === "rent" ? (
     <div>
       {searchParams.get("card") === "true" ? (

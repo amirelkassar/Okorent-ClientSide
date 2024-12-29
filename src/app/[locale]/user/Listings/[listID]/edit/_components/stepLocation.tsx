@@ -23,6 +23,7 @@ function StepLocation({
   const [indexSelect, setIndexSelect] = useState<any>(0);
   const { data } = GetMyStock();
 
+console.log(data);
 
   const handelValueWhenAddNewLocation = (newLocation: any) => {
     handleInputChangeLocation([...location, newLocation]);
@@ -37,11 +38,11 @@ function StepLocation({
         {data?.data?.length > 0 ? (
           <div className="flex flex-col gap-5 lg:gap-6 max-w-full">
             <MultiSelect
-              data={data?.data.map((loc: any) => ({
+              data={data?.data?.map((loc: any) => ({
                 value: loc.id, // Use the `id` as the value
                 label: loc.name, // Use the `address` as the label
               }))}
-              value={location.map((loc) => `${loc}`)}
+              value={location?.map((loc) => `${loc}`)}
               onChange={(selectedValues) => {
                 handleInputChangeLocation(selectedValues);
               }}
@@ -67,7 +68,7 @@ function StepLocation({
             />
 
             {data?.data
-              ?.filter((item: any) => location.includes(item.id))
+              ?.filter((item: any) => location?.includes(item.id))
               .map((loc: any, index: number) => (
                 <div
                   key={index}

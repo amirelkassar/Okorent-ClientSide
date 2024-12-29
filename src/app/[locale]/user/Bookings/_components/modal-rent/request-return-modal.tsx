@@ -25,7 +25,7 @@ const OptionReturn = [
     label: "I had trouble using the product.",
   },
 ];
-function RequestReturnModale({
+function RequestReturnModal({
   opened,
   close,
 }: {
@@ -79,4 +79,4 @@ function RequestReturnModale({
   );
 }
 
-export default RequestReturnModale;
+export default RequestReturnModal;

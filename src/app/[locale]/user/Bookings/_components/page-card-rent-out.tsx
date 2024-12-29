@@ -19,10 +19,8 @@ function PageCardRentOut({ query }: { query: any }) {
             <div>
               <CardViewReq
                 title="New"
-                first
                 products={getDataByStatus(1)}
                 status={1}
-                haveRentSwitch
               />
               <CardViewReq
                 title="Accepted"
@@ -51,7 +49,7 @@ function PageCardRentOut({ query }: { query: any }) {
               />
               <CardViewReq
                 title="Completed"
-                products={getDataByStatus(1)}
+                products={getDataByStatus(10)}
                 status={10}
               />
               <CardViewReq

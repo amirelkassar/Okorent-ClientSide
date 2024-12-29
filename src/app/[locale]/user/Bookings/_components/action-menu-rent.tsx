@@ -10,14 +10,16 @@ import ReviewIcon from "@/src/assets/icons/review";
 import RentAgainIcon from "@/src/assets/icons/rentAgain";
 import ReorderIcon from "@/src/assets/icons/reorder";
 import ScanQrModal from "./modal-rent/scan-qr-modale";
-import RequestReturnModale from "./modal-rent/request-return-modale";
 import CancelIcon from "@/src/assets/icons/cancel";
 import ROUTES from "@/src/routes";
 import { useChangeStatusRent } from "../_hooks/use-change-status-rent";
+import RequestReturnModal from "./modal-rent/request-return-modal";
+import ReviewModal from "./modal-rent/review-modal";
 
-function ActionMenuRent({ id, status = 0 }: { id: any; status: any }) {
+function ActionMenuRent({ id, status = 0,dataForReview }: { id: any; status: any,dataForReview:any }) {
   const [opened, { open, close }] = useDisclosure(false);
   const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
+  const [opened3, { open: open3, close: close3 }] = useDisclosure(false);
 
   const {
     onSubmitCancel,
@@ -45,7 +47,9 @@ function ActionMenuRent({ id, status = 0 }: { id: any; status: any }) {
       label: "Review",
       icon: <ReviewIcon fill="#6F6B7D" className="w-3 h-auto" />,
       type: "btn",
-      action: () => {},
+      action: () => {
+        open3();
+      },
     },
     //3
     {
@@ -124,7 +128,10 @@ function ActionMenuRent({ id, status = 0 }: { id: any; status: any }) {
     <>
       <DataActions data={optionView() || []} />
       {opened && <ScanQrModal opened={opened} close={close} />}
-      {opened2 && <RequestReturnModale opened={opened2} close={close2} />}
+      {opened2 && <RequestReturnModal opened={opened2} close={close2} />}
+      {opened3 && (
+        <ReviewModal opened={opened3} close={close3} dataForReview={dataForReview} />
+      )}
     </>
   );
 }

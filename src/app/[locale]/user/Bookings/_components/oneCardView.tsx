@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import homeImg from "@/src/assets/images/house1.png";
+import homeImg from "@/src/assets/images/placProduct.png";
 import userImg from "@/src/assets/images/avatar.png";
 import { getDate } from "@/src/lib/utils";
 import BottomCardRent from "./bottom-card-rent";
@@ -22,8 +22,10 @@ function OneCardView({ product, status }: { product?: any; status: any }) {
       <Image
         alt="home"
         priority
-        src={homeImg}
-        className="w-full rounded-xl h-[122px] lg:h-40 object-cover object-center lg:object-top"
+        src={product?.heroImage||homeImg}
+        className="w-full rounded-xl h-[122px]  lg:h-40 object-contain object-center lg:object-top"
+        width={400}
+        height={122}
       />
       <div className="flex items-center gap-3 mt-2 lg:mt-6">
         <Image
