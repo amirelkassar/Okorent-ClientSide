@@ -22,7 +22,7 @@ function OneCardView({ data, offline }: { data: any; offline: boolean }) {
         priority
         height={160}
         width={365}
-        src={ placCardProductImg}
+        src={ data?.heroImage||placCardProductImg}
         className="w-full rounded-xl h-40 object-cover bg-blueLight object-center"
       />
       <div className="flex items-end justify-between lg:gap-3 gap-2 mt-5">
@@ -49,7 +49,7 @@ function OneCardView({ data, offline }: { data: any; offline: boolean }) {
             Quantity
           </h3>
           <p className="lg:text-[16px] text-sm text-center font-SemiBold">
-            {data?.quantity || "0"}
+            {data?.totalQuantity || "0"}
           </p>
         </div>
       </div>
