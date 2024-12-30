@@ -93,7 +93,7 @@ function NavLinks() {
     () => [
       {
         id: 0,
-        name: `Homepage / ${searchParams.get("category")}`,
+        name: `Homepage / ${searchParams.get("category")||'Products'}`,
         url: ROUTES.USER.CATEGORIES(searchParams.get("category")),
         active:
           path + `?category=${searchParams.get("category")}` ===
@@ -150,7 +150,7 @@ function NavLinks() {
           ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID),
       },
     ],
-    [path]
+    [path,searchParams.toString()]
   );
 
   return (

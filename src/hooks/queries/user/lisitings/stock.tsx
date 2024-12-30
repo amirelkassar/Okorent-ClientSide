@@ -9,7 +9,7 @@ export const GetMyStock = () => {
   return useQuery({
     queryKey: [initialQueryKey],
     queryFn: async () => {
-      const response = await api.get(user.stock.base+'?PageSize=1000');
+      const response = await api.get(user.stock.base);
       return response.data;
     },
   });

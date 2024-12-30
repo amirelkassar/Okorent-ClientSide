@@ -1,45 +1,49 @@
 "use client";
 import SearchIcon from "@/src/assets/icons/search";
 import { TextInput } from "@mantine/core";
-import React, { useState } from "react";
-import { useQueryState } from "nuqs";
-function SearchItem() {
-  const [name, setName] = useQueryState("name");
-  const [category, setCategory] = useState("");
-  const addSearchValue = () => {
-    const formattedValue = category.replace(/ /g, "_");
-    setName(formattedValue || null);
+import { useSearchParams } from "next/navigation";
+import React from "react";
+
+function SearchItem({
+  setFilter,
+  children,
+  onClickInput,
+}: {
+  setFilter?: any;
+  children: React.ReactNode;
+  onClickInput?: () => void;
+}) {
+  const searchparams = useSearchParams();
+
+  // Function to handle keydown and trigger input function on Enter
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      if (onClickInput) onClickInput(); // Trigger onClickInput if it's provided
+    }
   };
 
   return (
     <div className="flex gap-6 h-[66px] mb-4">
-      <div className="flex-1 flex p-[1px] rounded-2xl  border-[3px] border-green/30 lg:ps-6 bg-white overflow-hidden">
+      <div className="flex-1 flex p-[1px] rounded-2xl border-[3px] border-green/30 lg:ps-6 bg-white overflow-hidden">
         <SearchIcon
           className={"w-[18px] h-auto hidden lg:block"}
           fill="#0F2A43"
         />
         <TextInput
-          onChange={(e) => setCategory(e.target.value)}
+          onChange={(e) => setFilter(e.target.value)}
+          defaultValue={searchparams.get("filter") || ""}
           placeholder="What are you looking to rent today?"
           type="text"
           classNames={{
             input:
-              "flex-1  bg-white text-black h-full border-none px-3 lg:px-5 text-sm lg:text-[16px] font-Medium",
+              "flex-1 bg-white text-black h-full border-none px-3 lg:px-5 text-sm lg:text-[16px] font-Medium",
             wrapper: "h-full",
           }}
-          className="flex-1  text-grayMedium h-full text-[16px]"
-          onKeyDown={(e) => {
-            e.key === "Enter" && addSearchValue();
-          }}
+          className="flex-1 text-grayMedium h-full text-[16px]"
+          onKeyDown={handleKeyDown} // Call onKeyDown for Enter key
         />
-        <button
-          onClick={() => {
-            addSearchValue();
-          }}
-          className="h-full w-[78px] rounded-e-xl border-[3px] bg-green border-[#a9c788] hover:border-green duration-500 flex items-center justify-center"
-        >
-          <SearchIcon className={"w-[26px] h-auto"} />
-        </button>
+
+        {children}
       </div>
     </div>
   );

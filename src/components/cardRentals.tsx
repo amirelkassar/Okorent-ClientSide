@@ -4,11 +4,9 @@ import React from "react";
 import rental from "@/src/assets/images/placProduct.png";
 import LocationIcon from "@/src/assets/icons/location";
 import StarIcon from "@/src/assets/icons/star";
-import FavIcon from "../assets/icons/fav";
 import DeleteIcon from "../assets/icons/delete";
 import { Link, usePathname } from "../navigation";
 import ROUTES from "../routes";
-import FavRedIcon from "../assets/icons/favRed";
 import FavoriteProduct from "./favorite-product";
 
 interface CardRentalsProps {
