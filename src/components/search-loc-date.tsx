@@ -1,22 +1,22 @@
 "use client";
 import React, { useState } from "react";
-import SearchItem from "./searchItem";
-import SelectLocation from "./selectLocation";
-import SelectDate from "./selectDate";
 import { useQueryState } from "nuqs";
 import SearchIcon from "@/src/assets/icons/search";
 import LinkGreen from "@/src/components/linkGreen";
 import ROUTES from "@/src/routes";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "@/src/navigation";
+import SearchItem from "@/src/components/searchItem";
+import SelectLocation from "@/src/components/selectLocation";
+import SelectDate from "@/src/components/selectDate";
 
-function SearchLocDate() {
+function SearchLocDate({ guest = false }: { guest?: boolean }) {
   const searchparams = useSearchParams();
   const router = useRouter();
   const [Filter, setFilter] = useQueryState("filter", { throttleMs: 2000 });
   const [AvailableFromAndToParams, setAvailableFromAndToParams] = useState({
-    AvailableFrom: "",
-    AvailableTo: "",
+    AvailableFrom: searchparams.get("AvailableFrom") || "",
+    AvailableTo: searchparams.get("AvailableTo") || "",
   });
 
   console.log({ Filter, AvailableFromAndToParams });
@@ -39,7 +39,9 @@ function SearchLocDate() {
     const queryString = new URLSearchParams(queryObject).toString();
 
     // Return the complete URL
-    return `${ROUTES.USER.CATEGORIESPATH}?${queryString}`;
+    return `${
+      guest ? ROUTES.GUEST.PRODUCTSPATH : ROUTES.USER.CATEGORIESPATH
+    }?${queryString}`;
   };
 
   return (

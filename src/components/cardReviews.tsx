@@ -7,8 +7,16 @@ import ShowMore from "@/src/components/showMore";
 import InputTextarea from "./InputTextarea";
 import Button from "./button";
 import DeleteIcon from "../assets/icons/delete";
-function CardReviews({ IsEdit = false }: { IsEdit?: boolean }) {
-  const [expanded, setExpanded] = useState(false);
+import { getDate } from "../lib/utils";
+function CardReviews({
+  IsEdit = false,
+  review,
+}: {
+  IsEdit?: boolean;
+  review?: any;
+}) {
+  console.log(review);
+
   return (
     <div>
       <div className="mb-4 flex items-center justify-between gap-3">
@@ -21,19 +29,23 @@ function CardReviews({ IsEdit = false }: { IsEdit?: boolean }) {
             alt="man"
           />
           <div>
-            <h3 className="text-base font-SemiBold">Saad</h3>
-            <p className="text-[12px] text-black/80">October 2023</p>
+            <h3 className="text-base font-SemiBold">
+              {review?.reviewerName || "name"}
+            </h3>
+            <p className="text-[12px] text-black/80">
+              {getDate(review?.created).fullYearWithMonthName || "October 2023"}
+            </p>
           </div>
         </div>
 
         <div className="flex items-center gap-2 mb-2">
           <Rating
             color="#88BA52"
-            value={4.6}
+            value={review?.rate || 0}
             fractions={IsEdit ? 1 : 10}
             readOnly={!IsEdit}
           />
-          {!IsEdit && <p className="text-base">4.6</p>}
+          {!IsEdit && <p className="text-base">{review?.rate || 0}</p>}
         </div>
       </div>
       {IsEdit ? (
@@ -53,16 +65,8 @@ function CardReviews({ IsEdit = false }: { IsEdit?: boolean }) {
         </>
       ) : (
         <>
-          <h3 className="text-sm lg:text-base">
-            Slightly expensive, but the performance justifies the cost
-          </h3>
-          <div className="text-sm lg:text-base text-grayMedium font-Regular">
-            <ShowMore lines={2}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor
-              sit amet, consectetur adipiscing elit, sed do
-            </ShowMore>
+          <div className="text-sm lg:text-base px-1 md:px-3 text-grayMedium font-Regular">
+            <ShowMore lines={2}>{review?.review || ""}</ShowMore>
           </div>
         </>
       )}

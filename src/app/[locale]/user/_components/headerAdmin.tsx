@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import HeaderAdminIcon from "@/src/assets/icons/headerAdmin";
-import SearchLocDate from "./search-loc-date";
+import SearchLocDate from "@/src/components/search-loc-date";
 function HeaderAdmin() {
   return (
     <div className="flex items-center gap-5 mb-9 lg:mb-10 justify-between">

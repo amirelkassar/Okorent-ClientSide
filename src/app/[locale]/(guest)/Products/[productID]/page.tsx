@@ -45,7 +45,7 @@ function Page({ params }: any) {
                     to pick up your order.
                   </p>
                 </div>
-                <Reviews />
+                <Reviews usersReviews={data?.usersReviews} productID={params.productID} />
                 <div className="flex flex-col gap-5 mb-section">
                   <Description
                     title="Guarantee"

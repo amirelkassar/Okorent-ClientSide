@@ -20,9 +20,9 @@ const MapComponent = ({ stocks }: { stocks: any[] }) => {
   const mapRef = useRef<Map | null>(null); // Allow Map or null
   // Points data
   const transformedData = stocks?.map((item: any) => ({
-    lat: item.location.latitude,
-    lon: item.location.longitude,
-    label: item.name,
+    lat: item?.location.latitude,
+    lon: item?.location.longitude,
+    label: item?.name,
   }));
 
   const points =

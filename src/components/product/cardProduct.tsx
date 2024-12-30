@@ -90,7 +90,7 @@ function CardProduct({
   }
   return (
     <div className=" mb-section">
-      <ImagesProduct dataImages={data?.images||[]} />
+      <ImagesProduct dataImages={data?.images || []} />
       <div className=" w-full  border-b border-grayMedium/40 pb-6">
         <div className="flex w-full items-center  justify-between gap-3 mb-7 mt-5 md:mt-section ">
           <h2 className="text-lg lg:text-[32px] font-SemiBold ">
@@ -106,7 +106,7 @@ function CardProduct({
           </div>
         </div>
 
-        <FeaturesProduct />
+        <FeaturesProduct numRates={data?.usersReviews?.average || 0} />
       </div>
 
       <div className="flex mt-5 md:mt-section items-start justify-between flex-col lg:flex-row gap-11">
@@ -139,12 +139,18 @@ function CardProduct({
           >
             <div className="flex items-center px-5 justify-between gap-4 pb-4 flex-wrap mt-5">
               <LinkGreen
-                href={guest?ROUTES.AUTH.LOGIN:ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID)}
+                href={
+                  guest
+                    ? ROUTES.AUTH.LOGIN
+                    : ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID)
+                }
                 className={`w-full  ${
-                  valueAddressType && TotalPriceOrder && location 
+                  valueAddressType && TotalPriceOrder && location
                     ? "opacity-100"
-                    :guest? "opacity-100" :"opacity-50 pointer-events-none"
-                 }  duration-300  `}
+                    : guest
+                    ? "opacity-100"
+                    : "opacity-50 pointer-events-none"
+                }  duration-300  `}
               >
                 Request this item
               </LinkGreen>
