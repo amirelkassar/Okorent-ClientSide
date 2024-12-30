@@ -9,6 +9,7 @@ const nextConfig = {
         hostname: "okorent.profound-group.com" ,
       },
     ],
+    unoptimized: true
   },
   experimental: {
     optimizePackageImports: ["@mantine/core", "@mantine/hooks"],

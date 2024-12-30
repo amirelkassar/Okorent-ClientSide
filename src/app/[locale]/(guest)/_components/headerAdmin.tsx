@@ -1,6 +1,8 @@
 import React from "react";
-import ImgDash from "@/src/assets/icons/imgDash";
 import SearchLocDate from "@/src/components/search-loc-date";
+import imgDash from "@/src/assets/images/imgDash.png";
+import Image from "next/image";
+import DashImg from "@/src/assets/icons/dashImg";
 function HeaderAdmin() {
   return (
     <div className="flex items-center gap-5 mb-9 lg:mb-10 justify-between">
@@ -16,7 +18,12 @@ function HeaderAdmin() {
         <SearchLocDate guest />
       </div>
       <div className="w-[780px] max-w-full h-auto object-contain lg:block hidden">
-        <ImgDash className={"w-full h-auto"} />
+        <Image
+          src={imgDash}
+          alt={`Image`}
+          priority
+          className="w-full h-auto max-w-full"
+        />
       </div>
     </div>
   );
