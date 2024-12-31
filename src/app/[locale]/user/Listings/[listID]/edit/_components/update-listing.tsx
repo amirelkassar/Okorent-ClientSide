@@ -84,6 +84,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
       },
     });
   };
+
   return (
     <div className="w-full lg:w-[810px] mb-section flex flex-col gap-4">
       <div className=" mt-1 mdl:mt-2 mdl:pb-8 flex-1">

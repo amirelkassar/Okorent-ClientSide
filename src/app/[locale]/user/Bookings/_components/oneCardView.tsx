@@ -39,7 +39,7 @@ function OneCardView({ product, status }: { product?: any; status: any }) {
             {product?.lessorName || "name"}
           </h3>
           <p className="text-grayMedium text-sm lg:text-base font-Regular">
-            {product?.lessorName || "name"}
+            {product?.lessorEmail || ""}
           </p>
         </div>
       </div>

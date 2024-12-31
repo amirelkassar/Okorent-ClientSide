@@ -21,11 +21,10 @@ function CardRentals({ data, Fav = false, edit = false }: CardRentalsProps) {
       <div className=" w-full p-2 lg:p-4 bg-white/80 rounded-3xl  border border-black/25 duration-200 hover:shadow-md">
         <div className=" relative mb-[6px] md:mb-3">
           <Image
-            alt="Rentals"
+            alt={`${data?.title||data?.id}`}
             src={data?.heroImage || rental}
             width={252}
             height={160}
-            priority
             property="10000000"
             className="w-full h-[124px] md:h-[160px] object-cover object-center rounded-[18px]"
           />

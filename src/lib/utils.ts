@@ -210,10 +210,21 @@ export const getFormData = async (data: Record<string, any>) => {
           formData.append(key, item, item.name);
         } else if (item.path) {
           // Fetch image and convert to Blob
-          const response = await fetch(item.path);
-          const blob = await response.blob();
+          console.log(item.path);
+
+          const response = await axios.get(item.path, { responseType: 'blob' });
+          console.log(response);
+
+
+          const blob = await response.data;
+          console.log(blob);
+          const objectURL = URL.createObjectURL(blob);
+          console.log(objectURL);
+
           const fileName = item.path.split('/').pop() || "image.jpg";
-          formData.append(key, new File([blob], fileName, { type: blob.type }));
+          console.log(new File([blob], fileName, { type: blob.type }));
+
+          formData.append(key, new File([blob], fileName, { type: 'image/png' }));
         }
       }
     } else if ((key === "FAQs" || key === "faQs") && Array.isArray(value)) {
@@ -265,3 +276,25 @@ export const GetIdsValues = (data: any[] = []) => {
 
   return ids.length > 0 ? ids : null; // Return ids if any, else null
 };
+
+// export async function fetchAndDisplayImage() {
+//   const imageUrl = "https://okorent.profound-group.com/ProductEntity/f4612acc-47da-403b-a2a8-ce72cc7a35c9_026c062d-468c-4bba-8723-73e9cd44940c_c4d4e184-076a-4d7e-bf1c-afd128ce7b29_129055380-800x600.png";
+
+//   try {
+//     const response = await axios.get(imageUrl, { responseType: 'blob' });
+//     console.log(response);
+
+//     // Check if the response is OK
+//     const blob = await response.data;
+//     console.log(blob);
+
+//     //const objectURL = URL.createObjectURL(blob);
+
+//     console.log(response);
+
+
+//   } catch (error) {
+
+//     console.error("Error fetching or displaying image:", error);
+//   }
+// }

@@ -177,7 +177,7 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
   return (
     <>
       <DataActions data={optionView() || []} />
-      {opened && <ViewQrModal opened={opened} close={close} />}
+      {opened && <ViewQrModal opened={opened} close={close} id={id} />}
       {opened2 && (
         <VersionHistoryModal opened={opened2} close={close2} id={id} />
       )}

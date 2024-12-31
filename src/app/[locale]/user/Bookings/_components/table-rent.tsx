@@ -33,9 +33,7 @@ function TableRent({ query }: { query: any }) {
         <TableHeader.Last options={FilterOptionsBooking} />
       </TableHeader>
       <QueryWrapper query={query}>
-        {({ data, totalPages }: { data: any, totalPages?:number }) => {
-          console.log(data);
-          console.log(totalPages);
+        {({ data, totalPages }: { data: any; totalPages?: number }) => {
           return (
             <div>
               <DataTable
@@ -45,9 +43,7 @@ function TableRent({ query }: { query: any }) {
                 functionSelect={functionSelectView}
                 setSelectedFromTable={setSelectedFromTable}
               />
-              {/* <Pagination
-              totalPages={totalPages}
-              /> */}
+              <Pagination totalPages={totalPages} />
             </div>
           );
         }}

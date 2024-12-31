@@ -16,7 +16,15 @@ import { useChangeStatusRent } from "../_hooks/use-change-status-rent";
 import RequestReturnModal from "./modal-rent/request-return-modal";
 import ReviewModal from "./modal-rent/review-modal";
 
-function ActionMenuRent({ id, status = 0,dataForReview }: { id: any; status: any,dataForReview:any }) {
+function ActionMenuRent({
+  id,
+  status = 0,
+  dataForReview,
+}: {
+  id: any;
+  status: any;
+  dataForReview: any;
+}) {
   const [opened, { open, close }] = useDisclosure(false);
   const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
   const [opened3, { open: open3, close: close3 }] = useDisclosure(false);
@@ -67,8 +75,7 @@ function ActionMenuRent({ id, status = 0,dataForReview }: { id: any; status: any
       icon: <CarReturn fill="#6F6B7D" className="w-3 h-auto" />,
       type: "btn",
       action: () => {
-        //open2();
-        onSubmitRefund();
+        open2();
       },
     },
     //5
@@ -128,9 +135,19 @@ function ActionMenuRent({ id, status = 0,dataForReview }: { id: any; status: any
     <>
       <DataActions data={optionView() || []} />
       {opened && <ScanQrModal opened={opened} close={close} />}
-      {opened2 && <RequestReturnModal opened={opened2} close={close2} />}
+      {opened2 && (
+        <RequestReturnModal
+          onSubmitRefund={onSubmitRefund}
+          opened={opened2}
+          close={close2}
+        />
+      )}
       {opened3 && (
-        <ReviewModal opened={opened3} close={close3} dataForReview={dataForReview} />
+        <ReviewModal
+          opened={opened3}
+          close={close3}
+          dataForReview={dataForReview}
+        />
       )}
     </>
   );

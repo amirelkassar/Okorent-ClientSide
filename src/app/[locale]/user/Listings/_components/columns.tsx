@@ -14,7 +14,7 @@ export type RequestsTableData = {
   inStock: number;
   rentedQuantity: number;
   dailyPrice: number;
-  heroImage:string
+  heroImage: string;
 };
 
 export const columns: ColumnDef<RequestsTableData>[] = [
@@ -30,8 +30,7 @@ export const columns: ColumnDef<RequestsTableData>[] = [
           href={ROUTES.USER.LISTINGSDETAILS(id)}
           className="flex items-center gap-2 w-fit"
         >
-          <ImgProduct productName={name} src={image}/>
-         
+          <ImgProduct productName={name} src={image} />
         </Link>
       );
     },
@@ -46,17 +45,12 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     },
   },
   {
-    accessorKey: "inStock",
+    accessorKey: "quantityInStock",
     header: "In Stock ",
     cell: ({ getValue, row }) => {
-      const inStock = getValue<number>();
-      const totalQuantity = row.original.totalQuantity;
-      const rentedQuantity = row.original.rentedQuantity;
-      return (
-        <p className="text-grayMedium text-[16px]">
-          {totalQuantity - rentedQuantity || 0}
-        </p>
-      );
+      const quantityInStock = getValue<number>();
+
+      return <p className="text-grayMedium text-[16px]">{quantityInStock}</p>;
     },
   },
   {
@@ -92,7 +86,7 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     id: "actions",
     cell: ({ row }) => {
       const id = row.original.id;
-      const status = row.original.isActive
+      const status = row.original.isActive;
       return (
         <div className="flex items-center gap-3 w-fit">
           <ActionMenu id={id} status={status} />

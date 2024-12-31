@@ -33,6 +33,7 @@ export const QueryWrapper = <T extends unknown>({
   children,
 }: QueryWrapperProps<T>) => {
   if (!query) throw new Error("No query props provided");
+console.log(query?.data);
 
   const items = query.data?.data?.items ?? query.data?.data ?? {};
   const pageSize = query.data?.data?.pageSize;

@@ -47,6 +47,7 @@ export const user = {
       base: "/Reviews",
       getByID: (id: any) => `/Reviews/${id}`,
     },
+    barcode:'Barcode/generate'
   },
   user: {
     getByID: (id: any) => `User/${id}`,

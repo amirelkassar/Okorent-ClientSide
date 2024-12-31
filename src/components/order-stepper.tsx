@@ -52,7 +52,6 @@ export default function OrderStepper({
     },
   ];
 
-  console.log(numTracker);
 
   return (
     <div className="min-h-[150px]   place-content-center  bg-white rounded-lg px-3 mdl:px-7 py-3 mt-6">
