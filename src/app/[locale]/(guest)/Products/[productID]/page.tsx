@@ -4,11 +4,11 @@ import FAQ from "@/src/components/faq";
 import MapComponent from "@/src/components/map";
 import CardProduct from "@/src/components/product/cardProduct";
 import Description from "@/src/components/product/description";
+import LoadingProductsRow from "@/src/components/product/loading-products-row";
 import { QueryWrapper } from "@/src/components/query-wrapper";
 import QuestionView from "@/src/components/question";
 import Reviews from "@/src/components/reviews";
-import { GetProductsByID } from "@/src/hooks/queries/user/home";
-import { Rentals } from "@/src/lib/dataUser";
+import { GetProductsAll, GetProductsByID } from "@/src/hooks/queries/user/home";
 import { useSearchParams } from "next/navigation";
 import React from "react";
 
@@ -16,7 +16,8 @@ function Page({ params }: any) {
   const searchparams = useSearchParams();
 
   const query = GetProductsByID(params.productID);
-
+  const { data: dataCustomers, isLoading: isLoadingProducts } =
+    GetProductsAll();
   return (
     <QueryWrapper query={query}>
       {({ data }: { data: any }) => {
@@ -45,7 +46,10 @@ function Page({ params }: any) {
                     to pick up your order.
                   </p>
                 </div>
-                <Reviews usersReviews={data?.usersReviews} productID={params.productID} />
+                <Reviews
+                  usersReviews={data?.usersReviews}
+                  productID={params.productID}
+                />
                 <div className="flex flex-col gap-5 mb-section">
                   <Description
                     title="Guarantee"
@@ -62,10 +66,22 @@ function Page({ params }: any) {
                   <h2 className=" relative text-xl lg:text-[24px] mb-8">
                     Customers who rent this item also rent
                   </h2>
-                  <div className="flex gap-4 max-w-full  lg:gap-8 overflow-x-auto  hideScroll md:flex-wrap relative z-[10]">
-                    {Rentals.map((item) => {
-                      return <CardRentals data={item} key={item.id} />;
-                    })}
+                  <div className=" relative z-10">
+                    <>
+                      {isLoadingProducts ? (
+                        <div className="flex ">
+                          <LoadingProductsRow />
+                        </div>
+                      ) : (
+                        <div className="flex gap-4 max-w-full  lg:gap-8 overflow-x-auto  hideScroll md:flex-wrap relative z-[10]">
+                          {dataCustomers?.data?.items.map(
+                            (item: any, index: number) => {
+                              return <CardRentals data={item} key={index} />;
+                            }
+                          )}
+                        </div>
+                      )}
+                    </>
                   </div>
                 </div>
               </>
