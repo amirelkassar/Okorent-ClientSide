@@ -55,6 +55,7 @@ export const ChangeStautsByID = (id: any) => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKeyOut]);
+      queryClient.invalidateQueries([initialQueryKey]);
       console.log(res);
     },
     onError: (res) => {
@@ -84,8 +85,8 @@ export const useDeleteOrderOutMutation = () => {
 export const useCancelOrderMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data:any) => {
-      const response = await api.post(user.order.cancel_iRent,data);
+    mutationFn: async (data: any) => {
+      const response = await api.post(user.order.cancel_iRent, data);
       return response.data;
     },
     onSuccess: (res) => {
@@ -103,7 +104,7 @@ export const useRejectOrderOutMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await api.post(user.order.reject_iRent,data);
+      const response = await api.post(user.order.reject_iRent, data);
       return response.data;
     },
     onSuccess: (res) => {
@@ -120,8 +121,8 @@ export const useRejectOrderOutMutation = () => {
 export const useCancelOrderOutMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data:any) => {
-      const response = await api.post(user.order.cancel_iRent_out,data);
+    mutationFn: async (data: any) => {
+      const response = await api.post(user.order.cancel_iRent_out, data);
       return response.data;
     },
     onSuccess: (res) => {
@@ -155,7 +156,7 @@ export const useRefundOrderMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await api.post(user.order.refund_iRent,data);
+      const response = await api.post(user.order.refund_iRent, data);
       return response.data;
     },
     onSuccess: (res) => {
@@ -173,11 +174,32 @@ export const useRefundOrderOutMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await api.post(user.order.refund_iRent_out,data);
+      const response = await api.post(user.order.refund_iRent_out, data);
       return response.data;
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKeyOut]);
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
+
+//get QrCode
+export const GetQrCodeOrder = () => {
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.post(user.order.barcode, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        responseType: "blob",
+      });
+      return response;
+    },
+    onSuccess: (res) => {
       console.log(res);
     },
     onError: (res) => {

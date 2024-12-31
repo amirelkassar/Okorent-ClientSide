@@ -150,6 +150,7 @@ function WithdrawlInfo() {
             weekendDays={[]}
             value={value}
             onChange={setValue}
+            minDate={new Date()}
           />
          
       

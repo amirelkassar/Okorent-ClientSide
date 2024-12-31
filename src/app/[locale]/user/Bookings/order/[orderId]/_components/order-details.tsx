@@ -3,7 +3,7 @@ import ImgProduct from "@/src/components/img-product";
 import OrderTable from "@/src/components/order-table";
 import PriceRow from "@/src/components/price-row";
 import React from "react";
-import phoneImg from "@/src/assets/images/phone.png";
+import placTableProductImg from "@/src/assets/images/placTableProduct.png";
 import PriceOrderTable from "@/src/components/price-order-table";
 import { calculateDurationRange } from "@/src/lib/utils";
 import OrderCardPhone from "@/src/components/order-card-phone";
@@ -13,7 +13,7 @@ function OrderDetails({ ProductDetails }: { ProductDetails: any }) {
   const data = ProductDetails.map((product: any) => [
     <ImgProduct
       key={`product-img-${product.productId}`}
-      src={phoneImg}
+      src={product?.heroImage || placTableProductImg}
       productName={product.productName}
     />,
     product.quantity || 0,

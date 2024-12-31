@@ -7,7 +7,6 @@ import { Navigation } from "swiper/modules";
 import ArrowLeftIcon from "@/src/assets/icons/arrowLeft";
 import ArrowRightIcon from "@/src/assets/icons/ArrowRight";
 import { StaticImageData } from "next/image";
-import RentSwitch from "@/src/components/RentSwitch";
 import CardRequest from "@/src/components/cardRequest";
 
 interface RequestData {
@@ -35,16 +34,12 @@ interface RequestData {
 interface CardViewProps {
   title: string;
   products?: RequestData[];
-  status: number|any;
-  first?: boolean;
-  haveRentSwitch?: boolean;
+  status: number | any;
 }
 function CardViewReq({
   title,
-  first = false,
   products,
   status,
-  haveRentSwitch = false,
 }: CardViewProps) {
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
@@ -57,40 +52,33 @@ function CardViewReq({
       swiper.navigation.update();
     }
   };
-  return (
-    <div className="swiperList pt-4 lg:pt-14 pb-5 lg:pb-16 lg:border-t border-black first-of-type:border-none first-of-type:pt-0">
-      <div
-        className={`flex  justify-start md:justify-between mb-2 lg:mb-6 gap-7  ${
-          first
-            ? "flex-col-reverse lg:items-center lg:flex-row"
-            : " items-center"
-        } `}
-      >
-        <div className="flex items-center gap-5 w-full md:w-fit md:justify-start justify-between">
-          <h2 className="text-2xl lg:text-[32px] ">{title}</h2>
+  if (products?.length === 0) {
+    return null;
+  }
 
-          {first && (
-            <Link
-              href={ROUTES.USER.BOOKINGS}
-              className="px-3 duration-300 hover:shadow-md w-fit py-2 rounded-xl border border-black flex items-center justify-center gap-2"
-            >
-              <ListIcon className="w-auto h-4 lg:h-5" />
-              <p className="lg:text-[16px] text-sm">List View</p>
-            </Link>
-          )}
+  
+  return (
+    <div className="swiperList swiperListBooking pt-4 lg:pt-10 pb-5 lg:pb-10 lg:border-t border-black first-of-type:border-none first-of-type:pt-0">
+      <div
+        className={`flex headBooking items-center  justify-start md:justify-between mb-2 lg:mb-6 gap-5 md:gap-7 flex-wrap lg:flex-nowrap   `}
+      >
+        <div className="flex items-center gap-5 w-fit md:justify-start justify-between">
+          <h2 className="text-xl lg:text-[32px] ">{title}</h2>
+          <Link
+            href={ROUTES.USER.BOOKINGS}
+            className="px-3 duration-300 linkView hover:shadow-md w-fit py-2 rounded-xl border border-black flex items-center justify-center gap-2"
+          >
+            <ListIcon className="w-auto h-4 lg:h-5" />
+            <p className="lg:text-[16px] text-sm text-nowrap">List View</p>
+          </Link>
         </div>
-        {first && haveRentSwitch && (
-          <div className="mx-auto">
-            <RentSwitch typeUser="user" />
-          </div>
-        )}
         <Link
-          href={ROUTES.USER.BOOKINGSID(status)+'?typeUser=IRentOut&statusTitle='+title.split(" ").join("-")}
-          className={` underline text-sm lg:text-lg min-w-fit ${
-            first
-              ? "order-first w-full lg:w-fit lg:order-none -mt-5 lg:mt-0  text-end"
-              : ""
-          }     font-medium`}
+          href={
+            ROUTES.USER.BOOKINGSID(status) +
+            "?typeUser=IRentOut&statusTitle=" +
+            title.split(" ").join("-")
+          }
+          className={` underline text-sm lg:text-lg min-w-fit text-end ms-auto   font-medium`}
         >
           View all
         </Link>
@@ -130,12 +118,12 @@ function CardViewReq({
             className={"mySwiper "}
           >
             {products?.map((item) => {
-                return (
-                  <SwiperSlide key={item.id}>
-                    <CardRequest data={item} status={status} />
-                  </SwiperSlide>
-                );
-              })}
+              return (
+                <SwiperSlide key={item.id}>
+                  <CardRequest data={item} status={status} />
+                </SwiperSlide>
+              );
+            })}
           </Swiper>
         </div>
         <div className="xl:flex hidden gap-3  absolute top-1/2 -translate-y-1/2 -right-10">

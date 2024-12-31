@@ -1,8 +1,9 @@
+"use client";
 import Button from "@/src/components/button";
 import Input from "@/src/components/input";
 import ModalComp from "@/src/components/modal-comp";
 import { Radio } from "@mantine/core";
-import React from "react";
+import React, { useState } from "react";
 const OptionReturn = [
   {
     value: "The product does not match the description.",
@@ -25,19 +26,21 @@ const OptionReturn = [
     label: "I had trouble using the product.",
   },
 ];
-function RequestReturnModale({
+function RequestReturnModal({
   opened,
   close,
+  onSubmitRefund,
 }: {
   opened: boolean;
   close: any;
+  onSubmitRefund: (msg: any) => void;
 }) {
+  const [DetailsRefund, setDetailsRefund] = useState(
+    "The product does not match the description."
+  );
+  const [Reason, setReason] = useState("");
   return (
-    <ModalComp
-      title="Request to return"
-      opened={opened}
-      close={close}
-    >
+    <ModalComp title="Request to return" opened={opened} close={close}>
       <div className="w-[564px] max-w-full">
         <div className="mb-8">
           <p className="text-xs mdl:text-base font-Regular mb-8">
@@ -56,15 +59,28 @@ function RequestReturnModale({
                       icon: "w-3 h-3 left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2",
                     }}
                     className="pb-2 border-b "
+                    onChange={(e) => setReason(e.target.value)}
                   />
                 );
               })}
             </div>
           </Radio.Group>
-          <Input placeholder="Provide additional details" inputClassName="bg-white h-16 rounded-xl" />
+          <Input
+            onChange={(e) => setDetailsRefund(e.target.value)}
+            placeholder="Provide additional details"
+            inputClassName="bg-white h-16 rounded-xl"
+          />
         </div>
         <div className="flex items-center gap-7 w-full">
-          <Button onClick={close} className={" flex-1 h-[54px]"}>
+          <Button
+            onClick={() => {
+              onSubmitRefund(
+                Reason ? Reason + " and " + DetailsRefund : DetailsRefund
+              );
+              close();
+            }}
+            className={" flex-1 h-[54px]"}
+          >
             Send
           </Button>
           <Button
@@ -79,4 +95,4 @@ function RequestReturnModale({
   );
 }
 
-export default RequestReturnModale;
+export default RequestReturnModal;

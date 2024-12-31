@@ -5,7 +5,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 import persone1 from "@/src/assets/images/person1.png";
 import persone2 from "@/src/assets/images/person2.png";
-import LogoWhite from "@/src/assets/icons/logoWhite";
+import OkoRentLogo from "@/src/assets/icons/OkorentLogo";
 interface SliderAuthProps {}
 const dataSwiper = [
   {
@@ -53,19 +53,20 @@ function SliderAuth({}: SliderAuthProps) {
         pagination={true}
         modules={[Navigation, Pagination]}
         className="w-full h-full rounded-[30px] swiperAuth"
-       
       >
         {dataSwiper.map((item) => {
           return (
             <SwiperSlide key={item.id}>
               <div className="w-full h-full relative rounded-[30px]">
-                <div className=" absolute top-12 left-14 z-10">
-                  <LogoWhite />
+                <div className=" absolute top-8 left-10 z-10">
+                  
+                  <OkoRentLogo className="w-[130px] h-auto"/>
                 </div>
-                <div className="w-full h-full relative before:content-[''] before:w-full before:h-full before:absolute before:bg-[#0000001a] before:z-[1]">
+                <div className="w-full h-full relative before:content-[''] before:w-full before:bottom-0 before:h-[50%] before:absolute before:bg-gradient-to-t before:from-[#0000001a] before:to-transparent before:z-[1]">
                   <Image
                     src={item.image}
                     priority
+                    width={7000}
                     className=" object-cover w-full h-full"
                     alt={item.name}
                   />

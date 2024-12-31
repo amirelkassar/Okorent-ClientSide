@@ -1,11 +1,12 @@
 import Image, { StaticImageData } from "next/image";
 import React from "react";
-import imageCard from "@/src/assets/images/phone.png";
+import imageCard from "@/src/assets/images/placProduct.png";
 import imageUser from "@/src/assets/images/avatar.png";
 import StarIcon from "@/src/assets/icons/star";
 import VerifyBlackIcon from "@/src/assets/icons/verifyBlack";
-import { getDate } from "../lib/utils";
+import { calculateDurationRange, getDate } from "../lib/utils";
 import BottomCardRentOut from "../app/[locale]/user/Bookings/_components/bottom-card-rent-out";
+import { useChangeStatusRentOut } from "../app/[locale]/user/Bookings/_hooks/use-change-status-rentOut";
 interface RequestData {
   id: number;
   renterName: string;
@@ -39,6 +40,15 @@ interface CardRequestProps {
 }
 
 function CardRequest({ data, status = 1 }: CardRequestProps) {
+  const {
+    onSubmitDelete,
+    onSubmitChangeStatus,
+    onSubmitReject,
+    onSubmitCancel,
+    onSubmitRefundNo,
+    onSubmitRefundYes,
+  } = useChangeStatusRentOut(data.id);
+
   if (!data) {
     return <p>No data available</p>; // Handle missing data case
   }
@@ -50,12 +60,12 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
         <div className="flex flex-col gap-2 justify-center ">
           <Image
             alt="user"
-            src={ imageUser||data?.heroImage}
+            src={imageUser}
             className=" lgl:size-[104px] size-[70x] lgl:min-w-[104px] min-w-[70px] rounded-[50%] object-cover object-top"
             priority
           />
           <p className="text-green lgl:text-[16px] text-sm text-center">
-            {data?.statusUser || "available"}
+            {data?.isAvailable ? "available" : "unAvailable"}
           </p>
         </div>
         <div>
@@ -63,26 +73,35 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
             <h3 className="text-base lgl:text-[32px] ">
               {data?.renterName || "Renter Name"}
             </h3>
-            <div className="flex items-center justify-center size-5 lgl:size-[26px] ">
-              <VerifyBlackIcon />
-            </div>
+            {data?.isVerified && (
+              <div className="flex items-center justify-center size-5 lgl:size-[26px] ">
+                <VerifyBlackIcon />
+              </div>
+            )}
           </div>
           <h4 className="text-grayMedium text-sm lgl:text-[20px]  mb-2 lgl:mb-6">
-            Member Since {getDate(data?.from || "").fullMonthNameWithDayName}
+            Member Since{" "}
+            {getDate(data?.renterCreated || "").fullMonthNameWithDayName}
           </h4>
           <div className="flex items-center ">
             <div className="flex items-center gap-1 pe-3 lgl:pe-4">
-              <p className="font-Bold text-base lgl:text-[24px]">1</p>
+              <p className="font-Bold text-base lgl:text-[24px]">
+                {data?.userRating || 0}
+              </p>
               <StarIcon className="w-4 lgl:w-[22px] h-auto" />
             </div>
             <div className="flex lgl:items-end items-center lgl:text-[16px] text-sm flex-col lgl:flex-row  lgl:gap-1 pe-3 lgl:pe-4 ps-2 border-s border-green">
-              <p className="font-Bold text-base lgl:text-[24px]">50</p>
+              <p className="font-Bold text-base lgl:text-[24px]">
+                {data?.rentedItemsCount || 0}
+              </p>
               <p className="text-[12px] lgl:text-[16px] lgl:mb-1 text-grayMedium">
                 Rented Items
               </p>
             </div>
             <div className="flex lgl:items-end items-center lgl:text-[16px] text-sm flex-col lgl:flex-row  lgl:gap-1 pe-3 lgl:pe-4 ps-2 border-s border-green">
-              <p className="font-Bold text-base lgl:text-[24px]">50</p>
+              <p className="font-Bold text-base lgl:text-[24px]">
+                {data?.leasedItemsCount}
+              </p>
               <p className="text-[12px] lgl:text-[16px] lgl:mb-1 text-grayMedium">
                 {" "}
                 Leased Items
@@ -93,12 +112,14 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
       </div>
       <div className=" pt-4 lg:pt-6 pb-7 lgl:pb-12">
         <div className="flex items-center gap-2 lg:gap-4">
-          <div className="bg-grayBack rounded-2xl p-3 w-[104px] lgl:w-[212px] h-[110px] lgl:h-[170px] flex items-center justify-center">
+          <div className="bg-grayBack rounded-2xl p-1 mdl:p-3 min-w-[90px] w-[104px] lgl:w-[212px] h-[110px] lgl:h-[170px] flex items-center justify-center">
             <Image
               alt="user"
-              src={imageCard}
+              src={data?.heroImage || imageCard}
               priority
-              className="w-auto object-contain h-full "
+              className="w-auto object-contain h-full rounded-lg "
+              width={212}
+              height={170}
             />
           </div>
 
@@ -109,7 +130,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
                   Product Name
                 </h3>
                 <p className="lgl:text-[16px] text-[12px] font-SemiBold max-w-[130px] truncate">
-                  {data?.productName}
+                  {data?.productName || "Product Name"}a
                 </p>
               </div>
               <span className=" block h-[34px] w-[1px] bg-green"></span>
@@ -117,8 +138,8 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
                 <h3 className="text-grayMedium  mb-[2px] lgl:mb-1 font-Regular text-[12px] lgl:text-base">
                   Payment
                 </h3>
-                <p className="lgl:text-[16px] text-[12px]  font-SemiBold">
-                  {data?.amount}
+                <p className="lgl:text-[16px] text-[12px] text-center  font-SemiBold">
+                  {data?.amount || 0}$
                 </p>
               </div>
               <span className=" block h-[34px] w-[1px] bg-green"></span>
@@ -126,7 +147,11 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
                 <h3 className="text-grayMedium mb-[2px] lgl:mb-1 font-Regular text-[12px] lgl:text-base">
                   Rental Period
                 </h3>
-                <p className="lgl:text-[16px] text-[12px] font-SemiBold">
+                <p className="lgl:text-[16px] text-center text-[12px] font-SemiBold">
+                  {calculateDurationRange(
+                    new Date(data.from),
+                    new Date(data.to)
+                  )}
                   {data.rentalPeriod} Days
                 </p>
               </div>
@@ -137,7 +162,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
                   Start Date
                 </h3>
                 <p className="lgl:text-[16px] text-[12px] font-SemiBold">
-                  {getDate(data?.from || "").fullMonthNameWithDayName}
+                  {getDate(data?.from || "").fullYear}
                 </p>
               </div>
               <span className=" block h-[34px] w-[1px] bg-green"></span>
@@ -146,7 +171,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
                   End Date
                 </h3>
                 <p className="lgl:text-[16px] text-[12px]  font-SemiBold">
-                  {getDate(data?.to || "").fullMonthNameWithDayName}
+                  {getDate(data?.to || "").fullYear}
                 </p>
               </div>
               <span className=" block h-[34px] w-[1px] bg-green"></span>
@@ -168,16 +193,13 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
             <BottomCardRentOut.Accept
               style="w-full min-w-full"
               id={data?.id || "undefined"}
-              onClick={() => console.log("Reorder clicked")}
+              onClick={() => onSubmitChangeStatus()}
             />
             <BottomCardRentOut.Reject
               id={data?.id || "undefined"}
-              onClick={() => console.log("Reorder clicked")}
+              onClick={() => onSubmitReject()}
             />
-            <BottomCardRentOut.ViewDetailsLink
-              id={data?.id || "undefined"}
-              onClick={() => console.log("Reorder clicked")}
-            />
+            <BottomCardRentOut.ViewDetailsLink id={data?.id || "undefined"} />
           </>
         )}
         {status === 3 && (
@@ -185,7 +207,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
             <BottomCardRentOut.OutForDelivery
               style="w-full min-w-full"
               id={data?.id || "undefined"}
-              onClick={() => console.log("Reorder clicked")}
+              onClick={() => onSubmitChangeStatus()}
             />
             <BottomCardRentOut.MessageLink
               id={data?.id || "undefined"}
@@ -193,7 +215,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
             />
             <BottomCardRentOut.CancelBookings
               id={data?.id || "undefined"}
-              onClick={() => console.log("Reorder clicked")}
+              onClick={() => onSubmitCancel()}
             />
           </>
         )}
@@ -211,7 +233,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
             <BottomCardRentOut.OutForReturn
               style="w-full min-w-full"
               id={data?.id || "undefined"}
-              onClick={() => console.log("Reorder clicked")}
+              onClick={() => onSubmitChangeStatus()}
             />
             <BottomCardRentOut.MessageLink
               id={data?.id || "undefined"}
@@ -227,8 +249,8 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
               name={FirstLessorName || "User"}
             />
             <BottomCardRentOut.MarkAsCompleted
-              onClick={() => console.log("Reorder clicked")}
               id={data?.id || "undefined"}
+              onClick={() => onSubmitChangeStatus()}
             />
           </>
         )}
@@ -239,7 +261,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
               name={FirstLessorName || "User"}
             />
             <BottomCardRentOut.Delete
-              onClick={() => console.log("Reorder clicked")}
+              onClick={() => onSubmitDelete()}
               id={data?.id || "undefined"}
             />
           </>
@@ -249,7 +271,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
             <BottomCardRentOut.Approve
               style="w-full min-w-full"
               id={data?.id || "undefined"}
-              onClick={() => console.log("Reorder clicked")}
+              onClick={() => onSubmitRefundYes()}
             />
             <BottomCardRentOut.MessageLink
               id={data?.id || "undefined"}
@@ -257,7 +279,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
             />
             <BottomCardRentOut.RejectReturn
               id={data?.id || "undefined"}
-              onClick={() => console.log("Reorder clicked")}
+              onClick={() => onSubmitRefundNo()}
             />
           </>
         )}

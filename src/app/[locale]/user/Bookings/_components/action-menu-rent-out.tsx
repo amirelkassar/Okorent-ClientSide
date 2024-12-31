@@ -27,6 +27,8 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
     onSubmitChangeStatus,
     onSubmitReject,
     onSubmitCancel,
+    onSubmitRefundNo,
+    onSubmitRefundYes,
   } = useChangeStatusRentOut(id);
 
   const options = [
@@ -54,7 +56,8 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
       icon: <BarcodeIcon className="w-3 h-auto" />,
       type: "btn",
       action: () => {
-        open();
+       // open();
+       onSubmitChangeStatus();
       },
     },
     //3
@@ -96,14 +99,18 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
       label: "Approve Request",
       icon: <TrueIcon fill="#88BA52" className="w-3 h-auto" />,
       type: "btn",
-      action: () => {},
+      action: () => {
+        onSubmitRefundYes();
+      },
     },
     //8
     {
       label: "Reject Request",
       icon: <CloseIcon fill="#FF1D45" className="w-3 h-auto" />,
       type: "btn",
-      action: () => {},
+      action: () => {
+        onSubmitRefundNo();
+      },
     },
     //9
     {
@@ -143,7 +150,7 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
   const optionView = () => {
     switch (status.toString()) {
       case "1":
-        return [options[0], options[5], options[6], options[10],options[9]];
+        return [options[0], options[5], options[6], options[10], options[9]];
       case "3":
         return [options[1], options[4], options[5], options[6], options[9]];
       case "4":
@@ -170,7 +177,7 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
   return (
     <>
       <DataActions data={optionView() || []} />
-      {opened && <ViewQrModal opened={opened} close={close} />}
+      {opened && <ViewQrModal opened={opened} close={close} id={id} />}
       {opened2 && (
         <VersionHistoryModal opened={opened2} close={close2} id={id} />
       )}

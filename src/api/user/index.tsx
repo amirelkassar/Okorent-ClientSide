@@ -43,6 +43,11 @@ export const user = {
     refund_iRent: `/OrderRequest/Refund Order Request`,
     refund_iRent_out: `/OrderRequest/Refund Order Response`,
     reject_iRent: `/OrderRequest/Reject Order`,
+    review: {
+      base: "/Reviews",
+      getByID: (id: any) => `/Reviews/${id}`,
+    },
+    barcode:'Barcode/generate'
   },
   user: {
     getByID: (id: any) => `User/${id}`,

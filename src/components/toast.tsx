@@ -43,12 +43,14 @@ const Toast = {
         },
         error: (err: any) => {
           console.log(err);
-          
+
           if (options?.onError) options.onError(err);
           return (
             <div className="flex items-center justify-between w-full ">
               <p className="text-xs mdl:text-base font-medium">
-                {options.error || err?.response?.data?.errors?.Error || "Request failed"}
+                {options.error ||
+                  err?.response?.data?.errors?.Error ||
+                  "Request failed"}
               </p>
             </div>
           );
@@ -59,7 +61,10 @@ const Toast = {
           duration: 5000,
         },
         error: {
-          duration: 15000,
+          duration: 5000,
+        },
+        loading: {
+          duration: Infinity,
         },
       }
     );
@@ -90,7 +95,6 @@ export function Toaster() {
           style={{ padding: 0, width: "100%", maxWidth: "100%" }}
         >
           {({ icon, message }) => (
-            
             <div className="flex items-center justify-between w-full">
               <div className="flex items-center">
                 {t.type === "error" ? (
@@ -100,7 +104,7 @@ export function Toaster() {
                 ) : (
                   icon
                 )}
-                
+
                 <div className="md:ml-2">{message}</div>
               </div>
               {t.type !== "loading" && (

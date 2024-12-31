@@ -30,7 +30,7 @@ export const Pagination = ({
     <div className="font-bold flex ltr:flex-row-reverse items-center justify-between mb-section">
       <Button
         className={`py-1 text-xs font-Regular  px-2 lg:px-5 gap-2 lg:gap-4 rounded-xl ${
-          currentPage === 4 || disabled ? "opacity-55 pointer-events-none" : ""
+          currentPage === totalPages || disabled ? "opacity-55 pointer-events-none" : ""
         }`}
         onClick={() => {
           if (setPageNumber) return setPageNumber(+PageNumber + 1);

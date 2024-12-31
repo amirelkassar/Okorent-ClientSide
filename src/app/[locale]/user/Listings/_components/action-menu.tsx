@@ -18,19 +18,18 @@ import { Toast } from "@/src/components/toast";
 function ActionMenu({ id, status }: { id: any; status: any }) {
   const [opened, { open, close }] = useDisclosure(false);
   const { mutateAsync: DeleteProduct } = useDeleteMutation();
-  const { mutateAsync: UpdateToOnlin } = useUpdateToOnlineMutation();
+  const { mutateAsync: UpdateToOnline } = useUpdateToOnlineMutation();
   const onSubmitDelete = useCallback(async () => {
     Toast.Promise(DeleteProduct(id), {
       success: "Deleted Product Done",
       onSuccess: async (res) => {},
     });
-  }, [DeleteProduct]);
+  }, [DeleteProduct, id]);
   const onSubmitOnline = useCallback(async () => {
-    Toast.Promise(UpdateToOnlin(id), {
+    Toast.Promise(UpdateToOnline(id), {
       success: "Done Change Product To OnLine",
-
     });
-  }, [DeleteProduct]);
+  }, [UpdateToOnline, id]);
   const options = [
     {
       label: "Edit",

@@ -27,15 +27,14 @@ interface StepAvailabilityProps {
 function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
   const [opened, { open, close }] = useDisclosure(false);
   return (
-    <div className="mt-[7px] pb-8 lg:pb-12 flex-1">
-      <h3 className={"text-base lg:text-[24px] mb-2 lg:mb-3 "}>Availability</h3>
+    <div className="mt-1 mdl:mt-2 mdl:pb-8 flex-1">
+      <h3 className={"text-sm lg:text-[24px] mb-2 lg:mb-3 "}>Availability</h3>
       <p className="text-grayMedium mb-4 text-sm lg:text-base font-Regular">
         Choose when your item will be available for rent
       </p>
       <Radio.Group
         name="OptionAvailability"
         defaultValue={dataList?.alwaysAvailable ? "always" : "pick"}
-        
         onChange={(e) => {
           setDataList({
             ...dataList,
@@ -46,7 +45,7 @@ function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
           }
         }}
       >
-        <div className="flex my-6 items-center justify-between gap-1 lg:gap-3 flex-wrap">
+        <div className="flex my-6 mdl:items-center flex-col mdl:flex-row justify-between gap-3 flex-wrap">
           {OptionAvailability.map((option, inedx) => {
             return (
               <Radio
@@ -56,6 +55,12 @@ function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
                 label={option.label}
                 classNames={{
                   icon: "w-3 h-3 left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2",
+                  label: " text-xs lg:text-sm",
+                }}
+                onClick={(e) => {
+                  if (e.currentTarget.value === "pick") {
+                    open();
+                  }
                 }}
               />
             );
@@ -63,16 +68,28 @@ function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
         </div>
       </Radio.Group>
       <div>
-        <p className="mt-4 text-[12px] md:text-[14px] text-grayMedium font-Regular">
-          Your item is available for rent{" "}
-          <span className="text-blue font-Medium">
-            from{" "}
-            {getDate(dataList?.availableFrom, "en").fullMonthNameWithDayName} to{" "}
-            {getDate(dataList?.availableTo, "en").fullMonthNameWithDayName}
-          </span>{" "}
-          <br />
-          Availability automatically updates to reflect rental periods.
-        </p>
+        {dataList.alwaysAvailable === true ? (
+          <p className="mt-4 text-[12px] md:text-[14px] text-grayMedium font-Regular">
+            Your item is Always available for rent
+          </p>
+        ) : dataList.alwaysAvailable === false ? (
+          <p className="mt-4 text-[12px] md:text-[14px] text-grayMedium font-Regular">
+            Your item is available for rent{" "}
+            <span
+              className="text-blue font-Medium cursor-pointer "
+              onClick={open}
+            >
+              from{" "}
+              {getDate(dataList?.availableFrom, "en")
+                .fullMonthNameWithDayName || "__"}{" "}
+              to{" "}
+              {getDate(dataList?.availableTo, "en").fullMonthNameWithDayName ||
+                "__"}
+            </span>{" "}
+            <br />
+            Availability automatically updates to reflect rental periods.
+          </p>
+        ) : null}
       </div>
       <ModalComp
         title="Choose available date and time "
@@ -137,6 +154,7 @@ function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
               weekday: "text-black",
               calendarHeader: "text-grayMedium",
             }}
+            minDate={new Date()}
           />
         </div>
 

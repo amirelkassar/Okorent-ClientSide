@@ -5,12 +5,14 @@ import FreeIcon from "@/src/assets/icons/free";
 import { Rating } from "@mantine/core";
 import React from "react";
 
-function FeaturesProduct() {
+function FeaturesProduct({ numRates = 0 }: { numRates?: any }) {
   return (
     <div className="flex items-center gap-3 flex-wrap ">
-       <div className="bg-black px-3  rounded-lg flex items-center gap-[6px]">
+      <div className="bg-black px-3  rounded-lg flex items-center gap-[6px]">
         <ElectronicsWhiteIcon />
-        <p className="text-sm lg:text-base text-white font-Regular]">Electronics</p>
+        <p className="text-sm lg:text-base text-white font-Regular]">
+          Electronics
+        </p>
       </div>
       <div className="bg-blue/10 px-3  rounded-lg flex items-center gap-[6px]">
         <BestIcon />
@@ -25,8 +27,16 @@ function FeaturesProduct() {
         <p className="text-sm lg:text-base font-Regular]">20% Discount</p>
       </div>
       <div className="flex items-center gap-2 ">
-        <p className="text-sm lg:text-base font-Regular">4.2</p>
-        <Rating color="#88BA52" count={4} value={4.2} fractions={10} readOnly />
+        <p className="text-sm lg:text-base font-Regular">
+          {parseFloat(numRates.toFixed(1)) || 0}
+        </p>
+        <Rating
+          color="#88BA52"
+          count={5}
+          value={numRates}
+          fractions={10}
+          readOnly
+        />
       </div>
     </div>
   );

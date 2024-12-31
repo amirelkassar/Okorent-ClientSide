@@ -31,7 +31,7 @@ function Step({
           <span className="flex-1 block h-full w-[1px] bg-black/40 mb-1"></span>
         )}
       </div>
-      <div className="mt-[7px] pb-5 lg:pb-12 flex-1">
+      <div className="mt-[7px] pb-5 lg:pb-12 flex-1 max-w-[calc(100%-50px)]">
         <h3 className={cn("text-sm lg:text-[24px] lg:mb-1 ", !dec && "!mb-3 lg:!mb-6")}>{title}</h3>
         {dec && (
           <p className="text-grayMedium mb-3 lg:mb-4 text-sm lg:text-base font-Regular">{dec}</p>

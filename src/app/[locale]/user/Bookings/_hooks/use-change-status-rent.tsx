@@ -51,18 +51,21 @@ export const useChangeStatusRent = (id: any): ActionTableIRentProps => {
   }, [DeleteOrderOut, id]);
 
   //cancel order
-  const onSubmitRefund = useCallback(async () => {
-    Toast.Promise(
-      RefundOrder({
-        orderId: id,
-        renterMessage: "string",
-      }),
-      {
-        success: "Done Send Request to Return Order",
-        onSuccess: async (res) => {},
-      }
-    );
-  }, [RefundOrder, id]);
+  const onSubmitRefund = useCallback(
+    async (msg: any = "msg") => {
+      Toast.Promise(
+        RefundOrder({
+          orderId: id,
+          renterMessage: msg,
+        }),
+        {
+          success: "Done Send Request to Return Order",
+          onSuccess: async (res) => {},
+        }
+      );
+    },
+    [RefundOrder, id]
+  );
 
   return {
     onSubmitDelete,

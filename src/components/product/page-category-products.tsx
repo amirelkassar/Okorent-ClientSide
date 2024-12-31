@@ -1,6 +1,9 @@
 "use client";
 import CloseIcon from "@/src/assets/icons/close";
-import { GetSubCategory } from "@/src/hooks/queries/user/add-lisiting";
+import {
+  GetCategory,
+  GetSubCategory,
+} from "@/src/hooks/queries/user/add-lisiting";
 import { GetProductsAll } from "@/src/hooks/queries/user/home";
 import { useUpdateQueryParams } from "@/src/lib/utils";
 import { useSearchParams } from "next/navigation";
@@ -11,6 +14,7 @@ import SkeletonLoading from "../skeleton-loading";
 import { MultiSelect } from "@mantine/core";
 import CantFind from "./CantFind";
 import { Pagination } from "../pagination";
+import { useQueryState } from "nuqs";
 const sortingOptions: any[] = [
   {
     value: "PriceAsc",
@@ -30,6 +34,9 @@ const sortingOptions: any[] = [
   },
 ];
 function PageCategoryProducts({ children }: { children: React.ReactNode }) {
+  const { data: dataCategory, isLoading: isLoadingCategory } = GetCategory();
+  const [CategoryIdParams, setCategoryIdParams] = useQueryState("CategoryId");
+  const [CategoryNameParams, setCategoryNameParams] = useQueryState("category");
   const searchParams = useSearchParams();
   const [selectedSubcategories, setSelectedSubcategories] = useState<string[]>(
     searchParams.getAll("SubCategoryIds") || []
@@ -111,41 +118,70 @@ function PageCategoryProducts({ children }: { children: React.ReactNode }) {
           clearable
           className="block lgl:hidden" // Visible on mobile, hidden on larger screens
         />
-        {isLoadingSubCategory ? (
+        {searchParams.get("CategoryId") ? (
+          isLoadingSubCategory ? (
+            <div className=" lgl:block hidden">
+              <SkeletonLoading className="!w-[270px] !h-[650px]" />
+            </div>
+          ) : (
+            <div className="border border-green hidden lgl:block px-2 py-8 rounded-2xl bg-white shadow-md max-w-[330px] min-w-[330px] w-full">
+              <h2 className="text-3xl font-SemiBold  mb-4 px-3">
+                Subcategories
+              </h2>
+              {dataSubCategories?.data.length === 0 ? (
+                <p className="text-grayMedium ps-4 text-sm font-Regular">
+                  No subcategories found.
+                </p>
+              ) : (
+                <div className=" flex-col flex gap-5">
+                  {dataSubCategories?.data.map(
+                    (subcategory: any, index: number) => (
+                      <div
+                        key={index}
+                        className={`${
+                          selectedSubcategories.includes(subcategory.id)
+                            ? "bg-green/15"
+                            : ""
+                        } cursor-pointer px-4 py-1 rounded-lg`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleSubcategoryToggle(subcategory.id);
+                        }}
+                      >
+                        {subcategory.name}
+                      </div>
+                    )
+                  )}
+                </div>
+              )}
+            </div>
+          )
+        ) : isLoadingCategory ? (
           <div className=" lgl:block hidden">
             <SkeletonLoading className="!w-[270px] !h-[650px]" />
           </div>
         ) : (
           <div className="border border-green hidden lgl:block px-2 py-8 rounded-2xl bg-white shadow-md max-w-[330px] min-w-[330px] w-full">
-            <h2 className="text-3xl font-SemiBold  mb-4 px-3">Subcategories</h2>
-
-            {/* MultiSelect for mobile */}
-
-            {/* List for larger screens */}
-            {dataSubCategories?.data.length === 0 ? (
+            <h2 className="text-3xl font-SemiBold  mb-4 px-3">Categories</h2>
+            {dataCategory?.data.length === 0 ? (
               <p className="text-grayMedium ps-4 text-sm font-Regular">
-                No subcategories found.
+                No Categories found.
               </p>
             ) : (
               <div className=" flex-col flex gap-5">
-                {dataSubCategories?.data.map(
-                  (subcategory: any, index: number) => (
-                    <div
-                      key={index}
-                      className={`${
-                        selectedSubcategories.includes(subcategory.id)
-                          ? "bg-green/15"
-                          : ""
-                      } cursor-pointer px-4 py-1 rounded-lg`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleSubcategoryToggle(subcategory.id);
-                      }}
-                    >
-                      {subcategory.name}
-                    </div>
-                  )
-                )}
+                {dataCategory?.data.map((category: any, index: number) => (
+                  <div
+                    key={index}
+                    className={`cursor-pointer px-4 py-1 rounded-lg`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setCategoryNameParams(category.name); // Set the category name
+                      setCategoryIdParams(category.id); // Set the CategoryId
+                    }}
+                  >
+                    {category?.name}
+                  </div>
+                ))}
               </div>
             )}
           </div>

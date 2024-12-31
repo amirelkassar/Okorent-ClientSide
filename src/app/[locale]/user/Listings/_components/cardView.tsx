@@ -56,7 +56,11 @@ function CardView({
       {withStatus ? (
         <div className="w-full flex-wrap gap-6 my-4 relative flex items-center">
           {data?.map((item: any, index: number) => (
-            <OneCardView key={index} data={item} offline={false} />
+            <OneCardView
+              key={index}
+              data={item}
+              offline={title === "Offline"}
+            />
           ))}
         </div>
       ) : (

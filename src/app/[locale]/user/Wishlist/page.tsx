@@ -1,19 +1,26 @@
+"use client";
 import React from "react";
-import OneCardView from "./_components/oneCardView";
-
+import { GetProductsFavoriteAll } from "@/src/hooks/queries/user/home";
+import { QueryWrapper } from "@/src/components/query-wrapper";
+import CardFavView from "./_components/card-fav-view";
 
 function page() {
-   
+  const query = GetProductsFavoriteAll("IncludeFavoritesOnly=true");
+
   return (
-    <div className="flex gap-x-12 mb-24 flex-wrap gap-y-8">
-      <OneCardView />
-      <OneCardView />
-      <OneCardView />
-      <OneCardView />
-      <OneCardView />
-      <OneCardView />
-    
-    </div>
+    <QueryWrapper query={query}>
+      {({ data, totalPages }) => {
+        console.log(data);
+        console.log(totalPages);
+        return (
+          <div className="flex gap-x-12 mb-24 flex-wrap gap-y-8">
+            {data.map((item: any, index: number) => (
+              <CardFavView product={item} key={index} />
+            ))}
+          </div>
+        );
+      }}
+    </QueryWrapper>
   );
 }
 

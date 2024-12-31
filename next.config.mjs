@@ -6,9 +6,10 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "okorent.profound-group.com" ,
+        hostname: "okorent.profound-group.com",
       },
     ],
+    unoptimized: true,
   },
   experimental: {
     optimizePackageImports: ["@mantine/core", "@mantine/hooks"],

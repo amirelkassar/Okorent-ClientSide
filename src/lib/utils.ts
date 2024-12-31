@@ -198,21 +198,36 @@ export const calculateDurationRange = (valueDateFrom: Date | null, valueDateTo: 
   }
   return 0;
 };
-export const getFormData = (data: Record<string, any>) => {
+export const getFormData = async (data: Record<string, any>) => {
   const formData = new FormData();
 
-  Object.entries(data).forEach(([key, value]) => {
-    if ((key === "ProductImageFiles"||key === "images") && Array.isArray(value)) {
-      // Handle ProductImageFiles as files
-      value.forEach((file) => {
-        if (file instanceof File) {
-          formData.append(key, file, file.name); // Append File objects
-        } else if (file.path) {
-          const mockFile = new File([], file.path); // Create a mock File for path strings
-          formData.append(key, mockFile, file.path);
+  for (const [key, value] of Object.entries(data)) {
+    if ((key === "ProductImageFiles" || key === "images") && Array.isArray(value)) {
+      // Handle image files and URLs
+      for (const item of value) {
+        if (item instanceof File) {
+          // Append File objects directly
+          formData.append(key, item, item.name);
+        } else if (item.path) {
+          // Fetch image and convert to Blob
+          console.log(item.path);
+
+          const response = await axios.get(item.path, { responseType: 'blob' });
+          console.log(response);
+
+
+          const blob = await response.data;
+          console.log(blob);
+          const objectURL = URL.createObjectURL(blob);
+          console.log(objectURL);
+
+          const fileName = item.path.split('/').pop() || "image.jpg";
+          console.log(new File([blob], fileName, { type: blob.type }));
+
+          formData.append(key, new File([blob], fileName, { type: 'image/png' }));
         }
-      });
-    } else if ((key === "FAQs"||key === "faQs") && Array.isArray(value)) {
+      }
+    } else if ((key === "FAQs" || key === "faQs") && Array.isArray(value)) {
       // Handle FAQs as indexed structure
       value.forEach((faq, index) => {
         Object.entries(faq).forEach(([faqKey, faqValue]) => {
@@ -233,10 +248,11 @@ export const getFormData = (data: Record<string, any>) => {
       // Handle primitive values
       formData.append(key, String(value));
     }
-  });
+  }
 
   return formData;
 };
+
 
 export const GetUniqueValues = (data: any[], key: string) => {
   if (!key) return null; // Return null if no key is provided
@@ -260,3 +276,25 @@ export const GetIdsValues = (data: any[] = []) => {
 
   return ids.length > 0 ? ids : null; // Return ids if any, else null
 };
+
+// export async function fetchAndDisplayImage() {
+//   const imageUrl = "https://okorent.profound-group.com/ProductEntity/f4612acc-47da-403b-a2a8-ce72cc7a35c9_026c062d-468c-4bba-8723-73e9cd44940c_c4d4e184-076a-4d7e-bf1c-afd128ce7b29_129055380-800x600.png";
+
+//   try {
+//     const response = await axios.get(imageUrl, { responseType: 'blob' });
+//     console.log(response);
+
+//     // Check if the response is OK
+//     const blob = await response.data;
+//     console.log(blob);
+
+//     //const objectURL = URL.createObjectURL(blob);
+
+//     console.log(response);
+
+
+//   } catch (error) {
+
+//     console.error("Error fetching or displaying image:", error);
+//   }
+// }

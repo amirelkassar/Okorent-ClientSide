@@ -10,6 +10,7 @@ import { columnsReq } from "./columnsReq";
 import { QueryWrapper } from "@/src/components/query-wrapper";
 import { useActionTableIRentOut } from "../_hooks/use-action-table-iRent-out";
 import { FilterOptionsBooking } from "./filter-data";
+import { Pagination } from "@/src/components/pagination";
 
 function TableRentOut({ query }: { query: any }) {
   const { setSelectedFromTable, functionSelectView } = useActionTableIRentOut();
@@ -31,16 +32,20 @@ function TableRentOut({ query }: { query: any }) {
         <TableHeader.Last options={FilterOptionsBooking} />
       </TableHeader>
       <QueryWrapper query={query}>
-        {({ data }: { data: any }) => {
-          console.log(data);
+        {({ data, totalPages }: { data: any; totalPages?: any }) => {
+          console.log(totalPages);
+
           return (
-            <DataTable
-              title=""
-              data={data || []}
-              columns={columnsReq}
-              functionSelect={functionSelectView}
-              setSelectedFromTable={setSelectedFromTable}
-            />
+            <div>
+              <DataTable
+                title=""
+                data={data || []}
+                columns={columnsReq}
+                functionSelect={functionSelectView}
+                setSelectedFromTable={setSelectedFromTable}
+              />
+              <Pagination totalPages={totalPages} />
+            </div>
           );
         }}
       </QueryWrapper>

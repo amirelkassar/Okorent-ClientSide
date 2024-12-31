@@ -73,7 +73,7 @@ function ItemLocation({
               "bg-white text-black rounded-lg border border-green/50 text-grayDark py-2",
             option:
               "hover:bg-green hover:text-white duration-300   flex items-center ",
-            pill: "bg-green text-white h-auto py-2 flex items-center rounded-lg gap-2 text-base",
+            pill: "bg-green text-white h-auto py-2 flex items-center rounded-lg gap-2 text-sm mdl:text-base",
             label: "text-grayMedium",
           }}
           clearable
@@ -180,20 +180,18 @@ function ItemLocation({
       </div>
 
       {location.length < 3 && (
-        <div className="variations-header">
-          <Button
-            onClick={() => {
-              addLocation();
-              open();
-            }}
-            className={
-              " mt-5 lg:mt-8 bg-grayBack gap-3 px-4 lg:px-7 h-12 lg:h-[64px] border-none text-black"
-            }
-          >
-            <LocationIcon fill="#0F2A43" />
-            <p>Add location</p>
-          </Button>
-        </div>
+        <Button
+          onClick={() => {
+            addLocation();
+            open();
+          }}
+          className={
+            " mt-5 lg:mt-8 bg-grayBack gap-3 px-4 lg:px-7 h-12 lg:h-[64px] border-none text-black"
+          }
+        >
+          <LocationIcon fill="#0F2A43" />
+          <p>Add location</p>
+        </Button>
       )}
       {opened && indexSelect ? (
         <ModalComp title="Add a variation" opened={opened} close={close}>

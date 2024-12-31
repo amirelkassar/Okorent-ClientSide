@@ -68,6 +68,7 @@ function DateSuspendModal() {
             weekendDays={[]}
             value={TypeDate === "from" ? value : value2}
             onChange={TypeDate === "from" ? setValue : setValue2}
+            minDate={new Date()}
           />
 
           <Button

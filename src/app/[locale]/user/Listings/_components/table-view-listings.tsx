@@ -7,6 +7,7 @@ import { Link } from "@/src/navigation";
 import CardIcon from "@/src/assets/icons/card";
 import { useActionTable } from "../_hooks/use-action-table";
 import { Pagination } from "@/src/components/pagination";
+import { QueryWrapper } from "@/src/components/query-wrapper";
 const FilterOptions = [
   {
     label: "online",
@@ -20,15 +21,8 @@ const FilterOptions = [
   },
 ];
 
-function TableViewListings({
-  data,
-  totalPages,
-}: {
-  data: any;
-  totalPages: any;
-}) {
+function TableViewListings({ query }: { query: any }) {
   const { functionSelectView, setSelectedFromTable } = useActionTable();
-  console.log(data);
 
   return (
     <div className=" hidden mdl:block">
@@ -44,15 +38,23 @@ function TableViewListings({
         </TableHeader.First>
         <TableHeader.Last options={FilterOptions} />
       </TableHeader>
-      <DataTable
-        //Component={CardViewPhoneListing}
-        title=""
-        data={data}
-        columns={columns}
-        functionSelect={functionSelectView}
-        setSelectedFromTable={setSelectedFromTable}
-      />
-      <Pagination totalPages={totalPages} />
+      <QueryWrapper query={query}>
+        {({ data, totalPages }: { data: any; totalPages?: any }) => {
+          return (
+            <div>
+              <DataTable
+                //Component={CardViewPhoneListing}
+                title=""
+                data={data}
+                columns={columns}
+                functionSelect={functionSelectView}
+                setSelectedFromTable={setSelectedFromTable}
+              />
+              <Pagination totalPages={totalPages} />
+            </div>
+          );
+        }}
+      </QueryWrapper>
     </div>
   );
 }

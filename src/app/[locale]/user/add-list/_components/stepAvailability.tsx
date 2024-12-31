@@ -9,6 +9,8 @@ import Button from "@/src/components/button";
 import { DatePickerInput } from "@mantine/dates";
 import DateIcon from "@/src/assets/icons/date";
 import { getDate } from "@/src/lib/utils";
+import ErrorMsg from "@/src/components/error-msg";
+import GetErrorMsg from "@/src/components/getErrorMsg";
 const OptionAvailability = [
   {
     value: "always",
@@ -24,8 +26,15 @@ const OptionAvailability = [
 interface StepAvailabilityProps {
   setDataList: React.Dispatch<any>;
   dataList: any;
+  error: any;
+  reset: any;
 }
-function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
+function StepAvailability({
+  setDataList,
+  dataList,
+  error,
+  reset,
+}: StepAvailabilityProps) {
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
@@ -38,6 +47,7 @@ function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
       <Radio.Group
         name="OptionAvailability"
         onChange={(e) => {
+          reset();
           setDataList({
             ...dataList,
             AlwaysAvailable: e === "always" ? true : false,
@@ -59,23 +69,45 @@ function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
                   icon: "w-3 h-3 left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2",
                   label: " text-xs lg:text-sm",
                 }}
+                onClick={(e) => {
+                  if (e.currentTarget.value === "pick") {
+                    open();
+                  }
+                }}
               />
             );
           })}
         </div>
       </Radio.Group>
       <div>
-        <p className="mt-4 text-[12px] md:text-[14px] text-grayMedium font-Regular">
-          Your item is available for rent{" "}
-          <span className="text-blue font-Medium">
-            from{" "}
-            {getDate(dataList?.AvailableFrom, "en").fullMonthNameWithDayName} to{" "}
-            {getDate(dataList?.AvailableTo, "en").fullMonthNameWithDayName}
-          </span>{" "}
-          <br />
-          Availability automatically updates to reflect rental periods.
-        </p>
+        {dataList.AlwaysAvailable === true ? (
+          <p className="mt-4 text-[12px] md:text-[14px] text-grayMedium font-Regular">
+            Your item is Always available for rent
+          </p>
+        ) : dataList.AlwaysAvailable === false ? (
+          <p className="mt-4 text-[12px] md:text-[14px] text-grayMedium font-Regular">
+            Your item is available for rent{" "}
+            <span
+              className="text-blue font-Medium cursor-pointer "
+              onClick={open}
+            >
+              from{" "}
+              {getDate(dataList?.AvailableFrom, "en")
+                .fullMonthNameWithDayName || "__"}{" "}
+              to{" "}
+              {getDate(dataList?.AvailableTo, "en").fullMonthNameWithDayName ||
+                "__"}
+            </span>{" "}
+            <br />
+            Availability automatically updates to reflect rental periods.
+          </p>
+        ) : null}
       </div>
+      <div className="flex flex-wrap flex-col gap-2">
+        <ErrorMsg error={GetErrorMsg(error, "AvailableFrom")} />
+        <ErrorMsg error={GetErrorMsg(error, "AvailableTo")} />
+      </div>
+
       <ModalComp
         title="Choose available date and time "
         opened={opened}
@@ -104,6 +136,7 @@ function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
           <DatePickerInput
             type="range"
             label="Availability"
+            minDate={new Date()}
             leftSection={<DateIcon fill="#344050" />}
             placeholder=".. - .."
             defaultValue={[
@@ -116,6 +149,7 @@ function StepAvailability({ setDataList, dataList }: StepAvailabilityProps) {
             ]}
             onChange={(e) => {
               console.log(e);
+              reset();
               setDataList({
                 ...dataList,
                 AvailableFrom: getDate(e[0]?.toString(), "en").fullYear,

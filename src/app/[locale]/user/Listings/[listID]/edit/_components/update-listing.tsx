@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Checkbox, TextInput } from "@mantine/core";
+import { Checkbox } from "@mantine/core";
 import DropImg from "@/src/components/DropImg";
 import Button from "@/src/components/button";
 import SelectInput from "@/src/components/select-input";
@@ -72,27 +72,24 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
     const newFaqs = [...faqs];
     newFaqs[index][field] = value;
     setFaqs(newFaqs);
-    setDataList({ ...dataList, faQs: newFaqs });
+    setDataList({ ...dataList, FAQs: newFaqs });
   };
   console.log(dataList);
-
   const { mutateAsync: createListing } = useEditListingMutation(dataList?.id);
   const handleSubmit = async () => {
-    const formData = { ...dataList };
-    await Toast.Promise(createListing(formData), {
+    await Toast.Promise(createListing(dataList), {
       success: "successfully Edit Product",
       onSuccess: async (res) => {
         console.log(res);
       },
     });
   };
+
   return (
-    <div className="w-full lg:w-[810px] mb-20 flex flex-col gap-4">
-      <div className="mt-[7px] pb-8 flex-1">
-        <h3 className={"text-base lg:text-[24px] mb-2 lg:mb-3 "}>
-          Choose item category
-        </h3>
+    <div className="w-full lg:w-[810px] mb-section flex flex-col gap-4">
+      <div className=" mt-1 mdl:mt-2 mdl:pb-8 flex-1">
         <SelectInput
+          label=" Choose item category"
           data={dataCategory?.data?.map((item: any) => {
             return { label: item.name, value: item.id };
           })}
@@ -101,8 +98,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
             setDataList({ ...dataList, categoryId: e });
           }}
           value={dataList?.categoryId}
-          inputClassName="!rounded-2xl text-grayMedium !border-2  !h-16 "
-          className=" bg-white "
+          inputClassName=" !rounded-xl md:!rounded-2xl text-grayMedium !h-12  md:!h-16 "
         />
         <SelectInput
           label="Select SubCategory"
@@ -114,14 +110,12 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
           onChange={(e) => {
             setDataList({ ...dataList, subCategoryId: e });
           }}
-          inputClassName="!rounded-2xl text-grayMedium !border-2  !h-16 "
+          inputClassName=" !rounded-xl md:!rounded-2xl text-grayMedium !h-12  md:!h-16 "
           className="mt-4"
         />
       </div>
-      <div className="mt-[7px] pb-8 flex-1">
-        <h3 className={"text-base lg:text-[24px] mb-2 lg:mb-3 "}>
-          Describtion
-        </h3>
+      <div className=" mt-1 mdl:mt-2 mdl:pb-8 flex-1">
+        <h3 className={"text-sm lg:text-[24px] mb-2 lg:mb-3 "}>Describtion</h3>
         <Input
           placeholder="Add item title here"
           onChange={(e) => {
@@ -144,12 +138,11 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
           defaultValue={dataList?.description}
           autosize
           placeholder="Add as much details as you can here about your item "
+          className=" !mb-0 mdl:!mb-6"
         />
       </div>
-      <div className="mt-[7px] pb-8 flex-1">
-        <h3 className={"text-base lg:text-[24px] mb-2 lg:mb-3 "}>
-          Item Images
-        </h3>
+      <div className=" mt-1 mdl:mt-2 mdl:pb-8 flex-1">
+        <h3 className={"text-sm lg:text-[24px] mb-2 lg:mb-3 "}>Item Images</h3>
         <p className="text-grayMedium mb-4  text-sm lg:text-base font-Regular">
           You can upload up to 8 images
         </p>
@@ -160,8 +153,8 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
           edit
         />
       </div>
-      <div className="mt-[7px] pb-8 flex-1">
-        <h3 className={"text-base lg:text-[24px] mb-2 lg:mb-3 "}>Item Price</h3>
+      <div className=" mt-1 mdl:mt-2 mdl:pb-8 flex-1">
+        <h3 className={"text-sm lg:text-[24px] mb-2 lg:mb-3 "}>Item Price</h3>
         <p className="text-grayMedium mb-4  text-sm lg:text-base font-Regular">
           Try to add lower price for longer bookings
         </p>
@@ -177,7 +170,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
               });
             }}
             defaultValue={dataList?.dailyPrice}
-            inputClassName="  w-full !rounded-2xl bg-white  border-2   h-16  "
+            inputClassName="  w-full  !rounded-xl md:!rounded-2xl bg-white  border-2  h-12 md:h-16  "
             labelClassName="text-sm lg:text-[16px]  mb-2 text-grayMedium"
             className=" flex-1 min-w-[170px] w-full  md:max-w-[200px] "
           />
@@ -192,7 +185,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
               });
             }}
             defaultValue={dataList?.weeklyPrice}
-            inputClassName="  w-full !rounded-2xl bg-white  border-2   h-16  "
+            inputClassName="  w-full  !rounded-xl md:!rounded-2xl bg-white  border-2  h-12 md:h-16  "
             labelClassName="text-sm lg:text-[16px]  mb-2 text-grayMedium"
             className=" flex-1 min-w-[170px] w-full  md:max-w-[200px] "
           />
@@ -207,7 +200,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
               });
             }}
             defaultValue={dataList?.monthlyPrice}
-            inputClassName="  w-full !rounded-2xl bg-white  border-2   h-16  "
+            inputClassName="  w-full  !rounded-xl md:!rounded-2xl bg-white  border-2  h-12 md:h-16  "
             labelClassName="text-sm lg:text-[16px]  mb-2 text-grayMedium"
             className=" flex-1 min-w-[170px] w-full  md:max-w-[200px] "
           />
@@ -219,47 +212,37 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
         handleInputChangeLocation={handleInputChangeLocation}
       />
 
-      <div className="mt-[7px] pb-8 flex-1">
-        <h3 className={"text-base lg:text-[24px] mb-2 lg:mb-3 "}>
+      <div className=" mt-1 mdl:mt-2 mdl:pb-8 flex-1">
+        <h3 className={"text-sm lg:text-[24px] mb-2 lg:mb-3 "}>
           Value of the item
         </h3>
-        <TextInput
+        <Input
           defaultValue={dataList?.cost}
           onChange={(e) => {
             setDataList({ ...dataList, cost: e.target.value });
           }}
           placeholder="Add item value here"
-          classNames={{
-            input:
-              " text-black rounded-2xl text-grayMedium  h-full border-none placeholder:text-grayMedium placeholder:opacity-100 ",
-            wrapper: "h-full",
-          }}
-          className="h-[64px] mb-6 duration-200 min-h-[64px] bg-white rounded-2xl border-2 border-green text-grayMedium"
+          inputClassName=" !rounded-xl md:!rounded-2xl bg-white !h-12  md:!h-16 border-2 "
+          className="mdl:mb-6 "
         />
       </div>
 
       <StepAvailability dataList={dataList} setDataList={setDataList} />
-      <div className="mt-[7px] pb-8 flex-1">
-        <h3 className={"text-base lg:text-[24px] mb-2 lg:mb-3 "}>Stock</h3>
-        <TextInput
+      <div className=" mt-1 mdl:mt-2 mdl:pb-8 flex-1">
+        <h3 className={"text-sm lg:text-[24px] mb-2 lg:mb-3 "}>Stock</h3>
+        <Input
           placeholder="Add available stock number here"
           defaultValue={dataList?.totalQuantity}
           onChange={(e) => {
             setDataList({ ...dataList, totalQuantity: e.target.value });
           }}
-          classNames={{
-            input:
-              " text-black rounded-2xl text-grayMedium  h-full border-none placeholder:text-grayMedium placeholder:opacity-100 ",
-            wrapper: "h-full",
-          }}
-          className="h-[64px] lg:mb-6 duration-200 min-h-[64px] bg-white rounded-2xl border-2 border-green text-grayMedium"
+          inputClassName=" !rounded-xl md:!rounded-2xl bg-white !h-12  md:!h-16 border-2 "
+          className="mdl:mb-6 "
         />
       </div>
 
-      <div className="mt-[7px] pb-8 flex-1">
-        <h3 className={"text-base lg:text-[24px] mb-2 lg:mb-3 "}>
-          Item Status
-        </h3>
+      <div className=" mt-1 mdl:mt-2 mdl:pb-8 flex-1">
+        <h3 className={"text-sm lg:text-[24px] mb-2 lg:mb-3 "}>Item Status</h3>
         <div className="flex flex-col gap-4">
           <Checkbox
             checked={selectedCheckbox === "true"}
@@ -291,16 +274,16 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
         setFaqs={setFaqs}
         handleChangeFAQ={handleChangeFAQ}
       />
-      <div className="flex items-center mt-8 gap-7 md:flex-row flex-col">
+      <div className="flex items-center mt-8 gap-4 mdl:gap-7 md:flex-row flex-col">
         <Button
           onClick={handleSubmit}
-          className={"w-full lg:w-[208px] h-[64px]"}
+          className={"w-full lg:w-[208px] h-12 mdl:h-[64px]"}
         >
           Save Edits
         </Button>
         <Button
           className={
-            "w-full lg:w-[208px] h-[64px] text-black bg-grayBack border-none"
+            "w-full lg:w-[208px]  h-12 mdl:h-[64px] text-black bg-grayBack border-none"
           }
         >
           Discard Edits

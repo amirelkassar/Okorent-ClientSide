@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import Button from "@/src/components/button";
 import LocationIcon from "@/src/assets/icons/location";
@@ -10,6 +10,7 @@ import {
   useEditStockMutation,
 } from "../hooks/queries/user/lisitings/stock";
 import Input from "./input";
+import { Toast } from "./toast";
 const containerStyle = {
   width: "100%",
   height: "390px",
@@ -27,6 +28,7 @@ interface GoogleMapProps {
   ) => void;
   close?: any;
   setLocation?: React.Dispatch<React.SetStateAction<string>>;
+  handelValueWhenAddNewLocation?: (newLocation: any) => void;
 }
 interface LocationDetailsProps {
   address: string;
@@ -39,6 +41,7 @@ function GoogleMapLoc({
   index,
   handleInputChangeLocation,
   setLocation,
+  handelValueWhenAddNewLocation,
 }: GoogleMapProps) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -77,19 +80,46 @@ function GoogleMapLoc({
 
   const { mutateAsync: createStock } = useCreateStockMutation();
   const { mutateAsync: editStock } = useEditStockMutation(index);
+  const onSubmitAddNewLocation = useCallback(
+    async (formData: any) => {
+      Toast.Promise(createStock(formData), {
+        success: "Done Add New Location",
+        onSuccess(res) {
+          console.log(res);
+          if (handelValueWhenAddNewLocation) {
+            handelValueWhenAddNewLocation(res?.data);
+          }
+        },
+        onError: async (res) => {},
+      });
+    },
+    [createStock]
+  );
+  const onSubmitEditLocation = useCallback(
+    async (formData: any) => {
+      Toast.Promise(editStock(formData), {
+        success: "Done Edit Location",
+      });
+    },
+    [editStock]
+  );
   const handleSubmit = async () => {
     const formData = {
-      location: selectedLocation,
+      location: {
+        latitude: selectedLocation?.lat,
+        longitude: selectedLocation?.lng,
+      },
       name: nameLocation || placeName.state,
       address: placeName.address,
       country: placeName.country,
       city: placeName.city,
       state: placeName.state,
     };
+
     if (index) {
-      await editStock(formData);
+      await onSubmitEditLocation(formData);
     } else {
-      await createStock(formData);
+      await onSubmitAddNewLocation(formData);
     }
   };
 

@@ -4,6 +4,7 @@ import {
   ChangeStautsByID,
   useCancelOrderOutMutation,
   useDeleteOrderOutMutation,
+  useRefundOrderOutMutation,
   useRejectOrderOutMutation,
 } from "@/src/hooks/queries/user/booking";
 import { Toast } from "@/src/components/toast";
@@ -13,12 +14,15 @@ interface ActionTableIRentProps {
   onSubmitChangeStatus: any;
   onSubmitReject: any;
   onSubmitCancel: any;
+  onSubmitRefundYes: any;
+  onSubmitRefundNo: any;
 }
 export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
   const { mutateAsync: ChangeStatusProduct } = ChangeStautsByID(id);
   const { mutateAsync: DeleteOrderOut } = useDeleteOrderOutMutation();
   const { mutateAsync: RejectOrderOut } = useRejectOrderOutMutation();
   const { mutateAsync: CancelOrder } = useCancelOrderOutMutation();
+  const { mutateAsync: RefundOrder } = useRefundOrderOutMutation();
 
   //delete order
   const onSubmitDelete = useCallback(async () => {
@@ -62,11 +66,43 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
         onSuccess: async (res) => {},
       }
     );
-  }, [CancelOrder]);
+  }, [CancelOrder, id]);
+
+  //RefundYes order
+  const onSubmitRefundYes = useCallback(async () => {
+    Toast.Promise(
+      RefundOrder({
+        orderId: id,
+        answer: true,
+        lessorMessage: "string",
+      }),
+      {
+        success: " Request Approved ",
+        onSuccess: async (res) => {},
+      }
+    );
+  }, [RefundOrder, id]);
+
+  //RefundNo order
+  const onSubmitRefundNo = useCallback(async () => {
+    Toast.Promise(
+      RefundOrder({
+        orderId: id,
+        answer: false,
+        lessorMessage: "string",
+      }),
+      {
+        success: "Request Rejected ",
+        onSuccess: async (res) => {},
+      }
+    );
+  }, [RefundOrder, id]);
   return {
     onSubmitDelete,
     onSubmitChangeStatus,
     onSubmitReject,
-    onSubmitCancel
+    onSubmitCancel,
+    onSubmitRefundYes,
+    onSubmitRefundNo,
   };
 };

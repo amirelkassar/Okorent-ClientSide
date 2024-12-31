@@ -70,6 +70,7 @@ const ROUTES = {
     HOMEPAGE: "/",
     ALLPRODUCTS: `/Products`,
     PRODUCTS: (id) => `/Products?category=${id}`,
+    PRODUCTSPATH: `/Products`,
     PRODUCTSDETAILS: (id) => `/Products/${id}`,
     PROFILE: (id, id2) => `/Products/${id}/profile/${id2}`,
     ADDLISTING: "Add-Listing",

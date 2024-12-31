@@ -184,6 +184,7 @@ function FilterBilling() {
             type="range"
             value={value}
             onChange={handleDateChange}
+            minDate={new Date()}
           />
           <div className="flex gap-6 flex-wrap bg-grayBack  rounded-xl py-2 px-3">
             <div className="flex-1 min-w-[100px]">
