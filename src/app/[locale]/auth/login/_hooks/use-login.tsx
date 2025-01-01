@@ -62,9 +62,8 @@ export const useLogin = (): SignUpReturn => {
 
   const onSubmit = useCallback(async () => {
     Toast.Promise(Login(formData), {
-      loading: "Logging in... " ,
+      loading: "Logging in... ",
       success: "Successfully logged ",
-      error: "Login failed ",
       onSuccess: async (res) => {
         console.log(res);
         const userRole = await decodedToken(res.data.token).then((res2) => {
