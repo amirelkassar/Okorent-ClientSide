@@ -8,9 +8,6 @@ import ROUTES from "@/src/routes";
 import ListIcon from "@/src/assets/icons/list";
 function Page({ params }: any) {
   const searchparams = useSearchParams();
-  console.log(params.BookingID);
-  console.log(searchparams.get("typeUser"));
-  console.log(searchparams.get("statusTitle"));
 
   return (
     <div className="swiperList  pb-3 lg:pb-16  ">

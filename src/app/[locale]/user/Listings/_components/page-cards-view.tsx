@@ -20,8 +20,6 @@ function PageCardsView() {
       ? searchParams.toString()
       : "active=false&PageSize=5"
   );
-  console.log(OfflineProducts?.data?.items?.length);
-  console.log(isLoading);
   if (isLoading) {
     return <Loading />;
   }

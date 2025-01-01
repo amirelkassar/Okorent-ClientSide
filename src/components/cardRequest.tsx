@@ -61,14 +61,14 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
           <Image
             alt="user"
             src={imageUser}
-            className=" lgl:size-[104px] size-[70x] lgl:min-w-[104px] min-w-[70px] rounded-[50%] object-cover object-top"
+            className=" lgl:size-[104px] size-[70px] lgl:min-w-[104px] min-w-[70px] rounded-[50%] object-cover object-top"
             priority
           />
           <p className="text-green lgl:text-[16px] text-sm text-center">
             {data?.isAvailable ? "available" : "unAvailable"}
           </p>
         </div>
-        <div>
+        <div className="flex-1">
           <div className="flex  gap-5 justify-between mb-1 lgl:mb-3">
             <h3 className="text-base lgl:text-[32px] ">
               {data?.renterName || "Renter Name"}
@@ -129,7 +129,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
                 <h3 className="text-grayMedium mb-[2px] lgl:mb-1 font-Regular text-[12px] lgl:text-base">
                   Product Name
                 </h3>
-                <p className="lgl:text-[16px] text-[12px] font-SemiBold max-w-[130px] truncate">
+                <p className="lgl:text-[16px] text-[12px] font-SemiBold min-w-[88px] mdl:min-w-[130px] max-w-[88px] mdl:max-w-[130px] truncate">
                   {data?.productName || "Product Name"}a
                 </p>
               </div>
@@ -138,7 +138,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
                 <h3 className="text-grayMedium  mb-[2px] lgl:mb-1 font-Regular text-[12px] lgl:text-base">
                   Payment
                 </h3>
-                <p className="lgl:text-[16px] text-[12px] text-center  font-SemiBold">
+                <p className="lgl:text-[16px] min-w-[70px] max-w-[70px] mdl:max-w-[90px] mdl:min-w-[90px] truncate text-[12px] text-center  font-SemiBold">
                   {data?.amount || 0}$
                 </p>
               </div>
