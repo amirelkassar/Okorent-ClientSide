@@ -32,7 +32,7 @@ function NavLinks() {
       {
         id: 3,
         name: "My Listings",
-        url: ROUTES.USER.LISTINGS + "?card=true",
+        url: ROUTES.USER.LISTINGS,
         active: path.includes(ROUTES.USER.LISTINGS),
         activeDetails:
           path === ROUTES.USER.LISTINGSDETAILS(params.listID)
@@ -44,7 +44,7 @@ function NavLinks() {
       {
         id: 4,
         name: "Bookings",
-        url: ROUTES.USER.BOOKINGS + "?card=true",
+        url: ROUTES.USER.BOOKINGS,
         active:
           path === ROUTES.USER.BOOKINGS ||
           path === ROUTES.USER.BOOKINGSID(params.BookingID),
@@ -93,7 +93,7 @@ function NavLinks() {
     () => [
       {
         id: 0,
-        name: `Homepage / ${searchParams.get("category")||'Products'}`,
+        name: `Homepage / ${searchParams.get("category") || "Products"}`,
         url: ROUTES.USER.CATEGORIES(searchParams.get("category")),
         active:
           path + `?category=${searchParams.get("category")}` ===
@@ -101,7 +101,9 @@ function NavLinks() {
       },
       {
         id: 1,
-        name: `Bookings / ${searchParams.get("statusTitle")?.toString()
+        name: `Bookings / ${searchParams
+          .get("statusTitle")
+          ?.toString()
           .split("-")
           .join("  ")}`,
         url: ROUTES.USER.BOOKINGS,
@@ -150,7 +152,7 @@ function NavLinks() {
           ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID),
       },
     ],
-    [path,searchParams.toString()]
+    [path, searchParams.toString()]
   );
 
   return (
