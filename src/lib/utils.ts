@@ -212,7 +212,13 @@ export const getFormData = async (data: Record<string, any>) => {
           // Fetch image and convert to Blob
           console.log(item.path);
 
-          const response = await axios.get(item.path, { responseType: 'blob' });
+          const response = await axios.get(item.path, {
+            responseType: 'blob', headers: {
+              "Cache-Control": "no-cache, no-store, must-revalidate",
+              Pragma: "no-cache",
+              Expires: "0",
+            }
+          });
           console.log(response);
 
 

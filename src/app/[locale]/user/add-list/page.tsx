@@ -91,6 +91,8 @@ function Page() {
   useEffect(() => {
     RefetchGetSubCategory();
   }, [dataList?.CategoryId]);
+
+
   return (
     <div
       className={`"w-full max-w-full ${
