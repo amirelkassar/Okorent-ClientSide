@@ -14,6 +14,7 @@ import { useParams, useSearchParams } from "next/navigation";
 import ViewCheckout from "./checkout/view-checkout";
 import LinkGreen from "../linkGreen";
 import ROUTES from "@/src/routes";
+import { calculateDurationRange } from "@/src/lib/utils";
 
 function CardProduct({
   data = [],
@@ -84,6 +85,7 @@ function CardProduct({
       pickUpAddress: location,
     }),
   };
+console.log( calculateDurationRange(valueDate[0], valueDate[1]));
 
   if (searchparams.get("checkout") === "true") {
     return <ViewCheckout data={formData} />;
@@ -145,7 +147,10 @@ function CardProduct({
                     : ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID)
                 }
                 className={`w-full  ${
-                  valueAddressType && TotalPriceOrder && location
+                  valueAddressType &&
+                  TotalPriceOrder &&
+                  location &&
+                 ( calculateDurationRange(valueDate[0], valueDate[1])>0)
                     ? "opacity-100"
                     : guest
                     ? "opacity-100"
