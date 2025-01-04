@@ -1,9 +1,5 @@
 "use client";
 import CloseIcon from "@/src/assets/icons/close";
-import {
-  GetCategory,
-  GetSubCategory,
-} from "@/src/hooks/queries/user/add-lisiting";
 import { GetProductsAll } from "@/src/hooks/queries/user/home";
 import { useUpdateQueryParams } from "@/src/lib/utils";
 import { useSearchParams } from "next/navigation";
@@ -15,6 +11,7 @@ import { MultiSelect } from "@mantine/core";
 import CantFind from "./CantFind";
 import { Pagination } from "../pagination";
 import { useQueryState } from "nuqs";
+import { GetCategory, GetSubCategory } from "@/src/hooks/queries/admin/master-data/category";
 const sortingOptions: any[] = [
   {
     value: "PriceAsc",

@@ -66,7 +66,7 @@ export const useLogin = (): SignUpReturn => {
       success: "Successfully logged ",
       onSuccess: async (res) => {
         console.log(res);
-        const userRole = await decodedToken(res.data.token).then((res2) => {
+        const userRole = await decodedToken(res.data).then((res2) => {
           return res2?.userRole;
         });
         console.log(userRole);

@@ -32,6 +32,7 @@ const ROUTES = {
     MASTERDATA: "/admin/master-data",
     PLANSADD: "/admin/master-data/add",
     CATEGORIES: "/admin/master-data/Categories",
+    CATEGORIESID:(id)=> `/admin/master-data/Categories/${id}`,
     CATEGORYADD: "/admin/master-data/Categories/add",
     BANNERS: "/admin/master-data/Banners",
     BANNERSADD: "/admin/master-data/Banners/add",

@@ -5,7 +5,7 @@ interface TitleMasterProps {
 }
 function TitleMaster({ title = "", num = 0 }: TitleMasterProps) {
   return (
-    <h3 className="text-[32px] font-SemiBold">
+    <h3 className=" text-xl mdl:text-[32px] font-SemiBold">
       {title}{" "}
       {num ? (
         <>

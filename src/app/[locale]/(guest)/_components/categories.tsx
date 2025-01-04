@@ -1,5 +1,5 @@
 import ToolsIcon from "@/src/assets/icons/tools";
-import { GetCategory } from "@/src/hooks/queries/user/add-lisiting";
+import { GetCategory } from "@/src/hooks/queries/admin/master-data/category";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import Image from "next/image";

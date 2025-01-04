@@ -5,8 +5,6 @@ import DropImg from "@/src/components/DropImg";
 import Button from "@/src/components/button";
 import SelectInput from "@/src/components/select-input";
 import {
-  GetCategory,
-  GetSubCategory,
   useEditListingMutation,
 } from "@/src/hooks/queries/user/add-lisiting";
 import InputTextarea from "@/src/components/InputTextarea";
@@ -17,6 +15,7 @@ import StepAvailability from "./stepAvailability";
 import StepFAQ from "./stepFAQ";
 import StepLocation from "./stepLocation";
 import GetErrorMsg from "@/src/components/getErrorMsg";
+import { GetCategory, GetSubCategory } from "@/src/hooks/queries/admin/master-data/category";
 interface LocationProps {
   id: number;
   name: string;

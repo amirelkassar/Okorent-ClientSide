@@ -100,7 +100,7 @@ export function Toaster() {
                 {t.type === "error" ? (
                   <ErrorNotficationIcon />
                 ) : t.type === "success" ? (
-                  <SuccessIcon />
+                  <SuccessIcon className="w-5 mdl:w-8 h-auto" />
                 ) : (
                   icon
                 )}

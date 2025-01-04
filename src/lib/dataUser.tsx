@@ -2,14 +2,6 @@ import avatar from "@/src/assets/images/1.png";
 import house from "@/src/assets/images/house1.png";
 import house2 from "@/src/assets/images/house2.png";
 import phoneImg from "@/src/assets/images/phone.png";
-import ElectronicsIcon from "../assets/icons/electronics";
-import ToolsIcon from "../assets/icons/tools";
-import SportIcon from "../assets/icons/sport";
-import HomeIcon from "../assets/icons/home";
-import BusIcon from "../assets/icons/bus";
-import PartyIcon from "../assets/icons/party";
-import FilmIcon from "../assets/icons/film";
-import OthersIcon from "../assets/icons/others";
 import { StaticImageData } from "next/image";
 import avatarUser from "@/src/assets/images/avatar.png";
 import bannerImg from "@/src/assets/images/offer.png";
@@ -1105,56 +1097,7 @@ export const ChatsGroupData: ChatsDataProps[] = [
   },
 ];
 
-export const CategoriesAdminData = [
-  {
-    id: 1,
-    title: "Electronics",
-    subcategories: "15",
-    img: <ElectronicsIcon className={"h-[30px] w-auto"} />,
-  },
-  {
-    id: 2,
-    title: "Tools",
-    subcategories: "15",
-    img: <ToolsIcon className={"h-[30px] w-auto"} />,
-  },
-  {
-    id: 3,
-    title: "Hobbies & Sports",
-    subcategories: "15",
-    img: <SportIcon className={"h-[30px] w-auto"} />,
-  },
-  {
-    id: 4,
-    title: "Home & Garden",
-    subcategories: "15",
-    img: <HomeIcon className={"h-[30px] w-auto"} />,
-  },
-  {
-    id: 5,
-    title: "Vehicle",
-    subcategories: "15",
-    img: <BusIcon className={"h-[30px] w-auto"} />,
-  },
-  {
-    id: 6,
-    title: "Party",
-    subcategories: "15",
-    img: <PartyIcon className={"h-[30px] w-auto"} />,
-  },
-  {
-    id: 7,
-    title: "Film & Photography",
-    subcategories: "15",
-    img: <FilmIcon className={"h-[30px] w-auto"} />,
-  },
-  {
-    id: 8,
-    title: "Others",
-    subcategories: "15",
-    img: <OthersIcon className={"h-[30px] w-auto"} />,
-  },
-];
+
 
 interface BannerProps {
   id: number;

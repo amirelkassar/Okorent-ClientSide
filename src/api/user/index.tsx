@@ -58,3 +58,16 @@ export const user = {
     getByID: (id: any) => `User/${id}`,
   },
 };
+
+export const admin = {
+  Category: {
+    base: "/Category",
+    Category_ID: (id: any) => `/Category/${id}`,
+  },
+  SubCategory: {
+    base: "/SubCategory",
+    SubCategory_ID: (id: any) => `/SubCategory/${id}`,
+    subCategory_by_category: (id: any) => `/SubCategory/list?ParentId=${id}`,
+
+  },
+}

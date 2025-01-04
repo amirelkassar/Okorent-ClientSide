@@ -34,7 +34,6 @@ export const QueryWrapper = <T extends unknown>({
   children,
 }: QueryWrapperProps<T>) => {
   if (!query) throw new Error("No query props provided");
-  console.log(query?.data);
 
   const items = query.data?.data?.items ?? query.data?.data ?? {};
   const pageSize = query.data?.data?.pageSize;
@@ -49,7 +48,6 @@ export const QueryWrapper = <T extends unknown>({
   }, [items]);
 
   const onRetry = useCallback(() => query.refetch?.(), [query]);
-  console.log(query?.isFetching);
 
   if (query?.isPaused) return <MemowizedServerError />;
   if (query?.isLoading) return <MemowizedLoader />;

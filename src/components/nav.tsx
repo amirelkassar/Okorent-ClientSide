@@ -25,6 +25,8 @@ import SupportIcon from "../assets/icons/Support";
 import InboxIcon from "../assets/icons/Inbox";
 import NotificationsIcon from "../assets/icons/Notifications";
 import Notifications from "./Notifications";
+import Logo from "./logo";
+import LogoOkoRent from "../assets/icons/logo";
 interface NavProps {
   linkLogo: string;
 }
@@ -136,13 +138,7 @@ function Nav({ linkLogo = "#" }: NavProps) {
   return (
     <nav className="px-4 lg:px-16 py-5 lg:py-7 flex items-center justify-between gap-4 max-w-[1600px] mx-auto ">
       <Link href={linkLogo}>
-        <Image
-          src={logo}
-          alt="logo"
-          width={135}
-          height={45}
-          className="md:w-[135px] w-[98px] h-auto"
-        />
+        <LogoOkoRent className="md:w-[135px] w-[98px] h-auto" />
       </Link>
       <div className="hidden mdl:flex items-center gap-3">
         <Link

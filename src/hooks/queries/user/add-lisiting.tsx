@@ -7,31 +7,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 export const initialQueryKey = "user.addListing";
 export const initialQueryKeyMyProduct = "user.myProductsAll";
 
-//getCategory
-export const GetCategory = () => {
-  const queryClient = useQueryClient();
-  return useQuery({
-    queryKey: [initialQueryKey],
-    queryFn: async () => {
-      const response = await api.get(
-        user.addListing.category + "?CategoryType=Category"
-      );
-      return response.data;
-    },
-  });
-};
-export const GetSubCategory = (id: any) => {
-  const queryClient = useQueryClient();
-  return useQuery({
-    queryKey: [initialQueryKey, id],
-    queryFn: async () => {
-      const response = await api.get(
-        user.addListing.subCategory_by_category(id)
-      );
-      return response.data;
-    },
-  });
-};
+
 
 export const useCreateListingMutation = () => {
   const router = useRouter()

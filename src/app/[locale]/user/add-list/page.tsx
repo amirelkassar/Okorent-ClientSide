@@ -12,14 +12,13 @@ import LinkGreen from "@/src/components/linkGreen";
 import { useSearchParams } from "next/navigation";
 import InputTextarea from "@/src/components/InputTextarea";
 import {
-  GetCategory,
-  GetSubCategory,
   useCreateListingMutation,
 } from "@/src/hooks/queries/user/add-lisiting";
 import SelectInput from "@/src/components/select-input";
 import Input from "@/src/components/input";
 import { Toast } from "@/src/components/toast";
 import GetErrorMsg from "@/src/components/getErrorMsg";
+import { GetCategory, GetSubCategory } from "@/src/hooks/queries/admin/master-data/category";
 
 interface LocationProps {
   id: number;
