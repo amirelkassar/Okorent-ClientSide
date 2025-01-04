@@ -19,8 +19,8 @@ function PageIRentOutId({ status }: any) {
           <div className="w-full flex-wrap gap-6 my-4 relative flex items-center">
             {data.map((item: any, index: number) => {
               return (
-                <div>
-                  <CardRequest key={index} data={item} status={+status} />
+                <div key={index}>
+                  <CardRequest  data={item} status={+status} />
                 </div>
               );
             })}
