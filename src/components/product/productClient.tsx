@@ -24,7 +24,9 @@ function ProductClient({ clientID }: { clientID: any }) {
         <div className="flex flex-col items-center gap-2 justify-center ">
           <Image
             alt="user"
-            src={avatar}
+            src={data?.data?.userImage || avatar}
+            width={100}
+            height={100}
             className=" size-[50px] lg:size-[60px] rounded-[50%] object-cover object-top"
             priority
           />
@@ -42,7 +44,9 @@ function ProductClient({ clientID }: { clientID: any }) {
           </h4>
           <div className="flex items-center ">
             <div className="flex items-center gap-1 pe-2 lg:pe-4">
-              <p className="font-Bold text-lg lg:text-xl ">{data?.data?.rating}</p>
+              <p className="font-Bold text-lg lg:text-xl ">
+                {data?.data?.rating}
+              </p>
               <StarIcon className="w-[18px] lg:w-[20px] h-auto" />
             </div>
             <div className="flex items-center md:items-end gap-1 pe-2 lg:pe-4 ps-2 border-s border-green">

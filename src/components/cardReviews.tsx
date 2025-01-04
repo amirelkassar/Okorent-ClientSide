@@ -22,7 +22,7 @@ function CardReviews({
       <div className="mb-4 flex items-center justify-between gap-3">
         <div className=" flex items-center gap-3">
           <Image
-            src={man}
+            src={review?.reviewerImage||man}
             width={40}
             height={40}
             className=" size-10 rounded-full object-cover object-top"

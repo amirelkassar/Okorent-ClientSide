@@ -43,7 +43,7 @@ function FavoriteProduct({
           onSubmitRemoveFavoriteProduct();
         }
       }}
-      className="p-[5px] md:p-2 rounded-lg bg-grayBack size-6 md:size-8 flex items-center justify-center absolute bottom-3 end-2 z-[2]"
+      className="p-[5px] md:p-2 rounded-lg bg-grayBack size-6 hover:shadow-md duration-300 md:size-8 flex items-center justify-center absolute bottom-3 end-2 z-10"
     >
       {favorite ? <FavRedIcon /> : <FavIcon />}
     </button>

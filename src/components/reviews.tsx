@@ -18,9 +18,8 @@ function Reviews({
 }) {
   const [IsEdit, setIsEdit] = useState(false);
   const [ShowAll, setShowAll] = useState(false);
-  console.log(productID);
   const { data, isLoading } = GetReviewByID(productID);
-  console.log(data);
+
 
   return (
     <div className="flex gap-5 justify-between flex-wrap pb-9 border-b border-grayMedium/20 mb-section">

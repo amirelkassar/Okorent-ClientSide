@@ -21,8 +21,9 @@ export type RequestsTableData = {
   paymentStatus: string;
   heroImage: StaticImageData;
   orderId: any;
-  prodId:any
-  productName:any
+  prodId: any;
+  productName: any;
+  userImage: any;
 };
 
 export const columns: ColumnDef<RequestsTableData>[] = [
@@ -68,16 +69,10 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     },
     cell: ({ getValue, row }) => {
       const lessorName = getValue<string>();
+      const userImage = row.original.userImage;
       return (
         <div className="flex items-center gap-2">
-          <Image
-            src={avatar}
-            alt={lessorName}
-            width={50}
-            height={50}
-            className="w-12 h-12 rounded-[50%] object-cover object-top"
-          />
-          <h2 className="text-[16px] font-SemiBold">{lessorName}</h2>
+          <ImgProduct productName={lessorName} src={userImage || avatar} />
         </div>
       );
     },
@@ -149,14 +144,18 @@ export const columns: ColumnDef<RequestsTableData>[] = [
       const id = row.original.id;
       const ProdId = row.original.prodId;
       const status = row.original.status;
-      const dataForReview ={
-        ProdId:ProdId,
-        imageProduct:row.original.heroImage,
-        productName:row.original.productName,
-      }
+      const dataForReview = {
+        ProdId: ProdId,
+        imageProduct: row.original.heroImage,
+        productName: row.original.productName,
+      };
       return (
         <div className="flex items-center gap-3 w-fit">
-          <ActionMenuRent id={id} status={status} dataForReview={dataForReview} />
+          <ActionMenuRent
+            id={id}
+            status={status}
+            dataForReview={dataForReview}
+          />
         </div>
       );
     },

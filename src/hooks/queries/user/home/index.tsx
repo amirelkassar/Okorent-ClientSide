@@ -6,6 +6,7 @@ import { getToken } from "@/token";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 export const initialQueryKey = "user.productsAll";
 export const initialQueryKeyUser = "user.productsAllUser";
+export const initialQueryKeyFavUser = "user.productsAllFavUser";
 const token = getToken();
 //getAllProducts
 export const GetProductsAll = (queries?: any) => {
@@ -30,6 +31,16 @@ export const GetProductsByID = (id: any) => {
     },
   });
 };
+//getAllProductsFavorite
+export const GetProductsFavoriteAll = (queries?: any) => {
+  return useQuery({
+    queryKey: [initialQueryKeyFavUser, queries], // إضافة queries إلى queryKey
+    queryFn: async () => {
+      const response = await api.get(`${user.product.base(queries)}`);
+      return response.data;
+    },
+  });
+};
 
 //Favorite Product
 export const useFavoriteProductMutation = () => {
@@ -40,7 +51,10 @@ export const useFavoriteProductMutation = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKeyUser]);
+      queryClient.refetchQueries([
+        initialQueryKeyFavUser,
+        "IncludeFavoritesOnly=true",
+      ]);
       console.log(res);
     },
     onError: (res) => {
@@ -60,22 +74,14 @@ export const useDeleteFavoriteProductMutation = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKeyUser]);
+      queryClient.invalidateQueries([
+        initialQueryKeyFavUser,
+        "IncludeFavoritesOnly=true",
+      ]);
       console.log(res);
     },
     onError: (res) => {
       console.log(res);
-    },
-  });
-};
-
-//getAllProductsFavorite
-export const GetProductsFavoriteAll = (queries?: any) => {
-  return useQuery({
-    queryKey: [initialQueryKeyUser, queries], // إضافة queries إلى queryKey
-    queryFn: async () => {
-      const response = await api.get(`${user.product.base(queries)}`);
-      return response.data;
     },
   });
 };

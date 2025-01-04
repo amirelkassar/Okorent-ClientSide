@@ -31,18 +31,20 @@ function CardFavView({ product }: { product?: any }) {
     });
   }, [DeleteFavoriteProduct, product?.id]);
 
-
   return (
     <>
       <div className="bg-white border border-green/50 rounded-3xl px-3 lg:px-5 py-3 lg:py-4 max-w-[400px] mb-3 w-full mdl:min-w-[320px] shadow-sidebar relative">
-        <Image
-          alt="home"
-          priority
-          src={iphone}
-          width={370}
-          height={166}
-          className="w-full rounded-xl h-[122px] lg:h-40 object-cover object-center lg:object-top"
-        />
+        <div className=" rounded-xl bg-blueLight w-full h-[122px] lg:h-40">
+          <Image
+            alt="home"
+            priority
+            src={product?.heroImage || iphone}
+            width={370}
+            height={166}
+            className="w-full rounded-xl h-full object-cover object-center "
+          />
+        </div>
+
         <div className="flex items-center gap-3 justify-between mt-2 lg:mt-6">
           <div className="flex items-center gap-3 ">
             <Image
@@ -95,7 +97,10 @@ function CardFavView({ product }: { product?: any }) {
           </div>
         </div>
         <div className="flex items-center gap-2 lg:gap-5 mt-8">
-          <LinkGreen href={ROUTES.USER.PRODUCTDETAILS(product?.id)} className={"h-10 bg-grayBack flex-1 text-black border-none"}>
+          <LinkGreen
+            href={ROUTES.USER.PRODUCTDETAILS(product?.id)}
+            className={"h-10 bg-grayBack flex-1 text-black border-none"}
+          >
             View Details
           </LinkGreen>
           <LinkGreen href={ROUTES.USER.INBOX} className={"h-10 flex-1"}>

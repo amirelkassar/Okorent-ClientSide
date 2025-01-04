@@ -5,6 +5,7 @@ import Loading from "./loading";
 import Error404 from "./error-404";
 import Error403 from "./error-403";
 import Error500 from "./error-500";
+import { clearToken } from "../lib/token";
 
 const MemowizedLoader = memo(Loading);
 const MemowizedNotFound404 = memo(Error404);
@@ -33,7 +34,7 @@ export const QueryWrapper = <T extends unknown>({
   children,
 }: QueryWrapperProps<T>) => {
   if (!query) throw new Error("No query props provided");
-console.log(query?.data);
+  console.log(query?.data);
 
   const items = query.data?.data?.items ?? query.data?.data ?? {};
   const pageSize = query.data?.data?.pageSize;
@@ -56,6 +57,8 @@ console.log(query?.data);
     return <MemowizedNotFound404 />;
   if (query?.isError && query?.failureReason?.status === 403)
     return <MemowizedForbiden403 />;
+  if (query?.isError && query?.failureReason?.status === 401)
+    return clearToken();
   if (query?.isError) return <MemowizedServerError />;
   if (!hasData && !isFiltered) return <MemowizedNoDataYet />;
   if (isSearching && !hasData) return <MemowizedNoDataYet />; // Adjust logic if other components are needed.
