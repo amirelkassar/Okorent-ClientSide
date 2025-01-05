@@ -22,7 +22,7 @@ interface FirstProps {
 
 interface LastProps {
   children?: ReactNode;
-  options: any;
+  options?: any;
   className?: string;
 }
 
@@ -32,15 +32,17 @@ export const TableHeader: React.FC<TableHeaderProps> & {
   Last: React.FC<LastProps>;
 } = ({ children }) => {
   return (
-    <div className={`flex items-center justify-between gap-6 flex-wrap mb-5 md:mb-8 `}>
+    <div
+      className={`flex items-center justify-between gap-6 flex-wrap mb-5 md:mb-8 `}
+    >
       {children}
     </div>
   );
 };
 
-const First: React.FC<FirstProps> = ({ children, functionSelect,title }) => (
+const First: React.FC<FirstProps> = ({ children, functionSelect, title }) => (
   <div className="flex items-center space-x-4 lg:flex-1">
-   {title && <h2 className="headTitle mdl:min-h-10 text-nowrap">{title}</h2>}
+    {title && <h2 className="headTitle mdl:min-h-10 text-nowrap">{title}</h2>}
     {children}
     {functionSelect &&
       functionSelect.map((item, index) => {
@@ -53,9 +55,11 @@ const Middle: React.FC<SectionProps> = ({ children }) => (
   <div className="text-center">{children}</div>
 );
 
-const Last: React.FC<LastProps> = ({ children, options ,className='' }) => (
-  <div className={`flex items-center gap-4 flex-wrap w-fit lg:flex-1  justify-end ${className}`}>
-    <TableFilter data={options} />
+const Last: React.FC<LastProps> = ({ children, options, className = "" }) => (
+  <div
+    className={`flex items-center gap-4 flex-wrap w-fit lg:flex-1  justify-end ${className}`}
+  >
+    {options?.length > 0 && <TableFilter data={options} />}
     {children}
   </div>
 );

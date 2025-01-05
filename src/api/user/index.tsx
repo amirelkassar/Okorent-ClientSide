@@ -15,7 +15,7 @@ export const user = {
     my_products: (queries: any) => buildQuery("/Product/my-products", queries),
     getById: (id: any) => `/Product/${id}`,
     upDateToOnlineById: (id: any) => `/Product/${id}/availability`,
-    upDateManyToOnlineById:  `/Product/update products availabilty`,
+    upDateManyToOnlineById: `/Product/update products availabilty`,
     getMyProductsById: (id: any) => `/Product/my-product/${id}`,
     favoriteProducts: `/FavouriteProduct`,
     DeleteFavoriteProducts: (id: any) => `/FavouriteProduct/${id}`,
@@ -53,7 +53,7 @@ export const user = {
       base: "/Reviews",
       getByID: (id: any) => `/Reviews/${id}`,
     },
-    barcode:'Barcode/generate'
+    barcode: "Barcode/generate",
   },
   user: {
     getByID: (id: any) => `User/${id}`,
@@ -69,6 +69,9 @@ export const admin = {
     base: "/SubCategory",
     SubCategory_ID: (id: any) => `/SubCategory/${id}`,
     subCategory_by_category: (id: any) => `/SubCategory/list?ParentId=${id}`,
-
   },
-}
+  Accounts: {
+    base: (queries: any) => buildQuery("/User/list", queries),
+    AccountsID: (id: any) => `/User/${id}`,
+  },
+};
