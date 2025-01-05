@@ -3,8 +3,6 @@ import EditIcon from "@/src/assets/icons/edit";
 import Button from "@/src/components/button";
 import Input from "@/src/components/input";
 import ModalComp from "@/src/components/modal-comp";
-import { Link } from "@/src/navigation";
-import ROUTES from "@/src/routes";
 import { useDisclosure } from "@mantine/hooks";
 import React from "react";
 interface PricingAdminDataProps {
