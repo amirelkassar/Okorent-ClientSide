@@ -33,7 +33,7 @@ function SwitchPagesMaster() {
         radius="lg"
         classNames={{
           root: "border p-[2px] rounded-xl border-solid border-green",
-          tab: "border-2 h-9 rounded-xl border-solid data-[active]:border-[#a9c788] border-transparent duration-500  hover:border-green",
+          tab: "border-2 h-9 rounded-xl border-solid data-[active]:border-[#a9c788] px-2 md:px-4  border-transparent duration-500  hover:border-green",
         }}
         value={
           pathname === ROUTES.ADMIN.MASTERDATA

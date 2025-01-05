@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { UserData } from "@/src/lib/dataUser";
 import { columns } from "./_components/column";
 import { DataTable } from "@/src/components/data-table";
 import DeleteIcon from "@/src/assets/icons/delete";
