@@ -1,8 +1,10 @@
 "use client";
-import {  useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import OnlineIcon from "@/src/assets/icons/online";
 import DeleteIcon from "@/src/assets/icons/delete";
 import { GetIdsValues, GetUniqueValues } from "@/src/lib/utils";
+import { Toast } from "@/src/components/toast";
+import { useUpdateManyToOnlineMutation } from "@/src/hooks/queries/user/lisitings";
 
 interface SignUpReturn {
   functionSelectView: any[];
@@ -10,20 +12,39 @@ interface SignUpReturn {
 }
 export const useActionTable = (): SignUpReturn => {
   const [selectedFromTable, setSelectedFromTable] = useState([]);
+  const { mutateAsync: UpdateManyToOnline } = useUpdateManyToOnlineMutation();
+
+  //Make Many Product to Online
+  const onSubmitMakeOnline = useCallback(
+    async (data: any) => {
+      Toast.Promise(UpdateManyToOnline(data), {
+        loading: "Processing...",
+        success: "Operation completed!",
+        error: "Failed to complete operation",
+      });
+    },
+    [UpdateManyToOnline]
+  );
+
   const functionSelect = useMemo(
     () => [
       {
         title: "Make online",
         icon: <OnlineIcon fill="#006AFF" className="max-h-4 w-auto" />,
-        onclick: () => {
-          console.log(GetIdsValues(selectedFromTable));
+        onclick: (ids: any) => {
+          console.log(ids);
+
+          onSubmitMakeOnline({
+            productIds: ids?.map((item: any) => item.id),
+            isAvailable: true,
+          });
         },
       },
       {
         title: "Delete",
         icon: <DeleteIcon className="max-h-4 w-auto" />,
-        onclick: () => {
-          console.log(GetIdsValues(selectedFromTable));
+        onclick: (ids: any) => {
+          console.log(ids);
         },
       },
     ],
@@ -34,9 +55,9 @@ export const useActionTable = (): SignUpReturn => {
     const ValueSelected = GetUniqueValues(selectedFromTable, "isActive");
     console.log(ValueSelected);
 
-    if (ValueSelected) {
+    if (ValueSelected?.toString()) {
       switch (ValueSelected.toString()) {
-        case "true":
+        case "false":
           return [functionSelect[0], functionSelect[1]];
         default:
           return [functionSelect[1]];

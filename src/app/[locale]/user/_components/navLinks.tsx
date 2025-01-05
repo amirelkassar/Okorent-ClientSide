@@ -47,7 +47,8 @@ function NavLinks() {
         url: ROUTES.USER.BOOKINGS,
         active:
           path === ROUTES.USER.BOOKINGS ||
-          path === ROUTES.USER.BOOKINGSID(params.BookingID),
+          path === ROUTES.USER.BOOKINGSID(params.BookingID)||
+          path === ROUTES.USER.ORDERID(params.orderId),
       },
 
       {

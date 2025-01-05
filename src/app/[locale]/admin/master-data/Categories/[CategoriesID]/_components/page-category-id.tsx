@@ -82,16 +82,16 @@ function PageCategoryId({ data }: { data: any }) {
                 <Image
                   src={URL.createObjectURL(file)}
                   alt={`preview of ${file.name}`}
-                  width={60}
-                  height={60}
+                  width={2000}
+                  height={2000}
                   className=" object-contain h-full w-full object-top"
                 />
               ) : data?.iconPath ? (
                 <Image
                   src={data?.iconPath}
                   alt={`preview `}
-                  width={60}
-                  height={60}
+                  width={2000}
+                  height={2000}
                   className=" object-contain h-full w-full object-top"
                 />
               ) : null}
@@ -102,7 +102,7 @@ function PageCategoryId({ data }: { data: any }) {
                 multiple={false}
                 onReject={(files) => console.log("Rejected files", files)}
                 maxSize={3 * 1024 ** 2} // 3MB
-                accept={[MIME_TYPES.svg]}
+                accept={[ MIME_TYPES.png]}
                 className=" size-8 mdl:size-10   border-green/20 bg-grayBack overflow-hidden border-solid border rounded-full"
               >
                 <div className="h-full absolute w-full inset-0 flex justify-center items-center flex-col gap-3">

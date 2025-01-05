@@ -25,36 +25,40 @@ function TableViewListings({ query }: { query: any }) {
   const { functionSelectView, setSelectedFromTable } = useActionTable();
 
   return (
-    <div className=" hidden mdl:block">
+    <div>
       <TableHeader>
         <TableHeader.First title="My Listings">
           <Link
             href={ROUTES.USER.LISTINGS + "?card=true"}
-            className="px-3 duration-300 hover:shadow-md w-fit py-2 rounded-xl border border-black flex items-center justify-center gap-2"
+            className="px-3 hidden mdl:flex duration-300 hover:shadow-md w-fit py-2 rounded-xl border border-black  items-center justify-center gap-2"
           >
             <CardIcon />
             <p>Card View</p>
           </Link>
         </TableHeader.First>
-        <TableHeader.Last options={FilterOptions} />
+        <TableHeader.Last className="mdl:!flex !hidden" options={FilterOptions} />
       </TableHeader>
-      <QueryWrapper query={query}>
-        {({ data, totalPages }: { data: any; totalPages?: any }) => {
-          return (
-            <div>
-              <DataTable
-                //Component={CardViewPhoneListing}
-                title=""
-                data={data}
-                columns={columns}
-                functionSelect={functionSelectView}
-                setSelectedFromTable={setSelectedFromTable}
-              />
-              <Pagination totalPages={totalPages} />
-            </div>
-          );
-        }}
-      </QueryWrapper>
+      <div className=" hidden mdl:block">
+        <QueryWrapper query={query}>
+          {({ data, totalPages }: { data: any; totalPages?: any }) => {
+            console.log(data);
+
+            return (
+              <div>
+                <DataTable
+                  //Component={CardViewPhoneListing}
+                  title=""
+                  data={data}
+                  columns={columns}
+                  functionSelect={functionSelectView}
+                  setSelectedFromTable={setSelectedFromTable}
+                />
+                <Pagination totalPages={totalPages} />
+              </div>
+            );
+          }}
+        </QueryWrapper>
+      </div>
     </div>
   );
 }

@@ -23,6 +23,7 @@ interface FirstProps {
 interface LastProps {
   children?: ReactNode;
   options: any;
+  className?: string;
 }
 
 export const TableHeader: React.FC<TableHeaderProps> & {
@@ -31,7 +32,7 @@ export const TableHeader: React.FC<TableHeaderProps> & {
   Last: React.FC<LastProps>;
 } = ({ children }) => {
   return (
-    <div className={`flex items-center justify-between gap-6 flex-wrap mb-8 `}>
+    <div className={`flex items-center justify-between gap-6 flex-wrap mb-5 md:mb-8 `}>
       {children}
     </div>
   );
@@ -52,8 +53,8 @@ const Middle: React.FC<SectionProps> = ({ children }) => (
   <div className="text-center">{children}</div>
 );
 
-const Last: React.FC<LastProps> = ({ children, options }) => (
-  <div className="flex items-center gap-4 flex-wrap w-fit lg:flex-1  justify-end">
+const Last: React.FC<LastProps> = ({ children, options ,className='' }) => (
+  <div className={`flex items-center gap-4 flex-wrap w-fit lg:flex-1  justify-end ${className}`}>
     <TableFilter data={options} />
     {children}
   </div>

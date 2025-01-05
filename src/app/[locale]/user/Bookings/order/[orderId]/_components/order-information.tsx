@@ -79,7 +79,7 @@ function OrderInformation({
     <div className="w-full mdl:min-w-[400px] flex-1 py-6 mdl:py-9 px-3 mdl:px-4 bg-white rounded-xl border border-green/30">
       <div className="flex w-full flex-1 mdl:flex-row flex-col flex-wrap gap-y-5 gap-x-8">
         <CardInfoOrder
-          label={isRent === "rent" ? "Lessor Name" : "Client Name"}
+          label={data.renterType === "IRent" ? "Lessor Name" : "Client Name"}
           iconRender={() => (
             <div className="bg-blueLight rounded-full size-10 p-0 flex items-center justify-center">
               {data?.userImage ? (
@@ -97,9 +97,15 @@ function OrderInformation({
           )}
         >
           <div>
-            <h4>{data?.lessorName || "--"}</h4>
+            <h4>
+              {data.renterType === "IRent"
+                ? data?.lessorName
+                : data?.renterName || "--"}
+            </h4>
             <p className="text-xs text-grayMedium font-Regular">
-              {data?.lessorEmail || "--"}
+              {data.renterType === "IRent"
+                ? data?.lessorName
+                : data?.renterEmail || "--"}
             </p>
           </div>
         </CardInfoOrder>

@@ -15,6 +15,7 @@ export const user = {
     my_products: (queries: any) => buildQuery("/Product/my-products", queries),
     getById: (id: any) => `/Product/${id}`,
     upDateToOnlineById: (id: any) => `/Product/${id}/availability`,
+    upDateManyToOnlineById:  `/Product/update products availabilty`,
     getMyProductsById: (id: any) => `/Product/my-product/${id}`,
     favoriteProducts: `/FavouriteProduct`,
     DeleteFavoriteProducts: (id: any) => `/FavouriteProduct/${id}`,

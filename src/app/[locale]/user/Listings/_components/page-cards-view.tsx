@@ -36,6 +36,7 @@ function PageCardsView() {
           {searchParams.get("active") === "true" ? (
             ActiveProducts?.data?.items?.length > 0 ? (
               <div>
+                <h2 className="text-xl mdl:hidden mb-5">My Listings</h2>
                 <CardView
                   title={"Online"}
                   data={ActiveProducts?.data?.items}
@@ -81,8 +82,16 @@ function PageCardsView() {
         </>
       ) : (
         <div>
-          <CardView title={"Online"} data={ActiveProducts?.data?.items} />
-          <CardView title={"Offline"} data={OfflineProducts?.data?.items} />
+          <CardView
+            title={"Online"}
+            viewAllLink={`${ROUTES.USER.LISTINGS}?card=true&active=true`}
+            data={ActiveProducts?.data?.items}
+          />
+          <CardView
+            title={"Offline"}
+            viewAllLink={`${ROUTES.USER.LISTINGS}?card=true&active=false`}
+            data={OfflineProducts?.data?.items}
+          />
         </div>
       )}
     </div>
