@@ -37,6 +37,7 @@ const ROUTES = {
     BANNERS: "/admin/master-data/Banners",
     BANNERSADD: "/admin/master-data/Banners/add",
     ADS: "/admin/master-data/Ads",
+    ADSPRICING: "/admin/master-data/Ads/ads-pricing",
     ADSDETAILS: (id) => `/admin/master-data/Ads/${id}`,
   },
   USER: {

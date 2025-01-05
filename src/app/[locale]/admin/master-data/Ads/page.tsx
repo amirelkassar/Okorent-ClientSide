@@ -8,16 +8,21 @@ import DeleteIcon from "@/src/assets/icons/delete";
 import { columns } from "./_components/column";
 import VerifyIcon from "@/src/assets/icons/verify";
 import PauseIcon from "@/src/assets/icons/pause";
+import { TableHeader } from "@/src/components/table/table-header";
+import { Link } from "@/src/navigation";
+import AddPricingIcon from "@/src/assets/icons/add-pricing";
+import CardPhoneAds from "./_components/card-phone-ads";
+import ROUTES from "@/src/routes";
 const FilterOptions = [
   {
     label: "Activate",
-    type: "filter",
-    key: "Activate",
+    key: "filter",
+    value: "Activate",
   },
   {
     label: "Suspend",
-    type: "filter",
-    key: "Suspend",
+    key: "filter",
+    value: "Suspend",
   },
 ];
 function page() {
@@ -46,14 +51,27 @@ function page() {
   ];
   return (
     <LayoutMaster>
+      <TableHeader>
+        <TableHeader.First title="Ads Managment - 112">
+          <Link
+            href={ROUTES.ADMIN.ADSPRICING}
+            className="text-sm border duration-300 hover:shadow-md border-black h-10 min-w-[140px] rounded-xl px-4 py-2 flex items-center gap-2"
+          >
+            <AddPricingIcon />
+            Ads Pricing
+          </Link>
+        </TableHeader.First>
+        <TableHeader.Last
+          className="ms-auto"
+          options={FilterOptions}
+        ></TableHeader.Last>
+      </TableHeader>
       <DataTable
-        title="Ads Managment - 112 "
+        title=""
         data={AdsData}
         columns={columns}
         functionSelect={functionSelect}
-        filterData={FilterOptions}
-        filter={"buttons"}
-        filterBy="status"
+        Component={CardPhoneAds}
       />
     </LayoutMaster>
   );

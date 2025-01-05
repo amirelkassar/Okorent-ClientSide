@@ -42,7 +42,7 @@ export const TableHeader: React.FC<TableHeaderProps> & {
 
 const First: React.FC<FirstProps> = ({ children, functionSelect, title }) => (
   <div className="flex items-center space-x-4 lg:flex-1">
-    {title && <h2 className="headTitle mdl:min-h-10 text-nowrap">{title}</h2>}
+    {title && <h2 className="headTitle mdl:min-h-10 text-nowrap place-content-center">{title}</h2>}
     {children}
     {functionSelect &&
       functionSelect.map((item, index) => {

@@ -54,9 +54,6 @@ function page() {
         title=""
         data={TICKETS}
         columns={columns}
-        //filterBy="category"
-        //filter="buttons"
-        //filterData={FilterOptions}
         Component={CardPhoneAccount}
       />
     </div>

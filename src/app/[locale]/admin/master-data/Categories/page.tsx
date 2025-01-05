@@ -20,13 +20,13 @@ function page() {
           className={"gap-2 h-10 !px-5"}
         >
           <PlusIcon className="w-4 h-auto" />
-          <p className="text-base font-Regular font-medium">Add Category</p>
+          <p className=" text-sm mdl:text-base font-Regular font-medium">Add Category</p>
         </LinkGreen>
       </div>
       <QueryWrapper query={query}>
         {({ data, totalPages }: { data: any; totalPages?: any }) => {
           return (
-            <div className="bg-white rounded-xl border border-green/30 shadow-md w-full px-8 py-2 mb-section">
+            <div className="bg-white rounded-xl border border-green/30 shadow-md w-full px-3 mdl:px-8 py-1 mdl:py-2 mb-section">
               {data?.map((item: any, index: number) => (
                 <CategoryRow key={index} data={item} />
               ))}

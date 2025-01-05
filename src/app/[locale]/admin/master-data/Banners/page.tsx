@@ -11,7 +11,6 @@ import PasswordIconHide from "@/src/assets/icons/password";
 import ROUTES from "@/src/routes";
 import { TableHeader } from "@/src/components/table/table-header";
 import LinkGreen from "@/src/components/linkGreen";
-import AddIcon from "@/src/assets/icons/add";
 import PlusIcon from "@/src/assets/icons/plus";
 import CardBanner from "./_components/card-banner";
 const FilterOptions = [

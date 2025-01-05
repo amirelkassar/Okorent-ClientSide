@@ -42,7 +42,7 @@ function SwitchPagesMaster() {
             ? "categories"
             : pathname === ROUTES.ADMIN.BANNERS
             ? "banners"
-            : pathname === ROUTES.ADMIN.ADS
+            : (pathname === ROUTES.ADMIN.ADS|| pathname === ROUTES.ADMIN.ADSPRICING)
             ? "ads"
             : null
         }
