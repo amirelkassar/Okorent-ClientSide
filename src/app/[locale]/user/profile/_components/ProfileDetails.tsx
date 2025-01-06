@@ -14,9 +14,13 @@ import VerifyBlackIcon from "@/src/assets/icons/verifyBlack";
 import CameraIcon from "@/src/assets/icons/camera";
 import ModalComp from "@/src/components/modal-comp";
 import { useDisclosure } from "@mantine/hooks";
-import { MultiSelect, Select, TextInput } from "@mantine/core";
+import { Group, MultiSelect, Paper, Select, TextInput } from "@mantine/core";
 import Input from "@/src/components/input";
 import Verify from "@/src/components/verify";
+import InputTextarea from "@/src/components/InputTextarea";
+import { TimeInput } from "@mantine/dates";
+import ClockIcon from "@/src/assets/icons/clock";
+import UploadAndCropImg from "./uploadAndCropImg";
 const profileData = {
   name: "Mark James",
   memberSince: "March 2024",
@@ -48,25 +52,11 @@ const initialValues = {
 };
 function ProfileDetails() {
   const [opened, { open, close }] = useDisclosure(false);
-
+  // setFormData={setFormData} formData={formData}
   return (
     <div className="bg-white/50 flex-1 md:flex-row flex-col min-w-[530ox] xxl:min-w-[800px] flex gap-7 pt-6 pb-9 lg:pb-12  px-8 rounded-2xl border border-green/80 shadow-md">
       <div className="md:min-w-[200px]">
-        <div className=" size-[100px] md:size-[156px] relative rounded-full mx-auto mb-5 border-2 border-white shadow-md ">
-          <div className=" absolute top-1/2 -end-4 md:-end-6 w-7 md:w-10 h-auto -translate-y-1/2 ">
-            <VerifyBlackIcon className="w-full h-auto" />
-          </div>
-          <Image
-            src={profileData.image}
-            alt={profileData.name}
-            width={236}
-            height={195}
-            className="w-full h-full rounded-full object-cover "
-          />
-          <div className=" absolute bg-[#D9D9D9] md:min-w-8  md:min-h-8  left-1/2 -bottom-3 md:-bottom-5 cursor-pointer duration-200 hover:shadow-md size-5 md:size-8 rounded-full p-1 flex items-center justify-center h-auto -translate-x-1/2 ">
-            <CameraIcon />
-          </div>
-        </div>
+        <UploadAndCropImg image={profileData.image} />
         <p className="flex items-center gap-1 text-center mx-auto justify-center mb-1 md:mb-4 text-sm  md:text-base text-green">
           <span className="block h-[5px] w-[5px] rounded-full animate-pulse bg-green"></span>
           {profileData.availability}
@@ -160,7 +150,7 @@ function ProfileDetails() {
         </Button>
       </div>
       <ModalComp opened={opened} close={close} title="Edit profile">
-        <form className="flex flex-col gap-4 md:min-w-[420px]">
+        <form className="flex flex-col gap-4 w-[500px] max-w-full ">
           <Input label="Name" placeholder="Name" />
           <Input label="Email" placeholder="Email" />
           <Input label="Phone Number" placeholder="Phone Number" />
@@ -170,6 +160,44 @@ function ProfileDetails() {
             data={["English", "French"]}
             placeholder="Select Languages"
             searchable
+            nothingFoundMessage="No results"
+            classNames={{
+              input: "bg-grayLight border-none h-11 rounded-[8px] ",
+              label: "text-[16px] mb-2 font-Medium ms-1",
+              inputField: " h-full placeholder:text-xs ",
+              pillsList: "h-full ",
+              pill: "bg-green text-white rounded-lg text-xs font-Regular",
+              dropdown:
+                "bg-white text-black rounded-lg border border-green/50 text-grayDark py-2",
+              option:
+                "hover:bg-green hover:text-white duration-300  flex items-center ",
+            }}
+            clearable
+          />
+          <div className="flex flex-col gap-4">
+            <p className="text-sm lg:text-base font-Medium mb-1">
+              Address information
+            </p>
+            <Input label="Street Name" placeholder="Street Name" />
+            <Input label="Postal Code" placeholder="Postal Code" />
+          </div>
+          <div className="flex gap-7">
+            <Input label="Country" placeholder="Country" className="flex-1" />
+            <Input label="City" placeholder="City" className="flex-1" />
+          </div>
+          <InputTextarea
+            label="About"
+            placeholder="About"
+            inputClassName="min-h-[100px] bg-grayLight focus:bg-white"
+            autosize
+            className="h-auto !min-h-10 !mb-0"
+          />
+          <MultiSelect
+            label="Working Days"
+            data={["Saturday", "Friday"]}
+            placeholder="Select Working Days"
+            searchable
+            nothingFoundMessage="No results"
             classNames={{
               input: "bg-grayLight border-none h-11 rounded-[8px] ",
               label: "text-[16px] mb-2 font-Medium ms-1",
@@ -184,14 +212,28 @@ function ProfileDetails() {
             clearable
           />
           <div>
-            <p className="text-sm lg:text-base font-Medium mb-1">Address information</p>
-            <Input label="Street Name" placeholder="Street Name" />
+            <p className="text-sm lg:text-base font-Medium mb-1">
+              Opining hours
+            </p>
+            <div className="flex items-center gap-4 w-full">
+              <TimeInput
+                leftSection={<ClockIcon className="w-4 h-4" />}
+                classNames={{
+                  input: "bg-grayLight border-none w-full  ",
+                  section: "text-grayMedium",
+                }}
+                className="w-full"
+              />
+              <TimeInput
+                leftSection={<ClockIcon className="w-4 h-4" />}
+                classNames={{
+                  input: "bg-grayLight border-none w-full  ",
+                  section: "text-grayMedium",
+                }}
+                className="w-full"
+              />
+            </div>
           </div>
-          <div className="flex gap-7">
-            <Input label="City" placeholder="City" />
-            <Input label="Postal Code" placeholder="Postal Code" />
-          </div>
-          <Input label="Account Number" placeholder="Account Number" />
         </form>
         <div className="flex items-center mt-11 justify-between w-full gap-6 pb-7">
           <Button
