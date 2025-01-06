@@ -1,5 +1,6 @@
 "use client";
 import DownIcon from "@/src/assets/icons/down";
+import VisaTitleBlack from "@/src/assets/icons/visaTitleBlack";
 import Button from "@/src/components/button";
 import ModalComp from "@/src/components/modal-comp";
 import { Link } from "@/src/navigation";
@@ -7,10 +8,12 @@ import { Select, TextInput } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 import { useDisclosure } from "@mantine/hooks";
 import React, { useState } from "react";
+import ModalEditAccount from "./modal-edit-account";
 
 function WithdrawlInfo() {
   const [opened, { open, close }] = useDisclosure(false);
   const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
+  const [opened3, { open: open3, close: close3 }] = useDisclosure(false);
   const [value, setValue] = useState<Date | null>(new Date());
 
   const formatDate = (date: Date | null) => {
@@ -28,13 +31,26 @@ function WithdrawlInfo() {
           <h3 className="text-2xl font-Regular mb-10">Withdrawl Option</h3>
           <div className="flex gap-10 flex-col lg:flex-row justify-between">
             <div>
-              <h4 className="text-base font-Regular mb-2">Last Withdrawl</h4>
-              <p className="text-base font-Regular text-grayMedium ">
-                VISA ending in 0555
-              </p>
-              <p className="text-base font-Regular text-grayMedium ">
-                Expires 04/29
-              </p>
+              <h4 className="text-base font-Regular mb-2">Withdrawl Option</h4>
+              <div className="flex gap-4 lgl:gap-9">
+                <div className="flex  gap-2">
+                  <VisaTitleBlack className="mt-1" />
+                  <div>
+                    <p className="text-grayMedium text-base font-Regular">
+                      VISA ending in 0555
+                    </p>
+                    <p className="text-grayMedium text-base font-Regular">
+                      Expires 04/29
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={open3}
+                  className="text-blue font-Regular text-base"
+                >
+                  Change{" "}
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -137,7 +153,11 @@ function WithdrawlInfo() {
           </div>
         </ModalComp>
       )}
-      <ModalComp opened={opened2} close={close2} title={"Scheudle Starting Date"}>
+      <ModalComp
+        opened={opened2}
+        close={close2}
+        title={"Scheudle Starting Date"}
+      >
         <div className="mx-auto max-w-[95%] w-[420px] lg:max-w-[280px]">
           <DatePicker
             classNames={{
@@ -152,8 +172,7 @@ function WithdrawlInfo() {
             onChange={setValue}
             minDate={new Date()}
           />
-         
-      
+
           <Button
             className={"w-full mt-6"}
             onClick={() => {
@@ -165,6 +184,7 @@ function WithdrawlInfo() {
           </Button>
         </div>
       </ModalComp>
+      <ModalEditAccount opened={opened3} close={close3} />
     </div>
   );
 }

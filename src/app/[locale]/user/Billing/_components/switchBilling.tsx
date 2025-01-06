@@ -10,12 +10,12 @@ function SwitchBilling() {
     <SegmentedControl
       value={switchBilling}
       onChange={(e) => {
-        setSwitchBilling(e==='plan&wallet'?'plan&wallet':e==='renting'?'renting':'rentOuts');
+        setSwitchBilling(e==='plan'?'plan':e==='renting'?'renting':'rentOuts');
       }}
       withItemsBorders={false}
       color="#88BA52"
       data={[
-        { label: "Plan & Wallet", value: "plan&wallet" },
+        { label: "Plan", value: "plan" },
         { label: "Rentings", value: "renting" },
         { label: "Rentouts", value: "rentOuts" },
       ]}

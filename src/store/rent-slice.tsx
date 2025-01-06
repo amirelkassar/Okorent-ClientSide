@@ -21,13 +21,13 @@ export const useSwitchGuestRent = create<StoreGuest>((set) => ({
 }));
 /*store Switch Billing*/
 interface StoreBilling {
-  switchBilling: "plan&wallet" | "renting" | "rentOuts";
+  switchBilling: "plan" | "renting" | "rentOuts";
   setSwitchBilling: (
-    switchBilling: "plan&wallet" | "renting" | "rentOuts"
+    switchBilling: "plan" | "renting" | "rentOuts"
   ) => void;
 }
 export const useSwitchBilling = create<StoreBilling>((set) => ({
-  switchBilling: "plan&wallet", // default state
+  switchBilling: "plan", // default state
   setSwitchBilling: (switchBilling) => set({ switchBilling }),
 }));
 /*store Switch Available*/
