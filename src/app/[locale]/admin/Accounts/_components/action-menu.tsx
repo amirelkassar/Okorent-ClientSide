@@ -14,10 +14,25 @@ import { useDisclosure } from "@mantine/hooks";
 import EditModal from "./EditModal";
 import NoteModal from "@/src/components/NoteModal";
 
-function ActionMenu({ id }: { id: any }) {
+function ActionMenu({ id, status = "" }: { id: any; status: any }) {
   const [opened, { open, close }] = useDisclosure(false);
   const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
   const [opened3, { open: open3, close: close3 }] = useDisclosure(false);
+  const differentOption = [
+    {
+      label: "Verify",
+      icon: <TrueIcon fill="#6F6B7D" className="w-3 h-auto" />,
+      type: "btn",
+      action: () => {},
+    },
+    {
+      label: "Deactivate",
+      icon: <UnVerifyIcon fill="#6F6B7D" className="w-3 h-auto" />,
+      type: "btn",
+      action: open,
+    },
+  ];
+
   const options = [
     {
       label: "Edit Details",
@@ -37,18 +52,7 @@ function ActionMenu({ id }: { id: any }) {
       type: "btn",
       action: () => {},
     },
-    {
-      label: "Verify",
-      icon: <TrueIcon fill="#6F6B7D" className="w-3 h-auto" />,
-      type: "btn",
-      action: () => {},
-    },
-    {
-      label: "Deactivate",
-      icon: <UnVerifyIcon fill="#6F6B7D" className="w-3 h-auto" />,
-      type: "btn",
-      action: open,
-    },
+
     {
       label: "Send Note",
       icon: <NoteTableIcon fill="#6F6B7D" className="w-3 h-auto" />,
@@ -63,9 +67,19 @@ function ActionMenu({ id }: { id: any }) {
       color: "red",
     },
   ];
+  const optionView = () => {
+    switch (status.toString()) {
+      case "true":
+        return [differentOption[0], ...options];
+      case "false":
+        return [differentOption[1], ...options];
+      default:
+        return options;
+    }
+  };
   return (
     <>
-      <DataActions data={options} />
+      <DataActions data={optionView() || []} />
       {opened && <DeactivateModal id={id} opened={opened} close={close} />}
       {opened2 && <NoteModal id={id} opened={opened2} close={close2} />}
       {opened3 && <EditModal id={id} opened={opened3} close={close3} />}

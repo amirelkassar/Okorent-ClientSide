@@ -16,7 +16,7 @@ function HeaderEdit({ id }: any) {
     {
       title: "Discard Edits",
       icon: <UnVerifyIcon fill="#006AFF" />,
-      link: ROUTES.ADMIN.LISTINGSDETAILS(1),
+      link: ROUTES.ADMIN.LISTINGSDETAILS(id),
       onclick: () => {},
     },
     {

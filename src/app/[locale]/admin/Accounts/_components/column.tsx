@@ -68,7 +68,7 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     header: "Email",
   },
   {
-    accessorKey: "name",
+    accessorKey: "created",
     header: () => {
       return (
         <div className="flex items-center gap-1 cursor-pointer">
@@ -79,7 +79,7 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     },
     cell: ({ getValue }) => {
       const packageVal = getValue<string>();
-      return <RenderPackage packageVal={packageVal} />;
+      return <RenderPackage packageVal={'packageVal'} />;
     },
   },
   {
@@ -119,9 +119,10 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     id: "actions",
     cell: ({ row }) => {
       const id = row.original.id;
+      const verified = row.original.verified||false;
       return (
         <div className="flex items-center gap-3 justify-end">
-          <ActionMenu id={id} />
+          <ActionMenu id={id} status={verified} />
         </div>
       );
     },

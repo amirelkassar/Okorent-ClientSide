@@ -1,7 +1,5 @@
 "use client";
 import React from "react";
-import LinkGreen from "../linkGreen";
-import ROUTES from "@/src/routes";
 import { useParams } from "next/navigation";
 interface PricingOptionsProps {
   daysNumber: number;

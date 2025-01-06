@@ -7,12 +7,24 @@ import FormThree from "../../_components/forms-list/form-three";
 import FormFour from "../../_components/forms-list/form-four";
 import FormFive from "../../_components/forms-list/form-five";
 import FormSix from "../../_components/forms-list/form-six";
+import { QueryWrapper } from "@/src/components/query-wrapper";
+import { GetMyProductsByID } from "@/src/hooks/queries/user/lisitings";
+import UpdateListing from "./_components/update-listing";
 
 
 function Page({ params }: any) {
   const [dataList, setDataList] = useState<any>({});
+    const query = GetMyProductsByID(params.productID);
+  
   return (
     <div>
+         <QueryWrapper query={query}>
+      {({ data }) => {
+        console.log(data);
+
+        return <UpdateListing initialValues={data} />;
+      }}
+    </QueryWrapper>
       <HeaderEdit id={params.productID} />
       <div className="flex flex-col gap-6 mb-20">
         <FormOne />

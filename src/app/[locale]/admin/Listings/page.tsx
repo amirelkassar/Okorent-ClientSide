@@ -1,7 +1,6 @@
 "use client";
 import DeleteIcon from "@/src/assets/icons/delete";
 import { DataTable } from "@/src/components/data-table";
-import { ListingsDataAdmin } from "@/src/lib/dataUser";
 import React from "react";
 import { columns } from "./_components/column";
 import QuickEditIcon from "@/src/assets/icons/quickEdit";

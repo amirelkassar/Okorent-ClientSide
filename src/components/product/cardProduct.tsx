@@ -19,9 +19,11 @@ import { calculateDurationRange } from "@/src/lib/utils";
 function CardProduct({
   data = [],
   guest = false,
+  admin = false,
 }: {
   data?: any;
   guest?: boolean;
+  admin?: boolean;
 }) {
   const params = useParams();
   const searchparams = useSearchParams();
@@ -85,7 +87,7 @@ function CardProduct({
       pickUpAddress: location,
     }),
   };
-console.log( calculateDurationRange(valueDate[0], valueDate[1]));
+  console.log(calculateDurationRange(valueDate[0], valueDate[1]));
 
   if (searchparams.get("checkout") === "true") {
     return <ViewCheckout data={formData} />;
@@ -139,27 +141,29 @@ console.log( calculateDurationRange(valueDate[0], valueDate[1]));
             TotalPriceOrder={TotalPriceOrder}
             PriceBYDays={PriceBYDays}
           >
-            <div className="flex items-center px-5 justify-between gap-4 pb-4 flex-wrap mt-5">
-              <LinkGreen
-                href={
-                  guest
-                    ? ROUTES.AUTH.LOGIN
-                    : ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID)
-                }
-                className={`w-full  ${
-                  valueAddressType &&
-                  TotalPriceOrder &&
-                  location &&
-                 ( calculateDurationRange(valueDate[0], valueDate[1])>0)
-                    ? "opacity-100"
-                    : guest
-                    ? "opacity-100"
-                    : "opacity-50 pointer-events-none"
-                }  duration-300  `}
-              >
-                Request this item
-              </LinkGreen>
-            </div>
+            {admin ? null : (
+              <div className="flex items-center px-5 justify-between gap-4 pb-4 flex-wrap mt-5">
+                <LinkGreen
+                  href={
+                    guest
+                      ? ROUTES.AUTH.LOGIN
+                      : ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID)
+                  }
+                  className={`w-full  ${
+                    valueAddressType &&
+                    TotalPriceOrder &&
+                    location &&
+                    calculateDurationRange(valueDate[0], valueDate[1]) > 0
+                      ? "opacity-100"
+                      : guest
+                      ? "opacity-100"
+                      : "opacity-50 pointer-events-none"
+                  }  duration-300  `}
+                >
+                  Request this item
+                </LinkGreen>
+              </div>
+            )}
           </PriceDetails>
         </div>
       </div>
