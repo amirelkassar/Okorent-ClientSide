@@ -74,4 +74,13 @@ export const admin = {
     base: (queries: any) => buildQuery("/User/list", queries),
     AccountsID: (id: any) => `/User/${id}`,
   },
+  product: {
+    base: (queries: any) => buildQuery("/AdminProduct", queries),
+    getById: (id: any) => `/AdminProduct/${id}`,
+    DeleteManyProducts: `/AdminProduct/Delete-Products`,
+  },
+  Stocks:{
+    base: (id: any) => `/AdminUserStock/${id}`,
+    add: `/AdminUserStock`
+  }
 };

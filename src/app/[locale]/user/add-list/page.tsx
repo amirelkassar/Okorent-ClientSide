@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Step from "./_components/step";
 import { Checkbox } from "@mantine/core";
 import DropImg from "@/src/components/DropImg";
@@ -11,14 +11,15 @@ import Preview from "./_components/preview";
 import LinkGreen from "@/src/components/linkGreen";
 import { useSearchParams } from "next/navigation";
 import InputTextarea from "@/src/components/InputTextarea";
-import {
-  useCreateListingMutation,
-} from "@/src/hooks/queries/user/add-lisiting";
+import { useCreateListingMutation } from "@/src/hooks/queries/user/add-lisiting";
 import SelectInput from "@/src/components/select-input";
 import Input from "@/src/components/input";
 import { Toast } from "@/src/components/toast";
 import GetErrorMsg from "@/src/components/getErrorMsg";
-import { GetCategory, GetSubCategory } from "@/src/hooks/queries/admin/master-data/category";
+import {
+  GetCategory,
+  GetSubCategory,
+} from "@/src/hooks/queries/admin/master-data/category";
 
 interface LocationProps {
   id: number;
@@ -87,11 +88,6 @@ function Page() {
     });
   };
 
-  useEffect(() => {
-    RefetchGetSubCategory();
-  }, [dataList?.CategoryId]);
-
-
   return (
     <div
       className={`"w-full max-w-full ${
@@ -110,7 +106,13 @@ function Page() {
               placeholder="Select category"
               onChange={(e) => {
                 reset();
-                setDataList({ ...dataList, CategoryId: e });
+
+                setDataList({
+                  ...dataList,
+                  CategoryId: e,
+                  SubCategoryId: null,
+                });
+                RefetchGetSubCategory();
               }}
               inputClassName=" !rounded-xl md:!rounded-2xl text-grayMedium !h-12  md:!h-16 bg-white"
               error={GetErrorMsg(error, "CategoryId")}

@@ -4,9 +4,7 @@ import { Checkbox } from "@mantine/core";
 import DropImg from "@/src/components/DropImg";
 import Button from "@/src/components/button";
 import SelectInput from "@/src/components/select-input";
-import {
-  useEditListingMutation,
-} from "@/src/hooks/queries/user/add-lisiting";
+import { useEditListingMutation } from "@/src/hooks/queries/user/add-lisiting";
 import InputTextarea from "@/src/components/InputTextarea";
 import Input from "@/src/components/input";
 import { Toast } from "@/src/components/toast";
@@ -15,7 +13,10 @@ import StepAvailability from "./stepAvailability";
 import StepFAQ from "./stepFAQ";
 import StepLocation from "./stepLocation";
 import GetErrorMsg from "@/src/components/getErrorMsg";
-import { GetCategory, GetSubCategory } from "@/src/hooks/queries/admin/master-data/category";
+import {
+  GetCategory,
+  GetSubCategory,
+} from "@/src/hooks/queries/admin/master-data/category";
 interface LocationProps {
   id: number;
   name: string;
@@ -49,10 +50,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
     initialValues.isActive ? "true" : "false"
   );
 
-  useEffect(() => {
-    RefetchGetSubCategory();
-  }, [dataList?.categoryId]);
-
+  //functions
   const handleCheckboxChange = (
     value: string,
     setState: React.Dispatch<React.SetStateAction<string | null>>
@@ -106,7 +104,8 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
           placeholder="Select category"
           onChange={(e) => {
             reset();
-            setDataList({ ...dataList, categoryId: e });
+            setDataList({ ...dataList, categoryId: e, subCategoryId: null });
+            RefetchGetSubCategory();
           }}
           value={dataList?.categoryId}
           error={GetErrorMsg(error, "CategoryId")}

@@ -7,17 +7,17 @@ import CardProduct from "@/src/components/product/cardProduct";
 import Description from "@/src/components/product/description";
 import QuestionView from "@/src/components/question";
 import Reviews from "@/src/components/reviews";
-import { Rentals } from "@/src/lib/dataUser";
 import React, { useState } from "react";
 import HeaderProduct from "./_components/headerProduct";
 import AddProduct from "./_components/add-product";
 import { QueryWrapper } from "@/src/components/query-wrapper";
 import { GetProductsAll, GetProductsByID } from "@/src/hooks/queries/user/home";
 import LoadingProductsRow from "@/src/components/product/loading-products-row";
+import { GetProductsInAdminByID } from "@/src/hooks/queries/admin/lisiting";
 
 function Page({ params }: any) {
   const [IsEdit, setIsEdit] = useState(false);
-  const query = GetProductsByID(params.productID);
+  const query = GetProductsInAdminByID(params?.productID);
   const { data: dataCustomers, isLoading: isLoadingProducts } =
     GetProductsAll();
   return (

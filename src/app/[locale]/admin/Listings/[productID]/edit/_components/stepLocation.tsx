@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { MultiSelect } from "@mantine/core";
 import Button from "@/src/components/button";
 import ModalComp from "@/src/components/modal-comp";
@@ -8,25 +8,70 @@ import LocationIcon from "@/src/assets/icons/location";
 import GoogleMapLoc from "@/src/components/GoogleMap";
 import ButtonDelete from "@/src/components/button-delete";
 import { GetMyStock } from "@/src/hooks/queries/user/lisitings/stock";
+import {
+  GetAllStockUser,
+  useCreateStockInAdmin,
+  useEditStockInAdmin,
+} from "@/src/hooks/queries/admin/lisiting";
+import { Toast } from "@/src/components/toast";
 
 interface StepLocationProps {
   location: any[];
   handleInputChangeLocation: (ids: any[]) => void;
   handleRemoveLocation: (index: number) => void;
+  idUSer: any;
 }
 function StepLocation({
   location,
   handleInputChangeLocation,
   handleRemoveLocation,
+  idUSer,
 }: StepLocationProps) {
   const [opened, { open, close }] = useDisclosure(false);
   const [indexSelect, setIndexSelect] = useState<any>(0);
-  const { data } = GetMyStock();
+  const { data } = GetAllStockUser(idUSer);
 
-console.log(data);
+  console.log(data);
 
   const handelValueWhenAddNewLocation = (newLocation: any) => {
     handleInputChangeLocation([...location, newLocation]);
+  };
+
+  const { mutateAsync: createStock } = useCreateStockInAdmin(idUSer);
+  const { mutateAsync: editStock } = useEditStockInAdmin(idUSer);
+  const onSubmitAddNewLocation = useCallback(
+    async (formData: any) => {
+      Toast.Promise(createStock(formData), {
+        success: "Done Add New Location",
+        onSuccess(res) {
+          console.log(res);
+          if (handelValueWhenAddNewLocation) {
+            handelValueWhenAddNewLocation(res?.data);
+          }
+        },
+        onError: async (res) => {},
+      });
+    },
+    [createStock]
+  );
+  console.log(idUSer);
+
+  const onSubmitEditLocation = useCallback(
+    async (formData: any) => {
+      Toast.Promise(editStock(formData), {
+        success: "Done Edit Location",
+      });
+    },
+    [editStock]
+  );
+  console.log(indexSelect);
+
+  const handleSubmit = async (data: any) => {
+    if (indexSelect) {
+      await onSubmitEditLocation({ ...data, id: indexSelect });
+    } else {
+      await onSubmitAddNewLocation(data);
+    }
   };
   return (
     <div className="mt-1 mdl:mt-2 mdl:pb-8 flex-1">
@@ -134,6 +179,8 @@ console.log(data);
             close={close}
             index={indexSelect}
             handelValueWhenAddNewLocation={handelValueWhenAddNewLocation}
+            idUSer={idUSer}
+            handelFuncAdmin={handleSubmit}
           />
         </ModalComp>
       </div>

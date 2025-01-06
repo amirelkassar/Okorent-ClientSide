@@ -1,12 +1,9 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Checkbox } from "@mantine/core";
 import DropImg from "@/src/components/DropImg";
 import Button from "@/src/components/button";
 import SelectInput from "@/src/components/select-input";
-import {
-  useEditListingMutation,
-} from "@/src/hooks/queries/user/add-lisiting";
 import InputTextarea from "@/src/components/InputTextarea";
 import Input from "@/src/components/input";
 import { Toast } from "@/src/components/toast";
@@ -14,8 +11,12 @@ import { GetIdsValues } from "@/src/lib/utils";
 import StepAvailability from "./stepAvailability";
 import StepFAQ from "./stepFAQ";
 import GetErrorMsg from "@/src/components/getErrorMsg";
-import { GetCategory, GetSubCategory } from "@/src/hooks/queries/admin/master-data/category";
+import {
+  GetCategory,
+  GetSubCategory,
+} from "@/src/hooks/queries/admin/master-data/category";
 import StepLocation from "./stepLocation";
+import { useEditListingInAdmin } from "@/src/hooks/queries/admin/lisiting";
 interface LocationProps {
   id: number;
   name: string;
@@ -37,22 +38,22 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
   const [location, setLocation] = useState<LocationProps[] | any>(
     GetIdsValues(initialValues.stocks)
   );
-  //query
-  const {
-    mutateAsync: createListing,
-    error,
-    reset,
-  } = useEditListingMutation(dataList?.id);
-  const { data: dataSubCategory, refetch: RefetchGetSubCategory } =
-    GetSubCategory(initialValues?.categoryId);
   const [selectedCheckbox, setSelectedCheckbox] = useState<string | null>(
     initialValues.isActive ? "true" : "false"
   );
 
-  useEffect(() => {
-    RefetchGetSubCategory();
-  }, [dataList?.categoryId]);
+  //query
+  const {
+    mutateAsync: EditListing,
+    error,
+    reset,
+  } = useEditListingInAdmin(dataList?.id);
+  const { data: dataSubCategory, refetch: RefetchGetSubCategory } =
+    GetSubCategory(dataList?.categoryId);
 
+  console.log(dataSubCategory);
+
+  //functions
   const handleCheckboxChange = (
     value: string,
     setState: React.Dispatch<React.SetStateAction<string | null>>
@@ -83,11 +84,14 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
     setFaqs(newFaqs);
     setDataList({ ...dataList, FAQs: newFaqs });
   };
-  console.log(dataList);
 
   const handleSubmit = async () => {
+    const formData = {
+      ...dataList,
+      usersReviews: null,
+    };
     reset();
-    await Toast.Promise(createListing(dataList), {
+    await Toast.Promise(EditListing(formData), {
       success: "successfully Edit Product",
       onSuccess: async (res) => {
         console.log(res);
@@ -97,7 +101,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
 
   return (
     <div className="w-full lg:w-[810px] mb-section flex flex-col gap-4">
-      <div className=" mt-1 mdl:mt-2 mdl:pb-8 flex-1">
+      <div className=" mt-1 mdl:mt-2 mdl:pb-6 flex-1">
         <SelectInput
           label=" Choose item category"
           data={dataCategory?.data?.map((item: any) => {
@@ -106,7 +110,8 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
           placeholder="Select category"
           onChange={(e) => {
             reset();
-            setDataList({ ...dataList, categoryId: e });
+            setDataList({ ...dataList, categoryId: e, subCategoryId: null });
+            RefetchGetSubCategory();
           }}
           value={dataList?.categoryId}
           error={GetErrorMsg(error, "CategoryId")}
@@ -228,6 +233,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
         handleRemoveLocation={handleRemoveLocation}
         location={location}
         handleInputChangeLocation={handleInputChangeLocation}
+        idUSer={initialValues?.createdBy || ""}
       />
 
       <div className=" mt-1 mdl:mt-2 mdl:pb-8 flex-1">

@@ -29,6 +29,8 @@ interface GoogleMapProps {
   close?: any;
   setLocation?: React.Dispatch<React.SetStateAction<string>>;
   handelValueWhenAddNewLocation?: (newLocation: any) => void;
+  idUSer?: any ;
+  handelFuncAdmin?: (data: any) => void;
 }
 interface LocationDetailsProps {
   address: string;
@@ -42,6 +44,8 @@ function GoogleMapLoc({
   handleInputChangeLocation,
   setLocation,
   handelValueWhenAddNewLocation,
+  idUSer,
+  handelFuncAdmin,
 }: GoogleMapProps) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -105,6 +109,7 @@ function GoogleMapLoc({
   );
   const handleSubmit = async () => {
     const formData = {
+      ...(idUSer? { userId: idUSer }:null),
       location: {
         latitude: selectedLocation?.lat,
         longitude: selectedLocation?.lng,
@@ -115,8 +120,11 @@ function GoogleMapLoc({
       city: placeName.city,
       state: placeName.state,
     };
-
-    if (index) {
+    if (idUSer) {
+      if (handelFuncAdmin) {
+        handelFuncAdmin(formData);
+      }
+    } else if (index) {
       await onSubmitEditLocation(formData);
     } else {
       await onSubmitAddNewLocation(formData);

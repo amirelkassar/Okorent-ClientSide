@@ -8,13 +8,13 @@ import FormFour from "../../_components/forms-list/form-four";
 import FormFive from "../../_components/forms-list/form-five";
 import FormSix from "../../_components/forms-list/form-six";
 import { QueryWrapper } from "@/src/components/query-wrapper";
-import { GetMyProductsByID } from "@/src/hooks/queries/user/lisitings";
 import UpdateListing from "./_components/update-listing";
+import { GetProductsInAdminByID } from "@/src/hooks/queries/admin/lisiting";
 
 
 function Page({ params }: any) {
   const [dataList, setDataList] = useState<any>({});
-    const query = GetMyProductsByID(params.productID);
+    const query = GetProductsInAdminByID(params.productID);
   
   return (
     <div>
@@ -25,7 +25,7 @@ function Page({ params }: any) {
         return <UpdateListing initialValues={data} />;
       }}
     </QueryWrapper>
-      <HeaderEdit id={params.productID} />
+      {/* <HeaderEdit id={params.productID} />
       <div className="flex flex-col gap-6 mb-20">
         <FormOne />
         <FormTwo dataList={dataList} setDataList={setDataList} />
@@ -33,7 +33,7 @@ function Page({ params }: any) {
         <FormFour/>
         <FormFive/>
         <FormSix dataList={dataList} setDataList={setDataList}/>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -57,11 +57,11 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
   },
 
   {
-    accessorKey: "category",
+    accessorKey: "categoryName",
     header: "Category",
   },
   {
-    accessorKey: "alwaysAvailable",
+    accessorKey: "isActive",
     header: "Status",
     cell: ({ getValue }) => {
       const alwaysAvailable = getValue<string>();

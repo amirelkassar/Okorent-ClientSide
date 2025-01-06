@@ -5,12 +5,25 @@ import NoteTableIcon from "@/src/assets/icons/noteTable";
 import Events from "@/src/components/Events";
 import LinkGreen from "@/src/components/linkGreen";
 import NoteModal from "@/src/components/NoteModal";
+import { Toast } from "@/src/components/toast";
+import { useDeleteProductInAdmin } from "@/src/hooks/queries/admin/lisiting";
+import { useRouter } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import { useDisclosure } from "@mantine/hooks";
-import React from "react";
+import React, { useCallback } from "react";
 
 function HeaderProduct({ id }: any) {
+  const router = useRouter();
   const [opened, { open, close }] = useDisclosure(false);
+  const { mutateAsync: DeleteProduct } = useDeleteProductInAdmin();
+  const onSubmitDelete = useCallback(async () => {
+    Toast.Promise(DeleteProduct(id), {
+      success: "Deleted Product Done",
+      onSuccess: async (res) => {
+        router.push(ROUTES.ADMIN.LISTINGS);
+      },
+    });
+  }, [DeleteProduct, id]);
   const functionSelect = [
     {
       title: "Send Note",
@@ -20,8 +33,8 @@ function HeaderProduct({ id }: any) {
     {
       title: "Delete",
       icon: <DeleteIcon />,
-      onclick: (ids: any) => {
-        console.log([...ids]);
+      onclick: () => {
+        onSubmitDelete();
       },
     },
   ];

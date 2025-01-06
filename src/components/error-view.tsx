@@ -15,7 +15,7 @@ function ErrorView({
       <h2 className="text-xl text-center mx-auto mdl:text-3xl my-section">
         {title}
       </h2>
-      <div className="w-fit mx-auto">{children ? children : null}</div>
+      <div className="w-fit mx-auto flex justify-center max-w-[60%] ">{children ? children : null}</div>
       <p className="text-grayMedium font-Regular text-base mdl:text-xl my-section text-center mx-auto max-w-[680px]">
         {des}
       </p>

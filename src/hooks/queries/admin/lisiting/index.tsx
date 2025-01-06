@@ -1,45 +1,46 @@
 import { api } from "@/src/api/axios";
-import { user } from "@/src/api/user";
-import { getQueries } from "@/src/lib/utils";
+import { admin, user } from "@/src/api/user";
+import { getFormData, getQueries } from "@/src/lib/utils";
+import { useRouter } from "@/src/navigation";
+import ROUTES from "@/src/routes";
 import {
   QueryClient,
   useMutation,
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { initialSiteQueries } from "../../initials";
 
-const initialCustomQueries = null;
-export const initialQueries = initialCustomQueries || initialSiteQueries;
-export const initialQueryKey = "user.myProductsAll";
+export const initialQueryKey = "admin_products";
+export const initialQueryKeyStock = "admin_stock";
 
-//getMyAllProducts
-export const GetMyProductsAll = (queries?: any): any => {
+//get All Products
+export const GetProductsInAdmin = (queries?: any): any => {
   return useQuery({
     queryKey: [initialQueryKey, queries],
     queryFn: async () => {
-      const response = await api.get(user.product.my_products(queries));
+      const response = await api.get(admin.product.base(queries));
       return response.data;
     },
   });
 };
+
 //getProductByID
-export const GetMyProductsByID = (id: any) => {
+export const GetProductsInAdminByID = (id: any) => {
   return useQuery({
     queryKey: [initialQueryKey, id],
     queryFn: async () => {
-      const response = await api.get(user.product.getMyProductsById(id));
+      const response = await api.get(admin.product.getById(id));
       return response.data;
     },
   });
 };
 
 //Delete Product
-export const useDeleteMutation = () => {
+export const useDeleteProductInAdmin = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (id: any) => {
-      const response = await api.delete(user.product.getById(id));
+      const response = await api.delete(admin.product.getById(id));
       return response.data;
     },
 
@@ -52,14 +53,13 @@ export const useDeleteMutation = () => {
     },
   });
 };
-//Update Product to Online
-export const useUpdateToOnlineMutation = () => {
+//Delete Product
+export const useDeleteManyProductInAdmin = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (id: any) => {
-      const response = await api.put(user.product.upDateToOnlineById(id), {
-        productId: id,
-        isAvailable: true,
+    mutationFn: async (data: any) => {
+      const response = await api.delete(admin.product.DeleteManyProducts, {
+        data: data,
       });
       return response.data;
     },
@@ -73,16 +73,58 @@ export const useUpdateToOnlineMutation = () => {
     },
   });
 };
-//Update Many Product to Online
-export const useUpdateManyToOnlineMutation = () => {
+
+//Edit Product In Admin
+export const useEditListingInAdmin = (id: any) => {
+  const router = useRouter();
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await api.put(user.product.upDateManyToOnlineById, data);
+      const response = await api.put(
+        admin.product.getById(id),
+        await getFormData(data),
+        {
+          headers: {
+            Accept: "text/plain",
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
+      console.log(res);
+      queryClient.refetchQueries([initialQueryKey]);
+      router.push(ROUTES.ADMIN.LISTINGS);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
+
+//get User Stock
+export const GetAllStockUser = (id: any) => {
+  return useQuery({
+    queryKey: [initialQueryKeyStock, id],
+    queryFn: async () => {
+      const response = await api.get(admin.Stocks.base(id));
+      return response.data;
+    },
+  });
+};
+
+//Post New Stock
+export const useCreateStockInAdmin = (id: any) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.post(admin.Stocks.add, data, {});
+      return response.data;
+    },
+
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKeyStock, id]);
       console.log(res);
     },
     onError: (res) => {
@@ -90,43 +132,22 @@ export const useUpdateManyToOnlineMutation = () => {
     },
   });
 };
-//getProductByID
-export const GetUserProductsByID = (id: any) => {
-  return useQuery({
-    queryKey: [initialQueryKey, id],
-    queryFn: async () => {
-      const response = await api.get(user.user.getByID(id));
+
+//Edit New Stock
+export const useEditStockInAdmin = (id: any) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any,) => {
+      const response = await api.put(admin.Stocks.base(data?.id), data, {});
       return response.data;
     },
-  });
-};
 
-export const getComplaints = async (queries: any) =>
-  (await api.get(user.product.my_products(queries))).data;
-
-export const prefetchComplaints = async () => {
-  const queryClient = new QueryClient();
-
-  await queryClient.prefetchQuery({
-    queryKey: [initialQueryKey, initialQueries],
-    queryFn: () => getComplaints(initialQueries),
-  });
-
-  return queryClient;
-};
-
-//getAll
-export const useComplaints = (
-  params = {
-    pageNum: null,
-    search: "",
-  }
-) => {
-  const queries = getQueries({ params, initialQueries });
-
-  return useQuery({
-    queryKey: [initialQueryKey, queries],
-    queryFn: () => getComplaints(queries),
-    placeholderData: (previousData: any) => previousData, // Identity function
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKeyStock, id]);
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
   });
 };
