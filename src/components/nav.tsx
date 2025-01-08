@@ -6,7 +6,6 @@ import { useLocale } from "next-intl";
 import { Link, usePathname } from "../navigation";
 import PlusIcon from "../assets/icons/plus";
 import Image from "next/image";
-import logo from "@/src/assets/images/logo.png";
 import man from "@/src/assets/images/user.png";
 import ROUTES from "../routes";
 import MenuIcon from "../assets/icons/menu";
@@ -25,8 +24,8 @@ import SupportIcon from "../assets/icons/Support";
 import InboxIcon from "../assets/icons/Inbox";
 import NotificationsIcon from "../assets/icons/Notifications";
 import Notifications from "./Notifications";
-import Logo from "./logo";
 import LogoOkoRent from "../assets/icons/logo";
+import AdsIcon from "../assets/icons/ads";
 interface NavProps {
   linkLogo: string;
 }
@@ -131,6 +130,13 @@ function Nav({ linkLogo = "#" }: NavProps) {
         icon: <NotificationsIcon />,
         url: ROUTES.USER.SUPPORT,
         active: pathname === ROUTES.USER.SUPPORT,
+      },
+      {
+        id: 12,
+        name: "Ads",
+        icon: <AdsIcon />,
+        url: ROUTES.USER.ADS,
+        active: pathname === ROUTES.USER.ADS,
       },
     ],
     [pathname]

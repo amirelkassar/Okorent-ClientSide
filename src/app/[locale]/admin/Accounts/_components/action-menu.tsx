@@ -8,16 +8,29 @@ import TrueIcon from "@/src/assets/icons/true";
 import UnVerifyIcon from "@/src/assets/icons/unVerify";
 import DataActions from "@/src/components/DataActions";
 import ROUTES from "@/src/routes";
-import React from "react";
+import React, { useCallback } from "react";
 import DeactivateModal from "./DeactivateModal";
 import { useDisclosure } from "@mantine/hooks";
 import EditModal from "./EditModal";
 import NoteModal from "@/src/components/NoteModal";
+import { useDeleteAccountInAdmin } from "@/src/hooks/queries/admin/account";
+import { Toast } from "@/src/components/toast";
 
 function ActionMenu({ id, status = "" }: { id: any; status: any }) {
   const [opened, { open, close }] = useDisclosure(false);
   const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
   const [opened3, { open: open3, close: close3 }] = useDisclosure(false);
+  //query
+  const { mutateAsync: DeleteAccount } = useDeleteAccountInAdmin();
+
+  //delete User
+  const onSubmitDeleteAccount = useCallback(async () => {
+    Toast.Promise(DeleteAccount(id), {
+      success: "Deleted Account Done",
+      onSuccess: async (res) => {},
+    });
+  }, [DeleteAccount, id]);
+
   const differentOption = [
     {
       label: "Verify",
@@ -63,16 +76,18 @@ function ActionMenu({ id, status = "" }: { id: any; status: any }) {
       label: "Delete",
       icon: <DeleteIcon className="w-3 h-auto" />,
       type: "btn",
-      action: () => {},
+      action: () => {
+        onSubmitDeleteAccount();
+      },
       color: "red",
     },
   ];
   const optionView = () => {
     switch (status.toString()) {
       case "true":
-        return [differentOption[0], ...options];
-      case "false":
         return [differentOption[1], ...options];
+      case "false":
+        return [differentOption[0], ...options];
       default:
         return options;
     }

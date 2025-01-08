@@ -14,12 +14,15 @@ import { QueryWrapper } from "@/src/components/query-wrapper";
 import { GetProductsAll, GetProductsByID } from "@/src/hooks/queries/user/home";
 import LoadingProductsRow from "@/src/components/product/loading-products-row";
 import { GetProductsInAdminByID } from "@/src/hooks/queries/admin/lisiting";
+import { GetReviewByIDInAdmin } from "@/src/hooks/queries/admin/lisiting/Reviews";
 
 function Page({ params }: any) {
   const [IsEdit, setIsEdit] = useState(false);
   const query = GetProductsInAdminByID(params?.productID);
   const { data: dataCustomers, isLoading: isLoadingProducts } =
     GetProductsAll();
+  const { data: DataReviews, isLoading } = GetReviewByIDInAdmin(params.productID);
+
   return (
     <QueryWrapper query={query}>
       {({ data }: { data: any }) => {
@@ -45,7 +48,8 @@ function Page({ params }: any) {
             <Reviews
               editAdmin
               usersReviews={data?.usersReviews}
-              productID={params.productID}
+              isLoading={isLoading}
+              dataReviews={DataReviews?.data || []}
             />
 
             <div className="flex flex-col gap-5 mb-section">

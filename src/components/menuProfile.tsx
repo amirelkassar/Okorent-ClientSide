@@ -61,19 +61,25 @@ function MenuProfile() {
           leftSection={<ProfileIcon />}
           className=" hover:bg-green/15 py-0 h-[30px] px-1 text-[14px] font-SemiBold rounded-lg"
         >
-          <Link href={ROUTES.USER.PROFILE}>Profile</Link>
+          <Link className="flex-1 w-full  block" href={ROUTES.USER.PROFILE}>
+            Profile
+          </Link>
         </Menu.Item>
         <Menu.Item
           leftSection={<SubscriptionIcon />}
           className=" hover:bg-green/15 py-0 h-[30px] px-1 text-[14px] font-SemiBold rounded-lg"
         >
-          <Link href={ROUTES.USER.WALLET}>Wallet</Link>
+          <Link className="flex-1 w-full  block" href={ROUTES.USER.WALLET}>
+            Wallet
+          </Link>
         </Menu.Item>
         <Menu.Item
           leftSection={<AdsIcon />}
           className=" hover:bg-green/15 py-0 h-[30px] px-1 text-[14px] font-SemiBold rounded-lg"
         >
-          Ads
+          <Link className="flex-1 w-full  block" href={ROUTES.USER.ADS}>
+            Ads
+          </Link>
         </Menu.Item>
         <Menu.Item
           leftSection={<SettingsIcon />}

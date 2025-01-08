@@ -3,13 +3,13 @@ import React, { useState } from "react";
 import { columns } from "./_components/column";
 import { DataTable } from "@/src/components/data-table";
 import CardPhoneAccount from "./_components/card-phone-account";
-import { GetAccounts } from "@/src/hooks/queries/Accounts";
 import { useSearchParams } from "next/navigation";
 import { QueryWrapper } from "@/src/components/query-wrapper";
 import { Pagination } from "@/src/components/pagination";
 import { TableHeader } from "@/src/components/table/table-header";
 import AddUser from "@/src/components/add-user";
 import { useActionTable } from "./_hooks/use-action-table";
+import { GetAccounts } from "@/src/hooks/queries/admin/account";
 
 function Page() {
   const searchParams = useSearchParams();

@@ -1,20 +1,19 @@
-"use client";
-
+import DownIcon from "@/src/assets/icons/down";
 import TrueWhiteIcon from "@/src/assets/icons/trueWhite";
 import XIcon from "@/src/assets/icons/x";
 import Button from "@/src/components/button";
 import Input from "@/src/components/input";
 import ModalComp from "@/src/components/modal-comp";
 import InputCreditCard from "@/src/components/product/checkout/inputCreditCard";
-import { TextInput } from "@mantine/core";
+import { Select, TextInput } from "@mantine/core";
 import React from "react";
-interface ModalEditAccountProps {
+interface ModalAddAccountProps {
   opened: boolean;
   close: () => void;
 }
-function ModalEditAccount({ opened, close }: ModalEditAccountProps) {
+function ModalAddAccount({ opened, close}:ModalAddAccountProps) {
   return (
-    <ModalComp title="Edit Billing information" opened={opened} close={close}>
+    <ModalComp title="Add Account" opened={opened} close={close}>
       <div className="w-[664px] max-w-full">
         <div className="flex flex-wrap gap-3 md:gap-5 mb-10 ">
           <div className="pb-6 border-b border-green/40 ">
@@ -110,6 +109,37 @@ function ModalEditAccount({ opened, close }: ModalEditAccountProps) {
             </div>
           </div>
 
+          <div className="pb-8 border-b border-green/40 w-full">
+            <h2 className="text-xl lg:text-[24px] mb-4 font-SemiBold">
+              VAT information
+            </h2>
+            <div className=" flex flex-col md:flex-row md:items-center gap-3 md:gap-8">
+              <Select
+                data={["Neatherland", "3 DaNeatherlandy", "Neatherland4"]}
+                leftSectionPointerEvents="none"
+                rightSection={<DownIcon />}
+                placeholder="Select rental duration"
+                label={"Country"}
+                classNames={{
+                  label: "text-black text-base mb-2",
+                  input:
+                    " text-black rounded-lg  focus:border-green text-grayMedium bg-white flex-1   rounded-lg border border-green/30 h-[44px]  placeholder:text-grayMedium placeholder:opacity-100 ",
+
+                  wrapper: "h-[44px] flex-1",
+                  dropdown:
+                    "bg-white text-black rounded-2xl border border-green/50 text-grayDark py-2",
+                  option: "hover:bg-green hover:text-white duration-300 ",
+                }}
+                className=" flex-1   duration-200 min-h-[64px]  text-grayMedium"
+              />
+              <Input
+                label={"VAT Number"}
+                placeholder={"25462321"}
+                inputClassName="bg-white  h-[44px]"
+                className=" flex-1"
+              />
+            </div>
+          </div>
           <div className=" w-full">
             <h2 className="text-xl mb-5 lg:text-[24px]  font-SemiBold">
               Billing Address
@@ -141,4 +171,4 @@ function ModalEditAccount({ opened, close }: ModalEditAccountProps) {
   );
 }
 
-export default ModalEditAccount;
+export default ModalAddAccount;

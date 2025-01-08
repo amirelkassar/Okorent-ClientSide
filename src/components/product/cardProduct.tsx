@@ -51,7 +51,6 @@ function CardProduct({
     () => PriceBYDays * daysNumber - 50.82,
     [PriceBYDays, daysNumber]
   );
-  console.log(location);
 
   const formData = {
     orderItems: [
@@ -87,7 +86,6 @@ function CardProduct({
       pickUpAddress: location,
     }),
   };
-  console.log(calculateDurationRange(valueDate[0], valueDate[1]));
 
   if (searchparams.get("checkout") === "true") {
     return <ViewCheckout data={formData} />;

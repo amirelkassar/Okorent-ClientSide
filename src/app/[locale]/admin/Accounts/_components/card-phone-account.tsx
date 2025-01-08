@@ -1,6 +1,6 @@
 "use client";
 import CardPhone from "@/src/components/card-phone";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import React from "react";
 import ActionMenu from "./action-menu";
 import { Link } from "@/src/navigation";
@@ -19,8 +19,8 @@ export type MedicalTeamTableData = {
   period: string;
   payment: number;
   rating: number;
-  profileImageDocumentId: string;
-  verified: boolean;
+  userImage: string;
+  isVerified: boolean;
   created: string;
   userName: string;
   totalProductsCount: any;
@@ -34,14 +34,14 @@ function CardPhoneAccount({ dataCard }: CardDataProps) {
   return (
     <CardPhone>
       <div className=" absolute top-4 end-3">
-        <ActionMenu status={false}  id={dataCard?.id} />
+        <ActionMenu status={dataCard.isVerified}  id={dataCard?.id} />
       </div>
       <Link
         href={ROUTES.ADMIN.ACCOUNTSDETAILS(dataCard.id)}
         className="flex items-center w-fit gap-2 mb-2"
       >
         <Image
-          src={dataCard.profileImageDocumentId || avatarUser}
+          src={dataCard.userImage || avatarUser}
           alt={dataCard.name}
           width={50}
           height={50}
@@ -65,7 +65,7 @@ function CardPhoneAccount({ dataCard }: CardDataProps) {
         <RowCardPhone title="Payment" info={dataCard.totalProductsCount+' $'} />
         <RowCardPhone
           title="Status"
-          info={dataCard.verified ? "Verified" : "Un Verified"}
+          info={dataCard.isVerified ? "Verified" : "Un Verified"}
         />
         <RowCardPhone
           title="Rating"

@@ -19,8 +19,8 @@ export type MedicalTeamTableData = {
   period: string;
   payment: number;
   rating: number;
-  profileImageDocumentId: string;
-  verified: boolean;
+  userImage: string;
+  isVerified: boolean;
   created: string;
   userName: string
   totalProductsCount:any
@@ -39,7 +39,7 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     },
     cell: ({ getValue, row }) => {
       const name = getValue<string>();
-      const img = row.original.profileImageDocumentId;
+      const img = row.original.userImage;
       const created = row.original.created;
       const id = row.original.id;
 
@@ -91,7 +91,7 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     },
   },
   {
-    accessorKey: "verified",
+    accessorKey: "isVerified",
     header: "Status",
     cell: ({ getValue }) => {
       const verified = getValue();
@@ -119,7 +119,7 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     id: "actions",
     cell: ({ row }) => {
       const id = row.original.id;
-      const verified = row.original.verified||false;
+      const verified = row.original.isVerified;
       return (
         <div className="flex items-center gap-3 justify-end">
           <ActionMenu id={id} status={verified} />

@@ -47,7 +47,7 @@ function NavLinks() {
         url: ROUTES.USER.BOOKINGS,
         active:
           path === ROUTES.USER.BOOKINGS ||
-          path === ROUTES.USER.BOOKINGSID(params.BookingID)||
+          path === ROUTES.USER.BOOKINGSID(params.BookingID) ||
           path === ROUTES.USER.ORDERID(params.orderId),
       },
 
@@ -151,6 +151,24 @@ function NavLinks() {
         active:
           path + "?checkout=true" ===
           ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID),
+      },
+      {
+        id: 9,
+        name: `Promot Listing`,
+        url: ROUTES.USER.LISTINGSDETAILSADS(params.listID),
+        active: path === ROUTES.USER.LISTINGSDETAILSADS(params.listID),
+      },
+      {
+        id: 9,
+        name: `Ads`,
+        url: ROUTES.USER.ADS,
+        active: path === ROUTES.USER.ADS,
+      },
+      {
+        id: 9,
+        name: `Ads Details`,
+        url: ROUTES.USER.ADS,
+        active: path === ROUTES.USER.ADSID(params.adsID),
       },
     ],
     [path, searchParams.toString()]

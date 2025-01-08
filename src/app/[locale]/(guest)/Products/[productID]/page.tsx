@@ -8,6 +8,7 @@ import LoadingProductsRow from "@/src/components/product/loading-products-row";
 import { QueryWrapper } from "@/src/components/query-wrapper";
 import QuestionView from "@/src/components/question";
 import Reviews from "@/src/components/reviews";
+import { GetReviewByID } from "@/src/hooks/queries/user/booking/reviews";
 import { GetProductsAll, GetProductsByID } from "@/src/hooks/queries/user/home";
 import { useSearchParams } from "next/navigation";
 import React from "react";
@@ -18,6 +19,8 @@ function Page({ params }: any) {
   const query = GetProductsByID(params.productID);
   const { data: dataCustomers, isLoading: isLoadingProducts } =
     GetProductsAll();
+  const { data:DataReviews, isLoading } = GetReviewByID(params.productID);
+
   return (
     <QueryWrapper query={query}>
       {({ data }: { data: any }) => {
@@ -48,7 +51,8 @@ function Page({ params }: any) {
                 </div>
                 <Reviews
                   usersReviews={data?.usersReviews}
-                  productID={params.productID}
+                  isLoading={isLoading}
+                  dataReviews={DataReviews?.data || []}
                 />
                 <div className="flex flex-col gap-5 mb-section">
                   <Description

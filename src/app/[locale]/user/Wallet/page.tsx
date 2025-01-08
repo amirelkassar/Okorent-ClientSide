@@ -9,7 +9,7 @@ function Page() {
   return (
     <div className=" mb-section">
       <div className="flex items-center justify-between gap-4 mb-7">
-        <h2 className=" text-lg font-SemiBold mdl:text-2xl">Wallet</h2>
+        <h2 className=" text-lg font-SemiBold mdl:text-[32px] mdl:ps-8">Wallet</h2>
         <ModalChangeAccount />
       </div>
       <div className="flex flex-col lgl:flex-row gap-7">

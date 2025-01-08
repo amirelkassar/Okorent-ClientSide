@@ -357,8 +357,8 @@ function NoDataIcon({ className = "", fill = "" }: IconProps) {
           y2="333"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.474" stop-color="#D3D4DC" />
-          <stop offset="1" stop-color="white" />
+          <stop offset="0.474" stopColor="#D3D4DC" />
+          <stop offset="1" stopColor="white" />
         </linearGradient>
       </defs>
     </svg>

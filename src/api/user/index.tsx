@@ -50,8 +50,8 @@ export const user = {
     reject_iRent: `/OrderRequest/Reject Order`,
     rejects_iRent: `/OrderRequest/Reject Orders`,
     review: {
-      base: "/Reviews",
-      getByID: (id: any) => `/Reviews/${id}`,
+      base: "/ProductReviews",
+      getByID: (id: any) => `/ProductReviews/${id}`,
     },
     barcode: "Barcode/generate",
   },
@@ -71,16 +71,22 @@ export const admin = {
     subCategory_by_category: (id: any) => `/SubCategory/list?ParentId=${id}`,
   },
   Accounts: {
-    base: (queries: any) => buildQuery("/User/list", queries),
-    AccountsID: (id: any) => `/User/${id}`,
+    base: (queries: any) => buildQuery("/AdminManageUser", queries),
+    AccountsID: (id: any) => `/AdminManageUser/${id}`,
+    CreateAccounts: `/AdminManageUser`,
   },
   product: {
     base: (queries: any) => buildQuery("/AdminProduct", queries),
     getById: (id: any) => `/AdminProduct/${id}`,
     DeleteManyProducts: `/AdminProduct/Delete-Products`,
   },
-  Stocks:{
+  Stocks: {
     base: (id: any) => `/AdminUserStock/${id}`,
-    add: `/AdminUserStock`
-  }
+    add: `/AdminUserStock`,
+  },
+  ProductReviews: {
+    base: (id: any) => `/AdminProductReview/${id}`,
+    getByID: (id: any) => `/AdminProductReview/${id}`,
+    Update: "/AdminProductReview",
+  },
 };

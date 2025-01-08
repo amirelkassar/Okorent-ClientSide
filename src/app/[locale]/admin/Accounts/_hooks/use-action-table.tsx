@@ -1,12 +1,12 @@
 "use client";
-import { useCallback, useMemo, useState } from "react";
+import {useMemo, useState } from "react";
 import DeleteIcon from "@/src/assets/icons/delete";
-import { GetIdsValues, GetUniqueValues } from "@/src/lib/utils";
-import { Toast } from "@/src/components/toast";
+import { GetUniqueValues } from "@/src/lib/utils";
 import TrueIcon from "@/src/assets/icons/true";
 import ExportIcon from "@/src/assets/icons/export";
 import DeactivateIcon from "@/src/assets/icons/Deactivate";
 import NoteTableIcon from "@/src/assets/icons/noteTable";
+
 
 interface SignUpReturn {
   functionSelectView: any[];
@@ -14,6 +14,7 @@ interface SignUpReturn {
 }
 export const useActionTable = (): SignUpReturn => {
   const [selectedFromTable, setSelectedFromTable] = useState([]);
+
 
   const functionSelect = useMemo(
     () => [
@@ -63,7 +64,7 @@ export const useActionTable = (): SignUpReturn => {
   );
 
   const functionSelectView = useMemo(() => {
-    const ValueSelected = GetUniqueValues(selectedFromTable, "verified");
+    const ValueSelected = GetUniqueValues(selectedFromTable, "isVerified");
     console.log(ValueSelected);
 
     if (ValueSelected?.toString()) {
