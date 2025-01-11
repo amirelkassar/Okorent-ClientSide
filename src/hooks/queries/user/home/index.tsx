@@ -55,6 +55,7 @@ export const useFavoriteProductMutation = () => {
         initialQueryKeyFavUser,
         "IncludeFavoritesOnly=true",
       ]);
+      queryClient.refetchQueries([initialQueryKeyUser]);
       console.log(res);
     },
     onError: (res) => {
@@ -78,6 +79,7 @@ export const useDeleteFavoriteProductMutation = () => {
         initialQueryKeyFavUser,
         "IncludeFavoritesOnly=true",
       ]);
+      queryClient.refetchQueries([initialQueryKeyUser]);
       console.log(res);
     },
     onError: (res) => {
