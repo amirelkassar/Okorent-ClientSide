@@ -14,17 +14,21 @@ import { Pagination } from "@/src/components/pagination";
 
 function TableRentOut({ query }: { query: any }) {
   const { setSelectedFromTable, functionSelectView } = useActionTableIRentOut();
+  const totalCount = query.data?.data?.totalCount || 0;
+
   return (
     <div className=" hidden mdl:block">
       <TableHeader>
         <TableHeader.First title="My Requests">
-          <Link
-            href={ROUTES.USER.BOOKINGS + "?card=true"}
-            className="px-3 duration-300 hover:shadow-md w-fit py-2 rounded-xl border border-black flex items-center justify-center gap-2"
-          >
-            <CardIcon />
-            <p>Card View</p>
-          </Link>
+          {+totalCount > 0 ? (
+            <Link
+              href={ROUTES.USER.BOOKINGS + "?card=true"}
+              className="px-3 duration-300 hover:shadow-md w-fit py-2 rounded-xl border border-black flex items-center justify-center gap-2"
+            >
+              <CardIcon />
+              <p>Card View</p>
+            </Link>
+          ) : null}
         </TableHeader.First>
         <TableHeader.Middle>
           <RentSwitch typeUser="user" />

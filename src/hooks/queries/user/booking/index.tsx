@@ -32,6 +32,23 @@ export const GetMyOrderAll = (queries?: any) => {
     },
   });
 };
+//getMyAllProducts
+export const GetMyOrderAllByList = (number?: any) => {
+  return useQuery({
+    queryKey: ["myOrders", number],
+    queryFn: async () => {
+      const response = await api.get(
+        user.order.booking.i_rent(
+          `OrderType=myorders&PageSize=5&OrderStatus=${number}`
+        )
+      );
+      return response.data;
+    },
+    enabled: !!number, // Prevent the query from running if `number` is not provided
+    staleTime: 300000, // Cache data for 5 minutes
+    retry: 2, // Retry failed requests up to 2 times
+  });
+};
 //getProductByID
 export const GetMyProductsByID = (id: any) => {
   return useQuery({
