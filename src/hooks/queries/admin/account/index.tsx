@@ -15,6 +15,17 @@ export const GetAccounts = (queries?: any) => {
   });
 };
 
+//get Account ByID
+export const GetAccountInAdminByID = (id: any) => {
+  return useQuery({
+    queryKey: [initialQueryKey, id],
+    queryFn: async () => {
+      const response = await api.get(admin.Accounts.AccountsID(id));
+      return response.data;
+    },
+  });
+};
+
 //Delete Account
 export const useDeleteAccountInAdmin = () => {
   const queryClient = useQueryClient();
@@ -51,3 +62,5 @@ export const useCreateAccountInAdmin = () => {
     onError: () => {},
   });
 };
+
+

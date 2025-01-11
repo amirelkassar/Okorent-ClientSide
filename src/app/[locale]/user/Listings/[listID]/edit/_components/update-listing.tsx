@@ -98,7 +98,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
       <div className=" mt-1 mdl:mt-2 mdl:pb-8 flex-1">
         <SelectInput
           label=" Choose item category"
-          data={dataCategory?.data?.map((item: any) => {
+          data={dataCategory?.data?.items?.map((item: any) => {
             return { label: item.name, value: item.id };
           })}
           placeholder="Select category"

@@ -20,10 +20,12 @@ function ActionMenuRent({
   id,
   status = 0,
   dataForReview,
+  dataForReviewUser
 }: {
   id: any;
   status: any;
   dataForReview: any;
+  dataForReviewUser:any
 }) {
   const [opened, { open, close }] = useDisclosure(false);
   const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
@@ -147,6 +149,7 @@ function ActionMenuRent({
           opened={opened3}
           close={close3}
           dataForReview={dataForReview}
+          dataForReviewUser={dataForReviewUser}
         />
       )}
     </>

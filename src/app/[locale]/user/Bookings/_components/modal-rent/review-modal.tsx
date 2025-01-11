@@ -5,7 +5,10 @@ import Image from "next/image";
 import React, { useState } from "react";
 import avatar from "@/src/assets/images/avatar.png";
 import { Rating } from "@mantine/core";
-import { useReviewOrderMutation } from "@/src/hooks/queries/user/booking/reviews";
+import {
+  useReviewOrderMutation,
+  useReviewUserOrderMutation,
+} from "@/src/hooks/queries/user/booking/reviews";
 import { Toast } from "@/src/components/toast";
 import placholderImg from "@/src/assets/images/placTableProduct.png";
 import GetErrorMsg from "@/src/components/getErrorMsg";
@@ -15,15 +18,23 @@ function ReviewModal({
   opened,
   close,
   dataForReview,
+  dataForReviewUser,
 }: {
   opened: boolean;
   close: any;
   dataForReview: any;
+  dataForReviewUser: any;
 }) {
   const [review, setReview] = useState("");
   const [rate, setRate] = useState(0);
-
+  const [reviewUser, setReviewUser] = useState("");
+  const [rateUser, setRateUser] = useState(0);
   const { mutateAsync: SendReview, error, reset } = useReviewOrderMutation();
+  const {
+    mutateAsync: SendUserReview,
+    error: errorUserReview,
+    reset: resetUserReview,
+  } = useReviewUserOrderMutation();
 
   const onSubmitReview = () => {
     const reviewData = {
@@ -38,7 +49,19 @@ function ReviewModal({
       },
     });
   };
-
+  const onSubmitReviewUser = () => {
+    const reviewData = {
+      review: reviewUser,
+      rate: rateUser,
+      reviewedUserId: dataForReviewUser?.userId,
+    };
+    Toast.Promise(SendUserReview(reviewData), {
+      success: "Done Send Review On User",
+      onSuccess: async (res) => {
+        close();
+      },
+    });
+  };
   return (
     <ModalComp title="Review" opened={opened} close={close}>
       <div className="w-[700px] max-w-full">
@@ -48,23 +71,31 @@ function ReviewModal({
               Review Lessor
             </h3>
             <Image
-              src={avatar}
-              alt="user"
+              src={dataForReviewUser?.imageUser || avatar}
+              alt={dataForReviewUser?.UserName || "User"}
+              width={50}
+              height={50}
               className=" size-12 mdl:size-16 rounded-full object-cover object-center mx-auto"
             />
-            <h4 className="text-center text-sm mdl:text-base mt-2 mb-4 mdl:mb-6 font-SemiBold">
-              Ahmed Mohamed
+            <h4 className="text-center max-w-full md:max-w-[250px] truncate text-sm mdl:text-base mt-2 mx-auto mb-4 mdl:mb-6 font-SemiBold">
+              {dataForReviewUser?.UserName || "UserName"}
             </h4>
-            <div className="flex items-center w-fit mx-auto mb-4 mdl:mb-8">
+            <div className="flex flex-col items-center w-fit mx-auto mb-4 mdl:mb-8">
               <Rating
                 color="#88BA52"
                 count={5}
                 fractions={10}
+                value={rateUser}
                 classNames={{
                   symbolBody: " size-6 mdl:size-8 ",
                   starSymbol: "size-6 mdl:size-8",
                 }}
+                onChange={(e) => {
+                  setRateUser(e);
+                  resetUserReview();
+                }}
               />
+                <ErrorMsg error={GetErrorMsg(errorUserReview, "Rate")} />
             </div>
             <InputTextarea
               autosize
@@ -73,7 +104,18 @@ function ReviewModal({
               inputClassName="bg-white  !min-h-16 h-auto rounded-xl"
               labelClassName="!text-sm"
               className="!min-h-16 h-auto !mb-0"
+              onChange={(event) => {
+                setReviewUser(event.target.value);
+                resetUserReview();
+              }}
+              error={GetErrorMsg(errorUserReview, "Review")}
             />
+            <Button
+              onClick={onSubmitReviewUser}
+              className={" flex-1 w-full mt-5 h-[54px]"}
+            >
+              Confirn
+            </Button>
           </div>
           <div className="flex-1 border-green/30 border rounded-xl p-5 w-full">
             <h3 className="text-center text-sm mdl:text-base mb-4 md:mb-7">
@@ -95,7 +137,7 @@ function ReviewModal({
               />
             </div>
 
-            <h4 className="text-center max-w-full md:max-w-[250px] truncate text-sm mdl:text-base mt-2 mb-4 mdl:mb-6 font-SemiBold">
+            <h4 className="text-center max-w-full md:max-w-[250px] truncate text-sm mdl:text-base mx-auto mt-2 mb-4 mdl:mb-6 font-SemiBold">
               {dataForReview?.productName || "Product Name"}
             </h4>
             <div className="flex flex-col items-center w-fit mx-auto mb-4 mdl:mb-8">
@@ -128,13 +170,16 @@ function ReviewModal({
               }}
               error={GetErrorMsg(error, "Review")}
             />
+            <Button
+              onClick={onSubmitReview}
+              className={" w-full mt-5 flex-1 h-[54px]"}
+            >
+              Confirn
+            </Button>
           </div>
         </div>
 
         <div className="flex items-center gap-7 w-full">
-          <Button onClick={onSubmitReview} className={" flex-1 h-[54px]"}>
-            Send
-          </Button>
           <Button
             onClick={close}
             className={" flex-1 h-[54px] text-black bg-grayBack border-none"}

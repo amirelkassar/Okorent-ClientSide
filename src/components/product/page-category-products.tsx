@@ -160,13 +160,13 @@ function PageCategoryProducts({ children }: { children: React.ReactNode }) {
         ) : (
           <div className="border border-green hidden lgl:block px-2 py-8 rounded-2xl bg-white shadow-md max-w-[330px] min-w-[330px] w-full">
             <h2 className="text-3xl font-SemiBold  mb-4 px-3">Categories</h2>
-            {dataCategory?.data.length === 0 ? (
+            {dataCategory?.data?.items.length === 0 ? (
               <p className="text-grayMedium ps-4 text-sm font-Regular">
                 No Categories found.
               </p>
             ) : (
               <div className=" flex-col flex gap-5">
-                {dataCategory?.data.map((category: any, index: number) => (
+                {dataCategory?.data?.items.map((category: any, index: number) => (
                   <div
                     key={index}
                     className={`cursor-pointer px-4 py-1 rounded-lg`}

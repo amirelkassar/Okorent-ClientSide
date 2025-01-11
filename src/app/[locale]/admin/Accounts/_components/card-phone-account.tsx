@@ -34,7 +34,7 @@ function CardPhoneAccount({ dataCard }: CardDataProps) {
   return (
     <CardPhone>
       <div className=" absolute top-4 end-3">
-        <ActionMenu status={dataCard.isVerified}  id={dataCard?.id} />
+        <ActionMenu status={dataCard.isVerified}  id={dataCard?.id} dataUSer={dataCard} />
       </div>
       <Link
         href={ROUTES.ADMIN.ACCOUNTSDETAILS(dataCard.id)}

@@ -1,6 +1,6 @@
 "use client";
 import { DataTable } from "@/src/components/data-table";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { columns } from "./_components/column";
 import { useDisclosure } from "@mantine/hooks";
 import QuickEditModal from "./_components/QuickEditModal";

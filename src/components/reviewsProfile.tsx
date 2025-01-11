@@ -1,54 +1,42 @@
 import React from "react";
-import imgUser from "@/src/assets/images/avatar.png";
 import Review from "@/src/components/Review";
+import { GetReviewsUserInAdmin } from "../hooks/queries/admin/account/reviews";
+import LoadingProductsRow from "./product/loading-products-row";
 
-const ReviewData = [
-  {
-    name: "Sara Johnathan",
-    image: imgUser,
-    stateUser: "Verified User",
-    title:
-      "Lorem Ipsum is simply dummy text of the printing and  typesetting industry. Lorem Ipsum has been the industry's standard dummy  text ever since the 1500s, when an unknown printer took a galley of  type and scrambled it to make a type specimen book. It has survived not  only five centuries, but also the leap into electronic typesetting",
-    rate: 5,
-  },
-  {
-    name: "Sara Johnathan",
-    image: imgUser,
-    stateUser: "Verified User",
-    title:
-      "Lorem Ipsum is simply dummy text of the printing and  typesetting industry. Lorem Ipsum has been the industry's standard dummy  text ever since the 1500s, when an unknown printer took a galley of  type and scrambled it to make a type specimen book. It has survived not  only five centuries, but also the leap into electronic typesetting",
-    rate: 5,
-  },
-  {
-    name: "Sara Johnathan",
-    image: imgUser,
-    stateUser: "Verified User",
-    title:
-      "Lorem Ipsum is simply dummy text of the printing and  typesetting industry. Lorem Ipsum has been the industry's standard dummy  text ever since the 1500s, when an unknown printer took a galley of  type and scrambled it to make a type specimen book. It has survived not  only five centuries, but also the leap into electronic typesetting",
-    rate: 5,
-  },
-];
-function ReviewsProfile({ editAdmin = false }: { editAdmin?: boolean }) {
+
+function ReviewsProfile({
+  editAdmin = false,
+  userName = "User",
+  userID = "",
+}: {
+  editAdmin?: boolean;
+  userName?: string;
+  userID: string;
+}) {
+  const { data, isLoading } = GetReviewsUserInAdmin(userID);
+  console.log(data);
+
   return (
     <div className=" mt-10 relative">
       <h2 className="text-2xl  lg:text-3xl mb-7">
-        Customer Reviews about <span className="font-Bold">Mark</span>
+        Customer Reviews about <span className="font-Bold">{userName}</span>
       </h2>
-      <div className="flex gap-3 lg:gap-4 md:flex-wrap overflow-x-auto hideScroll">
-        {ReviewData.map((item, i) => {
-          return (
-            <Review
-              key={i}
-              name={item.name}
-              image={item.image}
-              stateUser={item.stateUser}
-              title={item.title}
-              rate={item.rate}
-              edit={editAdmin}
-            />
-          );
-        })}
-      </div>
+      {isLoading ? (
+        <LoadingProductsRow number={2} />
+      ) : (
+        <div className="flex gap-3 lg:gap-4 md:flex-wrap overflow-x-auto hideScroll">
+          {data?.data?.map((item: any, i: number) => {
+            return (
+              <Review
+                key={i}
+                data={item}
+                idUser={userID}
+                edit={editAdmin}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

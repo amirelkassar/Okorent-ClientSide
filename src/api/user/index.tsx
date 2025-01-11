@@ -53,6 +53,10 @@ export const user = {
       base: "/ProductReviews",
       getByID: (id: any) => `/ProductReviews/${id}`,
     },
+    reviewUser: {
+      base: "/UserReviews",
+      getByID: (id: any) => `/UserReviews/${id}`,
+    },
     barcode: "Barcode/generate",
   },
   user: {
@@ -88,5 +92,19 @@ export const admin = {
     base: (id: any) => `/AdminProductReview/${id}`,
     getByID: (id: any) => `/AdminProductReview/${id}`,
     Update: "/AdminProductReview",
+  },
+  userReview: {
+    base: (id: any) => `/AdminUserReview/${id}`,
+    delete: (id: any) => `/AdminUserReview/${id}`,
+    Update: "/AdminUserReview",
+  },
+};
+
+export const notifications = {
+  base: "/notification",
+  list: (queries: any) => buildQuery("/notification/list", queries),
+  actions: {
+    makeItRead: (id: any) => `/notification?id=${id}`,
+    delete: (id: any) => `/notification?id=${id}`,
   },
 };

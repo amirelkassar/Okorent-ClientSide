@@ -75,6 +75,8 @@ function Page() {
     setDataList({ ...dataList, FAQs: newFaqs });
   };
   const { data: dataCategory } = GetCategory();
+  console.log(dataCategory);
+  
   const { data: dataSubCategory, refetch: RefetchGetSubCategory } =
     GetSubCategory(dataList?.CategoryId);
 
@@ -100,7 +102,7 @@ function Page() {
         <div className="w-full">
           <Step title="Choose item category" active stepNum={1}>
             <SelectInput
-              data={dataCategory?.data?.map((item: any) => {
+              data={dataCategory?.data?.items?.map((item: any) => {
                 return { label: item.name, value: item.id };
               })}
               placeholder="Select category"

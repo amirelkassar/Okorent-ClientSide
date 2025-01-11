@@ -3,6 +3,7 @@ import { toast, Toaster as HotToaster, ToastBar } from "react-hot-toast";
 import CloseNotficationsIcon from "../assets/icons/closeNotfications";
 import SuccessIcon from "../assets/icons/success";
 import ErrorNotficationIcon from "../assets/icons/error-notfication";
+import NotificationsIcon from "../assets/icons/Notifications";
 
 interface ToastOptions {
   success?: string;
@@ -46,10 +47,11 @@ const Toast = {
 
           if (options?.onError) options.onError(err);
           return (
-            <div className="flex items-center justify-between w-full ">
+            <div className="flex items-center justify-between w-full">
               <p className="text-xs mdl:text-base font-medium">
                 {options.error ||
-                  err?.response?.data?.errors?.error || err?.response?.data?.errors?.Error||
+                  err?.response?.data?.errors?.error ||
+                  err?.response?.data?.errors?.Error ||
                   "Request failed"}
               </p>
             </div>
@@ -66,6 +68,35 @@ const Toast = {
         loading: {
           duration: Infinity,
         },
+      }
+    );
+  },
+
+  Notification: (message = "") => {
+    if (!message) return null;
+
+    return toast.custom(
+      (t) => (
+        <div
+          style={{
+            background:
+              "linear-gradient(90.87deg, #FFFFFF 60.75%, #DBF3F6 96.31%)",
+            boxShadow:
+              "0px 8px 10px 0px rgba(0, 0, 0, 0.2), 0px 6px 30px 0px rgba(0, 0, 0, 0.12), 0px 16px 24px 0px rgba(0, 0, 0, 0.14)",
+          }}
+          className="flex items-center gap-5 relative w-fit rounded-xl border-b-[3px] border-greenMain p-5"
+        >
+          <NotificationsIcon className="size-4 mdl:size-6 shrink-0" />
+
+          <p className="text-xs mdl:text-base font-medium flex-1">{message}</p>
+
+          <button onClick={() => toast.remove(t.id)}>
+            <CloseNotficationsIcon className="text-grayDark size-5" />
+          </button>
+        </div>
+      ),
+      {
+        duration: 2000,
       }
     );
   },

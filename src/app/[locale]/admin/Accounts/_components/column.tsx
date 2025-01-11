@@ -122,7 +122,7 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
       const verified = row.original.isVerified;
       return (
         <div className="flex items-center gap-3 justify-end">
-          <ActionMenu id={id} status={verified} />
+          <ActionMenu id={id} status={verified} dataUSer={row.original} />
         </div>
       );
     },

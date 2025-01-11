@@ -24,6 +24,8 @@ export type RequestsTableData = {
   prodId: any;
   productName: any;
   userImage: any;
+  lessorId: any;
+  lessorName:any
 };
 
 export const columns: ColumnDef<RequestsTableData>[] = [
@@ -149,12 +151,18 @@ export const columns: ColumnDef<RequestsTableData>[] = [
         imageProduct: row.original.heroImage,
         productName: row.original.productName,
       };
+      const dataForReviewUser = {
+        userId: row.original.lessorId,
+        imageUser: row.original.userImage,
+        UserName: row.original.lessorName,
+      };
       return (
         <div className="flex items-center gap-3 w-fit">
           <ActionMenuRent
             id={id}
             status={status}
             dataForReview={dataForReview}
+            dataForReviewUser={dataForReviewUser}
           />
         </div>
       );

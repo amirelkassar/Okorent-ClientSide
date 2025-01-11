@@ -13,7 +13,7 @@ function Categories() {
       <h2 className="text-center headTitle">Our Most Popular Categories </h2>
 
       <div className="flex justify-center flex-wrap mt-7 lg:mt-10 gap-1 lg:gap-7 ">
-        {data?.data.map((category: any, index: number) => {
+      {data?.data?.items?.map((category: any, index: number) => {
           return (
             <Link
               href={`${ROUTES.GUEST.PRODUCTS(category.name)}&CategoryId=${

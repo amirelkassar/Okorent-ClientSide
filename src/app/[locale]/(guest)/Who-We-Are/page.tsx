@@ -87,14 +87,7 @@ function page() {
         <div className="flex gap-5 lg:gap-8 md:flex-wrap overflow-x-auto hideScroll">
           {ReviewData.map((item, i) => {
             return (
-              <Review
-                key={i}
-                name={item.name}
-                image={item.image}
-                stateUser={item.stateUser}
-                title={item.title}
-                rate={item.rate}
-              />
+              <Review key={i} data={{}} idUser={''} />
             );
           })}
         </div>
