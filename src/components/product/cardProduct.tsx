@@ -14,13 +14,16 @@ import { useParams, useSearchParams } from "next/navigation";
 import ViewCheckout from "./checkout/view-checkout";
 import LinkGreen from "../linkGreen";
 import ROUTES from "@/src/routes";
+import { calculateDurationRange } from "@/src/lib/utils";
 
 function CardProduct({
   data = [],
   guest = false,
+  admin = false,
 }: {
   data?: any;
   guest?: boolean;
+  admin?: boolean;
 }) {
   const params = useParams();
   const searchparams = useSearchParams();
@@ -48,7 +51,6 @@ function CardProduct({
     () => PriceBYDays * daysNumber - 50.82,
     [PriceBYDays, daysNumber]
   );
-  console.log(location);
 
   const formData = {
     orderItems: [
@@ -137,24 +139,29 @@ function CardProduct({
             TotalPriceOrder={TotalPriceOrder}
             PriceBYDays={PriceBYDays}
           >
-            <div className="flex items-center px-5 justify-between gap-4 pb-4 flex-wrap mt-5">
-              <LinkGreen
-                href={
-                  guest
-                    ? ROUTES.AUTH.LOGIN
-                    : ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID)
-                }
-                className={`w-full  ${
-                  valueAddressType && TotalPriceOrder && location
-                    ? "opacity-100"
-                    : guest
-                    ? "opacity-100"
-                    : "opacity-50 pointer-events-none"
-                }  duration-300  `}
-              >
-                Request this item
-              </LinkGreen>
-            </div>
+            {admin ? null : (
+              <div className="flex items-center px-5 justify-between gap-4 pb-4 flex-wrap mt-5">
+                <LinkGreen
+                  href={
+                    guest
+                      ? ROUTES.AUTH.LOGIN
+                      : ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID)
+                  }
+                  className={`w-full  ${
+                    valueAddressType &&
+                    TotalPriceOrder &&
+                    location &&
+                    calculateDurationRange(valueDate[0], valueDate[1]) > 0
+                      ? "opacity-100"
+                      : guest
+                      ? "opacity-100"
+                      : "opacity-50 pointer-events-none"
+                  }  duration-300  `}
+                >
+                  Request this item
+                </LinkGreen>
+              </div>
+            )}
           </PriceDetails>
         </div>
       </div>

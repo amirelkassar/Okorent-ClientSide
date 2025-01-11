@@ -1,9 +1,12 @@
 "use client";
 import { useCallback } from "react";
 import {
+  ChangeStatusByIDs,
   ChangeStautsByID,
+  useCancelManyOrderMutation,
   useCancelOrderMutation,
   useDeleteOrderMutation,
+  useRefundManyOrderMutation,
   useRefundOrderMutation,
 } from "@/src/hooks/queries/user/booking";
 import { Toast } from "@/src/components/toast";
@@ -13,12 +16,18 @@ interface ActionTableIRentProps {
   onSubmitCancel: any;
   onSubmitRefund: any;
   onSubmitChangeStatus: any;
+  onSubmitChangeStatusIds: any;
+  onSubmitRefundMany: any;
+  onSubmitCancelMany: any;
 }
 export const useChangeStatusRent = (id: any): ActionTableIRentProps => {
   const { mutateAsync: DeleteOrderOut } = useDeleteOrderMutation();
   const { mutateAsync: CancelOrder } = useCancelOrderMutation();
+  const { mutateAsync: CancelManyOrder } = useCancelManyOrderMutation();
   const { mutateAsync: RefundOrder } = useRefundOrderMutation();
+  const { mutateAsync: RefundManyOrder } = useRefundManyOrderMutation();
   const { mutateAsync: ChangeStatusProduct } = ChangeStautsByID(id);
+  const { mutateAsync: ChangeStatusManyProduct } = ChangeStatusByIDs();
 
   //change status
   const onSubmitChangeStatus = useCallback(async () => {
@@ -28,6 +37,18 @@ export const useChangeStatusRent = (id: any): ActionTableIRentProps => {
       error: "Failed to complete operation",
     });
   }, [ChangeStatusProduct, id]);
+
+  //change status ids
+  const onSubmitChangeStatusIds = useCallback(
+    async (data: any) => {
+      Toast.Promise(ChangeStatusManyProduct(data), {
+        loading: "Processing...",
+        success: "Operation completed!",
+        error: "Failed to complete operation",
+      });
+    },
+    [ChangeStatusManyProduct, id]
+  );
 
   //cancel order
   const onSubmitCancel = useCallback(async () => {
@@ -42,6 +63,18 @@ export const useChangeStatusRent = (id: any): ActionTableIRentProps => {
       }
     );
   }, [CancelOrder, id]);
+
+  //cancel Many order
+  const onSubmitCancelMany = useCallback(
+    async (data: any) => {
+      Toast.Promise(CancelManyOrder(data), {
+        success: "Canceled Order",
+        onSuccess: async (res) => {},
+      });
+    },
+    [CancelManyOrder, id]
+  );
+
   //delete order
   const onSubmitDelete = useCallback(async () => {
     Toast.Promise(DeleteOrderOut(id), {
@@ -50,7 +83,7 @@ export const useChangeStatusRent = (id: any): ActionTableIRentProps => {
     });
   }, [DeleteOrderOut, id]);
 
-  //cancel order
+  //Refund order
   const onSubmitRefund = useCallback(
     async (msg: any = "msg") => {
       Toast.Promise(
@@ -67,10 +100,23 @@ export const useChangeStatusRent = (id: any): ActionTableIRentProps => {
     [RefundOrder, id]
   );
 
+  //Refund Many order
+  const onSubmitRefundMany = useCallback(
+    async (data: any) => {
+      Toast.Promise(RefundManyOrder(data), {
+        success: "Done Send Request to Return Order",
+        onSuccess: async (res) => {},
+      });
+    },
+    [RefundManyOrder, id]
+  );
   return {
     onSubmitDelete,
     onSubmitCancel,
     onSubmitRefund,
     onSubmitChangeStatus,
+    onSubmitChangeStatusIds,
+    onSubmitRefundMany,
+    onSubmitCancelMany,
   };
 };

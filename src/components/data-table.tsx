@@ -18,7 +18,6 @@ import RentSwitch from "./RentSwitch";
 import TrueIcon from "../assets/icons/true";
 import DeleteIcon from "../assets/icons/delete";
 import ExportIcon from "../assets/icons/export";
-import AddUser from "./add-user";
 import LinkGreen from "./linkGreen";
 import Events from "./Events";
 export interface FilterData {
@@ -50,7 +49,7 @@ interface DataTableProps<TData extends { id: any }, TValue> {
   sort?: boolean;
   sortingData?: SortingData[];
   haveRentSwitch?: boolean;
-  addUser?: boolean;
+
   Component?: React.ComponentType<{ dataCard: TData }>;
   children?: React.ReactNode;
   functionSelect?: functionSelectProps[];
@@ -70,7 +69,6 @@ export function DataTable<TData extends { id: any }, TValue>({
   sort = false,
   sortingData = [],
   haveRentSwitch = false,
-  addUser = false,
   Component,
   children,
   functionSelect,
@@ -194,7 +192,6 @@ export function DataTable<TData extends { id: any }, TValue>({
             filterfun={handelFilter}
             sortFun={handelSort}
             search={search}
-            addUser={addUser}
           />
         ) : filter ? (
           <FilterBy
@@ -202,7 +199,6 @@ export function DataTable<TData extends { id: any }, TValue>({
             filterfun={handelFilter}
             sortFun={() => {}}
             search={search}
-            addUser={addUser}
           />
         ) : sort ? (
           <FilterBy
@@ -210,11 +206,8 @@ export function DataTable<TData extends { id: any }, TValue>({
             filterfun={() => {}}
             sortFun={handelSort}
             search={search}
-            addUser={addUser}
           />
-        ) : (
-          addUser && <AddUser />
-        )}
+        ) : null}
       </div>
       {Component && (
         <div className=" flex flex-col w-full gap-5 mdl:hidden mb-14">

@@ -4,11 +4,7 @@ import { Checkbox } from "@mantine/core";
 import DropImg from "@/src/components/DropImg";
 import Button from "@/src/components/button";
 import SelectInput from "@/src/components/select-input";
-import {
-  GetCategory,
-  GetSubCategory,
-  useEditListingMutation,
-} from "@/src/hooks/queries/user/add-lisiting";
+import { useEditListingMutation } from "@/src/hooks/queries/user/add-lisiting";
 import InputTextarea from "@/src/components/InputTextarea";
 import Input from "@/src/components/input";
 import { Toast } from "@/src/components/toast";
@@ -16,6 +12,11 @@ import { GetIdsValues } from "@/src/lib/utils";
 import StepAvailability from "./stepAvailability";
 import StepFAQ from "./stepFAQ";
 import StepLocation from "./stepLocation";
+import GetErrorMsg from "@/src/components/getErrorMsg";
+import {
+  GetCategory,
+  GetSubCategory,
+} from "@/src/hooks/queries/admin/master-data/category";
 interface LocationProps {
   id: number;
   name: string;
@@ -27,31 +28,34 @@ interface FAQ {
   answer: string;
 }
 function UpdateListing({ initialValues }: { initialValues: any }) {
-  console.log(initialValues);
-
+  //state
   const [dataList, setDataList] = useState<any>({
     ...initialValues,
     stocks: GetIdsValues(initialValues.stocks),
   });
   const { data: dataCategory } = GetCategory();
   const [faqs, setFaqs] = useState<FAQ[]>(initialValues.faQs || []);
-
+  const [location, setLocation] = useState<LocationProps[] | any>(
+    GetIdsValues(initialValues.stocks)
+  );
+  //query
+  const {
+    mutateAsync: createListing,
+    error,
+    reset,
+  } = useEditListingMutation(dataList?.id);
   const { data: dataSubCategory, refetch: RefetchGetSubCategory } =
     GetSubCategory(initialValues?.categoryId);
   const [selectedCheckbox, setSelectedCheckbox] = useState<string | null>(
     initialValues.isActive ? "true" : "false"
   );
-  const [location, setLocation] = useState<LocationProps[] | any>(
-    GetIdsValues(initialValues.stocks)
-  );
-  useEffect(() => {
-    RefetchGetSubCategory();
-  }, [dataList?.categoryId]);
 
+  //functions
   const handleCheckboxChange = (
     value: string,
     setState: React.Dispatch<React.SetStateAction<string | null>>
   ) => {
+    reset();
     if (selectedCheckbox === value) {
       setState(null);
     } else {
@@ -60,23 +64,27 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
     }
   };
   const handleInputChangeLocation = (ids: any[]) => {
+    reset();
     setLocation(ids);
     setDataList({ ...dataList, stocks: ids });
   };
   const handleRemoveLocation = (index: any) => {
+    reset();
     const updatedLocations = location.filter((loc: any) => loc !== index);
     setLocation(updatedLocations);
     setDataList({ ...dataList, stocks: updatedLocations });
   };
   const handleChangeFAQ = (index: number, field: keyof FAQ, value: string) => {
+    reset();
     const newFaqs = [...faqs];
     newFaqs[index][field] = value;
     setFaqs(newFaqs);
     setDataList({ ...dataList, FAQs: newFaqs });
   };
   console.log(dataList);
-  const { mutateAsync: createListing } = useEditListingMutation(dataList?.id);
+
   const handleSubmit = async () => {
+    reset();
     await Toast.Promise(createListing(dataList), {
       success: "successfully Edit Product",
       onSuccess: async (res) => {
@@ -90,14 +98,17 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
       <div className=" mt-1 mdl:mt-2 mdl:pb-8 flex-1">
         <SelectInput
           label=" Choose item category"
-          data={dataCategory?.data?.map((item: any) => {
+          data={dataCategory?.data?.items?.map((item: any) => {
             return { label: item.name, value: item.id };
           })}
           placeholder="Select category"
           onChange={(e) => {
-            setDataList({ ...dataList, categoryId: e });
+            reset();
+            setDataList({ ...dataList, categoryId: e, subCategoryId: null });
+            RefetchGetSubCategory();
           }}
           value={dataList?.categoryId}
+          error={GetErrorMsg(error, "CategoryId")}
           inputClassName=" !rounded-xl md:!rounded-2xl text-grayMedium !h-12  md:!h-16 "
         />
         <SelectInput
@@ -108,6 +119,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
           value={dataList?.subCategoryId}
           placeholder="Select SubCategory"
           onChange={(e) => {
+            reset();
             setDataList({ ...dataList, subCategoryId: e });
           }}
           inputClassName=" !rounded-xl md:!rounded-2xl text-grayMedium !h-12  md:!h-16 "
@@ -119,6 +131,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
         <Input
           placeholder="Add item title here"
           onChange={(e) => {
+            reset();
             setDataList({
               ...dataList,
               name: e.target.value,
@@ -130,6 +143,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
         />
         <InputTextarea
           onChange={(e) => {
+            reset();
             setDataList({
               ...dataList,
               description: e.target.value,
@@ -164,6 +178,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
             label={"Price for 1 Day"}
             placeholder={"Add Price Here"}
             onChange={(e) => {
+              reset();
               setDataList({
                 ...dataList,
                 dailyPrice: e.target.value,
@@ -179,6 +194,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
             name="attribute1"
             placeholder={"Add Price Here"}
             onChange={(e) => {
+              reset();
               setDataList({
                 ...dataList,
                 weeklyPrice: e.target.value,
@@ -194,6 +210,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
             name="attribute2"
             placeholder={"Add Price Here"}
             onChange={(e) => {
+              reset();
               setDataList({
                 ...dataList,
                 monthlyPrice: e.target.value,
@@ -219,6 +236,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
         <Input
           defaultValue={dataList?.cost}
           onChange={(e) => {
+            reset();
             setDataList({ ...dataList, cost: e.target.value });
           }}
           placeholder="Add item value here"
@@ -234,6 +252,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
           placeholder="Add available stock number here"
           defaultValue={dataList?.totalQuantity}
           onChange={(e) => {
+            reset();
             setDataList({ ...dataList, totalQuantity: e.target.value });
           }}
           inputClassName=" !rounded-xl md:!rounded-2xl bg-white !h-12  md:!h-16 border-2 "
@@ -247,6 +266,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
           <Checkbox
             checked={selectedCheckbox === "true"}
             onChange={(e) => {
+              reset();
               handleCheckboxChange(e.target.value, setSelectedCheckbox);
             }}
             color="#88BA52"
@@ -256,6 +276,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
           <Checkbox
             checked={selectedCheckbox === "false"}
             onChange={(e) => {
+              reset();
               handleCheckboxChange(e.target.value, setSelectedCheckbox);
             }}
             color="#88BA52"

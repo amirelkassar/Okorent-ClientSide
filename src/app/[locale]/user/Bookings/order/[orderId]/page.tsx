@@ -2,7 +2,7 @@
 import CarReturn from "@/src/assets/icons/car-return";
 import Button from "@/src/components/button";
 import OrderStepper from "@/src/components/order-stepper";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import OrderInformation from "./_components/order-information";
 import OrderPayment from "./_components/order-payment";
 import OrderDetails from "./_components/order-details";
@@ -13,11 +13,18 @@ import Loading from "@/src/components/loading";
 import EditIcon from "@/src/assets/icons/edit";
 
 function Page({ params }: any) {
-  const { isRent } = useSwitchRent();
+  const { isRent, setSwitchRent } = useSwitchRent();
   const { data, isLoading } = GetOrderByID(params.orderId);
   const [edit, setEdit] = useState(false);
   console.log(data);
   const statusOrder = data?.data?.orderTrackers?.at(-1)?.newOrderStatus || 0;
+  useEffect(() => {
+    if (data?.data?.renterType) {
+      setSwitchRent(data.data.renterType === "IRent" ? "rent" : "rent_out");
+    }
+  }, [setSwitchRent, data?.data?.renterType,isLoading]);
+
+
   if (isLoading) {
     return <Loading />;
   }

@@ -1,17 +1,23 @@
 "use client";
 import { SegmentedControl } from "@mantine/core";
 import { useSwitchGuestRent, useSwitchRent } from "../store/rent-slice";
+import { parseAsInteger, useQueryState } from "nuqs";
 interface RentSwitchProps {
   typeUser: "user" | "guest";
 }
 const RentSwitch = ({ typeUser = "user" }: RentSwitchProps) => {
   const { isRent, setSwitchRent } = useSwitchRent();
   const { isGuestRent, setSwitchGuestRent } = useSwitchGuestRent();
+  const [PageNumber, setPageNumber] = useQueryState(
+    "PageNumber",
+    parseAsInteger.withDefault(1)
+  );
   return typeUser === "user" ? (
     <SegmentedControl
       value={isRent}
       onChange={(e) => {
         setSwitchRent(e === "rent_out" ? "rent_out" : "rent");
+        setPageNumber(1)
       }}
       withItemsBorders={false}
       color="#88BA52"

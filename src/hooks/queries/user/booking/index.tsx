@@ -63,6 +63,27 @@ export const ChangeStautsByID = (id: any) => {
     },
   });
 };
+//ChangeStatusByIDs
+export const ChangeStatusByIDs = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.put(
+        user.order.booking.changeStatusByIds,
+        data
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKeyOut]);
+      queryClient.invalidateQueries([initialQueryKey]);
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
 
 //Delete Product
 export const useDeleteOrderOutMutation = () => {
@@ -99,6 +120,24 @@ export const useCancelOrderMutation = () => {
   });
 };
 
+//Cancel Many Order
+export const useCancelManyOrderMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.post(user.order.cancel_iRent_many, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKey]);
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
+
 //Reject Product
 export const useRejectOrderOutMutation = () => {
   const queryClient = useQueryClient();
@@ -117,8 +156,42 @@ export const useRejectOrderOutMutation = () => {
   });
 };
 
+//Reject Product
+export const useRejectManyOrderOutMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.post(user.order.rejects_iRent, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKeyOut]);
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
 //Cancel Order Out
 export const useCancelOrderOutMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.post(user.order.cancel_iRent_out, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKeyOut]);
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
+//Cancel Order Out
+export const useCancelManyOrderOutMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: any) => {
@@ -168,7 +241,23 @@ export const useRefundOrderMutation = () => {
     },
   });
 };
-
+//Refund Many Product iRent
+export const useRefundManyOrderMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.post(user.order.refunds_iRent, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKey]);
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
 //Refund Product iRent Out
 export const useRefundOrderOutMutation = () => {
   const queryClient = useQueryClient();
@@ -186,7 +275,23 @@ export const useRefundOrderOutMutation = () => {
     },
   });
 };
-
+//Refund Many Products iRent Out
+export const useRefundManyOrderOutMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.post(user.order.refunds_iRent_out, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKeyOut]);
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
 //get QrCode
 export const GetQrCodeOrder = () => {
   return useMutation({

@@ -32,11 +32,15 @@ function CardView({
       swiper.navigation.update();
     }
   };
+  if (data?.length === 0) {
+    return null;
+  }
+
   return (
     <div className="swiperList mb-4 lg:mb-section">
-      <div className="flex items-center justify-between mb-2 lg:mb-6">
+      <div className="flex items-center justify-between mb-0 lg:mb-6">
         <div className="flex items-center gap-5">
-          <h2 className="text-2xl lg:text-[32px] font-Bold">{title}</h2>
+          <h2 className="text-xl lg:text-[32px] font-Bold">{title}</h2>
           {first && (
             <Link
               href={ROUTES.USER.LISTINGS}
@@ -48,7 +52,10 @@ function CardView({
           )}
         </div>
         {viewAllLink && (
-          <Link href={viewAllLink} className=" underline text-lg font-medium">
+          <Link
+            href={viewAllLink}
+            className=" underline block text-sm mdl:text-lg font-medium"
+          >
             View all
           </Link>
         )}

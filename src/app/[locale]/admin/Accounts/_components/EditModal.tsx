@@ -1,3 +1,4 @@
+import Button from "@/src/components/button";
 import Input from "@/src/components/input";
 import InputPhone from "@/src/components/inputPhone";
 import ModalComp from "@/src/components/modal-comp";
@@ -5,13 +6,22 @@ import SelectInput from "@/src/components/select-input";
 import { Accordion } from "@mantine/core";
 import React from "react";
 
-function EditModal({ opened, close, id }: any) {
+function EditModal({
+  opened,
+  close,
+  dataUSer,
+}: {
+  dataUSer: any;
+  opened: boolean;
+  close: any;
+}) {
   return (
     <ModalComp opened={opened} close={close} title={"Account Details"}>
       <div className="lg:w-[580px] w-full flex flex-col gap-4">
         <div className="flex gap-3 flex-wrap lg:gap-7 w-full">
           <Input
             sectionType="user"
+            defaultValue={dataUSer.name}
             inputClassName="bg-white h-12 lg:h-16 rounded-xl"
             label="Name"
             placeholder="Write customer name here"
@@ -20,6 +30,7 @@ function EditModal({ opened, close, id }: any) {
           <Input
             sectionType="email"
             type="email"
+            defaultValue={dataUSer.userName}
             inputClassName="bg-white h-12 lg:h-16 rounded-xl"
             label="Name"
             placeholder="Write customer email here"
@@ -89,6 +100,22 @@ function EditModal({ opened, close, id }: any) {
               </Accordion.Panel>
             </Accordion.Item>
           </Accordion>
+        </div>
+        <div className="flex items-center gap-7 w-full">
+          <Button
+            onClick={close}
+            className={" flex-1 h-[54px] text-black bg-grayBack border-none"}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={() => {
+              close();
+            }}
+            className={" flex-1 h-[54px]"}
+          >
+            Save
+          </Button>
         </div>
       </div>
     </ModalComp>

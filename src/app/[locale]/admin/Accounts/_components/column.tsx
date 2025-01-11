@@ -4,9 +4,11 @@ import StarIcon from "@/src/assets/icons/star";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import { ColumnDef } from "@tanstack/react-table";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import ActionMenu from "./action-menu";
 import RenderPackage from "../../_components/render-package";
+import avatarUser from "@/src/assets/images/avatar.png";
+import { getDate } from "@/src/lib/utils";
 
 
 export type MedicalTeamTableData = {
@@ -17,9 +19,11 @@ export type MedicalTeamTableData = {
   period: string;
   payment: number;
   rating: number;
-  img: StaticImageData;
-  verified: boolean;
-  date: string;
+  userImage: string;
+  isVerified: boolean;
+  created: string;
+  userName: string
+  totalProductsCount:any
 };
 
 export const columns: ColumnDef<MedicalTeamTableData>[] = [
@@ -35,8 +39,8 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     },
     cell: ({ getValue, row }) => {
       const name = getValue<string>();
-      const img = row.original.img;
-      const date = row.original.date;
+      const img = row.original.userImage;
+      const created = row.original.created;
       const id = row.original.id;
 
       return (
@@ -45,7 +49,7 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
           className="flex items-center gap-2"
         >
           <Image
-            src={img}
+            src={img||avatarUser}
             alt={name}
             width={50}
             height={50}
@@ -53,18 +57,18 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
           />
           <div>
             <h2 className="text-[16px] font-SemiBold">{name}</h2>
-            <p className="text-[14px] text-grayMedium">{date}</p>
+            <p className="text-[14px] text-grayMedium">{getDate(created).fullYear}</p>
           </div>
         </Link>
       );
     },
   },
   {
-    accessorKey: "email",
+    accessorKey: "userName",
     header: "Email",
   },
   {
-    accessorKey: "package",
+    accessorKey: "created",
     header: () => {
       return (
         <div className="flex items-center gap-1 cursor-pointer">
@@ -75,11 +79,11 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     },
     cell: ({ getValue }) => {
       const packageVal = getValue<string>();
-      return <RenderPackage packageVal={packageVal} />;
+      return <RenderPackage packageVal={'packageVal'} />;
     },
   },
   {
-    accessorKey: "payment",
+    accessorKey: "totalProductsCount",
     header: "Payment",
     cell: ({ getValue }) => {
       const payment = getValue<number>();
@@ -87,7 +91,7 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     },
   },
   {
-    accessorKey: "verified",
+    accessorKey: "isVerified",
     header: "Status",
     cell: ({ getValue }) => {
       const verified = getValue();
@@ -115,9 +119,10 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     id: "actions",
     cell: ({ row }) => {
       const id = row.original.id;
+      const verified = row.original.isVerified;
       return (
         <div className="flex items-center gap-3 justify-end">
-          <ActionMenu id={id} />
+          <ActionMenu id={id} status={verified} dataUSer={row.original} />
         </div>
       );
     },

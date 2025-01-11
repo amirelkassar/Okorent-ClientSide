@@ -49,7 +49,7 @@ function DashImg({ className = "" }: IconProps) {
         <path
           d="M10.7109 458.57C10.7109 452.219 15.8597 447.07 22.2109 447.07H354.395C360.746 447.07 365.895 452.219 365.895 458.57V498.57C365.895 504.922 360.746 510.07 354.395 510.07H22.2109C15.8597 510.07 10.7109 504.922 10.7109 498.57V458.57Z"
           stroke="#6F6B7D"
-          stroke-opacity="0.2"
+          strokeOpacity="0.2"
         />
       </g>
       <path
@@ -74,7 +74,7 @@ function DashImg({ className = "" }: IconProps) {
       <path
         d="M278.219 475.07C278.219 470.652 281.8 467.07 286.219 467.07H340.219C344.637 467.07 348.219 470.652 348.219 475.07V482.07C348.219 486.489 344.637 490.07 340.219 490.07H286.219C281.8 490.07 278.219 486.489 278.219 482.07V475.07Z"
         fill="#006AFF"
-        fill-opacity="0.1"
+        fillOpacity="0.1"
       />
       <circle cx="293.719" cy="478.57" r="3.5" fill="#006AFF" />
       <path
@@ -94,7 +94,7 @@ function DashImg({ className = "" }: IconProps) {
         <path
           d="M494.418 380.531C494.418 374.18 499.567 369.031 505.918 369.031H790.613C796.965 369.031 802.113 374.18 802.113 380.531V420.531C802.113 426.883 796.965 432.031 790.613 432.031H505.918C499.567 432.031 494.418 426.883 494.418 420.531V380.531Z"
           stroke="#6F6B7D"
-          stroke-opacity="0.2"
+          strokeOpacity="0.2"
         />
       </g>
       <path
@@ -111,7 +111,7 @@ function DashImg({ className = "" }: IconProps) {
       <path
         d="M686.912 396.969C686.912 392.55 690.494 388.969 694.912 388.969H775.912C780.33 388.969 783.912 392.55 783.912 396.969V403.969C783.912 408.387 780.33 411.969 775.912 411.969H694.912C690.494 411.969 686.912 408.387 686.912 403.969V396.969Z"
         fill="#88BA52"
-        fill-opacity="0.1"
+        fillOpacity="0.1"
       />
       <circle cx="702.412" cy="400.469" r="3.5" fill="#88BA52" />
       <path
@@ -193,9 +193,9 @@ function DashImg({ className = "" }: IconProps) {
           width="376.184"
           height="84"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -236,9 +236,9 @@ function DashImg({ className = "" }: IconProps) {
           width="328.695"
           height="84"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"

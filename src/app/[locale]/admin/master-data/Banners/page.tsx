@@ -9,16 +9,20 @@ import EditIcon from "@/src/assets/icons/edit";
 import DeleteIcon from "@/src/assets/icons/delete";
 import PasswordIconHide from "@/src/assets/icons/password";
 import ROUTES from "@/src/routes";
+import { TableHeader } from "@/src/components/table/table-header";
+import LinkGreen from "@/src/components/linkGreen";
+import PlusIcon from "@/src/assets/icons/plus";
+import CardBanner from "./_components/card-banner";
 const FilterOptions = [
   {
     label: "Visible",
-    type: "filter",
-    key: "Visible",
+    key: "filter",
+    value: "Visible",
   },
   {
     label: "Hide",
-    type: "filter",
-    key: "Hide",
+    key: "filter",
+    value: "Hide",
   },
 ];
 function page() {
@@ -46,15 +50,24 @@ function page() {
   ];
   return (
     <LayoutMaster>
+      <TableHeader>
+        <TableHeader.First title="Banners" />
+        <TableHeader.Last className="mdl:!flex !hidden" options={FilterOptions}>
+          <LinkGreen
+            href={ROUTES.ADMIN.BANNERSADD}
+            className={"gap-2 px-6 h-10"}
+          >
+            <PlusIcon className="w-4 h-auto" />
+            Add Banner
+          </LinkGreen>
+        </TableHeader.Last>
+      </TableHeader>
       <DataTable
-        title="Banners"
+        title=""
         data={BannersData}
         columns={columns}
+        Component={CardBanner}
         functionSelect={functionSelect}
-        filterData={FilterOptions}
-        filter={'buttons'}
-        filterBy="status"
-        cardView={ROUTES.ADMIN.BANNERSADD}
       />
     </LayoutMaster>
   );

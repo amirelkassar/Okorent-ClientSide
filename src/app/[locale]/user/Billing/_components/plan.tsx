@@ -13,7 +13,7 @@ const dataPla = [
 ];
 function Plan() {
   return (
-    <div className=" order-1 flex flex-col lg:flex-row flex-1 justify-between shadow-md border gap-3 lg:gap-5 bg-white/50 border-green rounded-3xl px-6 pt-8 lg:pt-10 pb-4">
+    <div className=" order-1 flex flex-col lg:flex-row flex-1 justify-between shadow-md border gap-3 lg:gap-5 bg-white/50 border-green/70 rounded-3xl px-6 pt-8 lg:pt-10 pb-4">
       <div>
         <h3 className="text-base lg:text-xl text-grayMedium font-Regular mb-3 lg:mb-0 ps-10">
           Your Plan{" "}

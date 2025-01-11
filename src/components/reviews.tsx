@@ -4,23 +4,21 @@ import React, { useState } from "react";
 import Button from "@/src/components/button";
 import CardReviews from "./cardReviews";
 import ProgressRev from "./product/ProgressRev";
-import { GetReviewByID } from "../hooks/queries/user/booking/reviews";
 import SkeletonLoading from "./skeleton-loading";
 
 function Reviews({
   editAdmin = false,
   usersReviews,
-  productID,
+  isLoading = false,
+  dataReviews = [],
 }: {
   editAdmin?: boolean;
   usersReviews?: any;
-  productID?: any;
+  isLoading: boolean;
+  dataReviews: any[];
 }) {
   const [IsEdit, setIsEdit] = useState(false);
   const [ShowAll, setShowAll] = useState(false);
-  console.log(productID);
-  const { data, isLoading } = GetReviewByID(productID);
-  console.log(data);
 
   return (
     <div className="flex gap-5 justify-between flex-wrap pb-9 border-b border-grayMedium/20 mb-section">
@@ -129,7 +127,7 @@ function Reviews({
           <SkeletonLoading className="!w-full !h-[140px]" />
           <SkeletonLoading className="!w-full !h-[140px]" />
         </div>
-      ) : data?.data?.length > 0 ? (
+      ) : dataReviews?.length > 0 ? (
         <div className="w-[800px] max-w-full">
           <div className="flex items-center gap-3 flex-wrap justify-between mb-10">
             <h2 className=" relative text-xl lg:text-[24px] ">
@@ -139,18 +137,10 @@ function Reviews({
               (IsEdit ? (
                 <div className="flex items-center gap-2 ">
                   <Button
-                    className={
-                      "h-9 text-blue bg-blue/15 border-none hover:shadow-md !px-5 !text-sm"
-                    }
-                    onClick={() => setIsEdit(false)}
-                  >
-                    Discard Edits
-                  </Button>
-                  <Button
                     className={"h-9 !px-5 !text-sm"}
                     onClick={() => setIsEdit(false)}
                   >
-                    Save Edits
+                    Done Edits
                   </Button>
                 </div>
               ) : (
@@ -163,18 +153,18 @@ function Reviews({
               ))}
           </div>
           <div className="flex flex-col gap-7 mb-7">
-            {data?.data
-              ?.slice(0, ShowAll ? data?.data?.length : 3)
+            {dataReviews
+              ?.slice(0, ShowAll ? dataReviews?.length : 3)
               .map((item: any, index: number) => (
-                <CardReviews IsEdit={IsEdit} review={item} key={index} />
+                <CardReviews IsEdit={IsEdit} review={item} key={item?.id} />
               ))}
           </div>
-          {ShowAll ? null : data?.data?.length > 3 ? (
+          {ShowAll ? null : dataReviews?.length > 3 ? (
             <button
               onClick={() => setShowAll(true)}
               className="px-8 py-3 text-nowrap duration-300 hover:shadow-md leading-4 rounded-xl text-sm lg:text-base border border-black text-center"
             >
-              Show all {+data?.data?.length - 3} reviews
+              Show all {+dataReviews?.length - 3} reviews
             </button>
           ) : null}
           {}

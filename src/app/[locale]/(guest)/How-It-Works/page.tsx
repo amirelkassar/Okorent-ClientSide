@@ -74,22 +74,15 @@ function page() {
   return (
     <div>
       <LookingFor />
-      <Goals/>
+      <Goals />
       <div className="mb-16 mt-4 lg:mt-10 relative">
-        <h2 className="text-2xl text-center lg:text-3xl mb-14">What our users say</h2>
+        <h2 className="text-2xl text-center lg:text-3xl mb-14">
+          What our users say
+        </h2>
 
         <div className="flex gap-5 lg:gap-8 md:flex-wrap   overflow-x-auto hideScroll">
           {ReviewData.map((item, i) => {
-            return (
-              <Review
-                key={i}
-                name={item.name}
-                image={item.image}
-                stateUser={item.stateUser}
-                title={item.title}
-                rate={item.rate}
-              />
-            );
+            return <Review key={i} data={{}} idUser={''} />;
           })}
         </div>
       </div>

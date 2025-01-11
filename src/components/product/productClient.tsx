@@ -11,20 +11,27 @@ import { useParams } from "next/navigation";
 import { GetUserProductsByID } from "@/src/hooks/queries/user/lisitings";
 import SkeletonLoading from "../skeleton-loading";
 import { getDate } from "@/src/lib/utils";
+import { usePathname } from "@/src/navigation";
 function ProductClient({ clientID }: { clientID: any }) {
   const params = useParams();
+  const path = usePathname();
   const { data, isLoading } = GetUserProductsByID(clientID);
-  console.log(data);
+  console.log(path);
   if (isLoading) {
     return <SkeletonLoading className="md:!w-full md:!h-[218px]" />;
   }
+  const isAdminRoute = path.includes(ROUTES.ADMIN.DASHBOARD);
+  console.log(isAdminRoute);
+  
   return (
     <div className="border border-green/30 mt-6 rounded-lg py-6 px-5 bg-white/50">
       <div className=" flex items-center lg:items-start gap-4 flex-col lg:flex-row lg:gap-6 w-full pb-3 border-b border-grayLight">
         <div className="flex flex-col items-center gap-2 justify-center ">
           <Image
             alt="user"
-            src={avatar}
+            src={data?.data?.userImage || avatar}
+            width={100}
+            height={100}
             className=" size-[50px] lg:size-[60px] rounded-[50%] object-cover object-top"
             priority
           />
@@ -42,7 +49,9 @@ function ProductClient({ clientID }: { clientID: any }) {
           </h4>
           <div className="flex items-center ">
             <div className="flex items-center gap-1 pe-2 lg:pe-4">
-              <p className="font-Bold text-lg lg:text-xl ">{data?.data?.rating}</p>
+              <p className="font-Bold text-lg lg:text-xl ">
+                {data?.data?.rating}
+              </p>
               <StarIcon className="w-[18px] lg:w-[20px] h-auto" />
             </div>
             <div className="flex items-center md:items-end gap-1 pe-2 lg:pe-4 ps-2 border-s border-green">
@@ -69,7 +78,7 @@ function ProductClient({ clientID }: { clientID: any }) {
           Message Ahmed
         </LinkGreen>
         <LinkGreen
-          href={ROUTES.GUEST.PROFILE(params.productID, 1)}
+          href={ isAdminRoute ? ROUTES.ADMIN.ACCOUNTSDETAILS(data?.data?.id) : ROUTES.GUEST.PROFILE(params.productID, data?.data?.id)}
           className={"flex-1 h-10 bg-grayBack text-black border-none"}
         >
           {" "}

@@ -1,21 +1,15 @@
 import React from "react";
 import ErrorView from "./error-view";
-import Image from "next/image";
-import imgError from "@/src/assets/images/server.png";
+import Error500Icon from "../assets/icons/error-500";
 
 function Error500() {
   return (
     <div>
       <ErrorView
-        title="Unexpected Error"
-        des="An unexpected error has occurred. Please try again later or contact support for assistance"
+        title="Server Error"
+        des="An error occurred on the server. Please refresh the page or try again later"
       >
-        <Image
-        src={imgError}
-        alt="error"
-        width={360}
-        height={245}
-        />
+        <Error500Icon className="w-[208px] max-w-[80%] h-auto" />
       </ErrorView>
     </div>
   );

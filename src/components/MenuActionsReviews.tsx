@@ -3,16 +3,29 @@ import DeleteIcon from "@/src/assets/icons/delete";
 import DotsIcon from "@/src/assets/icons/dots";
 import EditIcon from "@/src/assets/icons/edit";
 import { Popover } from "@mantine/core";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
+import { Toast } from "./toast";
+import { useDeleteReviewUserInAdmin } from "../hooks/queries/admin/account/reviews";
 interface MenuActionsProps {
   setIsEdit: any;
+  userID: any;
+  id: any;
 }
-function MenuActions({ setIsEdit }: MenuActionsProps) {
+function MenuActions({ setIsEdit, userID = "", id }: MenuActionsProps) {
   const [opened, setOpened] = useState(false); // State to control Popover visibility
-
+  const { mutateAsync: DeleteReviewUser } = useDeleteReviewUserInAdmin(userID||'');
   const handleClose = () => {
     setOpened(false); // Close the Popover
   };
+
+  //Delete Review
+  const onSubmitDeleteReview = useCallback(async () => {
+    Toast.Promise(DeleteReviewUser(id), {
+      success: "Deleted Review Product Done",
+      onSuccess: async (res) => {},
+    });
+  }, [DeleteReviewUser, id]);
+
   return (
     <Popover
       width={110}
@@ -33,7 +46,7 @@ function MenuActions({ setIsEdit }: MenuActionsProps) {
         <div className="flex flex-col gap-1">
           <button
             onClick={() => {
-              handleClose();
+              onSubmitDeleteReview();
             }}
             className="flex items-center gap-2 py-1 px-2 border-b border-grayBack "
           >

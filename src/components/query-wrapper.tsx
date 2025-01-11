@@ -5,6 +5,7 @@ import Loading from "./loading";
 import Error404 from "./error-404";
 import Error403 from "./error-403";
 import Error500 from "./error-500";
+import { clearToken } from "../lib/token";
 
 const MemowizedLoader = memo(Loading);
 const MemowizedNotFound404 = memo(Error404);
@@ -48,7 +49,6 @@ console.log(query?.data);
   }, [items]);
 
   const onRetry = useCallback(() => query.refetch?.(), [query]);
-  console.log(query?.isFetching);
 
   if (query?.isPaused) return <MemowizedServerError />;
   if (query?.isLoading) return <MemowizedLoader />;
@@ -56,6 +56,8 @@ console.log(query?.data);
     return <MemowizedNotFound404 />;
   if (query?.isError && query?.failureReason?.status === 403)
     return <MemowizedForbiden403 />;
+  if (query?.isError && query?.failureReason?.status === 401)
+    return clearToken();
   if (query?.isError) return <MemowizedServerError />;
   if (!hasData && !isFiltered) return <MemowizedNoDataYet />;
   if (isSearching && !hasData) return <MemowizedNoDataYet />; // Adjust logic if other components are needed.

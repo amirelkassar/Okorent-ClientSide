@@ -11,6 +11,7 @@ import { useEditOrderByIDMutation } from "@/src/hooks/queries/user/order";
 import { getDate } from "@/src/lib/utils";
 import { Radio } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import Image from "next/image";
 import React, { useState } from "react";
 const OptionAddresses = [
   {
@@ -40,9 +41,11 @@ function OrderInformation({
   const [valueAddressType, setValueAddressType] = useState("");
   const [location, setLocation] = useState<any>(null);
   const [opened, { open, close }] = useDisclosure(false);
-  const { data: productData } = GetProductsByID(data?.getOrderItemDtos[0]?.productId);
+  const { data: productData } = GetProductsByID(
+    data?.getOrderItemDtos[0]?.productId
+  );
   console.log(data);
-  
+
   const { mutateAsync: EditOrderDetails } = useEditOrderByIDMutation(data?.id);
   const handelEditOrder = () => {
     const formData = {
@@ -76,17 +79,33 @@ function OrderInformation({
     <div className="w-full mdl:min-w-[400px] flex-1 py-6 mdl:py-9 px-3 mdl:px-4 bg-white rounded-xl border border-green/30">
       <div className="flex w-full flex-1 mdl:flex-row flex-col flex-wrap gap-y-5 gap-x-8">
         <CardInfoOrder
-          label={isRent === "rent" ? "Lessor Name" : "Client Name"}
+          label={data.renterType === "IRent" ? "Lessor Name" : "Client Name"}
           iconRender={() => (
-            <div className="bg-blueLight rounded-full size-10 p-1 flex items-center justify-center">
-              {data?.lessorName?.slice(0, 2)}
+            <div className="bg-blueLight rounded-full size-10 p-0 flex items-center justify-center">
+              {data?.userImage ? (
+                <Image
+                  src={data.userImage}
+                  alt="user"
+                  width={100}
+                  height={100}
+                  className="w-full h-full rounded-full object-cover object-top"
+                />
+              ) : (
+                data?.lessorName?.slice(0, 2)
+              )}
             </div>
           )}
         >
           <div>
-            <h4>{data?.lessorName || "--"}</h4>
+            <h4>
+              {data.renterType === "IRent"
+                ? data?.lessorName
+                : data?.renterName || "--"}
+            </h4>
             <p className="text-xs text-grayMedium font-Regular">
-              {data?.lessorEmail || "--"}
+              {data.renterType === "IRent"
+                ? data?.lessorName
+                : data?.renterEmail || "--"}
             </p>
           </div>
         </CardInfoOrder>

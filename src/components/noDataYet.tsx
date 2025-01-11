@@ -18,7 +18,7 @@ function NoDataYet() {
       title="No Data Available"
       des="No data is currently available. Please try again later."
     >
-      <NoDataIcon className="w-[267px] h-auto"/>
+      <NoDataIcon className="w-[480px] max-w-[80%] h-auto"/>
     </ErrorView>
   );
 }

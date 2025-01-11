@@ -30,3 +30,21 @@ export const GetReviewByID = (id: any) => {
     },
   });
 };
+
+
+// add Review User
+export const useReviewUserOrderMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.post(user.order.reviewUser.base, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};

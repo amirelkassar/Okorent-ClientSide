@@ -12,12 +12,12 @@ function Page() {
   return (
     <div>
       {searchParams.get("card") === "true" ? (
-        <PageCardsView query={query} />
+        <PageCardsView />
       ) : (
         <>
           <TableViewListings query={query} />
           <div className=" block mdl:hidden">
-            <PageCardsView query={query} />
+            <PageCardsView />
           </div>
         </>
       )}

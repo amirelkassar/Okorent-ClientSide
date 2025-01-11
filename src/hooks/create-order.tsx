@@ -4,13 +4,14 @@ import { useCallback, useState } from "react";
 import { Toast } from "@/src/components/toast";
 import { useCreateOrderMutation } from "./queries/user/order";
 import { useDisclosure } from "@mantine/hooks";
+import { useSwitchRent } from "../store/rent-slice";
 
 // Define the type for the form state and handlers
 interface FormProps {
-  onSubmit: (data:any) => void;
+  onSubmit: (data: any) => void;
   error: any; // You can replace 'any' with a more specific type based on your error structure
-  opened2:any,
-  close2:any
+  opened2: any;
+  close2: any;
 }
 
 // Define the type for the status state
@@ -24,6 +25,7 @@ interface SignUpReturn {
 }
 export const useCreateOrder = (): SignUpReturn => {
   const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
+  const { isRent, setSwitchRent } = useSwitchRent();
   const {
     mutateAsync: CreateOrder,
     error,
@@ -32,15 +34,19 @@ export const useCreateOrder = (): SignUpReturn => {
     reset,
   } = useCreateOrderMutation();
 
-  const onSubmit = useCallback(async (data:any) => {
-    Toast.Promise(CreateOrder(data), {
-      success: "successfully Create Order",
-      onSuccess: async (res) => {
-        console.log(res);
-        open2()
-      },
-    });
-  }, [CreateOrder]);
+  const onSubmit = useCallback(
+    async (data: any) => {
+      setSwitchRent("rent");
+      Toast.Promise(CreateOrder(data), {
+        success: "successfully Create Order",
+        onSuccess: async (res) => {
+          console.log(res);
+          open2();
+        },
+      });
+    },
+    [CreateOrder]
+  );
 
   const form: FormProps = {
     onSubmit,

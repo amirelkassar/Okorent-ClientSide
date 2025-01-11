@@ -31,6 +31,7 @@ export type RequestsTableData = {
   imgUser: StaticImageData;
   heroImage: StaticImageData;
   orderId: any;
+  userImage: any;
 };
 
 export const columnsReq: ColumnDef<RequestsTableData>[] = [
@@ -47,21 +48,14 @@ export const columnsReq: ColumnDef<RequestsTableData>[] = [
     cell: ({ getValue, row }) => {
       const name = getValue<string>();
       const id = row.original.id;
-      // const image = row.original.heroImage;
+      const userImage = row.original.userImage;
 
       return (
         <Link
           href={ROUTES.USER.ORDERID(id)}
           className="flex items-center gap-2"
         >
-          <Image
-            src={avatar}
-            alt={name}
-            width={50}
-            height={50}
-            className="w-12 h-12 rounded-[50%] object-cover object-top"
-          />
-          <h2 className="text-[16px] font-SemiBold">{name}</h2>
+          <ImgProduct productName={name} src={userImage || avatar} />
         </Link>
       );
     },

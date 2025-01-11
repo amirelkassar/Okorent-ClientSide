@@ -2,7 +2,10 @@
 import React from "react";
 import { useSearchParams } from "next/navigation";
 import { useSwitchRent } from "@/src/store/rent-slice";
-import { GetMyOrderAll, GetMyOrderOutAll } from "@/src/hooks/queries/user/booking";
+import {
+  GetMyOrderAll,
+  GetMyOrderOutAll,
+} from "@/src/hooks/queries/user/booking";
 import PageCardRent from "./_components/page-card-rent";
 import TableRent from "./_components/table-rent";
 import TableRentOut from "./_components/table-rent-out";
@@ -14,16 +17,15 @@ function Page() {
   const query = GetMyOrderAll(searchParams.toString());
   const queryOut = GetMyOrderOutAll(searchParams.toString());
 
-
   return isRent === "rent" ? (
     <div>
       {searchParams.get("card") === "true" ? (
-        <PageCardRent query={query} />
+        <PageCardRent />
       ) : (
         <>
           <TableRent query={query} />
           <div className=" block mdl:hidden">
-            <PageCardRent query={query} />
+            <PageCardRent />
           </div>
         </>
       )}
@@ -31,12 +33,12 @@ function Page() {
   ) : (
     <div>
       {searchParams.get("card") === "true" ? (
-        <PageCardRentOut query={queryOut} />
+        <PageCardRentOut />
       ) : (
         <>
           <TableRentOut query={queryOut} />
           <div className=" block mdl:hidden">
-            <PageCardRentOut query={queryOut} />
+            <PageCardRentOut />
           </div>
         </>
       )}

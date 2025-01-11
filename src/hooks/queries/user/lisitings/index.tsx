@@ -73,6 +73,23 @@ export const useUpdateToOnlineMutation = () => {
     },
   });
 };
+//Update Many Product to Online
+export const useUpdateManyToOnlineMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.put(user.product.upDateManyToOnlineById, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKey]);
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
 //getProductByID
 export const GetUserProductsByID = (id: any) => {
   return useQuery({

@@ -1,10 +1,13 @@
 "use client";
 import { useCallback } from "react";
 import {
+  ChangeStatusByIDs,
   ChangeStautsByID,
   useCancelOrderOutMutation,
   useDeleteOrderOutMutation,
+  useRefundManyOrderOutMutation,
   useRefundOrderOutMutation,
+  useRejectManyOrderOutMutation,
   useRejectOrderOutMutation,
 } from "@/src/hooks/queries/user/booking";
 import { Toast } from "@/src/components/toast";
@@ -16,13 +19,20 @@ interface ActionTableIRentProps {
   onSubmitCancel: any;
   onSubmitRefundYes: any;
   onSubmitRefundNo: any;
+  onSubmitChangeStatusIds: any;
+  onSubmitRejectOrdersIds: any;
+  onSubmitRefundManyYes: any;
+  onSubmitRefundManyNo: any;
 }
 export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
   const { mutateAsync: ChangeStatusProduct } = ChangeStautsByID(id);
+  const { mutateAsync: ChangeStatusManyProduct } = ChangeStatusByIDs();
   const { mutateAsync: DeleteOrderOut } = useDeleteOrderOutMutation();
   const { mutateAsync: RejectOrderOut } = useRejectOrderOutMutation();
+  const { mutateAsync: RejectManyOrderOut } = useRejectManyOrderOutMutation();
   const { mutateAsync: CancelOrder } = useCancelOrderOutMutation();
   const { mutateAsync: RefundOrder } = useRefundOrderOutMutation();
+  const { mutateAsync: RefundManyOrder } = useRefundManyOrderOutMutation();
 
   //delete order
   const onSubmitDelete = useCallback(async () => {
@@ -41,6 +51,18 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
     });
   }, [ChangeStatusProduct, id]);
 
+  //change status ids
+  const onSubmitChangeStatusIds = useCallback(
+    async (data: any) => {
+      Toast.Promise(ChangeStatusManyProduct(data), {
+        loading: "Processing...",
+        success: "Operation completed!",
+        error: "Failed to complete operation",
+      });
+    },
+    [ChangeStatusManyProduct]
+  );
+
   //reject order
   const onSubmitReject = useCallback(async () => {
     Toast.Promise(
@@ -55,6 +77,19 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
     );
   }, [RejectOrderOut, id]);
 
+  //reject order ids
+  const onSubmitRejectOrdersIds = useCallback(
+    async (data: any) => {
+      Toast.Promise(RejectManyOrderOut(data), {
+        loading: "Processing...",
+        success: "Operation completed!",
+        error: "Failed to complete operation",
+      });
+    },
+    [RejectManyOrderOut]
+  );
+
+  //cancel order
   const onSubmitCancel = useCallback(async () => {
     Toast.Promise(
       CancelOrder({
@@ -97,6 +132,29 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
       }
     );
   }, [RefundOrder, id]);
+
+  //RefundYes many order
+  const onSubmitRefundManyYes = useCallback(
+    async (data: any) => {
+      Toast.Promise(RefundManyOrder(data), {
+        success: " Request Approved ",
+        onSuccess: async (res) => {},
+      });
+    },
+    [RefundManyOrder, id]
+  );
+
+  //RefundNo many order
+  const onSubmitRefundManyNo = useCallback(
+    async (data: any) => {
+      Toast.Promise(RefundManyOrder(data), {
+        success: "Request Rejected ",
+        onSuccess: async (res) => {},
+      });
+    },
+    [RefundManyOrder, id]
+  );
+
   return {
     onSubmitDelete,
     onSubmitChangeStatus,
@@ -104,5 +162,9 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
     onSubmitCancel,
     onSubmitRefundYes,
     onSubmitRefundNo,
+    onSubmitChangeStatusIds,
+    onSubmitRejectOrdersIds,
+    onSubmitRefundManyYes,
+    onSubmitRefundManyNo,
   };
 };

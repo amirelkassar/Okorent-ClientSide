@@ -2,97 +2,80 @@
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import { ColumnDef } from "@tanstack/react-table";
-import Image, { StaticImageData } from "next/image";
 import ActionMenu from "./action-menu";
 import RenderStatus from "./render-status";
-
+import ImgProduct from "@/src/components/img-product";
+import placeholderImg from "@/src/assets/images/placTableProduct.png";
+import avatar from "@/src/assets/images/avatar.png";
 export type MedicalTeamTableData = {
   id: number;
-  phone: string;
-  ProductImage: StaticImageData;
-  user: string;
-  avatar: StaticImageData;
+  name: string;
+  heroImage: string;
+  creatorName: string;
+  creatorImage: string;
   category: string;
   status: boolean;
-  rentalCost: number;
-  location: string;
+  dailyPrice: number;
+  address: string;
 };
 
 export const columns: ColumnDef<MedicalTeamTableData>[] = [
   {
     header: "Product",
-    accessorKey: "phone",
+    accessorKey: "name",
     cell: ({ getValue, row }) => {
       const name = getValue<string>();
-      const img = row.original.ProductImage;
+      const img = row.original.heroImage||placeholderImg;
       const id = row.original.id;
       return (
         <Link
           href={ROUTES.ADMIN.LISTINGSDETAILS(id)}
           className="flex items-center gap-2"
         >
-          <div className="size-[50px] rounded-[50%] p-[6px] bg-grayBack flex justify-center items-center">
-            <Image
-              src={img}
-              alt={name}
-              width={50}
-              height={50}
-              className="w-auto h-full  object-contain "
-            />
-          </div>
-
-          <div>
-            <h2 className="text-[16px] font-SemiBold">{name}</h2>
-          </div>
+          <ImgProduct src={img} productName={name} />
         </Link>
       );
     },
   },
   {
     header: "Owner",
-    accessorKey: "user",
+    accessorKey: "creatorName",
     cell: ({ getValue, row }) => {
-      const user = getValue<string>();
-      const avatar = row.original.avatar;
-      return (
-        <div className="flex items-center gap-2">
-          <Image
-            src={avatar}
-            alt={user}
-            width={50}
-            height={50}
-            className="w-12 h-12 rounded-[50%] object-cover object-top"
-          />
-          <h2 className="text-[16px] font-SemiBold">{user}</h2>
-        </div>
-      );
+      const creatorName = getValue<string>();
+      const creatorImage = row.original.creatorImage||avatar;
+      return <ImgProduct src={creatorImage} productName={creatorName} />;
     },
   },
 
   {
-    accessorKey: "rentalCost",
+    accessorKey: "dailyPrice",
     header: "Rental price",
     cell: ({ getValue }) => {
-      const rentalCost = getValue<number>();
-      return <p className="font-SemiBold text-[16px]">{rentalCost}$</p>;
+      const dailyPrice = getValue<number>();
+      return <p className="font-SemiBold text-[16px]">{dailyPrice}$</p>;
     },
   },
 
   {
-    accessorKey: "category",
+    accessorKey: "categoryName",
     header: "Category",
   },
   {
-    accessorKey: "status",
+    accessorKey: "isActive",
     header: "Status",
     cell: ({ getValue }) => {
-      const status = getValue<string>();
-      return <RenderStatus status={status} />;
+      const alwaysAvailable = getValue<string>();
+      return <RenderStatus status={alwaysAvailable} />;
     },
   },
   {
-    accessorKey: "location",
+    accessorKey: "address",
     header: "Stock Location",
+    cell: ({ getValue }) => {
+      const address = getValue<number>();
+      return <p className="font-SemiBold text-[16px] max-w-[200px] truncate">{address}</p>;
+    },
+
   },
   {
     id: "actions",
