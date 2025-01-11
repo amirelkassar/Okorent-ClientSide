@@ -13,14 +13,17 @@ import { GetAccounts } from "@/src/hooks/queries/admin/account";
 
 function Page() {
   const searchParams = useSearchParams();
+  console.log(searchParams.toString());
+
   const query = GetAccounts(searchParams.toString());
-  const [counterAccount, setCounterAccount] = useState(10);
   const { functionSelectView, setSelectedFromTable } = useActionTable();
+  const totalCount = query.data?.data?.totalCount || 0;
+
   return (
     <div className="mb-10 ">
       <TableHeader>
         <TableHeader.First
-          title={`${counterAccount ?? null} Account`}
+          title={`${totalCount ?? null} Account`}
         ></TableHeader.First>
         <TableHeader.Last className="mdl:!flex !hidden">
           <AddUser />

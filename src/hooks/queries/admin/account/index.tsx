@@ -1,13 +1,14 @@
+'use client'
 import { api } from "@/src/api/axios";
 import { admin } from "@/src/api/user";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 export const initialQueryKey = "Accounts";
 
 // Get Accounts
-export const GetAccounts = (queries?: any) => {
+export const GetAccounts = (queries:any) => {
   const queryClient = useQueryClient();
   return useQuery({
-    queryKey: [initialQueryKey],
+    queryKey: [initialQueryKey,queries],
     queryFn: async () => {
       const response = await api.get(admin.Accounts.base(queries));
       return response.data;
@@ -50,6 +51,27 @@ export const useCreateAccountInAdmin = () => {
   return useMutation({
     mutationFn: async (data: any) => {
       const response = await api.post(admin.Accounts.CreateAccounts, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKey]);
+    },
+    onError: () => {},
+  });
+};
+
+
+
+// Edit Account
+export const useEditAccountInAdmin = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.put(admin.Accounts.CreateAccounts, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
