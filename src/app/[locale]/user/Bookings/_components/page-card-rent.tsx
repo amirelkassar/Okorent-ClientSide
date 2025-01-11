@@ -2,9 +2,7 @@
 import React from "react";
 import CardView from "./cardView";
 import RentSwitch from "@/src/components/RentSwitch";
-import {
-  GetMyOrderAllByList,
-} from "@/src/hooks/queries/user/booking";
+import { GetMyOrderAllByList } from "@/src/hooks/queries/user/booking";
 import Loading from "@/src/components/loading";
 import NoDataYet from "@/src/components/noDataYet";
 const statuses = [
@@ -22,7 +20,6 @@ const statuses = [
 
 function PageCardRent() {
   console.log("dfg");
-
 
   const data = statuses.map(({ status }) => GetMyOrderAllByList(status));
   const isLoading = data.some((hook) => hook.isLoading);
