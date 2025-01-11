@@ -10,6 +10,7 @@ interface InputPhone {
   flagBorder?: boolean;
   onChange?: (value: string) => void;
   error?: any;
+  value?: any;
 }
 function InputPhone({
   label = "Phone number",
@@ -20,6 +21,7 @@ function InputPhone({
   flagBorder = true,
   onChange,
   error,
+  value,
 }: InputPhone) {
   return (
     <div className={boxClassName}>
@@ -31,6 +33,7 @@ function InputPhone({
       <div dir="ltr" className="mx-1">
         <PhoneInput
           placeholder={placeholder}
+          value={value}
           specialLabel=""
           enableSearch={true}
           country={"eg"} // Set Egypt as the default country (matches your image)

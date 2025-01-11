@@ -64,3 +64,24 @@ export const useCreateAccountInAdmin = () => {
 };
 
 
+
+// Edit Account
+export const useEditAccountInAdmin = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.put(admin.Accounts.CreateAccounts, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKey]);
+    },
+    onError: () => {},
+  });
+};
+
+

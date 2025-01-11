@@ -3,6 +3,7 @@ import Input from "@/src/components/input";
 import InputPhone from "@/src/components/inputPhone";
 import ModalComp from "@/src/components/modal-comp";
 import SelectInput from "@/src/components/select-input";
+import { useEditAccountInAdmin } from "@/src/hooks/queries/admin/account";
 import { Accordion } from "@mantine/core";
 import React from "react";
 
@@ -15,6 +16,8 @@ function EditModal({
   opened: boolean;
   close: any;
 }) {
+  const  {mutateAsync:EditUserDetails}=useEditAccountInAdmin();
+  
   return (
     <ModalComp opened={opened} close={close} title={"Account Details"}>
       <div className="lg:w-[580px] w-full flex flex-col gap-4">
@@ -45,6 +48,7 @@ function EditModal({
             className="flex-1"
           />
           <InputPhone
+            value={dataUSer.phoneNumber}
             boxClassName={"flex-1"}
             inputClassName="bg-white h-12 lg:h-16 !border border-green/30"
             flagBorder={false}
@@ -71,17 +75,20 @@ function EditModal({
                     label="Adresses"
                     inputClassName="bg-white h-12 lg:h-16 rounded-xl"
                     className="flex-1"
+                    defaultValue={dataUSer.address}
                   />
                   <div className="flex gap-3 flex-wrap lg:gap-7">
                     <Input
                       label="Zip Code"
                       inputClassName="bg-white h-12 lg:h-16 rounded-xl"
                       className="flex-1 min-w-[200px]"
+                      defaultValue={dataUSer.zipCode}
                     />
                     <Input
                       label="City"
                       inputClassName="bg-white h-12 lg:h-16 rounded-xl"
                       className="flex-1 min-w-[200px]"
+                      defaultValue={dataUSer.city}
                     />
                   </div>
                   <div className="flex gap-3 flex-wrap lg:gap-7">
@@ -89,11 +96,13 @@ function EditModal({
                       label="Region"
                       inputClassName="bg-white h-12 lg:h-16 rounded-xl"
                       className="flex-1 min-w-[200px]"
+                      defaultValue={dataUSer.region}
                     />
                     <Input
                       label="Country"
                       inputClassName="bg-white h-12 lg:h-16 rounded-xl"
                       className="flex-1 min-w-[200px]"
+                      defaultValue={dataUSer.country}
                     />
                   </div>
                 </div>
