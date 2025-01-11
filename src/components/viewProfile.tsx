@@ -43,7 +43,7 @@ function ViewProfile({
   data?: any;
 }) {
   return (
-    <div className="flex  flex-col lg:flex-row gap-10  lg:gap-4 -mt-5 lg:-mt-[140px] lg:ps-8">
+    <div className="flex  flex-col lg:flex-row gap-10 lg:items-start  lg:gap-4 -mt-5 lg:-mt-[140px] lg:ps-8">
       <div className="min-w-[370px]   bg-white rounded-2xl lg:rounded-3xl w-full max-w-[93%] lg:max-w-[370px] mx-auto flex-1 pb-12 lg:pb-24 shadow-md">
         <div className="lg:min-w-[200px]">
           <div className=" -mt-5 lg:-mt-24 size-[100px] lg:size-[156px] relative rounded-full mx-auto mb-5 border-2 border-white shadow-md ">
@@ -149,7 +149,7 @@ function ViewProfile({
         </div>
       </div>
 
-      <div className=" flex-1 lg:pt-[180px] self-end w-full">
+      <div className=" flex-1 lg:pt-[180px] w-full">
         <AboutProfile
           description={data.description}
           nameUser={data?.name?.split(" ")[0] || ""}

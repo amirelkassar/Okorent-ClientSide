@@ -2,46 +2,36 @@
 import React from "react";
 import CardView from "./cardView";
 import RentSwitch from "@/src/components/RentSwitch";
-import { GetMyOrderAll } from "@/src/hooks/queries/user/booking";
+import {
+  GetMyOrderAllByList,
+} from "@/src/hooks/queries/user/booking";
 import Loading from "@/src/components/loading";
 import NoDataYet from "@/src/components/noDataYet";
+const statuses = [
+  { title: "New", status: 1 },
+  { title: "Accepted", status: 3 },
+  { title: "Out for Delivery", status: 4 },
+  { title: "Received", status: 6 },
+  { title: "Request for Return", status: 11 },
+  { title: "Out for Return", status: 12 },
+  { title: "Completed", status: 10 },
+  { title: "Returned", status: 7 },
+  { title: "Rejected", status: 8 },
+  { title: "Canceled", status: 9 },
+];
 
 function PageCardRent() {
-  const { data: New_Order, isLoading } = GetMyOrderAll(
-    "OrderStatus=1&PageSize=5"
-  );
-  const { data: Accepted_Order } = GetMyOrderAll("OrderStatus=3&PageSize=5");
-  const { data: OutForDelivery_Order } = GetMyOrderAll(
-    "OrderStatus=4&PageSize=5"
-  );
-  const { data: Received_Order } = GetMyOrderAll("OrderStatus=6&PageSize=5");
-  const { data: RequestForReturn_Order } = GetMyOrderAll(
-    "OrderStatus=11&PageSize=5"
-  );
-  const { data: OutForReturn_Order } = GetMyOrderAll(
-    "OrderStatus=12&PageSize=5"
-  );
-  const { data: Completed_Order } = GetMyOrderAll("OrderStatus=10&PageSize=5");
-  const { data: Returned_Order } = GetMyOrderAll("OrderStatus=7&PageSize=5");
-  const { data: Rejected_Order } = GetMyOrderAll("OrderStatus=8&PageSize=5");
-  const { data: Canceled_Order } = GetMyOrderAll("OrderStatus=9&PageSize=5");
-  
+  console.log("dfg");
+
+
+  const data = statuses.map(({ status }) => GetMyOrderAllByList(status));
+  const isLoading = data.some((hook) => hook.isLoading);
+  const allItems = data.flatMap((hook) => hook.data?.data?.items || []);
   if (isLoading) {
     return <Loading />;
   }
-  if (
-    New_Order?.data?.items?.length === 0 &&
-    Accepted_Order?.data?.items?.length === 0 &&
-    OutForDelivery_Order?.data?.items?.length === 0 &&
-    Received_Order?.data?.items?.length === 0 &&
-    RequestForReturn_Order?.data?.items?.length === 0 &&
-    OutForReturn_Order?.data?.items?.length === 0 &&
-    Completed_Order?.data?.items?.length === 0 &&
-    Returned_Order?.data?.items?.length === 0 &&
-    Rejected_Order?.data?.items?.length === 0 &&
-    Canceled_Order?.data?.items?.length === 0
 
-  ) {
+  if (allItems.length === 0) {
     return <NoDataYet />;
   }
   return (
@@ -50,7 +40,17 @@ function PageCardRent() {
         <RentSwitch typeUser="user" />
       </div>
       <div>
-        <CardView
+        {statuses.map(({ title, status }, index) => (
+          <CardView
+            key={status}
+            first={index === 0}
+            title={title}
+            haveRentSwitch={index === 0}
+            products={data[index]?.data?.data?.items || []}
+            status={status}
+          />
+        ))}
+        {/* <CardView
           first
           title={"New"}
           haveRentSwitch
@@ -101,7 +101,7 @@ function PageCardRent() {
           title={"Canceled"}
           products={Canceled_Order?.data?.items || []}
           status={9}
-        />
+        /> */}
       </div>
     </div>
   );

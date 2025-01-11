@@ -14,18 +14,21 @@ import { Pagination } from "@/src/components/pagination";
 
 function TableRent({ query }: { query: any }) {
   const { functionSelectView, setSelectedFromTable } = useActionTableIRent();
+  const totalCount = query.data?.data?.totalCount || 0;
 
   return (
     <div className=" hidden mdl:block">
       <TableHeader>
         <TableHeader.First title="Bookings">
-          <Link
-            href={ROUTES.USER.BOOKINGS + "?card=true"}
-            className="px-3 duration-300 hover:shadow-md w-fit py-2 rounded-xl border border-black flex items-center justify-center gap-2"
-          >
-            <CardIcon />
-            <p>Card View</p>
-          </Link>
+          {+totalCount > 0 ? (
+            <Link
+              href={ROUTES.USER.BOOKINGS + "?card=true"}
+              className="px-3 duration-300 hover:shadow-md w-fit py-2 rounded-xl border border-black flex items-center justify-center gap-2"
+            >
+              <CardIcon />
+              <p>Card View</p>
+            </Link>
+          ) : null}
         </TableHeader.First>
         <TableHeader.Middle>
           <RentSwitch typeUser="user" />

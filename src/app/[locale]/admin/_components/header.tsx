@@ -37,7 +37,7 @@ const number = [
 function HeaderDash() {
   return (
     <div className=" mb-phone lg:mb-section">
-      <h2 className="text-grayMedium text-base lg:text-[24px] font-Medium">
+      <h2 className="text-grayMedium text-base lg:text-[24px] font-Medium mb-5">
         Welcome Back, Tom 👋{" "}
       </h2>
       <h3 className=" text-2xl lg:text-[32px] font-Bold mb-6 lg:mb-8">Here is an overview</h3>
