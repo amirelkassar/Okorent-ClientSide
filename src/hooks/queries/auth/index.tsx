@@ -30,9 +30,7 @@ export const useLogout = () => {
 export const initialQueryKey = "auth.login";
 
 export const useLoginMutation = () => {
-  const router = useRouter();
   const { setToken } = useToken();
-  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (data: any) => {

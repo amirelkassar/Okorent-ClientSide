@@ -1,6 +1,10 @@
 import { api } from "@/src/api/axios";
 import { notifications } from "@/src/api/user";
-import { useInfiniteQuery, UseInfiniteQueryResult } from "@tanstack/react-query";
+import {
+  useInfiniteQuery,
+  UseInfiniteQueryResult,
+} from "@tanstack/react-query";
+import { AxiosResponse } from "axios";
 
 export const initialQueryKey = "user.notifications";
 
@@ -17,12 +21,18 @@ export interface NotificationQueryParams {
   [key: string]: any; // Add any other query parameters if needed
 }
 
-export const getNotifications = async (queries: NotificationQueryParams): Promise<NotificationResponse> => {
-  const response = await api.get(notifications.list(queries));
+export const getNotifications = async (
+  queries: NotificationQueryParams
+): Promise<NotificationResponse> => {
+  const response = await api.get(notifications.base);
+  console.log(response.data);
   return response.data;
 };
 
-export const useNotifications = (): UseInfiniteQueryResult<NotificationResponse> => {
+export const useNotifications = (): UseInfiniteQueryResult<
+  NotificationResponse,
+  any
+> => {
   return useInfiniteQuery<NotificationResponse, Error>({
     queryKey: [initialQueryKey],
     queryFn: async ({ pageParam = 1 }) => {

@@ -21,7 +21,7 @@ function MenuProfile() {
   const { setToken } = useToken();
 
   const handleLogout = () => {
-    setToken(null); // Clear token from the state
+    setToken({}); // Clear token from the state
     clearToken(); // Clear token from storage
   };
 

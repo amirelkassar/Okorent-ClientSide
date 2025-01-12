@@ -1,7 +1,7 @@
 "use client";
 import FilterIcon from "@/src/assets/icons/filter";
 import { ColumnDef } from "@tanstack/react-table";
-import Image, { StaticImageData } from "next/image";
+import { StaticImageData } from "next/image";
 import CardStatus from "@/src/components/cardStatus";
 import avatar from "@/src/assets/images/avatar.png";
 import { getDate } from "@/src/lib/utils";
@@ -9,6 +9,7 @@ import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import ImgProduct from "@/src/components/img-product";
 import ActionMenuRent from "./action-menu-rent";
+import OrderStatus from "@/src/components/order-status";
 export type RequestsTableData = {
   id: number;
   name: string;
@@ -25,7 +26,7 @@ export type RequestsTableData = {
   productName: any;
   userImage: any;
   lessorId: any;
-  lessorName:any
+  lessorName: any;
 };
 
 export const columns: ColumnDef<RequestsTableData>[] = [
@@ -84,33 +85,8 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     header: "Status",
     cell: ({ getValue }) => {
       const status = getValue<string>();
-      switch (status.toString()) {
-        case "1":
-          return <CardStatus circle type="blue" title={"new"} />;
-        case "3":
-          return <CardStatus circle type="green" title={"Accepted"} />;
-        case "4":
-          return <CardStatus circle type="blue" title={"Out For Delivery"} />;
-        case "6":
-          return <CardStatus circle type="green" title={"Received"} />;
-        case "7":
-          return <CardStatus circle type="gray" title={"Returned"} />;
-        case "8":
-          return <CardStatus circle type="red" title={"Rejected"} />;
-        case "9":
-          return <CardStatus circle type="red" title={"Canceled"} />;
-        case "10":
-          return <CardStatus circle type="green" title={"Compeleted"} />;
-        case "11":
-          return (
-            <CardStatus circle type="gray" title={"Request for returned"} />
-          );
-        case "12":
-          return <CardStatus circle type="gray" title={"out for return"} />;
 
-        default:
-          return <CardStatus circle type="gray" title="--" />;
-      }
+      return <OrderStatus status={status} />;
     },
   },
   {

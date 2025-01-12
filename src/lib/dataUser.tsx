@@ -192,7 +192,6 @@ export const Rentals = [
   },
 ];
 
-
 export const ListingsData = [
   {
     id: 1,
@@ -761,121 +760,6 @@ export const TICKETS: Ticket[] = [
   },
 ];
 
-interface BookingsAdminData {
-  id: number;
-  renter: string;
-  lessor: string;
-  product: string;
-  startDate: string;
-  endingDate: string;
-  quantity: number;
-  status: string;
-  payment: string;
-  lessorImg: StaticImageData;
-  renterImg: StaticImageData;
-  productImg: StaticImageData;
-}
-
-export const BOOKINGS_ADMIN: BookingsAdminData[] = [
-  {
-    id: 1,
-    renter: "Ahmed Mohamed",
-    lessor: "Ahmed Ali",
-    product: "iPhone 15 Pro",
-    startDate: "3 August 2024",
-    endingDate: "3 August 2024",
-    quantity: 21,
-    status: "New",
-    payment: "100$",
-    lessorImg: avatar, // Link to user 1 image
-    renterImg: avatar, // Link to user 1 image
-    productImg: phoneImg, // Link to product image
-  },
-  {
-    id: 2,
-    renter: "Ahmed Mohamed",
-    lessor: "Ahmed Ali",
-    product: "iPhone 15 Pro",
-    startDate: "4 August 2024",
-    endingDate: "4 August 2024",
-    quantity: 2505,
-    status: "Out for delivery",
-    payment: "250$",
-    lessorImg: avatar, // Link to user 1 image
-    renterImg: avatar, // Link to user 1 image
-    productImg: phoneImg, // Link to product image
-  },
-  {
-    id: 3,
-    renter: "Ahmed Mohamed",
-    lessor: "Ahmed Ali",
-    product: "iPhone 15 Pro",
-    startDate: "5 August 2024",
-    endingDate: "5 August 2024",
-    quantity: 1005,
-    status: "Reserved",
-    payment: "100$",
-    lessorImg: avatar, // Link to user 1 image
-    renterImg: avatar, // Link to user 1 image
-    productImg: phoneImg, // Link to product image
-  },
-  {
-    id: 4,
-    renter: "Ahmed Mohamed",
-    lessor: "Ahmed Ali",
-    product: "iPhone 15 Pro",
-    startDate: "6 August 2024",
-    endingDate: "6 August 2024",
-    quantity: 1005,
-    status: "Ongoing",
-    payment: "100$",
-    lessorImg: avatar, // Link to user 1 image
-    renterImg: avatar, // Link to user 1 image
-    productImg: phoneImg, // Link to product image
-  },
-  {
-    id: 5,
-    renter: "Ahmed Mohamed",
-    lessor: "Ahmed Ali",
-    product: "iPhone 15 Pro",
-    startDate: "7 August 2024",
-    endingDate: "7 August 2024",
-    quantity: 1005,
-    status: "Rejected",
-    payment: "100$",
-    lessorImg: avatar, // Link to user 1 image
-    renterImg: avatar, // Link to user 1 image
-    productImg: phoneImg, // Link to product image
-  },
-  {
-    id: 6,
-    renter: "Ahmed Mohamed",
-    lessor: "Ahmed Ali",
-    product: "iPhone 15 Pro",
-    startDate: "8 August 2024",
-    endingDate: "8 August 2024",
-    quantity: 1005,
-    status: "Cancelled",
-    payment: "100$",
-    lessorImg: avatar, // Link to user 1 image
-    renterImg: avatar, // Link to user 1 image
-    productImg: phoneImg, // Link to product image
-  },
-  {
-    id: 7,
-    renter: "Ahmed Mohamed",
-    lessor: "Ahmed Ali",
-    product: "iPhone 15 Pro",
-    startDate: "9 August 2024",
-    endingDate: "9 August 2024",
-    quantity: 1005,
-    status: "Request for returned",
-    payment: "100$",
-    lessorImg: avatar, // Link to user 1 image
-    renterImg: avatar, // Link to user 1 image
-    productImg: phoneImg, // Link to product image
-  },
-];
 type MembershipsDataProps = {
   id: number;
   name: string;
@@ -1096,8 +980,6 @@ export const ChatsGroupData: ChatsDataProps[] = [
     image: avatar,
   },
 ];
-
-
 
 interface BannerProps {
   id: number;

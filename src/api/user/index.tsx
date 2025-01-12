@@ -98,6 +98,12 @@ export const admin = {
     delete: (id: any) => `/AdminUserReview/${id}`,
     Update: "/AdminUserReview",
   },
+  Bookings: {
+    base:(queries: any) => buildQuery("/AdminOrder", queries),
+    BookingID: (id: any) => `/AdminOrder/${id}`,
+    UpdateOrder: `/AdminOrder`,
+
+  },
 };
 
 export const notifications = {

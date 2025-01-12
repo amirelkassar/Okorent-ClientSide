@@ -1,49 +1,63 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { useQueryClient } from '@tanstack/react-query';
-import * as signalR from '@microsoft/signalr';
-import { Toast } from './toast';
-import { useToken } from '../hooks/use-token';
+import { useEffect } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import * as signalR from "@microsoft/signalr";
+import { Toast } from "./toast";
+import { useToken } from "../hooks/use-token";
 
 export const NotificationsHub = () => {
   const { token } = useToken();
+  const tokenValue = token?.token || ""; // Destructure `token` correctly
+  console.log(tokenValue);
 
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    let connection:any = null;
+    if (!tokenValue) {
+      console.warn(
+        "Token is not available. NotificationsHub will not connect."
+      );
+      return;
+    }
+
+    let connection: signalR.HubConnection | null = null;
     const audio = new Audio(
-      '/notification-received.mp3?v=' + new Date().getTime()
+      "/notification-received.mp3?v=" + new Date().getTime()
     );
 
     const connectSignalR = async () => {
+      console.log("Trying to connect");
+
       const HUB_URL = `${process.env.NEXT_PUBLIC_SIGNALR_HUB_URL}/notification`;
 
       connection = new signalR.HubConnectionBuilder()
-        .withUrl(HUB_URL, { accessTokenFactory: () => token })
+        .withUrl(HUB_URL, { accessTokenFactory: () => tokenValue })
         .configureLogging(signalR.LogLevel.None)
         .build();
 
-      connection.on('Receive', (message:any) => {
+      connection.on("Receive", (message: any) => {
         if (!message) return;
-        // return console.log(message);
+
+        // Play notification sound and show toast
         audio.play();
         Toast.Notification(message?.title);
+
+        // Refetch notifications query
         queryClient.refetchQueries({
-          queryKey: ['notfications'],
+          queryKey: ["notifications"],
         });
       });
 
       try {
         await connection.start();
-        // console.log('SignalR connected successfully!');
-      } catch {
-        // console.error('SignalR connection failed: ', error);
+        console.log("SignalR connected successfully!");
+      } catch (error) {
+        console.error("SignalR connection failed: ", error);
       }
 
       connection.onclose(() => {
-        console.warn('SignalR Notifications connection closed.');
+        console.warn("SignalR Notifications connection closed.");
       });
     };
 
@@ -51,8 +65,12 @@ export const NotificationsHub = () => {
 
     return () => {
       if (connection) {
-        connection.stop();
+        connection.stop().catch((err) => {
+          console.error("Error stopping SignalR connection:", err);
+        });
       }
     };
-  }, [token, queryClient]);
+  }, [tokenValue, queryClient]);
+
+  return null; // No UI is rendered
 };

@@ -37,7 +37,7 @@ export const decodedToken = async (token: string): Promise<DecodeResponse> => {
   }
 };
 
-export const authDecodedToken = async (): Promise<AuthResponse> => {
+export const authDecodedToken = async (): Promise<AuthResponse|any> => {
   try {
     const cookieStore = cookies();
     const token = cookieStore.get("accessToken")?.value;
@@ -51,6 +51,7 @@ export const authDecodedToken = async (): Promise<AuthResponse> => {
     }
 
     return {
+
       //userId: decodedToken.ClientId,
       userFirstName:
         decodedToken[
@@ -66,6 +67,7 @@ export const authDecodedToken = async (): Promise<AuthResponse> => {
         decodedToken[
         "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
         ],
+      token: token,
     };
   } catch {
     return null;

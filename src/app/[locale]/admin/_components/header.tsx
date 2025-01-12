@@ -27,7 +27,7 @@ const number = [
     icon: <RenewalsIcon />,
   },
   {
-    id: 3,
+    id: 4,
     title: "Monthly Earnings",
     number: "$1652",
     percentage: 65,

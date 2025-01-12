@@ -1,6 +1,6 @@
 import React from "react";
 import ImgProduct from "./img-product";
-import phoneImg from "@/src/assets/images/phone.png";
+import placTableProduct from "@/src/assets/images/placTableProduct.png";
 import RowCardPhone from "./row-card-phone";
 import { calculateDurationRange } from "../lib/utils";
 
@@ -13,7 +13,7 @@ function OrderCardPhone({ data }: { data: any }) {
       <div className="mb-7">
         <ImgProduct
           key={`product-img-${data.productId}`}
-          src={phoneImg}
+          src={data.heroImage || placTableProduct}
           productName={data.productName}
         />
       </div>
