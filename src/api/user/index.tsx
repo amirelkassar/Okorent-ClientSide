@@ -78,6 +78,8 @@ export const admin = {
     base: (queries: any) => buildQuery("/AdminManageUser", queries),
     AccountsID: (id: any) => `/AdminManageUser/${id}`,
     CreateAccounts: `/AdminManageUser`,
+    DeActivate: "/AdminManageUser/deactivate",
+    Activate: "/AdminManageUser/ReactivateUser",
   },
   product: {
     base: (queries: any) => buildQuery("/AdminProduct", queries),
@@ -99,10 +101,9 @@ export const admin = {
     Update: "/AdminUserReview",
   },
   Bookings: {
-    base:(queries: any) => buildQuery("/AdminOrder", queries),
+    base: (queries: any) => buildQuery("/AdminOrder", queries),
     BookingID: (id: any) => `/AdminOrder/${id}`,
     UpdateOrder: `/AdminOrder`,
-
   },
 };
 

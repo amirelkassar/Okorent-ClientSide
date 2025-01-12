@@ -1,9 +1,12 @@
 "use client";
 import ModalComp from "@/src/components/modal-comp";
 import { Radio, Textarea } from "@mantine/core";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import DateDeactivateModal from "./DateDeactivateModal";
 import Button from "@/src/components/button";
+import { Toast } from "@/src/components/toast";
+import { useDeActivateAccountInAdmin } from "@/src/hooks/queries/admin/account";
+import { getDate } from "@/src/lib/utils";
 const OptionAvailability = [
   {
     value: "permanently",
@@ -16,7 +19,33 @@ const OptionAvailability = [
 ];
 function DeactivateModal({ opened, close, id }: any) {
   console.log(id);
-  const [valueDeactivate, setValueDeactivate] = useState("");
+  const [valueDeactivate, setValueDeactivate] = useState("permanently");
+  const [duration, setDuration] = useState({
+    deactivationStart: "",
+    deactivationEnd: "",
+  });
+  console.log(duration);
+
+  const { mutateAsync: DeActivateAccount } = useDeActivateAccountInAdmin();
+
+  //DeActivate User
+  const onSubmitDeActivateAccount = useCallback(async () => {
+    const formData = {
+      userId: id,
+      isDeactivated: true,
+      isPermanentDeactivation: valueDeactivate === "permanently",
+      ...(valueDeactivate !== "permanently" && {
+        deactivationStart: getDate(duration.deactivationStart).fullYear,
+        deactivationEnd: getDate(duration.deactivationEnd).fullYear,
+      }),
+    };
+    Toast.Promise(DeActivateAccount(formData), {
+      success: "DeActivate Account Done",
+      onSuccess: async (res) => {
+        close();
+      },
+    });
+  }, [DeActivateAccount, id, valueDeactivate, duration, close]);
 
   return (
     <>
@@ -27,6 +56,9 @@ function DeactivateModal({ opened, close, id }: any) {
             defaultValue={"permanently"}
             onChange={(e) => {
               setValueDeactivate(e);
+              if (e === "permanently") {
+                setDuration({ deactivationStart: "", deactivationEnd: "" });
+              }
             }}
           >
             <div className="flex my-6 lgl:items-center gap-4 flex-col md:flex-row  lgl:gap-14 flex-wrap">
@@ -46,7 +78,12 @@ function DeactivateModal({ opened, close, id }: any) {
               })}
             </div>
           </Radio.Group>
-          {valueDeactivate === "specific" && <DateDeactivateModal />}
+          {valueDeactivate === "specific" && (
+            <DateDeactivateModal
+              duration={duration}
+              setDuration={setDuration}
+            />
+          )}
 
           <Textarea
             label={"Add note to be sent to the account"}
@@ -61,10 +98,20 @@ function DeactivateModal({ opened, close, id }: any) {
             className="w-full mb-4"
           />
           <div className="flex items-center gap-7 mt-10 w-full">
-            <Button  onClick={close} className={" flex-1 h-[54px] text-black bg-grayBack border-none"}>
+            <Button
+              onClick={close}
+              className={" flex-1 h-[54px] text-black bg-grayBack border-none"}
+            >
               Cancel
             </Button>
-            <Button onClick={close}  className={" flex-1 h-[54px]"}>Confirm</Button>
+            <Button
+              onClick={() => {
+                onSubmitDeActivateAccount();
+              }}
+              className={" flex-1 h-[54px]"}
+            >
+              Confirm
+            </Button>
           </div>
         </div>
       </ModalComp>

@@ -10,7 +10,6 @@ import RenderPackage from "../../_components/render-package";
 import avatarUser from "@/src/assets/images/avatar.png";
 import { getDate } from "@/src/lib/utils";
 
-
 export type MedicalTeamTableData = {
   id: number;
   name: string;
@@ -20,10 +19,10 @@ export type MedicalTeamTableData = {
   payment: number;
   rating: number;
   userImage: string;
-  isVerified: boolean;
+  status: boolean;
   created: string;
-  userName: string
-  totalProductsCount:any
+  userName: string;
+  totalProductsCount: any;
 };
 
 export const columns: ColumnDef<MedicalTeamTableData>[] = [
@@ -49,7 +48,7 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
           className="flex items-center gap-2"
         >
           <Image
-            src={img||avatarUser}
+            src={img || avatarUser}
             alt={name}
             width={50}
             height={50}
@@ -57,7 +56,9 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
           />
           <div>
             <h2 className="text-[16px] font-SemiBold">{name}</h2>
-            <p className="text-[14px] text-grayMedium">{getDate(created).fullYear}</p>
+            <p className="text-[14px] text-grayMedium">
+              {getDate(created).fullYear}
+            </p>
           </div>
         </Link>
       );
@@ -79,7 +80,7 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     },
     cell: ({ getValue }) => {
       const packageVal = getValue<string>();
-      return <RenderPackage packageVal={'packageVal'} />;
+      return <RenderPackage packageVal={"packageVal"} />;
     },
   },
   {
@@ -91,13 +92,17 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     },
   },
   {
-    accessorKey: "isVerified",
+    accessorKey: "status",
     header: "Status",
     cell: ({ getValue }) => {
-      const verified = getValue();
+      const status = getValue();
       return (
         <p className="text-[16px] font-SemiBold">
-          {verified ? "Verified" : "Un Verified"}
+          {status === 2
+            ? "Verified"
+            : status === 1
+            ? "Un Verified"
+            : "Deactivated"}
         </p>
       );
     },
@@ -119,10 +124,10 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     id: "actions",
     cell: ({ row }) => {
       const id = row.original.id;
-      const verified = row.original.isVerified;
+      const status = row.original.status;
       return (
         <div className="flex items-center gap-3 justify-end">
-          <ActionMenu id={id} status={verified} dataUSer={row.original} />
+          <ActionMenu id={id} status={status} dataUSer={row.original} />
         </div>
       );
     },
