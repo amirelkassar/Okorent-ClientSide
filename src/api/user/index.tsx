@@ -23,6 +23,7 @@ export const user = {
   information: {
     base: (id: any) => `/User/${id}`,
     user_edit: `/User`,
+    ProductsOrder: (id: any) => `/User/User-Order-Products/${id}`,
   },
   stock: {
     base: "/Stock",
@@ -62,6 +63,9 @@ export const user = {
   user: {
     getByID: (id: any) => `User/${id}`,
   },
+  MyProfile:{
+    base: "/MyProfile",
+  }
 };
 
 export const admin = {
@@ -85,6 +89,7 @@ export const admin = {
     base: (queries: any) => buildQuery("/AdminProduct", queries),
     getById: (id: any) => `/AdminProduct/${id}`,
     DeleteManyProducts: `/AdminProduct/Delete-Products`,
+    productUserOrder: (id: any) => `/AdminProduct/User-Order-Products/${id}`,
   },
   Stocks: {
     base: (id: any) => `/AdminUserStock/${id}`,

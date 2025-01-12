@@ -113,23 +113,20 @@ function ViewProfile({
               <span className="font-Bold">{data.name?.split(" ")[0]}</span>{" "}
             </h3>
             <div className="flex flex-col gap-5  mb-11">
-              {profileData.about.languagesSpoken ? (
-                <div className="flex items-center gap-3">
-                  <SpeakIcon className="min-w-5 lg:min-w-6 h-auto w-5 lg:w-6" />
-                  <p className="text-base lg:text-xl text-grayMedium font-Medium">
-                    Speaks{" "}
-                    {data?.languageNames[0]?.split(",").join(", ") || "--"}
-                  </p>
-                </div>
-              ) : null}
-             
-                <div className="flex items-center gap-3">
-                  <LangIcon className="min-w-5 lg:min-w-6 h-auto w-5 lg:w-6" />
-                  <p className="text-base lg:text-xl text-grayMedium font-Medium">
-                    Lives in {data?.city || '--'}
-                  </p>
-                </div>
-             
+              <div className="flex items-center gap-3">
+                <SpeakIcon className="min-w-5 lg:min-w-6 h-auto w-5 lg:w-6" />
+                <p className="text-base lg:text-xl text-grayMedium font-Medium">
+                  Speaks {data?.languageNames[0]?.split(",").join(", ") || "--"}
+                </p>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <LangIcon className="min-w-5 lg:min-w-6 h-auto w-5 lg:w-6" />
+                <p className="text-base lg:text-xl text-grayMedium font-Medium">
+                  Lives in {data?.city || "--"}
+                </p>
+              </div>
+
               {profileData.about.email ? (
                 <div className="flex items-center gap-3">
                   <GmailIcon className="min-w-5 lg:min-w-6 h-auto w-5 lg:w-6" />
