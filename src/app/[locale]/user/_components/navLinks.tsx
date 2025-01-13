@@ -85,7 +85,7 @@ function NavLinks() {
         id: 10,
         name: "Support",
         url: ROUTES.USER.SUPPORT,
-        active: path === ROUTES.USER.SUPPORT,
+        active: path === ROUTES.USER.SUPPORT||path === ROUTES.USER.SUPPORTHISTORY||path === ROUTES.USER.SUPPORTFAQ||path === ROUTES.USER.SUPPORTCONTACT,
       },
     ],
     [path]

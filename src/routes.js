@@ -60,7 +60,6 @@ const ROUTES = {
     WISHLIST: "/user/Wishlist",
     CALENDAR: "/user/Calendar",
     BILLING: "/user/Billing",
-    SUPPORT: "/user/Support",
     ADDLIST: "/user/add-list",
     PRODUCTDETAILS: (id) => `/user/product/${id}`,
     PRODUCTDETAILSCHECKOUT: (id) => `/user/product/${id}?checkout=true`,
@@ -71,6 +70,12 @@ const ROUTES = {
     WALLET: "/user/Wallet",
     ADS: "/user/Ads",
     ADSID: (id) => `/user/Ads/${id}`,
+    SUPPORT: "/user/Support",
+    SUPPORTHISTORY: "/user/Support/support-history",
+    SUPPORTFAQ: "/user/Support/Faq",
+    SUPPORTCONTACT: "/user/Support/Contact",
+
+
   },
   GUEST: {
     HOMEPAGE: "/",
