@@ -24,6 +24,7 @@ export type MedicalTeamTableData = {
   created: string;
   userName: string;
   totalProductsCount: any;
+  memberShipName:any
 };
 
 interface CardDataProps {
@@ -60,7 +61,7 @@ function CardPhoneAccount({ dataCard }: CardDataProps) {
         <RowCardPhone title="Email" info={dataCard.userName} />
         <RowCardPhone
           title="Package"
-          cell={() => <RenderPackage packageVal={dataCard.name} />}
+          cell={() => <RenderPackage packageVal={dataCard.memberShipName} />}
         />
         <RowCardPhone title="Payment" info={dataCard.totalProductsCount+' $'} />
         <RowCardPhone

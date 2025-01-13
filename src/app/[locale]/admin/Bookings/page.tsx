@@ -13,17 +13,20 @@ import { Pagination } from "@/src/components/pagination";
 import { FilterOptionsBooking } from "./_components/filter-data";
 import { useActionTableBookingInAdmin } from "./_hooks/use-action-table";
 import { GetOrdersInAdmin } from "@/src/hooks/queries/admin/booking";
+import { useSearchParams } from "next/navigation";
 
 function Page() {
+  const searchParams = useSearchParams();
   const [opened, { open, close }] = useDisclosure(false);
   const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
   const [opened3, { open: open3, close: close3 }] = useDisclosure(false);
-  const query = GetOrdersInAdmin();
-  const { functionSelectView, setSelectedFromTable } = useActionTableBookingInAdmin({
-    open,
-    open2,
-    open3,
-  });
+  const query = GetOrdersInAdmin(searchParams.toString());
+  const { functionSelectView, setSelectedFromTable } =
+    useActionTableBookingInAdmin({
+      open,
+      open2,
+      open3,
+    });
   const totalCount = query.data?.data?.totalCount || 0;
 
   return (

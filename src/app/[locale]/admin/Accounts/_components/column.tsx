@@ -23,6 +23,7 @@ export type MedicalTeamTableData = {
   created: string;
   userName: string;
   totalProductsCount: any;
+  memberShipName: any;
 };
 
 export const columns: ColumnDef<MedicalTeamTableData>[] = [
@@ -69,7 +70,7 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     header: "Email",
   },
   {
-    accessorKey: "created",
+    accessorKey: "memberShipName",
     header: () => {
       return (
         <div className="flex items-center gap-1 cursor-pointer">
@@ -80,7 +81,7 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     },
     cell: ({ getValue }) => {
       const packageVal = getValue<string>();
-      return <RenderPackage packageVal={"packageVal"} />;
+      return <RenderPackage packageVal={packageVal} />;
     },
   },
   {
