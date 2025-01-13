@@ -24,6 +24,10 @@ import BillingIcon from "@/src/assets/icons/Billing";
 import NotificationsIcon from "@/src/assets/icons/Notifications";
 import MembershipsIcon from "@/src/assets/icons/memberships";
 import MasterDataIcon from "@/src/assets/icons/masterData";
+import { clearToken } from "@/src/lib/token";
+import { useToken } from "@/src/hooks/use-token";
+import { Button } from "@mantine/core";
+import LinkGreen from "@/src/components/linkGreen";
 
 interface NavProps {
   linkLogo: string;
@@ -31,9 +35,14 @@ interface NavProps {
 function Nav({ linkLogo = "#" }: NavProps) {
   const path = usePathname();
   const params = useParams();
-  const router = useRouter();
   const locale = useLocale();
   const [showMenu, setShowMenu] = useState(false);
+  const { setToken } = useToken();
+
+  const handleLogout = () => {
+    setToken({}); // Clear token from the state
+    clearToken(); // Clear token from storage
+  };
 
   const isMobile = useMediaQuery("(max-width: 768px)");
   useEffect(() => {
@@ -165,6 +174,13 @@ function Nav({ linkLogo = "#" }: NavProps) {
           className="w-10 h-10 cursor-pointer duration-300 hover:shadow-lg rounded-[50%] bg-[#E5F1FB] p-2 relative flex items-center justify-center"
         >
           <LangIcon />
+        </Link>
+        <Link
+          href={ROUTES.GUEST.HOMEPAGE}
+          onClick={handleLogout}
+          className="w-10 h-10 cursor-pointer duration-300 hover:shadow-lg rounded-[50%] hover:bg-[#E5F1FB] bg-[#E5F1FB] p-2 relative flex items-center justify-center"
+        >
+          <LogOutMenuIcon fill="#0F2A43" />
         </Link>
       </div>
       <div
