@@ -6,15 +6,17 @@ function SwitchAvailable() {
   const { switchAvailable, setSwitchAvailable } = useSwitchAvailable();
 
   return (
-    <SwitchControl
-      options={[
-        { label: "Available", value: "Available" },
-        { label: "Vacation", value: "Vacation" },
-      ]}
-      onChange={(e) => {
-        setSwitchAvailable(e === "Available" ? "Available" : "Vacation");
-      }}
-    />
+    <div>
+      <SwitchControl
+        options={[
+          { label: "Available", value: "Available" },
+          { label: "Vacation", value: "Vacation" },
+        ]}
+        onChange={(e) => {
+          setSwitchAvailable(e === "Available" ? "Available" : "Vacation");
+        }}
+      />
+    </div>
   );
 }
 

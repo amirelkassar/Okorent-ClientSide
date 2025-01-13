@@ -68,12 +68,6 @@ function NavLinks() {
         active: path === ROUTES.ADMIN.INBOX,
       },
       {
-        id: 10,
-        name: "Reports",
-        url: ROUTES.ADMIN.REPORTS,
-        active: path === ROUTES.ADMIN.REPORTS,
-      },
-      {
         id: 11,
         name: "Memberships",
         url: ROUTES.ADMIN.MEMBERSHIPS,
