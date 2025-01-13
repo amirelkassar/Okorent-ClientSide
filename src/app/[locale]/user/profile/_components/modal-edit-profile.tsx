@@ -1,115 +1,244 @@
-import ClockIcon from '@/src/assets/icons/clock'
-import Button from '@/src/components/button'
-import Input from '@/src/components/input'
-import InputTextarea from '@/src/components/InputTextarea'
-import ModalComp from '@/src/components/modal-comp'
-import { MultiSelect } from '@mantine/core'
-import { TimeInput } from '@mantine/dates'
-import React from 'react'
+"use client";
+import ClockIcon from "@/src/assets/icons/clock";
+import Button from "@/src/components/button";
+import Input from "@/src/components/input";
+import InputTextarea from "@/src/components/InputTextarea";
+import ModalComp from "@/src/components/modal-comp";
+import SelectInput from "@/src/components/select-input";
+import { Toast } from "@/src/components/toast";
+import { useEditMyProfile } from "@/src/hooks/queries/user/my-profile";
+import { Language, WorkingDays } from "@/src/lib/dataUser";
+import { MultiSelect, ScrollArea } from "@mantine/core";
+import { TimeInput } from "@mantine/dates";
+import React, { useCallback, useState } from "react";
 
-function ModalEditProfile({opened,close,initialData}:{opened:boolean,close:()=>void,initialData:any}) {
+function ModalEditProfile({
+  opened,
+  close,
+  initialData,
+}: {
+  opened: boolean;
+  close: () => void;
+  initialData: any;
+}) {
+  const { mutateAsync: EditMyProfile } = useEditMyProfile();
   console.log(initialData);
-  
+  const [formState, setFormState] = useState({
+    id: initialData?.id || "",
+    Name: initialData?.name || "",
+    Email: initialData?.userName || "",
+    Country: initialData?.country || "",
+    City: initialData?.city || "",
+    PostalCode: initialData?.postalCode || "",
+    streetName: initialData?.streetName || "",
+    PhoneNumber:initialData?.phoneNumber || "",
+    Language: "en",
+    description: initialData?.description || "",
+    UserLanguages:
+      initialData?.languages.map((item: any) =>
+        item?.userLanguages?.toString()
+      ) || [],
+    address: initialData?.address || "",
+    workingFrom: initialData?.workingFrom || "",
+    workingTo: initialData?.workingTo || "",
+    activeFrom: initialData?.activeFrom?.toString() || "",
+    activeTo: initialData?.activeTo?.toString() || "",
+  });
+
+  const handleInputChange = (field: string, value: any) => {
+    setFormState((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  const onSubmitEditProfile = useCallback(async () => {
+    console.log("Form Data:", formState);
+
+    Toast.Promise(EditMyProfile(formState), {
+      success: "successfully Edit Profile",
+      onSuccess(res) {
+        close();
+      },
+    });
+  }, [EditMyProfile, formState, close]);
+
   return (
     <ModalComp opened={opened} close={close} title="Edit profile">
-    <form className="flex flex-col gap-4 w-[500px] max-w-full ">
-      <Input label="Name" placeholder="Name" defaultValue={initialData?.name} />
-      <Input label="Email" placeholder="Email" defaultValue={initialData?.userName} />
-      <Input label="Phone Number" placeholder="Phone Number" defaultValue={initialData?.phone} />
+      <div className="w-[500px] max-w-full">
+        <ScrollArea
+          h={600}
+          color="red"
+          classNames={{
+            scrollbar: "bg-grayMedium/15 rounded-2xl",
+            thumb: "bg-green",
+          }}
+        >
+          <form className="flex flex-col gap-4 max-w-[calc(100%-20px)] w-full pb-2  ">
+            <Input
+              label="Name"
+              placeholder="Name"
+              defaultValue={formState.Name}
+              onChange={(e) => handleInputChange("Name", e.target.value)}
+            />
+            <Input
+              label="Email"
+              placeholder="Email"
+              defaultValue={formState.Email}
+              onChange={(e) => handleInputChange("Email", e.target.value)}
+            />
+            <Input
+              label="Phone Number"
+              placeholder="Phone Number"
+              defaultValue={formState.PhoneNumber}
+              onChange={(e) =>
+                handleInputChange("PhoneNumber ", e.target.value)
+              }
+            />
 
-      <MultiSelect
-        label="Languages"
-        data={["English", "French"]}
-        defaultValue={initialData?.languages}
-        placeholder="Select Languages"
-        searchable
-        nothingFoundMessage="No results"
-        classNames={{
-          input: "bg-grayLight border-none h-11 rounded-[8px] ",
-          label: "text-[16px] mb-2 font-Medium ms-1",
-          inputField: " h-full placeholder:text-xs ",
-          pillsList: "h-full ",
-          pill: "bg-green text-white rounded-lg text-xs font-Regular",
-          dropdown:
-            "bg-white text-black rounded-lg border border-green/50 text-grayDark py-2",
-          option:
-            "hover:bg-green hover:text-white duration-300  flex items-center ",
-        }}
-        clearable
-      />
-      <div className="flex flex-col gap-4">
-        <p className="text-sm lg:text-base font-Medium mb-1">
-          Address information
-        </p>
-        <Input label="Street Name" placeholder="Street Name" defaultValue={initialData?.address} />
-        <Input label="Postal Code" placeholder="Postal Code" />
-      </div>
-      <div className="flex gap-7">
-        <Input label="Country" placeholder="Country" className="flex-1" />
-        <Input label="City" placeholder="City" className="flex-1" />
-      </div>
-      <InputTextarea
-        label="About"
-        placeholder="About"
-        inputClassName="min-h-[100px] bg-grayLight focus:bg-white"
-        autosize
-        className="h-auto !min-h-10 !mb-0"
-        defaultValue={initialData?.description||''}
-      />
-      <MultiSelect
-        label="Working Days"
-        data={["Saturday", "Friday"]}
-        placeholder="Select Working Days"
-        searchable
-        nothingFoundMessage="No results"
-        classNames={{
-          input: "bg-grayLight border-none h-11 rounded-[8px] ",
-          label: "text-[16px] mb-2 font-Medium ms-1",
-          inputField: " h-full placeholder:text-xs ",
-          pillsList: "h-full ",
-          pill: "bg-green text-white rounded-lg text-xs font-Regular",
-          dropdown:
-            "bg-white text-black rounded-lg border border-green/50 text-grayDark py-2",
-          option:
-            "hover:bg-green hover:text-white duration-300  flex items-center ",
-        }}
-        clearable
-      />
-      <div>
-        <p className="text-sm lg:text-base font-Medium mb-1">
-          Opining hours
-        </p>
-        <div className="flex items-center gap-4 w-full">
-          <TimeInput
-            leftSection={<ClockIcon className="w-4 h-4" />}
-            classNames={{
-              input: "bg-grayLight border-none w-full  ",
-              section: "text-grayMedium",
-            }}
-            className="w-full"
-          />
-          <TimeInput
-            leftSection={<ClockIcon className="w-4 h-4" />}
-            classNames={{
-              input: "bg-grayLight border-none w-full  ",
-              section: "text-grayMedium",
-            }}
-            className="w-full"
-          />
+            <MultiSelect
+              label="Languages"
+              data={Language}
+              defaultValue={formState.UserLanguages}
+              onChange={(value) => handleInputChange("UserLanguages", value)}
+              placeholder="Select Languages"
+              searchable
+              nothingFoundMessage="No results"
+              classNames={{
+                input: "bg-grayLight border-none h-11 rounded-[8px] ",
+                label: "text-[16px] mb-2 font-Medium ms-1",
+                inputField: " h-full placeholder:text-xs ",
+                pillsList: "h-full ",
+                pill: "bg-green text-white rounded-lg text-xs font-Regular",
+                dropdown:
+                  "bg-white text-black rounded-lg border border-green/50 text-grayDark py-2",
+                option:
+                  "hover:bg-green hover:text-white duration-300  flex items-center ",
+              }}
+              clearable
+            />
+            <div className="flex flex-col gap-4">
+              <p className="text-sm lg:text-base font-Medium mb-1">
+                Address information
+              </p>
+              <Input
+                label="Street Name"
+                placeholder="Street Name"
+                defaultValue={formState.streetName}
+                onChange={(e) =>
+                  handleInputChange("streetName", e.target.value)
+                }
+              />
+              <Input
+                label="Postal Code"
+                placeholder="Postal Code"
+                defaultValue={formState.PostalCode || ""}
+                onChange={(e) =>
+                  handleInputChange("PostalCode", e.target.value)
+                }
+              />
+            </div>
+            <div className="flex gap-4 mdl:gap-7 flex-wrap flex-col mdl:flex-row">
+              <Input
+                label="Country"
+                defaultValue={formState.Country}
+                placeholder="Country"
+                className="flex-1"
+                onChange={(e) => handleInputChange("Country", e.target.value)}
+              />
+              <Input
+                label="City"
+                defaultValue={formState.City}
+                placeholder="City"
+                className="flex-1"
+                onChange={(e) => handleInputChange("City", e.target.value)}
+              />
+            </div>
+            <InputTextarea
+              label="About"
+              placeholder="About"
+              inputClassName="min-h-[100px] bg-grayLight focus:bg-white"
+              autosize
+              className="h-auto !min-h-10 !mb-0"
+              defaultValue={formState.description}
+              onChange={(e) => handleInputChange("description", e.target.value)}
+            />
+            <div>
+              <p className="text-sm lg:text-base font-Medium mb-1">
+                Working Days
+              </p>
+              <div className="flex gap-4 flex-wrap flex-col mdl:flex-row ">
+                <SelectInput
+                  data={WorkingDays}
+                  label="From"
+                  placeholder="Select Working Days"
+                  onChange={(value) => handleInputChange("activeFrom", value)}
+                  inputClassName="bg-grayLight border-none !h-11 !min-h-11 rounded-[8px]  placeholder:!text-xs"
+                  className="h-auto flex-1"
+                  defaultValue={formState.activeFrom}
+                />
+                <SelectInput
+                  data={WorkingDays}
+                  label="To"
+                  placeholder="Select Working Days"
+                  onChange={(value) => handleInputChange("activeTo", value)}
+                  inputClassName="bg-grayLight border-none !h-11 !min-h-11 rounded-[8px]  placeholder:!text-xs"
+                  className="h-auto flex-1"
+                  defaultValue={formState.activeTo}
+                />
+              </div>
+            </div>
+
+            <div>
+              <p className="text-sm lg:text-base font-Medium mb-1">
+                Opining hours
+              </p>
+              <div className="flex mdl:items-center gap-4 w-full flex-col mdl:flex-row">
+                <TimeInput
+                  label="From"
+                  leftSection={<ClockIcon className="w-4 h-4" />}
+                  onChange={(value) =>
+                    handleInputChange("workingFrom", value.target.value)
+                  }
+                  defaultValue={formState.workingFrom}
+                  classNames={{
+                    input: "bg-grayLight border-none w-full h-11 rounded-xl ",
+                    section: "text-grayMedium",
+                  }}
+                  className="w-full"
+                />
+                <TimeInput
+                  label="To"
+                  leftSection={<ClockIcon className="w-4 h-4" />}
+                  onChange={(value) =>
+                    handleInputChange("workingTo", value.target.value)
+                  }
+                  defaultValue={formState.workingTo}
+                  classNames={{
+                    input: "bg-grayLight border-none w-full h-11 rounded-xl ",
+                    section: "text-grayMedium",
+                  }}
+                  className="w-full"
+                />
+              </div>
+            </div>
+          </form>
+        </ScrollArea>
+
+        <div className="flex items-center mt-5 justify-between w-full gap-6 ">
+          <Button
+            className={"bg-grayBack flex-1 border-none text-black"}
+            onClick={close}
+          >
+            Discard Edits
+          </Button>
+          <Button className={"flex-1"} onClick={onSubmitEditProfile}>
+            Confirm
+          </Button>
         </div>
       </div>
-    </form>
-    <div className="flex items-center mt-11 justify-between w-full gap-6 pb-7">
-      <Button
-        className={"bg-grayBack flex-1 border-none text-black"}
-        onClick={close}
-      >
-        Discard Edits
-      </Button>
-      <Button className={"flex-1"}>Confirm</Button>
-    </div>
-  </ModalComp>
-  )
+    </ModalComp>
+  );
 }
 
-export default ModalEditProfile
+export default ModalEditProfile;

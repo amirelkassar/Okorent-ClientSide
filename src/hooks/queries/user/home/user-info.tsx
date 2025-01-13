@@ -6,7 +6,6 @@ import { decodedToken } from "@/token";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const initialQueryKey = "user.information";
-export const initialQueryKeyMyProfile = "MyProfile";
 export const initialQueryKeyProductOrder = "user.information.ProductsOrder";
 
 //get user information
@@ -51,17 +50,6 @@ export const GetUserProductsOrderByID = (id: any) => {
     queryKey: [initialQueryKeyProductOrder, id],
     queryFn: async () => {
       const response = await api.get(user.information.ProductsOrder(id));
-      return response.data;
-    },
-  });
-};
-
-//get user information
-export const GetMyProfile = () => {
-  return useQuery({
-    queryKey: [initialQueryKeyMyProfile],
-    queryFn: async () => {
-      const response = await api.get(user.MyProfile.base);
       return response.data;
     },
   });

@@ -7,7 +7,7 @@ function Missing({ title }: PropsMissing) {
   return (
     <div className="flex items-center gap-3">
       <MissingIcon />
-      <p className="text-base lg:text-xl text-green">{title}</p>
+      <p className="text-base lg:text-lg text-green">{title}</p>
     </div>
   );
 }

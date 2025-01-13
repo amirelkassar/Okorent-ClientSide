@@ -9,20 +9,24 @@ import DiscardIcon from "@/src/assets/icons/Discard";
 import { blobUrlToFile, getCroppedImg } from "@/src/lib/utils";
 import VerifyBlackIcon from "@/src/assets/icons/verifyBlack";
 import CameraIcon from "@/src/assets/icons/camera";
+import { useEditImageMyProfile } from "@/src/hooks/queries/user/my-profile";
+import { Toast } from "@/src/components/toast";
 interface Props {
   image: StaticImageData | string;
 }
 function UploadAndCropImg({ image }: Props) {
+  //Hooks
   const [formData, setFormData] = useState<any>({});
   const [opened, { open, close }] = useDisclosure(false);
   const [openedChanges, { open: openChanges, close: closeChanges }] =
     useDisclosure(false);
-
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [crop, setCrop] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [zoom, setZoom] = useState<number>(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
-
+  //Query
+  const { mutateAsync: EditImage } = useEditImageMyProfile();
+  //Functions
   const onCropComplete = useCallback(
     (croppedArea: Area, croppedAreaPixels: Area) => {
       setCroppedAreaPixels(croppedAreaPixels);
@@ -35,7 +39,7 @@ function UploadAndCropImg({ image }: Props) {
         blobUrl,
         formData.Name || "user" + ".png"
       ).then((file) => file);
-
+      onSubmitEditImageProfile(file);
       setFormData((prevData: any) => ({
         ...prevData,
         ProfileImageFile: file,
@@ -52,13 +56,14 @@ function UploadAndCropImg({ image }: Props) {
       open();
     }
   };
+
+  
   const onCrop = useCallback(async () => {
     if (!imageSrc || !croppedAreaPixels) return;
 
     try {
       const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels);
       handleProfileImageChange(croppedImage);
-      close();
     } catch (e) {
       console.error(e);
     }
@@ -69,8 +74,17 @@ function UploadAndCropImg({ image }: Props) {
     setZoom(1);
     setCrop({ x: 0, y: 0 });
   };
-  console.log(formData);
-
+  const onSubmitEditImageProfile = useCallback(
+    async (image: any) => {
+      Toast.Promise(EditImage({ ProfileImageFile: image }), {
+        success: "successfully Edit Profile",
+        onSuccess(res) {
+          close();
+        },
+      });
+    },
+    [EditImage, close]
+  );
   return (
     <div>
       <div className=" size-[100px] md:size-[156px] relative rounded-full mx-auto mb-5 border-2 border-white shadow-md ">
@@ -78,11 +92,7 @@ function UploadAndCropImg({ image }: Props) {
           <VerifyBlackIcon className="w-full h-auto" />
         </div>
         <Image
-          src={
-            formData?.ProfileImageFile
-              ? URL.createObjectURL(formData?.ProfileImageFile)
-              : image
-          }
+          src={image}
           alt={"profileData.name"}
           width={236}
           height={195}

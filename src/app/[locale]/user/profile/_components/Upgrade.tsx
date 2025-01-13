@@ -1,9 +1,10 @@
 import ArrowWhiteIcon from "@/src/assets/icons/arrowWhite";
 import TrueGreenIcon from "@/src/assets/icons/trueGreen";
-import Button from "@/src/components/button";
 import React from "react";
 import backUpgrade from "@/src/assets/images/backUpgrade.png";
 import TwoLineIcon from "@/src/assets/icons/twoLine";
+import LinkGreen from "@/src/components/linkGreen";
+import ROUTES from "@/src/routes";
 const UpgradeData = [
   {
     id: 1,
@@ -57,10 +58,10 @@ function Upgrade() {
           );
         })}
       </ul>
-      <Button className={" gap-2 mx-auto"}>
+      <LinkGreen href={ROUTES.USER.SUBSCRIPTION} className={" gap-2 w-fit mx-auto"}>
         <p className="text-white">Upgrade now</p>
         <ArrowWhiteIcon />
-      </Button>
+      </LinkGreen>
     </div>
   );
 }

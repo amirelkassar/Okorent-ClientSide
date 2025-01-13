@@ -116,7 +116,7 @@ function ViewProfile({
               <div className="flex items-center gap-3">
                 <SpeakIcon className="min-w-5 lg:min-w-6 h-auto w-5 lg:w-6" />
                 <p className="text-base lg:text-xl text-grayMedium font-Medium">
-                  Speaks {data?.languageNames[0]?.split(",").join(", ") || "--"}
+                  Speaks {data?.languageNames?.join(", ") || "--"}
                 </p>
               </div>
 

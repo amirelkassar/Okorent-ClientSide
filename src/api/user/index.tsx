@@ -63,9 +63,11 @@ export const user = {
   user: {
     getByID: (id: any) => `User/${id}`,
   },
-  MyProfile:{
+  MyProfile: {
     base: "/MyProfile",
-  }
+    reviews: `/MyProfile/Reviews About Me`,
+    ImageUpdate: "/MyProfile/Image",
+  },
 };
 
 export const admin = {

@@ -38,7 +38,7 @@ function ProfileDetails({ initialData }: { initialData: any }) {
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
-    <div className="bg-white/50 flex-1 md:flex-row flex-col min-w-[530ox] xxl:min-w-[800px] flex gap-7 pt-6 pb-9 lg:pb-12  px-8 rounded-2xl border border-green/80 shadow-md">
+    <div className="bg-white/50 flex-1 md:flex-row flex-col min-w-[530ox] xxl:min-w-[800px] flex gap-5 pt-6 pb-9 lg:pb-12  px-6 rounded-2xl border border-green/80 shadow-md">
       <div className="md:min-w-[200px]">
         <UploadAndCropImg image={initialData.userImage || profileData.image} />
         <p className="flex items-center gap-1 text-center mx-auto justify-center mb-1 md:mb-4 text-sm  md:text-base text-green">
@@ -67,7 +67,9 @@ function ProfileDetails({ initialData }: { initialData: any }) {
             <div className=" flex items-center gap-5">
               <div className="flex items-center gap-1 pe-4 border-e border-green">
                 <StarIcon />
-                <p className="text-base lg:text-xl">{initialData.rating || 0}</p>
+                <p className="text-base lg:text-xl">
+                  {initialData.rating || 0}
+                </p>
               </div>
               <div className="flex items-end gap-1">
                 <h4 className="text-base lg:text-xl">
@@ -87,8 +89,7 @@ function ProfileDetails({ initialData }: { initialData: any }) {
                 <div className="flex items-center gap-3">
                   <SpeakIcon className="min-w-5 lg:min-w-6 h-auto w-5 lg:w-6" />
                   <p className="text-base lg:text-xl text-grayMedium font-Medium">
-                    Speaks{" "}
-                    {initialData?.languageNames[0]?.split(",").join(", ") || "--"}
+                    Speaks {initialData?.languageNames?.join(", ") || "--"}
                   </p>
                 </div>
               ) : (
@@ -116,12 +117,12 @@ function ProfileDetails({ initialData }: { initialData: any }) {
               )}
             </div>
             <div className="flex flex-col gap-5">
-              {profileData.verify.verifiedPhoneNumber ? (
+              {initialData?.phoneNumberVerified ? (
                 <Verify title="Verified Phone number" />
               ) : (
                 <Missing title="Click to verify your Phone number!" />
               )}
-              {profileData.verify.verifiedEmail ? (
+              {initialData?.emailVerified ? (
                 <Verify title="Verified Email" />
               ) : (
                 <Missing title="Click to verify your Email!" />
@@ -137,7 +138,11 @@ function ProfileDetails({ initialData }: { initialData: any }) {
           <p>Edit profile</p>
         </Button>
       </div>
-      <ModalEditProfile opened={opened} close={close} initialData={initialData} />
+      <ModalEditProfile
+        opened={opened}
+        close={close}
+        initialData={initialData}
+      />
     </div>
   );
 }

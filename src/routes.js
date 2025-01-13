@@ -25,6 +25,7 @@ const ROUTES = {
     RENTERS: "/admin/Renters",
     BOOKINGS: "/admin/Bookings",
     BOOKINGSDETAILS: (id) => `/admin/Bookings/${id}`,
+  INVOICES: "/admin/Invoices",
     RESERVATIONS: "/admin/Reservations",
     REPORTS: "/admin/Reports",
     MEMBERSHIPS: "/admin/Memberships",

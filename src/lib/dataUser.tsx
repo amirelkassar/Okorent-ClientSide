@@ -1109,3 +1109,60 @@ export const AdsData: AdsDataProps[] = [
     status: "Activate",
   },
 ];
+interface LanguageProps {
+  label: string;
+  value: string;
+}
+export const Language: LanguageProps[] = [
+  {
+    label: "English",
+    value: "1",
+  },
+  {
+    label: "German",
+    value: "2",
+  },
+  {
+    label: "French",
+    value: "3",
+  },
+  {
+    label: "Spanish",
+    value: "4",
+  },
+];
+
+interface WorkingDaysProps {
+  label: string;
+  value: string;
+}
+export const WorkingDays: WorkingDaysProps[] = [
+  {
+    label: "Sunday",
+    value: "0",
+  },
+  {
+    label: "Monday",
+    value: "1",
+  },
+  {
+    label: "Tuesday",
+    value: "2",
+  },
+  {
+    label: "Wednesday",
+    value: "3",
+  },
+  {
+    label: "Thursday",
+    value: "4",
+  },
+  {
+    label: "Friday",
+    value: "5",
+  },
+  {
+    label: "Saturday",
+    value: "6",
+  },
+];
