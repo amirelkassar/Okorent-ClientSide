@@ -39,14 +39,14 @@ function SwitchPagesSupport() {
             : pathname === ROUTES.USER.SUPPORTFAQ
             ? "FAQ"
             : pathname === ROUTES.USER.SUPPORTCONTACT
-            ? "Contact "
+            ? "Contact"
             : null
         }
       >
         <Tabs.List>
           <Tabs.Tab value="Support">Support</Tabs.Tab>
           <Tabs.Tab value="FAQ">FAQ</Tabs.Tab>
-          <Tabs.Tab value="Contact ">Contact </Tabs.Tab>
+          <Tabs.Tab value="Contact">Contact </Tabs.Tab>
         </Tabs.List>
       </Tabs>
     </div>

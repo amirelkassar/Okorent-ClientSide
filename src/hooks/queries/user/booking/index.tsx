@@ -317,7 +317,7 @@ export const GetQrCodeOrder = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        responseType: "blob",
+         responseType: "blob",
       });
       return response;
     },
