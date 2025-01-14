@@ -33,7 +33,8 @@ function SwitchPagesSupport() {
           tab: "border-2 h-9 rounded-xl border-solid data-[active]:border-[#a9c788] px-2 md:px-6  border-transparent duration-500  hover:border-green",
         }}
         value={
-          pathname === ROUTES.USER.SUPPORT
+          pathname === ROUTES.USER.SUPPORT ||
+          pathname === ROUTES.USER.SUPPORTHISTORY
             ? "Support"
             : pathname === ROUTES.USER.SUPPORTFAQ
             ? "FAQ"
