@@ -119,10 +119,9 @@ p {
 }
 .swiperListBooking:not(:first-of-type) .linkView {
   display: none;
-  
 }
 .swiperListBooking:first-of-type .headBooking {
-  @apply  lg:items-center;
+  @apply lg:items-center;
 }
 .inputChat {
   display: flex;
@@ -326,4 +325,11 @@ li.search::before {
 
 .Toastify__toast-icon {
   margin-right: 12px;
+}
+
+.AccordionFAQ
+  .mantine-Accordion-item[data-active]
+  .mantine-Accordion-chevron
+  svg {
+  color: white;
 }
