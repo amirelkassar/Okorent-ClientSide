@@ -15,7 +15,17 @@ export const GetAccounts = (queries: any) => {
     },
   });
 };
-
+// Get New Subscriptions
+export const GetNewSubscriptions = () => {
+  const queryClient = useQueryClient();
+  return useQuery({
+    queryKey: [initialQueryKey, "filter=New"],
+    queryFn: async () => {
+      const response = await api.get(admin.Accounts.base("filter=New"));
+      return response.data;
+    },
+  });
+};
 //get Account ByID
 export const GetAccountInAdminByID = (id: any) => {
   return useQuery({
