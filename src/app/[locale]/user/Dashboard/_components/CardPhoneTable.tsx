@@ -1,25 +1,12 @@
-'use client';
+"use client";
 import React from "react";
 import Image from "next/image";
 import phoneImg from "@/src/assets/images/phone.png";
-import CardStatus from "@/src/components/cardStatus";
 import avatar from "@/src/assets/images/1.png";
 import MenuActions from "./MenuActions";
+import PaymentStatus from "@/src/components/payment-status";
 
-function CardPhoneTable({dataCard}:any) {
-
-  const GetStatusPayment = (paymentStatus: string) => {
-    switch (paymentStatus.toLowerCase()) {
-      case "completed":
-        return <CardStatus circle type="blue" title={paymentStatus} />;
-      case "canceled":
-        return <CardStatus circle type="red" title={paymentStatus} />;
-      case "pending":
-        return <CardStatus circle type="green" title={paymentStatus} />;
-      default:
-        return <CardStatus circle type="gray" title="--" />;
-    }
-  };
+function CardPhoneTable({ dataCard }: any) {
   return (
     <div className="border border-green rounded-2xl py-5 px-6 shadow-md bg-white/50">
       <div className="border-b border-grayBack pb-6 mb-4">
@@ -64,7 +51,7 @@ function CardPhoneTable({dataCard}:any) {
               <li className="flex items-center justify-between gap-3">
                 <h5 className="text-base font-SemiBold">Payment Status</h5>
                 <div className="text-base text-grayMedium">
-                  {GetStatusPayment("Pending")}
+                  <PaymentStatus status={"1"} />
                 </div>
               </li>
             </ul>

@@ -10,6 +10,7 @@ import ROUTES from "@/src/routes";
 import ImgProduct from "@/src/components/img-product";
 import ActionMenuRent from "./action-menu-rent";
 import OrderStatus from "@/src/components/order-status";
+import PaymentStatus from "@/src/components/payment-status";
 export type RequestsTableData = {
   id: number;
   name: string;
@@ -102,18 +103,7 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     header: "Payment Status",
     cell: ({ getValue }) => {
       const paymentStatus = getValue<string>();
-      switch (paymentStatus.toString()) {
-        case "6":
-          return <CardStatus circle type="green" title={"Pending"} />;
-        case "7":
-          return <CardStatus circle type="blue" title={"Completed"} />;
-        case "8":
-          return <CardStatus circle type="red" title={"Refunded"} />;
-        case "2":
-          return <CardStatus circle type="gray" title={"Partial Payment"} />;
-        default:
-          return <CardStatus type="gray" title="--" />;
-      }
+      return <PaymentStatus status={paymentStatus} />;
     },
   },
   {

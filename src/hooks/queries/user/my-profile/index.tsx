@@ -4,6 +4,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const initialQueryKeyMyProfile = "MyProfile";
 export const initialQueryKeyMyProfileReviews = "MyProfile.Reviews";
+export const initialQueryKeyRecentActivitiesOrders =
+  "MyProfile.RecentActivitiesOrders";
 
 //get user information
 export const GetMyProfile = () => {
@@ -58,7 +60,7 @@ export const useEditImageMyProfile = () => {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-      });  
+      });
       return response.data;
     },
     onSuccess: (res) => {
@@ -67,6 +69,17 @@ export const useEditImageMyProfile = () => {
     },
     onError: (err) => {
       console.log(err);
+    },
+  });
+};
+
+//get My Recent Activities
+export const GetRecentActivitiesOrders = () => {
+  return useQuery({
+    queryKey: [initialQueryKeyRecentActivitiesOrders],
+    queryFn: async () => {
+      const response = await api.get(user.MyProfile.RecentActivities);
+      return response.data;
     },
   });
 };

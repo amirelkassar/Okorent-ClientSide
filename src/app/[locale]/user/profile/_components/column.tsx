@@ -2,35 +2,35 @@
 
 import DeleteIcon from "@/src/assets/icons/delete";
 import EditIcon from "@/src/assets/icons/edit";
-import StarIcon from "@/src/assets/icons/star";
 import CardStatus from "@/src/components/cardStatus";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import { ActionIcon } from "@mantine/core";
 import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
-
+import placholderImg from "@/src/assets/images/placTableProduct.png";
+import PaymentStatus from "@/src/components/payment-status";
 
 export type MedicalTeamTableData = {
   id: number;
-  product: string;
-  productType: string;
-  userType: string;
+  productName: string;
+  categoryName: string;
+  activityType: string;
   user: string;
   paymentStatus: string;
-  payment: number;
-  img: any;
+  price: number;
+  heroImage: any;
   quantity: number;
 };
 
 export const columns: ColumnDef<MedicalTeamTableData>[] = [
   {
-    accessorKey: "product",
+    accessorKey: "productName",
     header: "Product",
     cell: ({ getValue, row }) => {
-      const name = getValue<string>();
-      const img = row.original.img;
-      const type = row.original.productType;
+      const productName = getValue<string>();
+      const heroImage = row.original.heroImage;
+      const categoryName = row.original.categoryName;
       const id = row.original.id;
 
       return (
@@ -40,16 +40,19 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
         >
           <div className="bg-grayBack rounded-[50%] size-[50px] p-1 flex items-center justify-center">
             <Image
-              src={img}
-              alt={name}
+              src={heroImage || placholderImg}
+              alt={productName}
+              width={50}
+              height={50}
               priority
-              className="w-auto h-full  object-contain"
+              className="w-full h-full rounded-full  object-cover object-center"
             />
           </div>
-
           <div>
-            <h2 className="text-[16px] font-SemiBold">{name}</h2>
-            <p className="text-grayMedium font-Regular text-[14px]">{type}</p>
+            <h2 className="text-[16px] font-SemiBold">{productName}</h2>
+            <p className="text-grayMedium font-Regular text-[14px]">
+              {categoryName}
+            </p>
           </div>
         </Link>
       );
@@ -57,15 +60,15 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
   },
 
   {
-    accessorKey: "userType",
+    accessorKey: "activityType",
     header: "Activitie Type",
     cell: ({ getValue }) => {
-      const userType = getValue<string>();
-      switch (userType.toLowerCase()) {
-        case "rentout":
-          return <CardStatus animation circle type="green" title={userType} />;
-        case "rent":
-          return <CardStatus circle type="blue" title={userType} />;
+      const activityType = getValue<string>();
+      switch (activityType.toString().toLowerCase()) {
+        case "1":
+          return <CardStatus animation circle type="green" title={"Rent"} />;
+        case "2":
+          return <CardStatus circle type="blue" title={"Rent Out"} />;
         default:
           return <CardStatus circle type="gray" title="--" />;
       }
@@ -76,34 +79,30 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     header: "Quantity",
   },
   {
-    accessorKey: "user",
+    accessorKey: "name",
     header: "User",
     cell: ({ getValue }) => {
       const user = getValue<string>();
-      return <p className={`text-[16px]  text-grayMedium `}>{user}</p>;
+      return (
+        <p className={`text-[16px]  text-grayMedium `}>{user || "User"}</p>
+      );
     },
   },
   {
-    accessorKey: "payment",
+    accessorKey: "price",
     header: "Payment",
+    cell: ({ getValue }) => {
+      const price = getValue<number>();
+      return <p className={`text-[16px]  text-grayMedium `}>{price}$</p>;
+    },
   },
   {
     accessorKey: "paymentStatus",
     header: "Payment Status",
     cell: ({ getValue }) => {
       const paymentStatus = getValue<string>();
-      switch (paymentStatus.toLowerCase()) {
-        case "pending":
-          return (
-            <CardStatus animation circle type="green" title={paymentStatus} />
-          );
-        case "canceled":
-          return <CardStatus circle type="red" title={paymentStatus} />;
-        case "completed":
-          return <CardStatus circle type="blue" title={paymentStatus} />;
-        default:
-          return <CardStatus circle type="gray" title="--" />;
-      }
+
+      return <PaymentStatus status={paymentStatus} />;
     },
   },
 

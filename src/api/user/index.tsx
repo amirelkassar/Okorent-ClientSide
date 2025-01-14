@@ -67,6 +67,7 @@ export const user = {
     base: "/MyProfile",
     reviews: `/MyProfile/Reviews About Me`,
     ImageUpdate: "/MyProfile/Image",
+    RecentActivities: "/MyProfile/My Recent Activities",
   },
 };
 

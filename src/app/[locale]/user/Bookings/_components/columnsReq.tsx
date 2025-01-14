@@ -9,6 +9,7 @@ import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import ImgProduct from "@/src/components/img-product";
 import ActionMenuRentOut from "./action-menu-rent-out";
+import PaymentStatus from "@/src/components/payment-status";
 export type RequestsTableData = {
   id: number;
   renterName: string;
@@ -152,18 +153,7 @@ export const columnsReq: ColumnDef<RequestsTableData>[] = [
     header: "Payment Status",
     cell: ({ getValue }) => {
       const paymentStatus = getValue<string>();
-      switch (paymentStatus.toString()) {
-        case "6":
-          return <CardStatus circle type="green" title={"Pending"} />;
-        case "7":
-          return <CardStatus circle type="blue" title={"Completed"} />;
-        case "8":
-          return <CardStatus circle type="red" title={"Refunded"} />;
-        case "2":
-          return <CardStatus circle type="gray" title={"Partial Payment"} />;
-        default:
-          return <CardStatus type="gray" title="--" />;
-      }
+      return <PaymentStatus status={paymentStatus} />;
     },
   },
   {

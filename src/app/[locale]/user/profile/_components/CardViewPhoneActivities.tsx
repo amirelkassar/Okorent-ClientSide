@@ -8,49 +8,38 @@ import DotsIcon from "@/src/assets/icons/dots";
 import EditIcon from "@/src/assets/icons/edit";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
+import placholderImg from "@/src/assets/images/placTableProduct.png";
+import PaymentStatus from "@/src/components/payment-status";
 
 interface PhoneProps {
   id: number;
-  product: string;
-  productType: string;
-  userType: string;
+  productName: string;
+  categoryName: string;
+  activityType: string;
   user: string;
   paymentStatus: string;
-  payment: number;
-  img: any;
+  price: number;
+  heroImage: any;
   quantity: number;
 }
 interface CardDataProps {
   dataCard?: PhoneProps;
 }
 function CardViewPhoneActivities({ dataCard }: CardDataProps) {
-  const getRent = (userType:string) => {
-    switch (userType.toLowerCase()) {
-      case "rentout":
-        return <CardStatus animation circle type="green" title={userType} />;
-      case "rent":
-        return <CardStatus circle type="blue" title={userType} />;
+  const getRent = (userType: string) => {
+    switch (userType?.toString().toLowerCase()) {
+      case "1":
+        return <CardStatus animation circle type="green" title={"Rent"} />;
+      case "2":
+        return <CardStatus circle type="blue" title={"Rent Out"} />;
       default:
         return <CardStatus circle type="gray" title="--" />;
     }
   };
-  const getStatus = (paymentStatus:string) => {
-    switch (paymentStatus.toLowerCase()) {
-      case "pending":
-        return (
-          <CardStatus animation circle type="green" title={paymentStatus} />
-        );
-      case "canceled":
-        return <CardStatus circle type="red" title={paymentStatus} />;
-      case "completed":
-        return <CardStatus circle type="blue" title={paymentStatus} />;
-      default:
-        return <CardStatus circle type="gray" title="--" />;
-    }
-  };
+
   return dataCard ? (
     <>
-      <div className="px-8 pt-5 relative pb-7 rounded-3xl border border-green shadow-md bg-white/50 w-full">
+      <div className="px-4 pt-4 relative pb-7 rounded-3xl border border-green shadow-md bg-white/50 w-full">
         <div className="absolute top-5 end-5">
           <Popover width={110} position="bottom-end" shadow="md">
             <Popover.Target>
@@ -83,15 +72,15 @@ function CardViewPhoneActivities({ dataCard }: CardDataProps) {
         <div className="flex items-start  gap-5 pb-6 border-b border-grayLight">
           <div className="bg-grayBack size-[58px] min-w-[58px] rounded-full p-1 flex items-center justify-center">
             <Image
-              src={dataCard.img}
+              src={dataCard.heroImage || placholderImg}
               alt="phone"
-              width={20}
-              height={40}
-              className="h-full w-auto object-contain"
+              width={50}
+              height={50}
+              className="w-full h-full rounded-full  object-cover object-center"
             />
           </div>
           <div className="flex flex-col gap-2 w-full">
-            <h3 className="text-base font-SemiBold">{dataCard.product}</h3>
+            <h3 className="text-base font-SemiBold">{dataCard.productName}</h3>
             <div className="flex items-center justify-between gap-4">
               <h4 className="text-base font-SemiBold">Quantity</h4>
               <p className="text-base text-grayMedium">{dataCard.quantity}</p>
@@ -102,18 +91,18 @@ function CardViewPhoneActivities({ dataCard }: CardDataProps) {
             </div>
             <div className="flex items-center justify-between gap-4">
               <h4 className="text-base font-SemiBold">payment</h4>
-              <p className="text-base text-grayMedium">$ {dataCard.payment}</p>
+              <p className="text-base text-grayMedium">$ {dataCard.price}</p>
             </div>
             <div className="flex items-center justify-between gap-4">
               <h4 className="text-base font-SemiBold">Activitie type</h4>
-              {getRent(dataCard.userType)}
+              {getRent(dataCard.activityType)}
             </div>
           </div>
         </div>
         <div className="mt-5">
           <div className="flex items-center justify-between gap-4">
             <h4 className="text-base font-medium">Payment Status</h4>
-            {getStatus(dataCard.paymentStatus)}
+            <PaymentStatus status={dataCard?.paymentStatus} />
           </div>
         </div>
       </div>
