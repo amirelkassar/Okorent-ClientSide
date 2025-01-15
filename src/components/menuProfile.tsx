@@ -20,6 +20,7 @@ import { DatePicker } from "@mantine/dates";
 import { useDisclosure } from "@mantine/hooks";
 import Button from "./button";
 import ModalVacation from "./modal-vacation";
+import LocationIcon from "../assets/icons/location";
 function MenuProfile() {
   const [openMenu, setOpened] = useState(false);
   const locale = useLocale();
@@ -91,10 +92,15 @@ function MenuProfile() {
             </Link>
           </Menu.Item>
           <Menu.Item
-            leftSection={<SettingsIcon />}
+            leftSection={<LocationIcon fill="#0F2A43" className="w-3 h-auto" />}
             className=" hover:bg-green/15 py-0 h-[30px] px-1 text-[14px] font-SemiBold rounded-lg"
           >
-            Settings
+            <Link
+              className="flex-1 w-full  block"
+              href={ROUTES.USER.WAREHOUSES}
+            >
+              Warehouses
+            </Link>
           </Menu.Item>
           <Menu.Item
             onClick={handleLogout}

@@ -74,6 +74,7 @@ const ROUTES = {
     SUPPORTHISTORY: "/user/Support/support-history",
     SUPPORTFAQ: "/user/Support/Faq",
     SUPPORTCONTACT: "/user/Support/Contact",
+    WAREHOUSES: "/user/Warehouses",
 
 
   },
