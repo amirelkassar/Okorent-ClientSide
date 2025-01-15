@@ -11,26 +11,7 @@ import ModalComp from "@/src/components/modal-comp";
 import GoogleMapLoc from "@/src/components/GoogleMap";
 import { useDisclosure } from "@mantine/hooks";
 import CardPhoneWarehouse from "./_components/card-phone-warehouse";
-const LocationData = [
-  {
-    id: 1,
-    name: "New York Location 1",
-    address: "New York Location 1",
-    status: true,
-  },
-  {
-    id: 2,
-    name: "New York Location 2",
-    address: "New York Location 2",
-    status: false,
-  },
-  {
-    id: 3,
-    name: "New York Location 3",
-    address: "New York Location 3",
-    status: true,
-  },
-];
+
 
 function Page() {
   const query = GetMyStock();

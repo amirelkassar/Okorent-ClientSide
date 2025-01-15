@@ -72,6 +72,9 @@ export const user = {
 };
 
 export const admin = {
+  Home:{
+    DashboardCount: "/AdminDashBoard/Get Users Overview",
+  },
   Category: {
     base: "/Category",
     Category_ID: (id: any) => `/Category/${id}`,
