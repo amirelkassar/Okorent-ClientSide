@@ -1,6 +1,6 @@
 import { api } from "@/src/api/axios";
 import { admin } from "@/src/api/user";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export const initialQueryKey = "DashboardCount";
 

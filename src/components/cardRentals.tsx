@@ -82,9 +82,6 @@ function CardRentals({ data, Fav = false, edit = false }: CardRentalsProps) {
               <h6 className="text-[10px] md:text-[12px] font-Medium text-black/80 line-clamp-2 min-h-9 place-content-center">
                 {data.address || data.location || "--"}
               </h6>
-              {/* <p className="text-[10px] md:text-[12px] font-Light  text-black/60">
-                {data.locationDetails}
-              </p> */}
             </div>
           </div>
         </Link>

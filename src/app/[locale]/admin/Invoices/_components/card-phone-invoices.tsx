@@ -18,8 +18,8 @@ interface InvoicesAdminData {
   productName: string;
   productImage: StaticImageData;
   startDate: string;
-  endingDate: string;
-  payment: string;
+  endDate: string;
+  price: string;
 }
 interface CardDataProps {
   dataCard: InvoicesAdminData;
@@ -82,9 +82,9 @@ function CardPhoneInvoices({ dataCard }: CardDataProps) {
         </div>
         <div className="flex flex-col gap-3 w-full ">
           <RowCardPhone title={dataCard.productName} />
-          <RowCardPhone title="Payment" info={`${dataCard.payment}`} />
+          <RowCardPhone title="Payment" info={`${dataCard.price}`} />
           <RowCardPhone title="Start date" info={dataCard.startDate} />
-          <RowCardPhone title="End date" info={dataCard.endingDate} />
+          <RowCardPhone title="End date" info={dataCard.endDate} />
         </div>
       </div>
     </CardPhone>

@@ -116,6 +116,9 @@ export const admin = {
     BookingID: (id: any) => `/AdminOrder/${id}`,
     UpdateOrder: `/AdminOrder`,
   },
+  Invoices:{
+    base: (queries: any) => buildQuery("/AdminManageInvoices/GetAllInvoices", queries),
+  }
 };
 
 export const notifications = {

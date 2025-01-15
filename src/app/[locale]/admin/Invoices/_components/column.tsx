@@ -1,12 +1,9 @@
 "use client";
-
 import { ColumnDef } from "@tanstack/react-table";
 import { StaticImageData } from "next/image";
 import ActionMenu from "./action-menu";
-import { getDate } from "@/src/lib/utils";
 import ImgProduct from "@/src/components/img-product";
 import avatar from "@/src/assets/images/avatar.png";
-import OrderStatus from "@/src/components/order-status";
 
 interface RentalData {
   id: any;
@@ -18,13 +15,17 @@ interface RentalData {
   productName: string;
   productImage: StaticImageData;
   startDate: string;
-  endingDate: string;
-  payment: string;
+  endDate: string;
+  price: string;
 }
 export const columns: ColumnDef<RentalData>[] = [
   {
-    accessorKey: "invoiceNo",
+    accessorKey: "id",
     header: "Invoice No",
+    cell: ({ getValue }) => {
+      const id = getValue<string>();
+      return <p className=" text-[16px]">#{id.split("").slice(0,6).join("")}</p>;
+    }
   },
   {
     accessorKey: "lessorName",
@@ -37,7 +38,7 @@ export const columns: ColumnDef<RentalData>[] = [
   },
   {
     accessorKey: "renterName",
-    header: "Lessor",
+    header: "Renter",
     cell: ({ getValue, row }) => {
       const lessor = getValue<string>();
       const renterImage = row.original.renterImage;
@@ -62,7 +63,7 @@ export const columns: ColumnDef<RentalData>[] = [
     },
   },
   {
-    accessorKey: "endingDate",
+    accessorKey: "endDate",
     header: "Ending Date",
     cell: ({ getValue }) => {
       const to = getValue<string>();
@@ -72,11 +73,11 @@ export const columns: ColumnDef<RentalData>[] = [
   },
 
   {
-    accessorKey: "payment",
+    accessorKey: "price",
     header: "Payment",
     cell: ({ getValue }) => {
       const amount = getValue<number>();
-      return <p className=" text-[16px] font-SemiBold">{amount}</p>;
+      return <p className=" text-[16px] font-SemiBold">{amount}$</p>;
     },
   },
   {
