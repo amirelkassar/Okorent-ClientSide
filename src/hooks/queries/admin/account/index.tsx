@@ -1,21 +1,31 @@
-'use client'
+"use client";
 import { api } from "@/src/api/axios";
 import { admin } from "@/src/api/user";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 export const initialQueryKey = "Accounts";
 
 // Get Accounts
-export const GetAccounts = (queries:any) => {
+export const GetAccounts = (queries: any) => {
   const queryClient = useQueryClient();
   return useQuery({
-    queryKey: [initialQueryKey,queries],
+    queryKey: [initialQueryKey, queries],
     queryFn: async () => {
       const response = await api.get(admin.Accounts.base(queries));
       return response.data;
     },
   });
 };
-
+// Get New Subscriptions
+export const GetNewSubscriptions = () => {
+  const queryClient = useQueryClient();
+  return useQuery({
+    queryKey: [initialQueryKey, "filter=New"],
+    queryFn: async () => {
+      const response = await api.get(admin.Accounts.base("filter=New"));
+      return response.data;
+    },
+  });
+};
 //get Account ByID
 export const GetAccountInAdminByID = (id: any) => {
   return useQuery({
@@ -36,7 +46,7 @@ export const useDeleteAccountInAdmin = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.refetchQueries([initialQueryKey]);
       console.log(res);
     },
     onError: (res) => {
@@ -64,8 +74,6 @@ export const useCreateAccountInAdmin = () => {
   });
 };
 
-
-
 // Edit Account
 export const useEditAccountInAdmin = () => {
   const queryClient = useQueryClient();
@@ -85,4 +93,60 @@ export const useEditAccountInAdmin = () => {
   });
 };
 
+// DeActivate Account In Admin
+export const useDeActivateAccountInAdmin = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.put(admin.Accounts.DeActivate, data, {});
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKey]);
+    },
+    onError: () => {},
+  });
+};
 
+// Activate Account In Admin
+export const useActivateAccountInAdmin = (id: any) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async () => {
+      const response = await api.post(
+        admin.Accounts.Activate,
+        {
+          userId: id,
+        },
+        {}
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKey]);
+    },
+    onError: () => {},
+  });
+};
+
+//Delete Many Account In Admin
+export const useDeleteManyAccountInAdmin = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.delete(admin.Accounts.DeleteManyAccounts, {
+        data: data,
+      });
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.refetchQueries([initialQueryKey]);
+      console.log(res);
+    },
+    onError: (res) => {
+      queryClient.refetchQueries([initialQueryKey]);
+
+      console.log(res);
+    },
+  });
+};

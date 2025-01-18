@@ -16,6 +16,7 @@ interface CardRentalsProps {
 }
 function CardRentals({ data, Fav = false, edit = false }: CardRentalsProps) {
   const pathName = usePathname();
+
   return (
     <div className="w-full flex-1 sml:flex-none max-w-[270px] min-w-[200px] block">
       <div className=" w-full p-2 lg:p-4 bg-white/80 rounded-3xl  border border-black/25 duration-200 hover:shadow-md">
@@ -24,6 +25,8 @@ function CardRentals({ data, Fav = false, edit = false }: CardRentalsProps) {
             href={
               pathName.includes("/user")
                 ? ROUTES.USER.PRODUCTDETAILS(data.id)
+                : pathName.includes(ROUTES.ADMIN.DASHBOARD)
+                ? ROUTES.ADMIN.LISTINGSDETAILS(data.id)
                 : ROUTES.GUEST.PRODUCTSDETAILS(data.id)
             }
           >
@@ -45,6 +48,8 @@ function CardRentals({ data, Fav = false, edit = false }: CardRentalsProps) {
           href={
             pathName.includes("/user")
               ? ROUTES.USER.PRODUCTDETAILS(data.id)
+              : pathName.includes(ROUTES.ADMIN.DASHBOARD)
+              ? ROUTES.ADMIN.LISTINGSDETAILS(data.id)
               : ROUTES.GUEST.PRODUCTSDETAILS(data.id)
           }
         >
@@ -77,9 +82,6 @@ function CardRentals({ data, Fav = false, edit = false }: CardRentalsProps) {
               <h6 className="text-[10px] md:text-[12px] font-Medium text-black/80 line-clamp-2 min-h-9 place-content-center">
                 {data.address || data.location || "--"}
               </h6>
-              {/* <p className="text-[10px] md:text-[12px] font-Light  text-black/60">
-                {data.locationDetails}
-              </p> */}
             </div>
           </div>
         </Link>

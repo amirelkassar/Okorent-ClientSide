@@ -138,7 +138,7 @@ function StepLocation({
           <p>Add location</p>
         </Button>
 
-        <ModalComp title="Add a variation" opened={opened} close={close}>
+        <ModalComp title="Add  location" opened={opened} close={close}>
           <GoogleMapLoc
             close={close}
             index={indexSelect}

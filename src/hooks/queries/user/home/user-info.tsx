@@ -5,12 +5,13 @@ import { useRouter } from "@/src/navigation";
 import { decodedToken } from "@/token";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-export const initialQueryKey = "auth.login";
+export const initialQueryKey = "user.information";
+export const initialQueryKeyProductOrder = "user.information.ProductsOrder";
 
 //get user information
 export const GetUserInfo = (id: any) => {
   return useQuery({
-    queryKey: [initialQueryKey],
+    queryKey: [initialQueryKey, id],
     queryFn: async () => {
       const response = await api.get(user.information.base(id));
       return response.data;
@@ -40,5 +41,16 @@ export const useUserEditMutation = (token: any) => {
       );
     },
     onError: () => {},
+  });
+};
+
+//get User Order Products ByID
+export const GetUserProductsOrderByID = (id: any) => {
+  return useQuery({
+    queryKey: [initialQueryKeyProductOrder, id],
+    queryFn: async () => {
+      const response = await api.get(user.information.ProductsOrder(id));
+      return response.data;
+    },
   });
 };

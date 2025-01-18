@@ -56,16 +56,16 @@ function NavLinks() {
           path === ROUTES.ADMIN.BOOKINGSDETAILS(params.bookingsId),
       },
       {
+        id: 8,
+        name: "Invoices",
+        url: ROUTES.ADMIN.INVOICES,
+        active: path === ROUTES.ADMIN.INVOICES,
+      },
+      {
         id: 9,
         name: "Inbox",
         url: ROUTES.ADMIN.INBOX,
         active: path === ROUTES.ADMIN.INBOX,
-      },
-      {
-        id: 10,
-        name: "Reports",
-        url: ROUTES.ADMIN.REPORTS,
-        active: path === ROUTES.ADMIN.REPORTS,
       },
       {
         id: 11,

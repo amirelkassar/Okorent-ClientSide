@@ -20,6 +20,7 @@ export type MedicalTeamTableData = {
   status: boolean;
   dailyPrice: number;
   address: string;
+  categoryName: string;
 };
 interface CardDataProps {
   dataCard: MedicalTeamTableData;
@@ -33,7 +34,7 @@ function CardPhoneAccount({ dataCard }: CardDataProps) {
           <ActionMenu id={dataCard?.id} />
         </div>
         <Link
-          href={ROUTES.ADMIN.ACCOUNTSDETAILS(dataCard.id)}
+         href={ROUTES.ADMIN.LISTINGSDETAILS(dataCard.id)}
           className="flex items-center w-fit gap-2"
         >
           <ImgProduct
@@ -54,7 +55,7 @@ function CardPhoneAccount({ dataCard }: CardDataProps) {
           <RowCardPhone title={dataCard.creatorName} />
 
           <RowCardPhone title="Rental Price" info={dataCard.dailyPrice} />
-          <RowCardPhone title="Category" info={dataCard.category} />
+          <RowCardPhone title="Category" info={dataCard.categoryName} />
           <RowCardPhone
             title="Status"
             cell={() => <RenderStatus status={dataCard.status} />}
@@ -62,11 +63,9 @@ function CardPhoneAccount({ dataCard }: CardDataProps) {
           <RowCardPhone
             title="Stock Location"
             cell={() => (
-              <div className="flex-1">
-                <p className=" text-sm md:text-base font-Medium text-grayMedium max-w-full  truncate">
-                  {dataCard.address}
-                </p>
-              </div>
+              <p className=" text-sm md:text-base font-Medium text-grayMedium max-w-full  truncate">
+                {dataCard.address}
+              </p>
             )}
           />
         </div>

@@ -11,17 +11,17 @@ function SelectLocation() {
 
   return (
     <>
-      <div className="flex items-center justify-center gap-2 " onClick={open}>
-        <div className=" min-h-10  px-3 rounded-xl flex items-center border cursor-pointer border-transparent gap-1 lg:gap-3 bg-blue/10 duration-300 hover:border-blue hover:shadow-sidebar">
+      <div className="flex items-center md:justify-center gap-2 " onClick={open}>
+        <div className=" min-h-10  px-3 rounded-xl flex-1 flex items-center border cursor-pointer border-transparent gap-1 lg:gap-3 bg-blue/10 duration-300 hover:border-blue hover:shadow-sidebar">
           <LocationIcon fill="#006AFF" />
-          <h3 className="text-blue text-sm h-fit lg:text-[16px]">
+          <h3 className="text-blue text-xs lg:text-[16px] h-fit ">
             {location || "Select Location"}
           </h3>
         </div>
         {location && (
           <p
             onClick={open}
-            className="text-green cursor-pointer text-base font-Regular"
+            className="text-green cursor-pointer text-xs md:text-base font-Regular"
           >
             (Change)
           </p>

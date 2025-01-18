@@ -52,13 +52,13 @@ function SearchLocDate({ guest = false }: { guest?: boolean }) {
       >
         <LinkGreen
           href={generateUrl()}
-          className="h-full w-[78px] rounded-e-xl border-[3px] bg-green border-[#a9c788] hover:border-green duration-500 flex items-center justify-center"
+          className="h-full w-12 mdl:w-[78px] rounded-e-xl border-[3px] bg-green border-[#a9c788] hover:border-green duration-500 flex items-center justify-center"
         >
-          <SearchIcon className={"w-[26px] h-auto"} />
+          <SearchIcon className={" w-4 mdl:w-[26px] h-auto"} />
         </LinkGreen>
       </SearchItem>
 
-      <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 lg:gap-5 mt-7 mb-6 lg:mb-10">
+      <div className="flex flex-wrap flex-col md:flex-row md:items-center md:justify-center lg:justify-start gap-2 lg:gap-5 mt-5 mdl:mt-7 mb-6 lg:mb-10">
         <SelectLocation />
         <SelectDate setAvailableFromAndToParams={setAvailableFromAndToParams} />
       </div>

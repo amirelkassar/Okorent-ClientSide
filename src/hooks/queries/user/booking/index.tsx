@@ -33,20 +33,20 @@ export const GetMyOrderAll = (queries?: any) => {
   });
 };
 //getMyAllProducts
-export const GetMyOrderAllByList = (number?: any) => {
+export const GetMyOrderAllByList = (number?: number) => {
   return useQuery({
     queryKey: ["myOrders", number],
     queryFn: async () => {
       const response = await api.get(
-        user.order.booking.i_rent(
-          `OrderType=myorders&PageSize=5&OrderStatus=${number}`
-        )
+        user.order.booking.i_rent(`OrderType=myorders&PageSize=5&OrderStatus=${number}`)
       );
       return response.data;
     },
-    enabled: !!number, // Prevent the query from running if `number` is not provided
-    staleTime: 300000, // Cache data for 5 minutes
-    retry: 2, // Retry failed requests up to 2 times
+    enabled: !!number, // Only run if `number` is valid
+    staleTime: Infinity, // Cache data indefinitely
+    refetchOnWindowFocus: false, // Do not refetch when the window regains focus
+    refetchOnMount: false, // Do not refetch when the component remounts
+    retry: 0, // Do not retry failed requests
   });
 };
 //getProductByID
@@ -317,7 +317,7 @@ export const GetQrCodeOrder = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        responseType: "blob",
+         responseType: "blob",
       });
       return response;
     },

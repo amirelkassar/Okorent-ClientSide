@@ -23,6 +23,7 @@ export const user = {
   information: {
     base: (id: any) => `/User/${id}`,
     user_edit: `/User`,
+    ProductsOrder: (id: any) => `/User/User-Order-Products/${id}`,
   },
   stock: {
     base: "/Stock",
@@ -62,9 +63,18 @@ export const user = {
   user: {
     getByID: (id: any) => `User/${id}`,
   },
+  MyProfile: {
+    base: "/MyProfile",
+    reviews: `/MyProfile/Reviews About Me`,
+    ImageUpdate: "/MyProfile/Image",
+    RecentActivities: "/MyProfile/My Recent Activities",
+  },
 };
 
 export const admin = {
+  Home: {
+    DashboardCount: "/AdminDashBoard/Get Users Overview",
+  },
   Category: {
     base: "/Category",
     Category_ID: (id: any) => `/Category/${id}`,
@@ -78,11 +88,15 @@ export const admin = {
     base: (queries: any) => buildQuery("/AdminManageUser", queries),
     AccountsID: (id: any) => `/AdminManageUser/${id}`,
     CreateAccounts: `/AdminManageUser`,
+    DeActivate: "/AdminManageUser/deactivate",
+    Activate: "/AdminManageUser/ReactivateUser",
+    DeleteManyAccounts: "/AdminManageUser/DeleteUsers",
   },
   product: {
     base: (queries: any) => buildQuery("/AdminProduct", queries),
     getById: (id: any) => `/AdminProduct/${id}`,
     DeleteManyProducts: `/AdminProduct/Delete-Products`,
+    productUserOrder: (id: any) => `/AdminProduct/User-Order-Products/${id}`,
   },
   Stocks: {
     base: (id: any) => `/AdminUserStock/${id}`,
@@ -97,6 +111,16 @@ export const admin = {
     base: (id: any) => `/AdminUserReview/${id}`,
     delete: (id: any) => `/AdminUserReview/${id}`,
     Update: "/AdminUserReview",
+  },
+  Bookings: {
+    base: (queries: any) => buildQuery("/AdminOrder", queries),
+    BookingID: (id: any) => `/AdminOrder/${id}`,
+    UpdateOrder: `/AdminOrder`,
+    DeleteManyOrders: "/AdminOrder/DeleteOrders",
+  },
+  Invoices: {
+    base: (queries: any) =>
+      buildQuery("/AdminManageInvoices/GetAllInvoices", queries),
   },
 };
 

@@ -6,11 +6,14 @@ import EmpoweringImg from "@/src/assets/images/Empowering.png";
 import { QueryWrapper } from "@/src/components/query-wrapper";
 import LoadingProductsRow from "@/src/components/product/loading-products-row";
 import ProductList from "@/src/components/product/productList";
-import { GetProductsAll } from "@/src/hooks/queries/user/home";
+import { GetUserProductsOrderInAdminByID } from "@/src/hooks/queries/admin/lisiting";
 
 function AccountDetailsView({ accountId = "" }: { accountId?: string }) {
   const query = GetAccountInAdminByID(accountId);
-  const { data: ProductsData, isLoading, isFetching } = GetProductsAll("");
+  const { data: ProductsData, isLoading } =
+    GetUserProductsOrderInAdminByID(accountId);
+  console.log(ProductsData);
+
   return (
     <div>
       <QueryWrapper query={query}>
@@ -34,9 +37,8 @@ function AccountDetailsView({ accountId = "" }: { accountId?: string }) {
                 ) : (
                   <ProductList
                     title={`${data.name.split(" ")[0]} Rentals`}
-                    data={ProductsData?.data?.items || []}
+                    data={ProductsData?.data || []}
                     more={false}
-                    
                   />
                 )}
               </div>

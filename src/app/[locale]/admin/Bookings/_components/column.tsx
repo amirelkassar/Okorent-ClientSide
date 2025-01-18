@@ -2,99 +2,88 @@
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import { ColumnDef } from "@tanstack/react-table";
-import Image, { StaticImageData } from "next/image";
-import RenderStatus from "./render-status";
+import  { StaticImageData } from "next/image";
 import ActionMenu from "./action-menu";
+import { getDate } from "@/src/lib/utils";
+import ImgProduct from "@/src/components/img-product";
+import avatar from "@/src/assets/images/avatar.png";
+import OrderStatus from "@/src/components/order-status";
 
 interface BookingsAdminData {
   id: number;
-  renter: string;
-  lessor: string;
-  product: string;
-  startDate: string;
-  endingDate: string;
+  renterName: string;
+  lessorName: string;
+  productName: string;
+  from: string;
+  to: string;
   quantity: number;
   status: string;
-  payment: string;
-  lessorImg: StaticImageData;
-  renterImg: StaticImageData;
-  productImg: StaticImageData;
+  amount: string;
+  lessorImage: StaticImageData;
+  renterImage: StaticImageData;
+  productImage: StaticImageData;
 }
 export const columns: ColumnDef<BookingsAdminData>[] = [
   {
-    accessorKey: "renter",
+    accessorKey: "renterName",
     header: "Renter",
     cell: ({ getValue, row }) => {
       const renter = getValue<string>();
-      const renterImg = row.original.renterImg;
+      const renterImage = row.original.renterImage;
       const id = row.original.id;
       return (
         <Link
           href={ROUTES.ADMIN.BOOKINGSDETAILS(id)}
           className="flex items-center gap-2"
         >
-          <Image
-            src={renterImg}
-            alt={renter}
-            width={50}
-            height={50}
-            className="w-12 h-12 rounded-[50%] object-cover object-top"
-          />
-          <h2 className="text-[16px] font-SemiBold">{renter}</h2>
+          <ImgProduct productName={renter} src={renterImage || avatar} />
         </Link>
       );
     },
   },
   {
-    accessorKey: "lessor",
+    accessorKey: "lessorName",
     header: "Lessor",
     cell: ({ getValue, row }) => {
       const lessor = getValue<string>();
-      const lessorImg = row.original.lessorImg;
+      const lessorImage = row.original.lessorImage;
 
-      return (
-        <div className="flex items-center gap-2">
-          <Image
-            src={lessorImg}
-            alt={lessor}
-            width={50}
-            height={50}
-            className="w-12 h-12 rounded-[50%] object-cover object-top"
-          />
-          <h2 className="text-[16px] font-SemiBold">{lessor}</h2>
-        </div>
-      );
+      return <ImgProduct productName={lessor} src={lessorImage || avatar} />;
     },
   },
   {
-    accessorKey: "product",
+    accessorKey: "productName",
     header: "Product",
     cell: ({ getValue, row }) => {
-      const product = getValue<string>();
-      const productImg = row.original.productImg;
+      const productName = getValue<string>();
+      const productImage = row.original.productImage;
+      return <ImgProduct productName={productName} src={productImage} />;
+    },
+  },
+  {
+    accessorKey: "from",
+    header: "Start Date",
+    cell: ({ getValue }) => {
+      const from = getValue<string>();
       return (
-        <div className="flex items-center gap-2">
-          <div className="size-[50px] rounded-[50%] p-[6px] bg-grayBack flex justify-center items-center">
-            <Image
-              src={productImg}
-              alt={product}
-              width={50}
-              height={50}
-              className="w-auto h-full  object-contain "
-            />
-          </div>
-          <h2 className="text-[16px] font-SemiBold">{product}</h2>
-        </div>
+        <p className="text-grayMedium text-[16px]">
+          {getDate(from).fullYearWithMonthName}
+        </p>
       );
     },
   },
   {
-    accessorKey: "startDate",
-    header: "Start Date",
-  },
-  {
-    accessorKey: "endingDate",
+    accessorKey: "to",
     header: "Ending Date",
+    cell: ({ getValue }) => {
+      const to = getValue<string>();
+
+      return (
+        <p className="text-grayMedium text-[16px]">
+          {getDate(to).fullYearWithMonthName}
+        </p>
+      );
+    },
   },
   {
     accessorKey: "quantity",
@@ -103,14 +92,19 @@ export const columns: ColumnDef<BookingsAdminData>[] = [
   {
     accessorKey: "status",
     header: "Status",
-    cell({ getValue }) {
+    cell: ({ getValue }) => {
       const status = getValue<string>();
-      return <RenderStatus status={status} />;
+
+      return <OrderStatus status={status} />;
     },
   },
   {
-    accessorKey: "payment",
+    accessorKey: "amount",
     header: "Payment",
+    cell: ({ getValue }) => {
+      const amount = getValue<number>();
+      return <p className=" text-[16px] font-SemiBold">{amount}$</p>;
+    },
   },
   {
     id: "actions",

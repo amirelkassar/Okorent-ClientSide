@@ -30,9 +30,7 @@ export const useLogout = () => {
 export const initialQueryKey = "auth.login";
 
 export const useLoginMutation = () => {
-  const router = useRouter();
   const { setToken } = useToken();
-  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (data: any) => {
@@ -115,5 +113,31 @@ export const useReSendOTP = () => {
     onError: (req) => {
       console.log(req);
     },
+  });
+};
+
+export const useForgetPassword = () => {
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.post(auth.forgot_password.base, data);
+      return response.data;
+    },
+    onSuccess: async (res) => {
+      console.log(res);
+    },
+    onError: () => {},
+  });
+};
+
+export const useResetPassword = () => {
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.post(auth.reset_password.base, data);
+      return response.data;
+    },
+    onSuccess: async (res) => {
+      console.log(res);
+    },
+    onError: () => {},
   });
 };

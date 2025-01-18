@@ -94,9 +94,9 @@ function FormFeatures() {
   return (
     <>
       {featureGroups.map((group) => (
-        <Card key={group.id} className="flex-1 p-6 min-w-[50%] max-w-[50%]">
+        <Card key={group.id} className="flex-1 p-6 min-w-full mdl:min-w-[50%] max-w-[50%]">
           <div className="flex justify-between flex-col h-full">
-            <div className="flex items-center gap-4 mb-5 ">
+            <div className="flex md:items-center flex-col md:flex-row gap-4 mb-5 ">
               {" "}
               <h3>{group.title}</h3>
               <Input

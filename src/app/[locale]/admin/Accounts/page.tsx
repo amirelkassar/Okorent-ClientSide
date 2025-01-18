@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { columns } from "./_components/column";
 import { DataTable } from "@/src/components/data-table";
 import CardPhoneAccount from "./_components/card-phone-account";

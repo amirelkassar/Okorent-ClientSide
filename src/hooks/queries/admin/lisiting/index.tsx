@@ -11,6 +11,7 @@ import {
 } from "@tanstack/react-query";
 
 export const initialQueryKey = "admin_products";
+export const initialQueryKeyUser = "admin_products_user";
 export const initialQueryKeyStock = "admin_stock";
 
 //get All Products
@@ -137,7 +138,7 @@ export const useCreateStockInAdmin = (id: any) => {
 export const useEditStockInAdmin = (id: any) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: any,) => {
+    mutationFn: async (data: any) => {
       const response = await api.put(admin.Stocks.base(data?.id), data, {});
       return response.data;
     },
@@ -148,6 +149,17 @@ export const useEditStockInAdmin = (id: any) => {
     },
     onError: (res) => {
       console.log(res);
+    },
+  });
+};
+
+//get User Order Products ByID
+export const GetUserProductsOrderInAdminByID = (id: any) => {
+  return useQuery({
+    queryKey: [initialQueryKeyUser, id],
+    queryFn: async () => {
+      const response = await api.get(admin.product.productUserOrder(id));
+      return response.data;
     },
   });
 };

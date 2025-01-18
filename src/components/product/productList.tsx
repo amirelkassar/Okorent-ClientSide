@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import Button from "@/src/components/button";
 import CardRentals from "@/src/components/cardRentals";
 import { StaticImageData } from "next/image";
@@ -25,6 +25,7 @@ function ProductList({ link, title, data, more = true }: ProductListProps) {
     "PageSize",
     parseAsInteger.withDefault(10)
   );
+  if (data.length === 0) return null;
   return (
     <div className="mb-11">
       {title && (

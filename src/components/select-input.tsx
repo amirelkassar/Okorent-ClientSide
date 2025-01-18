@@ -29,6 +29,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
         label: `text-black mb-2 text-xs lg:text-base ${labelClassName}`,
         dropdown: `bg-white text-black rounded-xl border border-green/50 text-grayDark py-2`,
         option: `hover:bg-green hover:text-white duration-300`,
+      
       }}
       className={`   duration-200 mdl:min-h-[64px] h-auto  rounded-2xl  text-grayMedium ${className}`}
       {...props}

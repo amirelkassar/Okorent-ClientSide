@@ -28,7 +28,7 @@ function ActionMenu({ id }: { id: any }) {
       action: open2,
     },
     {
-      label: "Cancel",
+      label: "Delete",
       icon: <DeleteIcon className="w-3 h-auto" />,
       type: "btn",
       action: open3,
@@ -40,7 +40,7 @@ function ActionMenu({ id }: { id: any }) {
 
       {opened && <RefundModal opened={opened} close={close} />}
       {opened2 && <NoteModal opened={opened2} close={close2} />}
-      {opened3 && <CancelModal opened={opened3} close={close3} />}
+      {opened3 && <CancelModal opened={opened3} close={close3} id={id} />}
     </>
   );
 }

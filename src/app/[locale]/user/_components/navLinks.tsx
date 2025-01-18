@@ -58,12 +58,6 @@ function NavLinks() {
         active: path === ROUTES.USER.INBOX,
       },
       {
-        id: 6,
-        name: "Clients",
-        url: ROUTES.USER.CLIENTS,
-        active: path === ROUTES.USER.CLIENTS,
-      },
-      {
         id: 7,
         name: "Wishlist",
         url: ROUTES.USER.WISHLIST,
@@ -85,7 +79,11 @@ function NavLinks() {
         id: 10,
         name: "Support",
         url: ROUTES.USER.SUPPORT,
-        active: path === ROUTES.USER.SUPPORT,
+        active:
+          path === ROUTES.USER.SUPPORT ||
+          path === ROUTES.USER.SUPPORTHISTORY ||
+          path === ROUTES.USER.SUPPORTFAQ ||
+          path === ROUTES.USER.SUPPORTCONTACT,
       },
     ],
     [path]
@@ -159,16 +157,22 @@ function NavLinks() {
         active: path === ROUTES.USER.LISTINGSDETAILSADS(params.listID),
       },
       {
-        id: 9,
+        id: 10,
         name: `Ads`,
         url: ROUTES.USER.ADS,
         active: path === ROUTES.USER.ADS,
       },
       {
-        id: 9,
+        id: 11,
         name: `Ads Details`,
         url: ROUTES.USER.ADS,
         active: path === ROUTES.USER.ADSID(params.adsID),
+      },
+      {
+        id: 12,
+        name: `Warehouses`,
+        url: ROUTES.USER.WAREHOUSES,
+        active: path === ROUTES.USER.WAREHOUSES,
       },
     ],
     [path, searchParams.toString()]

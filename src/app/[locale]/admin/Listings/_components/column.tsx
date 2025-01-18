@@ -17,6 +17,8 @@ export type MedicalTeamTableData = {
   status: boolean;
   dailyPrice: number;
   address: string;
+  categoryName: string;
+
 };
 
 export const columns: ColumnDef<MedicalTeamTableData>[] = [

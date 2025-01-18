@@ -100,7 +100,7 @@ const MapOl: React.FC = () => {
         className="w-full h-[330px] rounded-2xl overflow-hidden "
       />
       {selectedLocation.length > 0 && (
-        <div className="flex items-center justify-center mt-7 mb-20">
+        <div className="flex items-center justify-center mt-7 mb-1 md:mb-20">
           <span
             className=" cursor-pointer text-xl leading-4 place-content-center flex items-center justify-center"
             onClick={() => {

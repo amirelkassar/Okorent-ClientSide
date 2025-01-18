@@ -16,7 +16,6 @@ import HomepageIcon from "../assets/icons/Homepage";
 import DashboardIcon from "../assets/icons/Dashboard";
 import ListingsIcon from "../assets/icons/Listings";
 import BookingsIcon from "../assets/icons/Bookings";
-import ClientsIcon from "../assets/icons/Clients";
 import WishlistIcon from "../assets/icons/Wishlist";
 import CalendarIcon from "../assets/icons/Calendar";
 import BillingIcon from "../assets/icons/Billing";
@@ -26,6 +25,9 @@ import NotificationsIcon from "../assets/icons/Notifications";
 import Notifications from "./Notifications";
 import LogoOkoRent from "../assets/icons/logo";
 import AdsIcon from "../assets/icons/ads";
+import { ScrollArea } from "@mantine/core";
+import { useToken } from "../hooks/use-token";
+import { clearToken } from "../lib/token";
 interface NavProps {
   linkLogo: string;
 }
@@ -33,7 +35,14 @@ function Nav({ linkLogo = "#" }: NavProps) {
   const locale = useLocale();
   const pathname = usePathname();
   const [showMenu, setShowMenu] = useState(false);
+  const { token, setToken } = useToken();
   const params = useParams();
+  console.log(token);
+
+  const handleLogout = () => {
+    setToken({}); // Clear token from the state
+    clearToken(); // Clear token from storage
+  };
 
   const isMobile = useMediaQuery("(max-width: 768px)");
   useEffect(() => {
@@ -90,13 +99,6 @@ function Nav({ linkLogo = "#" }: NavProps) {
         active: pathname === ROUTES.USER.INBOX,
       },
       {
-        id: 6,
-        name: "Clients",
-        icon: <ClientsIcon />,
-        url: ROUTES.USER.CLIENTS,
-        active: pathname === ROUTES.USER.CLIENTS,
-      },
-      {
         id: 7,
         name: "Wishlist",
         icon: <WishlistIcon />,
@@ -134,7 +136,7 @@ function Nav({ linkLogo = "#" }: NavProps) {
       {
         id: 12,
         name: "Ads",
-        icon: <AdsIcon />,
+        icon: <AdsIcon className="w-5 h-auto" />,
         url: ROUTES.USER.ADS,
         active: pathname === ROUTES.USER.ADS,
       },
@@ -187,7 +189,7 @@ function Nav({ linkLogo = "#" }: NavProps) {
           >
             <div>
               <div
-                className="h-24 w-full ps-11 pb-5 flex items-end"
+                className="h-24 w-full ps-11 pb-5 flex items-end mb-2  border-b border-grayLight"
                 onClick={() => setShowMenu(false)}
               >
                 <Link
@@ -201,53 +203,67 @@ function Nav({ linkLogo = "#" }: NavProps) {
                     className=" rounded-full size-11 object-cover object-top"
                     alt="user"
                   />
-                  <h3 className="text-base font-Medium">John Mark</h3>
+                  <h3 className="text-base font-Medium">
+                    {token?.userFirstName || "User Name"}
+                  </h3>
                 </Link>
               </div>
-              <div className="px-5 border-t border-grayLight ">
-                <div className="flex flex-col gap-1 mt-8">
-                  {LinksNav.map((link, i) => {
-                    return (
-                      <div key={i} onClick={() => setShowMenu(false)}>
-                        <Link
-                          href={link.url}
-                          className={`text-base py- ${
-                            link.active
-                              ? " before:bg-green !bg-green/15 hover:bg-green/15 "
-                              : " bg-transparent"
-                          } rounded-lg min-h-[60px] relative  before:w-[6px] before:content-[''] hover:bg-green/5  before:h-12 before:-start-5 before:absolute before:top-1/2 before:-translate-y-1/2 before:rounded-e-lg  flex items-center gap-5 px-8 text-nowrap font-SemiBold duration-200 text-black/80 hover:text-black`}
-                        >
-                          {link.icon}
-                          {link.name}
-                        </Link>
-                      </div>
-                    );
-                  })}
-                  <div onClick={() => setShowMenu(false)}>
-                    <Link
-                      href={pathname}
-                      locale={locale === "en" ? "ar" : "en"}
-                      className={`text-base py- ${" bg-transparent"} rounded-lg min-h-[60px] relative  before:w-[6px] before:content-[''] hover:bg-green/5  before:h-12 before:-start-5 before:absolute before:top-1/2 before:-translate-y-1/2 before:rounded-e-lg  flex items-center gap-5 px-8 text-nowrap font-SemiBold duration-200 text-black/80 hover:text-black`}
-                    >
-                      <LangIcon />
-                      Language
-                    </Link>
+              <ScrollArea
+                className="h-[calc(100vh-130px)] me-1"
+                classNames={{
+                  scrollbar: "bg-grayMedium/15 rounded-2xl",
+                  thumb: "bg-green",
+                }}
+              >
+                <div className="px-5 pt-4  ">
+                  <div className="flex flex-col gap-1 ">
+                    {LinksNav.map((link, i) => {
+                      return (
+                        <div key={i} onClick={() => setShowMenu(false)}>
+                          <Link
+                            href={link.url}
+                            className={`text-base py- ${
+                              link.active
+                                ? " before:bg-green !bg-green/15 duration-300 hover:bg-green/10 "
+                                : " bg-transparent"
+                            } rounded-lg min-h-[60px] relative  before:w-[6px] before:content-[''] hover:bg-green/10  before:h-12 before:-start-5 before:absolute before:top-1/2 before:-translate-y-1/2 before:rounded-e-lg  flex items-center gap-5 px-8 text-nowrap font-SemiBold duration-200 text-black/80 hover:text-black`}
+                          >
+                            {link.icon}
+                            {link.name}
+                          </Link>
+                        </div>
+                      );
+                    })}
+                    <div onClick={() => setShowMenu(false)}>
+                      <Link
+                        href={pathname}
+                        locale={locale === "en" ? "ar" : "en"}
+                        className={`text-base py- ${" bg-transparent"} rounded-lg min-h-[60px] relative  before:w-[6px] before:content-[''] hover:bg-green/5  before:h-12 before:-start-5 before:absolute before:top-1/2 before:-translate-y-1/2 before:rounded-e-lg  flex items-center gap-5 px-8 text-nowrap font-SemiBold duration-200 text-black/80 hover:text-black`}
+                      >
+                        <LangIcon />
+                        Language
+                      </Link>
+                    </div>
                   </div>
+                  <Link
+                    href={ROUTES.USER.ADDLIST}
+                    className={
+                      "gap-2 h-[54px] mt-9 bg-green px-3 border-4  border-[#a9c788] hover:border-green duration-500 text-medium rounded-xl text-white flex items-center justify-center "
+                    }
+                  >
+                    <PlusIcon className={"w-[16px] h-auto"} />
+                    <p className="text-base">List an item</p>
+                  </Link>
+                  <Link
+                    href={ROUTES.GUEST.HOMEPAGE}
+                    onClick={() => handleLogout()}
+                    className="flex items-center gap-4 min-h-8 mb-4 cursor-pointer ps-8 mt-9"
+                  >
+                    <LogOutMenuIcon />
+                    <p className="text-[#E31B1B] text-base">Log out</p>
+                  </Link>
                 </div>
-                <Link
-                  href={ROUTES.USER.ADDLIST}
-                  className={
-                    "gap-2 h-[54px] mt-9 bg-green px-3 border-4  border-[#a9c788] hover:border-green duration-500 text-medium rounded-xl text-white flex items-center justify-center "
-                  }
-                >
-                  <PlusIcon className={"w-[16px] h-auto"} />
-                  <p className="text-base">List an item</p>
-                </Link>
-                <div className="flex items-center gap-4 min-h-8 mb-10 cursor-pointer ps-8 mt-11">
-                  <LogOutMenuIcon />
-                  <p className="text-[#E31B1B] text-base">Log out</p>
-                </div>
-              </div>
+              </ScrollArea>
             </div>
           </div>
           <div

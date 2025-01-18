@@ -1,15 +1,19 @@
 "use client";
-import CalendarIcon from "@/src/assets/icons/Calendar";
 import DateIcon from "@/src/assets/icons/date";
 import Button from "@/src/components/button";
 import Input from "@/src/components/input";
 import ModalComp from "@/src/components/modal-comp";
-import { TextInput } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 import { useDisclosure } from "@mantine/hooks";
 import React, { useState } from "react";
 
-function DateDeactivateModal() {
+function DateDeactivateModal({
+  duration,
+  setDuration,
+}: {
+  duration: any;
+  setDuration: any;
+}) {
   const [opened, { open: open2, close: close2 }] = useDisclosure(false);
   const [value, setValue] = useState<Date | null>(new Date());
   const [value2, setValue2] = useState<Date | null>(new Date());
@@ -22,6 +26,20 @@ function DateDeactivateModal() {
       month: "short",
       day: "numeric",
     }).format(date);
+  };
+  const handleSaveDate = () => {
+    if (TypeDate === "from" && value) {
+      setDuration((prev: any) => ({
+        ...prev,
+        deactivationStart: value.toISOString(),
+      }));
+    } else if (TypeDate === "to" && value2) {
+      setDuration((prev: any) => ({
+        ...prev,
+        deactivationEnd: value2.toISOString(),
+      }));
+    }
+    close2();
   };
   return (
     <>
@@ -56,7 +74,7 @@ function DateDeactivateModal() {
       <ModalComp
         opened={opened}
         close={close2}
-        title={"Scheudle Starting Date"}
+        title={"Schedule Starting Date"}
       >
         <div className="mx-auto max-w-[95%] w-[420px] lg:max-w-[280px]">
           <DatePicker
@@ -69,14 +87,20 @@ function DateDeactivateModal() {
             }}
             weekendDays={[]}
             value={TypeDate === "from" ? value : value2}
-            onChange={TypeDate === "from" ? setValue : setValue2}
+            onChange={(date) => {
+              if (TypeDate === "from") {
+                setValue(date);
+              } else {
+                setValue2(date);
+              }
+            }}
             minDate={new Date()}
           />
 
           <Button
             className={"w-full mt-6"}
             onClick={() => {
-              close2();
+              handleSaveDate();
             }}
           >
             Save

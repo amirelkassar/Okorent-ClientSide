@@ -3,11 +3,7 @@ import React, { useState } from "react";
 import HeaderDash from "./_components/header";
 import ChartsPlatform from "./_components/charts";
 import Button from "@/src/components/button";
-import { columns } from "./_components/column";
-import { UserData } from "@/src/lib/dataUser";
-import { DataTable } from "@/src/components/data-table";
-import ROUTES from "@/src/routes";
-import CardPhoneAccount from "./_components/card-phone-account";
+import TableNewSubscriptions from "./Accounts/_components/table-new-subscriptions";
 const data = [
   {
     date: "January",
@@ -152,14 +148,7 @@ function Page() {
           }
         />
       </div>
-
-      <DataTable
-        title="New subscriptions"
-        viewAll={ROUTES.ADMIN.ACCOUNTS}
-        data={UserData}
-        columns={columns}
-        Component={CardPhoneAccount}
-      />
+      <TableNewSubscriptions />
     </div>
   );
 }

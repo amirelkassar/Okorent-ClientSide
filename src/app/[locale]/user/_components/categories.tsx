@@ -1,7 +1,6 @@
 "use client";
 import ToolsIcon from "@/src/assets/icons/tools";
 import { GetCategory } from "@/src/hooks/queries/admin/master-data/category";
-
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import Image from "next/image";
@@ -11,7 +10,7 @@ function Categories() {
   const { data, isLoading } = GetCategory();
   console.log(data);
   return (
-    <div className="mb-10 lg:mb-16">
+    <div className=" mb-5 md:mb-10 lg:mb-16">
       <h2 className="text-center headTitle">Our Most Popular Categories </h2>
       <div className="flex justify-center flex-wrap mt-7 lg:mt-10 gap-1 lg:gap-7 ">
         {data?.data?.items?.map((category: any, index: number) => {

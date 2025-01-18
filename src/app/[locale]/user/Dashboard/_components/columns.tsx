@@ -9,6 +9,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import Image, { StaticImageData } from "next/image";
 import phoneImg from "@/src/assets/images/phone.png";
 import CardStatus from "@/src/components/cardStatus";
+import PaymentStatus from "@/src/components/payment-status";
 
 export type RequestsTableData = {
   id: number;
@@ -106,16 +107,7 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     header: "Payment Status",
     cell: ({ getValue }) => {
       const paymentStatus = getValue<string>();
-      switch (paymentStatus.toLowerCase()) {
-        case "completed":
-          return <CardStatus type="blue" title={paymentStatus} />;
-        case "canceled":
-          return <CardStatus type="gray" title={paymentStatus} />;
-        case "pending":
-          return <CardStatus type="green" title={paymentStatus} />;
-        default:
-          return <CardStatus type="gray" title="--" />;
-      }
+      return <PaymentStatus status={paymentStatus} />;
     },
   },
   {

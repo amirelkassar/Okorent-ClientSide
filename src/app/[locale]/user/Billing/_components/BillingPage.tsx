@@ -8,7 +8,7 @@ import SearchItem from "./searchItem";
 import FilterBilling from "./filterBilling";
 
 function BillingPage() {
-  const { switchBilling, setSwitchBilling } = useSwitchBilling();
+  const { switchBilling } = useSwitchBilling();
   console.log(switchBilling);
 
   return (

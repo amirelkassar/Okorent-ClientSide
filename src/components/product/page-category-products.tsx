@@ -11,7 +11,10 @@ import { MultiSelect } from "@mantine/core";
 import CantFind from "./CantFind";
 import { Pagination } from "../pagination";
 import { useQueryState } from "nuqs";
-import { GetCategory, GetSubCategory } from "@/src/hooks/queries/admin/master-data/category";
+import {
+  GetCategory,
+  GetSubCategory,
+} from "@/src/hooks/queries/admin/master-data/category";
 const sortingOptions: any[] = [
   {
     value: "PriceAsc",
@@ -40,7 +43,6 @@ function PageCategoryProducts({ children }: { children: React.ReactNode }) {
   );
 
   const { data, isLoading } = GetProductsAll(searchParams.toString());
-  const query = GetProductsAll(searchParams.toString());
   const { data: dataSubCategories, isLoading: isLoadingSubCategory } =
     GetSubCategory(searchParams.get("CategoryId"));
   const updateQuerySearchParams = useUpdateQueryParams();
@@ -87,7 +89,7 @@ function PageCategoryProducts({ children }: { children: React.ReactNode }) {
   return (
     <div className="mb-20">
       {children}
-      <div className="pt-8 border-t flex flex-col lgl:flex-row lgl:items-start gap-4 border-grayMedium/30">
+      <div className=" pt-6 md:pt-8 border-t flex flex-col lgl:flex-row lgl:items-start gap-4 border-grayMedium/30">
         <MultiSelect
           data={
             dataSubCategories?.data.map((item: any) => ({
@@ -96,21 +98,25 @@ function PageCategoryProducts({ children }: { children: React.ReactNode }) {
             })) || []
           }
           value={selectedSubcategories}
-          onChange={setSelectedSubcategories}
+          onChange={(updatedSelection) => {
+            setSelectedSubcategories(updatedSelection);
+            updateQueryParams("SubCategoryIds", updatedSelection);
+          }}
           placeholder="Subcategories"
           searchable
           size="md"
           classNames={{
             input:
-              " bg-white text-black flex items-center   rounded-lg text-grayMedium  min-h-[50px] border border-green",
+              " bg-white text-black flex items-center text-xs  rounded-lg text-grayMedium  min-h-[50px] border border-green",
 
             inputField:
-              "placeholder:text-xl h-full placeholder:text-black placeholder:opacity-100   placeholder:font-SemiBold",
+              " text-xs mdl:placeholder:text-xl h-full text-sm placeholder:text-black placeholder:opacity-100   placeholder:font-SemiBold",
             pillsList: "h-full",
+            pill:'text-xs md:text-base',
             dropdown:
               "bg-white text-black rounded-lg border border-green/50 text-grayDark py-2",
             option:
-              "hover:bg-green hover:text-white duration-300  flex items-center ",
+              "hover:bg-green hover:text-white text-xs duration-300  flex items-center ",
           }}
           clearable
           className="block lgl:hidden" // Visible on mobile, hidden on larger screens
@@ -166,19 +172,21 @@ function PageCategoryProducts({ children }: { children: React.ReactNode }) {
               </p>
             ) : (
               <div className=" flex-col flex gap-5">
-                {dataCategory?.data?.items.map((category: any, index: number) => (
-                  <div
-                    key={index}
-                    className={`cursor-pointer px-4 py-1 rounded-lg`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setCategoryNameParams(category.name); // Set the category name
-                      setCategoryIdParams(category.id); // Set the CategoryId
-                    }}
-                  >
-                    {category?.name}
-                  </div>
-                ))}
+                {dataCategory?.data?.items.map(
+                  (category: any, index: number) => (
+                    <div
+                      key={index}
+                      className={`cursor-pointer px-4 py-1 rounded-lg`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setCategoryNameParams(category.name); // Set the category name
+                        setCategoryIdParams(category.id); // Set the CategoryId
+                      }}
+                    >
+                      {category?.name}
+                    </div>
+                  )
+                )}
               </div>
             )}
           </div>

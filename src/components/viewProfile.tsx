@@ -63,8 +63,8 @@ function ViewProfile({
           </div>
         </div>
 
-        <div className="flex-1 ps-12 pe-2 mt-9">
-          <div className="flex flex-col gap-2 mb-14 lg:mb-16">
+        <div className="flex-1 ps-4 md:ps-12 pe-2 mt-5 md:mt-9">
+          <div className="flex justify-center text-center flex-col gap-2 mb-14 lg:mb-16">
             <h2 className="text-2xl lg:text-3xl ">
               {data.name || profileData.name}
             </h2>
@@ -74,7 +74,7 @@ function ViewProfile({
                 ? getDate(data.created).fullYearWithMonthName
                 : profileData.memberSince}
             </h3>
-            <div className=" flex items-center gap-5">
+            <div className=" flex items-center justify-center md:justify-start gap-5">
               <div className="flex items-center gap-1 pe-4 border-e border-green">
                 <StarIcon />
                 <p className="text-base lg:text-2xl">{data.rating || 0}</p>
@@ -88,7 +88,7 @@ function ViewProfile({
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-2 mt-7">
+            <div className="flex items-center justify-center md:justify-start gap-2 mt-7">
               <LinkGreen
                 href={
                   editAdmin
@@ -113,23 +113,20 @@ function ViewProfile({
               <span className="font-Bold">{data.name?.split(" ")[0]}</span>{" "}
             </h3>
             <div className="flex flex-col gap-5  mb-11">
-              {profileData.about.languagesSpoken ? (
-                <div className="flex items-center gap-3">
-                  <SpeakIcon className="min-w-5 lg:min-w-6 h-auto w-5 lg:w-6" />
-                  <p className="text-base lg:text-xl text-grayMedium font-Medium">
-                    Speaks{" "}
-                    {data?.languageNames[0]?.split(",").join(", ") || "--"}
-                  </p>
-                </div>
-              ) : null}
-             
-                <div className="flex items-center gap-3">
-                  <LangIcon className="min-w-5 lg:min-w-6 h-auto w-5 lg:w-6" />
-                  <p className="text-base lg:text-xl text-grayMedium font-Medium">
-                    Lives in {data?.city || '--'}
-                  </p>
-                </div>
-             
+              <div className="flex items-center gap-3">
+                <SpeakIcon className="min-w-5 lg:min-w-6 h-auto w-5 lg:w-6" />
+                <p className="text-base lg:text-xl text-grayMedium font-Medium">
+                  Speaks {data?.languageNames?.join(", ") || "--"}
+                </p>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <LangIcon className="min-w-5 lg:min-w-6 h-auto w-5 lg:w-6" />
+                <p className="text-base lg:text-xl text-grayMedium font-Medium">
+                  Lives in {data?.city || "--"}
+                </p>
+              </div>
+
               {profileData.about.email ? (
                 <div className="flex items-center gap-3">
                   <GmailIcon className="min-w-5 lg:min-w-6 h-auto w-5 lg:w-6" />

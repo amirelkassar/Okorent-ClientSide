@@ -20,10 +20,11 @@ export type MedicalTeamTableData = {
   payment: number;
   rating: number;
   userImage: string;
-  isVerified: boolean;
+  status: any;
   created: string;
   userName: string;
   totalProductsCount: any;
+  memberShipName:any
 };
 
 interface CardDataProps {
@@ -34,7 +35,7 @@ function CardPhoneAccount({ dataCard }: CardDataProps) {
   return (
     <CardPhone>
       <div className=" absolute top-4 end-3">
-        <ActionMenu status={dataCard.isVerified}  id={dataCard?.id} dataUSer={dataCard} />
+        <ActionMenu status={dataCard.status}  id={dataCard?.id} dataUSer={dataCard} />
       </div>
       <Link
         href={ROUTES.ADMIN.ACCOUNTSDETAILS(dataCard.id)}
@@ -60,13 +61,18 @@ function CardPhoneAccount({ dataCard }: CardDataProps) {
         <RowCardPhone title="Email" info={dataCard.userName} />
         <RowCardPhone
           title="Package"
-          cell={() => <RenderPackage packageVal={dataCard.name} />}
+          cell={() => <RenderPackage packageVal={dataCard.memberShipName} />}
         />
         <RowCardPhone title="Payment" info={dataCard.totalProductsCount+' $'} />
         <RowCardPhone
           title="Status"
-          info={dataCard.isVerified ? "Verified" : "Un Verified"}
+          info= {dataCard?.status === 2
+            ? "Verified"
+            : dataCard?.status === 1
+            ? "Un Verified"
+            : "Deactivated"}
         />
+        
         <RowCardPhone
           title="Rating"
           cell={() => (
