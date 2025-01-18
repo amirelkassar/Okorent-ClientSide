@@ -52,7 +52,7 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
     },
     //2
     {
-      label: "Scan For Completed",
+      label: "Mark as Completed",
       icon: <BarcodeIcon className="w-3 h-auto" />,
       type: "btn",
       action: () => {

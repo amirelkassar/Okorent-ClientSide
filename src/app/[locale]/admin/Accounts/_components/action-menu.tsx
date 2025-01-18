@@ -107,7 +107,6 @@ function ActionMenu({
         return [
           options[0],
           options[1],
-          options[2],
           options[3],
           options[4],
           options[7],
@@ -117,21 +116,13 @@ function ActionMenu({
         return [
           options[0],
           options[1],
-          options[2],
           options[3],
           options[5],
           options[7],
           options[8],
         ];
       case "3":
-        return [
-          options[0],
-          options[1],
-          options[2],
-          options[3],
-          options[6],
-          options[8],
-        ];
+        return [options[0], options[1], options[3], options[6], options[8]];
       default:
         return [];
     }

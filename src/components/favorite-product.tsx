@@ -11,6 +11,7 @@ import { useDisclosure } from "@mantine/hooks";
 import ModalComp from "./modal-comp";
 import ListRemove from "../assets/icons/listRemove";
 import Button from "./button";
+import { useToken } from "../hooks/use-token";
 
 function FavoriteProduct({
   favorite,
@@ -20,6 +21,8 @@ function FavoriteProduct({
   id?: string;
 }) {
   const [opened, { open, close }] = useDisclosure(false);
+  const { token } = useToken();
+  console.log(token);
 
   //queries
   const { mutateAsync: FavoriteProduct } = useFavoriteProductMutation();
@@ -34,6 +37,9 @@ function FavoriteProduct({
       }),
       {
         success: "The product has been added to Favorites",
+        ...(!token?.userID && {
+          error: "Please log in first to add products to Favorites.",
+        }),
         onSuccess: async (res) => {},
       }
     );

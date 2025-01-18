@@ -32,13 +32,7 @@ function HeaderEditAcc({
         console.log([...ids]);
       },
     },
-    {
-      title: "Export",
-      icon: <ExportIcon className="max-h-4 w-auto" />,
-      onclick: (ids: any) => {
-        console.log([...ids]);
-      },
-    },
+
     {
       title: "Deactivate",
       icon: <DeactivateIcon className="max-h-4 w-auto" />,

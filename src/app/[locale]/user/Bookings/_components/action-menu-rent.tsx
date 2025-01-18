@@ -63,7 +63,7 @@ function ActionMenuRent({
     },
     //3
     {
-      label: "Scan For Receiving",
+      label: "Mark as Receiving",
       icon: <BarcodeIcon className="w-3 h-auto" />,
       type: "btn",
       action: () => {

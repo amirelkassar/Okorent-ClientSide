@@ -76,7 +76,7 @@ function Page() {
   };
   const { data: dataCategory } = GetCategory();
   console.log(dataCategory);
-  
+
   const { data: dataSubCategory, refetch: RefetchGetSubCategory } =
     GetSubCategory(dataList?.CategoryId);
 
@@ -337,25 +337,6 @@ function Page() {
         >
           Save
         </Button>
-        {searchparams.get("preview") === "true" ? (
-          <LinkGreen
-            href={"?preview=false"}
-            className={
-              "w-full lg:w-[208px] h-12 mdl:h-[64px] text-black bg-grayBack border-none"
-            }
-          >
-            Back
-          </LinkGreen>
-        ) : (
-          <LinkGreen
-            href={"?preview=true"}
-            className={
-              "w-full lg:w-[208px] h-12 mdl:h-[64px] text-black bg-grayBack border-none"
-            }
-          >
-            Preview
-          </LinkGreen>
-        )}
       </div>
     </div>
   );
