@@ -1,12 +1,16 @@
 "use client";
-import {useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import DeleteIcon from "@/src/assets/icons/delete";
 import { GetUniqueValues } from "@/src/lib/utils";
 import TrueIcon from "@/src/assets/icons/true";
 import ExportIcon from "@/src/assets/icons/export";
 import DeactivateIcon from "@/src/assets/icons/Deactivate";
 import NoteTableIcon from "@/src/assets/icons/noteTable";
-
+import {
+  useDeleteAccountInAdmin,
+  useDeleteManyAccountInAdmin,
+} from "@/src/hooks/queries/admin/account";
+import { Toast } from "@/src/components/toast";
 
 interface SignUpReturn {
   functionSelectView: any[];
@@ -14,7 +18,17 @@ interface SignUpReturn {
 }
 export const useActionTable = (): SignUpReturn => {
   const [selectedFromTable, setSelectedFromTable] = useState([]);
-
+  const { mutateAsync: DeleteManyAccount } = useDeleteManyAccountInAdmin();
+  //delete User
+  const onSubmitDeleteManyAccount = useCallback(
+    async (data: any) => {
+      Toast.Promise(DeleteManyAccount(data), {
+        success: "Deleted Account Done",
+        onSuccess: async (res) => {},
+      });
+    },
+    [DeleteManyAccount, selectedFromTable]
+  );
 
   const functionSelect = useMemo(
     () => [
@@ -56,7 +70,9 @@ export const useActionTable = (): SignUpReturn => {
         title: "Delete",
         icon: <DeleteIcon className="max-h-4 w-auto " />,
         onclick: (ids: any) => {
-          console.log([...ids]);
+          onSubmitDeleteManyAccount({
+            userIds: ids?.map((item: any) => item.id),
+          });
         },
       },
     ],

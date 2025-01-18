@@ -46,7 +46,7 @@ export const useDeleteAccountInAdmin = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.refetchQueries([initialQueryKey]);
       console.log(res);
     },
     onError: (res) => {
@@ -126,5 +126,27 @@ export const useActivateAccountInAdmin = (id: any) => {
       queryClient.invalidateQueries([initialQueryKey]);
     },
     onError: () => {},
+  });
+};
+
+//Delete Many Account In Admin
+export const useDeleteManyAccountInAdmin = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.delete(admin.Accounts.DeleteManyAccounts, {
+        data: data,
+      });
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.refetchQueries([initialQueryKey]);
+      console.log(res);
+    },
+    onError: (res) => {
+      queryClient.refetchQueries([initialQueryKey]);
+
+      console.log(res);
+    },
   });
 };

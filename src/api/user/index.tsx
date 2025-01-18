@@ -72,7 +72,7 @@ export const user = {
 };
 
 export const admin = {
-  Home:{
+  Home: {
     DashboardCount: "/AdminDashBoard/Get Users Overview",
   },
   Category: {
@@ -90,6 +90,7 @@ export const admin = {
     CreateAccounts: `/AdminManageUser`,
     DeActivate: "/AdminManageUser/deactivate",
     Activate: "/AdminManageUser/ReactivateUser",
+    DeleteManyAccounts: "/AdminManageUser/DeleteUsers",
   },
   product: {
     base: (queries: any) => buildQuery("/AdminProduct", queries),
@@ -115,10 +116,12 @@ export const admin = {
     base: (queries: any) => buildQuery("/AdminOrder", queries),
     BookingID: (id: any) => `/AdminOrder/${id}`,
     UpdateOrder: `/AdminOrder`,
+    DeleteManyOrders: "/AdminOrder/DeleteOrders",
   },
-  Invoices:{
-    base: (queries: any) => buildQuery("/AdminManageInvoices/GetAllInvoices", queries),
-  }
+  Invoices: {
+    base: (queries: any) =>
+      buildQuery("/AdminManageInvoices/GetAllInvoices", queries),
+  },
 };
 
 export const notifications = {

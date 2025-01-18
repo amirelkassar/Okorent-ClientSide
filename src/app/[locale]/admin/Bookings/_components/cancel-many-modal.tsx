@@ -2,29 +2,35 @@ import Button from "@/src/components/button";
 import InputTextarea from "@/src/components/InputTextarea";
 import ModalComp from "@/src/components/modal-comp";
 import { Toast } from "@/src/components/toast";
-import { useDeleteOrderByIDInAdmin } from "@/src/hooks/queries/admin/booking";
+import { useDeleteManyOrderByIDInAdmin } from "@/src/hooks/queries/admin/booking";
 import React, { useCallback } from "react";
 
-function CancelModal({
+function CancelManyModal({
   opened,
   close,
-  id,
+  selectedFromTable,
 }: {
   opened: any;
   close: any;
-  id: any;
+  selectedFromTable: any;
 }) {
-  const { mutateAsync: DeleteOrder } = useDeleteOrderByIDInAdmin(id);
+  console.log(selectedFromTable);
+  const { mutateAsync: DeleteManyOrders } = useDeleteManyOrderByIDInAdmin();
 
   //delete order
-  const onSubmitDelete = useCallback(async () => {
-    Toast.Promise(DeleteOrder(), {
-      success: "Deleted Order Done",
-      onSuccess: async (res) => {
-        close();
-      },
-    });
-  }, [DeleteOrder,close]);
+  const onSubmitDelete = async () => {
+    Toast.Promise(
+      DeleteManyOrders({
+        orderIds: selectedFromTable?.map((item: any) => item.id),
+      }),
+      {
+        success: "Deleted Orders Done",
+        onSuccess: async (res) => {
+          close();
+        },
+      }
+    );
+  };
 
   return (
     <ModalComp opened={opened} close={close} title="Cancel Booking ">
@@ -42,6 +48,10 @@ function CancelModal({
           </Button>
           <Button
             onClick={() => {
+              console.log({
+                orderIds: selectedFromTable?.map((item: any) => item.id),
+              });
+
               onSubmitDelete();
             }}
             className={" flex-1 h-[54px]"}
@@ -54,4 +64,4 @@ function CancelModal({
   );
 }
 
-export default CancelModal;
+export default CancelManyModal;

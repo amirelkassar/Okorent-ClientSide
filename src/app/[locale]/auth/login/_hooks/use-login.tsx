@@ -5,7 +5,7 @@ import ROUTES from "@/src/routes";
 import { useLoginMutation } from "@/src/hooks/queries/auth";
 import { useRouter } from "@/src/navigation";
 import { Toast } from "@/src/components/toast";
-import { authDecodedToken, decodedToken } from "@/token";
+import { decodedToken } from "@/token";
 
 // Define the type for the form data
 interface FormDataProps {

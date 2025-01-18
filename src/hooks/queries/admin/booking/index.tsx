@@ -46,3 +46,42 @@ export const useEditOrderByIDInAdmin = (id: any) => {
     },
   });
 };
+
+//Delete  Order By ID In Admin
+export const useDeleteOrderByIDInAdmin = (id: any) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async () => {
+      const response = await api.delete(admin.Bookings.BookingID(id));
+      return response.data;
+    },
+    onSuccess: async (res) => {
+      console.log(res);
+      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKey, id]);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
+
+//Delete Many Order By ID In Admin
+export const useDeleteManyOrderByIDInAdmin = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.delete(admin.Bookings.DeleteManyOrders, {
+        data: data,
+      });
+      return response.data;
+    },
+    onSuccess: async (res) => {
+      console.log(res);
+      queryClient.invalidateQueries([initialQueryKey]);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};

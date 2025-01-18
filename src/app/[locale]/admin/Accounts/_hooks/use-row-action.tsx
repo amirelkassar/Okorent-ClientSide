@@ -11,6 +11,7 @@ interface ActionTableIRentProps {
   onSubmitActivateAccount: any;
 }
 export const useRowActionAccountInAdmin = (id: any): ActionTableIRentProps => {
+
   const { mutateAsync: DeleteAccount } = useDeleteAccountInAdmin();
   const { mutateAsync: ActivateAccount } = useActivateAccountInAdmin(id);
 

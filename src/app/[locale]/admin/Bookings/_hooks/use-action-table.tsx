@@ -8,6 +8,7 @@ import RefundIcon from "@/src/assets/icons/Refund";
 interface ActionTableBookingInAdminProps {
   functionSelectView: any[];
   setSelectedFromTable: any;
+  selectedFromTable: any;
 }
 export const useActionTableBookingInAdmin = ({open, open2, open3}:{open: any, open2: any, open3: any}): ActionTableBookingInAdminProps => {
   const [selectedFromTable, setSelectedFromTable] = useState([]);
@@ -22,6 +23,7 @@ export const useActionTableBookingInAdmin = ({open, open2, open3}:{open: any, op
           open();
         },
       },
+      //1
       {
         title: "Send Note",
         icon: <NoteTableIcon className="max-h-4 w-auto" />,
@@ -29,8 +31,9 @@ export const useActionTableBookingInAdmin = ({open, open2, open3}:{open: any, op
           open2();
         },
       },
+      //2
       {
-        title: "Cancel",
+        title: "Delete",
         icon: <DeleteIcon className="max-h-4 w-auto" />,
         onclick: () => {
           open3();
@@ -50,7 +53,7 @@ export const useActionTableBookingInAdmin = ({open, open2, open3}:{open: any, op
           return functionSelect;
       }
     } else {
-      return [];
+      return [functionSelect[2]];
     }
   }, [selectedFromTable, functionSelect]);
   console.log(functionSelectView);
@@ -58,5 +61,6 @@ export const useActionTableBookingInAdmin = ({open, open2, open3}:{open: any, op
   return {
     functionSelectView,
     setSelectedFromTable,
+    selectedFromTable
   };
 };
