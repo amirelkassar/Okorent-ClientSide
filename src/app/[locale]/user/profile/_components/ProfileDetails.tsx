@@ -38,7 +38,7 @@ function ProfileDetails({ initialData }: { initialData: any }) {
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
-    <div className="bg-white/50 flex-1 md:flex-row flex-col min-w-[530ox] xxl:min-w-[800px] flex gap-5 pt-6 pb-9 lg:pb-12  px-6 rounded-2xl border border-green/80 shadow-md">
+    <div className="bg-white/50 flex-1 md:flex-row flex-col min-w-[530ox] xxl:min-w-[800px] flex gap-4 md:gap-5 pt-6 pb-9 lg:pb-12  px-6 rounded-2xl border border-green/80 shadow-md">
       <div className="md:min-w-[200px]">
         <UploadAndCropImg image={initialData.userImage || profileData.image} />
         <p className="flex items-center gap-1 text-center mx-auto justify-center mb-1 md:mb-4 text-sm  md:text-base text-green">
@@ -52,9 +52,9 @@ function ProfileDetails({ initialData }: { initialData: any }) {
           </p>
         </div>
       </div>
-      <div className="flex lg:px-0 px-8 flex-wrap flex-1 gap-10 lg:gap-2 flex-col lg:flex-row pt-6">
+      <div className="flex lg:px-0 md:px-8 px-0 flex-wrap flex-1 gap-10 lg:gap-2 flex-col lg:flex-row md:pt-6">
         <div className="flex-1">
-          <div className="flex flex-col gap-2 mb-8">
+          <div className="flex flex-col text-center justify-center md:justify-start md:text-start gap-2 mb-8">
             <h2 className="text-2xl md:text-3xl ">
               {initialData.name || profileData.name}
             </h2>
@@ -64,7 +64,7 @@ function ProfileDetails({ initialData }: { initialData: any }) {
                 ? getDate(initialData.created).fullYearWithMonthName
                 : profileData.memberSince}
             </h3>
-            <div className=" flex items-center gap-5">
+            <div className=" flex items-center justify-center md:justify-start gap-5">
               <div className="flex items-center gap-1 pe-4 border-e border-green">
                 <StarIcon />
                 <p className="text-base lg:text-xl">

@@ -1,7 +1,7 @@
 import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function LogOutMenuIcon({ className = "", fill = "##E31B1B" }: IconProps) {
+function LogOutMenuIcon({ className = "", fill = "#E31B1B" }: IconProps) {
   return (
     <svg
       width="22"

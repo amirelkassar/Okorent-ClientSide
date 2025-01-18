@@ -23,7 +23,7 @@ function SearchItem({
   };
 
   return (
-    <div className="flex gap-6 h-[66px] mb-4">
+    <div className="flex gap-6 h-[50px] mdl:h-[66px] mb-3 mdl:mb-4">
       <div className="flex-1 flex p-[1px] rounded-2xl border-[3px] border-green/30 lg:ps-6 bg-white overflow-hidden">
         <SearchIcon
           className={"w-[18px] h-auto hidden lg:block"}
@@ -36,7 +36,7 @@ function SearchItem({
           type="text"
           classNames={{
             input:
-              "flex-1 bg-white text-black h-full border-none px-3 lg:px-5 text-sm lg:text-[16px] font-Medium",
+              "flex-1 bg-white text-black h-full border-none px-3 placeholder:text-xs mdl:placeholder:text-base lg:px-5 text-sm lg:text-[16px] font-Medium",
             wrapper: "h-full",
           }}
           className="flex-1 text-grayMedium h-full text-[16px]"

@@ -5,9 +5,9 @@ interface PropsMissing {
 }
 function Missing({ title }: PropsMissing) {
   return (
-    <div className="flex items-center gap-3">
-      <MissingIcon />
-      <p className="text-base lg:text-lg text-green">{title}</p>
+    <div className="flex items-center gap-2 md:gap-3">
+      <MissingIcon className="w-4 h-auto md:w-6" />
+      <p className=" text-sm md:text-base lg:text-lg text-green">{title}</p>
     </div>
   );
 }

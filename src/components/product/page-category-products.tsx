@@ -89,7 +89,7 @@ function PageCategoryProducts({ children }: { children: React.ReactNode }) {
   return (
     <div className="mb-20">
       {children}
-      <div className="pt-8 border-t flex flex-col lgl:flex-row lgl:items-start gap-4 border-grayMedium/30">
+      <div className=" pt-6 md:pt-8 border-t flex flex-col lgl:flex-row lgl:items-start gap-4 border-grayMedium/30">
         <MultiSelect
           data={
             dataSubCategories?.data.map((item: any) => ({
@@ -107,15 +107,16 @@ function PageCategoryProducts({ children }: { children: React.ReactNode }) {
           size="md"
           classNames={{
             input:
-              " bg-white text-black flex items-center   rounded-lg text-grayMedium  min-h-[50px] border border-green",
+              " bg-white text-black flex items-center text-xs  rounded-lg text-grayMedium  min-h-[50px] border border-green",
 
             inputField:
-              "placeholder:text-xl h-full placeholder:text-black placeholder:opacity-100   placeholder:font-SemiBold",
+              " text-xs mdl:placeholder:text-xl h-full text-sm placeholder:text-black placeholder:opacity-100   placeholder:font-SemiBold",
             pillsList: "h-full",
+            pill:'text-xs md:text-base',
             dropdown:
               "bg-white text-black rounded-lg border border-green/50 text-grayDark py-2",
             option:
-              "hover:bg-green hover:text-white duration-300  flex items-center ",
+              "hover:bg-green hover:text-white text-xs duration-300  flex items-center ",
           }}
           clearable
           className="block lgl:hidden" // Visible on mobile, hidden on larger screens

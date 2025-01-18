@@ -34,10 +34,10 @@ function SelectDate({
   };
   return (
     <>
-      <div className="flex items-center justify-center gap-2 " onClick={open}>
-        <div className=" h-10 min-h-fit px-3 rounded-xl flex items-center border bg-blue/10 cursor-pointer border-transparent gap-1 lg:gap-3 duration-300 hover:border-blue hover:shadow-sidebar">
-          <DateIcon />
-          <h3 className="text-blue text-sm lg:text-[16px]">
+      <div className="flex items-center md:justify-center gap-2 " onClick={open}>
+        <div className=" h-10 min-h-fit px-3 rounded-xl flex-1 flex items-center border bg-blue/10 cursor-pointer border-transparent gap-1 lg:gap-3 duration-300 hover:border-blue hover:shadow-sidebar">
+          <DateIcon className=" w-3 md:w-4 h-auto" />
+          <h3 className="text-blue text-xs lg:text-[16px]">
             {getDate(value[0]?.toISOString()).fullYear ||
             getDate(value[1]?.toISOString()).fullYear
               ? formatDate(value[0]) + " - " + formatDate(value[1])
@@ -47,7 +47,7 @@ function SelectDate({
         {value.length > 0 && (
           <p
             onClick={open}
-            className="text-green cursor-pointer text-base font-Regular"
+            className="text-green cursor-pointer text-sm md:text-base font-Regular"
           >
             (Change)
           </p>
