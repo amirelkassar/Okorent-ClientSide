@@ -25,7 +25,7 @@ function Page() {
           <Button className={" flex-1 h-10 text-base !px-8"}>Save </Button>
         </div>
       </div>
-      <div className="flex flex-wrap gap-6 mb-6">
+      <div className="flex flex-col mdl:flex-row flex-wrap gap-6 mb-6">
         <FormPlanInfo />
         <FormFeatures />
       </div>

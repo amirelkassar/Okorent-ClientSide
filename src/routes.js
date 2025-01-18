@@ -25,7 +25,7 @@ const ROUTES = {
     RENTERS: "/admin/Renters",
     BOOKINGS: "/admin/Bookings",
     BOOKINGSDETAILS: (id) => `/admin/Bookings/${id}`,
-  INVOICES: "/admin/Invoices",
+    INVOICES: "/admin/Invoices",
     RESERVATIONS: "/admin/Reservations",
     REPORTS: "/admin/Reports",
     MEMBERSHIPS: "/admin/Memberships",
@@ -75,8 +75,6 @@ const ROUTES = {
     SUPPORTFAQ: "/user/Support/Faq",
     SUPPORTCONTACT: "/user/Support/Contact",
     WAREHOUSES: "/user/Warehouses",
-
-
   },
   GUEST: {
     HOMEPAGE: "/",

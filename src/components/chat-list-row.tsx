@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import ROUTES from "../routes";
-import { Link } from "../navigation";
+import { Link, usePathname } from "../navigation";
 import Image, { StaticImageData } from "next/image";
 import TimeIcon from "../assets/icons/time";
 import { useSearchParams } from "next/navigation";
@@ -19,10 +19,15 @@ interface ChatListRowProps {
 }
 function ChatListRow({ data }: ChatListRowProps) {
   const searchParams = useSearchParams();
-
+  const path = usePathname();
+  const adminView = path.includes(ROUTES.ADMIN.DASHBOARD);
   return (
     <Link
-      href={ROUTES.USER.INBOX + "?chat=" + data.id}
+      href={
+        (adminView ? ROUTES.ADMIN.INBOX : ROUTES.USER.INBOX) +
+        "?chat=" +
+        data.id
+      }
       className={cn(
         "py-1 px-2 flex items-center gap-3 cursor-pointer duration-300 hover:bg-grayBack/50 justify-between  w-full rounded-[18px] ",
         data.identifier > 0 ? "bg-grayBack hover:bg-grayBack" : null,

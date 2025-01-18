@@ -15,7 +15,7 @@ function ReviewsProfile({
 
   return (
     <div className=" mt-10 relative">
-      <h2 className="text-2xl  lg:text-3xl mb-7">
+      <h2 className=" text-lg md:text-2xl  lg:text-3xl mb-7">
         Customer Reviews about <span className="font-Bold">{userName}</span>
       </h2>
       {editAdmin ? (

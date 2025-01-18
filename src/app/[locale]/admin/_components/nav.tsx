@@ -229,7 +229,8 @@ function Nav({ linkLogo = "#" }: NavProps) {
                   </div>
                 </div>
 
-                <div
+                <Link
+                  href={ROUTES.GUEST.HOMEPAGE}
                   onClick={() => {
                     handleLogout();
                   }}
@@ -237,7 +238,7 @@ function Nav({ linkLogo = "#" }: NavProps) {
                 >
                   <LogOutMenuIcon />
                   <p className="text-[#E31B1B] text-base">Log out</p>
-                </div>
+                </Link>
               </div>
             </div>
           </div>

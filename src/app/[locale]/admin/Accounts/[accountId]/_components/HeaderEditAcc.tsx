@@ -58,8 +58,8 @@ function HeaderEditAcc({
     },
   ];
   return (
-    <div className="flex items-center justify-between gap-7 flex-wrap mb-8">
-      <div className="flex items-center gap-5">
+    <div className="flex items-center justify-center md:justify-between gap-7 flex-wrap mb-8">
+      <div className="flex md:items-center flex-col md:flex-row gap-5">
         <h2 className="text-lg lg:text-[32px] font-SemiBold">Profile</h2>
         <div className="flex items-center gap-3 flex-wrap">
           {functionSelect.map((item, index) => {
@@ -67,10 +67,12 @@ function HeaderEditAcc({
           })}
         </div>
       </div>
+
       <SwitchViewProfile
         viewProfile={viewProfile}
         setViewProfile={setViewProfile}
       />
+
       {opened2 && <DeactivateModal id={id} opened={opened2} close={close2} />}
       <NoteModal opened={opened} close={close} />
     </div>
