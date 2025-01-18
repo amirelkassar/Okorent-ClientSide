@@ -116,8 +116,8 @@ function RentOuts() {
             className="border-0 bg-white/70 z-10 relative rounded-t-2xl"
           >
             <Accordion.Control className="bg-white !border border-solid border-green/30 rounded-2xl hover:bg-white shadow-sm">
-              <div className="w-full flex   gap-5 ps-4 py-2 ">
-                <div className=" size-[56px] min-w-[56px] rounded-full relative">
+              <div className="w-full flex   gap-5 md:ps-4 py-2 ">
+                <div className=" size-11 md:size-[56px] min-w-11 md:min-w-[56px] rounded-full relative">
                   <Image
                     src={invoice.avatar}
                     className="rounded-full h-full w-full object-cover"
@@ -150,10 +150,10 @@ function RentOuts() {
             </Accordion.Control>
 
             {/* التفاصيل الكاملة للفاتورة */}
-            <Accordion.Panel className="bg-white/70 border-green/30 border border-t-0 pt-8 lg:pt-12 z-[-1] relative -mt-4 border-solid rounded-b-2xl shadow-md px-3 lg:px-8">
+            <Accordion.Panel className="bg-white/70 border-green/30 border border-t-0 pt-8 lg:pt-12 z-[-1] relative -mt-4 border-solid rounded-b-2xl shadow-md px-1 md:px-3 lg:px-8">
               <div className="flex items-center justify-between gap-4 mb-4 lg:mb-8">
-                <p className="text-xl">Invoice {invoice.id}</p>
-                <Button className="h-10 !px-8">Print</Button>
+                <p className="text-base lg:text-xl">Invoice {invoice.id}</p>
+                <Button className="h-10 px-3 mdl:!px-8">Print</Button>
               </div>
               {/* عرض التفاصيل بدون استخدام جدول */}
               <div className="flex justify-between lgl:justify-start gap-x-7 gap-y-5 lg:gap-x-14 flex-wrap lgl:flex-nowrap flex-col mdl:flex-row">

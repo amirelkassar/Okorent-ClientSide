@@ -52,7 +52,7 @@ function SearchLocDate({ guest = false }: { guest?: boolean }) {
       >
         <LinkGreen
           href={generateUrl()}
-          className="h-full w-12 mld:w-[78px] rounded-e-xl border-[3px] bg-green border-[#a9c788] hover:border-green duration-500 flex items-center justify-center"
+          className="h-full w-12 mdl:w-[78px] rounded-e-xl border-[3px] bg-green border-[#a9c788] hover:border-green duration-500 flex items-center justify-center"
         >
           <SearchIcon className={" w-4 mdl:w-[26px] h-auto"} />
         </LinkGreen>

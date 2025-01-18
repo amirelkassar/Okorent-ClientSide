@@ -13,6 +13,7 @@ import ModalComp from "@/src/components/modal-comp";
 import ListRemove from "@/src/assets/icons/listRemove";
 import { useDeleteFavoriteProductMutation } from "@/src/hooks/queries/user/home";
 import { Toast } from "@/src/components/toast";
+import { getDate } from "@/src/lib/utils";
 
 function CardFavView({ product }: { product?: any }) {
   const [opened, { open, close }] = useDisclosure(false);
@@ -54,9 +55,12 @@ function CardFavView({ product }: { product?: any }) {
               className="size-11 lg:size-[60px] rounded-full  object-cover object-top"
             />
             <div>
-              <h3 className="text-base lg:text-xl font-Medium">Sara James</h3>
+              <h3 className="text-base lg:text-xl font-Medium">
+                {product?.creatorName || "User Name"}
+              </h3>
               <p className="text-grayMedium text-sm lg:text-base font-Regular">
-                Since Sep 2024
+                Since{" "}
+                {getDate(product?.creatorCreation || "").fullYearWithMonthName}
               </p>
             </div>
           </div>

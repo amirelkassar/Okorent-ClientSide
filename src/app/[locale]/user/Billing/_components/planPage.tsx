@@ -1,7 +1,6 @@
 import React from "react";
 import Plan from "./plan";
 import BillingInfo from "./BillingInfo";
-import WithdrawlInfo from "./WithdrawlInfo";
 import { Checkbox } from "@mantine/core";
 
 function PlanPage() {
@@ -15,8 +14,8 @@ function PlanPage() {
         </h3>
         <p className="text-2xl lg:text-3xl font-Regular">30$</p>
       </div>
-      <div className="bg-white/50 flex-1 order-5  min-w-[calc(50%-16px)] rounded-3xl border-green/70 border shadow-md pt-8 pb-6 px-10 lg:px-14">
-        <h3 className="text-2xl font-Regular mb-3">Notifications</h3>
+      <div className="bg-white/50 flex-1 order-5  min-w-[calc(50%-16px)] rounded-3xl border-green/70 border shadow-md  py-6 md:py-10 px-3 md:px-8  lg:px-14">
+        <h3 className=" text-lg md:text-2xl font-Regular mb-3">Notifications</h3>
         <div className="flex lg:items-center flex-col lg:flex-row gap-3">
           <p className="text-base font-Regular text-grayMedium mb-4 w-full lg:w-fit lg:max-w-[310px]">
             Receipts and billing alerts will be sent to 

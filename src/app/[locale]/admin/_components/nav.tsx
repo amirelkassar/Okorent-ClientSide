@@ -8,17 +8,14 @@ import logo from "@/src/assets/images/logo.png";
 import { useMediaQuery } from "@mantine/hooks";
 import { Link, usePathname } from "@/src/navigation";
 import ROUTES from "@/src/routes";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import MenuIcon from "@/src/assets/icons/menu";
 import LogOutMenuIcon from "@/src/assets/icons/logOutMenu";
 import DashboardIcon from "@/src/assets/icons/Dashboard";
 import ListingsIcon from "@/src/assets/icons/Listings";
 import SupportIcon from "@/src/assets/icons/Support";
 import BookingsIcon from "@/src/assets/icons/Bookings";
-import CalendarIcon from "@/src/assets/icons/Calendar";
 import InboxIcon from "@/src/assets/icons/Inbox";
-import HomepageIcon from "@/src/assets/icons/Homepage";
-import man from "@/src/assets/images/user.png";
 import ClientsIcon from "@/src/assets/icons/Clients";
 import BillingIcon from "@/src/assets/icons/Billing";
 import NotificationsIcon from "@/src/assets/icons/Notifications";
@@ -26,8 +23,6 @@ import MembershipsIcon from "@/src/assets/icons/memberships";
 import MasterDataIcon from "@/src/assets/icons/masterData";
 import { clearToken } from "@/src/lib/token";
 import { useToken } from "@/src/hooks/use-token";
-import { Button } from "@mantine/core";
-import LinkGreen from "@/src/components/linkGreen";
 
 interface NavProps {
   linkLogo: string;
@@ -234,7 +229,12 @@ function Nav({ linkLogo = "#" }: NavProps) {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 min-h-8 mb-10 cursor-pointer ps-8 mt-11">
+                <div
+                  onClick={() => {
+                    handleLogout();
+                  }}
+                  className="flex items-center gap-4 min-h-8 mb-10 cursor-pointer ps-8 mt-11"
+                >
                   <LogOutMenuIcon />
                   <p className="text-[#E31B1B] text-base">Log out</p>
                 </div>

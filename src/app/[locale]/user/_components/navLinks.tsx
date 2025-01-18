@@ -58,12 +58,6 @@ function NavLinks() {
         active: path === ROUTES.USER.INBOX,
       },
       {
-        id: 6,
-        name: "Clients",
-        url: ROUTES.USER.CLIENTS,
-        active: path === ROUTES.USER.CLIENTS,
-      },
-      {
         id: 7,
         name: "Wishlist",
         url: ROUTES.USER.WISHLIST,

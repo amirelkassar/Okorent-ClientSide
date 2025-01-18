@@ -16,7 +16,6 @@ import HomepageIcon from "../assets/icons/Homepage";
 import DashboardIcon from "../assets/icons/Dashboard";
 import ListingsIcon from "../assets/icons/Listings";
 import BookingsIcon from "../assets/icons/Bookings";
-import ClientsIcon from "../assets/icons/Clients";
 import WishlistIcon from "../assets/icons/Wishlist";
 import CalendarIcon from "../assets/icons/Calendar";
 import BillingIcon from "../assets/icons/Billing";
@@ -27,6 +26,8 @@ import Notifications from "./Notifications";
 import LogoOkoRent from "../assets/icons/logo";
 import AdsIcon from "../assets/icons/ads";
 import { ScrollArea } from "@mantine/core";
+import { useToken } from "../hooks/use-token";
+import { clearToken } from "../lib/token";
 interface NavProps {
   linkLogo: string;
 }
@@ -34,7 +35,14 @@ function Nav({ linkLogo = "#" }: NavProps) {
   const locale = useLocale();
   const pathname = usePathname();
   const [showMenu, setShowMenu] = useState(false);
+  const { token, setToken } = useToken();
   const params = useParams();
+  console.log(token);
+
+  const handleLogout = () => {
+    setToken({}); // Clear token from the state
+    clearToken(); // Clear token from storage
+  };
 
   const isMobile = useMediaQuery("(max-width: 768px)");
   useEffect(() => {
@@ -89,13 +97,6 @@ function Nav({ linkLogo = "#" }: NavProps) {
         icon: <InboxIcon />,
         url: ROUTES.USER.INBOX,
         active: pathname === ROUTES.USER.INBOX,
-      },
-      {
-        id: 6,
-        name: "Clients",
-        icon: <ClientsIcon />,
-        url: ROUTES.USER.CLIENTS,
-        active: pathname === ROUTES.USER.CLIENTS,
       },
       {
         id: 7,
@@ -202,7 +203,9 @@ function Nav({ linkLogo = "#" }: NavProps) {
                     className=" rounded-full size-11 object-cover object-top"
                     alt="user"
                   />
-                  <h3 className="text-base font-Medium">John Mark</h3>
+                  <h3 className="text-base font-Medium">
+                    {token?.userFirstName || "User Name"}
+                  </h3>
                 </Link>
               </div>
               <ScrollArea
@@ -251,10 +254,14 @@ function Nav({ linkLogo = "#" }: NavProps) {
                     <PlusIcon className={"w-[16px] h-auto"} />
                     <p className="text-base">List an item</p>
                   </Link>
-                  <div className="flex items-center gap-4 min-h-8 mb-4 cursor-pointer ps-8 mt-9">
+                  <Link
+                    href={ROUTES.GUEST.HOMEPAGE}
+                    onClick={() => handleLogout()}
+                    className="flex items-center gap-4 min-h-8 mb-4 cursor-pointer ps-8 mt-9"
+                  >
                     <LogOutMenuIcon />
                     <p className="text-[#E31B1B] text-base">Log out</p>
-                  </div>
+                  </Link>
                 </div>
               </ScrollArea>
             </div>
