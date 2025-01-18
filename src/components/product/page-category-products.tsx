@@ -11,7 +11,10 @@ import { MultiSelect } from "@mantine/core";
 import CantFind from "./CantFind";
 import { Pagination } from "../pagination";
 import { useQueryState } from "nuqs";
-import { GetCategory, GetSubCategory } from "@/src/hooks/queries/admin/master-data/category";
+import {
+  GetCategory,
+  GetSubCategory,
+} from "@/src/hooks/queries/admin/master-data/category";
 const sortingOptions: any[] = [
   {
     value: "PriceAsc",
@@ -40,7 +43,6 @@ function PageCategoryProducts({ children }: { children: React.ReactNode }) {
   );
 
   const { data, isLoading } = GetProductsAll(searchParams.toString());
-  const query = GetProductsAll(searchParams.toString());
   const { data: dataSubCategories, isLoading: isLoadingSubCategory } =
     GetSubCategory(searchParams.get("CategoryId"));
   const updateQuerySearchParams = useUpdateQueryParams();
@@ -96,7 +98,10 @@ function PageCategoryProducts({ children }: { children: React.ReactNode }) {
             })) || []
           }
           value={selectedSubcategories}
-          onChange={setSelectedSubcategories}
+          onChange={(updatedSelection) => {
+            setSelectedSubcategories(updatedSelection);
+            updateQueryParams("SubCategoryIds", updatedSelection);
+          }}
           placeholder="Subcategories"
           searchable
           size="md"
@@ -166,19 +171,21 @@ function PageCategoryProducts({ children }: { children: React.ReactNode }) {
               </p>
             ) : (
               <div className=" flex-col flex gap-5">
-                {dataCategory?.data?.items.map((category: any, index: number) => (
-                  <div
-                    key={index}
-                    className={`cursor-pointer px-4 py-1 rounded-lg`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setCategoryNameParams(category.name); // Set the category name
-                      setCategoryIdParams(category.id); // Set the CategoryId
-                    }}
-                  >
-                    {category?.name}
-                  </div>
-                ))}
+                {dataCategory?.data?.items.map(
+                  (category: any, index: number) => (
+                    <div
+                      key={index}
+                      className={`cursor-pointer px-4 py-1 rounded-lg`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setCategoryNameParams(category.name); // Set the category name
+                        setCategoryIdParams(category.id); // Set the CategoryId
+                      }}
+                    >
+                      {category?.name}
+                    </div>
+                  )
+                )}
               </div>
             )}
           </div>
