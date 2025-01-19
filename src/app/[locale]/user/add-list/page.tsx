@@ -31,18 +31,27 @@ interface FAQ {
   answer: string;
 }
 function Page() {
+  //Hooks
   const [selectedCheckbox, setSelectedCheckbox] = useState<string | null>(null);
   const [location, setLocation] = useState<LocationProps[]>([]);
   const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [dataList, setDataList] = useState<any>({});
   const searchparams = useSearchParams();
+
+  //query
   const {
     mutateAsync: createListing,
     error,
     isError,
     reset,
   } = useCreateListingMutation();
+  const { data: dataCategory } = GetCategory();
+  console.log(dataCategory);
 
+  const { data: dataSubCategory, refetch: RefetchGetSubCategory } =
+    GetSubCategory(dataList?.CategoryId);
+
+  //Functions
   const handleInputChangeLocation = (ids: any[]) => {
     reset();
     setLocation(ids);
@@ -74,11 +83,6 @@ function Page() {
     setFaqs(newFaqs);
     setDataList({ ...dataList, FAQs: newFaqs });
   };
-  const { data: dataCategory } = GetCategory();
-  console.log(dataCategory);
-
-  const { data: dataSubCategory, refetch: RefetchGetSubCategory } =
-    GetSubCategory(dataList?.CategoryId);
 
   const handleSubmit = async () => {
     reset();

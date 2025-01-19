@@ -9,8 +9,9 @@ import { useSelectRowTable } from "@/src/components/select-row-table-context";
 interface SignUpReturn {
   functionSelectView: any[];
   setSelectedFromTable: any;
+  selectedFromTable: any;
 }
-export const useActionTable = (): SignUpReturn => {
+export const useActionTable = (open: any): SignUpReturn => {
   const [selectedFromTable, setSelectedFromTable] = useState([]);
   const { mutateAsync: DeleteManyProducts } = useDeleteManyProductInAdmin();
   const {setSelectRowTable } = useSelectRowTable();
@@ -62,5 +63,6 @@ export const useActionTable = (): SignUpReturn => {
   return {
     functionSelectView,
     setSelectedFromTable,
+    selectedFromTable
   };
 };

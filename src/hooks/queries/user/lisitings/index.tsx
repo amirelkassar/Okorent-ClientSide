@@ -90,6 +90,25 @@ export const useUpdateManyToOnlineMutation = () => {
     },
   });
 };
+//delete Many my Product
+export const useDeleteManyMyProduct = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.delete(user.product.DeleteManyProduct, {
+        data: data,
+      });
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKey]);
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
 //getProductByID
 export const GetUserProductsByID = (id: any) => {
   return useQuery({

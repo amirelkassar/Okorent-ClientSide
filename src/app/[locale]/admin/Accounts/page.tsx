@@ -10,13 +10,16 @@ import { TableHeader } from "@/src/components/table/table-header";
 import AddUser from "@/src/components/add-user";
 import { useActionTable } from "./_hooks/use-action-table";
 import { GetAccounts } from "@/src/hooks/queries/admin/account";
+import DeactivateModalMany from "./_components/DeactivateModal-many";
+import { useDisclosure } from "@mantine/hooks";
 
 function Page() {
   const searchParams = useSearchParams();
   console.log(searchParams.toString());
+  const [opened, { open, close }] = useDisclosure(false);
 
   const query = GetAccounts(searchParams.toString());
-  const { functionSelectView, setSelectedFromTable } = useActionTable();
+  const { functionSelectView, setSelectedFromTable, selectedFromTable } = useActionTable(open);
   const totalCount = query.data?.data?.totalCount || 0;
 
   return (
@@ -48,6 +51,7 @@ function Page() {
           );
         }}
       </QueryWrapper>
+      <DeactivateModalMany opened={opened} close={close} ids={selectedFromTable} />
     </div>
   );
 }

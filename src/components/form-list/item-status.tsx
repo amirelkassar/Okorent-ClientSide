@@ -1,6 +1,6 @@
 "use client";
 import { Checkbox } from "@mantine/core";
-import React, { useState } from "react";
+import React from "react";
 interface ItemStatusProps {
   selectedCheckbox: string | null;
   setSelectedCheckbox: React.Dispatch<React.SetStateAction<string | null>>;

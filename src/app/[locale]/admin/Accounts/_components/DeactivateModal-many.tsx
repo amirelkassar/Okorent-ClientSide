@@ -5,8 +5,12 @@ import React, { useCallback, useState } from "react";
 import DateDeactivateModal from "./DateDeactivateModal";
 import Button from "@/src/components/button";
 import { Toast } from "@/src/components/toast";
-import { useDeActivateAccountInAdmin } from "@/src/hooks/queries/admin/account";
+import {
+  useDeActivateAccountInAdmin,
+  useDeActivateManyAccountInAdmin,
+} from "@/src/hooks/queries/admin/account";
 import { getDate } from "@/src/lib/utils";
+import { useSelectRowTable } from "@/src/components/select-row-table-context";
 const OptionAvailability = [
   {
     value: "permanently",
@@ -17,21 +21,30 @@ const OptionAvailability = [
     label: "Select Specific Period",
   },
 ];
-function DeactivateModal({ opened, close, id }: { opened: any; close: any; id: any }) {
-  console.log(id);
+function DeactivateModalMany({
+  opened,
+  close,
+  ids,
+}: {
+  opened: any;
+  close: any;
+  ids: any;
+}) {
+  console.log(ids);
   const [valueDeactivate, setValueDeactivate] = useState("permanently");
   const [duration, setDuration] = useState({
     deactivationStart: "",
     deactivationEnd: "",
   });
-  console.log(duration);
+  const { setSelectRowTable } = useSelectRowTable();
 
-  const { mutateAsync: DeActivateAccount } = useDeActivateAccountInAdmin();
+  const { mutateAsync: DeActivateManyAccount } =
+    useDeActivateManyAccountInAdmin();
 
-  //DeActivate User
-  const onSubmitDeActivateAccount = useCallback(async () => {
+  //DeActive Many User
+  const onSubmitDeActiveManyAccount = useCallback(async () => {
     const formData = {
-      userId: id,
+      userIds: ids.map((item: any) => item.id),
       isDeactivated: true,
       isPermanentDeactivation: valueDeactivate === "permanently",
       ...(valueDeactivate !== "permanently" && {
@@ -39,14 +52,18 @@ function DeactivateModal({ opened, close, id }: { opened: any; close: any; id: a
         deactivationEnd: getDate(duration.deactivationEnd).fullYear,
       }),
     };
-    Toast.Promise(DeActivateAccount(formData), {
-      success: "DeActivate Account Done",
-      onSuccess: async (res) => {
+    Toast.Promise(DeActivateManyAccount(formData), {
+      success: "Activate Accounts Done",
+      onSuccess(res) {
+        setSelectRowTable([]);
+        close();
+      },
+      onError(err) {
+        setSelectRowTable([]);
         close();
       },
     });
-  }, [DeActivateAccount, id, valueDeactivate, duration, close]);
-
+  }, [DeActivateManyAccount,ids]);
   return (
     <>
       <ModalComp opened={opened} close={close} title={"Deactivate account"}>
@@ -106,7 +123,7 @@ function DeactivateModal({ opened, close, id }: { opened: any; close: any; id: a
             </Button>
             <Button
               onClick={() => {
-                onSubmitDeActivateAccount();
+                onSubmitDeActiveManyAccount();
               }}
               className={" flex-1 h-[54px]"}
             >
@@ -119,4 +136,4 @@ function DeactivateModal({ opened, close, id }: { opened: any; close: any; id: a
   );
 }
 
-export default DeactivateModal;
+export default DeactivateModalMany;

@@ -26,8 +26,9 @@ const FilterOptions = [
 function Page() {
   const searchParams = useSearchParams();
   const [opened, { open, close }] = useDisclosure(false);
+  const { functionSelectView, setSelectedFromTable, selectedFromTable } = useActionTable(open);
+  
   const query = GetProductsInAdmin(searchParams.toString());
-  const { functionSelectView, setSelectedFromTable } = useActionTable();
   const totalCount = query.data?.data?.totalCount||0;
 
   return (
@@ -54,7 +55,7 @@ function Page() {
           );
         }}
       </QueryWrapper>
-      <QuickEditModal opened={opened} close={close} />
+      <QuickEditModal opened={opened} close={close} selectedFromTable={selectedFromTable} />
     </div>
   );
 }

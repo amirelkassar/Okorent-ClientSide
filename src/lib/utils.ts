@@ -350,3 +350,37 @@ export const getCroppedImg = (
     image.onerror = () => reject(new Error('Failed to load the image'));
   });
 };
+
+
+
+
+export function convertTo24Hour(time12h: string) {
+  const [time, modifier] = time12h.split(" ");
+  let [hours, minutes] = time.split(":");
+
+  if (hours === "12") {
+    hours = "00";
+  }
+
+  if (modifier === "PM") {
+    hours = String(parseInt(hours, 10) + 12);
+  }
+
+  return `${hours.padStart(2, "0")}:${minutes}`;
+}
+
+export function convertTo12Hour(time24h: string) {
+  const [hours, minutes] = time24h.split(":");
+  const hour = parseInt(hours, 10);
+
+  if (hour === 0) {
+    return `12:${minutes} AM`;
+  }
+  if (hour === 12) {
+    return `12:${minutes} PM`;
+  }
+  if (hour > 12) {
+    return `${hour - 12}:${minutes} PM`;
+  }
+  return `${hour}:${minutes} AM`;
+}

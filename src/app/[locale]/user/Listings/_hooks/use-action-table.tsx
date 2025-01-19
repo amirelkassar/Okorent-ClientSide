@@ -4,7 +4,10 @@ import OnlineIcon from "@/src/assets/icons/online";
 import DeleteIcon from "@/src/assets/icons/delete";
 import { GetUniqueValues } from "@/src/lib/utils";
 import { Toast } from "@/src/components/toast";
-import { useUpdateManyToOnlineMutation } from "@/src/hooks/queries/user/lisitings";
+import {
+  useDeleteManyMyProduct,
+  useUpdateManyToOnlineMutation,
+} from "@/src/hooks/queries/user/lisitings";
 import { useSelectRowTable } from "@/src/components/select-row-table-context";
 
 interface SignUpReturn {
@@ -14,7 +17,8 @@ interface SignUpReturn {
 export const useActionTable = (): SignUpReturn => {
   const [selectedFromTable, setSelectedFromTable] = useState([]);
   const { mutateAsync: UpdateManyToOnline } = useUpdateManyToOnlineMutation();
-  const {setSelectRowTable } = useSelectRowTable();
+  const { mutateAsync: DeleteManyMyProduct } = useDeleteManyMyProduct();
+  const { setSelectRowTable } = useSelectRowTable();
 
   //Make Many Product to Online
   const onSubmitMakeOnline = useCallback(
@@ -22,13 +26,28 @@ export const useActionTable = (): SignUpReturn => {
       Toast.Promise(UpdateManyToOnline(data), {
         loading: "Processing...",
         success: "Operation completed!",
-        error: "Failed to complete operation",
         onSuccess(res) {
           setSelectRowTable([]);
         },
       });
     },
     [UpdateManyToOnline]
+  );
+  //Delete Many Product
+  const onSubmitDeleteProducts = useCallback(
+    async (data: any) => {
+      Toast.Promise(DeleteManyMyProduct(data), {
+        loading: "Processing...",
+        success: "Deleted Products Done",
+        onSuccess(res) {
+          setSelectRowTable([]);
+        },
+        onError(err) {
+          setSelectRowTable([]);
+        },
+      });
+    },
+    [DeleteManyMyProduct]
   );
 
   const functionSelect = useMemo(
@@ -49,7 +68,9 @@ export const useActionTable = (): SignUpReturn => {
         title: "Delete",
         icon: <DeleteIcon className="max-h-4 w-auto" />,
         onclick: (ids: any) => {
-          console.log(ids);
+          onSubmitDeleteProducts({
+            productIds: ids?.map((item: any) => item.id),
+          });
         },
       },
     ],

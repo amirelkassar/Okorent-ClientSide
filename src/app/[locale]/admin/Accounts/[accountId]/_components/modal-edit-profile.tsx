@@ -5,9 +5,9 @@ import InputTextarea from "@/src/components/InputTextarea";
 import ModalComp from "@/src/components/modal-comp";
 import SelectInput from "@/src/components/select-input";
 import { Toast } from "@/src/components/toast";
-import { useEditMyProfile } from "@/src/hooks/queries/user/my-profile";
+import { useEditAccountIDInAdmin } from "@/src/hooks/queries/admin/account";
 import { Language, WorkingDays } from "@/src/lib/dataUser";
-import { convertTo12Hour, convertTo24Hour } from "@/src/lib/utils";
+import {  convertTo24Hour } from "@/src/lib/utils";
 import { MultiSelect, ScrollArea } from "@mantine/core";
 import React, { useCallback, useState } from "react";
 
@@ -20,10 +20,10 @@ function ModalEditProfile({
   close: () => void;
   initialData: any;
 }) {
-  const { mutateAsync: EditMyProfile } = useEditMyProfile();
+  const { mutateAsync: EditMyProfile } = useEditAccountIDInAdmin();
   console.log(initialData);
   const [formState, setFormState] = useState({
-    id: initialData?.id || "",
+    UserId: initialData?.id || "",
     Name: initialData?.name || "",
     Email: initialData?.userName || "",
     Country: initialData?.country || "",
@@ -34,7 +34,7 @@ function ModalEditProfile({
     Language: "en",
     description: initialData?.description || "",
     UserLanguages:
-      initialData?.languages?.map((item: any) =>
+      initialData?.userLanguage?.map((item: any) =>
         item?.userLanguages?.toString()
       ) || [],
     address: initialData?.address || "",

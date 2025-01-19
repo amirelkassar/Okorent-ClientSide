@@ -19,7 +19,8 @@ export type MedicalTeamTableData = {
   payment: number;
   rating: number;
   userImage: string;
-  status: boolean;
+  isActivated: any;
+  isVerified: any;
   created: string;
   userName: string;
   totalProductsCount: any;
@@ -89,21 +90,29 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     header: "Payment",
     cell: ({ getValue }) => {
       const payment = getValue<number>();
-      return <p className=" text-[16px] font-SemiBold">{payment}$</p>;
+      return <p className=" text-[16px] font-SemiBold">{payment || 0} $</p>;
     },
   },
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: "isVerified",
+    header: "Verify",
     cell: ({ getValue }) => {
-      const status = getValue();
+      const isVerified = getValue();
       return (
         <p className="text-[16px] font-SemiBold">
-          {status === 2
-            ? "Verified"
-            : status === 1
-            ? "Un Verified"
-            : "Deactivated"}
+          {isVerified ? "Verified" : "Un Verified"}
+        </p>
+      );
+    },
+  },
+  {
+    accessorKey: "isActivated",
+    header: "Status",
+    cell: ({ getValue }) => {
+      const isActivated = getValue();
+      return (
+        <p className="text-[16px] font-SemiBold">
+          {isActivated ? "Activated" : "Deactivated"}
         </p>
       );
     },
@@ -125,10 +134,11 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     id: "actions",
     cell: ({ row }) => {
       const id = row.original.id;
-      const status = row.original.status;
+      const isActivated = row.original.isActivated;
+      const isVerified = row.original.isVerified;
       return (
         <div className="flex items-center gap-3 justify-end">
-          <ActionMenu id={id} status={status} dataUSer={row.original} />
+          <ActionMenu id={id} isActivated={isActivated} isVerified={isVerified} dataUSer={row.original} />
         </div>
       );
     },

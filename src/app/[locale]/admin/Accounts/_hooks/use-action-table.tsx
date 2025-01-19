@@ -5,17 +5,27 @@ import { GetUniqueValues } from "@/src/lib/utils";
 import TrueIcon from "@/src/assets/icons/true";
 import DeactivateIcon from "@/src/assets/icons/Deactivate";
 import NoteTableIcon from "@/src/assets/icons/noteTable";
-import { useDeleteManyAccountInAdmin } from "@/src/hooks/queries/admin/account";
+import {
+  useActiveManyAccountInAdmin,
+  useDeleteManyAccountInAdmin,
+  useVerificationManyAccountInAdmin,
+} from "@/src/hooks/queries/admin/account";
 import { Toast } from "@/src/components/toast";
 import { useSelectRowTable } from "@/src/components/select-row-table-context";
+import UnVerifyIcon from "@/src/assets/icons/unVerify";
 
 interface SignUpReturn {
   functionSelectView: any[];
   setSelectedFromTable: any;
+  selectedFromTable: any;
 }
-export const useActionTable = (): SignUpReturn => {
+export const useActionTable = (open: any): SignUpReturn => {
   const [selectedFromTable, setSelectedFromTable] = useState([]);
   const { mutateAsync: DeleteManyAccount } = useDeleteManyAccountInAdmin();
+  const { mutateAsync: ActiveManyAccount } = useActiveManyAccountInAdmin();
+  const { mutateAsync: VerificationManyAccount } =
+    useVerificationManyAccountInAdmin();
+
   const { setSelectRowTable } = useSelectRowTable();
 
   //delete User
@@ -26,74 +36,158 @@ export const useActionTable = (): SignUpReturn => {
         onSuccess(res) {
           setSelectRowTable([]);
         },
+        onError(err) {
+          setSelectRowTable([]);
+        },
       });
     },
     [DeleteManyAccount, selectedFromTable]
   );
-
-  const functionSelect = useMemo(
-    () => [
-      //0
-      {
-        title: "Verify",
-        icon: <TrueIcon className="max-h-4 w-auto " />,
-        onclick: (ids: any) => {
-          console.log([...ids]);
+  //Active Many User
+  const onSubmitActiveManyAccount = useCallback(
+    async (data: any) => {
+      Toast.Promise(ActiveManyAccount(data), {
+        success: "Activate Accounts Done",
+        onSuccess(res) {
+          setSelectRowTable([]);
         },
-      },
-      //1
-      {
-        title: "Deactivate",
-        icon: <DeactivateIcon className="max-h-4 w-auto " />,
-        onclick: (ids: any) => {
-          console.log([...ids]);
+        onError(err) {
+          setSelectRowTable([]);
         },
-      },
-      //3
-      {
-        title: "Send Note",
-        icon: <NoteTableIcon className="max-h-4 w-auto " />,
-        onclick: (ids: any) => {
-          console.log([...ids]);
+      });
+    },
+    [ActiveManyAccount, selectedFromTable]
+  );
+  //Verification Many User
+  const onSubmitVerificationManyAccount = useCallback(
+    async (data: any, verify: boolean) => {
+      Toast.Promise(VerificationManyAccount(data), {
+        success: ` ${verify ? "Verified" : "UnVerified"} Accounts Done`,
+        onSuccess(res) {
+          setSelectRowTable([]);
         },
-      },
-      //4
-      {
-        title: "Delete",
-        icon: <DeleteIcon className="max-h-4 w-auto " />,
-        onclick: (ids: any) => {
-          onSubmitDeleteManyAccount({
-            userIds: ids?.map((item: any) => item.id),
-          });
+        onError(err) {
+          setSelectRowTable([]);
         },
-      },
-    ],
-    [selectedFromTable]
+      });
+    },
+    [VerificationManyAccount, selectedFromTable]
   );
 
-  const functionSelectView = useMemo(() => {
-    const ValueSelected = GetUniqueValues(selectedFromTable, "isVerified");
-    console.log(ValueSelected);
+  const functionSelect = [
+    //0
+    {
+      title: "Verify",
+      icon: <TrueIcon className="max-h-4 w-auto " />,
+      onclick: (ids: any) => {
+        onSubmitVerificationManyAccount(
+          {
+            verify: true,
+            userIds: ids.map((item: any) => item.id),
+          },
+          true
+        );
+      },
+    },
+    //1
+    {
+      title: "Deactivate",
+      icon: <DeactivateIcon className="max-h-4 w-auto " />,
+      onclick: (ids: any) => {
+        open();
+      },
+    },
+    //2
+    {
+      title: "Send Note",
+      icon: <NoteTableIcon className="max-h-4 w-auto " />,
+      onclick: (ids: any) => {
+        console.log([...ids]);
+      },
+    },
+    //3
+    {
+      title: "Activate",
+      icon: <TrueIcon className="max-h-4 w-auto " />,
+      onclick: (ids: any) => {
+        onSubmitActiveManyAccount({
+          userIds: ids?.map((item: any) => item.id),
+        });
+      },
+    },
+    //4
+    {
+      title: "UnVerify",
+      icon: <UnVerifyIcon fill="#006AFF" className="w-3 h-auto" />,
+      onclick: (ids: any) => {
+        onSubmitVerificationManyAccount(
+          {
+            verify: false,
+            userIds: ids.map((item: any) => item.id),
+          },
+          false
+        );
+      },
+    },
+    //5
+    {
+      title: "Delete",
+      icon: <DeleteIcon className="max-h-4 w-auto " />,
+      onclick: (ids: any) => {
+        onSubmitDeleteManyAccount({
+          userIds: ids?.map((item: any) => item.id),
+        });
+      },
+    },
+  ];
 
-    if (ValueSelected?.toString()) {
-      switch (ValueSelected.toString()) {
-        case "false":
-          return [functionSelect[0], functionSelect[2], functionSelect[3]];
-        default:
-          return [functionSelect[1], functionSelect[2], functionSelect[3]];
-      }
-    } else {
+  const functionSelectView = useMemo(() => {
+    const isVerified = GetUniqueValues(selectedFromTable, "isVerified");
+    const isActivated = GetUniqueValues(selectedFromTable, "isActivated");
+
+    if (isVerified?.toString() === "true" && isActivated?.toString() === "true")
       return [
+        functionSelect[4],
         functionSelect[1],
         functionSelect[2],
-        functionSelect[3],
-        functionSelect[4],
+        functionSelect[5],
       ];
-    }
+    else if (
+      isVerified?.toString() === "true" &&
+      isActivated?.toString() === "false"
+    )
+      return [
+        functionSelect[4],
+        functionSelect[3],
+        functionSelect[2],
+        functionSelect[5],
+      ];
+    else if (
+      isVerified?.toString() === "false" &&
+      isActivated?.toString() === "true"
+    )
+      return [
+        functionSelect[0],
+        functionSelect[1],
+        functionSelect[2],
+        functionSelect[5],
+      ];
+    else if (
+      isVerified?.toString() === "false" &&
+      isActivated?.toString() === "false"
+    )
+      return [
+        functionSelect[0],
+        functionSelect[3],
+        functionSelect[2],
+        functionSelect[5],
+      ];
+    else return [functionSelect[2], functionSelect[5]];
   }, [selectedFromTable, functionSelect]);
 
   return {
     functionSelectView,
     setSelectedFromTable,
+    selectedFromTable,
   };
 };
