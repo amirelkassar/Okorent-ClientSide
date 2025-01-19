@@ -33,7 +33,6 @@ function Page() {
     <div>
       <TableHeader>
         <TableHeader.First title={`Booking - ${totalCount}`} />
-
         <TableHeader.Last options={FilterOptionsBooking} />
       </TableHeader>
       <QueryWrapper query={query}>
@@ -56,7 +55,11 @@ function Page() {
 
       <RefundModal opened={opened} close={close} />
       <NoteModal opened={opened2} close={close2} />
-      <CancelManyModal opened={opened3} close={close3} selectedFromTable={selectedFromTable} />
+      <CancelManyModal
+        opened={opened3}
+        close={close3}
+        selectedFromTable={selectedFromTable}
+      />
     </div>
   );
 }

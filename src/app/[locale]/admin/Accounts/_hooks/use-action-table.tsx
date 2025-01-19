@@ -3,14 +3,11 @@ import { useCallback, useMemo, useState } from "react";
 import DeleteIcon from "@/src/assets/icons/delete";
 import { GetUniqueValues } from "@/src/lib/utils";
 import TrueIcon from "@/src/assets/icons/true";
-import ExportIcon from "@/src/assets/icons/export";
 import DeactivateIcon from "@/src/assets/icons/Deactivate";
 import NoteTableIcon from "@/src/assets/icons/noteTable";
-import {
-  useDeleteAccountInAdmin,
-  useDeleteManyAccountInAdmin,
-} from "@/src/hooks/queries/admin/account";
+import { useDeleteManyAccountInAdmin } from "@/src/hooks/queries/admin/account";
 import { Toast } from "@/src/components/toast";
+import { useSelectRowTable } from "@/src/components/select-row-table-context";
 
 interface SignUpReturn {
   functionSelectView: any[];
@@ -19,12 +16,16 @@ interface SignUpReturn {
 export const useActionTable = (): SignUpReturn => {
   const [selectedFromTable, setSelectedFromTable] = useState([]);
   const { mutateAsync: DeleteManyAccount } = useDeleteManyAccountInAdmin();
+  const { setSelectRowTable } = useSelectRowTable();
+
   //delete User
   const onSubmitDeleteManyAccount = useCallback(
     async (data: any) => {
       Toast.Promise(DeleteManyAccount(data), {
         success: "Deleted Account Done",
-        onSuccess: async (res) => {},
+        onSuccess(res) {
+          setSelectRowTable([]);
+        },
       });
     },
     [DeleteManyAccount, selectedFromTable]
@@ -44,15 +45,6 @@ export const useActionTable = (): SignUpReturn => {
       {
         title: "Deactivate",
         icon: <DeactivateIcon className="max-h-4 w-auto " />,
-        onclick: (ids: any) => {
-          console.log([...ids]);
-        },
-      },
-
-      //2
-      {
-        title: "Export",
-        icon: <ExportIcon className="max-h-4 w-auto " />,
         onclick: (ids: any) => {
           console.log([...ids]);
         },
@@ -86,19 +78,9 @@ export const useActionTable = (): SignUpReturn => {
     if (ValueSelected?.toString()) {
       switch (ValueSelected.toString()) {
         case "false":
-          return [
-            functionSelect[0],
-            functionSelect[2],
-            functionSelect[3],
-            functionSelect[4],
-          ];
+          return [functionSelect[0], functionSelect[2], functionSelect[3]];
         default:
-          return [
-            functionSelect[1],
-            functionSelect[2],
-            functionSelect[3],
-            functionSelect[4],
-          ];
+          return [functionSelect[1], functionSelect[2], functionSelect[3]];
       }
     } else {
       return [

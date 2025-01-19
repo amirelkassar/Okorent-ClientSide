@@ -88,23 +88,17 @@ function ViewProfile({
                 </p>
               </div>
             </div>
-            <div className="flex items-center justify-center md:justify-start gap-2 mt-7">
+            <div className="flex items-center pe-4 md:pe-12 justify-center md:justify-start gap-2 mt-7">
               <LinkGreen
                 href={
                   editAdmin
                     ? ROUTES.ADMIN.INBOX + "?chat=" + data?.id
                     : ROUTES.USER.INBOX + "?chat=" + data?.id
                 }
-                className={"h-[50px]"}
+                className={"h-[50px] w-full"}
               >
                 Message {data.name?.split(" ")[0] || "user"}
               </LinkGreen>
-              <button className=" size-[46px]  rounded-lg bg-grayBack flex items-center justify-center p-3 duration-300 hover:shadow-md">
-                <FavIcon className="w-full h-auto" />
-              </button>
-              <button className=" size-[46px]  rounded-lg bg-grayBack flex items-center justify-center p-3 duration-300 hover:shadow-md">
-                <ShareIcon />
-              </button>
             </div>
           </div>
           <div>

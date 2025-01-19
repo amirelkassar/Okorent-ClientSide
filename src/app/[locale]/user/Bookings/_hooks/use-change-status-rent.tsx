@@ -10,6 +10,7 @@ import {
   useRefundOrderMutation,
 } from "@/src/hooks/queries/user/booking";
 import { Toast } from "@/src/components/toast";
+import { useSelectRowTable } from "@/src/components/select-row-table-context";
 
 interface ActionTableIRentProps {
   onSubmitDelete: any;
@@ -28,13 +29,16 @@ export const useChangeStatusRent = (id: any): ActionTableIRentProps => {
   const { mutateAsync: RefundManyOrder } = useRefundManyOrderMutation();
   const { mutateAsync: ChangeStatusProduct } = ChangeStautsByID(id);
   const { mutateAsync: ChangeStatusManyProduct } = ChangeStatusByIDs();
-
+  const { setSelectRowTable } = useSelectRowTable();
   //change status
   const onSubmitChangeStatus = useCallback(async () => {
     Toast.Promise(ChangeStatusProduct(id), {
       loading: "Processing...",
       success: "Operation completed!",
       error: "Failed to complete operation",
+      onSuccess(res) {
+        setSelectRowTable([]);
+      },
     });
   }, [ChangeStatusProduct, id]);
 
@@ -45,6 +49,9 @@ export const useChangeStatusRent = (id: any): ActionTableIRentProps => {
         loading: "Processing...",
         success: "Operation completed!",
         error: "Failed to complete operation",
+        onSuccess(res) {
+          setSelectRowTable([]);
+        },
       });
     },
     [ChangeStatusManyProduct, id]
@@ -59,7 +66,9 @@ export const useChangeStatusRent = (id: any): ActionTableIRentProps => {
       }),
       {
         success: "Canceled Order",
-        onSuccess: async (res) => {},
+        onSuccess(res) {
+          setSelectRowTable([]);
+        },
       }
     );
   }, [CancelOrder, id]);
@@ -69,7 +78,9 @@ export const useChangeStatusRent = (id: any): ActionTableIRentProps => {
     async (data: any) => {
       Toast.Promise(CancelManyOrder(data), {
         success: "Canceled Order",
-        onSuccess: async (res) => {},
+        onSuccess(res) {
+          setSelectRowTable([]);
+        },
       });
     },
     [CancelManyOrder, id]
@@ -79,7 +90,9 @@ export const useChangeStatusRent = (id: any): ActionTableIRentProps => {
   const onSubmitDelete = useCallback(async () => {
     Toast.Promise(DeleteOrderOut(id), {
       success: "Deleted Product Done",
-      onSuccess: async (res) => {},
+      onSuccess(res) {
+        setSelectRowTable([]);
+      },
     });
   }, [DeleteOrderOut, id]);
 
@@ -93,7 +106,9 @@ export const useChangeStatusRent = (id: any): ActionTableIRentProps => {
         }),
         {
           success: "Done Send Request to Return Order",
-          onSuccess: async (res) => {},
+          onSuccess(res) {
+            setSelectRowTable([]);
+          },
         }
       );
     },
@@ -105,7 +120,9 @@ export const useChangeStatusRent = (id: any): ActionTableIRentProps => {
     async (data: any) => {
       Toast.Promise(RefundManyOrder(data), {
         success: "Done Send Request to Return Order",
-        onSuccess: async (res) => {},
+        onSuccess(res) {
+          setSelectRowTable([]);
+        },
       });
     },
     [RefundManyOrder, id]

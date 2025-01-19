@@ -4,6 +4,7 @@ import DeleteIcon from "@/src/assets/icons/delete";
 import { Toast } from "@/src/components/toast";
 import QuickEditIcon from "@/src/assets/icons/quickEdit";
 import { useDeleteManyProductInAdmin } from "@/src/hooks/queries/admin/lisiting";
+import { useSelectRowTable } from "@/src/components/select-row-table-context";
 
 interface SignUpReturn {
   functionSelectView: any[];
@@ -12,13 +13,19 @@ interface SignUpReturn {
 export const useActionTable = (): SignUpReturn => {
   const [selectedFromTable, setSelectedFromTable] = useState([]);
   const { mutateAsync: DeleteManyProducts } = useDeleteManyProductInAdmin();
-
+  const {setSelectRowTable } = useSelectRowTable();
   //Delete Many Product
   const onSubmitDelete = useCallback(
     async (data: any) => {
       Toast.Promise(DeleteManyProducts(data), {
         loading: "Processing...",
         success: "Deleted Products Done",
+        onSuccess(res) {
+          setSelectRowTable([]);
+        },
+        onError(err) {
+          setSelectRowTable([])
+        },
       });
     },
     [DeleteManyProducts]

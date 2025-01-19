@@ -4,7 +4,6 @@ import ImagesProduct from "./imagesProduct";
 import PricingOptions from "./PricingOptions";
 import RentalDuration from "./rentalDuration";
 import PriceDetails from "./priceDetails";
-import ShareIcon from "@/src/assets/icons/share";
 import FavRedIcon from "@/src/assets/icons/favRed";
 import FeaturesProduct from "./FeaturesProduct";
 import ProductClient from "./productClient";
@@ -15,6 +14,7 @@ import ViewCheckout from "./checkout/view-checkout";
 import LinkGreen from "../linkGreen";
 import ROUTES from "@/src/routes";
 import { calculateDurationRange } from "@/src/lib/utils";
+import CopyLink from "../copy-link";
 
 function CardProduct({
   data = [],
@@ -99,9 +99,7 @@ function CardProduct({
             {data.name || "Hbada E3 Air Ergonomic Office Chair"}
           </h2>
           <div className="flex flex-col md:flex-row items-center gap-2 md:gap-5">
-            <button className=" size-9 md:size-11 lg:size-[60px] rounded-full bg-grayBack flex items-center justify-center p-2 md:p-3 duration-300 hover:shadow-md">
-              <ShareIcon />
-            </button>
+            <CopyLink />
             <button className=" size-9 md:size-11 lg:size-[60px] rounded-full bg-grayBack flex items-center justify-center p-2 md:p-3 duration-300 hover:shadow-md">
               <FavRedIcon />
             </button>

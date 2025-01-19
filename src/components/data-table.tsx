@@ -9,7 +9,7 @@ import {
   getSortedRowModel,
 } from "@tanstack/react-table";
 import { Checkbox, Table } from "@mantine/core";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import ArrowWhiteIcon from "../assets/icons/arrowWhite";
 import FilterBy from "./filterBy";
 import { Link } from "../navigation";
@@ -20,6 +20,7 @@ import DeleteIcon from "../assets/icons/delete";
 import ExportIcon from "../assets/icons/export";
 import LinkGreen from "./linkGreen";
 import Events from "./Events";
+import { useSelectRowTable } from "./select-row-table-context";
 export interface FilterData {
   label: string;
   type: string;
@@ -83,6 +84,10 @@ export function DataTable<TData extends { id: any }, TValue>({
     getSortedRowModel: getSortedRowModel(),
   });
 
+  //use context
+  const { selectRowTable, setSelectRowTable } = useSelectRowTable();
+
+  //functions
   const handelFilter = (key: string | boolean) => {
     table.getColumn(filterBy)?.setFilterValue(key);
   };
@@ -93,14 +98,12 @@ export function DataTable<TData extends { id: any }, TValue>({
     return table.getColumn(key)?.getIsSorted();
   };
 
-  const [selectedUsers, setSelectedUsers] = useState<any[]>([]);
-
   const toggleUser = useCallback((row: any) => {
-    setSelectedUsers((prev) => {
-      const existingIndex = prev.findIndex((user) => user.id === row.id);
+    setSelectRowTable((prev: any) => {
+      const existingIndex = prev.findIndex((user: any) => user.id === row.id);
       if (existingIndex !== -1) {
         // Remove user
-        return prev.filter((_, index) => index !== existingIndex);
+        return prev.filter((_: any, index: any) => index !== existingIndex);
       }
       // Add user
       return [...prev, row];
@@ -119,7 +122,7 @@ export function DataTable<TData extends { id: any }, TValue>({
   }, []);
 
   const toggleAll = useCallback(() => {
-    setSelectedUsers((prev) =>
+    setSelectRowTable((prev) =>
       prev.length === table.getRowModel().rows.length
         ? []
         : table.getRowModel().rows.map((row) => row.original)
@@ -132,6 +135,7 @@ export function DataTable<TData extends { id: any }, TValue>({
       );
     }
   }, [table]);
+
   return (
     <div>
       <div className="flex items-center justify-between gap-6 flex-wrap ">
@@ -148,33 +152,31 @@ export function DataTable<TData extends { id: any }, TValue>({
               <p>Card View</p>
             </Link>
           )}
-          {selectedUsers.length > 0 ? (
-            <>
-              <div className={`flex items-center gap-3 flex-wrap mb-5`}>
-                {functionSelect ? (
-                  functionSelect.map((item, index) => {
-                    return (
-                      <Events key={index} item={item} ids={selectedUsers} />
-                    );
-                  })
-                ) : (
-                  <>
-                    <div className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
-                      <TrueIcon />
-                      <p className="text-blue text-[14px]">Verify</p>
-                    </div>
-                    <div className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
-                      <ExportIcon />
-                      <p className="text-blue text-[14px]">Export</p>
-                    </div>
-                    <div className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
-                      <DeleteIcon className="h-[14px] w-auto" />
-                      <p className="text-red text-[14px]">Delete</p>
-                    </div>
-                  </>
-                )}
-              </div>
-            </>
+          {selectRowTable.length > 0 ? (
+            <div className={`flex items-center gap-3 flex-wrap mb-5`}>
+              {functionSelect ? (
+                functionSelect.map((item, index) => {
+                  return (
+                    <Events key={index} item={item} ids={selectRowTable} />
+                  );
+                })
+              ) : (
+                <>
+                  <div className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
+                    <TrueIcon />
+                    <p className="text-blue text-[14px]">Verify</p>
+                  </div>
+                  <div className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
+                    <ExportIcon />
+                    <p className="text-blue text-[14px]">Export</p>
+                  </div>
+                  <div className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
+                    <DeleteIcon className="h-[14px] w-auto" />
+                    <p className="text-red text-[14px]">Delete</p>
+                  </div>
+                </>
+              )}
+            </div>
           ) : null}
         </div>
         {haveRentSwitch && <RentSwitch typeUser="user" />}
@@ -221,7 +223,7 @@ export function DataTable<TData extends { id: any }, TValue>({
                       input: "bg-transparent",
                     }}
                     size="xs"
-                    checked={selectedUsers.some(
+                    checked={selectRowTable.some(
                       (user) => user.id === row.original.id
                     )}
                     onChange={() => toggleUser(row.original)}
@@ -248,11 +250,11 @@ export function DataTable<TData extends { id: any }, TValue>({
                       input: "bg-transparent",
                     }}
                     checked={
-                      selectedUsers.length === table.getRowModel().rows.length
+                      selectRowTable.length === table.getRowModel().rows.length
                     }
                     indeterminate={
-                      selectedUsers.length > 0 &&
-                      selectedUsers.length < table.getRowModel().rows.length
+                      selectRowTable.length > 0 &&
+                      selectRowTable.length < table.getRowModel().rows.length
                     }
                     onChange={toggleAll}
                   />
@@ -288,7 +290,7 @@ export function DataTable<TData extends { id: any }, TValue>({
                         input: "bg-transparent",
                       }}
                       size="xs"
-                      checked={selectedUsers.some(
+                      checked={selectRowTable.some(
                         (user) => user.id === row.original.id
                       )}
                       onChange={() => toggleUser(row.original)}

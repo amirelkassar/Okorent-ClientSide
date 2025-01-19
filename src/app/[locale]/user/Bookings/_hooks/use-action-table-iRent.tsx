@@ -1,7 +1,7 @@
 "use client";
 import { useMemo, useState } from "react";
 import DeleteIcon from "@/src/assets/icons/delete";
-import { GetIdsValues, GetUniqueValues } from "@/src/lib/utils";
+import { GetUniqueValues } from "@/src/lib/utils";
 import BarcodeIcon from "@/src/assets/icons/barcode";
 import CarReturn from "@/src/assets/icons/car-return";
 import RentAgainIcon from "@/src/assets/icons/rentAgain";

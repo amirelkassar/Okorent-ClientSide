@@ -15,7 +15,7 @@ function ItemStatus({
   handleCheckboxChange,
 }: ItemStatusProps) {
   return (
-    <div >
+    <div>
       <div className="flex flex-col gap-4">
         <Checkbox
           checked={selectedCheckbox === "Active"}
@@ -36,11 +36,15 @@ function ItemStatus({
           label="Not Active"
         />
       </div>
-
-      <p className="mt-4 text-[14px] text-grayMedium font-Regular ">
-        Set as Active to make the item available for rent Set <br /> as Not
-        Active to keep the item unavailable for rent
-      </p>
+      {selectedCheckbox === "Active" ? (
+        <p className="mt-4 text-xs md:text-[14px] text-grayMedium font-Regular">
+          Set as &apos;Not Active&apos; to keep the item unavailable for rent
+        </p>
+      ) : (
+        <p className="mt-4 text-xs md:text-[14px] text-grayMedium font-Regular">
+          Set as &apos;Active&apos; to make the item available for rent
+        </p>
+      )}
     </div>
   );
 }

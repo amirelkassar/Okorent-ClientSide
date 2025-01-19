@@ -2,9 +2,10 @@
 import { useCallback, useMemo, useState } from "react";
 import OnlineIcon from "@/src/assets/icons/online";
 import DeleteIcon from "@/src/assets/icons/delete";
-import { GetIdsValues, GetUniqueValues } from "@/src/lib/utils";
+import { GetUniqueValues } from "@/src/lib/utils";
 import { Toast } from "@/src/components/toast";
 import { useUpdateManyToOnlineMutation } from "@/src/hooks/queries/user/lisitings";
+import { useSelectRowTable } from "@/src/components/select-row-table-context";
 
 interface SignUpReturn {
   functionSelectView: any[];
@@ -13,6 +14,7 @@ interface SignUpReturn {
 export const useActionTable = (): SignUpReturn => {
   const [selectedFromTable, setSelectedFromTable] = useState([]);
   const { mutateAsync: UpdateManyToOnline } = useUpdateManyToOnlineMutation();
+  const {setSelectRowTable } = useSelectRowTable();
 
   //Make Many Product to Online
   const onSubmitMakeOnline = useCallback(
@@ -21,6 +23,9 @@ export const useActionTable = (): SignUpReturn => {
         loading: "Processing...",
         success: "Operation completed!",
         error: "Failed to complete operation",
+        onSuccess(res) {
+          setSelectRowTable([]);
+        },
       });
     },
     [UpdateManyToOnline]

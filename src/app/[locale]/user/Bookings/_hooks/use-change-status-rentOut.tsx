@@ -11,6 +11,7 @@ import {
   useRejectOrderOutMutation,
 } from "@/src/hooks/queries/user/booking";
 import { Toast } from "@/src/components/toast";
+import { useSelectRowTable } from "@/src/components/select-row-table-context";
 
 interface ActionTableIRentProps {
   onSubmitDelete: any;
@@ -33,12 +34,15 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
   const { mutateAsync: CancelOrder } = useCancelOrderOutMutation();
   const { mutateAsync: RefundOrder } = useRefundOrderOutMutation();
   const { mutateAsync: RefundManyOrder } = useRefundManyOrderOutMutation();
+  const { setSelectRowTable } = useSelectRowTable();
 
   //delete order
   const onSubmitDelete = useCallback(async () => {
     Toast.Promise(DeleteOrderOut(id), {
       success: "Deleted Product Done",
-      onSuccess: async (res) => {},
+      onSuccess(res) {
+        setSelectRowTable([]);
+      },
     });
   }, [DeleteOrderOut, id]);
 
@@ -48,6 +52,9 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
       loading: "Processing...",
       success: "Operation completed!",
       error: "Failed to complete operation",
+      onSuccess(res) {
+        setSelectRowTable([]);
+      },
     });
   }, [ChangeStatusProduct, id]);
 
@@ -58,6 +65,9 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
         loading: "Processing...",
         success: "Operation completed!",
         error: "Failed to complete operation",
+        onSuccess(res) {
+          setSelectRowTable([]);
+        },
       });
     },
     [ChangeStatusManyProduct]
@@ -72,7 +82,9 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
       }),
       {
         success: "Rejected Product Done",
-        onSuccess: async (res) => {},
+        onSuccess(res) {
+          setSelectRowTable([]);
+        },
       }
     );
   }, [RejectOrderOut, id]);
@@ -84,6 +96,9 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
         loading: "Processing...",
         success: "Operation completed!",
         error: "Failed to complete operation",
+        onSuccess(res) {
+          setSelectRowTable([]);
+        },
       });
     },
     [RejectManyOrderOut]
@@ -98,7 +113,9 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
       }),
       {
         success: "Canceled Order",
-        onSuccess: async (res) => {},
+        onSuccess(res) {
+          setSelectRowTable([]);
+        },
       }
     );
   }, [CancelOrder, id]);
@@ -113,7 +130,9 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
       }),
       {
         success: " Request Approved ",
-        onSuccess: async (res) => {},
+        onSuccess(res) {
+          setSelectRowTable([]);
+        },
       }
     );
   }, [RefundOrder, id]);
@@ -128,7 +147,9 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
       }),
       {
         success: "Request Rejected ",
-        onSuccess: async (res) => {},
+        onSuccess(res) {
+          setSelectRowTable([]);
+        },
       }
     );
   }, [RefundOrder, id]);
@@ -138,7 +159,9 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
     async (data: any) => {
       Toast.Promise(RefundManyOrder(data), {
         success: " Request Approved ",
-        onSuccess: async (res) => {},
+        onSuccess(res) {
+          setSelectRowTable([]);
+        },
       });
     },
     [RefundManyOrder, id]
@@ -149,7 +172,9 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
     async (data: any) => {
       Toast.Promise(RefundManyOrder(data), {
         success: "Request Rejected ",
-        onSuccess: async (res) => {},
+        onSuccess(res) {
+          setSelectRowTable([]);
+        },
       });
     },
     [RefundManyOrder, id]
