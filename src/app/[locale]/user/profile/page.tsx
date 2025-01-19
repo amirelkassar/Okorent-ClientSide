@@ -18,7 +18,8 @@ function page() {
           console.log(data);
           return (
             <>
-              <Complete />
+              {!data.profileInfoCompleted && <Complete />}
+
               <div className="flex flex-wrap lgl:flex-row flex-col  gap-8 mb-20">
                 <ProfileDetails initialData={data} />
                 <Upgrade />
