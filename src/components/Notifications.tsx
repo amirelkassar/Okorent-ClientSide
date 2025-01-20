@@ -93,7 +93,7 @@ function Notifications() {
         components={{
           Footer: () => isFetchingNextPage && <Loading />,
         }}
-        style={{ height: "350px" }}
+        style={{ height: "350px", maxHeight: "350px",borderRadius:"10px" }}
         itemContent={(index: number, data: any) => {
           return <NotificationRow key={index} notificationDetails={data} />;
         }}
