@@ -22,7 +22,6 @@ function FavoriteProduct({
 }) {
   const [opened, { open, close }] = useDisclosure(false);
   const { token } = useToken();
-  console.log(token);
 
   //queries
   const { mutateAsync: FavoriteProduct } = useFavoriteProductMutation();

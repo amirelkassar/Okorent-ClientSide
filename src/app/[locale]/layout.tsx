@@ -45,7 +45,7 @@ export default async function RootLayout({
               <ReactQueryConfig>
                 <MantineProvider>
                   <SelectRowTableProvider>{children}</SelectRowTableProvider>
-                  {/* <NotificationsHub  /> */}
+                  <NotificationsHub  />
                   <Toaster />
                 </MantineProvider>
               </ReactQueryConfig>

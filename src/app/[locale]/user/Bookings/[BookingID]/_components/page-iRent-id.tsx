@@ -15,7 +15,6 @@ function PageIRentId({ status }: any) {
   return (
     <QueryWrapper query={query}>
       {({ data, totalPages }: { data: any; totalPages?: number }) => {
-        console.log(data);
         return (
           <div className="w-full flex-wrap gap-6 my-4 relative flex items-center">
             {data.map((item: any, index: number) => {

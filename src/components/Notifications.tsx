@@ -2,19 +2,14 @@
 
 import React, { forwardRef, memo, useCallback, useMemo, useState } from "react";
 import NotificationIcon from "../assets/icons/notfication";
-import {
-  Divider,
-  Notification,
-  Popover,
-  ScrollArea,
-} from "@mantine/core";
-import ErrorIcon from "../assets/icons/error";
-import DownIcon from "../assets/icons/down";
+import { Notification, Popover, ScrollArea } from "@mantine/core";
 import SwitchControl from "./switch-control";
 import { useNotifications } from "../hooks/queries/user/notifications";
 import Loading from "./loading";
 import Error500 from "./error-500";
-import { getDate } from "../lib/utils";
+import NotificationRow from "./notification-row";
+import { Virtuoso } from "react-virtuoso";
+import { useRouter } from "next/navigation";
 
 interface NotificationItemProps {
   id: string | number;
@@ -26,6 +21,8 @@ interface NotificationItemProps {
 }
 
 function Notifications() {
+  const router = useRouter();
+
   const [opened, setOpened] = useState(false);
   const [notifications] = useState<any[]>([
     {
@@ -58,8 +55,20 @@ function Notifications() {
     isLoading,
     refetch,
   } = useNotifications();
-
-
+  const onNotificationClick = useCallback(
+    (notification: any) => {
+      if (notification?.objectUrl) {
+        router.push(notification.objectUrl);
+        setOpened(false);
+      }
+    },
+    [router]
+  );
+  const loadMore = useCallback(() => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   const Content = useMemo(() => {
     if (isLoading) return <Loading />;
@@ -69,27 +78,44 @@ function Notifications() {
 
     if (!totalCount) {
       return (
-        <div className="w-full h-full flex justify-center items-center text-grayDark">
+        <div className="w-full my-10 h-full flex justify-center items-center text-grayDark">
           No notifications
         </div>
       );
     }
+    const mergedNotifications =
+      data?.pages.flatMap((page) => page?.data?.items) || [];
 
-    return data.pages.flatMap((page:any) =>
-      page.data?.map((notification: NotificationItemProps, index: number) => (
-        <NotificationItem
-          key={notification.id || index}
-          {...notification}
-          onClick={() => console.log(`Notification clicked: ${notification.id}`)}
-        />
-      ))
+    return (
+      <Virtuoso
+        data={mergedNotifications}
+        endReached={loadMore}
+        components={{
+          Footer: () => isFetchingNextPage && <Loading />,
+        }}
+        style={{ height: "350px" }}
+        itemContent={(index: number, data: any) => {
+          return <NotificationRow key={index} notificationDetails={data} />;
+        }}
+      />
     );
-  }, [data, isLoading, isError]);
+  }, [
+    data,
+    onNotificationClick,
+    isError,
+    refetch,
+    loadMore,
+    isFetchingNextPage,
+    isLoading,
+    opened,
+  ]);
 
   return (
     <Popover
       opened={opened}
-      onChange={setOpened}
+      onChange={(e) => {
+        setOpened((o) => !o);
+      }}
       position="bottom-end"
       clickOutsideEvents={["mouseup", "touchend"]}
       offset={10}
@@ -100,7 +126,15 @@ function Notifications() {
     >
       <Popover.Target>
         <button
-          onClick={() => setOpened((o) => !o)}
+          onClick={(e) => {
+            if (opened) {
+              setOpened(false);
+            } else {
+              setOpened(true);
+              refetch();
+            }
+          }}
+          value={opened.toString()}
           className="w-10 h-10 rounded-full bg-[#E5F1FB] p-2 relative flex items-center justify-center cursor-pointer duration-300 hover:shadow-lg"
         >
           <p className="text-white text-[8px] flex items-center border border-[#E5F1FB] justify-center bg-red min-w-[12px] w-fit h-[12px] aspect-[1/1] rounded-full p-[2px] absolute top-2 right-2">
@@ -144,37 +178,8 @@ function Notifications() {
               />
             </div>
           </div>
-          <ScrollArea className="h-[340px]">
-            {filteredNotifications.length === 0 ? (
-              <div className="flex flex-col items-center justify-center h-full p-4 text-center text-muted-foreground">
-                <ErrorIcon className="w-8 h-8 mb-2 opacity-50" />
-                <p>No notifications to show</p>
-              </div>
-            ) : (
-              <div className="divide-y">
-                {filteredNotifications.map((notification) => (
-                  <div
-                    key={notification.id}
-                    className={`flex items-start gap-3 p-4 cursor-pointer hover:bg-green/20 duration-500 ${
-                      !notification.isRead ? "bg-accent/10" : ""
-                    }`}
-                  >
-                    <div className="flex bg-blueLight rounded-full items-center justify-center w-10 h-10 text-sm font-medium">
-                      {notification.name}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-xs">{notification.des}</p>
-                      <p className="text-xs text-grayMedium">
-                        {notification.date}
-                      </p>
-                    </div>
-                    <div className="bg-blueLight rounded-full p-2 flex items-center justify-center">
-                      <DownIcon fill="black" className="w-4 h-4 -rotate-90" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
+          <ScrollArea type="never" className="h-[340px]">
+            {Content}
           </ScrollArea>
         </div>
       </Popover.Dropdown>
@@ -184,34 +189,10 @@ function Notifications() {
 
 const NotificationItem = memo(
   forwardRef<HTMLDivElement, NotificationItemProps>(
-    ({ title = "", content = "", created = "", status = 2, onClick = () => {} }, ref) => {
-      const { timeFromNow } = getDate(created);
-      const isNew = status === 2;
-
+    (notificationDetails: any) => {
       return (
         <>
-          <Notification
-            ref={ref}
-            radius={3}
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              onClick(e);
-            }}
-            classNames={{
-              root: "shadow-none cursor-pointer transition hover:bg-blueLighter",
-              description: "flex items-center gap-4",
-            }}
-            withCloseButton={false}
-            color={isNew ? "#10B0C1" : "#939393"}
-          >
-            <div className="flex-1">
-              <h4 className="font-bold text-sm">{title}</h4>
-              <p className="text-xs text-grayDark">{content}</p>
-            </div>
-            <time>{timeFromNow}</time>
-          </Notification>
-          <Divider my="sm" className="border-grayLight border-2 last:border-none" />
+          <NotificationRow notificationDetails={notificationDetails} />
         </>
       );
     }

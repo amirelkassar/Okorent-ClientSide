@@ -40,7 +40,14 @@ export const NotificationsHub = () => {
         if (!message) return;
 
         // Play notification sound and show toast
-        audio.play();
+        audio
+          .play()
+          .then(() => {
+            console.log("Audio played successfully.");
+          })
+          .catch((err) => {
+            console.error("Audio playback failed:", err);
+          });
         Toast.Notification(message?.title);
 
         // Refetch notifications query
