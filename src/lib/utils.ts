@@ -5,7 +5,6 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import { twMerge } from 'tailwind-merge';
 import axios from "axios";
 import { usePathname, useRouter } from '../navigation';
-import { serialize } from 'object-to-formdata';
 
 
 
@@ -19,8 +18,6 @@ export async function blobUrlToFile(blobUrl: string, fileName: string) {
   const response = await fetch(blobUrl); // Fetch the blob data
   const blob = await response.blob(); // Convert the response to a Blob
   const file = new File([blob], fileName, { type: blob.type }); // Create a File object
-  console.log(file);
-
   return file;
 }
 export function formatDate(date: string | Date): string {
@@ -174,12 +171,11 @@ export const useSearchParams = () => {
 export const useUpdateQueryParams = () => {
   const router = useRouter();
   const pathName = usePathname();
-  console.log(pathName);
 
   // Utility: Update the URL query params
   const updateQueryParams = (key: string, values: string[]) => {
     const params = new URLSearchParams(window.location.search);
-    console.log(params);
+
     params.delete(key);
     values.forEach((value) => {
       if (value) params.append(key, value);
@@ -210,7 +206,7 @@ export const getFormData = async (data: Record<string, any>) => {
           formData.append(key, item, item.name);
         } else if (item.path) {
           // Fetch image and convert to Blob
-          console.log(item.path);
+
 
           const response = await axios.get(item.path, {
             responseType: 'blob', headers: {
@@ -219,16 +215,16 @@ export const getFormData = async (data: Record<string, any>) => {
               Expires: "0",
             }
           });
-          console.log(response);
+
 
 
           const blob = await response.data;
-          console.log(blob);
+
           const objectURL = URL.createObjectURL(blob);
-          console.log(objectURL);
+
 
           const fileName = item.path.split('/').pop() || "image.jpg";
-          console.log(new File([blob], fileName, { type: blob.type }));
+
 
           formData.append(key, new File([blob], fileName, { type: 'image/png' }));
         }

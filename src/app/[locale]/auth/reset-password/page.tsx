@@ -1,5 +1,4 @@
 "use client";
-import Button from "@/src/components/button";
 import InputSubmit from "@/src/components/input-submit";
 import LinkGreen from "@/src/components/linkGreen";
 import Logo from "@/src/components/logo";
@@ -42,7 +41,6 @@ function Page() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  console.log(errors);
 
   const onSubmit = useCallback(
     async (data: { newPassword: string }) => {
@@ -57,7 +55,6 @@ function Page() {
           success: "Successfully Changed Password",
           error: "Failed to change the password",
           onSuccess: async (res) => {
-            console.log(res);
             router.push(ROUTES.AUTH.LOGIN);
           },
           onError: (err) => {
@@ -71,7 +68,7 @@ function Page() {
   return (
     <div className="flex-1 pt-4 lgl:pt-20 pb-8 md:pb-16  flex  min-h-full justify-center lgl:justify-start">
       <div className="max-w-[470px] w-full flex flex-col gap-4">
-        <Logo theme="green" />
+        <Logo  />
         <div className="flex-1 content-center">
           <h1 className=" font-Bold text-lg lg:text-xLarge">
             Reset Your password

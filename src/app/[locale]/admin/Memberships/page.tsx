@@ -71,6 +71,7 @@ function Page() {
         data={MembershipsData}
         columns={columns}
         Component={CardPhoneMemberships}
+        functionSelect={functionSelect}
       />
       <NoteModal opened={opened} close={close} />
       <SuspendModal opened={opened2} close={close2} />

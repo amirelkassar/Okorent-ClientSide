@@ -3,8 +3,8 @@ import { api } from "@/src/api/axios";
 import { clearToken, storeToken } from "@/src/lib/token";
 import { useRouter } from "@/src/navigation";
 import ROUTES from "@/src/routes";
-import { authDecodedToken, decodedToken } from "@/token";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { authDecodedToken } from "@/token";
+import { useMutation } from "@tanstack/react-query";
 import { useToken } from "../../use-token";
 
 export const useLogout = () => {
@@ -38,7 +38,6 @@ export const useLoginMutation = () => {
       return response.data;
     },
     onSuccess: async (res) => {
-      console.log(res);
       storeToken(res?.data);
       setToken(await authDecodedToken());
     },
@@ -48,8 +47,6 @@ export const useLoginMutation = () => {
   });
 };
 export const useCreateAccountMutation = () => {
-  const queryClient = useQueryClient();
-
   return useMutation({
     mutationFn: async (data: any) => {
       const response = await api.post(auth.register.base, data, {
@@ -60,21 +57,13 @@ export const useCreateAccountMutation = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      console.log(res);
       storeToken(res?.data);
-      console.log(
-        decodedToken(res?.data).then((res2) => {
-          console.log(res2);
-        })
-      );
     },
     onError: () => {},
   });
 };
 
 export const useVerifyPhoneMutation = () => {
-  const queryClient = useQueryClient();
-
   return useMutation({
     mutationFn: async (data: any) => {
       const response = await api.post(auth.register.verify_phone, data, {
@@ -83,13 +72,7 @@ export const useVerifyPhoneMutation = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      console.log(res);
       storeToken(res);
-      console.log(
-        decodedToken(res).then((res2) => {
-          console.log(res2);
-        })
-      );
     },
     onError: () => {
       clearToken();
@@ -98,8 +81,6 @@ export const useVerifyPhoneMutation = () => {
 };
 
 export const useReSendOTP = () => {
-  const queryClient = useQueryClient();
-
   return useMutation({
     mutationFn: async (data: any) => {
       const response = await api.post(auth.register.resend_otp, data, {
@@ -108,7 +89,6 @@ export const useReSendOTP = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      console.log(res);
     },
     onError: (req) => {
       console.log(req);
@@ -122,9 +102,7 @@ export const useForgetPassword = () => {
       const response = await api.post(auth.forgot_password.base, data);
       return response.data;
     },
-    onSuccess: async (res) => {
-      console.log(res);
-    },
+    onSuccess: async (res) => {},
     onError: () => {},
   });
 };
@@ -135,9 +113,7 @@ export const useResetPassword = () => {
       const response = await api.post(auth.reset_password.base, data);
       return response.data;
     },
-    onSuccess: async (res) => {
-      console.log(res);
-    },
+    onSuccess: async (res) => {},
     onError: () => {},
   });
 };

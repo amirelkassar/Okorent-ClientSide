@@ -48,8 +48,6 @@ export const useLogin = (): SignUpReturn => {
   const onChange = useCallback(
     (e: any) => {
       const { name, value } = e.target;
-      console.log(formData);
-
       setFormData((prevData) => ({
         ...prevData,
         [name]: value,
@@ -65,11 +63,9 @@ export const useLogin = (): SignUpReturn => {
       loading: "Logging in... ",
       success: "Successfully logged ",
       onSuccess: async (res) => {
-        console.log(res);
         const userRole = await decodedToken(res.data).then((res2) => {
           return res2?.userRole;
         });
-        console.log(userRole);
         if (userRole === "Administrator") {
           router.replace(ROUTES.ADMIN.DASHBOARD);
         } else {

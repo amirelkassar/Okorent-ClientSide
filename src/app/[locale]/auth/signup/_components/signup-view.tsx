@@ -39,10 +39,8 @@ function SignupView() {
 
   // إرسال البيانات عند تقديم النموذج
   const handleFormSubmit = (data: FormData) => {
-    console.log("Form Submitted", data);
     onSubmit(data); // استدعاء دالة onSubmit من useSignUp
   };
-  console.log(error);
 
   return (
     <div className="flex-1 content-center">

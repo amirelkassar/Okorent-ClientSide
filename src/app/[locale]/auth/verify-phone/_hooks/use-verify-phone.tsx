@@ -50,10 +50,8 @@ export const useVerifyPhone = (): VerifyPhoneReturn => {
     Toast.Promise(ReSendOTP({ phone: formData.phoneNumber }), {
       success: "The OTP has been sent again",
       onSuccess: async (res) => {
-        console.log(res);
       },
       onError: (error) => {
-        console.log("error");
         console.log(error);
       },
     });
@@ -62,12 +60,10 @@ export const useVerifyPhone = (): VerifyPhoneReturn => {
     Toast.Promise(VerifyPhone(formData), {
       success: "OTP sent successfully",
       onSuccess: (res) => {
-        console.log(res);
         setUser({ user, token: res });
         router.replace(ROUTES.AUTH.MAKE_HOME);
       },
       onError: (error) => {
-        console.log("error");
         console.log(error);
       },
     });
