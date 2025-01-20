@@ -149,3 +149,21 @@ export const useComplaints = (
     placeholderData: (previousData: any) => previousData, // Identity function
   });
 };
+
+//get QrCode my Product
+export const GetQrCodeMyProduct = () => {
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.post(user.product.barcode_my_products, data, {
+        responseType: "blob",
+      });
+      return response;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};

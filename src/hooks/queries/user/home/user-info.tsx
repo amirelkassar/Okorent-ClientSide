@@ -54,3 +54,14 @@ export const GetUserProductsOrderByID = (id: any) => {
     },
   });
 };
+
+
+//get user Dashboard
+export const GetUserHeaderDashboard = () => {
+  return useQuery({
+    queryFn: async () => {
+      const response = await api.get(user.information.Header_Dashboard);
+      return response.data;
+    },
+  });
+};

@@ -79,7 +79,7 @@ function ActionMenu({ id, status }: { id: any; status: any }) {
   return (
     <>
       <DataActions data={optionView() || []} />
-      {opened && <ModalBarcode opened={opened} close={close} />}
+      {opened && <ModalBarcode id={id} opened={opened} close={close} />}
     </>
   );
 }

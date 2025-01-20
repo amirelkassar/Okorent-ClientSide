@@ -20,11 +20,13 @@ export const user = {
     favoriteProducts: `/FavouriteProduct`,
     DeleteFavoriteProducts: (id: any) => `/FavouriteProduct/${id}`,
     DeleteManyProduct: `/Product/DeleteMyProducts`,
+    barcode_my_products: "Barcode/generate-product-barcode",
   },
   information: {
     base: (id: any) => `/User/${id}`,
     user_edit: `/User`,
     ProductsOrder: (id: any) => `/User/User-Order-Products/${id}`,
+    Header_Dashboard:'/UserDashboard/User Get Dashboard'
   },
   stock: {
     base: "/Stock",

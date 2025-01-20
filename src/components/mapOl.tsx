@@ -19,38 +19,61 @@ const MapOl: React.FC = () => {
   const mapRef = useRef<Map | null>(null);
   const [selectedLocation, setSelectedLocation] = useState<number[]>([]);
   const [radius, setRadius] = useState<number>(500);
-  console.log(selectedLocation);
+
   useEffect(() => {
-    // Example usage
     if (selectedLocation.length > 0) {
       fetchLocationDetails(selectedLocation[1], selectedLocation[0])
         .then((details) => console.log(details))
         .catch((error) => console.error(error));
     }
   }, [selectedLocation]);
-  console.log(radius);
+
   useEffect(() => {
-    if (!mapRef.current && mapElement.current) {
+    const initializeMap = (center: number[]) => {
       const initialView = new View({
-        center: fromLonLat([31.2357, 30.0444]),
+        center: fromLonLat(center),
         zoom: 12,
       });
-      mapRef.current = new Map({
-        target: mapElement.current,
-        layers: [
-          new TileLayer({
-            source: new OSM(),
-          }),
-        ],
-        view: initialView,
-      });
 
-      mapRef.current.on("singleclick", function (evt) {
-        const coords = toLonLat(evt.coordinate);
-        setSelectedLocation(coords);
-      });
+      if (!mapRef.current && mapElement.current) {
+        mapRef.current = new Map({
+          target: mapElement.current,
+          layers: [
+            new TileLayer({
+              source: new OSM(),
+            }),
+          ],
+          view: initialView,
+        });
+
+        mapRef.current.on("singleclick", function (evt) {
+          const coords = toLonLat(evt.coordinate);
+          setSelectedLocation(coords);
+        });
+      }
+    };
+
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const userLocation = [
+            position.coords.longitude,
+            position.coords.latitude,
+          ];
+          setSelectedLocation(userLocation);
+          initializeMap(userLocation);
+        },
+        (error) => {
+          console.error("Geolocation error:", error);
+          initializeMap([31.2357, 30.0444]); // Fallback to Cairo, Egypt
+        }
+      );
+    } else {
+      console.warn("Geolocation is not available in this browser.");
+      initializeMap([31.2357, 30.0444]); // Fallback to Cairo, Egypt
     }
   }, []);
+
   useEffect(() => {
     if (selectedLocation.length > 0 && mapRef.current) {
       const iconFeature: Feature<Point> = new Feature({
