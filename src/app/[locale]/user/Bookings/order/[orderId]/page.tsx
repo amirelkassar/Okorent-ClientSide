@@ -57,7 +57,7 @@ function Page({ params }: any) {
       </div>
       <OrderStepper
         active={data?.data?.orderTrackers.at(-1)?.newOrderStatus}
-        data={data.data?.orderTrackers || []}
+        data={data?.data?.orderTrackers || []}
       />
       <div className="mt-section flex gap-10 lgl:flex-row flex-col ">
         <div className="flex flex-col gap-4  max-w-[930px]">

@@ -19,7 +19,7 @@ function page() {
   return (
     <div>
       <HeaderDash />
-      <div className="lg:mt-14 mt-8 flex gap-7 lg:gap-10 lg:flex-row flex-col pb-10 border-b border-[#B6BFC6] ">
+      <div className="lg:mt-14 mt-8 items-start flex gap-7 lg:gap-10 lg:flex-row flex-col pb-10 border-b border-[#B6BFC6] ">
         <OngoingRentals />
         <EarningReport />
       </div>

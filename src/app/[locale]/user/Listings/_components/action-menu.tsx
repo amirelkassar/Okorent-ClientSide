@@ -46,8 +46,8 @@ function ActionMenu({ id, status }: { id: any; status: any }) {
     {
       label: "Promote Listing",
       icon: <RocketIcon fill="#6F6B7D" className="w-3 h-auto" />,
-      type: "btn",
-      action: () => {},
+      link: ROUTES.USER.LISTINGSDETAILSADS(id) ,
+      type: "link",
     },
     {
       label: "Make online",

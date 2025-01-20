@@ -12,7 +12,7 @@ const data = [
     name: "xxxx-9089",
   },
   {
-    name: "xxxx-9089",
+    name: "xxxx-9080",
   },
 ];
 function PriceAdsDetails() {

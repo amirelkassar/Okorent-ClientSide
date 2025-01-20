@@ -59,8 +59,20 @@ export const GetUserProductsOrderByID = (id: any) => {
 //get user Dashboard
 export const GetUserHeaderDashboard = () => {
   return useQuery({
+    queryKey: [initialQueryKey, "Header_Dashboard"],
     queryFn: async () => {
       const response = await api.get(user.information.Header_Dashboard);
+      return response.data;
+    },
+  });
+};
+
+//get user Dashboard
+export const GetDashboardOngoingRentals = () => {
+  return useQuery({
+    queryKey: [initialQueryKey, "Ongoing_Rentals"],
+    queryFn: async () => {
+      const response = await api.get(user.information.Ongoing_Rentals);
       return response.data;
     },
   });

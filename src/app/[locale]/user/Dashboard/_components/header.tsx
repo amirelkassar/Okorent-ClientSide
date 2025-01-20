@@ -8,34 +8,7 @@ import MoneyIcon from "@/src/assets/icons/money";
 import ClockIcon from "@/src/assets/icons/clock";
 import { GetUserHeaderDashboard } from "@/src/hooks/queries/user/home/user-info";
 import SkeletonLoading from "@/src/components/skeleton-loading";
-const number = [
-  {
-    id: 1,
-    title: "New Rental Requests",
-    number: "+12",
-    icon: <ShopIcon />,
-    link: ROUTES.USER.BOOKINGS + "?OrderStatus=1",
-    titleLink: "View rentals",
-  },
-  {
-    id: 2,
-    title: "Earnings This Month",
-    number: "420$",
-    percentage: 65,
-    icon: <MoneyIcon />,
-    link: "",
-    titleLink: "",
-  },
-  {
-    id: 3,
-    title: "Ongoing Rentals",
-    number: "22",
-    percentage: 65,
-    icon: <ClockIcon />,
-    link: "",
-    titleLink: "",
-  },
-];
+
 function HeaderDash() {
   const { data, isLoading } = GetUserHeaderDashboard();
   console.log(data);
