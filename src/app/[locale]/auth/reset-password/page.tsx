@@ -49,8 +49,8 @@ function Page() {
       Toast.Promise(
         ResetPassword({
           newPassword: data.newPassword,
-          email: searchparams.get("email") || "",
-          token: searchparams.get("token") || "",
+          email:  "hibrahem266@gmail.com",
+          token:'CfDJ8F9WoHE0fpxEtFCaJ2kvIaqRcyzjlDTdubi6XKWnjhX37hzdccsvDBsR/4R4cTU3k9gAk+MbZs1w8JJylGEFZYtMPneyGd9zCMssu9I7i8spqXnRbGyt6UYJbJUXvdcUubZia0t9DcgRn/0WXHjA7p1vaftQ/fyxWldJoqKXZSnL4la3OuIPB1WLhdFgI7AaSs9jm5NBvRXschWNX9O7PYwAWSrKEa1xhpvqXlnL0t3M',
         }),
         {
           loading: "Sending New Password ...",

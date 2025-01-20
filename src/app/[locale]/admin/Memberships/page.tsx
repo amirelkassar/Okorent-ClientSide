@@ -13,6 +13,7 @@ import SuspendModal from "./_components/SuspendModal";
 import CancelModal from "./_components/cancel-modal";
 import ChangePlanModal from "./_components/change-plan-modal";
 import CardPhoneMemberships from "./_components/card-phone-account";
+import { TableHeader } from "@/src/components/table/table-header";
 
 const FilterOptions = [
   {
@@ -61,14 +62,14 @@ function Page() {
   ];
   return (
     <div>
+      <TableHeader>
+        <TableHeader.First title={` All Memberships - 11054`} />
+        <TableHeader.Last options={FilterOptions} />
+      </TableHeader>
       <DataTable
-        title=" All Memberships - 11054"
+        title=""
         data={MembershipsData}
         columns={columns}
-        filterBy="package"
-        filter="buttons"
-        filterData={FilterOptions}
-        functionSelect={functionSelect}
         Component={CardPhoneMemberships}
       />
       <NoteModal opened={opened} close={close} />

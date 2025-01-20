@@ -74,116 +74,98 @@ export const useActionTable = (open: any): SignUpReturn => {
     [VerificationManyAccount, selectedFromTable]
   );
 
-  const functionSelect = [
-    //0
-    {
-      title: "Verify",
-      icon: <TrueIcon className="max-h-4 w-auto " />,
-      onclick: (ids: any) => {
-        onSubmitVerificationManyAccount(
-          {
-            verify: true,
-            userIds: ids.map((item: any) => item.id),
-          },
-          true
-        );
-      },
-    },
-    //1
-    {
-      title: "Deactivate",
-      icon: <DeactivateIcon className="max-h-4 w-auto " />,
-      onclick: (ids: any) => {
-        open();
-      },
-    },
-    //2
-    {
-      title: "Send Note",
-      icon: <NoteTableIcon className="max-h-4 w-auto " />,
-      onclick: (ids: any) => {
-        console.log([...ids]);
-      },
-    },
-    //3
-    {
-      title: "Activate",
-      icon: <TrueIcon className="max-h-4 w-auto " />,
-      onclick: (ids: any) => {
-        onSubmitActiveManyAccount({
-          userIds: ids?.map((item: any) => item.id),
-        });
-      },
-    },
-    //4
-    {
-      title: "UnVerify",
-      icon: <UnVerifyIcon fill="#006AFF" className="w-3 h-auto" />,
-      onclick: (ids: any) => {
-        onSubmitVerificationManyAccount(
-          {
-            verify: false,
-            userIds: ids.map((item: any) => item.id),
-          },
-          false
-        );
-      },
-    },
-    //5
-    {
-      title: "Delete",
-      icon: <DeleteIcon className="max-h-4 w-auto " />,
-      onclick: (ids: any) => {
-        onSubmitDeleteManyAccount({
-          userIds: ids?.map((item: any) => item.id),
-        });
-      },
-    },
-  ];
+
 
   const functionSelectView = useMemo(() => {
     const isVerified = GetUniqueValues(selectedFromTable, "isVerified");
     const isActivated = GetUniqueValues(selectedFromTable, "isActivated");
 
-    if (isVerified?.toString() === "true" && isActivated?.toString() === "true")
-      return [
-        functionSelect[4],
-        functionSelect[1],
-        functionSelect[2],
-        functionSelect[5],
-      ];
-    else if (
-      isVerified?.toString() === "true" &&
-      isActivated?.toString() === "false"
-    )
-      return [
-        functionSelect[4],
-        functionSelect[3],
-        functionSelect[2],
-        functionSelect[5],
-      ];
-    else if (
-      isVerified?.toString() === "false" &&
-      isActivated?.toString() === "true"
-    )
-      return [
-        functionSelect[0],
-        functionSelect[1],
-        functionSelect[2],
-        functionSelect[5],
-      ];
-    else if (
-      isVerified?.toString() === "false" &&
-      isActivated?.toString() === "false"
-    )
-      return [
-        functionSelect[0],
-        functionSelect[3],
-        functionSelect[2],
-        functionSelect[5],
-      ];
-    else return [functionSelect[2], functionSelect[5]];
-  }, [selectedFromTable, functionSelect]);
+    const functionSelect = [
+      ...(isVerified?.toString() === "true"
+        ? [
+            {
+              title: "UnVerify",
+              icon: <UnVerifyIcon fill="#006AFF" className="w-3 h-auto" />,
+              onclick: (ids: any) => {
+                onSubmitVerificationManyAccount(
+                  {
+                    verify: false,
+                    userIds: ids.map((item: any) => item.id),
+                  },
+                  false
+                );
+              },
+            },
+          ]
+        : isVerified?.toString() === "false"
+        ? [
+            {
+              title: "Verify",
+              icon: <TrueIcon className="max-h-4 w-auto " />,
+              onclick: (ids: any) => {
+                onSubmitVerificationManyAccount(
+                  {
+                    verify: true,
+                    userIds: ids.map((item: any) => item.id),
+                  },
+                  true
+                );
+              },
+            },
+          ]
+        : []),
+      ...(isActivated?.toString() === "true"
+        ? [
+            {
+              title: "Deactivate",
+              icon: <DeactivateIcon className="max-h-4 w-auto " />,
+              onclick: (ids: any) => {
+                open();
+              },
+            },
+          ]
+        : isActivated?.toString() === "false"
+        ? [
+            {
+              title: "Activate",
+              icon: <TrueIcon className="max-h-4 w-auto " />,
+              onclick: (ids: any) => {
+                onSubmitActiveManyAccount({
+                  userIds: ids?.map((item: any) => item.id),
+                });
+              },
+            },
+          ]
+        : []),
+
+      //2
+      {
+        title: "Send Note",
+        icon: <NoteTableIcon className="max-h-4 w-auto " />,
+        onclick: (ids: any) => {
+          console.log([...ids]);
+        },
+      },
+      //5
+      {
+        title: "Delete",
+        icon: <DeleteIcon className="max-h-4 w-auto " />,
+        onclick: (ids: any) => {
+          onSubmitDeleteManyAccount({
+            userIds: ids?.map((item: any) => item.id),
+          });
+        },
+      },
+    ];
+
+    return functionSelect;
+  }, [
+    selectedFromTable,
+    onSubmitActiveManyAccount,
+    onSubmitDeleteManyAccount,
+    onSubmitVerificationManyAccount,
+    open,
+  ]);
 
   return {
     functionSelectView,

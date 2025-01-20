@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import Button from "@/src/components/button";
 import LocationIcon from "@/src/assets/icons/location";
@@ -15,7 +15,7 @@ const containerStyle = {
   width: "100%",
   height: "390px",
 };
-const center = {
+const defaultCenter = {
   lat: 31.21405130266879,
   lng: 29.96070451527003,
 };
@@ -52,12 +52,26 @@ function GoogleMapLoc({
     googleMapsApiKey: "AIzaSyAdseC43NWVi8d4BAjCOFByov7bFdVQr1M",
   });
   console.log(index);
-
+  const [center, setCenter] = useState(defaultCenter);
   const [selectedLocation, setSelectedLocation] = useState<{
     lat: number;
     lng: number;
   } | null>(null);
-
+  // Get user's current location on mount
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setCenter({ lat: latitude, lng: longitude });
+          setSelectedLocation({ lat: latitude, lng: longitude });
+        },
+        (error) => {
+          console.error("Error fetching location:", error);
+        }
+      );
+    }
+  }, []);
   const [placeName, setPlaceName] = useState<LocationDetailsProps>({
     address: "",
     country: "",
