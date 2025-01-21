@@ -150,7 +150,7 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
   const optionView = () => {
     switch (status.toString()) {
       case "1":
-        return [options[0], options[5], options[6], options[10], options[9]];
+        return [options[0], options[5], options[6], options[10]];
       case "3":
         return [options[1], options[4], options[5], options[6], options[9]];
       case "4":

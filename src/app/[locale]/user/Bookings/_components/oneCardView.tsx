@@ -8,11 +8,11 @@ import { useChangeStatusRent } from "../_hooks/use-change-status-rent";
 
 function OneCardView({ product, status }: { product?: any; status: any }) {
   const FirstLessorName = product?.lessorName?.split(" ")[0];
-  const {
-    onSubmitChangeStatus,
-  } = useChangeStatusRent(product?.id);
+  const { onSubmitChangeStatus, onSubmitReOrderByID } = useChangeStatusRent(
+    product?.id
+  );
   console.log(product);
-  
+
   return (
     <div className="bg-white border border-green/50 rounded-3xl px-3 lg:px-5 py-3 lg:py-4 max-w-[400px] mb-3 w-full mdl:min-w-[320px] shadow-sidebar relative">
       {/* <div className="flex items-center justify-center gap-2 bg-[#FF0E0E] rounded-xl absolute top-5 lg:top-7 start-6 p-2  lg:p-3">
@@ -24,7 +24,7 @@ function OneCardView({ product, status }: { product?: any; status: any }) {
       <Image
         alt="home"
         priority
-        src={product?.heroImage||homeImg}
+        src={product?.heroImage || homeImg}
         className="w-full rounded-xl h-[122px]  lg:h-40 object-contain object-center lg:object-top"
         width={400}
         height={122}
@@ -35,7 +35,7 @@ function OneCardView({ product, status }: { product?: any; status: any }) {
           priority
           width={200}
           height={200}
-          src={product?.userImage||userImg}
+          src={product?.userImage || userImg}
           className="size-11 lg:size-[60px] rounded-full  object-cover object-top"
         />
         <div>
@@ -121,17 +121,13 @@ function OneCardView({ product, status }: { product?: any; status: any }) {
         {(status === 8 || status === 9) && (
           <>
             <BottomCardRent.ViewDetailsLink id={product?.id || "undefined"} />
-            <BottomCardRent.ReorderButton
-              onClick={() => console.log("Reorder clicked")}
-            />
+            <BottomCardRent.ReorderButton onClick={onSubmitReOrderByID} />
           </>
         )}
         {status === 10 && (
           <>
             <BottomCardRent.ViewDetailsLink id={product?.id || "undefined"} />
-            <BottomCardRent.RentAgainButton
-              onClick={() => console.log("Rent again clicked")}
-            />
+            <BottomCardRent.RentAgainButton id={product?.id || "undefined"} />
           </>
         )}
       </div>

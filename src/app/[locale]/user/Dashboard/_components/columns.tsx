@@ -102,16 +102,5 @@ export const columns: ColumnDef<RequestsTableData>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => {
-      const id = row.original.id;
-
-      return (
-        <div className="flex items-center gap-3 w-fit">
-          <Link href={ROUTES.USER.ORDERID(id)}>
-            <EditIcon className="w-5 h-auto" />
-          </Link>
-        </div>
-      );
-    },
   },
 ];

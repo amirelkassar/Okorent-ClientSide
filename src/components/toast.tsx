@@ -5,7 +5,8 @@ import SuccessIcon from "../assets/icons/success";
 import ErrorNotficationIcon from "../assets/icons/error-notfication";
 import NotificationsIcon from "../assets/icons/Notifications";
 import NotificationIcon from "../assets/icons/notfication";
-
+import Image from "next/image";
+import notificationGif from "@/src/assets/images/notification.gif";
 interface ToastOptions {
   success?: string;
   loading?: string;
@@ -84,7 +85,12 @@ const Toast = {
           }`}
         >
           <div className="flex items-center">
-            <NotificationIcon className="w-4 mdl:w-7 h-auto" />
+            <Image
+              src={notificationGif} // Replace with the path to your GIF
+              alt="Notification"
+              className="mdl:w-10 w-8  h-auto"
+            />
+
             <div className="ml-2 text-sm mdl:text-base font-medium text-gray-800">
               {message}
             </div>

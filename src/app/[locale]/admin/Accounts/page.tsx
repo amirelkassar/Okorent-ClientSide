@@ -15,11 +15,11 @@ import { useDisclosure } from "@mantine/hooks";
 
 function Page() {
   const searchParams = useSearchParams();
-  console.log(searchParams.toString());
   const [opened, { open, close }] = useDisclosure(false);
 
   const query = GetAccounts(searchParams.toString());
-  const { functionSelectView, setSelectedFromTable, selectedFromTable } = useActionTable(open);
+  const { functionSelectView, setSelectedFromTable, selectedFromTable } =
+    useActionTable(open);
   const totalCount = query.data?.data?.totalCount || 0;
 
   return (
@@ -51,7 +51,11 @@ function Page() {
           );
         }}
       </QueryWrapper>
-      <DeactivateModalMany opened={opened} close={close} ids={selectedFromTable} />
+      <DeactivateModalMany
+        opened={opened}
+        close={close}
+        ids={selectedFromTable}
+      />
     </div>
   );
 }

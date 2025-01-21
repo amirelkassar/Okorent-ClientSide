@@ -18,14 +18,16 @@ import ReviewModal from "./modal-rent/review-modal";
 
 function ActionMenuRent({
   id,
+  ProdId,
   status = 0,
   dataForReview,
-  dataForReviewUser
+  dataForReviewUser,
 }: {
   id: any;
+  ProdId: any;
   status: any;
   dataForReview: any;
-  dataForReviewUser:any
+  dataForReviewUser: any;
 }) {
   const [opened, { open, close }] = useDisclosure(false);
   const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
@@ -36,6 +38,7 @@ function ActionMenuRent({
     onSubmitDelete,
     onSubmitRefund,
     onSubmitChangeStatus,
+    onSubmitReOrderByID,
   } = useChangeStatusRent(id);
   const options = [
     //0
@@ -43,14 +46,16 @@ function ActionMenuRent({
       label: "Reorder",
       icon: <ReorderIcon fill="#6F6B7D" className="w-3 h-auto" />,
       type: "btn",
-      action: () => {},
+      action: () => {
+        onSubmitReOrderByID();
+      },
     },
     //1
     {
       label: "Rent again",
       icon: <RentAgainIcon fill="#6F6B7D" className="w-3 h-auto" />,
-      type: "btn",
-      action: () => {},
+      link: ROUTES.USER.PRODUCTDETAILS(ProdId),
+      type: "link",
     },
     //2
     {

@@ -26,8 +26,8 @@ export const user = {
     base: (id: any) => `/User/${id}`,
     user_edit: `/User`,
     ProductsOrder: (id: any) => `/User/User-Order-Products/${id}`,
-    Header_Dashboard:'/UserDashboard/User Get Dashboard',
-    Ongoing_Rentals:'/UserDashboard/User Get Ongoing Rentals'
+    Header_Dashboard: "/UserDashboard/User Get Dashboard",
+    Ongoing_Rentals: "/UserDashboard/User Get Ongoing Rentals",
   },
   stock: {
     base: "/Stock",
@@ -54,6 +54,7 @@ export const user = {
     refunds_iRent_out: `/OrderRequest/Refund Orders Response`,
     reject_iRent: `/OrderRequest/Reject Order`,
     rejects_iRent: `/OrderRequest/Reject Orders`,
+    ReOrder:'/BookingOrder/ReOrder',
     review: {
       base: "/ProductReviews",
       getByID: (id: any) => `/ProductReviews/${id}`,
@@ -72,6 +73,9 @@ export const user = {
     reviews: `/MyProfile/Reviews About Me`,
     ImageUpdate: "/MyProfile/Image",
     RecentActivities: "/MyProfile/My Recent Activities",
+  },
+  contact_us: {
+    base: "/Tickets",
   },
 };
 
@@ -135,10 +139,10 @@ export const admin = {
 };
 
 export const notifications = {
-  base: "/notification",
+  base: (queries: any) => buildQuery("/notification", queries),
   list: (queries: any) => buildQuery("/notification/list", queries),
   actions: {
-    makeItRead: (id: any) => `/notification?id=${id}`,
+    makeItRead: "/Notification/read",
     delete: (id: any) => `/notification?id=${id}`,
   },
 };

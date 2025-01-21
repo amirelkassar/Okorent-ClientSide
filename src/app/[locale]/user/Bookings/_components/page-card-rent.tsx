@@ -2,7 +2,7 @@
 import React from "react";
 import CardView from "./cardView";
 import RentSwitch from "@/src/components/RentSwitch";
-import { GetMyOrderAllByList } from "@/src/hooks/queries/user/booking";
+import { GetMyOrderAll, GetMyOrderAllByList } from "@/src/hooks/queries/user/booking";
 import Loading from "@/src/components/loading";
 import NoDataYet from "@/src/components/noDataYet";
 const statuses = [
@@ -19,9 +19,19 @@ const statuses = [
 ];
 
 function PageCardRent() {
-  console.log("dfg");
+  const data = statuses.map(({ status }) => GetMyOrderAll(`OrderStatus=${status}&PageSize=5`));
+  console.log(data);
+  // const { data: New_Order } = GetMyOrderAllByList(1);
+  // const { data: Accepted_Order } = GetMyOrderAllByList(3);
+  // const { data: OutForDelivery_Order } = GetMyOrderAllByList(4);
+  // const { data: Received_Order } = GetMyOrderAllByList(6);
+  // const { data: RequestForReturn_Order } = GetMyOrderAllByList(11);
+  // const { data: OutForReturn_Order } = GetMyOrderAllByList(12);
+  // const { data: Completed_Order } = GetMyOrderAllByList(10);
+  // const { data: Returned_Order } = GetMyOrderAllByList(7);
+  // const { data: Rejected_Order } = GetMyOrderAllByList(8);
+  // const { data: Canceled_Order } = GetMyOrderAllByList(9);
 
-  const data = statuses.map(({ status }) => GetMyOrderAllByList(status));
   const isLoading = data.some((hook) => hook.isLoading);
   const allItems = data.flatMap((hook) => hook.data?.data?.items || []);
   if (isLoading) {

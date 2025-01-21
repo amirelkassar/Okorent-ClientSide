@@ -48,7 +48,7 @@ function CardProduct({
     return priceOptions.Daily;
   }, [daysNumber, priceOptions]);
   const TotalPriceOrder = useMemo(
-    () => PriceBYDays * daysNumber - 50.82,
+    () => PriceBYDays * daysNumber,
     [PriceBYDays, daysNumber]
   );
 

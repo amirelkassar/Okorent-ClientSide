@@ -47,8 +47,8 @@ function Page() {
       Toast.Promise(
         ResetPassword({
           newPassword: data.newPassword,
-          email:  "hibrahem266@gmail.com",
-          token:'CfDJ8F9WoHE0fpxEtFCaJ2kvIaqRcyzjlDTdubi6XKWnjhX37hzdccsvDBsR/4R4cTU3k9gAk+MbZs1w8JJylGEFZYtMPneyGd9zCMssu9I7i8spqXnRbGyt6UYJbJUXvdcUubZia0t9DcgRn/0WXHjA7p1vaftQ/fyxWldJoqKXZSnL4la3OuIPB1WLhdFgI7AaSs9jm5NBvRXschWNX9O7PYwAWSrKEa1xhpvqXlnL0t3M',
+          email: searchparams.get("email") || "",
+          token: searchparams.get("token")?.toString() || "",
         }),
         {
           loading: "Sending New Password ...",
@@ -68,7 +68,7 @@ function Page() {
   return (
     <div className="flex-1 pt-4 lgl:pt-20 pb-8 md:pb-16  flex  min-h-full justify-center lgl:justify-start">
       <div className="max-w-[470px] w-full flex flex-col gap-4">
-        <Logo  />
+        <Logo />
         <div className="flex-1 content-center">
           <h1 className=" font-Bold text-lg lg:text-xLarge">
             Reset Your password

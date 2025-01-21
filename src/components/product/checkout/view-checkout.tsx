@@ -48,7 +48,7 @@ function ViewCheckout({ data = {} }: { data: any }) {
       </div>
       <div className="pb-8 pt-7 lg:pt-11 lg:ps-11 px-4 lg:px-5 lg:pe-7 w-full flex-1 mt-2 bg-white border border-green/30 rounded-2xl  xl:max-w-[650px]">
         <h2 className="text-lg lg:text-[24px] font-Bold mb-0">Price details</h2>
-        <div className="  mt-[100 px] lg:mt-[120px]">
+        <div className="  mt-[100px] lg:mt-[120px] max-w-[450px] lg:max-w-[650px] mx-auto">
           <Visa />
         </div>
         <div className="border mb-6 border-green/30 rounded-lg flex items-center gap-3 px-10 py-2">
@@ -71,7 +71,7 @@ function ViewCheckout({ data = {} }: { data: any }) {
           </li>
           <li className="flex items-center justify-between pt-4 border-t border-x-grayMedium/40 ">
             <h3 className="text-base  ">Total</h3>
-            <p className="text-base ">USD {data?.orderItems[0].price * 0.9}</p>
+            <p className="text-base ">USD {(data?.orderItems[0].price * 0.9).toFixed(2)}</p>
           </li>
         </ul>
         <Button onClick={open} className={"w-full mt-6"}>

@@ -57,7 +57,6 @@ function UploadAndCropImg({ image }: Props) {
     }
   };
 
-  
   const onCrop = useCallback(async () => {
     if (!imageSrc || !croppedAreaPixels) return;
 
@@ -81,13 +80,16 @@ function UploadAndCropImg({ image }: Props) {
         onSuccess(res) {
           close();
         },
+        onError(err) {
+          close();
+        },
       });
     },
     [EditImage, close]
   );
   return (
     <div>
-      <div  className=" size-[100px] md:size-[156px] relative rounded-full mx-auto mb-5 border-2 border-white shadow-md ">
+      <div className=" size-[100px] md:size-[156px] relative rounded-full mx-auto mb-5 border-2 border-white shadow-md ">
         <div className=" absolute top-1/2 -end-4 md:-end-6 w-7 md:w-10 h-auto -translate-y-1/2 ">
           <VerifyBlackIcon className="w-full h-auto" />
         </div>

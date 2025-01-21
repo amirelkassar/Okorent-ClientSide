@@ -38,7 +38,9 @@ export const GetMyOrderAllByList = (number?: number) => {
     queryKey: ["myOrders", number],
     queryFn: async () => {
       const response = await api.get(
-        user.order.booking.i_rent(`OrderType=myorders&PageSize=5&OrderStatus=${number}`)
+        user.order.booking.i_rent(
+          `OrderType=myorders&PageSize=5&OrderStatus=${number}`
+        )
       );
       return response.data;
     },
@@ -309,6 +311,26 @@ export const useRefundManyOrderOutMutation = () => {
     },
   });
 };
+// ReOrder
+export const useReOrderByID = (id: any) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async () => {
+      const response = await api.put(user.order.ReOrder, {
+        id: id,
+      });
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKey]);
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
+
 //get QrCode
 export const GetQrCodeOrder = () => {
   return useMutation({
@@ -317,7 +339,7 @@ export const GetQrCodeOrder = () => {
         headers: {
           "Content-Type": "application/json",
         },
-         responseType: "blob",
+        responseType: "blob",
       });
       return response;
     },

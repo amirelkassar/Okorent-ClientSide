@@ -2,6 +2,8 @@ import LockIcon from "@/src/assets/icons/lock";
 import TrueGreenIcon from "@/src/assets/icons/trueGreen";
 import Button from "@/src/components/button";
 import React from "react";
+import LinkGreen from "../linkGreen";
+import ROUTES from "@/src/routes";
 const PricingPlansData = [
   {
     name: "Essential",
@@ -135,9 +137,9 @@ function PricingPlans({ withBtn = true }: PricingPlansProps) {
               See all {plan.numMore} features
             </button>
             {withBtn && (
-              <Button className={"w-[280px] max-w-[96%] mx-auto"}>
+              <LinkGreen href={ROUTES.USER.CHECKOUTID('dfg')} className={"w-[280px] max-w-[96%] mx-auto"}>
                 Choose this plan
-              </Button>
+              </LinkGreen>
             )}
           </div>
         );

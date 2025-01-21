@@ -37,7 +37,6 @@ function Nav({ linkLogo = "#" }: NavProps) {
   const [showMenu, setShowMenu] = useState(false);
   const { token, setToken } = useToken();
   const params = useParams();
-  console.log(token);
 
   const handleLogout = () => {
     setToken({}); // Clear token from the state

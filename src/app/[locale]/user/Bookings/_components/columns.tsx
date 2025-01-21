@@ -126,6 +126,7 @@ export const columns: ColumnDef<RequestsTableData>[] = [
         <div className="flex items-center gap-3 w-fit">
           <ActionMenuRent
             id={id}
+            ProdId={ProdId}
             status={status}
             dataForReview={dataForReview}
             dataForReviewUser={dataForReviewUser}

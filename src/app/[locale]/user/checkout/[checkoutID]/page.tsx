@@ -122,7 +122,7 @@ function Page() {
             </div>
           </div>
         </div>
-        <div className=" border border-green/30 rounded-xl shadow-md mt-[116px] lg:mt-[140px]">
+        <div className=" border border-green/30 rounded-xl shadow-md max-w-[600px] lg:max-w-[750px] mx-auto mt-[116px] lg:mt-[140px]">
           <Visa />
           <ul className="px-2 flex flex-col gap-3 pb-3">
             <li className="flex items-center justify-between ps-4 lg:ps-6 gap-2 pb-2 lg:pb-5 border-b border-[#B6BFC64D] last-of-type:border-none">

@@ -119,7 +119,7 @@ export const useActionTableIRentOut = (): ActionTableIRentOutProps => {
       },
       //9
       {
-        title: "Scan For Completed",
+        title: "Mark as Completed",
         icon: <BarcodeIcon fill="#006AFF" className="max-h-4 w-auto" />,
         onclick: (ids: any) => {
           onSubmitChangeStatusIds({

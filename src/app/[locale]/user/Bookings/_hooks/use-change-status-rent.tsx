@@ -8,6 +8,7 @@ import {
   useDeleteOrderMutation,
   useRefundManyOrderMutation,
   useRefundOrderMutation,
+  useReOrderByID,
 } from "@/src/hooks/queries/user/booking";
 import { Toast } from "@/src/components/toast";
 import { useSelectRowTable } from "@/src/components/select-row-table-context";
@@ -20,6 +21,7 @@ interface ActionTableIRentProps {
   onSubmitChangeStatusIds: any;
   onSubmitRefundMany: any;
   onSubmitCancelMany: any;
+  onSubmitReOrderByID: any;
 }
 export const useChangeStatusRent = (id: any): ActionTableIRentProps => {
   const { mutateAsync: DeleteOrderOut } = useDeleteOrderMutation();
@@ -29,6 +31,7 @@ export const useChangeStatusRent = (id: any): ActionTableIRentProps => {
   const { mutateAsync: RefundManyOrder } = useRefundManyOrderMutation();
   const { mutateAsync: ChangeStatusProduct } = ChangeStautsByID(id);
   const { mutateAsync: ChangeStatusManyProduct } = ChangeStatusByIDs();
+  const { mutateAsync: ReOrderByID } = useReOrderByID(id);
   const { setSelectRowTable } = useSelectRowTable();
   //change status
   const onSubmitChangeStatus = useCallback(async () => {
@@ -127,6 +130,17 @@ export const useChangeStatusRent = (id: any): ActionTableIRentProps => {
     },
     [RefundManyOrder, id]
   );
+
+  //Re Order ByID
+  const onSubmitReOrderByID = useCallback(async () => {
+    Toast.Promise(ReOrderByID(), {
+      success: "Canceled Order",
+      onSuccess(res) {
+        setSelectRowTable([]);
+      },
+    });
+  }, [ReOrderByID, setSelectRowTable]);
+
   return {
     onSubmitDelete,
     onSubmitCancel,
@@ -135,5 +149,6 @@ export const useChangeStatusRent = (id: any): ActionTableIRentProps => {
     onSubmitChangeStatusIds,
     onSubmitRefundMany,
     onSubmitCancelMany,
+    onSubmitReOrderByID,
   };
 };

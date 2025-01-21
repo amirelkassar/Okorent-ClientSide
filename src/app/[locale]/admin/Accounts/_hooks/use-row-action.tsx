@@ -6,22 +6,31 @@ import {
   useDeleteAccountInAdmin,
   useVerificationAccountInAdmin,
 } from "@/src/hooks/queries/admin/account";
+import ROUTES from "@/src/routes";
+import { useRouter } from "next/navigation";
 
 interface ActionTableIRentProps {
   onSubmitDeleteAccount: any;
   onSubmitActivateAccount: any;
   onSubmitVerificationAccount: any;
 }
-export const useRowActionAccountInAdmin = (id: any): ActionTableIRentProps => {
+export const useRowActionAccountInAdmin = (
+  id: any,
+  PageDetails?: boolean
+): ActionTableIRentProps => {
   const { mutateAsync: DeleteAccount } = useDeleteAccountInAdmin();
   const { mutateAsync: ActivateAccount } = useActivateAccountInAdmin(id);
   const { mutateAsync: Verification } = useVerificationAccountInAdmin();
-
+  const router = useRouter();
   //delete User
   const onSubmitDeleteAccount = useCallback(async () => {
     Toast.Promise(DeleteAccount(id), {
       success: "Deleted Account Done",
-      onSuccess: async (res) => {},
+      onSuccess: async (res) => {
+        if (PageDetails) {
+          router.push(ROUTES.ADMIN.ACCOUNTS);
+        }
+      },
     });
   }, [DeleteAccount, id]);
 

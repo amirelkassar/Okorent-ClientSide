@@ -1,6 +1,5 @@
 "use client";
 import LangIcon from "@/src/assets/icons/lang";
-import NotificationIcon from "@/src/assets/icons/notfication";
 import React, { useEffect, useMemo, useState } from "react";
 import { useLocale } from "next-intl";
 import Image from "next/image";
@@ -23,6 +22,7 @@ import MembershipsIcon from "@/src/assets/icons/memberships";
 import MasterDataIcon from "@/src/assets/icons/masterData";
 import { clearToken } from "@/src/lib/token";
 import { useToken } from "@/src/hooks/use-token";
+import Notifications from "@/src/components/Notifications";
 
 interface NavProps {
   linkLogo: string;
@@ -157,12 +157,7 @@ function Nav({ linkLogo = "#" }: NavProps) {
           <PlusIcon className={"w-[16px] h-auto"} />
           <p className="text-base">List an item</p>
         </Link> */}
-        <div className="w-10 h-10 rounded-[50%] bg-[#E5F1FB] p-2 relative flex items-center justify-center  cursor-pointer duration-300 hover:shadow-lg">
-          <p className="text-white text-[8px] flex items-center border border-[#E5F1FB] justify-center bg-red min-w-[12px] w-fit h-[12px] aspect-[1/1] rounded-[50%] p-[2px] absolute top-2 right-2">
-            1
-          </p>
-          <NotificationIcon />
-        </div>
+        <Notifications />
         <Link
           href={path}
           locale={locale === "en" ? "ar" : "en"}

@@ -47,6 +47,7 @@ export const useDeleteAccountInAdmin = () => {
     },
     onSuccess: (res) => {
       queryClient.refetchQueries([initialQueryKey]);
+      queryClient.refetchQueries([initialQueryKey, ""]);
       console.log(res);
     },
     onError: (res) => {
@@ -224,7 +225,11 @@ export const useVerificationManyAccountInAdmin = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await api.put(admin.Accounts.Verification_Many, data, {});
+      const response = await api.put(
+        admin.Accounts.Verification_Many,
+        data,
+        {}
+      );
       return response.data;
     },
     onSuccess: (res) => {

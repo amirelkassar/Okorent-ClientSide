@@ -33,7 +33,7 @@ function HeaderEditAcc({
     onSubmitDeleteAccount,
     onSubmitActivateAccount,
     onSubmitVerificationAccount,
-  } = useRowActionAccountInAdmin(id);
+  } = useRowActionAccountInAdmin(id,true);
 
   const functionSelect = [
     {
