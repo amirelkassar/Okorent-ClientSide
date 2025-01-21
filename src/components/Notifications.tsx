@@ -99,6 +99,7 @@ function Notifications() {
         }}
       />
     );
+    
   }, [
     data,
     onNotificationClick,
