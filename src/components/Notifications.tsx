@@ -3,14 +3,22 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import NotificationIcon from "../assets/icons/notfication";
 import { Popover, ScrollArea } from "@mantine/core";
 import SwitchControl from "./switch-control";
-import { useNotifications } from "../hooks/queries/user/notifications";
+import {
+  useNotifications,
+  useNotificationsMarkAsReadAll,
+} from "../hooks/queries/user/notifications";
 import Error500 from "./error-500";
 import NotificationRow from "./notification-row";
 import { Virtuoso } from "react-virtuoso";
 import LoadingNotifications from "./loading-notifications";
+import { Toast } from "./toast";
 
 function Notifications() {
   const [opened, setOpened] = useState(false);
+  const [typeNotifications, setTypeNotifications] = useState("All");
+  const [Ids, setIds] = useState<any[]>([]);
+  const [unReadCount, setUnReadCount] = useState(0);
+  console.log(unReadCount);
 
   const {
     data,
@@ -20,7 +28,16 @@ function Notifications() {
     isError,
     isLoading,
     refetch,
-  } = useNotifications();
+  } = useNotifications(typeNotifications !== "All");
+  const { mutateAsync: markAllAsRead } = useNotificationsMarkAsReadAll();
+  console.log(data);
+
+  const handleSubmitMarkAllAsRead = useCallback(async () => {
+    Toast.Promise(markAllAsRead({ ids: Ids }), {
+      success: "Done Mark All As Read",
+      onSuccess: async (res) => {},
+    });
+  }, [markAllAsRead, Ids]);
 
   const loadMore = useCallback(() => {
     if (hasNextPage && !isFetchingNextPage) {
@@ -33,7 +50,7 @@ function Notifications() {
     if (isError) return <Error500 />;
 
     const totalCount = data?.pages[0]?.data?.totalCount;
-
+    setUnReadCount(data?.pages[0]?.data?.unReadCount);
     if (!totalCount) {
       return (
         <div className="w-full my-10 h-full flex justify-center items-center text-grayDark">
@@ -43,6 +60,12 @@ function Notifications() {
     }
     const mergedNotifications =
       data?.pages.flatMap((page) => page?.data?.items) || [];
+    console.log(mergedNotifications);
+    setIds(
+      mergedNotifications
+        ?.filter((item) => item.status === 2)
+        ?.map((item) => item.id)
+    );
 
     return (
       <Virtuoso
@@ -92,9 +115,12 @@ function Notifications() {
           onClick={handlePopoverToggle}
           className="w-10 h-10 rounded-full bg-[#E5F1FB] p-2 relative flex items-center justify-center cursor-pointer duration-300 hover:shadow-lg"
         >
-          <p className="text-white text-[8px] flex items-center border border-[#E5F1FB] justify-center bg-red min-w-[12px] w-fit h-[12px] aspect-[1/1] rounded-full p-[2px] absolute top-2 right-2">
-            1
-          </p>
+          {+unReadCount > 0 ? (
+            <p className="text-white text-[8px] flex items-center border border-[#E5F1FB] justify-center bg-red min-w-[12px] w-fit h-[12px] aspect-[1/1] rounded-full p-[2px] absolute top-2 right-2">
+              {unReadCount}
+            </p>
+          ) : null}
+
           <NotificationIcon />
         </button>
       </Popover.Target>
@@ -104,12 +130,14 @@ function Notifications() {
           <div className="p-4 border-b">
             <div className="flex items-center justify-between">
               <h2 className="text-base font-semibold">Notifications</h2>
-              <button
-                className="text-sm text-blue hover:text-blue-700"
-                onClick={() => console.log("Mark all as read")}
-              >
-                Mark all as read
-              </button>
+              {Ids.length > 0 ? (
+                <button
+                  className="text-sm text-blue hover:text-blue-700"
+                  onClick={() => handleSubmitMarkAllAsRead()}
+                >
+                  Mark all as read
+                </button>
+              ) : null}
             </div>
             <div className="mt-2 mx-auto flex items-center justify-center">
               <SwitchControl
@@ -119,14 +147,18 @@ function Notifications() {
                     label: (
                       <div className="flex gap-2 items-center">
                         All
-                        <p className="bg-white text-black px-1 text-xs h-5 rounded-md">
+                        {/* <p className="bg-white text-black px-1 text-xs h-5 rounded-md">
                           2
-                        </p>
+                        </p> */}
                       </div>
                     ),
                     value: "All",
                   },
                 ]}
+                value={typeNotifications}
+                onChange={(e) => {
+                  setTypeNotifications(e);
+                }}
                 radius="md"
                 rootClassName="!h-8 !w-[160px]"
                 size="sm"

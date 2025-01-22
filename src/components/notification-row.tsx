@@ -13,7 +13,7 @@ function NotificationRow({
     <div
       onClick={() => {
         if (notificationDetails.status === 2) {
-          markAsRead(notificationDetails.id);
+          markAsRead({ norificationId: notificationDetails.id });
         }
       }}
       className={`flex mb-1 border-b border-[#B6BFC6] items-start gap-3 p-4 cursor-pointer hover:shadow-md     duration-500 ${

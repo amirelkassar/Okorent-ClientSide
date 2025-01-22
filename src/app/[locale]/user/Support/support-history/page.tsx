@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import LayoutSupport from "../_components/layout-support";
 import { Link } from "@/src/navigation";
@@ -7,44 +8,14 @@ import Card from "@/src/components/card";
 import { DataTable } from "@/src/components/data-table";
 import { columns } from "./_components/column";
 import CardPhoneSupport from "./_components/card-phone-support";
-interface SupportDataProps {
-  id: number;
-  Category: string;
-  Status: string;
-  Topic: string;
-  date: string;
-}
-const SupportData: SupportDataProps[] = [
-  {
-    id: 1,
-    Category: "Complaint",
-    Status: "In Progress",
-    Topic: "I want help in adjusting my listings ",
-    date: "Today | 05:30 PM",
-  },
-  {
-    id: 2,
-    Category: "Sales",
-    Status: "New",
-    Topic: "I want help in adjusting my listings ",
-    date: "Today | 05:30 PM",
-  },
-  {
-    id: 3,
-    Category: "Complaint",
-    Status: "In Progress",
-    Topic: "I want help in adjusting my listings ",
-    date: "Today | 05:30 PM",
-  },
-  {
-    id: 4,
-    Category: "Sales",
-    Status: "Solved",
-    Topic: "I want help in adjusting my listings ",
-    date: "Today | 05:30 PM",
-  },
-];
-function page() {
+import { QueryWrapper } from "@/src/components/query-wrapper";
+import { Pagination } from "@/src/components/pagination";
+import { GetSupportsMessages } from "@/src/hooks/queries/admin/support";
+import { useSearchParams } from "next/navigation";
+
+function Page() {
+  const searchparams = useSearchParams();
+  const query = GetSupportsMessages(searchparams.toString());
   return (
     <LayoutSupport>
       <div className="flex items-center  gap-4 flex-wrap mb-section">
@@ -60,16 +31,26 @@ function page() {
         </Link>
       </div>
       <Card className="mdl:p-11 rounded-2xl bg-transparent mdl:bg-white border-none mdl:border">
-        <DataTable
-          title=""
-          data={SupportData}
-          columns={columns}
-          Component={CardPhoneSupport}
-          functionSelect={[]}
-        />
+        <QueryWrapper query={query}>
+          {({ data, totalPages }: { data: any; totalPages?: any }) => {
+            console.log(data);
+            return (
+              <div>
+                <DataTable
+                  title=""
+                  data={data}
+                  columns={columns}
+                  Component={CardPhoneSupport}
+                  functionSelect={[]}
+                />
+                <Pagination totalPages={totalPages} />
+              </div>
+            );
+          }}
+        </QueryWrapper>
       </Card>
     </LayoutSupport>
   );
 }
 
-export default page;
+export default Page;

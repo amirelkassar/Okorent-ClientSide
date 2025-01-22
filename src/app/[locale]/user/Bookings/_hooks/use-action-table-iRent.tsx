@@ -16,8 +16,12 @@ interface ActionTableIRentProps {
 }
 export const useActionTableIRent = (): ActionTableIRentProps => {
   const [selectedFromTable, setSelectedFromTable] = useState([]);
-  const { onSubmitChangeStatusIds, onSubmitRefundMany, onSubmitCancelMany } =
-    useChangeStatusRent("ids");
+  const {
+    onSubmitChangeStatusIds,
+    onSubmitRefundMany,
+    onSubmitCancelMany,
+    onSubmitReOrderManyByID,
+  } = useChangeStatusRent("ids");
   const functionSelect = useMemo(
     () => [
       //0
@@ -48,7 +52,9 @@ export const useActionTableIRent = (): ActionTableIRentProps => {
         title: "Reorder",
         icon: <ReorderIcon fill="#006AFF" className="max-h-4 w-auto" />,
         onclick: (ids: any) => {
-          console.log([...ids]);
+          onSubmitReOrderManyByID({
+            orderIds: ids?.map((item: any) => item.id),
+          });
         },
       },
       //3

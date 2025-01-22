@@ -1,5 +1,4 @@
 "use client";
-import FilterIcon from "@/src/assets/icons/filter";
 import StarIcon from "@/src/assets/icons/star";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
@@ -9,6 +8,7 @@ import ActionMenu from "./action-menu";
 import RenderPackage from "../../_components/render-package";
 import avatarUser from "@/src/assets/images/avatar.png";
 import { getDate } from "@/src/lib/utils";
+import TableFilter from "@/src/components/TableFilterProps";
 
 export type MedicalTeamTableData = {
   id: number;
@@ -31,12 +31,7 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
   {
     accessorKey: "name",
     header: () => {
-      return (
-        <div className="flex items-center gap-1 cursor-pointer">
-          <p className="text-[18px]">Name</p>
-          <FilterIcon />
-        </div>
-      );
+      return <TableFilter title="Name" column="Name" type="search" />;
     },
     cell: ({ getValue, row }) => {
       const name = getValue<string>();
@@ -72,14 +67,15 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
   },
   {
     accessorKey: "memberShipName",
-    header: () => {
-      return (
-        <div className="flex items-center gap-1 cursor-pointer">
-          <p className="text-[18px]">Package</p>
-          <FilterIcon />
-        </div>
-      );
-    },
+    header: () => (
+      <TableFilter
+        title="Package"
+        column="package"
+        type="select"
+        options={["Pro Package", "Diamond Package"]}
+      />
+    ),
+
     cell: ({ getValue }) => {
       const packageVal = getValue<string>();
       return <RenderPackage packageVal={packageVal} />;
@@ -138,7 +134,12 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
       const isVerified = row.original.isVerified;
       return (
         <div className="flex items-center gap-3 justify-end">
-          <ActionMenu id={id} isActivated={isActivated} isVerified={isVerified} dataUSer={row.original} />
+          <ActionMenu
+            id={id}
+            isActivated={isActivated}
+            isVerified={isVerified}
+            dataUSer={row.original}
+          />
         </div>
       );
     },

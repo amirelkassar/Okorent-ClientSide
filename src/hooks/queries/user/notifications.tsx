@@ -14,6 +14,7 @@ interface NotificationResponse {
     items: any[]; // Replace `any` with the specific type for a notification
     totalCount: number;
     pageSize: number;
+    unReadCount: number;
   };
 }
 
@@ -23,26 +24,26 @@ export interface NotificationQueryParams {
 }
 
 export const getNotifications = async (
-  queries: NotificationQueryParams
+  queries: NotificationQueryParams,
+  UnReadOnly: boolean
 ): Promise<NotificationResponse> => {
   const response = await api.get(
-    notifications.base(`PageNumber=${queries.page}`)
+    notifications.base(`PageNumber=${queries.page}&UnReadOnly=${UnReadOnly}`)
   );
   console.log(response.data);
   return response.data;
 };
 
-export const useNotifications = (): UseInfiniteQueryResult<
-  NotificationResponse,
-  any
-> => {
+export const useNotifications = (
+  UnReadOnly: boolean = false
+): UseInfiniteQueryResult<NotificationResponse, any> => {
   return useInfiniteQuery<NotificationResponse, Error>({
-    queryKey: [initialQueryKey],
+    queryKey: [initialQueryKey, UnReadOnly ? "UnRead" : "Read"],
     queryFn: async ({ pageParam = 1 }) => {
       const params: NotificationQueryParams = { page: pageParam };
       console.log(params);
 
-      return await getNotifications(params);
+      return await getNotifications(params, UnReadOnly);
     },
     getNextPageParam: (lastPage, allPages) => {
       const totalCount = lastPage?.data?.totalCount || 0;
@@ -50,20 +51,34 @@ export const useNotifications = (): UseInfiniteQueryResult<
       const totalPages = Math.ceil(totalCount / pageSize);
       return allPages.length < totalPages ? allPages.length + 1 : undefined;
     },
+    
   });
 };
 
 //Read notification
-
 export const useNotificationsMarkAsRead = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (id: any) => {
-      const response = await api.put(notifications.actions.makeItRead, id, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+    mutationFn: async (data: any) => {
+      const response = await api.put(notifications.actions.makeItRead, data);
+      return response.data;
+    },
+    onSuccess: async (res) => {
+      console.log(res);
+      queryClient.refetchQueries([initialQueryKey]);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
+
+//Read All notification
+export const useNotificationsMarkAsReadAll = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.put(notifications.actions.makeItReadAll, data);
       return response.data;
     },
     onSuccess: async (res) => {

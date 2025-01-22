@@ -14,22 +14,4 @@ export const GetReviewByIDInGuest = (id: any) => {
   });
 };
 
-export const useContactUs = () => {
-  return useMutation({
-    mutationFn: async (data: any) => {
-      const response = await api.post(user.contact_us.base, data, {
-        headers: {
-          Accept: "text/plain",
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      return response.data;
-    },
-    onSuccess: (res) => {
-      console.log(res);
-    },
-    onError: (res) => {
-      console.log(res);
-    },
-  });
-};
+

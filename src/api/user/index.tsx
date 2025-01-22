@@ -54,7 +54,8 @@ export const user = {
     refunds_iRent_out: `/OrderRequest/Refund Orders Response`,
     reject_iRent: `/OrderRequest/Reject Order`,
     rejects_iRent: `/OrderRequest/Reject Orders`,
-    ReOrder:'/BookingOrder/ReOrder',
+    ReOrder: "/BookingOrder/ReOrder",
+    ReOrder_many: "/BookingOrder/ReOrders",
     review: {
       base: "/ProductReviews",
       getByID: (id: any) => `/ProductReviews/${id}`,
@@ -73,9 +74,6 @@ export const user = {
     reviews: `/MyProfile/Reviews About Me`,
     ImageUpdate: "/MyProfile/Image",
     RecentActivities: "/MyProfile/My Recent Activities",
-  },
-  contact_us: {
-    base: "/Tickets",
   },
 };
 
@@ -143,6 +141,18 @@ export const notifications = {
   list: (queries: any) => buildQuery("/notification/list", queries),
   actions: {
     makeItRead: "/Notification/read",
+    makeItReadAll: "/Notification/read-list",
     delete: (id: any) => `/notification?id=${id}`,
   },
+};
+
+export const Support = {
+  get_all: (queries: any) =>
+    buildQuery("/Tickets/User-GetAll-Tickets", queries),
+  get_by_id: (id: any) => `/Tickets/User-Get-Ticket/${id}`,
+  create_guest: "/Tickets/Guest-Create",
+  reply_guest: "/Tickets/Guest-Reply",
+  create_user: "/Tickets/User-Create",
+  reply_user: "/Tickets/User-Reply",
+  delete: `/Tickets/User-Delete`,
 };

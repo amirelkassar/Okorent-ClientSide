@@ -3,17 +3,18 @@ import { ColumnDef } from "@tanstack/react-table";
 import RenderStatus from "./render-status";
 import StatusCategory from "./status-category";
 import TicketModal from "./ticket-modal";
+import { getDate } from "@/src/lib/utils";
 
 interface SupportDataProps {
   id: number;
-  Category: string;
-  Status: string;
-  Topic: string;
-  date: string;
+  ticketType: string;
+  contactUsStatus: string;
+  messages: [{ content: string }];
+  created: string;
 }
 export const columns: ColumnDef<SupportDataProps>[] = [
   {
-    accessorKey: "Category",
+    accessorKey: "ticketType",
     header: "Category",
     cell({ getValue }) {
       const Category = getValue<string>();
@@ -21,29 +22,29 @@ export const columns: ColumnDef<SupportDataProps>[] = [
     },
   },
   {
-    accessorKey: "Status",
+    accessorKey: "contactUsStatus",
     header: "Status",
     cell({ getValue }) {
-      const status = getValue<string>();
-      return <RenderStatus status={status} />;
+      const contactUsStatus = getValue<string>();
+      return <RenderStatus status={contactUsStatus} />;
     },
   },
   {
-    accessorKey: "Topic",
+    accessorKey: "messages",
     header: "Topic",
-    cell: ({ getValue }) => {
-      const topic = getValue<string>();
-      return <h4 className="max-w-[330px] truncate">{topic}</h4>;
+    cell: ({ row }) => {
+      const messages = row.original.messages[0].content;
+      return <h4 className="max-w-[330px] truncate">{messages || ""}</h4>;
     },
   },
   {
-    accessorKey: "date",
+    accessorKey: "created",
     header: "",
     cell: ({ getValue }) => {
       const date = getValue<string>();
       return (
         <div className="flex items-center gap-5 justify-between">
-          <h4 className="text-grayMedium">{date}</h4>
+          <h4 className="text-grayMedium">{getDate(date).timeFromNow}</h4>
           <TicketModal />
         </div>
       );

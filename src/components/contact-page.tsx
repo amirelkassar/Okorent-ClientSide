@@ -7,10 +7,10 @@ import Input from "./input";
 import FacebookIcon from "../assets/icons/facebook";
 import InstaIcon from "../assets/icons/insta";
 import TwitterIcon from "../assets/icons/twitter";
-import { useContactUs } from "../hooks/queries/guest";
 import { Toast } from "./toast";
+import { useContactUs, useSupportUser } from "../hooks/queries/admin/support";
 
-function ContactPage() {
+function ContactPage({ user = false }: { user?: boolean }) {
   const [formData, setFormData] = useState({
     UserName: "",
     UserEmail: "",
@@ -18,6 +18,8 @@ function ContactPage() {
     Content: "",
   });
   const { mutateAsync: SendContactUs } = useContactUs();
+  const { mutateAsync: SendSupport } = useSupportUser();
+
   // Handle input change
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -29,14 +31,27 @@ function ContactPage() {
     }));
   };
 
-  //Verification User
-  const handleSubmit = useCallback(async () => {
+  const handleSubmitGuest = useCallback(async () => {
     Toast.Promise(SendContactUs(formData), {
-      success: "Contact Us Message Done Send",
+      success: "successfully Send Contact Us Message",
       onSuccess: async (res) => {},
     });
   }, [SendContactUs, formData]);
 
+  const handleSubmitUser = useCallback(async () => {
+    Toast.Promise(
+      SendSupport({
+        Title: formData.Title,
+        Content: formData.Content,
+        TicketType: 4,
+      }),
+      {
+        success: "successfully Send Contact Us Message",
+        onSuccess: async (res) => {},
+      }
+    );
+  }, [SendSupport, formData]);
+  const handleSubmit = user ? handleSubmitUser : handleSubmitGuest;
   return (
     <div>
       <div className="my-section">

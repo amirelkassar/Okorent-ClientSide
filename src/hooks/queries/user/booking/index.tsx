@@ -331,6 +331,24 @@ export const useReOrderByID = (id: any) => {
   });
 };
 
+//ReOrder Many Product
+export const useReOrderManyByID = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.put(user.order.ReOrder_many, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKey]);
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
+
 //get QrCode
 export const GetQrCodeOrder = () => {
   return useMutation({
