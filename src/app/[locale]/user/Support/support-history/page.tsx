@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import LayoutSupport from "../_components/layout-support";
 import { Link } from "@/src/navigation";
 import SupportIcon from "@/src/assets/icons/Support";
 import ROUTES from "@/src/routes";
@@ -17,7 +16,7 @@ function Page() {
   const searchparams = useSearchParams();
   const query = GetSupportsMessages(searchparams.toString());
   return (
-    <LayoutSupport>
+    <div>
       <div className="flex items-center  gap-4 flex-wrap mb-section">
         <h3 className=" text-lg md:text-xl mdl:text-[32px] font-SemiBold">
           Support History
@@ -49,7 +48,7 @@ function Page() {
           }}
         </QueryWrapper>
       </Card>
-    </LayoutSupport>
+    </div>
   );
 }
 
