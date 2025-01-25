@@ -33,7 +33,7 @@ function ProductList({ link, title, data, more = true }: ProductListProps) {
       )}
 
       {data.length > 0 && (
-        <div className="flex gap-3 lg:gap-4 justify-center md:justify-start  flex-wrap">
+        <div className="flex gap-3 lg:gap-4 justify-center xl:justify-start  flex-wrap w-fit mx-auto">
           {data?.map((item, i) => {
             return <CardRentals data={item} key={i} Fav={true} />;
           })}
