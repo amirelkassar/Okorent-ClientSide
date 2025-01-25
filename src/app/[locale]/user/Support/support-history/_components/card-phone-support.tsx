@@ -11,8 +11,9 @@ interface SupportDataProps {
   id: number;
   ticketType: string;
   contactUsStatus: string;
-  messages: [{ content: string }];
+  title: string;
   created: string;
+  userName: string;
 }
 interface CardDataProps {
   dataCard: SupportDataProps;
@@ -33,12 +34,12 @@ function CardPhoneSupport({ dataCard }: CardDataProps) {
             title="Status"
             cell={() => <RenderStatus status={dataCard.contactUsStatus} />}
           />
-          <RowCardPhone title="Topic" info={dataCard.messages[0].content || ""} />
+          <RowCardPhone title="Topic" info={dataCard.title || ""} />
           <div className="flex  items-center gap-5 justify-between">
             <h4 className="text-grayMedium text-sm  ">
               {getDate(dataCard.created).timeFromNow}
             </h4>
-            <TicketModal />
+            <TicketModal id={dataCard.id} name={dataCard.userName} />
           </div>
         </div>
       </div>

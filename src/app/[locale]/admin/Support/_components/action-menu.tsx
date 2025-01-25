@@ -1,52 +1,65 @@
 "use client";
 import DeleteIcon from "@/src/assets/icons/delete";
-import ProfileIcon from "@/src/assets/icons/Profile";
 import DataActions from "@/src/components/DataActions";
-import React from "react";
-import { useDisclosure } from "@mantine/hooks";
-import ViewIcon from "@/src/assets/icons/view";
-import HourGlassIcon from "@/src/assets/icons/hourglass";
+import React, { useCallback } from "react";
 import MarkIcon from "@/src/assets/icons/mark";
-import AssignModal from "./assign-modal";
+import {
+  useDeleteSupportInAdmin,
+  useSolvedSupportInAdmin,
+} from "@/src/hooks/queries/admin/support";
+import { Toast } from "@/src/components/toast";
 
-function ActionMenu({ id }: { id: any }) {
-  const [opened, { open, close }] = useDisclosure(false);
+function ActionMenu({ id, solved = false }: { id: any; solved: boolean }) {
+  const { mutateAsync: DeleteSupport } = useDeleteSupportInAdmin(id);
+  const { mutateAsync: SolvedSupport } = useSolvedSupportInAdmin(id);
+
+  const onSubmitDeleteSupport = useCallback(async () => {
+    Toast.Promise(
+      DeleteSupport({
+        TicketId: id,
+      }),
+      {
+        success: "Deleted Support Done",
+        onSuccess: async (res) => {},
+      }
+    );
+  }, [DeleteSupport, id]);
+  const onSubmitSolvedSupport = useCallback(async () => {
+    Toast.Promise(
+      SolvedSupport({
+        TicketId: id,
+      }),
+      {
+        success: "Solved Support Done",
+        onSuccess: async (res) => {},
+      }
+    );
+  }, [SolvedSupport, id]);
   const options = [
-    {
-      label: "Mark as In Progress",
-      icon: <HourGlassIcon />,
-      type: "btn",
-      action: () => {},
-    },
-    {
-      label: "Mark as Solved",
-      icon: <MarkIcon fill="#6F6B7D" className="w-3 h-auto" />,
-      type: "btn",
-      action: () => {},
-    },
-    {
-      label: "Assign",
-      icon: <ProfileIcon fill="#6F6B7D" className="w-3 h-auto" />,
-      type: "btn",
-      action: open,
-    },
-    {
-      label: "View Details",
-      icon: <ViewIcon className="w-3 h-auto" />,
-      type: "btn",
-      action: () => {},
-    },
+    ...(solved
+      ? []
+      : [
+          {
+            label: "Mark as Solved",
+            icon: <MarkIcon fill="#6F6B7D" className="w-3 h-auto" />,
+            type: "btn",
+            action: () => {
+              onSubmitSolvedSupport();
+            },
+          },
+        ]),
     {
       label: "Delete",
       icon: <DeleteIcon className="w-3 h-auto" />,
       type: "btn",
-      action: () => {},
+      action: () => {
+        onSubmitDeleteSupport();
+      },
     },
   ];
   return (
     <>
       <DataActions data={options} />
-      {opened && <AssignModal id={id} opened={opened} close={close} />}
     </>
   );
 }

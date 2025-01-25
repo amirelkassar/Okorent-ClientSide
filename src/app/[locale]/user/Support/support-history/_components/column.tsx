@@ -9,8 +9,9 @@ interface SupportDataProps {
   id: number;
   ticketType: string;
   contactUsStatus: string;
-  messages: [{ content: string }];
+  title: string;
   created: string;
+  userName: string;
 }
 export const columns: ColumnDef<SupportDataProps>[] = [
   {
@@ -30,22 +31,24 @@ export const columns: ColumnDef<SupportDataProps>[] = [
     },
   },
   {
-    accessorKey: "messages",
+    accessorKey: "title",
     header: "Topic",
     cell: ({ row }) => {
-      const messages = row.original.messages[0].content;
-      return <h4 className="max-w-[330px] truncate">{messages || ""}</h4>;
+      const title = row.original.title;
+      return <h4 className="max-w-[330px] truncate">{title || ""}</h4>;
     },
   },
   {
     accessorKey: "created",
     header: "",
-    cell: ({ getValue }) => {
+    cell: ({ getValue, row }) => {
       const date = getValue<string>();
+      const id = row.original.id;
+      const name = row.original.userName;
       return (
         <div className="flex items-center gap-5 justify-between">
           <h4 className="text-grayMedium">{getDate(date).timeFromNow}</h4>
-          <TicketModal />
+          <TicketModal id={id} name={name} />
         </div>
       );
     },

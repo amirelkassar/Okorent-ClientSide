@@ -11,6 +11,8 @@ import { cn } from "@/src/lib/utils";
 import InputTextarea from "@/src/components/InputTextarea";
 import { useSupportUser } from "@/src/hooks/queries/admin/support";
 import { Toast } from "@/src/components/toast";
+import GetErrorMsg from "@/src/components/getErrorMsg";
+import ErrorMsg from "@/src/components/error-msg";
 type SupportType = "complaint" | "technical" | "sales" | "other" | "feedback";
 
 function FormSupport() {
@@ -19,7 +21,7 @@ function FormSupport() {
     Content: "",
     TicketType: "",
   });
-  const { mutateAsync: SendSupport } = useSupportUser();
+  const { mutateAsync: SendSupport, error, reset } = useSupportUser();
 
   const supportTypes = [
     {
@@ -67,6 +69,7 @@ function FormSupport() {
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    reset();
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -74,6 +77,7 @@ function FormSupport() {
     }));
   };
   const clearData = () => {
+    reset();
     setFormData({
       Title: "",
       Content: "",
@@ -84,6 +88,7 @@ function FormSupport() {
     Toast.Promise(SendSupport(formData), {
       success: "successfully Send Support",
       onSuccess: async (res) => {
+        reset();
         clearData();
       },
     });
@@ -106,15 +111,17 @@ function FormSupport() {
                       ? "bg-green text-white hover:bg-green"
                       : "bg-blueLight hover:bg-green/30 "
                   )}
-                  onClick={() =>
-                    setFormData((prev) => ({ ...prev, TicketType: type.id }))
-                  }
+                  onClick={() => {
+                    setFormData((prev) => ({ ...prev, TicketType: type.id }));
+                    reset();
+                  }}
                 >
                   {type.icon(formData.TicketType === type.id)}
                   <span>{type.label}</span>
                 </button>
               ))}
             </div>
+            <ErrorMsg error={GetErrorMsg(error, "TicketType")} />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -126,9 +133,10 @@ function FormSupport() {
                 name="Title"
                 value={formData.Title || ""}
                 onChange={handleInputChange}
-                placeholder="Profcunt Agency"
+                placeholder="Profound Agency"
                 inputClassName="bg-white !h-16 rounded-xl"
                 className="w-full"
+                error={GetErrorMsg(error, "Title")}
               />
             </div>
 
@@ -145,6 +153,7 @@ function FormSupport() {
                 placeholder="I want help in adjusting my..."
                 inputClassName="bg-white !h-20 !min-h-20 rounded-xl"
                 className="w-full min-h-20 !mb-0 "
+                error={GetErrorMsg(error, "Content")}
               />
             </div>
           </div>

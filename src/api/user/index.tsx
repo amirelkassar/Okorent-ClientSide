@@ -99,6 +99,7 @@ export const admin = {
     Activate: "/AdminManageUser/Reactivate",
     DeleteManyAccounts: "/AdminManageUser/DeleteUsers",
     UpdateUserProfile: "/AdminManageUser/UpdateUserProfile",
+    UpdateImageUserProfile: "/AdminManageUser/UpdateUserImage",
     ActiveManyUser: "/AdminManageUser/Bulk-Reactivate",
     Verification: "/AdminManageUser/Verification",
     Verification_Many: "/AdminManageUser/Bulk-Verification",
@@ -155,4 +156,13 @@ export const Support = {
   create_user: "/Tickets/User-Create",
   reply_user: "/Tickets/User-Reply",
   delete: `/Tickets/User-Delete`,
+  solved: "/Tickets/User-End-Ticket",
+};
+export const SupportAdmin = {
+  get_all: (queries: any) =>
+    buildQuery("/AdminTicket/Admin-GetAll-Tickets", queries),
+  get_by_id: (id: any) => `/AdminTicket/Admin-GetTicket-ByID?id=${id}`,
+  reply_admin: "/AdminTicket/Admin-Reply",
+  delete: `/AdminTicket/Admin-Delete`,
+  solved: "/AdminTicket/Admin-End-Ticket",
 };

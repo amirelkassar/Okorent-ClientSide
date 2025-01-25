@@ -9,6 +9,7 @@ import InstaIcon from "../assets/icons/insta";
 import TwitterIcon from "../assets/icons/twitter";
 import { Toast } from "./toast";
 import { useContactUs, useSupportUser } from "../hooks/queries/admin/support";
+import GetErrorMsg from "./getErrorMsg";
 
 function ContactPage({ user = false }: { user?: boolean }) {
   const [formData, setFormData] = useState({
@@ -17,13 +18,19 @@ function ContactPage({ user = false }: { user?: boolean }) {
     Title: "",
     Content: "",
   });
-  const { mutateAsync: SendContactUs } = useContactUs();
-  const { mutateAsync: SendSupport } = useSupportUser();
+  const { mutateAsync: SendContactUs, error, reset } = useContactUs();
+  const {
+    mutateAsync: SendSupport,
+    error: errorSupportUser,
+    reset: resetSupport,
+  } = useSupportUser();
 
   // Handle input change
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    resetSupport();
+    reset();
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -34,7 +41,10 @@ function ContactPage({ user = false }: { user?: boolean }) {
   const handleSubmitGuest = useCallback(async () => {
     Toast.Promise(SendContactUs(formData), {
       success: "successfully Send Contact Us Message",
-      onSuccess: async (res) => {},
+      onSuccess: async (res) => {
+        resetSupport();
+        reset();
+      },
     });
   }, [SendContactUs, formData]);
 
@@ -47,7 +57,10 @@ function ContactPage({ user = false }: { user?: boolean }) {
       }),
       {
         success: "successfully Send Contact Us Message",
-        onSuccess: async (res) => {},
+        onSuccess: async (res) => {
+          resetSupport();
+          reset();
+        },
       }
     );
   }, [SendSupport, formData]);
@@ -90,6 +103,10 @@ function ContactPage({ user = false }: { user?: boolean }) {
               inputClassName="!h-16 !rounded-2xl bg-white"
               className="flex-1 min-w-[350px]"
               labelClassName=" text-base mdl:!text-2xl"
+              error={
+                GetErrorMsg(error, "UserName") ||
+                GetErrorMsg(errorSupportUser, "UserName")
+              }
             />
             <Input
               label="Email Address"
@@ -100,6 +117,10 @@ function ContactPage({ user = false }: { user?: boolean }) {
               inputClassName="!h-16 !rounded-2xl bg-white"
               className="flex-1 min-w-[350px]"
               labelClassName=" text-base mdl:!text-2xl"
+              error={
+                GetErrorMsg(error, "UserEmail") ||
+                GetErrorMsg(errorSupportUser, "UserEmail")
+              }
             />
             <Input
               label="Subject"
@@ -110,6 +131,10 @@ function ContactPage({ user = false }: { user?: boolean }) {
               inputClassName="!h-16 !rounded-2xl bg-white"
               className="flex-1 min-w-[350px]"
               labelClassName=" text-base mdl:!text-2xl"
+              error={
+                GetErrorMsg(error, "Title") ||
+                GetErrorMsg(errorSupportUser, "Title")
+              }
             />
             <InputTextarea
               label="Message"
@@ -120,6 +145,10 @@ function ContactPage({ user = false }: { user?: boolean }) {
               inputClassName="!h-24 min-h-24 !rounded-2xl bg-white"
               labelClassName=" text-base mdl:!text-2xl"
               className="min-w-full !min-h-24"
+              error={
+                GetErrorMsg(error, "Content") ||
+                GetErrorMsg(errorSupportUser, "Content")
+              }
             />
             <Button
               onClick={() => {

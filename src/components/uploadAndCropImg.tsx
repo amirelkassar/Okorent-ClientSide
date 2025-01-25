@@ -11,10 +11,13 @@ import VerifyBlackIcon from "@/src/assets/icons/verifyBlack";
 import CameraIcon from "@/src/assets/icons/camera";
 import { useEditImageMyProfile } from "@/src/hooks/queries/user/my-profile";
 import { Toast } from "@/src/components/toast";
+import { useEditImageUserProfileInAdmin } from "../hooks/queries/admin/account";
 interface Props {
   image: StaticImageData | string;
+  admin?: boolean;
+  userID?: string;
 }
-function UploadAndCropImg({ image }: Props) {
+function UploadAndCropImg({ image, admin = false, userID }: Props) {
   //Hooks
   const [formData, setFormData] = useState<any>({});
   const [opened, { open, close }] = useDisclosure(false);
@@ -26,6 +29,7 @@ function UploadAndCropImg({ image }: Props) {
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
   //Query
   const { mutateAsync: EditImage } = useEditImageMyProfile();
+  const { mutateAsync: EditImageInAdmin } = useEditImageUserProfileInAdmin();
   //Functions
   const onCropComplete = useCallback(
     (croppedArea: Area, croppedAreaPixels: Area) => {
@@ -39,7 +43,12 @@ function UploadAndCropImg({ image }: Props) {
         blobUrl,
         formData.Name || "user" + ".png"
       ).then((file) => file);
-      onSubmitEditImageProfile(file);
+      if (admin) {
+        onSubmitEditImageUserProfileInAdmin(file);
+      } else {
+        onSubmitEditImageProfile(file);
+      }
+
       setFormData((prevData: any) => ({
         ...prevData,
         ProfileImageFile: file,
@@ -87,6 +96,23 @@ function UploadAndCropImg({ image }: Props) {
     },
     [EditImage, close]
   );
+  const onSubmitEditImageUserProfileInAdmin = useCallback(
+    async (image: any) => {
+      Toast.Promise(
+        EditImageInAdmin({ ProfileImageFile: image, UserId: userID }),
+        {
+          success: "successfully Edit Profile",
+          onSuccess(res) {
+            close();
+          },
+          onError(err) {
+            close();
+          },
+        }
+      );
+    },
+    [EditImageInAdmin, close]
+  );
   return (
     <div>
       <div className=" size-[100px] md:size-[156px] relative rounded-full mx-auto mb-5 border-2 border-white shadow-md ">
@@ -101,7 +127,7 @@ function UploadAndCropImg({ image }: Props) {
           className="w-full h-full rounded-full object-cover "
         />
 
-        <div className=" absolute bg-[#D9D9D9] md:min-w-8  md:min-h-8  left-1/2 -bottom-3 md:-bottom-5 cursor-pointer duration-200 hover:shadow-md size-5 md:size-8 rounded-full p-1 flex items-center justify-center h-auto -translate-x-1/2 ">
+        <div className=" absolute bg-[#D9D9D9] md:min-w-8  md:min-h-8  left-1/2 -bottom-3 md:-bottom-5 cursor-pointer duration-200 hover:shadow-md size-5 md:size-8 rounded-full p-0 flex items-center justify-center h-auto -translate-x-1/2 ">
           <FileButton onChange={handleFileChange} accept="image/png,image/jpeg">
             {(props) => (
               <div {...props}>

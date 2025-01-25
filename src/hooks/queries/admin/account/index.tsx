@@ -205,6 +205,28 @@ export const useEditAccountIDInAdmin = () => {
   });
 };
 
+//edit Image User Profile
+export const useEditImageUserProfileInAdmin = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.put(admin.Accounts.UpdateImageUserProfile, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      queryClient.invalidateQueries([initialQueryKey]);
+    },
+    onError: (err) => {
+      console.log(err);
+    },
+  });
+};
+
 // Verification Account In Admin
 export const useVerificationAccountInAdmin = () => {
   const queryClient = useQueryClient();
