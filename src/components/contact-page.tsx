@@ -10,8 +10,10 @@ import TwitterIcon from "../assets/icons/twitter";
 import { Toast } from "./toast";
 import { useContactUs, useSupportUser } from "../hooks/queries/admin/support";
 import GetErrorMsg from "./getErrorMsg";
+import { useSearchParams } from "next/navigation";
 
 function ContactPage({ user = false }: { user?: boolean }) {
+  const searchparams = useSearchParams();
   const [formData, setFormData] = useState({
     UserName: "",
     UserEmail: "",
@@ -65,6 +67,7 @@ function ContactPage({ user = false }: { user?: boolean }) {
     );
   }, [SendSupport, formData]);
   const handleSubmit = user ? handleSubmitUser : handleSubmitGuest;
+  
   return (
     <div>
       <div className="my-section">
