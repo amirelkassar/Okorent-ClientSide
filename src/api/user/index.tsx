@@ -79,7 +79,8 @@ export const user = {
 
 export const admin = {
   Home: {
-    DashboardCount: "/AdminDashBoard/Get Users Overview",
+    DashboardCount: "/AdminDashBoard/Get-Users-Overview",
+    performace_year: "/AdminDashBoard/Get-Monthly-Performace-Orders",
   },
   Category: {
     base: "/Category",

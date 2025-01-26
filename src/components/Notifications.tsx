@@ -102,21 +102,22 @@ function Notifications() {
       onChange={(e) => {
         setOpened((o) => !o);
       }}
-      position="bottom-end"
+      position='bottom-end'
       clickOutsideEvents={["mouseup", "touchend"]}
       offset={10}
       classNames={{
-        dropdown: "bg-white shadow-md py-0",
+        dropdown: "bg-white shadow-md py-0 max-w-[97%] md:max-w-[380px]",
       }}
+      
       width={340}
     >
       <Popover.Target>
         <button
           onClick={handlePopoverToggle}
-          className="w-10 h-10 rounded-full bg-[#E5F1FB] p-2 relative flex items-center justify-center cursor-pointer duration-300 hover:shadow-lg"
+          className=" w-8 md:w-10  h-8 md:h-10 rounded-full bg-[#E5F1FB] p-2 relative flex items-center justify-center cursor-pointer duration-300 hover:shadow-lg"
         >
           {+unReadCount > 0 ? (
-            <p className="text-white text-[8px] flex items-center border border-[#E5F1FB] justify-center bg-red min-w-[12px] w-fit h-[12px] aspect-[1/1] rounded-full p-[2px] absolute top-2 right-2">
+            <p className="text-white text-[8px] flex items-center border border-[#E5F1FB] justify-center bg-red min-w-[12px] w-fit h-[12px] aspect-[1/1] rounded-full p-[2px] absolute top-1 md:top-2 right-1 md:right-2">
               {unReadCount}
             </p>
           ) : null}
@@ -129,10 +130,10 @@ function Notifications() {
         <div className="w-full max-w-sm rounded-lg shadow-lg">
           <div className="p-4 border-b">
             <div className="flex items-center justify-between">
-              <h2 className="text-base font-semibold">Notifications</h2>
+              <h2 className=" text-sm md:text-base font-semibold">Notifications</h2>
               {Ids.length > 0 ? (
                 <button
-                  className="text-sm text-blue hover:text-blue-700"
+                  className=" text-xs md:text-sm text-blue hover:text-blue-700"
                   onClick={() => handleSubmitMarkAllAsRead()}
                 >
                   Mark all as read

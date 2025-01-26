@@ -21,7 +21,6 @@ import CalendarIcon from "../assets/icons/Calendar";
 import BillingIcon from "../assets/icons/Billing";
 import SupportIcon from "../assets/icons/Support";
 import InboxIcon from "../assets/icons/Inbox";
-import NotificationsIcon from "../assets/icons/Notifications";
 import Notifications from "./Notifications";
 import LogoOkoRent from "../assets/icons/logo";
 import AdsIcon from "../assets/icons/ads";
@@ -125,13 +124,7 @@ function Nav({ linkLogo = "#" }: NavProps) {
         url: ROUTES.USER.SUPPORT,
         active: pathname === ROUTES.USER.SUPPORT,
       },
-      {
-        id: 11,
-        name: "Notifications",
-        icon: <NotificationsIcon />,
-        url: ROUTES.USER.SUPPORT,
-        active: pathname === ROUTES.USER.SUPPORT,
-      },
+     
       {
         id: 12,
         name: "Ads",
@@ -167,14 +160,18 @@ function Nav({ linkLogo = "#" }: NavProps) {
         </Link>
         <MenuProfile />
       </div>
-      <div
-        className="block mdl:hidden cursor-pointer duration-300 hover:shadow-md"
-        onClick={() => {
-          setShowMenu(!showMenu);
-        }}
-      >
-        <MenuIcon />
+      <div className="flex gap-3  mdl:hidden items-center">
+        <Notifications />
+        <div
+          className=" cursor-pointer duration-300 hover:shadow-md"
+          onClick={() => {
+            setShowMenu(!showMenu);
+          }}
+        >
+          <MenuIcon />
+        </div>
       </div>
+
       {isMobile && (
         <div
           className={`h-screen overflow-hidden w-screen z-50 start-0  duration-300   fixed top-0  ${

@@ -17,7 +17,6 @@ import BookingsIcon from "@/src/assets/icons/Bookings";
 import InboxIcon from "@/src/assets/icons/Inbox";
 import ClientsIcon from "@/src/assets/icons/Clients";
 import BillingIcon from "@/src/assets/icons/Billing";
-import NotificationsIcon from "@/src/assets/icons/Notifications";
 import MembershipsIcon from "@/src/assets/icons/memberships";
 import MasterDataIcon from "@/src/assets/icons/masterData";
 import { clearToken } from "@/src/lib/token";
@@ -126,13 +125,6 @@ function Nav({ linkLogo = "#" }: NavProps) {
         url: ROUTES.ADMIN.MASTERDATA,
         active: path.includes(ROUTES.ADMIN.MASTERDATA),
       },
-      {
-        id: 13,
-        name: "Notifications",
-        icon: <NotificationsIcon />,
-        url: ROUTES.USER.SUPPORT,
-        active: path === ROUTES.ADMIN.SUPPORT,
-      },
     ],
     [path]
   );
@@ -173,14 +165,18 @@ function Nav({ linkLogo = "#" }: NavProps) {
           <LogOutMenuIcon fill="#0F2A43" />
         </Link>
       </div>
-      <div
-        className="block mdl:hidden cursor-pointer duration-300 hover:shadow-md"
-        onClick={() => {
-          setShowMenu(!showMenu);
-        }}
-      >
-        <MenuIcon />
+      <div className="flex gap-3  mdl:hidden items-center">
+        <Notifications />
+        <div
+          className=" cursor-pointer duration-300 hover:shadow-md"
+          onClick={() => {
+            setShowMenu(!showMenu);
+          }}
+        >
+          <MenuIcon />
+        </div>
       </div>
+
       {isMobile && (
         <div
           className={`h-screen overflow-hidden w-screen z-50 start-0  duration-300   fixed top-0  ${

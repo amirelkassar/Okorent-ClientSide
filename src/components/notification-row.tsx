@@ -20,8 +20,8 @@ function NotificationRow({
         notificationDetails?.status === 2 ? "bg-green/10" : ""
       }`}
     >
-      <div className="flex bg-blueLight rounded-full items-center justify-center w-10 h-10 text-sm font-medium">
-        {notificationDetails.title?.toString().split(" ")[0]}
+      <div className="flex bg-blueLight rounded-full uppercase items-center justify-center w-10 h-10 text-xs font-medium">
+        {notificationDetails.title?.toString().substring(0, 3)}
       </div>
       <div className="flex-1 min-w-0">
         <p className="text-xs">{notificationDetails.content}</p>
