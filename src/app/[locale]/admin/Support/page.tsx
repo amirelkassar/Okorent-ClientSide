@@ -11,24 +11,34 @@ import { useSearchParams } from "next/navigation";
 
 const FilterOptions = [
   {
-    label: "Un Assigned",
-    key: "filter",
-    value: "Un Assigned",
-  },
-  {
-    label: "Sales",
-    key: "filter",
-    value: "Sales",
+    label: "Complaints",
+    key: "TicketType",
+    value: "1",
   },
   {
     label: "Technical",
-    key: "filter",
-    value: "Technical",
+    key: "TicketType",
+    value: "2",
+  },
+  {
+    label: "Sales",
+    key: "TicketType",
+    value: "3",
+  },
+  {
+    label: "Something else",
+    key: "TicketType",
+    value: "4",
   },
   {
     label: "Feedback",
-    key: "filter",
-    value: "Feedback",
+    key: "TicketType",
+    value: "5",
+  },
+  {
+    label: "Guest Message",
+    key: "TicketType",
+    value: "6",
   },
 ];
 
@@ -44,8 +54,6 @@ function Page() {
       </TableHeader>
       <QueryWrapper query={query}>
         {({ data, totalPages }: { data: any; totalPages?: any }) => {
-          console.log(data);
-
           return (
             <div>
               <DataTable

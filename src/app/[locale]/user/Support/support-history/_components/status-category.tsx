@@ -9,6 +9,7 @@ function StatusCategory({ status }: { status: string }) {
     | "Something else"
     | "Technical issue"
     | "Guest Message"
+    | "Feedback"
     | "--";
 
   switch (status.toString()) {
@@ -28,6 +29,9 @@ function StatusCategory({ status }: { status: string }) {
       type = "red";
       Title = "Technical issue";
       break;
+    case "5":
+      type = "blue";
+      Title = "Feedback";
     case "6":
       type = "green";
       Title = "Guest Message";

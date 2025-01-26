@@ -28,6 +28,7 @@ export const user = {
     ProductsOrder: (id: any) => `/User/User-Order-Products/${id}`,
     Header_Dashboard: "/UserDashboard/User Get Dashboard",
     Ongoing_Rentals: "/UserDashboard/User Get Ongoing Rentals",
+    Vacation:'/User/UserVcation'
   },
   stock: {
     base: "/Stock",
@@ -81,6 +82,7 @@ export const admin = {
   Home: {
     DashboardCount: "/AdminDashBoard/Get-Users-Overview",
     performace_year: "/AdminDashBoard/Get-Monthly-Performace-Orders",
+    performace_weekly: "/AdminDashBoard/Get-Weekly-Performace-Orders",
   },
   Category: {
     base: "/Category",

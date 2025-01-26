@@ -1,7 +1,19 @@
+import {
+  GetPerformanceWeek,
+  GetPerformanceYear,
+} from "@/src/hooks/queries/admin";
 import { AreaChart } from "@mantine/charts";
 import React from "react";
 
-function ChartsPlatform({ data }: { data: { date: string; Rental: number }[] }) {
+function ChartsPlatform({
+  SelectView,
+}: {
+  SelectView: "Yearly" | "Monthly" | "Weekly";
+}) {
+  const { data } = GetPerformanceYear();
+  const { data: dataWeekly } = GetPerformanceWeek();
+  console.log(data?.data);
+
   return (
     <AreaChart
       tooltipAnimationDuration={200}
@@ -20,9 +32,9 @@ function ChartsPlatform({ data }: { data: { date: string; Rental: number }[] }) 
         axisLabel: "bg-red text-red min-w-5 min-h-5",
       }}
       h={250}
-      data={data}
-      dataKey="date"
-      series={[{ name: "Rental", color: "#88BA52", label: "Rental" }]}
+      data={SelectView === "Weekly" ? dataWeekly?.data : data?.data || []}
+      dataKey={SelectView === "Weekly" ? "day" : "month"}
+      series={[{ name: "rentals", color: "#88BA52", label: "Rentals" }]}
       curveType="bump"
       tickLine="none"
       gridAxis="none"

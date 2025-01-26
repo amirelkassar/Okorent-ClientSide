@@ -256,7 +256,7 @@ function PageCategoryProducts({ children }: { children: React.ReactNode }) {
             <CantFind />
           ) : (
             <div>
-              <ProductList data={data?.data.items || []} />
+              <ProductList data={data?.data.items || []} more={false} />
               <Pagination totalPages={data?.data?.totalPages} />
             </div>
           )}

@@ -9,6 +9,7 @@ function RenderCategory({ status }: { status: string }) {
     | "Something else"
     | "Technical issue"
     | "Guest Message"
+    | "Feedback"
     | "--";
 
   switch (status.toString()) {
@@ -28,9 +29,13 @@ function RenderCategory({ status }: { status: string }) {
       type = "red";
       Title = "Technical issue";
       break;
+    case "5":
+      type = "blue";
+      Title = "Feedback";
+      break;
     case "6":
       type = "green";
-      Title = 'Guest Message';
+      Title = "Guest Message";
       break;
     default:
       type = "blue";

@@ -89,7 +89,7 @@ const Weekly = [
   { date: " 4", Rental: 200 },
 ];
 function Page() {
-  const [currentView, setcurrentView] = useState("Yearly");
+  const [currentView, setcurrentView] = useState<"Yearly"|"Monthly"| "Weekly">("Monthly");
 
   return (
     <div>
@@ -138,15 +138,7 @@ function Page() {
             </Button>
           </div>
         </div>
-        <ChartsPlatform
-          data={
-            currentView === "Weekly"
-              ? Weekly
-              : currentView === "Monthly"
-              ? Monthly
-              : data
-          }
-        />
+        <ChartsPlatform SelectView={currentView} />
       </div>
       <TableNewSubscriptions />
     </div>

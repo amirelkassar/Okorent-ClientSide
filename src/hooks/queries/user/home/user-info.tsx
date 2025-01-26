@@ -3,7 +3,7 @@ import { user } from "@/src/api/user";
 import { storeToken } from "@/src/lib/token";
 import { useRouter } from "@/src/navigation";
 import { decodedToken } from "@/token";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const initialQueryKey = "user.information";
 export const initialQueryKeyProductOrder = "user.information.ProductsOrder";
@@ -55,7 +55,6 @@ export const GetUserProductsOrderByID = (id: any) => {
   });
 };
 
-
 //get user Dashboard
 export const GetUserHeaderDashboard = () => {
   return useQuery({
@@ -74,6 +73,27 @@ export const GetDashboardOngoingRentals = () => {
     queryFn: async () => {
       const response = await api.get(user.information.Ongoing_Rentals);
       return response.data;
+    },
+  });
+};
+
+//Vacation USer
+export const useVacationUser = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.put(user.information.Vacation, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        }
+      });
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
     },
   });
 };
