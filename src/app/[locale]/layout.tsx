@@ -14,7 +14,6 @@ import { TokenProvider } from "@/src/hooks/use-token";
 import { authDecodedToken } from "@/token";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Toaster } from "@/src/components/toast";
-import { NotificationsHub } from "@/src/components/notifications-hub";
 import { SelectRowTableProvider } from "@/src/components/select-row-table-context";
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -45,7 +44,6 @@ export default async function RootLayout({
               <ReactQueryConfig>
                 <MantineProvider>
                   <SelectRowTableProvider>{children}</SelectRowTableProvider>
-                  <NotificationsHub  />
                   <Toaster />
                 </MantineProvider>
               </ReactQueryConfig>

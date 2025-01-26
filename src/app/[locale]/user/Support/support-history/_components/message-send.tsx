@@ -62,7 +62,9 @@ function MessageSend({ chatID = "" }: { chatID: string }) {
           </div>
         ) : null}
         <div className="relative flex-1 flex items-center gap-2 ">
-          <FileButton onChange={setSelectedFile} multiple>
+          <FileButton
+            onChange={(files: any) => files && setSelectedFile([files])}
+          >
             {(props) => (
               <button {...props}>
                 <AttachIcon className="h-4 w-auto" />

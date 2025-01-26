@@ -10,7 +10,7 @@ import Image from "next/image";
 import React, { useCallback, useState } from "react";
 
 function MessageSend({ chatID = "" }: { chatID: string }) {
-  const [selectedFile, setSelectedFile] = useState<any[]>([]);
+  const [selectedFile, setSelectedFile] = useState<File[]>([]);
   const [message, setMessage] = useState("");
   const { mutateAsync: SendReplyAdmin } = useReplyAdmin(chatID);
 
@@ -48,11 +48,7 @@ function MessageSend({ chatID = "" }: { chatID: string }) {
                   />
                   <div
                     className=" absolute top-1 p-1 start-1 cursor-pointer duration-200 hover:bg-red/20 hover:shadow-sm bg-grayBack rounded-full w-4 h-4 flex items-center justify-center"
-                    onClick={() => {
-                      setSelectedFile(
-                        selectedFile.filter((item) => item !== file)
-                      );
-                    }}
+                    onClick={() => setSelectedFile([])}
                   >
                     <CloseChatIcon />
                   </div>
@@ -62,7 +58,9 @@ function MessageSend({ chatID = "" }: { chatID: string }) {
           </div>
         ) : null}
         <div className="relative flex-1 flex items-center gap-2 ">
-          <FileButton onChange={setSelectedFile} multiple>
+          <FileButton
+            onChange={(files: any) => files && setSelectedFile([files])}
+          >
             {(props) => (
               <button {...props}>
                 <AttachIcon className="h-4 w-auto" />
@@ -86,7 +84,9 @@ function MessageSend({ chatID = "" }: { chatID: string }) {
 
       <Button
         onClick={onSubmitSend}
-        className={" w-11 bg-black h-8 px-2 py-2 lg:h-9 border-none"}
+        className={` w-11 bg-black h-8 px-2 py-2 lg:h-9 border-none ${
+          message ? "" : " pointer-events-none opacity-50"
+        } `}
       >
         <SendIcon className="h-full w-auto" />
       </Button>
