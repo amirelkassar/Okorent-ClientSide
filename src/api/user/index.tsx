@@ -83,6 +83,7 @@ export const admin = {
     DashboardCount: "/AdminDashBoard/Get-Users-Overview",
     performace_year: "/AdminDashBoard/Get-Monthly-Performace-Orders",
     performace_weekly: "/AdminDashBoard/Get-Weekly-Performace-Orders",
+    performace_month: "/AdminDashBoard/Get-Daily-Performace-Orders",
   },
   Category: {
     base: "/Category",

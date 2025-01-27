@@ -1,4 +1,5 @@
 import {
+  GetPerformanceMonth,
   GetPerformanceWeek,
   GetPerformanceYear,
 } from "@/src/hooks/queries/admin";
@@ -12,7 +13,7 @@ function ChartsPlatform({
 }) {
   const { data } = GetPerformanceYear();
   const { data: dataWeekly } = GetPerformanceWeek();
-  console.log(data?.data);
+  const { data: dataMonth } = GetPerformanceMonth();
 
   return (
     <AreaChart
@@ -32,8 +33,22 @@ function ChartsPlatform({
         axisLabel: "bg-red text-red min-w-5 min-h-5",
       }}
       h={250}
-      data={SelectView === "Weekly" ? dataWeekly?.data : data?.data || []}
-      dataKey={SelectView === "Weekly" ? "day" : "month"}
+      data={
+        SelectView === "Yearly"
+          ? data?.data
+          : SelectView === "Monthly"
+          ? dataMonth?.data
+          : SelectView === "Weekly"
+          ? dataWeekly?.data
+          : []
+      }
+      dataKey={
+        SelectView === "Weekly"
+          ? "day"
+          : SelectView === "Yearly"
+          ? "month"
+          : "day"
+      }
       series={[{ name: "rentals", color: "#88BA52", label: "Rentals" }]}
       curveType="bump"
       tickLine="none"

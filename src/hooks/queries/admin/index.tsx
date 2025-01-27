@@ -38,3 +38,15 @@ export const GetPerformanceWeek = () => {
     },
   });
 }
+
+
+// Get Performance week
+export const GetPerformanceMonth = () => {
+  return useQuery({
+    queryKey: [initialQueryKeyPerformance, "month"],
+    queryFn: async () => {
+      const response = await api.get(admin.Home.performace_month);
+      return response.data;
+    },
+  });
+}
