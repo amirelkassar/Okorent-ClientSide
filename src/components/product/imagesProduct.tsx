@@ -1,9 +1,7 @@
 "use client";
 import React from "react";
 import product from "@/src/assets/images/item.png";
-import product2 from "@/src/assets/images/item.png";
 import Image from "next/image";
-const images = [product, product2];
 function ImagesProduct({ dataImages = [] }: { dataImages: any[] }) {
   return (
     <div className="w-full flex items-start gap-4 pb-2 hideScroll lg:gap-8 max-w-full overflow-x-auto ">

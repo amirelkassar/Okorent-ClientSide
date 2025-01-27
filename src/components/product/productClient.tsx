@@ -16,12 +16,10 @@ function ProductClient({ clientID }: { clientID: any }) {
   const params = useParams();
   const path = usePathname();
   const { data, isLoading } = GetUserProductsByID(clientID);
-  console.log(path);
   if (isLoading) {
     return <SkeletonLoading className="md:!w-full md:!h-[218px]" />;
   }
   const isAdminRoute = path.includes(ROUTES.ADMIN.DASHBOARD);
-  console.log(isAdminRoute);
   
   return (
     <div className="border border-green/30 mt-6 rounded-lg py-6 px-5 bg-white/50">

@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { useParams } from "next/navigation";
 interface PricingOptionsProps {
   daysNumber: number;
   PriceBYDays: number;
@@ -13,7 +12,6 @@ function PriceDetails({
   TotalPriceOrder,
   children,
 }: PricingOptionsProps) {
-  const params = useParams();
 
   return (
     <div className=" border rounded-lg bg-white/50 pt-4 pb-2  border-green/30">

@@ -18,7 +18,6 @@ import ROUTES from "@/src/routes";
 function ViewCheckout({ data = {} }: { data: any }) {
 
   const [opened, { open, close }] = useDisclosure(false);
-  console.log(data);
   const { form, status } = useCreateOrder();
   const { onSubmit, opened2, close2 } = form;
   const handleCreateOrder = () => {

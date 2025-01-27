@@ -46,7 +46,6 @@ function PageCategoryProducts({ children }: { children: React.ReactNode }) {
   const { data: dataSubCategories, isLoading: isLoadingSubCategory } =
     GetSubCategory(searchParams.get("CategoryId"));
   const updateQuerySearchParams = useUpdateQueryParams();
-  console.log(data);
 
   // Utility: Update the URL query params
   const updateQueryParams = useCallback(

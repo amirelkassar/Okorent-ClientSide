@@ -361,3 +361,12 @@ li.search::before {
 [data-virtuoso-scroller="true"]::-webkit-scrollbar:horizontal {
   height: 8px; /* Adjust height for horizontal scrollbar */
 }
+.OfferSwiper .swiper-pagination {
+  @apply absolute h-3 flex items-center justify-center bottom-3 left-1/2 -translate-x-1/2 translate-y-1/2;
+}
+.OfferSwiper .swiper-pagination .swiper-pagination-bullet{
+  @apply w-[5px] h-[5px];
+}
+.OfferSwiper .swiper-pagination .swiper-pagination-bullet-active{
+  @apply  bg-green;
+}
