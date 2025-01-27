@@ -16,6 +16,8 @@ const ROUTES = {
     ACCOUNTSDETAILS: (id) => `/admin/Accounts/${id}`,
     ACCOUNTSLISTDETAILS: (id) => `/admin/Accounts/list/${id}`,
     ACCOUNTSLISTDETAILSEDIT: (id) => `/admin/Accounts/list/${id}/edit`,
+    NOTESACCOUNTS: "/admin/Accounts/Notes-History",
+
     LISTINGS: "/admin/Listings",
     LISTINGSADD: "/admin/Listings/add-list",
     LISTINGSDETAILS: (id) => `/admin/Listings/${id}`,

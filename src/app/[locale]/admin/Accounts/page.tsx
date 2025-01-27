@@ -12,6 +12,8 @@ import { useActionTable } from "./_hooks/use-action-table";
 import { GetAccounts } from "@/src/hooks/queries/admin/account";
 import DeactivateModalMany from "./_components/DeactivateModal-many";
 import { useDisclosure } from "@mantine/hooks";
+import LinkHistoryNote from "../_components/link-history-note";
+import ROUTES from "@/src/routes";
 
 function Page() {
   const searchParams = useSearchParams();
@@ -25,9 +27,9 @@ function Page() {
   return (
     <div className="mb-10 ">
       <TableHeader>
-        <TableHeader.First
-          title={`${totalCount ?? null} Account`}
-        ></TableHeader.First>
+        <TableHeader.First title={`${totalCount ?? null} Account`}>
+        <LinkHistoryNote link={ROUTES.ADMIN.NOTESACCOUNTS} />
+        </TableHeader.First>
         <TableHeader.Last className="mdl:!flex !hidden">
           <AddUser />
         </TableHeader.Last>

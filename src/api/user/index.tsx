@@ -26,8 +26,8 @@ export const user = {
     base: (id: any) => `/User/${id}`,
     user_edit: `/User`,
     ProductsOrder: (id: any) => `/User/User-Order-Products/${id}`,
-    Header_Dashboard: "/UserDashboard/User Get Dashboard",
-    Ongoing_Rentals: "/UserDashboard/User Get Ongoing Rentals",
+    Header_Dashboard: "/UserDashboard/User-Get-Dashboard",
+    Ongoing_Rentals: "/UserDashboard/User-Get-Ongoing-Rentals",
     Vacation:'/User/UserVcation'
   },
   stock: {

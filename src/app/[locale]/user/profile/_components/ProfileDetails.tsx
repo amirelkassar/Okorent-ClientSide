@@ -21,7 +21,10 @@ function ProfileDetails({ initialData }: { initialData: any }) {
   return (
     <div className="bg-white/50 flex-1 md:flex-row flex-col min-w-[530ox] xxl:min-w-[800px] flex gap-4 md:gap-5 pt-6 pb-9 lg:pb-12  px-6 rounded-2xl border border-green/80 shadow-md">
       <div className="md:min-w-[200px]">
-        <UploadAndCropImg image={initialData.userImage || imgUser} />
+        <UploadAndCropImg
+          image={initialData.userImage || imgUser}
+          verify={initialData.emailVerified && initialData.phoneNumberVerified}
+        />
         <p className="flex items-center gap-1 text-center mx-auto justify-center mb-1 md:mb-4 text-sm  md:text-base text-green">
           <span className="block h-[5px] w-[5px] rounded-full animate-pulse bg-green"></span>
           Available

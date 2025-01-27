@@ -13,8 +13,9 @@ import { useEditImageMyProfile } from "@/src/hooks/queries/user/my-profile";
 import { Toast } from "@/src/components/toast";
 interface Props {
   image: StaticImageData | string;
+  verify: boolean;
 }
-function UploadAndCropImg({ image }: Props) {
+function UploadAndCropImg({ image, verify = false }: Props) {
   //Hooks
   const [formData, setFormData] = useState<any>({});
   const [opened, { open, close }] = useDisclosure(false);
@@ -57,7 +58,6 @@ function UploadAndCropImg({ image }: Props) {
     }
   };
 
-  
   const onCrop = useCallback(async () => {
     if (!imageSrc || !croppedAreaPixels) return;
 
@@ -88,9 +88,11 @@ function UploadAndCropImg({ image }: Props) {
   return (
     <div>
       <div className=" size-[100px] md:size-[156px] relative rounded-full mx-auto mb-5 border-2 border-white shadow-md ">
-        <div className=" absolute top-1/2 -end-4 md:-end-6 w-7 md:w-10 h-auto -translate-y-1/2 ">
-          <VerifyBlackIcon className="w-full h-auto" />
-        </div>
+        {verify && (
+          <div className=" absolute top-1/2 -end-4 md:-end-6 w-7 md:w-10 h-auto -translate-y-1/2 ">
+            <VerifyBlackIcon className="w-full h-auto" />
+          </div>
+        )}
         <Image
           src={image}
           alt={"profileData.name"}
