@@ -1,89 +1,77 @@
 "use client";
 import DownloadIcon from "@/src/assets/icons/download";
-import { Link } from "@/src/navigation";
-import ROUTES from "@/src/routes";
+import ImgProduct from "@/src/components/img-product";
 import { ActionIcon } from "@mantine/core";
 import { ColumnDef } from "@tanstack/react-table";
-import Image, { StaticImageData } from "next/image";
-
+import avatar from "@/src/assets/images/avatar.png";
+import { getDate } from "@/src/lib/utils";
+import { StaticImageData } from "next/image";
 
 export type MedicalTeamTableData = {
   id: number;
-  Product: string;
-  ProductImage: StaticImageData;
-  Renter: string;
-  img: StaticImageData;
-  Payment: string;
-  Date: string;
-  InvoiceReference: string;
+  productName: string;
+  productImage: StaticImageData;
+  renterName: string;
+  renterImage: StaticImageData;
+  lessorName: string;
+  lessorImage: StaticImageData;
+  paymentTotal: string;
+  created: string;
+  invoiceId: string;
 };
 
 export const columns: ColumnDef<MedicalTeamTableData>[] = [
   {
-    accessorKey: "Product",
+    accessorKey: "productName",
+    header: "Product",
     cell: ({ getValue, row }) => {
       const name = getValue<string>();
-      const img = row.original.ProductImage;
-      const id = row.original.id;
-      return (
-        <Link
-          href={ROUTES.ADMIN.ACCOUNTSDETAILS(id)}
-          className="flex items-center gap-2"
-        >
-          <div className="size-[50px] rounded-[50%] p-[6px] bg-grayBack flex justify-center items-center">
-            <Image
-              src={img}
-              alt={name}
-              width={50}
-              height={50}
-              className="w-auto h-full  object-contain "
-            />
-          </div>
-
-          <div>
-            <h2 className="text-[16px] font-SemiBold">{name}</h2>
-          </div>
-        </Link>
-      );
+      const img = row.original.productImage;
+      return <ImgProduct productName={name} src={img} classNameBox="" />;
     },
   },
   {
-    accessorKey: "Renter",
+    accessorKey: "lessorName",
+    header: "Lessor",
     cell: ({ getValue, row }) => {
-      const Renter = getValue<string>();
-      const img = row.original.img;
+      const lessorName = getValue<string>();
+      const lessorImage = row.original.lessorImage;
       return (
-        <div className="flex items-center gap-2">
-          <Image
-            src={img}
-            alt={Renter}
-            width={50}
-            height={50}
-            className="w-12 h-12 rounded-[50%] object-cover object-top"
-          />
-          <h2 className="text-[16px] font-SemiBold">{Renter}</h2>
-        </div>
+        <ImgProduct
+          productName={lessorName}
+          src={lessorImage || avatar}
+          classNameBox=""
+        />
       );
     },
   },
 
   {
-    accessorKey: "Payment",
+    accessorKey: "paymentTotal",
     header: "Payment",
+    cell: ({ getValue }) => {
+      const paymentTotal = getValue<string>();
+      return <p className="font-SemiBold text-[16px]">{paymentTotal}$</p>;
+    },
   },
-
   {
-    accessorKey: "Date",
+    accessorKey: "created",
     header: "Date",
+    cell: ({ getValue }) => {
+      const created = getValue<string>();
+      return (
+        <p className="font-SemiBold text-[16px]">{getDate(created).fullYear}</p>
+      );
+    },
   },
   {
-    accessorKey: "InvoiceReference",
-    header: "Invoice Refrence ",
+    accessorKey: "invoiceId",
+    header: "Invoice Reference ",
     cell: ({ getValue }) => {
       const invoice = getValue<number>();
       return (
-        <p className="px-2 w-fit rounded-xl py-1 h-11 text-base font-SemiBold bg-blue/15 text-center flex items-center justify-center">
-          {invoice}
+        <p className="px-2 w-fit rounded-xl max-w-[120px] truncate py-2  text-base font-SemiBold bg-blue/15 ">
+          # {invoice}
         </p>
       );
     },

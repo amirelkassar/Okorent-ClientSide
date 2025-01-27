@@ -28,7 +28,7 @@ export const user = {
     ProductsOrder: (id: any) => `/User/User-Order-Products/${id}`,
     Header_Dashboard: "/UserDashboard/User-Get-Dashboard",
     Ongoing_Rentals: "/UserDashboard/User-Get-Ongoing-Rentals",
-    Vacation:'/User/UserVcation'
+    Vacation: "/User/UserVcation",
   },
   stock: {
     base: "/Stock",
@@ -107,6 +107,10 @@ export const admin = {
     ActiveManyUser: "/AdminManageUser/Bulk-Reactivate",
     Verification: "/AdminManageUser/Verification",
     Verification_Many: "/AdminManageUser/Bulk-Verification",
+  },
+  Account_Dashboard: {
+    base: (id: any) => `/AdminGetUserDashBoard/${id}`,
+    Transactions: (id: any) => `/AdminGetUserDashBoard/Admin-Get-UserRecentTransactions/${id}`,
   },
   product: {
     base: (queries: any) => buildQuery("/AdminProduct", queries),

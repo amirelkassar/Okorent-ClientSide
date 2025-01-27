@@ -4,6 +4,7 @@ import React from "react";
 import { DataTable } from "@/src/components/data-table";
 import { columns } from "./_components/column";
 import DeleteIcon from "@/src/assets/icons/delete";
+import CardPhoneNote from "./_components/card-phone-note";
 const functionSelect = [
   {
     title: "Delete",
@@ -76,7 +77,7 @@ function page() {
           title=""
           data={data}
           columns={columns}
-          //Component={CardPhoneAccount}
+          Component={CardPhoneNote}
           functionSelect={functionSelect}
         ></DataTable>
       </div>

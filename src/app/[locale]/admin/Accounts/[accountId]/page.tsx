@@ -20,7 +20,7 @@ function Page({ params }: any) {
       {viewProfile === "Profile" ? (
         <AccountDetailsView accountId={params.accountId} query={query} />
       ) : (
-        <ActivityView />
+        <ActivityView accountId={params.accountId} />
       )}
     </div>
   );
