@@ -138,7 +138,7 @@ export const useChangeStatusRent = (id: any): ActionTableIRentProps => {
   //Re Order ByID
   const onSubmitReOrderByID = useCallback(async () => {
     Toast.Promise(ReOrderByID(), {
-      success: "Canceled Order",
+      success: 'Reorder Done',
       onSuccess(res) {
         setSelectRowTable([]);
       },
@@ -149,7 +149,7 @@ export const useChangeStatusRent = (id: any): ActionTableIRentProps => {
   const onSubmitReOrderManyByID = useCallback(
     async (data: any) => {
       Toast.Promise(ReOrderManyByID(data), {
-        success: "Canceled  Orders",
+        success: "Reorder Done",
         onSuccess(res) {
           setSelectRowTable([]);
         },

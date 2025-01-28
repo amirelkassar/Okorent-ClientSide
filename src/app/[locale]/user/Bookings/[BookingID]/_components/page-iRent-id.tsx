@@ -20,7 +20,7 @@ function PageIRentId({ status }: any) {
             {data.map((item: any, index: number) => {
               return (
                 <div key={index}>
-                  <OneCardView  product={item} status={status} />
+                  <OneCardView  product={item} status={+status} />
                 </div>
               );
             })}

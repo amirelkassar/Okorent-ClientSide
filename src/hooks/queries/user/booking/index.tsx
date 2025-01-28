@@ -7,6 +7,8 @@ const initialCustomQueries = null;
 export const initialQueries = initialCustomQueries || initialSiteQueries;
 export const initialQueryKey = "user.myOrderAll";
 export const initialQueryKeyOut = "user.myOrderOutAll";
+export const initialQueryKeyCard = "user.myOrderAllCard";
+export const initialQueryKeyOutCard = "user.myOrderOutAllCard";
 
 //getMyAllProducts
 export const GetMyOrderOutAll = (queries?: any) => {
@@ -15,6 +17,18 @@ export const GetMyOrderOutAll = (queries?: any) => {
     queryFn: async () => {
       const response = await api.get(
         user.order.booking.i_rentOut("OrderType=myordersout&" + queries)
+      );
+      return response.data;
+    },
+  });
+};
+//get Orders Card View
+export const GetMyOrderOutAllCardView = (queries?: any) => {
+  return useQuery({
+    queryKey: [initialQueryKeyOutCard, queries],
+    queryFn: async () => {
+      const response = await api.get(
+        user.order.booking.i_rent_card("OrderType=myordersout&" + queries)
       );
       return response.data;
     },
@@ -32,6 +46,19 @@ export const GetMyOrderAll = (queries?: any) => {
     },
   });
 };
+//get Orders Card View
+export const GetMyOrderAllCardView = (queries?: any) => {
+  return useQuery({
+    queryKey: [initialQueryKeyCard, queries],
+    queryFn: async () => {
+      const response = await api.get(
+        user.order.booking.i_rent_card("OrderType=myorders&" + queries)
+      );
+      return response.data;
+    },
+  });
+};
+
 //getMyAllProducts
 export const GetMyOrderAllByList = (number?: number) => {
   return useQuery({

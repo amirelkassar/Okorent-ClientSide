@@ -40,6 +40,7 @@ export const user = {
     base: "/BookingOrder/Direct-Order",
     booking: {
       i_rent: (queries: any) => buildQuery("/BookingOrder", queries),
+      i_rent_card: (queries: any) => buildQuery("/BookingOrder/BookingOrdersCarts", queries),
       i_rentOut: (queries: any) => buildQuery("/BookingOrder", queries),
       changeStatusById: (id: any) => `/BookingOrder/OrderStatus/${id}`,
       changeStatusByIds: `/BookingOrder/UpdateOrdersStatus`,
