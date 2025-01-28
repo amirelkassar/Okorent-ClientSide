@@ -101,7 +101,9 @@ export const ChangeStautsByID = (id: any) => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKeyOut]);
+      queryClient.invalidateQueries([initialQueryKeyOutCard]);
       queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKeyCard]);
       console.log(res);
     },
     onError: (res) => {
@@ -122,7 +124,9 @@ export const ChangeStatusByIDs = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKeyOut]);
+      queryClient.invalidateQueries([initialQueryKeyOutCard]);
       queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKeyCard]);
       console.log(res);
     },
     onError: (res) => {
@@ -141,6 +145,7 @@ export const useDeleteOrderOutMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKeyOut]);
+      queryClient.invalidateQueries([initialQueryKeyOutCard]);
       console.log(res);
     },
     onError: (res) => {
@@ -158,6 +163,7 @@ export const useCancelOrderMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKeyCard]);
       console.log(res);
     },
     onError: (res) => {
@@ -176,6 +182,7 @@ export const useCancelManyOrderMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKeyCard]);
       console.log(res);
     },
     onError: (res) => {
@@ -194,6 +201,7 @@ export const useRejectOrderOutMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKeyOut]);
+      queryClient.invalidateQueries([initialQueryKeyOutCard]);
       console.log(res);
     },
     onError: (res) => {
@@ -212,6 +220,7 @@ export const useRejectManyOrderOutMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKeyOut]);
+      queryClient.invalidateQueries([initialQueryKeyOutCard]);
       console.log(res);
     },
     onError: (res) => {
@@ -229,6 +238,7 @@ export const useCancelOrderOutMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKeyOut]);
+      queryClient.invalidateQueries([initialQueryKeyOutCard]);
       console.log(res);
     },
     onError: (res) => {
@@ -246,6 +256,7 @@ export const useCancelManyOrderOutMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKeyOut]);
+      queryClient.invalidateQueries([initialQueryKeyOutCard]);
       console.log(res);
     },
     onError: (res) => {
@@ -263,6 +274,7 @@ export const useDeleteOrderMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKeyCard]);
       console.log(res);
     },
     onError: (res) => {
@@ -280,6 +292,8 @@ export const useRefundOrderMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKeyCard]);
+
       console.log(res);
     },
     onError: (res) => {
@@ -297,6 +311,8 @@ export const useRefundManyOrderMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKeyCard]);
+
       console.log(res);
     },
     onError: (res) => {
@@ -314,6 +330,7 @@ export const useRefundOrderOutMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKeyOut]);
+      queryClient.invalidateQueries([initialQueryKeyOutCard]);
       console.log(res);
     },
     onError: (res) => {
@@ -331,6 +348,8 @@ export const useRefundManyOrderOutMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKeyOut]);
+      queryClient.invalidateQueries([initialQueryKeyOutCard]);
+
       console.log(res);
     },
     onError: (res) => {
@@ -350,6 +369,7 @@ export const useReOrderByID = (id: any) => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKeyCard]);
       console.log(res);
     },
     onError: (res) => {
@@ -368,6 +388,8 @@ export const useReOrderManyByID = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKeyCard]);
+
       console.log(res);
     },
     onError: (res) => {

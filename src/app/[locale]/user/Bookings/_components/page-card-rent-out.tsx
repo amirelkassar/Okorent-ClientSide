@@ -2,7 +2,7 @@
 import React from "react";
 import CardViewReq from "./cardViewReq";
 import RentSwitch from "@/src/components/RentSwitch";
-import { GetMyOrderAllCardView } from "@/src/hooks/queries/user/booking";
+import { GetMyOrderOutAllCardView } from "@/src/hooks/queries/user/booking";
 import Loading from "@/src/components/loading";
 import NoDataYet from "@/src/components/noDataYet";
 const statuses = [
@@ -18,7 +18,7 @@ const statuses = [
   { title: "Canceled", status: 9 },
 ];
 function PageCardRentOut() {
-  const { data, isLoading } = GetMyOrderAllCardView("");
+  const { data, isLoading } = GetMyOrderOutAllCardView("");
   console.log(data);
   const isAllDataEmpty = data?.data?.every(
     (statusGroup: any) => statusGroup.data.length === 0
@@ -35,7 +35,6 @@ function PageCardRentOut() {
       <div className=" linkView flex items-center mb-6 lgl:-mb-10 justify-center w-full order-first lg:order-none min-w-full lg:min-w-fit">
         <RentSwitch typeUser="user" />
       </div>
-
       <div>
         {data?.data.map(
           ({ statusname, statuscode, data = [] }: any, index: number) => (

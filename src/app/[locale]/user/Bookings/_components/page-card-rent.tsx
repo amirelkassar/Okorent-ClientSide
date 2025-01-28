@@ -41,12 +41,10 @@ function PageCardRent() {
           ({ statusname, statuscode, data = [] }: any, index: number) => (
             <CardView
               key={statuscode}
-              first={index === 0}
               title={
                 statuses.find(({ status }) => status === statuscode)?.title ||
                 statusname
               }
-              haveRentSwitch={index === 0}
               products={data || []}
               status={statuscode}
             />

@@ -11,7 +11,6 @@ function OneCardView({ product, status }: { product?: any; status: any }) {
   const { onSubmitChangeStatus, onSubmitReOrderByID } = useChangeStatusRent(
     product?.id
   );
-  console.log(product);
 
   return (
     <div className="bg-white border border-green/50 rounded-3xl px-3 lg:px-5 py-3 lg:py-4 max-w-[400px] mb-3 w-full mdl:min-w-[320px] shadow-sidebar relative">
@@ -127,7 +126,7 @@ function OneCardView({ product, status }: { product?: any; status: any }) {
         {status === 10 && (
           <>
             <BottomCardRent.ViewDetailsLink id={product?.id || "undefined"} />
-            <BottomCardRent.RentAgainButton id={product?.id || "undefined"} />
+            <BottomCardRent.RentAgainButton id={product?.prodId || "undefined"} />
           </>
         )}
       </div>
