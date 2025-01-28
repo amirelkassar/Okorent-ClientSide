@@ -8,7 +8,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import ArrowLeftIcon from "@/src/assets/icons/arrowLeft";
 import ArrowRightIcon from "@/src/assets/icons/ArrowRight";
-import RentSwitch from "@/src/components/RentSwitch";
 interface CardViewProps {
   title: string;
   products?: any[];
