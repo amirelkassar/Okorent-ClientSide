@@ -31,15 +31,15 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     },
   },
   {
-    accessorKey: "lessorName",
-    header: "Lessor",
+    accessorKey: "renterName",
+    header: "Renter",
     cell: ({ getValue, row }) => {
-      const lessorName = getValue<string>();
-      const lessorImage = row.original.lessorImage;
+      const renterName = getValue<string>();
+      const renterImage = row.original.renterImage;
       return (
         <ImgProduct
-          productName={lessorName}
-          src={lessorImage || avatar}
+          productName={renterName}
+          src={renterImage || avatar}
           classNameBox=""
         />
       );
@@ -70,8 +70,8 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     cell: ({ getValue }) => {
       const invoice = getValue<number>();
       return (
-        <p className="px-2 w-fit rounded-xl max-w-[120px] truncate py-2  text-base font-SemiBold bg-blue/15 ">
-          # {invoice}
+        <p className="px-2 w-fit rounded-xl max-w-[120px] truncate py-2   text-base font-SemiBold bg-blue/15 ">
+          # {invoice.toString().slice(0, 6)}
         </p>
       );
     },

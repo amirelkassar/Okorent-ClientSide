@@ -29,14 +29,14 @@ function InventoryReport() {
     return value.toString();
   };
   return (
-    <div className="bg-white border border-green rounded-3xl py-6 lg:py-8 px-4 lg:px-9 flex-1 shadow-sidebar">
+    <div className="bg-white border border-green rounded-3xl pt-6 pb-3 lg:pt-8 px-4 lg:px-9 flex-1 shadow-sidebar">
       <div className=" mb-3">
         <h2 className="text-2xl font-SemiBold text-grayMedium">Inventory Value</h2>
         <h3 className="headTitle !font-Bold">$112,000</h3>
       </div>
       <div>
         <BarChart
-          h={180}
+          h={170}
           data={chartData}
           dataKey="month"
           withTooltip={false}

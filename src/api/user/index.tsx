@@ -110,7 +110,16 @@ export const admin = {
   },
   Account_Dashboard: {
     base: (id: any) => `/AdminGetUserDashBoard/${id}`,
-    Transactions: (id: any) => `/AdminGetUserDashBoard/Admin-Get-UserRecentTransactions/${id}`,
+
+    Transactions: (id: any, queries: any) =>
+      buildQuery(
+        `/AdminGetUserDashBoard/Admin-Get-UserRecentTransactions/${id}`,
+        queries
+      ),
+    Rentals: (id: any) =>
+      `/AdminGetUserDashBoard/Get-Monthly-Performace-Orders-ForUser/${id}`,
+    Inventory: (id: any) =>
+      `/AdminGetUserDashBoard/Admin-Get-InventoryAllocation-ForUser/${id}`,
   },
   product: {
     base: (queries: any) => buildQuery("/AdminProduct", queries),

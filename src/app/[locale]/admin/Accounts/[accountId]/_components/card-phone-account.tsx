@@ -51,14 +51,14 @@ function CardPhoneAccount({ dataCard }: CardDataProps) {
       </div>
       <div className="flex gap-2 mt-5">
         <Image
-          src={dataCard?.lessorImage || avatar}
-          alt={dataCard?.lessorName}
+          src={dataCard?.renterImage || avatar}
+          alt={dataCard?.renterName}
           width={50}
           height={50}
           className=" size-8 w-10 h-10  object-cover rounded-full "
         />
         <div className="flex flex-col gap-3 w-full ">
-          <RowCardPhone title={dataCard?.lessorName} />
+          <RowCardPhone title={dataCard?.renterName} />
 
           <RowCardPhone title="Payment" info={dataCard?.paymentTotal} />
           <RowCardPhone

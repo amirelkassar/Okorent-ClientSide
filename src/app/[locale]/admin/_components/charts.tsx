@@ -1,10 +1,11 @@
+"use client";
 import {
   GetPerformanceMonth,
   GetPerformanceWeek,
   GetPerformanceYear,
 } from "@/src/hooks/queries/admin";
 import { AreaChart } from "@mantine/charts";
-import React from "react";
+import React, { useEffect } from "react";
 
 function ChartsPlatform({
   SelectView,
@@ -14,7 +15,18 @@ function ChartsPlatform({
   const { data } = GetPerformanceYear();
   const { data: dataWeekly } = GetPerformanceWeek();
   const { data: dataMonth } = GetPerformanceMonth();
-
+  useEffect(() => {
+    const originalConsoleError = console.error;
+    console.error = (...args: any[]) => {
+      if (typeof args[0] === "string" && /defaultProps/.test(args[0])) {
+        return;
+      }
+      originalConsoleError(...args);
+    };
+    return () => {
+      console.error = originalConsoleError;
+    };
+  }, []);
   return (
     <AreaChart
       tooltipAnimationDuration={200}
