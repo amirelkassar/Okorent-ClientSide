@@ -16,8 +16,7 @@ import { useSearchParams } from "next/navigation";
 function ActivityView({ accountId = "" }: { accountId: string }) {
   const searchparams = useSearchParams();
   const query = GetAccountTransactionsDashboardByID(
-    accountId,
-    searchparams.toString()
+    `UserId=${accountId}&` + searchparams.toString()
   );
   return (
     <div>

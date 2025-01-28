@@ -1,19 +1,19 @@
 "use client";
 import { BarChart } from "@mantine/charts";
-import React from "react";
+import React, { useEffect } from "react";
 export const data = [
   { month: "Electronics", value: 28000 },
   { month: "Sports", value: 10000 },
   { month: "Tools", value: 40000 },
   { month: "Home", value: 38000 },
   { month: "Vehicles", value: 15000 },
-
 ];
 interface DataItem {
   month: string;
   value: number;
   color?: string;
 }
+
 function InventoryReport() {
   const maxValue = Math.max(...data.map((item) => item.value));
 
@@ -28,10 +28,24 @@ function InventoryReport() {
     }
     return value.toString();
   };
+  useEffect(() => {
+    const originalConsoleError = console.error;
+    console.error = (...args: any[]) => {
+      if (typeof args[0] === "string" && /defaultProps/.test(args[0])) {
+        return;
+      }
+      originalConsoleError(...args);
+    };
+    return () => {
+      console.error = originalConsoleError;
+    };
+  }, []);
   return (
     <div className="bg-white border border-green rounded-3xl pt-6 pb-3 lg:pt-8 px-4 lg:px-9 flex-1 shadow-sidebar">
       <div className=" mb-3">
-        <h2 className="text-2xl font-SemiBold text-grayMedium">Inventory Value</h2>
+        <h2 className="text-2xl font-SemiBold text-grayMedium">
+          Inventory Value
+        </h2>
         <h3 className="headTitle !font-Bold">$112,000</h3>
       </div>
       <div>

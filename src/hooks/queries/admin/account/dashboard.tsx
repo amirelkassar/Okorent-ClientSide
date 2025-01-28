@@ -18,12 +18,12 @@ export const GetAccountDashboardByID = (id: any) => {
 };
 
 // Get Accounts Transactions  Dashboard By ID In Admin
-export const GetAccountTransactionsDashboardByID = (id: any, queries: any) => {
+export const GetAccountTransactionsDashboardByID = (queries: any) => {
   return useQuery({
-    queryKey: [initialQueryKeyTransactions, queries, id],
+    queryKey: [initialQueryKeyTransactions, queries],
     queryFn: async () => {
       const response = await api.get(
-        admin.Account_Dashboard.Transactions(id, queries)
+        admin.Account_Dashboard.Transactions(queries)
       );
       return response.data;
     },

@@ -1,3 +1,4 @@
+'use client';
 import { AreaChart } from "@mantine/charts";
 import React from "react";
 

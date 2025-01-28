@@ -110,10 +110,9 @@ export const admin = {
   },
   Account_Dashboard: {
     base: (id: any) => `/AdminGetUserDashBoard/${id}`,
-
-    Transactions: (id: any, queries: any) =>
+    Transactions: (queries: any) =>
       buildQuery(
-        `/AdminGetUserDashBoard/Admin-Get-UserRecentTransactions/${id}`,
+        `/AdminGetUserDashBoard/Admin-Get-UserRecentTransactions`,
         queries
       ),
     Rentals: (id: any) =>
