@@ -33,7 +33,6 @@ function TableNewSubscriptions() {
         </div>
       ) : (
         <DataTable
-          title=""
           data={data?.data?.items || []}
           columns={columns}
           Component={CardPhoneAccount}

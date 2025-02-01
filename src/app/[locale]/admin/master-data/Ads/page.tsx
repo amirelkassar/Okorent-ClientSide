@@ -67,7 +67,6 @@ function page() {
         ></TableHeader.Last>
       </TableHeader>
       <DataTable
-        title=""
         data={AdsData}
         columns={columns}
         functionSelect={functionSelect}

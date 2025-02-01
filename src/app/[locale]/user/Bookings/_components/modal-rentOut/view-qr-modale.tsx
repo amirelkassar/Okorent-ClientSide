@@ -45,8 +45,6 @@ function ViewQrModal({
       {
         success: "get QrCode Done",
         onSuccess: async (res) => {
-          console.log(res);
-          
           const imageUrl = URL.createObjectURL(res.data);
           setImageSrc(imageUrl);
         },

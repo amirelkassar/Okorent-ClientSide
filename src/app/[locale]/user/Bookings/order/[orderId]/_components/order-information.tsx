@@ -44,7 +44,6 @@ function OrderInformation({
   const { data: productData } = GetProductsByID(
     data?.getOrderItemDtos[0]?.productId
   );
-  console.log(data);
 
   const { mutateAsync: EditOrderDetails } = useEditOrderByIDMutation(data?.id);
   const handelEditOrder = () => {
@@ -70,9 +69,7 @@ function OrderInformation({
     };
     Toast.Promise(EditOrderDetails(formData), {
       success: "successfully Edit Order",
-      onSuccess: async (res) => {
-        console.log(res);
-      },
+      onSuccess: async (res) => {},
     });
   };
   return (

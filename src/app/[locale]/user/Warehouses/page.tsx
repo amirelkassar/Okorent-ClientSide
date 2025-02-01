@@ -12,7 +12,6 @@ import GoogleMapLoc from "@/src/components/GoogleMap";
 import { useDisclosure } from "@mantine/hooks";
 import CardPhoneWarehouse from "./_components/card-phone-warehouse";
 
-
 function Page() {
   const query = GetMyStock();
   const [opened, { open, close }] = useDisclosure(false);
@@ -23,7 +22,12 @@ function Page() {
         <h3 className=" text-lg md:text-xl mdl:text-[32px] font-SemiBold">
           Warehouses
         </h3>
-        <Button onClick={open} className={"!px-3 mdl:!px-8 h-10 items-center gap-2 text-xs mdl:text-base"}>
+        <Button
+          onClick={open}
+          className={
+            "!px-3 mdl:!px-8 h-10 items-center gap-2 text-xs mdl:text-base"
+          }
+        >
           <PlusIcon className="mdl:w-4 w-3 h-auto" />
           Add Location
         </Button>
@@ -37,7 +41,6 @@ function Page() {
               <div>
                 <DataTable
                   Component={CardPhoneWarehouse}
-                  title=""
                   data={data}
                   columns={columns}
                   functionSelect={[]}

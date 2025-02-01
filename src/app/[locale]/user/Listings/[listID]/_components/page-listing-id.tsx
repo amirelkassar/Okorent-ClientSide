@@ -108,7 +108,6 @@ function PageListingId({ initialData, id }: { initialData: any; id: any }) {
         decs={initialData?.isActive ? "Active" : "Not Active"}
       />
       <FAQ dataFAQ={initialData?.faQs} />
-      <Button className={"w-fit px-11 h-[64px] mt-8"}>Promote Listing</Button>
     </div>
   );
 }

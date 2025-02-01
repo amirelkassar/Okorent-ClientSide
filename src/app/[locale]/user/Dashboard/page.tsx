@@ -43,7 +43,6 @@ function page() {
             return (
               <div>
                 <DataTable
-                  title=""
                   data={data}
                   columns={columns}
                   Component={CardPhoneTable}

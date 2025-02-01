@@ -26,10 +26,11 @@ const FilterOptions = [
 function Page() {
   const searchParams = useSearchParams();
   const [opened, { open, close }] = useDisclosure(false);
-  const { functionSelectView, setSelectedFromTable, selectedFromTable } = useActionTable(open);
-  
+  const { functionSelectView, setSelectedFromTable, selectedFromTable } =
+    useActionTable(open);
+
   const query = GetProductsInAdmin(searchParams.toString());
-  const totalCount = query.data?.data?.totalCount||0;
+  const totalCount = query.data?.data?.totalCount || 0;
 
   return (
     <div className="mb-10 ">
@@ -43,7 +44,6 @@ function Page() {
           return (
             <div>
               <DataTable
-                title=""
                 data={data}
                 columns={columns}
                 Component={CardPhoneAccount}
@@ -55,7 +55,11 @@ function Page() {
           );
         }}
       </QueryWrapper>
-      <QuickEditModal opened={opened} close={close} selectedFromTable={selectedFromTable} />
+      <QuickEditModal
+        opened={opened}
+        close={close}
+        selectedFromTable={selectedFromTable}
+      />
     </div>
   );
 }

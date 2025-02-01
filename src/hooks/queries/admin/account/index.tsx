@@ -19,9 +19,9 @@ export const GetAccounts = (queries: any) => {
 export const GetNewSubscriptions = () => {
   const queryClient = useQueryClient();
   return useQuery({
-    queryKey: [initialQueryKey, "filter=New"],
+    queryKey: [initialQueryKey, "IsNewUser=true"],
     queryFn: async () => {
-      const response = await api.get(admin.Accounts.base("filter=New"));
+      const response = await api.get(admin.Accounts.base("IsNewUser=true"));
       return response.data;
     },
   });

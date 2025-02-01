@@ -40,7 +40,6 @@ function TableRent({ query }: { query: any }) {
           return (
             <div>
               <DataTable
-                title=""
                 data={data || []}
                 columns={columns}
                 functionSelect={functionSelectView}

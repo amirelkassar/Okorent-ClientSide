@@ -28,7 +28,7 @@ function Page() {
     <div className="mb-10 ">
       <TableHeader>
         <TableHeader.First title={`${totalCount ?? null} Account`}>
-        <LinkHistoryNote link={ROUTES.ADMIN.NOTESACCOUNTS} />
+          <LinkHistoryNote link={ROUTES.ADMIN.NOTESACCOUNTS} />
         </TableHeader.First>
         <TableHeader.Last className="mdl:!flex !hidden">
           <AddUser />
@@ -41,13 +41,12 @@ function Page() {
           return (
             <div>
               <DataTable
-                title=""
                 data={data}
                 columns={columns}
                 Component={CardPhoneAccount}
                 functionSelect={functionSelectView}
                 setSelectedFromTable={setSelectedFromTable}
-              ></DataTable>
+              />
               <Pagination totalPages={totalPages} />
             </div>
           );

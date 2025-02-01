@@ -20,6 +20,7 @@ import {
   GetCategory,
   GetSubCategory,
 } from "@/src/hooks/queries/admin/master-data/category";
+import ErrorMsg from "@/src/components/error-msg";
 
 interface LocationProps {
   id: number;
@@ -46,7 +47,6 @@ function Page() {
     reset,
   } = useCreateListingMutation();
   const { data: dataCategory } = GetCategory();
-  console.log(dataCategory);
 
   const { data: dataSubCategory, refetch: RefetchGetSubCategory } =
     GetSubCategory(dataList?.CategoryId);
@@ -175,6 +175,10 @@ function Page() {
             dec="You can upload up to 8 images"
           >
             <DropImg setDataList={setDataList} dataList={dataList} />
+            <ErrorMsg
+              error={GetErrorMsg(error, "ProductImageFiles")}
+              textClassName="mt-2"
+            />
           </Step>
           <Step
             title="Add item price"

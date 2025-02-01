@@ -50,7 +50,6 @@ function Page() {
             <div>
               <DataTable
                 data={data}
-                title=""
                 columns={columns}
                 Component={CardPhoneInvoices}
                 functionSelect={[]}

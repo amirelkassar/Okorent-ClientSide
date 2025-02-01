@@ -189,7 +189,7 @@ export const useUpdateQueryParams = () => {
 
 export const calculateDurationRange = (valueDateFrom: Date | null, valueDateTo: Date | null) => {
   if (valueDateFrom && valueDateTo) {
-    const diffTime = Math.abs(valueDateTo.getTime() - valueDateFrom.getTime());
+    const diffTime = valueDateTo.getTime() - valueDateFrom.getTime();
     return Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Convert the difference to days
   }
   return 0;

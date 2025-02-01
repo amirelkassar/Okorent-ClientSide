@@ -37,12 +37,9 @@ function TableRentOut({ query }: { query: any }) {
       </TableHeader>
       <QueryWrapper query={query}>
         {({ data, totalPages }: { data: any; totalPages?: any }) => {
-          console.log(totalPages);
-
           return (
             <div>
               <DataTable
-                title=""
                 data={data || []}
                 columns={columnsReq}
                 functionSelect={functionSelectView}

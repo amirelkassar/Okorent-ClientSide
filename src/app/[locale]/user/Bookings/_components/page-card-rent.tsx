@@ -20,7 +20,6 @@ const statuses = [
 
 function PageCardRent() {
   const { data, isLoading } = GetMyOrderAllCardView("");
-  console.log(data);
   const isAllDataEmpty = data?.data?.every(
     (statusGroup: any) => statusGroup.data.length === 0
   );

@@ -67,7 +67,6 @@ function Page() {
         <TableHeader.Last options={FilterOptions} />
       </TableHeader>
       <DataTable
-        title=""
         data={MembershipsData}
         columns={columns}
         Component={CardPhoneMemberships}

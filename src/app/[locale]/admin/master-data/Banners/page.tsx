@@ -63,7 +63,6 @@ function page() {
         </TableHeader.Last>
       </TableHeader>
       <DataTable
-        title=""
         data={BannersData}
         columns={columns}
         Component={CardBanner}

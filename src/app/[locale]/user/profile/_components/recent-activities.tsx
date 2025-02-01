@@ -64,7 +64,6 @@ function RecentActivities() {
           </div>
         ) : (
           <DataTable
-            title=""
             data={data?.data || []}
             columns={columns}
             Component={CardViewPhoneActivities}

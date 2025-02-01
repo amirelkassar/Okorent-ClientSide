@@ -19,7 +19,7 @@ const statuses = [
 ];
 function PageCardRentOut() {
   const { data, isLoading } = GetMyOrderOutAllCardView("");
-  console.log(data);
+
   const isAllDataEmpty = data?.data?.every(
     (statusGroup: any) => statusGroup.data.length === 0
   );

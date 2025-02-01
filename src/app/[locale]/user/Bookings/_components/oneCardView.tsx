@@ -2,26 +2,33 @@ import Image from "next/image";
 import React from "react";
 import homeImg from "@/src/assets/images/placProduct.png";
 import userImg from "@/src/assets/images/avatar.png";
-import { getDate } from "@/src/lib/utils";
+import { calculateDurationRange, getDate } from "@/src/lib/utils";
 import BottomCardRent from "./bottom-card-rent";
 import { useChangeStatusRent } from "../_hooks/use-change-status-rent";
+import NoteIcon from "@/src/assets/icons/note";
 
 function OneCardView({ product, status }: { product?: any; status: any }) {
   const FirstLessorName = product?.lessorName?.split(" ")[0];
   const { onSubmitChangeStatus, onSubmitReOrderByID } = useChangeStatusRent(
     product?.id
   );
-
+  const Ending_Soon_Days = calculateDurationRange(
+    new Date(),
+    new Date(product?.to)
+  );
   return (
     <div className="bg-white border border-green/50 rounded-3xl px-3 lg:px-5 py-3 lg:py-4 max-w-[400px] mb-3 w-full mdl:min-w-[320px] shadow-sidebar relative">
-      {/* <div className="flex items-center justify-center gap-2 bg-[#FF0E0E] rounded-xl absolute top-5 lg:top-7 start-6 p-2  lg:p-3">
-        <NoteIcon />
-        <p className="text-white text-xs lg:text-[14px] font-SemiBold">
-          Ending Soon!
-        </p>
-      </div> */}
+      {Ending_Soon_Days > 0 && Ending_Soon_Days < 4 ? (
+        <div className="flex items-center justify-center gap-2 bg-[#FF0E0E] rounded-xl absolute top-5 lg:top-7 start-6 p-2  lg:p-3">
+          <NoteIcon />
+          <p className="text-white text-xs lg:text-[14px] font-SemiBold">
+            Ending Soon!
+          </p>
+        </div>
+      ) : null}
+
       <Image
-        alt="home"
+        alt={product?.productName||'alt image'}
         priority
         src={product?.heroImage || homeImg}
         className="w-full rounded-xl h-[122px]  lg:h-40 object-contain object-center lg:object-top"
@@ -126,7 +133,9 @@ function OneCardView({ product, status }: { product?: any; status: any }) {
         {status === 10 && (
           <>
             <BottomCardRent.ViewDetailsLink id={product?.id || "undefined"} />
-            <BottomCardRent.RentAgainButton id={product?.prodId || "undefined"} />
+            <BottomCardRent.RentAgainButton
+              id={product?.prodId || "undefined"}
+            />
           </>
         )}
       </div>

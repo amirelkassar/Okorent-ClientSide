@@ -41,7 +41,6 @@ function Page() {
             <div>
               <DataTable
                 data={data}
-                title=""
                 columns={columns}
                 Component={CardPhoneAccount}
                 setSelectedFromTable={setSelectedFromTable}

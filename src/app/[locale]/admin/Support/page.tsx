@@ -57,7 +57,6 @@ function Page() {
           return (
             <div>
               <DataTable
-                title=""
                 data={data}
                 columns={columns}
                 Component={CardPhoneAccount}

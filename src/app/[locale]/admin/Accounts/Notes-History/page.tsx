@@ -74,12 +74,11 @@ function page() {
 
       <div>
         <DataTable
-          title=""
           data={data}
           columns={columns}
           Component={CardPhoneNote}
           functionSelect={functionSelect}
-        ></DataTable>
+        />
       </div>
     </div>
   );

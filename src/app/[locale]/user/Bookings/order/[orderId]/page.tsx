@@ -16,7 +16,6 @@ function Page({ params }: any) {
   const { isRent, setSwitchRent } = useSwitchRent();
   const { data, isLoading } = GetOrderByID(params.orderId);
   const [edit, setEdit] = useState(false);
-  console.log(data);
   const statusOrder = data?.data?.orderTrackers?.at(-1)?.newOrderStatus || 0;
   useEffect(() => {
     if (data?.data?.renterType) {

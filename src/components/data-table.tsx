@@ -3,75 +3,30 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
-  getFilteredRowModel,
   useReactTable,
-  getPaginationRowModel,
-  getSortedRowModel,
 } from "@tanstack/react-table";
 import { Checkbox, Table } from "@mantine/core";
 import { useCallback } from "react";
-import ArrowWhiteIcon from "../assets/icons/arrowWhite";
-import FilterBy from "./filterBy";
-import { Link } from "../navigation";
-import CardIcon from "../assets/icons/card";
-import RentSwitch from "./RentSwitch";
-import TrueIcon from "../assets/icons/true";
-import DeleteIcon from "../assets/icons/delete";
-import ExportIcon from "../assets/icons/export";
-import LinkGreen from "./linkGreen";
 import Events from "./Events";
 import { useSelectRowTable } from "./select-row-table-context";
-export interface FilterData {
-  label: string;
-  type: string;
-  key: string | boolean;
-}
-export interface SortingData {
-  label: string;
-  type: string;
-  key: string;
-}
 export interface functionSelectProps {
   title: string;
   icon: React.JSX.Element;
   onclick: (ids: any) => void;
 }
+
 interface DataTableProps<TData extends { id: any }, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  title: string;
-  viewAll?: string;
-  viewAllTitle?: string;
-  search?: boolean;
-  cardView?: string;
-  filter?: "buttons" | null;
-  filterBy?: string;
-  filterData?: FilterData[];
-  sort?: boolean;
-  sortingData?: SortingData[];
-  haveRentSwitch?: boolean;
 
   Component?: React.ComponentType<{ dataCard: TData }>;
-  children?: React.ReactNode;
   functionSelect?: functionSelectProps[];
   setSelectedFromTable?: any;
 }
 export function DataTable<TData extends { id: any }, TValue>({
   columns,
   data,
-  title,
-  viewAll,
-  viewAllTitle,
-  search,
-  cardView,
-  filter = null,
-  filterBy = "",
-  filterData = [],
-  sort = false,
-  sortingData = [],
-  haveRentSwitch = false,
   Component,
-  children,
   functionSelect,
   setSelectedFromTable,
 }: DataTableProps<TData, TValue>) {
@@ -79,37 +34,14 @@ export function DataTable<TData extends { id: any }, TValue>({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    //getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
   });
 
   //use context
   const { selectRowTable, setSelectRowTable } = useSelectRowTable();
 
-  //functions
-  const handelFilter = (key: string | boolean) => {
-    table.getColumn(filterBy)?.setFilterValue(key);
-  };
-  const handelSort = (key: string) => {
-    table.getColumn(key)?.getIsSorted() !== "desc"
-      ? table.getColumn(key)?.toggleSorting()
-      : table.resetSorting();
-    return table.getColumn(key)?.getIsSorted();
-  };
-
-  const toggleUser = useCallback((row: any) => {
-    setSelectRowTable((prev: any) => {
-      const existingIndex = prev.findIndex((user: any) => user.id === row.id);
-      if (existingIndex !== -1) {
-        // Remove user
-        return prev.filter((_: any, index: any) => index !== existingIndex);
-      }
-      // Add user
-      return [...prev, row];
-    });
-    if (setSelectedFromTable) {
-      setSelectedFromTable((prev: any) => {
+  const toggleUser = useCallback(
+    (row: any) => {
+      setSelectRowTable((prev: any) => {
         const existingIndex = prev.findIndex((user: any) => user.id === row.id);
         if (existingIndex !== -1) {
           // Remove user
@@ -118,9 +50,22 @@ export function DataTable<TData extends { id: any }, TValue>({
         // Add user
         return [...prev, row];
       });
-    }
-  }, []);
-
+      if (setSelectedFromTable) {
+        setSelectedFromTable((prev: any) => {
+          const existingIndex = prev.findIndex(
+            (user: any) => user.id === row.id
+          );
+          if (existingIndex !== -1) {
+            // Remove user
+            return prev.filter((_: any, index: any) => index !== existingIndex);
+          }
+          // Add user
+          return [...prev, row];
+        });
+      }
+    },
+    [setSelectedFromTable, setSelectRowTable]
+  );
   const toggleAll = useCallback(() => {
     setSelectRowTable((prev) =>
       prev.length === table.getRowModel().rows.length
@@ -134,82 +79,28 @@ export function DataTable<TData extends { id: any }, TValue>({
           : table.getRowModel().rows.map((row) => row.original)
       );
     }
-  }, [table]);
+  }, [table, setSelectedFromTable, setSelectRowTable]);
 
   return (
     <div>
       <div className="flex items-center justify-between gap-6 flex-wrap ">
         <div className="flex items-center gap-3 mdl:gap-5 flex-wrap">
-          {title && (
-            <h2 className="headTitle mdl:min-h-10 text-nowrap">{title}</h2>
-          )}
-          {cardView && (
-            <Link
-              href={cardView}
-              className="px-3 duration-300 hover:shadow-md w-fit py-2 rounded-xl border border-black flex items-center justify-center gap-2"
+          {functionSelect?.length ? (
+            <div
+              className={`mb-5 flex gap-2 transition-all duration-300 ease-in-out ${
+                selectRowTable.length
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 -translate-y-5 h-0"
+              }`}
             >
-              <CardIcon />
-              <p>Card View</p>
-            </Link>
-          )}
-          {selectRowTable.length > 0 ? (
-            <div className={`flex items-center gap-3 flex-wrap mb-5`}>
-              {functionSelect ? (
-                functionSelect.map((item, index) => {
-                  return (
-                    <Events key={index} item={item} ids={selectRowTable} />
-                  );
-                })
-              ) : (
-                <>
-                  <div className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
-                    <TrueIcon />
-                    <p className="text-blue text-[14px]">Verify</p>
-                  </div>
-                  <div className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
-                    <ExportIcon />
-                    <p className="text-blue text-[14px]">Export</p>
-                  </div>
-                  <div className="px-4 min-h-10 bg-blueLight duration-300 hover:shadow-lg cursor-pointer rounded-xl flex items-center gap-2">
-                    <DeleteIcon className="h-[14px] w-auto" />
-                    <p className="text-red text-[14px]">Delete</p>
-                  </div>
-                </>
-              )}
+              {functionSelect.map((item, index) => {
+                return <Events key={index} item={item} ids={selectRowTable} />;
+              })}
             </div>
-          ) : null}
+          ) : (
+            <></>
+          )}
         </div>
-        {haveRentSwitch && <RentSwitch typeUser="user" />}
-        {viewAll && (
-          <LinkGreen href={viewAll || "#"} className={"h-10 w-fit gap-3 "}>
-            <p className="text-white text-[16px]">
-              {viewAllTitle || "View all"}{" "}
-            </p>
-            <ArrowWhiteIcon />
-          </LinkGreen>
-        )}
-        {filter && sort ? (
-          <FilterBy
-            data={filterData.concat(sortingData)}
-            filterfun={handelFilter}
-            sortFun={handelSort}
-            search={search}
-          />
-        ) : filter ? (
-          <FilterBy
-            data={filterData}
-            filterfun={handelFilter}
-            sortFun={() => {}}
-            search={search}
-          />
-        ) : sort ? (
-          <FilterBy
-            data={sortingData}
-            filterfun={() => {}}
-            sortFun={handelSort}
-            search={search}
-          />
-        ) : null}
       </div>
       {Component && (
         <div className=" flex flex-col w-full gap-5 mdl:hidden mb-14">
@@ -235,7 +126,6 @@ export function DataTable<TData extends { id: any }, TValue>({
           )}
         </div>
       )}
-
       <div className="space-y-5 border hidden mdl:block border-[#dee2e6] rounded-3xl pt-3 pb-6 mb-phone lg:mb-section">
         {/* Table */}
         <Table>
