@@ -70,7 +70,7 @@ function HeaderDash() {
             />
             <Button
               onClick={open2}
-              className={"bg-blueLight px-3 w-fit h-10 border-none"}
+              className={"bg-blueLight px-3 w-10 h-10 border-none"}
             >
               <EditIcon fill="#006AFF" />
             </Button>

@@ -3,7 +3,7 @@ interface TrueWhiteIconProps {
   active?: boolean;
   className?: string;
 }
-function TrueWhiteIcon({ active = false, className }: TrueWhiteIconProps) {
+function TrueWhiteIcon({ active = false, className='md:w-8 w-5 h-auto' }: TrueWhiteIconProps) {
   return (
     <svg
       width="32"

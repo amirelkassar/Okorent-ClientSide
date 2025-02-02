@@ -18,7 +18,7 @@ function InputCreditCard() {
     setValue(formattedValue);
   };
   return (
-    <div className="flex flex-1 items-center gap-3 w-full px-5 py-1 border border-green rounded-lg bg-white">
+    <div className="flex flex-1 items-center gap-2 md:gap-3 w-full px-2 md:px-5 py-1 border border-green rounded-lg bg-white">
       <div className="min-w-[18px]">
         <CardVisaIcon />
       </div>
@@ -26,7 +26,7 @@ function InputCreditCard() {
         value={value}
         onChange={handleInputChange}
         classNames={{
-          input: "w-full border-none text-black text-[16px] font-SemiBold ",
+          input: "w-full border-none text-black text-sm md:text-[16px] font-SemiBold ",
         }}
         maxLength={25}
       />

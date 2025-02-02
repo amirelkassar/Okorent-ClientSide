@@ -13,7 +13,7 @@ function page() {
         console.log(data);
         console.log(totalPages);
         return (
-          <div className="flex gap-x-12 mb-24 flex-wrap gap-y-8">
+          <div className="flex gap-x-5 justify-center md:justify-start lg:gap-x-10 mb-24 flex-wrap gap-y-4 lg:gap-y-8">
             {data.map((item: any, index: number) => (
               <CardFavView product={item} key={index} />
             ))}

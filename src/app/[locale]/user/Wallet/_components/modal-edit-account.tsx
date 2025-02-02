@@ -19,7 +19,7 @@ function ModalEditAccount({ opened, close }: ModalEditAccountProps) {
         <div className="flex flex-wrap gap-3 md:gap-5 mb-10 ">
           <div className="pb-6 border-b border-green/40 ">
             <div className="flex items-center gap-2">
-              <TrueWhiteIcon className="w-8 h-auto" />
+              <TrueWhiteIcon className="md:w-8 w-5 h-auto" />
               <h3 className="text-base">New card</h3>
             </div>
             <div className="flex md:items-center gap-3 md:gap-6 mt-6 flex-col md:flex-row">
@@ -31,7 +31,7 @@ function ModalEditAccount({ opened, close }: ModalEditAccountProps) {
               </div>
               <div className="flex items-center gap-2 w-full">
                 <InputCreditCard />
-                <div className="bg-red size-8 rounded-full cursor-pointer duration-200 hover:shadow-md flex items-center justify-center">
+                <div className="bg-red size-6 mdl:size-8 rounded-full cursor-pointer duration-200 hover:shadow-md flex items-center justify-center">
                   <XIcon />
                 </div>
               </div>
@@ -127,12 +127,12 @@ function ModalEditAccount({ opened, close }: ModalEditAccountProps) {
           <Button
             onClick={close}
             className={
-              " flex-1 h-16 text-black hover:shadow-md bg-grayBack border-none"
+              " flex-1 mdl:h-16 h-10 text-black hover:shadow-md bg-grayBack border-none"
             }
           >
             Cancel
           </Button>
-          <Button onClick={close} className={" flex-1 h-16"}>
+          <Button onClick={close} className={" flex-1 mdl:h-16 h-10"}>
             Save
           </Button>
         </div>

@@ -34,7 +34,7 @@ function CardFavView({ product }: { product?: any }) {
 
   return (
     <>
-      <div className="bg-white border border-green/50 rounded-3xl px-3 lg:px-5 py-3 lg:py-4 max-w-[400px] mb-3 w-full mdl:min-w-[320px] shadow-sidebar relative">
+      <div className="bg-white border border-green/50 rounded-3xl px-3 flex-1 lg:px-5 py-3 lg:py-4 max-w-[320px] lg:max-w-[400px] mb-3 w-full min-w-[250px] lg:min-w-[380px] shadow-sidebar relative">
         <div className=" rounded-xl bg-blueLight w-full h-[122px] lg:h-40">
           <Image
             alt="home"

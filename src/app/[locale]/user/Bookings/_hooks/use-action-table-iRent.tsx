@@ -4,11 +4,10 @@ import DeleteIcon from "@/src/assets/icons/delete";
 import { GetUniqueValues } from "@/src/lib/utils";
 import BarcodeIcon from "@/src/assets/icons/barcode";
 import CarReturn from "@/src/assets/icons/car-return";
-import RentAgainIcon from "@/src/assets/icons/rentAgain";
 import ReorderIcon from "@/src/assets/icons/reorder";
 import CancelIcon from "@/src/assets/icons/cancel";
 import { useChangeStatusRent } from "./use-change-status-rent";
-import ROUTES from "@/src/routes";
+import { STYLE_ICON } from "@/src/lib/dataUser";
 
 interface ActionTableIRentProps {
   functionSelectView: any[];
@@ -27,7 +26,7 @@ export const useActionTableIRent = (): ActionTableIRentProps => {
       //0
       {
         title: "Mark as Receiving",
-        icon: <BarcodeIcon fill="#006AFF" className="max-h-4 w-auto" />,
+        icon: <BarcodeIcon fill="#006AFF" className={STYLE_ICON} />,
         onclick: (ids: any) => {
           onSubmitChangeStatusIds({
             orderIds: ids?.map((item: any) => item.id),
@@ -37,7 +36,7 @@ export const useActionTableIRent = (): ActionTableIRentProps => {
       //1
       {
         title: "Request to return",
-        icon: <CarReturn fill="#006AFF" className="max-h-4 w-auto" />,
+        icon: <CarReturn fill="#006AFF" className={STYLE_ICON} />,
         onclick: (ids: any) => {
           onSubmitRefundMany({
             orders: ids?.map((item: any) => ({
@@ -50,7 +49,7 @@ export const useActionTableIRent = (): ActionTableIRentProps => {
       //2
       {
         title: "Reorder",
-        icon: <ReorderIcon fill="#006AFF" className="max-h-4 w-auto" />,
+        icon: <ReorderIcon fill="#006AFF" className={STYLE_ICON} />,
         onclick: (ids: any) => {
           onSubmitReOrderManyByID({
             orderIds: ids?.map((item: any) => item.id),
@@ -60,7 +59,7 @@ export const useActionTableIRent = (): ActionTableIRentProps => {
       //3
       {
         title: "Delete",
-        icon: <DeleteIcon className="max-h-4 w-auto" />,
+        icon: <DeleteIcon className={STYLE_ICON} />,
         onclick: (ids: any) => {
           console.log([...ids]);
         },
@@ -68,7 +67,7 @@ export const useActionTableIRent = (): ActionTableIRentProps => {
       //4
       {
         title: "Cancel Order",
-        icon: <CancelIcon className="max-h-4 w-auto" />,
+        icon: <CancelIcon className={STYLE_ICON} />,
         onclick: (ids: any) => {
           console.log([...ids]);
           onSubmitCancelMany({

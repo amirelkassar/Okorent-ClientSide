@@ -12,6 +12,7 @@ import TrueIcon from "@/src/assets/icons/true";
 import CloseIcon from "@/src/assets/icons/close";
 import PrintIcon from "@/src/assets/icons/print";
 import { useChangeStatusRentOut } from "./use-change-status-rentOut";
+import { STYLE_ICON } from "@/src/lib/dataUser";
 
 interface ActionTableIRentOutProps {
   functionSelectView: any[];
@@ -30,7 +31,7 @@ export const useActionTableIRentOut = (): ActionTableIRentOutProps => {
       //0
       {
         title: "Accept",
-        icon: <AcceptedIcon fill="#006AFF" className="max-h-4 w-auto" />,
+        icon: <AcceptedIcon fill="#006AFF" className={STYLE_ICON} />,
         onclick: (ids: any) => {
           onSubmitChangeStatusIds({
             orderIds: ids?.map((item: any) => item.id),
@@ -40,7 +41,7 @@ export const useActionTableIRentOut = (): ActionTableIRentOutProps => {
       //1
       {
         title: "View QR code",
-        icon: <BarcodeIcon fill="#006AFF" className="max-h-4 w-auto" />,
+        icon: <BarcodeIcon fill="#006AFF" className={STYLE_ICON} />,
         onclick: (ids: any) => {
           console.log([...ids]);
         },
@@ -48,7 +49,7 @@ export const useActionTableIRentOut = (): ActionTableIRentOutProps => {
       //2
       {
         title: "Mark as returned",
-        icon: <CarReturn fill="#006AFF" className="max-h-4 w-auto" />,
+        icon: <CarReturn fill="#006AFF" className={STYLE_ICON} />,
         onclick: (ids: any) => {
           console.log([...ids]);
         },
@@ -56,7 +57,7 @@ export const useActionTableIRentOut = (): ActionTableIRentOutProps => {
       //3
       {
         title: "Mark as Out for delivery",
-        icon: <CarIcon fill="#006AFF" className="max-h-4 w-auto" />,
+        icon: <CarIcon fill="#006AFF" className={STYLE_ICON} />,
         onclick: (ids: any) => {
           onSubmitChangeStatusIds({
             orderIds: ids?.map((item: any) => item.id),
@@ -66,7 +67,7 @@ export const useActionTableIRentOut = (): ActionTableIRentOutProps => {
       //4
       {
         title: "Cancel Order",
-        icon: <CancelIcon className="max-h-4 w-auto" />,
+        icon: <CancelIcon className={STYLE_ICON} />,
         onclick: (ids: any) => {
           console.log([...ids]);
         },
@@ -74,7 +75,7 @@ export const useActionTableIRentOut = (): ActionTableIRentOutProps => {
       //5
       {
         title: "Reject",
-        icon: <RejectOrderIcon className="max-h-4 w-auto" />,
+        icon: <RejectOrderIcon className={STYLE_ICON} />,
         onclick: (ids: any) => {
           onSubmitRejectOrdersIds({
             orderIds: ids?.map((item: any) => item.id),
@@ -84,7 +85,7 @@ export const useActionTableIRentOut = (): ActionTableIRentOutProps => {
       //6
       {
         title: "Delete",
-        icon: <DeleteIcon className="max-h-4 w-auto" />,
+        icon: <DeleteIcon className={STYLE_ICON} />,
         onclick: (ids: any) => {
           console.log([...ids]);
         },
@@ -92,7 +93,7 @@ export const useActionTableIRentOut = (): ActionTableIRentOutProps => {
       //7
       {
         title: "Approve Request",
-        icon: <TrueIcon fill="#88BA52" className="w-3 h-auto" />,
+        icon: <TrueIcon fill="#88BA52" className={STYLE_ICON} />,
         onclick: (ids: any) => {
           onSubmitRefundManyYes({
             orders: ids?.map((item: any) => ({
@@ -106,7 +107,7 @@ export const useActionTableIRentOut = (): ActionTableIRentOutProps => {
       //8
       {
         title: "Reject Request",
-        icon: <CloseIcon fill="#FF1D45" className="w-3 h-auto" />,
+        icon: <CloseIcon fill="#FF1D45" className={STYLE_ICON} />,
         onclick: (ids: any) => {
           onSubmitRefundManyNo({
             orders: ids?.map((item: any) => ({
@@ -120,7 +121,7 @@ export const useActionTableIRentOut = (): ActionTableIRentOutProps => {
       //9
       {
         title: "Mark as Completed",
-        icon: <BarcodeIcon fill="#006AFF" className="max-h-4 w-auto" />,
+        icon: <BarcodeIcon fill="#006AFF" className={STYLE_ICON} />,
         onclick: (ids: any) => {
           onSubmitChangeStatusIds({
             orderIds: ids?.map((item: any) => item.id),
@@ -130,7 +131,7 @@ export const useActionTableIRentOut = (): ActionTableIRentOutProps => {
       //10
       {
         title: "Print shipping label",
-        icon: <PrintIcon fill="#006AFF" className="max-h-4 w-auto" />,
+        icon: <PrintIcon fill="#006AFF" className={STYLE_ICON} />,
         onclick: (ids: any) => {
           console.log([...ids]);
         },

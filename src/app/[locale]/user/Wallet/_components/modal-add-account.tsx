@@ -18,7 +18,7 @@ function ModalAddAccount({ opened, close}:ModalAddAccountProps) {
         <div className="flex flex-wrap gap-3 md:gap-5 mb-10 ">
           <div className="pb-6 border-b border-green/40 ">
             <div className="flex items-center gap-2">
-              <TrueWhiteIcon className="w-8 h-auto" />
+              <TrueWhiteIcon className="md:w-8 w-5 h-auto" />
               <h3 className="text-base">New card</h3>
             </div>
             <div className="flex md:items-center gap-3 md:gap-6 mt-6 flex-col md:flex-row">
@@ -30,7 +30,7 @@ function ModalAddAccount({ opened, close}:ModalAddAccountProps) {
               </div>
               <div className="flex items-center gap-2 w-full">
                 <InputCreditCard />
-                <div className="bg-red size-8 rounded-full cursor-pointer duration-200 hover:shadow-md flex items-center justify-center">
+                <div className="bg-red size-5 md:size-8 rounded-full cursor-pointer duration-200 hover:shadow-md flex items-center justify-center">
                   <XIcon />
                 </div>
               </div>
@@ -52,7 +52,7 @@ function ModalAddAccount({ opened, close}:ModalAddAccountProps) {
                   }}
                   className=" flex-1  duration-200 w-full min-h-[44px] rounded-2xl text-grayMedium"
                 />
-                <TrueWhiteIcon active />
+                <TrueWhiteIcon active className="md:w-8 w-5 h-auto" />
               </div>
             </div>
             <div className="flex md:items-center gap-3 md:gap-6 mt-6 flex-col md:flex-row">
@@ -110,7 +110,7 @@ function ModalAddAccount({ opened, close}:ModalAddAccountProps) {
           </div>
 
           <div className="pb-8 border-b border-green/40 w-full">
-            <h2 className="text-xl lg:text-[24px] mb-4 font-SemiBold">
+            <h2 className="text-lg lg:text-[24px] mb-4 font-SemiBold">
               VAT information
             </h2>
             <div className=" flex flex-col md:flex-row md:items-center gap-3 md:gap-8">
@@ -141,7 +141,7 @@ function ModalAddAccount({ opened, close}:ModalAddAccountProps) {
             </div>
           </div>
           <div className=" w-full">
-            <h2 className="text-xl mb-5 lg:text-[24px]  font-SemiBold">
+            <h2 className="text-lg mb-5 lg:text-[24px]  font-SemiBold">
               Billing Address
             </h2>
 
@@ -157,12 +157,12 @@ function ModalAddAccount({ opened, close}:ModalAddAccountProps) {
           <Button
             onClick={close}
             className={
-              " flex-1 h-16 text-black hover:shadow-md bg-grayBack border-none"
+              " flex-1 h-11 md:h-16 text-black hover:shadow-md bg-grayBack border-none"
             }
           >
             Cancel
           </Button>
-          <Button onClick={close} className={" flex-1 h-16"}>
+          <Button onClick={close} className={" flex-1 h-11 md:h-16"}>
             Save
           </Button>
         </div>

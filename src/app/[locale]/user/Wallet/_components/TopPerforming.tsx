@@ -36,8 +36,8 @@ function TopPerforming() {
   const maxPrice = Math.max(...apiData.map((item) => item.price));
   const [selectedDate, setSelectedDate] = useState<string | null>("September");
   return (
-    <div className="border bg-white/50 rounded-3xl pt-8 px-6 pb-4">
-      <div className="flex gap-6 justify-between ">
+    <div className="border bg-white/50 rounded-3xl pt-6 md:pt-8 px-5 md:px-6 pb-4">
+      <div className="flex gap-3 md:gap-6 justify-between ">
         <div>
           <h4 className="font-Regular  text-base lg:text-[24px] mb-3">
             Top Performing Product

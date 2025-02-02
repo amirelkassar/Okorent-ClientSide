@@ -9,6 +9,7 @@ import {
   useUpdateManyToOnlineMutation,
 } from "@/src/hooks/queries/user/lisitings";
 import { useSelectRowTable } from "@/src/components/select-row-table-context";
+import { STYLE_ICON } from "@/src/lib/dataUser";
 
 interface SignUpReturn {
   functionSelectView: any[];
@@ -54,7 +55,7 @@ export const useActionTable = (): SignUpReturn => {
     () => [
       {
         title: "Make online",
-        icon: <OnlineIcon fill="#006AFF" className="max-h-4 w-auto" />,
+        icon: <OnlineIcon fill="#006AFF" className={STYLE_ICON} />,
         onclick: (ids: any) => {
           console.log(ids);
 
@@ -66,7 +67,7 @@ export const useActionTable = (): SignUpReturn => {
       },
       {
         title: "Delete",
-        icon: <DeleteIcon className="max-h-4 w-auto" />,
+        icon: <DeleteIcon className={STYLE_ICON} />,
         onclick: (ids: any) => {
           onSubmitDeleteProducts({
             productIds: ids?.map((item: any) => item.id),
