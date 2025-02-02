@@ -4,7 +4,7 @@ import imgMission from '@/src/assets/images/rentalView.png'
 
 function Mission() {
   return (
-    <div className="mb-12 lg:mb-24">
+    <div className="mb-7 lg:mb-24">
       <h2 className=" text-lg lg:text-2xl text-center text-blue mb-4">Our mission</h2>
       <h3 className=" text-2xl lg:text-3xl text-center mb-4">Epowering Rental Business</h3>
       <p className="text-grayMedium text-base lg:text-xl text-center font-Regular max-w-[970px] mx-auto mb-8 lg:mb-6 lg:leading-8">

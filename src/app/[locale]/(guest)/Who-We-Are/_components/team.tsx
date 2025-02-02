@@ -27,7 +27,7 @@ const dataTeam = [
 ];
 function Team() {
   return (
-    <div className="py-7 mb-20">
+    <div className="py-7 mb-1 mdl:mb-12">
       <h2 className=" text-2xl lg:text-3xl text-center mb-8">Meet out team</h2>
       <div className="flex justify-between gap-5 max-w-[900px] mx-auto overflow-x-auto hideScroll">
         {dataTeam.map((item, i) => {

@@ -51,7 +51,7 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
     Toast.Promise(ChangeStatusProduct(id), {
       loading: "Processing...",
       success: "Operation completed!",
-      error: "Failed to complete operation",
+
       onSuccess(res) {
         setSelectRowTable([]);
       },
@@ -64,7 +64,7 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
       Toast.Promise(ChangeStatusManyProduct(data), {
         loading: "Processing...",
         success: "Operation completed!",
-        error: "Failed to complete operation",
+
         onSuccess(res) {
           setSelectRowTable([]);
         },
@@ -95,7 +95,7 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
       Toast.Promise(RejectManyOrderOut(data), {
         loading: "Processing...",
         success: "Operation completed!",
-        error: "Failed to complete operation",
+
         onSuccess(res) {
           setSelectRowTable([]);
         },

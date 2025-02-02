@@ -42,7 +42,7 @@ export default async function RootLayout({
           <TokenProvider value={token ? token : null}>
             <NuqsAdapter>
               <ReactQueryConfig>
-                <MantineProvider>
+                <MantineProvider >
                   <SelectRowTableProvider>{children}</SelectRowTableProvider>
                   <Toaster />
                 </MantineProvider>

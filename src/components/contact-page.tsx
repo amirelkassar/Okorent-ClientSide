@@ -10,10 +10,8 @@ import TwitterIcon from "../assets/icons/twitter";
 import { Toast } from "./toast";
 import { useContactUs, useSupportUser } from "../hooks/queries/admin/support";
 import GetErrorMsg from "./getErrorMsg";
-import { useSearchParams } from "next/navigation";
 
 function ContactPage({ user = false }: { user?: boolean }) {
-  const searchparams = useSearchParams();
   const [formData, setFormData] = useState({
     UserName: "",
     UserEmail: "",
@@ -104,7 +102,7 @@ function ContactPage({ user = false }: { user?: boolean }) {
               value={formData.UserName || ""}
               onChange={handleInputChange}
               inputClassName="!h-16 !rounded-2xl bg-white"
-              className="flex-1 min-w-[350px]"
+              className="flex-1 min-w-full md:min-w-[350px]"
               labelClassName=" text-base mdl:!text-2xl"
               error={
                 GetErrorMsg(error, "UserName") ||
@@ -118,7 +116,7 @@ function ContactPage({ user = false }: { user?: boolean }) {
               value={formData.UserEmail}
               onChange={handleInputChange}
               inputClassName="!h-16 !rounded-2xl bg-white"
-              className="flex-1 min-w-[350px]"
+              className="flex-1 min-w-full md:min-w-[350px]"
               labelClassName=" text-base mdl:!text-2xl"
               error={
                 GetErrorMsg(error, "UserEmail") ||
@@ -132,7 +130,7 @@ function ContactPage({ user = false }: { user?: boolean }) {
               value={formData.Title}
               onChange={handleInputChange}
               inputClassName="!h-16 !rounded-2xl bg-white"
-              className="flex-1 min-w-[350px]"
+              className="flex-1 min-w-full md:min-w-[350px]"
               labelClassName=" text-base mdl:!text-2xl"
               error={
                 GetErrorMsg(error, "Title") ||

@@ -61,7 +61,7 @@ function FooterGuest() {
 
   return (
     <div className="bg-[#022E2D] w-full pb-14 lg:pb-20 pt-8 mdl:pt-14">
-      <div className="max-w-[1600px] flex-col mdl:flex-row mx-auto px-12 lg:px-[74px] flex gap-14 lg:gap-36 justify-between">
+      <div className="max-w-[1600px] flex-col mdl:flex-row mx-auto px-9 lg:px-[74px] flex gap-14 lg:gap-36 justify-between">
         <div className=" w-full  justify-between gap-4 mdl:max-w-[320px] flex flex-row mdl:flex-col flex-wrap">
           <div>
             <Link href={ROUTES.GUEST.HOMEPAGE}>

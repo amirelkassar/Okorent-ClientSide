@@ -8,7 +8,7 @@ import TwoLineIcon from "@/src/assets/icons/twoLine";
 
 function TryFree() {
   return (
-    <div className="mb-20">
+    <div className=" mb-14 mdl:mb-20">
       <div className="p-2 lg:p-3 size-[52px] lg:size-[70px] mx-auto rounded-full bg-green/20 flex items-center justify-center">
         <SadIcon />
       </div>

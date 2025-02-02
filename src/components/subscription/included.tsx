@@ -278,7 +278,7 @@ function Included() {
   const isMobile = useMediaQuery("(max-width: 992px)");
 
   return (
-    <div className="mb-28">
+    <div className=" mb-12 mdl:mb-28">
       <h2 className="text-[32px] lg:text-[56px] text-center mb-2 ">
         What’s included
       </h2>

@@ -16,6 +16,7 @@ import ClientsIcon from "@/src/assets/icons/Clients";
 import PricingIcon from "@/src/assets/icons/pricing";
 import HowIcon from "@/src/assets/icons/how";
 import LoginIcon from "@/src/assets/icons/login";
+import LogoOkoRent from "@/src/assets/icons/logo";
 
 function NavLinks() {
   const locale = useLocale();
@@ -82,13 +83,7 @@ function NavLinks() {
     <nav className="py-7 px-4 relative z-30">
       <div className=" mx-auto gap-4   flex justify-between items-center">
         <Link href={"/"}>
-          <Image
-            src={logo}
-            alt="logo"
-            width={135}
-            height={45}
-            className="md:w-[135px] w-[98px] h-auto"
-          />
+          <LogoOkoRent className="md:w-[135px] w-[98px] h-auto" />
         </Link>
         <div className=" lg:hidden flex items-center gap-5">
           <LinkGreen
