@@ -13,6 +13,7 @@ import {
 import { Toast } from "@/src/components/toast";
 import { useSelectRowTable } from "@/src/components/select-row-table-context";
 import UnVerifyIcon from "@/src/assets/icons/unVerify";
+import { STYLE_ICON } from "@/src/lib/dataUser";
 
 interface SignUpReturn {
   functionSelectView: any[];
@@ -85,7 +86,7 @@ export const useActionTable = (open: any): SignUpReturn => {
         ? [
             {
               title: "UnVerify",
-              icon: <UnVerifyIcon fill="#006AFF" className="w-3 h-auto" />,
+              icon: <UnVerifyIcon fill="#006AFF" className={STYLE_ICON} />,
               onclick: (ids: any) => {
                 onSubmitVerificationManyAccount(
                   {
@@ -101,7 +102,7 @@ export const useActionTable = (open: any): SignUpReturn => {
         ? [
             {
               title: "Verify",
-              icon: <TrueIcon className="max-h-4 w-auto " />,
+              icon: <TrueIcon className={STYLE_ICON} />,
               onclick: (ids: any) => {
                 onSubmitVerificationManyAccount(
                   {
@@ -118,7 +119,7 @@ export const useActionTable = (open: any): SignUpReturn => {
         ? [
             {
               title: "Deactivate",
-              icon: <DeactivateIcon className="max-h-4 w-auto " />,
+              icon: <DeactivateIcon className={STYLE_ICON} />,
               onclick: (ids: any) => {
                 open();
               },
@@ -128,7 +129,7 @@ export const useActionTable = (open: any): SignUpReturn => {
         ? [
             {
               title: "Activate",
-              icon: <TrueIcon className="max-h-4 w-auto " />,
+              icon: <TrueIcon className={STYLE_ICON} />,
               onclick: (ids: any) => {
                 onSubmitActiveManyAccount({
                   userIds: ids?.map((item: any) => item.id),
@@ -141,7 +142,7 @@ export const useActionTable = (open: any): SignUpReturn => {
       //2
       {
         title: "Send Note",
-        icon: <NoteTableIcon className="max-h-4 w-auto " />,
+        icon: <NoteTableIcon className={STYLE_ICON} />,
         onclick: (ids: any) => {
           console.log([...ids]);
         },
@@ -149,7 +150,7 @@ export const useActionTable = (open: any): SignUpReturn => {
       //5
       {
         title: "Delete",
-        icon: <DeleteIcon className="max-h-4 w-auto " />,
+        icon: <DeleteIcon className={STYLE_ICON} />,
         onclick: (ids: any) => {
           onSubmitDeleteManyAccount({
             userIds: ids?.map((item: any) => item.id),

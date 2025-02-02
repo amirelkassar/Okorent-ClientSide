@@ -5,6 +5,7 @@ import { Toast } from "@/src/components/toast";
 import QuickEditIcon from "@/src/assets/icons/quickEdit";
 import { useDeleteManyProductInAdmin } from "@/src/hooks/queries/admin/lisiting";
 import { useSelectRowTable } from "@/src/components/select-row-table-context";
+import { STYLE_ICON } from "@/src/lib/dataUser";
 
 interface SignUpReturn {
   functionSelectView: any[];
@@ -37,7 +38,7 @@ export const useActionTable = (open: any): SignUpReturn => {
       //0
       {
         title: "Quick Edit",
-        icon: <QuickEditIcon className="max-h-4 w-auto" />,
+        icon: <QuickEditIcon className={STYLE_ICON} />,
         onclick: () => {
           open();
         },
@@ -45,7 +46,7 @@ export const useActionTable = (open: any): SignUpReturn => {
       //1
       {
         title: "Delete",
-        icon: <DeleteIcon className="max-h-4 w-auto" />,
+        icon: <DeleteIcon className={STYLE_ICON} />,
         onclick: (ids: any) => {
           onSubmitDelete({
             productIds: ids?.map((item: any) => item.id),

@@ -33,10 +33,10 @@ function Page({ params }: any) {
         <Button
           onClick={onSubmitRemoveCategory}
           className={
-            " h-11 mdl:h-12 text-sm mdl:text-base gap-1 mdl:gap-2 hover:shadow-md px-4 md:!px-8 border-none bg-blueLight text-red"
+            " h-10 mdl:h-12 text-sm mdl:text-base gap-1 mdl:gap-2 hover:shadow-md px-4 md:!px-8 border-none bg-blueLight text-red"
           }
         >
-          <DeleteIcon className="w-4 h-auto" /> Delete
+          <DeleteIcon className="mdl:w-4 w-3 h-auto" /> Delete
         </Button>
       </div>
       <QueryWrapper query={query}>

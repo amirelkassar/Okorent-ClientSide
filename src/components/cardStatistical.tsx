@@ -29,7 +29,7 @@ function CardStatistical({
           <p className="text-2xl lg:text-[32px] font-Bold leading-9  ">
             {number}
           </p>
-          <span className="bg-[#ECF4FA] px-3 min-h-6 flex items-center justify-center text-blue text-[14px] rounded-lg">
+          <span className="bg-[#ECF4FA] px-3 min-h-6 flex items-center justify-center text-blue text-[10px] mdl:text-sm font-Regular rounded-lg">
             +{percentage}%
           </span>
         </div>

@@ -6,9 +6,9 @@ function LinkHistoryNote({ link = "#" }: { link: string }) {
   return (
     <Link
       href={link}
-      className="w-10 h-9 rounded-lg border border-black flex items-center justify-center p-1 duration-300 hover:shadow-md"
+      className=" w-9 md:w-10 h-7 md:h-9 rounded-lg border border-black flex items-center justify-center p-1 duration-300 hover:shadow-md"
     >
-      <ClockIcon className="w-5 h-auto" />
+      <ClockIcon className="md:w-5 w-4 h-auto" />
     </Link>
   );
 }

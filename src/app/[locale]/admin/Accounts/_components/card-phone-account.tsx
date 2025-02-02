@@ -72,7 +72,7 @@ function CardPhoneAccount({ dataCard }: CardDataProps) {
         />
         <RowCardPhone
           title="Payment"
-          info={dataCard.totalProductsCount + " $"}
+          info={dataCard.totalProductsCount||0 + " $"}
         />
         <RowCardPhone
           title="Verify"

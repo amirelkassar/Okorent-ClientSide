@@ -17,12 +17,12 @@ function Page() {
           <LinkGreen
             href={ROUTES.ADMIN.MASTERDATA}
             className={
-              " flex-1 h-10 text-base hover:shadow-md !px-8 text-black bg-blueLight border-none"
+              " flex-1 h-10 mdl:text-base text-sm hover:shadow-md !px-4 mdl:!px-8 text-black bg-blueLight border-none"
             }
           >
             Discard
           </LinkGreen>
-          <Button className={" flex-1 h-10 text-base !px-8"}>Save </Button>
+          <Button className={" flex-1 h-10 mdl:text-base text-sm !px-4 mdl:!px-8"}>Save </Button>
         </div>
       </div>
       <div className="flex flex-col mdl:flex-row flex-wrap gap-6 mb-6">

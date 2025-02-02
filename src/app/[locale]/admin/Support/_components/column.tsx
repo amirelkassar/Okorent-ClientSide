@@ -14,6 +14,7 @@ interface Ticket {
   contactUsStatus: string | any;
   title: string;
   date: string;
+  created: string;
 }
 export const columns: ColumnDef<Ticket>[] = [
   {

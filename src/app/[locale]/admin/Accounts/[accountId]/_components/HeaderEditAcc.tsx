@@ -13,6 +13,7 @@ import EditIcon from "@/src/assets/icons/edit";
 import ModalEditProfile from "./modal-edit-profile";
 import { useRowActionAccountInAdmin } from "../../_hooks/use-row-action";
 import UnVerifyIcon from "@/src/assets/icons/unVerify";
+import { STYLE_ICON } from "@/src/lib/dataUser";
 interface HeaderEditAccProps {
   id: number;
   viewProfile: string;
@@ -38,7 +39,7 @@ function HeaderEditAcc({
   const functionSelect = [
     {
       title: "Edit",
-      icon: <EditIcon className="max-h-3 w-auto" fill="#006AFF" />,
+      icon: <EditIcon className={STYLE_ICON} fill="#006AFF" />,
       onclick: () => {
         open3();
       },
@@ -47,7 +48,7 @@ function HeaderEditAcc({
       ? [
           {
             title: "Unverify",
-            icon: <UnVerifyIcon fill="#006AFF" className="w-3 h-auto" />,
+            icon: <UnVerifyIcon fill="#006AFF" className={STYLE_ICON} />,
             onclick: () => {
               onSubmitVerificationAccount({ userId: id, verify: false });
             },
@@ -56,7 +57,7 @@ function HeaderEditAcc({
       : [
           {
             title: "Verify",
-            icon: <TrueIcon className="max-h-4 w-auto" />,
+            icon: <TrueIcon className={STYLE_ICON} />,
             onclick: () => {
               onSubmitVerificationAccount({ userId: id, verify: true });
             },
@@ -67,7 +68,7 @@ function HeaderEditAcc({
       ? [
           {
             title: "Deactivate",
-            icon: <DeactivateIcon className="max-h-4 w-auto" />,
+            icon: <DeactivateIcon className={STYLE_ICON} />,
             onclick: () => {
               open2();
             },
@@ -76,7 +77,7 @@ function HeaderEditAcc({
       : [
           {
             title: "Activate",
-            icon: <TrueIcon fill="#006AFF" className="w-3 h-auto" />,
+            icon: <TrueIcon fill="#006AFF" className={STYLE_ICON} />,
             onclick: () => {
               onSubmitActivateAccount();
             },
@@ -85,13 +86,13 @@ function HeaderEditAcc({
 
     {
       title: "Send Note",
-      icon: <NoteTableIcon className="max-h-4 w-auto" />,
+      icon: <NoteTableIcon className={STYLE_ICON} />,
       onclick: open,
     },
 
     {
       title: "Delete",
-      icon: <DeleteIcon className="max-h-4 w-auto" />,
+      icon: <DeleteIcon className={STYLE_ICON} />,
       onclick: () => {
         onSubmitDeleteAccount();
       },

@@ -12,11 +12,13 @@ function ReviewsListProfileAdmin({ userID }: { userID: string }) {
         <LoadingProductsRow number={2} />
       ) : (
         <div className="flex gap-3 lg:gap-4 md:flex-wrap overflow-x-auto hideScroll">
-          {data?.data?.map((item: any, i: number) => {
-            return (
-              <Review key={i} data={item} idUser={userID} edit={true} />
-            );
-          })}
+          {data?.data?.length === 0 ? (
+            <p className="text-center text-gray-500 w-full">No reviews found</p>
+          ) : (
+            data?.data?.map((item: any, i: number) => {
+              return <Review key={i} data={item} idUser={userID} edit={true} />;
+            })
+          )}
         </div>
       )}
     </>

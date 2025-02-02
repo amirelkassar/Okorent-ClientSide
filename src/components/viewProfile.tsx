@@ -44,7 +44,7 @@ function ViewProfile({
 }) {
   return (
     <div className="flex  flex-col lg:flex-row gap-10 lg:items-start  lg:gap-4 -mt-5 lg:-mt-[140px] lg:ps-8">
-      <div className="min-w-[370px]   bg-white rounded-2xl lg:rounded-3xl w-full max-w-[93%] lg:max-w-[370px] mx-auto flex-1 pb-12 lg:pb-24 shadow-md">
+      <div className="md:min-w-[370px] bg-white rounded-2xl lg:rounded-3xl w-full max-w-[93%] lg:max-w-[370px] mx-auto flex-1 pb-12 lg:pb-24 shadow-md">
         <div className="lg:min-w-[200px]">
           {editAdmin ? (
             <UploadAndCropImg image={data.userImage || imgUser} admin={editAdmin} userID={data.id} />
@@ -108,7 +108,7 @@ function ViewProfile({
             </div>
           </div>
           <div>
-            <h3 className="text-2xl lg:text-3xl mb-5">
+            <h3 className="text-xl lg:text-3xl mb-5">
               About{" "}
               <span className="font-Bold">{data.name?.split(" ")[0]}</span>{" "}
             </h3>

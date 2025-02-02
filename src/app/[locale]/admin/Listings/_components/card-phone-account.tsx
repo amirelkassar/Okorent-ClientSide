@@ -35,7 +35,7 @@ function CardPhoneAccount({ dataCard }: CardDataProps) {
         </div>
         <Link
          href={ROUTES.ADMIN.LISTINGSDETAILS(dataCard.id)}
-          className="flex items-center w-fit gap-2"
+          className="flex items-center flex-1 gap-2"
         >
           <ImgProduct
             src={dataCard.heroImage || placeholderImg}

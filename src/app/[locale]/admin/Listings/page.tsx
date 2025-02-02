@@ -28,7 +28,6 @@ function Page() {
   const [opened, { open, close }] = useDisclosure(false);
   const { functionSelectView, setSelectedFromTable, selectedFromTable } =
     useActionTable(open);
-
   const query = GetProductsInAdmin(searchParams.toString());
   const totalCount = query.data?.data?.totalCount || 0;
 
