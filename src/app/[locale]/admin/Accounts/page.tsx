@@ -14,14 +14,16 @@ import DeactivateModalMany from "./_components/DeactivateModal-many";
 import { useDisclosure } from "@mantine/hooks";
 import LinkHistoryNote from "../_components/link-history-note";
 import ROUTES from "@/src/routes";
+import NoteModal from "@/src/components/NoteModal";
 
 function Page() {
   const searchParams = useSearchParams();
   const [opened, { open, close }] = useDisclosure(false);
+  const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
 
   const query = GetAccounts(searchParams.toString());
   const { functionSelectView, setSelectedFromTable, selectedFromTable } =
-    useActionTable(open);
+    useActionTable(open, open2);
   const totalCount = query.data?.data?.totalCount || 0;
 
   return (
@@ -36,8 +38,6 @@ function Page() {
       </TableHeader>
       <QueryWrapper query={query}>
         {({ data, totalPages }: { data: any; totalPages?: any }) => {
-          console.log(data);
-
           return (
             <div>
               <DataTable
@@ -56,6 +56,12 @@ function Page() {
         opened={opened}
         close={close}
         ids={selectedFromTable}
+      />
+      <NoteModal
+        id={selectedFromTable?.map((item: any) => item.id)}
+        group
+        opened={opened2}
+        close={close2}
       />
     </div>
   );

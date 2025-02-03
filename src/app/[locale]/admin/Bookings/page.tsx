@@ -14,6 +14,8 @@ import { useActionTableBookingInAdmin } from "./_hooks/use-action-table";
 import { GetOrdersInAdmin } from "@/src/hooks/queries/admin/booking";
 import { useSearchParams } from "next/navigation";
 import CancelManyModal from "./_components/cancel-many-modal";
+import LinkHistoryNote from "../_components/link-history-note";
+import ROUTES from "@/src/routes";
 
 function Page() {
   const searchParams = useSearchParams();
@@ -28,11 +30,17 @@ function Page() {
       open3,
     });
   const totalCount = query.data?.data?.totalCount || 0;
-
+  const ids = selectedFromTable
+    ?.map((item: any) => [item.lessorId, item.renterId])
+    .flat();
+  console.log(ids);
+  const uniqueArray = Array.from(new Set(ids));
   return (
     <div>
       <TableHeader>
-        <TableHeader.First title={`Booking - ${totalCount}`} />
+        <TableHeader.First title={`Booking - ${totalCount}`}>
+          <LinkHistoryNote link={ROUTES.ADMIN.NOTESBOOKINGS} />
+        </TableHeader.First>
         <TableHeader.Last options={FilterOptionsBooking} />
       </TableHeader>
       <QueryWrapper query={query}>
@@ -53,7 +61,7 @@ function Page() {
       </QueryWrapper>
 
       <RefundModal opened={opened} close={close} />
-      <NoteModal opened={opened2} close={close2} />
+      <NoteModal id={uniqueArray} opened={opened2} close={close2} />
       <CancelManyModal
         opened={opened3}
         close={close3}

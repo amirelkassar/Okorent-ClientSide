@@ -88,8 +88,7 @@ export const useReSendOTP = () => {
       });
       return response.data;
     },
-    onSuccess: (res) => {
-    },
+    onSuccess: (res) => {},
     onError: (req) => {
       console.log(req);
     },
@@ -110,7 +109,12 @@ export const useForgetPassword = () => {
 export const useResetPassword = () => {
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await api.post(auth.reset_password.base, data);
+      const response = await api.post(auth.reset_password.base, data, {
+        headers: {
+          accept: "*/*",
+          "Content-Type": "application/json",
+        },
+      });
       return response.data;
     },
     onSuccess: async (res) => {},

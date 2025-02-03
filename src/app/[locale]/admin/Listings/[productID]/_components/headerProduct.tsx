@@ -51,7 +51,7 @@ function HeaderProduct({ id }: any) {
       {functionSelect.map((item, index) => {
         return <Events key={index} item={item} ids={[1]} />;
       })}
-      {opened && <NoteModal opened={opened} close={close} />}
+      {opened && <NoteModal id={id} opened={opened} close={close} />}
     </div>
   );
 }

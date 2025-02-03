@@ -20,7 +20,7 @@ interface SignUpReturn {
   setSelectedFromTable: any;
   selectedFromTable: any;
 }
-export const useActionTable = (open: any): SignUpReturn => {
+export const useActionTable = (open: any, open2: any): SignUpReturn => {
   const [selectedFromTable, setSelectedFromTable] = useState([]);
   const { mutateAsync: DeleteManyAccount } = useDeleteManyAccountInAdmin();
   const { mutateAsync: ActiveManyAccount } = useActiveManyAccountInAdmin();
@@ -74,8 +74,6 @@ export const useActionTable = (open: any): SignUpReturn => {
     },
     [VerificationManyAccount, selectedFromTable]
   );
-
-
 
   const functionSelectView = useMemo(() => {
     const isVerified = GetUniqueValues(selectedFromTable, "isVerified");
@@ -144,7 +142,7 @@ export const useActionTable = (open: any): SignUpReturn => {
         title: "Send Note",
         icon: <NoteTableIcon className={STYLE_ICON} />,
         onclick: (ids: any) => {
-          console.log([...ids]);
+          open2();
         },
       },
       //5
@@ -166,6 +164,7 @@ export const useActionTable = (open: any): SignUpReturn => {
     onSubmitDeleteManyAccount,
     onSubmitVerificationManyAccount,
     open,
+    open2,
   ]);
 
   return {

@@ -46,7 +46,7 @@ function ActionMenu({ id }: { id: any }) {
   return (
     <>
       <DataActions data={options} />
-      {opened && <NoteModal opened={opened} close={close} />}
+      {opened && <NoteModal id={id} opened={opened} close={close} />}
       {opened2 && <SuspendModal opened={opened2} close={close2} />}
       {opened3 && <CancelModal opened={opened3} close={close3} />}
       {opened4 && <ChangePlanModal opened={opened4} close={close4} />}

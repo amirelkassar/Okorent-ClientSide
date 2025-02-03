@@ -18,7 +18,6 @@ function Notifications() {
   const [typeNotifications, setTypeNotifications] = useState("All");
   const [Ids, setIds] = useState<any[]>([]);
   const [unReadCount, setUnReadCount] = useState(0);
-  console.log(unReadCount);
 
   const {
     data,
@@ -30,7 +29,6 @@ function Notifications() {
     refetch,
   } = useNotifications(typeNotifications !== "All");
   const { mutateAsync: markAllAsRead } = useNotificationsMarkAsReadAll();
-  console.log(data);
 
   const handleSubmitMarkAllAsRead = useCallback(async () => {
     Toast.Promise(markAllAsRead({ ids: Ids }), {
@@ -60,7 +58,6 @@ function Notifications() {
     }
     const mergedNotifications =
       data?.pages.flatMap((page) => page?.data?.items) || [];
-    console.log(mergedNotifications);
     setIds(
       mergedNotifications
         ?.filter((item) => item.status === 2)
@@ -102,13 +99,12 @@ function Notifications() {
       onChange={(e) => {
         setOpened((o) => !o);
       }}
-      position='bottom-end'
+      position="bottom-end"
       clickOutsideEvents={["mouseup", "touchend"]}
       offset={10}
       classNames={{
         dropdown: "bg-white shadow-md py-0 max-w-[97%] md:max-w-[380px]",
       }}
-      
       width={340}
     >
       <Popover.Target>
@@ -130,7 +126,9 @@ function Notifications() {
         <div className="w-full max-w-sm rounded-lg shadow-lg">
           <div className="p-4 border-b">
             <div className="flex items-center justify-between">
-              <h2 className=" text-sm md:text-base font-semibold">Notifications</h2>
+              <h2 className=" text-sm md:text-base font-semibold">
+                Notifications
+              </h2>
               {Ids.length > 0 ? (
                 <button
                   className=" text-xs md:text-sm text-blue hover:text-blue-700"

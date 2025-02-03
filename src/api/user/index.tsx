@@ -40,7 +40,8 @@ export const user = {
     base: "/BookingOrder/Direct-Order",
     booking: {
       i_rent: (queries: any) => buildQuery("/BookingOrder", queries),
-      i_rent_card: (queries: any) => buildQuery("/BookingOrder/BookingOrdersCarts", queries),
+      i_rent_card: (queries: any) =>
+        buildQuery("/BookingOrder/BookingOrdersCarts", queries),
       i_rentOut: (queries: any) => buildQuery("/BookingOrder", queries),
       changeStatusById: (id: any) => `/BookingOrder/OrderStatus/${id}`,
       changeStatusByIds: `/BookingOrder/UpdateOrdersStatus`,
@@ -151,6 +152,16 @@ export const admin = {
   Invoices: {
     base: (queries: any) =>
       buildQuery("/AdminManageInvoices/GetAllInvoices", queries),
+  },
+  Notes: {
+    get_all: (queries: any) =>
+      buildQuery("/AdminNote/Admin-GetAll-Notes", queries),
+    get_by_id: (queries: any) =>
+      buildQuery("/AdminNote/Get-Note-ByID", queries),
+    notes_id: (id: any) => `/AdminNote/${id}`,
+    create: "/AdminNote",
+    delete_bulk: "/AdminNote/DeleteNote-ForSpecificUsers",
+    delete_group: "/AdminNote/DeleteNotes",
   },
 };
 

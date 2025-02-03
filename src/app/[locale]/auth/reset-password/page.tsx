@@ -8,7 +8,6 @@ import { useResetPassword } from "@/src/hooks/queries/auth";
 import { useRouter } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useSearchParams } from "next/navigation";
 import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -30,8 +29,10 @@ const schema = yup.object().shape({
 
 function Page() {
   const router = useRouter();
-  const searchparams = useSearchParams();
   const { mutateAsync: ResetPassword } = useResetPassword();
+  const searchParams = new URLSearchParams(window.location.search);
+  const decodedToken = searchParams.get("token") || "";
+  const email = searchParams.get("email") || "";
 
   // react-hook-form setup
   const {
@@ -47,8 +48,8 @@ function Page() {
       Toast.Promise(
         ResetPassword({
           newPassword: data.newPassword,
-          email: searchparams.get("email") || "",
-          token: searchparams.get("token")?.toString() || "",
+          token: decodedToken,
+          email: email,
         }),
         {
           loading: "Sending New Password ...",
@@ -63,7 +64,7 @@ function Page() {
         }
       );
     },
-    [ResetPassword]
+    [ResetPassword, router, decodedToken, email]
   );
   return (
     <div className="flex-1 pt-4 lgl:pt-20 pb-8 md:pb-16  flex  min-h-full justify-center lgl:justify-start">

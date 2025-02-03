@@ -1,7 +1,6 @@
 "use client";
 import DeleteIcon from "@/src/assets/icons/delete";
 import EditIcon from "@/src/assets/icons/edit";
-import ExportIcon from "@/src/assets/icons/export";
 import NoteTableIcon from "@/src/assets/icons/noteTable";
 import ProfileIcon from "@/src/assets/icons/Profile";
 import TrueIcon from "@/src/assets/icons/true";
@@ -154,7 +153,7 @@ function ActionMenu({
     <>
       <DataActions data={optionView() || []} />
       {opened && <DeactivateModal id={id} opened={opened} close={close} />}
-      {opened2 && <NoteModal id={id} opened={opened2} close={close2} />}
+      {opened2 && <NoteModal id={[id]} opened={opened2} close={close2} />}
       {opened3 && (
         <EditModal opened={opened3} close={close3} dataUSer={dataUSer} />
       )}

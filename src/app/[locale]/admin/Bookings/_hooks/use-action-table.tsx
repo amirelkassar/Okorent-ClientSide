@@ -11,7 +11,15 @@ interface ActionTableBookingInAdminProps {
   setSelectedFromTable: any;
   selectedFromTable: any;
 }
-export const useActionTableBookingInAdmin = ({open, open2, open3}:{open: any, open2: any, open3: any}): ActionTableBookingInAdminProps => {
+export const useActionTableBookingInAdmin = ({
+  open,
+  open2,
+  open3,
+}: {
+  open: any;
+  open2: any;
+  open3: any;
+}): ActionTableBookingInAdminProps => {
   const [selectedFromTable, setSelectedFromTable] = useState([]);
 
   const functionSelect = useMemo(
@@ -54,7 +62,7 @@ export const useActionTableBookingInAdmin = ({open, open2, open3}:{open: any, op
           return functionSelect;
       }
     } else {
-      return [functionSelect[2]];
+      return [functionSelect[1], functionSelect[2]];
     }
   }, [selectedFromTable, functionSelect]);
   console.log(functionSelectView);
@@ -62,6 +70,6 @@ export const useActionTableBookingInAdmin = ({open, open2, open3}:{open: any, op
   return {
     functionSelectView,
     setSelectedFromTable,
-    selectedFromTable
+    selectedFromTable,
   };
 };

@@ -72,7 +72,7 @@ function Page() {
         Component={CardPhoneMemberships}
         functionSelect={functionSelect}
       />
-      <NoteModal opened={opened} close={close} />
+      <NoteModal id={""} opened={opened} close={close} />
       <SuspendModal opened={opened2} close={close2} />
       <CancelModal opened={opened3} close={close3} />
       <ChangePlanModal opened={opened4} close={close4} />

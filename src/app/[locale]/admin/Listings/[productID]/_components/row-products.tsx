@@ -1,4 +1,3 @@
-import AddIcon from "@/src/assets/icons/add";
 import PlusIcon from "@/src/assets/icons/plus";
 import Button from "@/src/components/button";
 import Image from "next/image";

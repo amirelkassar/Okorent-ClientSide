@@ -87,9 +87,9 @@ export function DataTable<TData extends { id: any }, TValue>({
         <div className="flex items-center gap-3 mdl:gap-5 flex-wrap">
           {functionSelect?.length ? (
             <div
-              className={`mb-5 flex gap-2 flex-wrap transition-all duration-300 ease-in-out ${
+              className={` flex gap-2 flex-wrap transition-all duration-300 ease-in-out ${
                 selectRowTable.length
-                  ? "opacity-100 translate-y-0"
+                  ? "opacity-100 translate-y-0 mb-5"
                   : "opacity-0 -translate-y-5 h-0"
               }`}
             >

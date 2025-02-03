@@ -3,14 +3,14 @@ import CardStatus from "./cardStatus";
 
 function NoteType({ status }: { status: string }) {
   let type: "blue" | "green" | "gray" | "red";
-  let Title: "Warning" | "Announcement" | "--";
+  let Title: "Complaint" | "Announcement" | "--";
 
   switch (status.toString()) {
-    case "Warning":
+    case "2":
       type = "gray";
-      Title = "Warning";
+      Title = "Complaint";
       break;
-    case "Announcement":
+    case "1":
       type = "green";
       Title = "Announcement";
       break;
@@ -20,7 +20,7 @@ function NoteType({ status }: { status: string }) {
       Title = "--";
       break;
   }
-  return <CardStatus circle title={Title} type={type} />;
+  return <CardStatus  title={Title} type={type} />;
 }
 
 export default NoteType;
