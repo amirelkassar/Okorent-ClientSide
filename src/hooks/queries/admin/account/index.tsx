@@ -210,11 +210,15 @@ export const useEditImageUserProfileInAdmin = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await api.put(admin.Accounts.UpdateImageUserProfile, data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await api.put(
+        admin.Accounts.UpdateImageUserProfile,
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       return response.data;
     },
     onSuccess: (res) => {

@@ -25,7 +25,7 @@ function ActionMenu({ id }: { id: any }) {
       action: open4,
     },
     {
-      label: "Susbend Plan",
+      label: "Suspend Plan",
       icon: <HowIcon fill="#6F6B7D" className="w-3 h-auto" />,
       type: "btn",
       action: open2,

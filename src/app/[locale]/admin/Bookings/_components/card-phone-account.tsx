@@ -12,6 +12,7 @@ import avatar from "@/src/assets/images/avatar.png";
 interface BookingsAdminData {
   id: number;
   renterName: string;
+  renterId: string;
   lessorName: string;
   productName: string;
   from: string;
@@ -20,6 +21,7 @@ interface BookingsAdminData {
   status: string;
   amount: string;
   lessorImage: StaticImageData;
+  lessorId: string;
   renterImage: StaticImageData;
   productImage: StaticImageData;
 }
@@ -32,7 +34,10 @@ function CardPhoneAccount({ dataCard }: CardDataProps) {
     <CardPhone>
       <div className="border-b border-grayLight/50 pb-2">
         <div className=" absolute top-4 end-3">
-          <ActionMenu id={dataCard?.id} />
+          <ActionMenu
+            id={dataCard?.id}
+            idsUserOrder={[dataCard?.lessorId, dataCard?.renterId]}
+          />
         </div>
         <Link
           href={ROUTES.ADMIN.BOOKINGSDETAILS(dataCard.id)}
@@ -40,8 +45,8 @@ function CardPhoneAccount({ dataCard }: CardDataProps) {
         >
           <div className="flex flex-col justify-center flex-1 items-center ">
             <Image
-              src={dataCard.lessorImage||avatar}
-              alt={dataCard.lessorName||'User'}
+              src={dataCard.lessorImage || avatar}
+              alt={dataCard.lessorName || "User"}
               width={50}
               height={50}
               className=" size-[50px] w-[50px] h-[50px]   rounded-full object-top  object-cover "
@@ -55,8 +60,8 @@ function CardPhoneAccount({ dataCard }: CardDataProps) {
           <span className="h-16 w-[1px] block bg-green"></span>
           <div className="flex flex-col justify-center flex-1 items-center ">
             <Image
-              src={dataCard.renterImage||avatar}
-              alt={dataCard.renterName||'User'}
+              src={dataCard.renterImage || avatar}
+              alt={dataCard.renterName || "User"}
               width={50}
               height={50}
               className=" size-[50px] w-[50px] h-[50px]   rounded-full object-top  object-cover "
@@ -73,7 +78,7 @@ function CardPhoneAccount({ dataCard }: CardDataProps) {
         <div className="size-11 rounded-[50%] p-1 bg-grayBack flex justify-center items-center">
           <Image
             src={dataCard.productImage}
-            alt={dataCard.productName||'Product'}
+            alt={dataCard.productName || "Product"}
             width={50}
             height={50}
             className=" w-full h-full rounded-full object-top  object-cover "

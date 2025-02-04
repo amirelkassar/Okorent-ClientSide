@@ -117,7 +117,7 @@ function HeaderEditAcc({
         setViewProfile={setViewProfile}
       />
       <DeactivateModal id={id} opened={opened2} close={close2} />
-      <NoteModal id={id} opened={opened} close={close} />
+      <NoteModal id={[id]} opened={opened} close={close} />
       {!query.isLoading && (
         <ModalEditProfile
           opened={opened3}

@@ -3,7 +3,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { getDate } from "@/src/lib/utils";
 import NoteType from "@/src/components/note-type";
 import DeleteNote from "./delete-note";
-import UINoteDetailsModal from "./ui-note-details-modal";
+import LinkViewDetails from "./link-view-details";
 
 export type MedicalTeamTableData = {
   id: number;
@@ -57,7 +57,7 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
       const id = row.original.id;
       return (
         <div className="flex items-center gap-3 px-3 justify-end">
-          <UINoteDetailsModal id={id} />
+          <LinkViewDetails id={id} />
           <DeleteNote id={id} />
         </div>
       );

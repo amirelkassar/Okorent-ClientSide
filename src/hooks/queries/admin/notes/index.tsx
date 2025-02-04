@@ -82,3 +82,21 @@ export const useDeleteManyNotes = () => {
     },
   });
 };
+
+// Delete Notes
+export const useDeleteNotesUser = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.post(admin.Notes.delete_bulk, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      queryClient.refetchQueries([initialQueryKey]);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};

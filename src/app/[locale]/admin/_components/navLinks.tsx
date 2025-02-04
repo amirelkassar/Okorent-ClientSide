@@ -112,16 +112,28 @@ function NavLinks() {
         active: path === ROUTES.ADMIN.ADSDETAILS(params.adsId),
       },
       {
-        id: 7,
+        id: 6,
         name: "Accounts",
         url: ROUTES.ADMIN.NOTESACCOUNTS,
         active: path === ROUTES.ADMIN.NOTESACCOUNTS,
       },
       {
-        id: 6,
+        id: 7,
+        name: "Accounts",
+        url: ROUTES.ADMIN.NOTESACCOUNTSDETAILS(params.noteID),
+        active: path === ROUTES.ADMIN.NOTESACCOUNTSDETAILS(params.noteID),
+      },
+      {
+        id: 8,
         name: "Bookings",
         url: ROUTES.ADMIN.NOTESBOOKINGS,
         active: path === ROUTES.ADMIN.NOTESBOOKINGS,
+      },
+      {
+        id: 9,
+        name: "Bookings",
+        url: ROUTES.ADMIN.NOTESBOOKINGSDETAILS(params.noteID),
+        active: path === ROUTES.ADMIN.NOTESBOOKINGSDETAILS(params.noteID),
       },
     ],
     [path]

@@ -59,7 +59,6 @@ function Page() {
       />
       <NoteModal
         id={selectedFromTable?.map((item: any) => item.id)}
-        group
         opened={opened2}
         close={close2}
       />

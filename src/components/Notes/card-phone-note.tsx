@@ -4,7 +4,7 @@ import React from "react";
 import RowCardPhone from "@/src/components/row-card-phone";
 import NoteType from "@/src/components/note-type";
 import { getDate } from "@/src/lib/utils";
-import DeleteNote from "./delete-note";
+import ActionMenu from "./_hooks/action-menu";
 
 export type MedicalTeamTableData = {
   id: number;
@@ -32,7 +32,7 @@ function CardPhoneNote({ dataCard }: CardDataProps) {
               </div>
             )}
           />
-          <DeleteNote id={dataCard?.id} />
+          <ActionMenu id={dataCard?.id} />
         </div>
         <RowCardPhone title="Note Content" info={dataCard?.content} />
         <RowCardPhone

@@ -33,8 +33,9 @@ function Page() {
   const ids = selectedFromTable
     ?.map((item: any) => [item.lessorId, item.renterId])
     .flat();
-  console.log(ids);
   const uniqueArray = Array.from(new Set(ids));
+  console.log(uniqueArray);
+
   return (
     <div>
       <TableHeader>

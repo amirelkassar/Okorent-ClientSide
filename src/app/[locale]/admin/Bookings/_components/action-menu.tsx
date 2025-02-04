@@ -9,7 +9,13 @@ import RefundModal from "./refund-modal";
 import NoteModal from "@/src/components/NoteModal";
 import CancelModal from "./cancel-modal";
 
-function ActionMenu({ id }: { id: any }) {
+function ActionMenu({
+  id,
+  idsUserOrder = [],
+}: {
+  id: any;
+  idsUserOrder: any[];
+}) {
   const [opened, { open, close }] = useDisclosure(false);
   const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
   const [opened3, { open: open3, close: close3 }] = useDisclosure(false);
@@ -39,7 +45,7 @@ function ActionMenu({ id }: { id: any }) {
       <DataActions data={options} />
 
       {opened && <RefundModal opened={opened} close={close} />}
-      {opened2 && <NoteModal id={id} opened={opened2} close={close2} />}
+      {opened2 && <NoteModal id={idsUserOrder} opened={opened2} close={close2} />}
       {opened3 && <CancelModal opened={opened3} close={close3} id={id} />}
     </>
   );

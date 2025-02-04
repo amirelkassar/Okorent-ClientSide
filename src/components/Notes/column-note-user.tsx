@@ -1,15 +1,15 @@
 "use client";
 import { ColumnDef } from "@tanstack/react-table";
-import DeleteNote from "./delete-note";
 import ImgProduct from "../img-product";
 import avatar from "@/src/assets/images/avatar.png";
+import DeleteNoteUser from "./delete-note-user";
 export type MedicalTeamTableData = {
   id: any;
-  userId: number;
   userImage: string;
   userName: string;
   userEmail: string;
   userCreation: string;
+  isActive: any;
 };
 
 export const columns: ColumnDef<MedicalTeamTableData>[] = [
@@ -28,12 +28,24 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     header: "Email",
   },
   {
+    accessorKey: "isActive",
+    header: "Status",
+    cell: ({ getValue }) => {
+      const isActive = getValue();
+      return (
+        <p className="text-[16px] font-SemiBold">
+          {isActive ? "Activated" : "Deactivated"}
+        </p>
+      );
+    },
+  },
+  {
     id: "actions",
     cell: ({ row }) => {
-      const id = row.original.userId;
+      const id = row.original.id;
       return (
         <div className="flex items-center gap-3 px-3 justify-end">
-          <DeleteNote id={id} />
+          <DeleteNoteUser id={id} />
         </div>
       );
     },
