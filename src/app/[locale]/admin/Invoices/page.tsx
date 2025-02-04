@@ -8,6 +8,8 @@ import { GetInvoicesInAdmin } from "@/src/hooks/queries/admin/Invoices";
 import { QueryWrapper } from "@/src/components/query-wrapper";
 import { Pagination } from "@/src/components/pagination";
 import { useSearchParams } from "next/navigation";
+import DeleteIcon from "@/src/assets/icons/delete";
+import { useRowActionInvoicesInAdmin } from "./_hooks/use-delete-invoice";
 
 const FilterOptionsBooking = [
   {
@@ -36,7 +38,19 @@ function Page() {
   const searchParams = useSearchParams();
   const query = GetInvoicesInAdmin(searchParams.toString());
   const totalCount = query.data?.data?.totalCount || 0;
-
+  const { onSubmitDeleteInvoicesInAdmin } = useRowActionInvoicesInAdmin();
+  const functionSelect = [
+    {
+      title: "Delete",
+      icon: <DeleteIcon className="max-h-4 w-auto " />,
+      onclick: (ids: any) => {
+        console.log(ids);
+        onSubmitDeleteInvoicesInAdmin({
+          invoiceIds: ids?.map((item: any) => item.id),
+        });
+      },
+    },
+  ];
   return (
     <div>
       <TableHeader>
@@ -52,7 +66,7 @@ function Page() {
                 data={data}
                 columns={columns}
                 Component={CardPhoneInvoices}
-                functionSelect={[]}
+                functionSelect={functionSelect}
               />
               <Pagination totalPages={totalPages} />
             </div>

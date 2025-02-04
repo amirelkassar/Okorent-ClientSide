@@ -195,14 +195,8 @@ export const useSolvedSupportInAdmin = (id: any) => {
 export const useDeleteSupportInAdmin = (id: any) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: any) => {
-      const response = await api.delete(SupportAdmin.delete, {
-        data,
-        headers: {
-          Accept: "text/plain",
-          "Content-Type": "multipart/form-data",
-        },
-      });
+    mutationFn: async () => {
+      const response = await api.delete(SupportAdmin.delete(id));
       return response.data;
     },
     onSuccess: (res) => {

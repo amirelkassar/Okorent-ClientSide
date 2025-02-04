@@ -79,14 +79,37 @@ export const GetDashboardOngoingRentals = () => {
 
 //Vacation USer
 export const useVacationUser = () => {
-  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: any) => {
       const response = await api.put(user.information.Vacation, data, {
         headers: {
           "Content-Type": "multipart/form-data",
-        }
+        },
       });
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
+
+// End Vacation USer
+export const useEndVacationUser = () => {
+  return useMutation({
+    mutationFn: async () => {
+      const response = await api.post(
+        user.information.End_Vacation,
+        {},
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       return response.data;
     },
     onSuccess: (res) => {

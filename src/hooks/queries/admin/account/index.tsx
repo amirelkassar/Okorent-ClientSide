@@ -169,9 +169,7 @@ export const useDeleteManyAccountInAdmin = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await api.delete(admin.Accounts.DeleteManyAccounts, {
-        data: data,
-      });
+      const response = await api.post(admin.Accounts.DeleteManyAccounts, data);
       return response.data;
     },
     onSuccess: (res) => {

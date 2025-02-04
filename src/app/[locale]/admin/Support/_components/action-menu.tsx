@@ -14,15 +14,10 @@ function ActionMenu({ id, solved = false }: { id: any; solved: boolean }) {
   const { mutateAsync: SolvedSupport } = useSolvedSupportInAdmin(id);
 
   const onSubmitDeleteSupport = useCallback(async () => {
-    Toast.Promise(
-      DeleteSupport({
-        TicketId: id,
-      }),
-      {
-        success: "Deleted Support Done",
-        onSuccess: async (res) => {},
-      }
-    );
+    Toast.Promise(DeleteSupport(), {
+      success: "Deleted Support Done",
+      onSuccess: async (res) => {},
+    });
   }, [DeleteSupport, id]);
   const onSubmitSolvedSupport = useCallback(async () => {
     Toast.Promise(

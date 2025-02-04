@@ -29,6 +29,7 @@ export const user = {
     Header_Dashboard: "/UserDashboard/User-Get-Dashboard",
     Ongoing_Rentals: "/UserDashboard/User-Get-Ongoing-Rentals",
     Vacation: "/User/UserVcation",
+    End_Vacation: "/User/User-End-Vcation",
   },
   stock: {
     base: "/Stock",
@@ -152,6 +153,7 @@ export const admin = {
   Invoices: {
     base: (queries: any) =>
       buildQuery("/AdminManageInvoices/GetAllInvoices", queries),
+    delete: "/AdminManageInvoices/DeleteInvoices",
   },
   Notes: {
     get_all: (queries: any) =>
@@ -191,6 +193,6 @@ export const SupportAdmin = {
     buildQuery("/AdminTicket/Admin-GetAll-Tickets", queries),
   get_by_id: (id: any) => `/AdminTicket/Admin-GetTicket-ByID?id=${id}`,
   reply_admin: "/AdminTicket/Admin-Reply",
-  delete: `/AdminTicket/Admin-Delete`,
+  delete:(id: any)=> `/AdminTicket/Admin-Delete/${id}`,
   solved: "/AdminTicket/Admin-End-Ticket",
 };

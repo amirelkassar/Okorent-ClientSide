@@ -71,9 +71,7 @@ export const useDeleteManyOrderByIDInAdmin = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await api.delete(admin.Bookings.DeleteManyOrders, {
-        data: data,
-      });
+      const response = await api.post(admin.Bookings.DeleteManyOrders, data);
       return response.data;
     },
     onSuccess: async (res) => {

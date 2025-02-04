@@ -59,9 +59,7 @@ export const useDeleteManyProductInAdmin = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await api.delete(admin.product.DeleteManyProducts, {
-        data: data,
-      });
+      const response = await api.post(admin.product.DeleteManyProducts, data);
       return response.data;
     },
 

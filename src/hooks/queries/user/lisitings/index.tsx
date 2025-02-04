@@ -95,9 +95,7 @@ export const useDeleteManyMyProduct = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await api.delete(user.product.DeleteManyProduct, {
-        data: data,
-      });
+      const response = await api.post(user.product.DeleteManyProduct, data);
       return response.data;
     },
     onSuccess: (res) => {
