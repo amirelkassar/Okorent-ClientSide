@@ -30,7 +30,6 @@ export const getNotifications = async (
   const response = await api.get(
     notifications.base(`PageNumber=${queries.page}&UnReadOnly=${UnReadOnly}`)
   );
-  console.log(response.data);
   return response.data;
 };
 
@@ -41,7 +40,6 @@ export const useNotifications = (
     queryKey: [initialQueryKey, UnReadOnly ? "UnRead" : "Read"],
     queryFn: async ({ pageParam = 1 }) => {
       const params: NotificationQueryParams = { page: pageParam };
-      console.log(params);
 
       return await getNotifications(params, UnReadOnly);
     },
@@ -51,7 +49,6 @@ export const useNotifications = (
       const totalPages = Math.ceil(totalCount / pageSize);
       return allPages.length < totalPages ? allPages.length + 1 : undefined;
     },
-    
   });
 };
 
@@ -64,12 +61,9 @@ export const useNotificationsMarkAsRead = () => {
       return response.data;
     },
     onSuccess: async (res) => {
-      console.log(res);
       queryClient.refetchQueries([initialQueryKey]);
     },
-    onError: (res) => {
-      console.log(res);
-    },
+    onError: (res) => {},
   });
 };
 
@@ -82,7 +76,6 @@ export const useNotificationsMarkAsReadAll = () => {
       return response.data;
     },
     onSuccess: async (res) => {
-      console.log(res);
       queryClient.refetchQueries([initialQueryKey]);
     },
     onError: (res) => {

@@ -1,20 +1,33 @@
 // components/CustomCalendar.tsx
 "use client";
-import React, { Suspense, useCallback, useMemo, useRef, useState } from "react";
+import React, {
+  Suspense,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import FullCalendar from "@fullcalendar/react";
 import resourceTimelinePlugin from "@fullcalendar/resource-timeline";
-import phone from "@/src/assets/images/phone.png";
 import avatar from "@/src/assets/images/avatar.png";
 import { StaticImageData } from "next/image";
 import OrdersIcon from "@/src/assets/icons/orders";
 import Button from "@/src/components/button";
 import CardCalender from "./cardCalender";
 import OrderCard from "./orderCard";
-import { EventSourceInput } from "@fullcalendar/core";
 import RentSwitch from "@/src/components/RentSwitch";
 import { Select } from "@mantine/core";
 import DownIcon from "@/src/assets/icons/down";
 import { useMediaQuery } from "@mantine/hooks";
+import { getMonthsForCurrentYear } from "@/src/lib/utils";
+import { useQueryState } from "nuqs";
+import { useSearchParams } from "next/navigation";
+import { useSwitchRent } from "@/src/store/rent-slice";
+import {
+  GetMyOrderAll,
+  GetMyOrderOutAll,
+} from "@/src/hooks/queries/user/booking";
+import Loading from "@/src/components/loading";
 
 interface EventData {
   id: string;
@@ -41,269 +54,122 @@ interface OrderResource {
   img: StaticImageData;
   code: string;
 }
-const months = [
-  "January 2024",
-  "February 2024",
-  "March 2024",
-  "April 2024",
-  "May 2024",
-  "June 2024",
-  "July 2024",
-  "August 2024",
-  "September 2024",
-  "October 2024",
-  "November 2024",
-  "December 2024",
-];
-const CustomCalendar: React.FC = () => {
+
+const CustomCalendar = () => {
+  const { isRent } = useSwitchRent();
+  const searchParams = useSearchParams();
+  const [DateCalenderParams, setDateCalenderParams] = useQueryState(
+    "DateForCalender",
+    {
+      defaultValue:
+        searchParams?.get("DateForCalender")?.toString() ||
+        new Date().toString(),
+    }
+  );
+
+  const { data: OrdersIRent, isLoading } = GetMyOrderAll(
+    `DateForCalender=${DateCalenderParams}`
+  );
+  const { data: OrdersIRentOut, isLoading: isLoadingOut } = GetMyOrderOutAll(
+    `DateForCalender=${
+      searchParams?.get("DateForCalender") || new Date().toString()
+    }`
+  );
+  console.log(OrdersIRent);
+  console.log(OrdersIRentOut);
+
+  const months = getMonthsForCurrentYear();
   const isMobile = useMediaQuery("(max-width: 992px)");
   const [selectedEvent, setSelectedEvent] = useState<EventData | null>(null);
+
   const calendarRef = useRef<FullCalendar | null>(null);
   const [currentView, setCurrentView] = useState<string>(
     "resourceTimelineMonth"
   );
   const [selectedDate, setSelectedDate] = useState<string | null>(
-    "September 2024"
+    new Date().toISOString().split("T")[0]
   );
+  const [EventData, setEventData] = useState<EventData[]>([]);
+  const [ResourceDate, setResourceDate] = useState<OrderResource[]>([]);
 
-  const events: EventSourceInput = useMemo(
-    () => [
-      {
-        id: "1",
-        title: "Iphone 15 Pro",
-        start: "2024-09-18",
-        end: "2024-10-08",
-        groupId: "1",
-        interactive: false,
-        display: "background",
-        color: "transparent",
-        resourceId: "1",
-        sourceId: "1",
-        extendedProps: {
-          status: "ongoing",
-          image: avatar,
-          productName: "Apple Mobile",
-          payment: "100$",
-          rentalPeriod: "5 Days",
-          country: "Netherlands",
-        },
-      },
-      {
-        id: "2",
-        title: "alialialialialialialialiali",
-        start: "2024-10-03",
-        end: "2024-10-10",
-        groupId: "2",
-        resourceId: "2",
-        interactive: false,
-        display: "background",
-        color: "transparent",
-        sourceId: "3",
-        extendedProps: {
-          status: "Declined",
-          image: avatar,
-          productName: "Apple Mobile",
-          payment: "100$",
-          rentalPeriod: "5 Days",
-          country: "Netherlands",
-        },
-      },
-      {
-        id: "3",
-        title: "ali",
-        start: "2024-10-20",
-        end: "2024-10-26",
-        resourceId: "3",
-        groupId: "3",
-        interactive: false,
-        display: "background",
-        color: "transparent",
-        sourceId: "3",
-        extendedProps: {
-          status: "New",
-          image: avatar,
-          productName: "Apple Mobile",
-          payment: "100$",
-          rentalPeriod: "5 Days",
-          country: "Netherlands",
-        },
-      },
-      {
-        id: "4",
-        title: "ahmed ali",
-        start: "2024-10-01",
-        end: "2024-10-07",
-        resourceId: "4",
-        groupId: "4",
-        interactive: false,
-        display: "background",
-        color: "transparent",
-        sourceId: "4",
-        extendedProps: {
-          status: "New",
-          image: avatar,
-          productName: "Apple Mobile",
-          payment: "100$",
-          rentalPeriod: "5 Days",
-          country: "Netherlands",
-        },
-      },
-      {
-        id: "5",
-        title: "ahmed ali",
-        start: "2024-10-03",
-        end: "2024-10-10",
-        resourceId: "5",
-        groupId: "5",
-        interactive: false,
-        display: "background",
-        color: "transparent",
-        sourceId: "5",
-        extendedProps: {
-          status: "New",
-          image: avatar,
-          productName: "Apple Mobile",
-          payment: "100$",
-          rentalPeriod: "5 Days",
-          country: "Netherlands",
-        },
-      },
-      {
-        id: "6",
-        title: "ahmed ali",
-        start: "2024-10-04",
-        end: "2024-10-10",
-        resourceId: "6",
-        groupId: "6",
-        interactive: false,
-        display: "background",
-        color: "transparent",
-        sourceId: "6",
-        extendedProps: {
-          status: "New",
-          image: avatar,
-          productName: "Apple Mobile",
-          payment: "100$",
-          rentalPeriod: "5 Days",
-          country: "Netherlands",
-        },
-      },
-      {
-        id: "7",
-        title: "ahmed ali",
-        start: "2025-01-26",
-        end: "2025-02-01",
-        resourceId: "5",
-        groupId: "5",
-        interactive: false,
-        display: "background",
-        color: "transparent",
-        sourceId: "5",
-        extendedProps: {
-          status: "New",
-          image: avatar,
-          productName: "Apple Mobile",
-          payment: "100$",
-          rentalPeriod: "5 Days",
-          country: "Netherlands",
-        },
-      },
-      {
-        id: "8",
-        title: "ahmed ali",
-        start: "2025-01-26",
-        end: "2025-01-29",
-        resourceId: "6",
-        groupId: "6",
-        interactive: false,
-        display: "background",
-        color: "transparent",
-        sourceId: "6",
-        extendedProps: {
-          status: "New",
-          image: avatar,
-          productName: "Apple Mobile",
-          payment: "100$",
-          rentalPeriod: "5 Days",
-          country: "Netherlands",
-        },
-      },
-    ],
-    []
-  );
-  const resources: OrderResource[] = useMemo(
-    () => [
-      {
-        id: "1",
-        title: "Iphone 15 Pro",
-        productType: "Electronics",
-        img: phone,
-        code: "#17521",
-        status: "ongoing",
-      },
-      {
-        id: "2",
-        title: "Iphone 15 Pro",
-        productType: "Electronics",
-        img: phone,
-        code: "#17521",
-      },
-      {
-        id: "6",
-        title: "aV",
-        productType: "Tv",
-        img: phone,
-        code: "#17421",
-      },
-      {
-        id: "3",
-        title: "Iphone 15 Pro",
-        productType: "Electronics",
-        img: phone,
-        code: "#17521",
-      },
-      {
-        id: "4",
-        title: "Iphone 16 Pro Max 54 54 ",
-        productType: "Phone",
-        img: phone,
-        code: "#17421",
-      },
-      {
-        id: "5",
-        title: "TV",
-        productType: "Tv",
-        img: phone,
-        code: "#17421",
-      },
-    ],
-    []
-  );
-  const handleEventClick = useCallback((info: any) => {}, [events]);
+  useEffect(() => {
+    if (isRent === "rent") {
+      if (OrdersIRent?.data) {
+        setEventData(
+          OrdersIRent?.data?.items?.map((item: any) => ({
+            id: item.id,
+            title: item?.renterName || item.lessorName,
+            start: item.from?.split("T")[0], // استخدم تاريخ الإنشاء كوقت بدء
+            end: item.to?.split("T")[0], // استخدم وقت انتهاء الإيجار
+            groupId: item.id,
+            resourceId: item.id,
+            interactive: false,
+            display: "background",
+            color: "transparent",
+            sourceId: item.id,
+            extendedProps: {
+              status: "Ongoing", // يمكن تغييره حسب حالة الدفع
+              image: item.userImage || avatar,
+              productName: item.productName,
+              payment: `$${item.amount}`,
+              rentalPeriod: "Custom", // تحتاج إلى حساب عدد الأيام إذا كان مطلوبًا
+              country: "Not Specified",
+            },
+          }))
+        );
+        setResourceDate(
+          OrdersIRent?.data?.items?.map((item: any) => ({
+            id: item.id,
+            title: item?.productName,
+            productType: item.productName,
+            img: item.heroImage || avatar,
+            code: item.id?.slice(0, 5),
+          }))
+        );
+      }
+    }
+    if (isRent === "rent_out") {
+      if (OrdersIRentOut?.data) {
+        setEventData(
+          OrdersIRentOut?.data?.items?.map((item: any) => ({
+            id: item.id,
+            title: item?.renterName || item.lessorName,
+            start: item.from?.split("T")[0], // استخدم تاريخ الإنشاء كوقت بدء
+            end: item.to?.split("T")[0], // استخدم وقت انتهاء الإيجار
+            groupId: item.id,
+            resourceId: item.id,
+            interactive: false,
+            display: "background",
+            color: "transparent",
+            sourceId: item.id,
+            extendedProps: {
+              status: "Ongoing", // يمكن تغييره حسب حالة الدفع
+              image: item.userImage || avatar,
+              productName: item.productName,
+              payment: `$${item.amount}`,
+              rentalPeriod: "Custom", // تحتاج إلى حساب عدد الأيام إذا كان مطلوبًا
+              country: "Not Specified",
+            },
+          }))
+        );
+        setResourceDate(
+          OrdersIRentOut?.data?.items?.map((item: any) => ({
+            id: item.id,
+            title: item?.productName,
+            productType: item.productName,
+            img: item.heroImage || avatar,
+            code: item.id?.slice(0, 5),
+          }))
+        );
+      }
+    }
+  }, [isLoading, isRent, OrdersIRent, OrdersIRentOut]);
+
+ 
   const handleViewChange = (view: string) => {
     setCurrentView(view); // Store the current view (month or week)
   };
-  const sortedResources = useMemo(() => {
-    return [...resources].sort((a, b) => a.title.localeCompare(b.title)); // Sorting by title alphabetically
-  }, [resources]);
-  const getWeekLabels = (date: Date) => {
-    const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-    let weekNumber = 1;
-    const labels = [];
-    while (startOfMonth.getMonth() === date.getMonth()) {
-      labels.push(`Week ${weekNumber}`);
-      weekNumber++;
-      startOfMonth.setDate(startOfMonth.getDate() + 7);
-    }
-    return labels;
-  };
-  const getWeekNumber = (date: Date) => {
-    const oneJan = new Date(date.getFullYear(), 0, 1);
-    const numberOfDays = Math.floor(
-      (date.getTime() - oneJan.getTime()) / (24 * 60 * 60 * 1000)
-    );
-    return Math.ceil((numberOfDays + oneJan.getDay() + 1) / 7);
-  };
+
   const getWeekNumberInMonth = (date: Date) => {
     const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
     const firstWeekDay = firstDayOfMonth.getDay();
@@ -312,6 +178,7 @@ const CustomCalendar: React.FC = () => {
     const weekNumber = Math.ceil((currentDay + daysInCurrentWeek) / 7);
     return weekNumber;
   };
+
   return (
     <div className="w-full mb-36">
       <div className="flex items-center justify-between gap-3 flex-wrap mb-4">
@@ -330,7 +197,8 @@ const CustomCalendar: React.FC = () => {
             wrapper: "h-full",
             dropdown:
               "bg-white text-black rounded-xl border border-green/50  py-2 text-sm lg:text-base",
-            option: "hover:bg-green hover:text-white duration-300 text-sm lg:text-base ",
+            option:
+              "hover:bg-green hover:text-white duration-300 text-sm lg:text-base ",
           }}
           className="h-10 order-2 mdl:order-1   duration-200 min-h-10  bg-white rounded-xl border border-green text-grayMedium"
         />
@@ -375,6 +243,11 @@ const CustomCalendar: React.FC = () => {
                 duration: { weeks: 1 },
               },
             }}
+            datesSet={(arg) => {
+              setEventData([]);
+              setResourceDate([]);
+              setDateCalenderParams(arg.startStr.split("T")[0]);
+            }}
             eventOverlap={false}
             plugins={[resourceTimelinePlugin]}
             initialView="resourceTimelineMonth"
@@ -382,9 +255,8 @@ const CustomCalendar: React.FC = () => {
             ref={calendarRef}
             dragRevertDuration={500}
             editable={false}
-            resources={sortedResources}
-            events={events}
-            eventClick={handleEventClick}
+            resources={ResourceDate}
+            events={EventData}
             eventShortHeight={100}
             contentHeight={870}
             stickyFooterScrollbar={false}
@@ -396,7 +268,11 @@ const CustomCalendar: React.FC = () => {
             eventLongPressDelay={500}
             resourcesInitiallyExpanded={false}
             resourceAreaHeaderClassNames="bg-green/10 !border-none rounded-t-3xl"
-            eventContent={(eventInfo) => <CardCalender eventInfo={eventInfo} />}
+            eventContent={(eventInfo) => {
+              if (!isLoading) {
+                return <CardCalender eventInfo={eventInfo} />;
+              }
+            }}
             eventResourceEditable={true}
             resourceAreaHeaderContent={() => (
               <div className="flex items-center gap-2 w-full ps-2 lgl:ps-7 flex-1 h-[54px] lgl:h-[70px]">
@@ -437,6 +313,7 @@ const CustomCalendar: React.FC = () => {
           />
         </Suspense>
       </div>
+
       {/* Right-side Event Detail Panel */}
       {selectedEvent && (
         <div className="w-1/3 bg-white p-4 rounded shadow-lg">

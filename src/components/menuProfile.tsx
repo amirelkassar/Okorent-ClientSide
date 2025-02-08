@@ -24,7 +24,7 @@ function MenuProfile() {
   const { setToken } = useToken();
   const [opened, { open, close }] = useDisclosure(false);
   const { data } = GetMyProfile();
-  console.log(data?.data);
+
   
   const handleLogout = () => {
     setToken({}); // Clear token from the state
@@ -55,7 +55,7 @@ function MenuProfile() {
               width={40}
               height={40}
               alt="profile"
-              className="w-8 h-8 rounded-full"
+              className="w-8 h-8 rounded-full object-cover object-top"
             />
           </button>
         </Menu.Target>

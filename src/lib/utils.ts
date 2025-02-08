@@ -380,3 +380,14 @@ export function convertTo12Hour(time24h: string) {
   }
   return `${hour}:${minutes} AM`;
 }
+
+// Function to get the months for the current year
+export const getMonthsForCurrentYear = (): string[] => {
+  const months = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  const currentYear = new Date().getFullYear(); // Get the current year
+  return months.map(month => `${month} ${currentYear}`); // Append the year to each month
+};

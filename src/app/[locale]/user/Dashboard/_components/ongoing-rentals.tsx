@@ -1,10 +1,8 @@
-import Button from "@/src/components/button";
 import React from "react";
 import CardPhone from "./cardPhone";
 import { GetDashboardOngoingRentals } from "@/src/hooks/queries/user/home/user-info";
 import SkeletonLoading from "@/src/components/skeleton-loading";
 import { useSwitchRent } from "@/src/store/rent-slice";
-import LinkGreen from "@/src/components/linkGreen";
 import ROUTES from "@/src/routes";
 import { Link } from "@/src/navigation";
 

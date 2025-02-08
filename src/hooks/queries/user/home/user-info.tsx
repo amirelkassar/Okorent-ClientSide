@@ -18,6 +18,7 @@ export const GetUserInfo = (id: any) => {
     },
   });
 };
+
 //edit user
 export const useUserEditMutation = (token: any) => {
   const router = useRouter();

@@ -36,7 +36,7 @@ function PageCardRentOut() {
         <RentSwitch typeUser="user" />
       </div>
       <div>
-        {data?.data.map(
+        {data?.data?.map(
           ({ statusname, statuscode, data = [] }: any, index: number) => (
             <CardViewReq
               key={statuscode}
