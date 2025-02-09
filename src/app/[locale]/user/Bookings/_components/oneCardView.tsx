@@ -9,9 +9,7 @@ import NoteIcon from "@/src/assets/icons/note";
 
 function OneCardView({ product, status }: { product?: any; status: any }) {
   const FirstLessorName = product?.lessorName?.split(" ")[0];
-  const { onSubmitChangeStatus, onSubmitReOrderByID } = useChangeStatusRent(
-    product?.id
-  );
+  const { onSubmitChangeStatus } = useChangeStatusRent(product?.id);
   const Ending_Soon_Days = calculateDurationRange(
     new Date(),
     new Date(product?.to)
@@ -28,7 +26,7 @@ function OneCardView({ product, status }: { product?: any; status: any }) {
       ) : null}
 
       <Image
-        alt={product?.productName||'alt image'}
+        alt={product?.productName || "alt image"}
         priority
         src={product?.heroImage || homeImg}
         className="w-full rounded-xl h-[122px]  lg:h-40 object-contain object-center lg:object-top"
@@ -127,7 +125,7 @@ function OneCardView({ product, status }: { product?: any; status: any }) {
         {(status === 8 || status === 9) && (
           <>
             <BottomCardRent.ViewDetailsLink id={product?.id || "undefined"} />
-            <BottomCardRent.ReorderButton onClick={onSubmitReOrderByID} />
+            <BottomCardRent.ReorderButton id={product?.prodId || "undefined"} />
           </>
         )}
         {status === 10 && (

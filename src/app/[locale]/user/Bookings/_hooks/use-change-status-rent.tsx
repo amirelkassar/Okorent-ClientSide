@@ -5,36 +5,27 @@ import {
   ChangeStautsByID,
   useCancelManyOrderMutation,
   useCancelOrderMutation,
-  useDeleteOrderMutation,
   useRefundManyOrderMutation,
   useRefundOrderMutation,
-  useReOrderByID,
-  useReOrderManyByID,
 } from "@/src/hooks/queries/user/booking";
 import { Toast } from "@/src/components/toast";
 import { useSelectRowTable } from "@/src/components/select-row-table-context";
 
 interface ActionTableIRentProps {
-  onSubmitDelete: any;
   onSubmitCancel: any;
   onSubmitRefund: any;
   onSubmitChangeStatus: any;
   onSubmitChangeStatusIds: any;
   onSubmitRefundMany: any;
   onSubmitCancelMany: any;
-  onSubmitReOrderByID: any;
-  onSubmitReOrderManyByID: any;
 }
 export const useChangeStatusRent = (id: any): ActionTableIRentProps => {
-  const { mutateAsync: DeleteOrderOut } = useDeleteOrderMutation();
   const { mutateAsync: CancelOrder } = useCancelOrderMutation();
   const { mutateAsync: CancelManyOrder } = useCancelManyOrderMutation();
   const { mutateAsync: RefundOrder } = useRefundOrderMutation();
   const { mutateAsync: RefundManyOrder } = useRefundManyOrderMutation();
   const { mutateAsync: ChangeStatusProduct } = ChangeStautsByID(id);
   const { mutateAsync: ChangeStatusManyProduct } = ChangeStatusByIDs();
-  const { mutateAsync: ReOrderByID } = useReOrderByID(id);
-  const { mutateAsync: ReOrderManyByID } = useReOrderManyByID();
 
   const { setSelectRowTable } = useSelectRowTable();
   //change status
@@ -93,16 +84,6 @@ export const useChangeStatusRent = (id: any): ActionTableIRentProps => {
     [CancelManyOrder, id]
   );
 
-  //delete order
-  const onSubmitDelete = useCallback(async () => {
-    Toast.Promise(DeleteOrderOut(id), {
-      success: "Deleted Product Done",
-      onSuccess(res) {
-        setSelectRowTable([]);
-      },
-    });
-  }, [DeleteOrderOut, id]);
-
   //Refund order
   const onSubmitRefund = useCallback(
     async (msg: any = "msg") => {
@@ -135,38 +116,12 @@ export const useChangeStatusRent = (id: any): ActionTableIRentProps => {
     [RefundManyOrder, id]
   );
 
-  //Re Order ByID
-  const onSubmitReOrderByID = useCallback(async () => {
-    Toast.Promise(ReOrderByID(), {
-      success: 'Reorder Done',
-      onSuccess(res) {
-        setSelectRowTable([]);
-      },
-    });
-  }, [ReOrderByID, setSelectRowTable]);
-
-  //Re Order Many ByID
-  const onSubmitReOrderManyByID = useCallback(
-    async (data: any) => {
-      Toast.Promise(ReOrderManyByID(data), {
-        success: "Reorder Done",
-        onSuccess(res) {
-          setSelectRowTable([]);
-        },
-      });
-    },
-    [ReOrderManyByID, setSelectRowTable]
-  );
-
   return {
-    onSubmitDelete,
     onSubmitCancel,
     onSubmitRefund,
     onSubmitChangeStatus,
     onSubmitChangeStatusIds,
     onSubmitRefundMany,
     onSubmitCancelMany,
-    onSubmitReOrderByID,
-    onSubmitReOrderManyByID
   };
 };

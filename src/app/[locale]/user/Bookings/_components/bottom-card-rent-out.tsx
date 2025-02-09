@@ -53,7 +53,7 @@ const CancelBookings: React.FC<ButtonProps> = ({ onClick, style }) => (
 );
 const OutForReturn: React.FC<ButtonProps> = ({ onClick, style }) => (
   <Button onClick={onClick} className={` h-10 flex-1  ${style}`}>
-   Mark as Out for return
+    Mark as Out for return
   </Button>
 );
 const MarkAsCompleted: React.FC<ButtonProps> = ({ onClick, style }) => (
@@ -61,14 +61,7 @@ const MarkAsCompleted: React.FC<ButtonProps> = ({ onClick, style }) => (
     Mark as Completed
   </Button>
 );
-const Delete: React.FC<ButtonProps> = ({ onClick, style }) => (
-  <Button
-    onClick={onClick}
-    className={`h-10 bg-grayBack flex-1 text-black border-none  ${style}`}
-  >
-    Delete
-  </Button>
-);
+
 const RejectReturn: React.FC<ButtonProps> = ({ onClick, style }) => (
   <Button
     onClick={onClick}
@@ -93,9 +86,8 @@ const BottomCardRentOut = {
   CancelBookings,
   OutForReturn,
   MarkAsCompleted,
-  Delete,
   RejectReturn,
-  Approve
+  Approve,
 };
 
 export default BottomCardRentOut;

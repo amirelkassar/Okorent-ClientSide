@@ -58,8 +58,6 @@ export const user = {
     refunds_iRent_out: `/OrderRequest/Refund Orders Response`,
     reject_iRent: `/OrderRequest/Reject Order`,
     rejects_iRent: `/OrderRequest/Reject Orders`,
-    ReOrder: "/BookingOrder/ReOrder",
-    ReOrder_many: "/BookingOrder/ReOrders",
     review: {
       base: "/ProductReviews",
       getByID: (id: any) => `/ProductReviews/${id}`,
@@ -193,6 +191,6 @@ export const SupportAdmin = {
     buildQuery("/AdminTicket/Admin-GetAll-Tickets", queries),
   get_by_id: (id: any) => `/AdminTicket/Admin-GetTicket-ByID?id=${id}`,
   reply_admin: "/AdminTicket/Admin-Reply",
-  delete:(id: any)=> `/AdminTicket/Admin-Delete/${id}`,
+  delete: (id: any) => `/AdminTicket/Admin-Delete/${id}`,
   solved: "/AdminTicket/Admin-End-Ticket",
 };

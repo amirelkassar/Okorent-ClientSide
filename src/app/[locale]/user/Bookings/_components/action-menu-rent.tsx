@@ -1,5 +1,4 @@
 "use client";
-import DeleteIcon from "@/src/assets/icons/delete";
 import DataActions from "@/src/components/DataActions";
 import React from "react";
 import { useDisclosure } from "@mantine/hooks";
@@ -33,22 +32,15 @@ function ActionMenuRent({
   const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
   const [opened3, { open: open3, close: close3 }] = useDisclosure(false);
 
-  const {
-    onSubmitCancel,
-    onSubmitDelete,
-    onSubmitRefund,
-    onSubmitChangeStatus,
-    onSubmitReOrderByID,
-  } = useChangeStatusRent(id);
+  const { onSubmitCancel, onSubmitRefund, onSubmitChangeStatus } =
+    useChangeStatusRent(id);
   const options = [
     //0
     {
       label: "Reorder",
       icon: <ReorderIcon fill="#6F6B7D" className="w-3 h-auto" />,
-      type: "btn",
-      action: () => {
-        onSubmitReOrderByID();
-      },
+      link: ROUTES.USER.PRODUCTDETAILS(ProdId),
+      type: "link",
     },
     //1
     {
@@ -101,15 +93,6 @@ function ActionMenuRent({
         onSubmitCancel();
       },
     },
-    //7
-    {
-      label: "Delete",
-      icon: <DeleteIcon fill="#FF1D45" className="w-3 h-auto" />,
-      type: "btn",
-      action: () => {
-        onSubmitDelete();
-      },
-    },
   ];
   const optionView = () => {
     switch (status.toString()) {
@@ -122,13 +105,13 @@ function ActionMenuRent({
       case "6":
         return [options[4], options[5]];
       case "7":
-        return [options[2], options[1], options[5], options[7]];
+        return [options[2], options[1], options[5]];
       case "8":
-        return [options[0], options[5], options[7]];
+        return [options[0], options[5]];
       case "9":
-        return [options[0], options[5], options[7]];
+        return [options[0], options[5]];
       case "10":
-        return [options[2], options[1], options[5], options[7]];
+        return [options[2], options[1], options[5]];
       case "11":
         return [options[5]];
       case "12":

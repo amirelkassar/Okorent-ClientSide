@@ -1,10 +1,8 @@
 "use client";
 import { useMemo, useState } from "react";
-import DeleteIcon from "@/src/assets/icons/delete";
 import { GetUniqueValues } from "@/src/lib/utils";
 import BarcodeIcon from "@/src/assets/icons/barcode";
 import CarReturn from "@/src/assets/icons/car-return";
-import ReorderIcon from "@/src/assets/icons/reorder";
 import CancelIcon from "@/src/assets/icons/cancel";
 import { useChangeStatusRent } from "./use-change-status-rent";
 import { STYLE_ICON } from "@/src/lib/dataUser";
@@ -15,12 +13,8 @@ interface ActionTableIRentProps {
 }
 export const useActionTableIRent = (): ActionTableIRentProps => {
   const [selectedFromTable, setSelectedFromTable] = useState([]);
-  const {
-    onSubmitChangeStatusIds,
-    onSubmitRefundMany,
-    onSubmitCancelMany,
-    onSubmitReOrderManyByID,
-  } = useChangeStatusRent("ids");
+  const { onSubmitChangeStatusIds, onSubmitRefundMany, onSubmitCancelMany } =
+    useChangeStatusRent("ids");
   const functionSelect = useMemo(
     () => [
       //0
@@ -46,25 +40,8 @@ export const useActionTableIRent = (): ActionTableIRentProps => {
           });
         },
       },
+
       //2
-      {
-        title: "Reorder",
-        icon: <ReorderIcon fill="#006AFF" className={STYLE_ICON} />,
-        onclick: (ids: any) => {
-          onSubmitReOrderManyByID({
-            orderIds: ids?.map((item: any) => item.id),
-          });
-        },
-      },
-      //3
-      {
-        title: "Delete",
-        icon: <DeleteIcon className={STYLE_ICON} />,
-        onclick: (ids: any) => {
-          console.log([...ids]);
-        },
-      },
-      //4
       {
         title: "Cancel Order",
         icon: <CancelIcon className={STYLE_ICON} />,
@@ -89,21 +66,21 @@ export const useActionTableIRent = (): ActionTableIRentProps => {
     if (ValueSelected) {
       switch (ValueSelected.toString()) {
         case "1":
-          return [functionSelect[4]];
+          return [functionSelect[2]];
         case "3":
-          return [functionSelect[4]];
+          return [functionSelect[2]];
         case "4":
           return [functionSelect[0], functionSelect[1]];
         case "6":
           return [functionSelect[1]];
         case "7":
-          return [functionSelect[3]];
+          return [];
         case "8":
-          return [functionSelect[2], functionSelect[3]];
+          return [];
         case "9":
-          return [functionSelect[2], functionSelect[3]];
+          return [];
         case "10":
-          return [functionSelect[3]];
+          return [];
         default:
           return [];
       }

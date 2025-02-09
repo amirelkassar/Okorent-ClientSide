@@ -4,7 +4,6 @@ import {
   ChangeStatusByIDs,
   ChangeStautsByID,
   useCancelOrderOutMutation,
-  useDeleteOrderOutMutation,
   useRefundManyOrderOutMutation,
   useRefundOrderOutMutation,
   useRejectManyOrderOutMutation,
@@ -14,7 +13,6 @@ import { Toast } from "@/src/components/toast";
 import { useSelectRowTable } from "@/src/components/select-row-table-context";
 
 interface ActionTableIRentProps {
-  onSubmitDelete: any;
   onSubmitChangeStatus: any;
   onSubmitReject: any;
   onSubmitCancel: any;
@@ -28,23 +26,12 @@ interface ActionTableIRentProps {
 export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
   const { mutateAsync: ChangeStatusProduct } = ChangeStautsByID(id);
   const { mutateAsync: ChangeStatusManyProduct } = ChangeStatusByIDs();
-  const { mutateAsync: DeleteOrderOut } = useDeleteOrderOutMutation();
   const { mutateAsync: RejectOrderOut } = useRejectOrderOutMutation();
   const { mutateAsync: RejectManyOrderOut } = useRejectManyOrderOutMutation();
   const { mutateAsync: CancelOrder } = useCancelOrderOutMutation();
   const { mutateAsync: RefundOrder } = useRefundOrderOutMutation();
   const { mutateAsync: RefundManyOrder } = useRefundManyOrderOutMutation();
   const { setSelectRowTable } = useSelectRowTable();
-
-  //delete order
-  const onSubmitDelete = useCallback(async () => {
-    Toast.Promise(DeleteOrderOut(id), {
-      success: "Deleted Product Done",
-      onSuccess(res) {
-        setSelectRowTable([]);
-      },
-    });
-  }, [DeleteOrderOut, id]);
 
   //change status
   const onSubmitChangeStatus = useCallback(async () => {
@@ -181,7 +168,6 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
   );
 
   return {
-    onSubmitDelete,
     onSubmitChangeStatus,
     onSubmitReject,
     onSubmitCancel,

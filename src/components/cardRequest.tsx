@@ -41,7 +41,6 @@ interface CardRequestProps {
 
 function CardRequest({ data, status = 1 }: CardRequestProps) {
   const {
-    onSubmitDelete,
     onSubmitChangeStatus,
     onSubmitReject,
     onSubmitCancel,
@@ -261,10 +260,6 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
             <BottomCardRentOut.MessageLink
               id={data?.id || "undefined"}
               name={FirstLessorName || "User"}
-            />
-            <BottomCardRentOut.Delete
-              onClick={() => onSubmitDelete()}
-              id={data?.id || "undefined"}
             />
           </>
         )}

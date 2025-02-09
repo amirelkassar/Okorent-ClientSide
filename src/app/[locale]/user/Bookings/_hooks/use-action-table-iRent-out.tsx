@@ -1,6 +1,5 @@
 "use client";
 import { useMemo, useState } from "react";
-import DeleteIcon from "@/src/assets/icons/delete";
 import { GetUniqueValues } from "@/src/lib/utils";
 import BarcodeIcon from "@/src/assets/icons/barcode";
 import CarReturn from "@/src/assets/icons/car-return";
@@ -84,14 +83,6 @@ export const useActionTableIRentOut = (): ActionTableIRentOutProps => {
       },
       //6
       {
-        title: "Delete",
-        icon: <DeleteIcon className={STYLE_ICON} />,
-        onclick: (ids: any) => {
-          console.log([...ids]);
-        },
-      },
-      //7
-      {
         title: "Approve Request",
         icon: <TrueIcon fill="#88BA52" className={STYLE_ICON} />,
         onclick: (ids: any) => {
@@ -104,7 +95,7 @@ export const useActionTableIRentOut = (): ActionTableIRentOutProps => {
           });
         },
       },
-      //8
+      //7
       {
         title: "Reject Request",
         icon: <CloseIcon fill="#FF1D45" className={STYLE_ICON} />,
@@ -118,7 +109,7 @@ export const useActionTableIRentOut = (): ActionTableIRentOutProps => {
           });
         },
       },
-      //9
+      //8
       {
         title: "Mark as Completed",
         icon: <BarcodeIcon fill="#006AFF" className={STYLE_ICON} />,
@@ -128,7 +119,7 @@ export const useActionTableIRentOut = (): ActionTableIRentOutProps => {
           });
         },
       },
-      //10
+      //9
       {
         title: "Print shipping label",
         icon: <PrintIcon fill="#006AFF" className={STYLE_ICON} />,
@@ -151,19 +142,19 @@ export const useActionTableIRentOut = (): ActionTableIRentOutProps => {
         case "3":
           return [functionSelect[3], functionSelect[4]];
         case "4":
-          return [functionSelect[10]];
-        case "7":
-          return [functionSelect[6]];
-        case "8":
-          return [functionSelect[6]];
-        case "9":
-          return [functionSelect[6]];
-        case "10":
-          return [functionSelect[6]];
-        case "11":
-          return [functionSelect[7], functionSelect[8]];
-        case "12":
           return [functionSelect[9]];
+        case "7":
+          return [];
+        case "8":
+          return [];
+        case "9":
+          return [];
+        case "10":
+          return [];
+        case "11":
+          return [functionSelect[6], functionSelect[7]];
+        case "12":
+          return [functionSelect[8]];
         default:
           return [];
       }

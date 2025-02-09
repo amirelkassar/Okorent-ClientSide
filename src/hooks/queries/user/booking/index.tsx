@@ -357,46 +357,6 @@ export const useRefundManyOrderOutMutation = () => {
     },
   });
 };
-// ReOrder
-export const useReOrderByID = (id: any) => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async () => {
-      const response = await api.put(user.order.ReOrder, {
-        id: id,
-      });
-      return response.data;
-    },
-    onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
-      queryClient.invalidateQueries([initialQueryKeyCard]);
-      console.log(res);
-    },
-    onError: (res) => {
-      console.log(res);
-    },
-  });
-};
-
-//ReOrder Many Product
-export const useReOrderManyByID = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async (data: any) => {
-      const response = await api.put(user.order.ReOrder_many, data);
-      return response.data;
-    },
-    onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
-      queryClient.invalidateQueries([initialQueryKeyCard]);
-
-      console.log(res);
-    },
-    onError: (res) => {
-      console.log(res);
-    },
-  });
-};
 
 //get QrCode
 export const GetQrCodeOrder = () => {

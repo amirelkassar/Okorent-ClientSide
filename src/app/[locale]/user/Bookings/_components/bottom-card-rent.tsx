@@ -37,10 +37,13 @@ const RentAgainButton: React.FC<ButtonProps> = ({ id, style }) => (
   </LinkGreen>
 );
 
-const ReorderButton: React.FC<ButtonProps> = ({ onClick, style }) => (
-  <Button onClick={onClick} className={`btn-warning h-10 flex-1  ${style}`}>
+const ReorderButton: React.FC<ButtonProps> = ({ id, style }) => (
+  <LinkGreen
+    href={ROUTES.USER.PRODUCTDETAILS(id)}
+    className={` h-10 flex-1  ${style}`}
+  >
     Reorder
-  </Button>
+  </LinkGreen>
 );
 const ScanForReceiving: React.FC<ButtonProps> = ({ onClick, style }) => (
   <Button onClick={onClick} className={`btn-warning h-10 flex-1  ${style}`}>
