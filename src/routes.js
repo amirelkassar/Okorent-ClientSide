@@ -33,6 +33,7 @@ const ROUTES = {
     RESERVATIONS: "/admin/Reservations",
     REPORTS: "/admin/Reports",
     MEMBERSHIPS: "/admin/Memberships",
+    DEMOREQUEST: "/admin/demo-requests",
     INBOX: "/admin/Inbox",
     MASTERDATA: "/admin/master-data",
     PLANSADD: "/admin/master-data/add",

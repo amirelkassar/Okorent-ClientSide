@@ -1,6 +1,6 @@
 "use client";
 import FullCalendar from "@fullcalendar/react";
-import React, { Suspense, useCallback, useRef } from "react";
+import React, { Suspense, useCallback, useMemo, useRef } from "react";
 import CardCalender from "./cardCalender";
 import OrdersIcon from "@/src/assets/icons/orders";
 import OrderCard from "./orderCard";
@@ -36,6 +36,8 @@ function CalenderComp({
     const weekNumber = Math.ceil((currentDay + daysInCurrentWeek) / 7);
     return weekNumber;
   }, []);
+  const events = useMemo(() => EventData, [EventData]);
+  const resources = useMemo(() => ResourceDate, [ResourceDate]);
 
   return (
     <div className="w-full">
@@ -63,23 +65,25 @@ function CalenderComp({
               : new Date().toISOString().split("T")[0]
           }
           ref={calendarRef}
-          dragRevertDuration={10}
+          dragRevertDuration={1000}
           editable={false}
           eventOverlap={false}
-          resources={ResourceDate}
-          events={EventData}
+          resources={resources}
+          events={events}
           eventShortHeight={100}
           contentHeight={870}
+          stickyFooterScrollbar={false}
           height={"870px"}
+          scrollTimeReset={false}
           slotMinWidth={isMobile ? 40 : 74}
           resourceAreaWidth={isMobile ? 120 : 400}
           eventDurationEditable={false}
           eventLongPressDelay={500}
+          resourcesInitiallyExpanded={false}
           resourceAreaHeaderClassNames="bg-green/10 !border-none rounded-t-3xl"
           eventContent={(eventInfo) => {
-            console.log(eventInfo.event);
-            if (ResourceDate.length === 0) return;
-            else return <CardCalender eventInfo={eventInfo} />;
+            if (resources.length === 0) return;
+            return <CardCalender eventInfo={eventInfo} />;
           }}
           eventResourceEditable={true}
           resourceAreaHeaderContent={() => (

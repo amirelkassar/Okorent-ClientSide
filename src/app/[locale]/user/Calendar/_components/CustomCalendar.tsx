@@ -26,7 +26,7 @@ const CustomCalendar = () => {
 
   return (
     <div className="w-full mb-36">
-      <div className="flex items-center justify-between gap-3 flex-wrap mb-4">
+      <div className="flex items-center justify-center flex-col md:flex-row md:justify-between gap-3 flex-wrap mb-4">
         <Select
           value={selectedDate}
           onChange={setSelectedDate}

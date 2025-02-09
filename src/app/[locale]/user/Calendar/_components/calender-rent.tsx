@@ -7,24 +7,26 @@ import Loading from "@/src/components/loading";
 function CalenderRent({ currentView }: { currentView: string }) {
   const searchParams = useSearchParams();
   const { data: OrdersIRent, isLoading } = GetMyOrderAll(
-    `DateForCalender=${searchParams.get("DateForCalender")}`
+    searchParams.toString()
   );
+
   const ResourceDate = useMemo(() => {
     if (!OrdersIRent?.data) return [];
     return OrdersIRent.data.items.map((item: any) => ({
       id: item.id,
-      title: item?.productName,
-      productType: item.productName,
+      title: item.productName,
+      productName: item.productName,
+      productType: "Electronics",
       img: item.heroImage,
       code: item.id?.slice(0, 5),
     }));
   }, [OrdersIRent]);
 
-  // 🏷️ استخدام useMemo لحساب البيانات فقط عند تغيير OrdersIRent
   const EventData = useMemo(() => {
     if (!OrdersIRent?.data) return [];
     return OrdersIRent.data.items.map((item: any) => ({
       id: item.id,
+      parentId: item.id,
       title: item?.renterName || item.lessorName,
       start: item.from?.split("T")[0],
       end: new Date(new Date(item.to).setDate(new Date(item.to).getDate() + 1))

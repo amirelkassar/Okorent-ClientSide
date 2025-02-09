@@ -14,8 +14,9 @@ function CalenderRentOut({ currentView }: { currentView: string }) {
     if (!OrdersIRentOut?.data) return [];
     return OrdersIRentOut.data.items.map((item: any) => ({
       id: item.id,
-      title: item?.productName,
-      productType: item.productName,
+      title: item.productName,
+      productName: item.productName,
+      productType: 'Electronics',
       img: item.heroImage,
       code: item.id?.slice(0, 5),
     }));
@@ -25,6 +26,7 @@ function CalenderRentOut({ currentView }: { currentView: string }) {
     if (!OrdersIRentOut?.data) return [];
     return OrdersIRentOut.data.items.map((item: any) => ({
       id: item.id,
+      parentId: item.id,
       title: item?.renterName || item.lessorName,
       start: item.from?.split("T")[0],
       end: new Date(new Date(item.to).setDate(new Date(item.to).getDate() + 1))
