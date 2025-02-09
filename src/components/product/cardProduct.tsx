@@ -15,6 +15,9 @@ import LinkGreen from "../linkGreen";
 import ROUTES from "@/src/routes";
 import { calculateDurationRange } from "@/src/lib/utils";
 import CopyLink from "../copy-link";
+import ModalContract from "../modal-contract";
+import { useDisclosure } from "@mantine/hooks";
+import Button from "../button";
 
 function CardProduct({
   data = [],
@@ -26,6 +29,7 @@ function CardProduct({
   admin?: boolean;
 }) {
   const params = useParams();
+  const [opened, { open, close }] = useDisclosure(false);
   const searchparams = useSearchParams();
   const [daysNumber, setDaysNumber] = useState(0);
   const [valueDate, setValueDate] = useState<[Date | null, Date | null]>([
@@ -139,13 +143,21 @@ function CardProduct({
           >
             {admin ? null : (
               <div className="flex items-center px-5 justify-between gap-4 pb-4 flex-wrap mt-5">
-                <LinkGreen
-                  href={
-                    guest
-                      ? ROUTES.AUTH.LOGIN
-                      : ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID)
-                  }
-                  className={`w-full  ${
+                <ModalContract opened={opened} close={close}>
+                  <LinkGreen
+                    href={
+                      guest
+                        ? ROUTES.AUTH.LOGIN
+                        : ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID)
+                    }
+                    className={'h-14 w-[310px] max-w-full mx-auto'}
+                  >
+                    Confirm
+                  </LinkGreen>
+                </ModalContract>
+                <Button
+                  onClick={open}
+                  className={`w-full !h-14  ${
                     valueAddressType &&
                     TotalPriceOrder &&
                     location &&
@@ -157,7 +169,7 @@ function CardProduct({
                   }  duration-300  `}
                 >
                   Request this item
-                </LinkGreen>
+                </Button>
               </div>
             )}
           </PriceDetails>

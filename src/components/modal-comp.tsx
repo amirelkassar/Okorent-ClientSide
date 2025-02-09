@@ -36,7 +36,7 @@ function ModalComp({ opened, close, children, title }: ModalCompProps) {
           </h2>
         </div>
       )}
-      <div className="px-4 pb-7">{children}</div>
+      <div className="md:px-4 px-3 pb-7">{children}</div>
     </Modal>
   );
 }
