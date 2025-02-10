@@ -5,7 +5,6 @@ import ActionMenu from "./action-menu";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import avatarUser from "@/src/assets/images/avatar.png";
-import { getDate } from "@/src/lib/utils";
 import RenderStatus from "./render-status";
 import NoteTableIcon from "@/src/assets/icons/noteTable";
 

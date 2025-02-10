@@ -18,7 +18,7 @@ function ActionMenu({ id, solved = false }: { id: any; solved: boolean }) {
       success: "Deleted Support Done",
       onSuccess: async (res) => {},
     });
-  }, [DeleteSupport, id]);
+  }, [DeleteSupport]);
   const onSubmitSolvedSupport = useCallback(async () => {
     Toast.Promise(
       SolvedSupport({

@@ -58,12 +58,7 @@ function CalenderComp({
           }}
           plugins={[resourceTimelinePlugin]}
           initialView="resourceTimelineMonth"
-          initialDate={
-            searchParams?.get("DateForCalender") &&
-            !isNaN(Date.parse(searchParams.get("DateForCalender")!))
-              ? searchParams.get("DateForCalender")!
-              : new Date().toISOString().split("T")[0]
-          }
+          initialDate={searchParams?.get("DateForCalender") || new Date()}
           ref={calendarRef}
           dragRevertDuration={1000}
           editable={false}
@@ -94,7 +89,7 @@ function CalenderComp({
               <h2 className="text-sm lgl:text-3xl font-SemiBold">Orders</h2>
             </div>
           )}
-          resourceLabelContent={(resource) => OrderCard(resource)}
+          resourceLabelContent={(resource,index) => OrderCard(resource)}
           slotLabelClassNames={" text-sm font-Regular max-h-8 bg-[#DFEBF4]"}
           slotLabelContent={(args) => {
             if (currentView === "resourceTimelineMonth") {

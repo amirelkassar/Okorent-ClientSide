@@ -4,19 +4,22 @@ import { useSearchParams } from "next/navigation";
 import React, { useMemo } from "react";
 import CalenderComp from "./calender-comp";
 import Loading from "@/src/components/loading";
+import { Pagination } from "@/src/components/pagination";
 
 function CalenderRentOut({ currentView }: { currentView: string }) {
   const searchParams = useSearchParams();
   const { data: OrdersIRentOut, isLoading } = GetMyOrderOutAll(
     searchParams.toString()
   );
+  console.log(OrdersIRentOut);
+
   const ResourceDate = useMemo(() => {
     if (!OrdersIRentOut?.data) return [];
     return OrdersIRentOut.data.items.map((item: any) => ({
       id: item.id,
       title: item.productName,
       productName: item.productName,
-      productType: 'Electronics',
+      productType: "Electronics",
       img: item.heroImage,
       code: item.id?.slice(0, 5),
     }));
@@ -52,11 +55,16 @@ function CalenderRentOut({ currentView }: { currentView: string }) {
     return <Loading />;
   }
   return (
-    <CalenderComp
-      EventData={EventData}
-      ResourceDate={ResourceDate}
-      currentView={currentView}
-    />
+    <div>
+      <div className="mb-section">
+        <CalenderComp
+          EventData={EventData}
+          ResourceDate={ResourceDate}
+          currentView={currentView}
+        />
+      </div>
+      <Pagination totalPages={OrdersIRentOut?.data?.totalPages} />
+    </div>
   );
 }
 

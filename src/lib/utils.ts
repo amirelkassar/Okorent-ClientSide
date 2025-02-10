@@ -290,8 +290,6 @@ export async function ConvertImageUrlToFile(url: string): Promise<File> {
       }
     });
 
-
-
     // Get the image as a Blob
     const blob = await response.data;
     const fileName = url.split('/').pop() || "image.jpg";
