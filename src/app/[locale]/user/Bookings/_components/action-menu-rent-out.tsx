@@ -17,10 +17,13 @@ import VersionHistoryModal from "./modal-rentOut/version-history-modal";
 import ROUTES from "@/src/routes";
 import PrintIcon from "@/src/assets/icons/print";
 import { useChangeStatusRentOut } from "../_hooks/use-change-status-rentOut";
+import ModalContract from "@/src/components/modal-contract";
+import Button from "@/src/components/button";
 
 function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
   const [opened, { open, close }] = useDisclosure(false);
   const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
+  const [opened3, { open: open3, close: close3 }] = useDisclosure(false);
   const {
     onSubmitChangeStatus,
     onSubmitReject,
@@ -36,7 +39,7 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
       icon: <AcceptedIcon fill="#6F6B7D" className="w-3 h-auto" />,
       type: "btn",
       action: () => {
-        onSubmitChangeStatus();
+        open3();
       },
     },
     //1
@@ -169,6 +172,19 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
       {opened && <ViewQrModal opened={opened} close={close} id={id} />}
       {opened2 && (
         <VersionHistoryModal opened={opened2} close={close2} id={id} />
+      )}
+      {opened3 && (
+        <ModalContract opened={opened3} close={close3}>
+          <Button
+            onClick={() => {
+              onSubmitChangeStatus();
+              close3();
+            }}
+            className={"h-14 w-[310px] max-w-full mx-auto"}
+          >
+            Confirm
+          </Button>
+        </ModalContract>
       )}
     </>
   );

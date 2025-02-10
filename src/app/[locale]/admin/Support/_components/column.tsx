@@ -37,7 +37,6 @@ export const columns: ColumnDef<Ticket>[] = [
       );
     },
   },
-
   {
     accessorKey: "ticketType",
     header: "Category",

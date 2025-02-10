@@ -7,6 +7,7 @@ import ROUTES from "@/src/routes";
 import avatarUser from "@/src/assets/images/avatar.png";
 import { getDate } from "@/src/lib/utils";
 import RenderStatus from "./render-status";
+import NoteTableIcon from "@/src/assets/icons/noteTable";
 
 type RequestStatus = "In Progress" | "New" | "Completed";
 
@@ -40,9 +41,7 @@ export const columns: ColumnDef<RentalData>[] = [
           />
           <div>
             <h2 className="text-[16px] font-SemiBold">{sender}</h2>
-            <p className="text-[14px] text-grayMedium">
-              {created}
-            </p>
+            <p className="text-[14px] text-grayMedium">{created}</p>
           </div>
         </Link>
       );
@@ -64,6 +63,18 @@ export const columns: ColumnDef<RentalData>[] = [
   {
     accessorKey: "requestDate",
     header: "Request Date",
+    cell: ({ getValue, row }) => {
+      const date = getValue<string>();
+      const id = row.original.id;
+      return (
+        <div className="flex items-center gap-5 justify-between">
+          <h4 className="text-grayMedium">{date}</h4>
+          <button>
+            <NoteTableIcon className="w-5 h-auto" fill="#6F6B7D" />
+          </button>
+        </div>
+      );
+    },
   },
 
   {

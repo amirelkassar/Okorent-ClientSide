@@ -15,7 +15,6 @@ module.exports = {
           lgl: '3rem',
         },
       },
-
       fontSize: {
         small: ['14px', '14px'],
         medium: ['16px', '16px'],
