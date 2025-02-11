@@ -46,7 +46,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
     reset,
   } = useEditListingMutation(dataList?.id);
   const { data: dataSubCategory, refetch: RefetchGetSubCategory } =
-    GetSubCategory(initialValues?.categoryId);
+    GetSubCategory(dataList?.categoryId);
   const [selectedCheckbox, setSelectedCheckbox] = useState<string | null>(
     initialValues.isActive ? "true" : "false"
   );

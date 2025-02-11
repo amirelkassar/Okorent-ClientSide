@@ -77,6 +77,9 @@ export const user = {
     ImageUpdate: "/MyProfile/Image",
     RecentActivities: "/MyProfile/My Recent Activities",
   },
+  Demo: {
+    create: "/Demo/Create-Demo",
+  },
 };
 
 export const admin = {
@@ -162,6 +165,11 @@ export const admin = {
     create: "/AdminNote",
     delete_bulk: "/AdminNote/DeleteNote-ForSpecificUsers",
     delete_group: "/AdminNote/DeleteNotes",
+  },
+  Demo: {
+    base: (queries: any) => buildQuery("/Demo/Admin-GetAll-Demos", queries),
+    Change: "Demo/Admin-Update-DemoStatus",
+    delete: (id: any) => `Demo/Admin-Update-DemoStatus/${id}`,
   },
 };
 

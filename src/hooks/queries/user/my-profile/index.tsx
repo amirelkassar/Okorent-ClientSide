@@ -83,3 +83,23 @@ export const GetRecentActivitiesOrders = () => {
     },
   });
 };
+
+//send Demo Request
+export const useSendDemoRequest = () => {
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.post(user.Demo.create, data,{
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response.data;
+    },
+    onSuccess: async (res) => {
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};

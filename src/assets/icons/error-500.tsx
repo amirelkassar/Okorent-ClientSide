@@ -11,7 +11,7 @@ function Error500Icon({ className = "", fill = "" }: IconProps) {
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
-      <g clip-path="url(#clip0_4797_25546)">
+      <g clipPath="url(#clip0_4797_25546)">
         <path
           d="M143.833 324.691C170.996 297.516 170.996 253.456 143.833 226.281C116.669 199.106 72.6284 199.106 45.4649 226.281C18.3014 253.456 18.3014 297.516 45.4649 324.691C72.6285 351.866 116.669 351.866 143.833 324.691Z"
           fill="#6F6B7D"

@@ -8,7 +8,6 @@ import StepLocation from "./_components/stepLocation";
 import StepAvailability from "./_components/stepAvailability";
 import StepFAQ from "./_components/stepFAQ";
 import Preview from "./_components/preview";
-import LinkGreen from "@/src/components/linkGreen";
 import { useSearchParams } from "next/navigation";
 import InputTextarea from "@/src/components/InputTextarea";
 import { useCreateListingMutation } from "@/src/hooks/queries/user/add-lisiting";
@@ -128,6 +127,7 @@ function Page() {
               data={dataSubCategory?.data?.map((item: any) => {
                 return { label: item.name, value: item.id };
               })}
+              value={dataList?.SubCategoryId}
               placeholder="Select SubCategory"
               onChange={(e) => {
                 reset();

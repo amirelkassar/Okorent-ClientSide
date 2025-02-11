@@ -4,112 +4,58 @@ import { TableHeader } from "@/src/components/table/table-header";
 import React from "react";
 import { columns } from "./_components/column";
 import CardPhoneDemo from "./_components/card-phone-demo";
+import { GetAllDemoRequestsInAdmin } from "@/src/hooks/queries/admin/demo-req";
+import { useSearchParams } from "next/navigation";
+import { QueryWrapper } from "@/src/components/query-wrapper";
+import { Pagination } from "@/src/components/pagination";
 
 const FilterOptionsBooking = [
   {
     label: "New",
-    key: "Filter",
-    value: "New",
+    key: "Status",
+    value: "1",
   },
   {
     label: "In Progress",
-    key: "Filter",
-    value: "InProgress",
+    key: "Status",
+    value: "2",
   },
   {
     label: "Completed",
-    key: "Filter",
-    value: "Completed",
+    key: "Status",
+    value: "3",
   },
 ];
 
-type RequestStatus = "In Progress" | "New" | "Completed";
 
-interface Request {
-  id: number;
-  sender: string;
-  email: string;
-  status: RequestStatus;
-  requestDate: string;
-  date: string;
-}
+
 
 function Page() {
-    
-  const requests: Request[] = [
-    {
-      id: 1,
-      sender: "Ahmed Mohamed",
-      email: "marchmanx@gmail.com",
-      status: "In Progress",
-      requestDate: "Today | 05:30",
-      date: "15/8/2024",
-    },
-    {
-      id: 2,
-      sender: "Ahmed Mohamed",
-      email: "marchmanx@gmail.com",
-      status: "New",
-      requestDate: "5 Feb 2025",
-      date: "15/8/2024",
-    },
-    {
-      id: 3,
-      sender: "Ahmed Mohamed",
-      email: "marchmanx@gmail.com",
-      status: "Completed",
-      requestDate: "5 Feb 2025",
-      date: "15/8/2024",
-    },
-    {
-      id: 4,
-      sender: "Ahmed Mohamed",
-      email: "marchmanx@gmail.com",
-      status: "New",
-      requestDate: "5 Feb 2025",
-      date: "15/8/2024",
-    },
-    {
-      id: 5,
-      sender: "Ahmed Mohamed",
-      email: "marchmanx@gmail.com",
-      status: "New",
-      requestDate: "5 Feb 2025",
-      date: "15/8/2024",
-    },
-    {
-      id: 6,
-      sender: "Ahmed Mohamed",
-      email: "marchmanx@gmail.com",
-      status: "New",
-      requestDate: "5 Feb 2025",
-      date: "15/8/2024",
-    },
-    {
-      id: 7,
-      sender: "Ahmed Mohamed",
-      email: "marchmanx@gmail.com",
-      status: "New",
-      requestDate: "5 Feb 2025",
-      date: "15/8/2024",
-    },
-  ];
+  const searchParams = useSearchParams();
+  const query = GetAllDemoRequestsInAdmin(searchParams.toString());
+ 
   return (
     <div>
       <TableHeader>
         <TableHeader.First title={`Demo Reqests - 1105`} />
         <TableHeader.Last options={FilterOptionsBooking} />
       </TableHeader>
-
-      <div>
-        <DataTable
-          data={requests}
-          columns={columns}
-          Component={CardPhoneDemo}
-          functionSelect={[]}
-        />
-        {/* <Pagination totalPages={totalPages} /> */}
-      </div>
+      <QueryWrapper query={query}>
+        {({ data, totalPages }: { data: any; totalPages?: any }) => {
+          console.log(data);
+          return (
+            <div>
+              <DataTable
+                data={data}
+                columns={columns}
+                Component={CardPhoneDemo}
+                functionSelect={[]}
+              />
+              <Pagination totalPages={totalPages} />
+            </div>
+          );
+        }}
+      </QueryWrapper>
     </div>
   );
 }
