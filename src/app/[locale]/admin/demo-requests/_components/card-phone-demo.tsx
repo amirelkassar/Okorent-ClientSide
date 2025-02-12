@@ -21,6 +21,7 @@ export type DemoRequestsTableData = {
   demoStatus: RequestStatus;
   created: string;
   userCreation: string;
+  demoNotes: any;
 };
 
 interface CardDataProps {
@@ -58,7 +59,10 @@ function CardPhoneDemo({ dataCard }: CardDataProps) {
           title="Status"
           cell={() => <RenderStatus status={dataCard?.demoStatus} />}
         />
-        <RowCardPhone title="Notes" info={"Special prices"} />
+        <RowCardPhone
+          title="Notes"
+          info={dataCard?.demoNotes[0]?.noteContent || "--"}
+        />
         <RowCardPhone
           title="Request Date"
           info={getDate(dataCard?.created).fullYear}

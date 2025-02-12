@@ -27,17 +27,15 @@ const FilterOptionsBooking = [
   },
 ];
 
-
-
-
 function Page() {
   const searchParams = useSearchParams();
   const query = GetAllDemoRequestsInAdmin(searchParams.toString());
- 
+  const totalCount = query.data?.data?.totalCount || 0;
+
   return (
     <div>
       <TableHeader>
-        <TableHeader.First title={`Demo Reqests - 1105`} />
+        <TableHeader.First title={`Demo Reqests - ${totalCount}`} />
         <TableHeader.Last options={FilterOptionsBooking} />
       </TableHeader>
       <QueryWrapper query={query}>

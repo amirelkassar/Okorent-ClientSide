@@ -91,7 +91,7 @@ function ActionMenu({ id, demoStatus }: { id: any; demoStatus: 1 | 2 | 3 }) {
   return (
     <>
       <DataActions data={Options_View} />
-      {opened && <ModalNoteDemo opened={opened} close={close} />}
+      {opened && <ModalNoteDemo opened={opened} close={close} id={id} />}
     </>
   );
 }

@@ -168,8 +168,10 @@ export const admin = {
   },
   Demo: {
     base: (queries: any) => buildQuery("/Demo/Admin-GetAll-Demos", queries),
-    Change: "Demo/Admin-Update-DemoStatus",
-    delete: (id: any) => `Demo/Admin-Update-DemoStatus/${id}`,
+    Change: "/Demo/Admin-Update-DemoStatus",
+    delete: (id: any) => `/Demo/Admin-Delete/${id}`,
+    add_note:'/Demo/Admin-Create-DemoNote',
+    get_note_byID: (id: any) => `/Demo/Admin-GetDemo-ByID/${id}`,
   },
 };
 

@@ -19,6 +19,7 @@ interface RentalData {
   demoStatus: RequestStatus;
   created: string;
   userCreation: string;
+  demoNotes: any;
 }
 export const columns: ColumnDef<RentalData>[] = [
   {
@@ -72,11 +73,12 @@ export const columns: ColumnDef<RentalData>[] = [
     },
   },
   {
-    accessorKey: "Notes",
+    accessorKey: "demoNotes",
     header: "Notes",
-    cell({ getValue }) {
+    cell({ row }) {
+      const demoNotes = row.original.demoNotes[0]?.noteContent || "--";
       return (
-        <p className="text-grayMedium max-w-[150px] truncate">Special prices</p>
+        <p className="text-grayMedium max-w-[180px] truncate">{demoNotes}</p>
       );
     },
   },
