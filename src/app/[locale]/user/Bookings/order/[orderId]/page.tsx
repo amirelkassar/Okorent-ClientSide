@@ -16,7 +16,6 @@ function Page({ params }: any) {
   const { isRent, setSwitchRent } = useSwitchRent();
   const { data, isLoading } = GetOrderByID(params.orderId);
   const [edit, setEdit] = useState(false);
-  console.log(data);
   const statusOrder = data?.data?.orderTrackers?.at(-1)?.newOrderStatus || 0;
   useEffect(() => {
     if (data?.data?.renterType) {
@@ -57,7 +56,7 @@ function Page({ params }: any) {
       </div>
       <OrderStepper
         active={data?.data?.orderTrackers.at(-1)?.newOrderStatus}
-        data={data.data?.orderTrackers || []}
+        data={data?.data?.orderTrackers || []}
       />
       <div className="mt-section flex gap-10 lgl:flex-row flex-col ">
         <div className="flex flex-col gap-4  max-w-[930px]">

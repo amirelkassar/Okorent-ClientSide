@@ -13,7 +13,7 @@ function Page() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { form } = useVerifyPhone();
-  const { setFormData, onSubmit,onSubmitReSendOTP, error } = form;
+  const { setFormData, onSubmit, onSubmitReSendOTP, error } = form;
 
   return (
     <div className="flex-1 pt-4   pb-8 md:pb-16  flex  min-h-full justify-center lgl:justify-start">
@@ -38,11 +38,6 @@ function Page() {
                 pinInput: "min-w-[44px] h-[44px] bg-transparent rounded-[8px]",
               }}
               onChange={(e) => {
-                console.log({
-                  phoneNumber: searchParams.get("phone_number"),
-                  otp: e,
-                });
-
                 setFormData({
                   phoneNumber: searchParams.get("phone_number"),
                   otp: e,

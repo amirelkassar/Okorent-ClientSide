@@ -1,5 +1,6 @@
 "use server";
 
+import { decodedToken } from "@/token";
 import { cookies } from "next/headers";
 interface TokenData {
   accessToken: string;
@@ -7,14 +8,15 @@ interface TokenData {
 }
 export async function storeToken(data: any) {
   const cookie = cookies();
-
+  console.log(data);
+  const exp = await decodedToken(data);
   try {
     cookie.set("accessToken", data, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
       path: "/",
-      //expires: new Date(data),
+      expires: new Date(exp?.tokenExpireDate || ""),
     });
 
     return true;

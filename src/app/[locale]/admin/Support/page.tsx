@@ -1,63 +1,73 @@
 "use client";
 import { DataTable } from "@/src/components/data-table";
-import SwitchControl from "@/src/components/switch-control";
-import { TICKETS } from "@/src/lib/dataUser";
 import React from "react";
 import { columns } from "./_components/column";
 import CardPhoneAccount from "./_components/card-phone-account";
 import { TableHeader } from "@/src/components/table/table-header";
+import { QueryWrapper } from "@/src/components/query-wrapper";
+import { GetSupportsMessagesInAdmin } from "@/src/hooks/queries/admin/support";
+import { Pagination } from "@/src/components/pagination";
+import { useSearchParams } from "next/navigation";
 
 const FilterOptions = [
   {
-    label: "Un Assigned",
-    key: "filter",
-    value: "Un Assigned",
-  },
-  {
-    label: "Sales",
-    key: "filter",
-    value: "Sales",
+    label: "Complaints",
+    key: "TicketType",
+    value: "1",
   },
   {
     label: "Technical",
-    key: "filter",
-    value: "Technical",
+    key: "TicketType",
+    value: "2",
+  },
+  {
+    label: "Sales",
+    key: "TicketType",
+    value: "3",
+  },
+  {
+    label: "Something else",
+    key: "TicketType",
+    value: "4",
   },
   {
     label: "Feedback",
-    key: "filter",
-    value: "Feedback",
+    key: "TicketType",
+    value: "5",
+  },
+  {
+    label: "Guest Message",
+    key: "TicketType",
+    value: "6",
   },
 ];
 
-function page() {
+function Page() {
+  const searchParams = useSearchParams();
+  const query = GetSupportsMessagesInAdmin(searchParams.toString());
+
   return (
     <div>
       <TableHeader>
         <TableHeader.First title="All Tickets"></TableHeader.First>
-        <TableHeader.Middle>
-          <div className="w-fit mx-auto mb-5 lgl:mb-0">
-            <SwitchControl
-              options={[
-                { label: "All Tickets", value: "allTickets" },
-                { label: "My Tickets", value: "myTickets" },
-              ]}
-              radius={"lg"}
-              rootClassName="!h-10 !w-auto"
-              size="md"
-            />
-          </div>
-        </TableHeader.Middle>
         <TableHeader.Last options={FilterOptions} />
       </TableHeader>
-      <DataTable
-        title=""
-        data={TICKETS}
-        columns={columns}
-        Component={CardPhoneAccount}
-      />
+      <QueryWrapper query={query}>
+        {({ data, totalPages }: { data: any; totalPages?: any }) => {
+          return (
+            <div>
+              <DataTable
+                data={data}
+                columns={columns}
+                Component={CardPhoneAccount}
+              />
+              <Pagination totalPages={totalPages} />
+            </div>
+          );
+        }}
+      </QueryWrapper>
     </div>
   );
 }
 
-export default page;
+export default Page;

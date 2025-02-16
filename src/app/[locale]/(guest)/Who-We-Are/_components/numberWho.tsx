@@ -24,7 +24,7 @@ const dataNumbers = [
 ];
 function NumberWho() {
   return (
-    <div className="my-16 lg:my-28 flex-col mdl:flex-row flex justify-center items-center lg:items-start lg:justify-between relative max-w-[1130px] w-full mx-auto gap-4 lg:gap-5">
+    <div className=" my-12 mdl:my-16 lg:my-28 flex-col mdl:flex-row flex justify-center items-center lg:items-start lg:justify-between relative max-w-[1130px] w-full mx-auto gap-4 lg:gap-5">
       {dataNumbers.map((item, i) => {
         return (
           <div

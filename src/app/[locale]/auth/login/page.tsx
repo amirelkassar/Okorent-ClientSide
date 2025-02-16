@@ -15,13 +15,13 @@ import { Link } from "@/src/navigation";
 function PageLogin() {
   const { form, status } = useLogin();
   // Destructure the form and status objects
-  const {onChange, onSubmit, error } = form;
+  const { onChange, onSubmit, error } = form;
   const { isPaused, isError } = status;
 
   return (
     <div className="flex-1 pt-4 lgl:pt-20  pb-8 md:pb-16  flex  min-h-full justify-center lgl:justify-start">
       <div className="max-w-[470px] w-full flex flex-col gap-4">
-        <Logo theme="green" />
+        <Logo />
         <div className="flex-1 content-center">
           <h1 className=" font-Bold text-lg lg:text-xLarge">Welcome Back!</h1>
           <p className="text-grayMedium text-sm lg:text-medium mb-6">

@@ -7,6 +7,8 @@ const initialCustomQueries = null;
 export const initialQueries = initialCustomQueries || initialSiteQueries;
 export const initialQueryKey = "user.myOrderAll";
 export const initialQueryKeyOut = "user.myOrderOutAll";
+export const initialQueryKeyCard = "user.myOrderAllCard";
+export const initialQueryKeyOutCard = "user.myOrderOutAllCard";
 
 //getMyAllProducts
 export const GetMyOrderOutAll = (queries?: any) => {
@@ -15,6 +17,18 @@ export const GetMyOrderOutAll = (queries?: any) => {
     queryFn: async () => {
       const response = await api.get(
         user.order.booking.i_rentOut("OrderType=myordersout&" + queries)
+      );
+      return response.data;
+    },
+  });
+};
+//get Orders Card View
+export const GetMyOrderOutAllCardView = (queries?: any) => {
+  return useQuery({
+    queryKey: [initialQueryKeyOutCard, queries],
+    queryFn: async () => {
+      const response = await api.get(
+        user.order.booking.i_rent_card("OrderType=myordersout&" + queries)
       );
       return response.data;
     },
@@ -32,13 +46,28 @@ export const GetMyOrderAll = (queries?: any) => {
     },
   });
 };
+//get Orders Card View
+export const GetMyOrderAllCardView = (queries?: any) => {
+  return useQuery({
+    queryKey: [initialQueryKeyCard, queries],
+    queryFn: async () => {
+      const response = await api.get(
+        user.order.booking.i_rent_card("OrderType=myorders&" + queries)
+      );
+      return response.data;
+    },
+  });
+};
+
 //getMyAllProducts
 export const GetMyOrderAllByList = (number?: number) => {
   return useQuery({
     queryKey: ["myOrders", number],
     queryFn: async () => {
       const response = await api.get(
-        user.order.booking.i_rent(`OrderType=myorders&PageSize=5&OrderStatus=${number}`)
+        user.order.booking.i_rent(
+          `OrderType=myorders&PageSize=5&OrderStatus=${number}`
+        )
       );
       return response.data;
     },
@@ -72,7 +101,9 @@ export const ChangeStautsByID = (id: any) => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKeyOut]);
+      queryClient.invalidateQueries([initialQueryKeyOutCard]);
       queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKeyCard]);
       console.log(res);
     },
     onError: (res) => {
@@ -93,7 +124,9 @@ export const ChangeStatusByIDs = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKeyOut]);
+      queryClient.invalidateQueries([initialQueryKeyOutCard]);
       queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKeyCard]);
       console.log(res);
     },
     onError: (res) => {
@@ -112,6 +145,7 @@ export const useDeleteOrderOutMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKeyOut]);
+      queryClient.invalidateQueries([initialQueryKeyOutCard]);
       console.log(res);
     },
     onError: (res) => {
@@ -129,6 +163,7 @@ export const useCancelOrderMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKeyCard]);
       console.log(res);
     },
     onError: (res) => {
@@ -147,6 +182,7 @@ export const useCancelManyOrderMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKeyCard]);
       console.log(res);
     },
     onError: (res) => {
@@ -165,6 +201,7 @@ export const useRejectOrderOutMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKeyOut]);
+      queryClient.invalidateQueries([initialQueryKeyOutCard]);
       console.log(res);
     },
     onError: (res) => {
@@ -183,6 +220,7 @@ export const useRejectManyOrderOutMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKeyOut]);
+      queryClient.invalidateQueries([initialQueryKeyOutCard]);
       console.log(res);
     },
     onError: (res) => {
@@ -200,6 +238,7 @@ export const useCancelOrderOutMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKeyOut]);
+      queryClient.invalidateQueries([initialQueryKeyOutCard]);
       console.log(res);
     },
     onError: (res) => {
@@ -217,6 +256,7 @@ export const useCancelManyOrderOutMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKeyOut]);
+      queryClient.invalidateQueries([initialQueryKeyOutCard]);
       console.log(res);
     },
     onError: (res) => {
@@ -234,6 +274,7 @@ export const useDeleteOrderMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKeyCard]);
       console.log(res);
     },
     onError: (res) => {
@@ -251,6 +292,8 @@ export const useRefundOrderMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKeyCard]);
+
       console.log(res);
     },
     onError: (res) => {
@@ -268,6 +311,8 @@ export const useRefundManyOrderMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries([initialQueryKeyCard]);
+
       console.log(res);
     },
     onError: (res) => {
@@ -285,6 +330,7 @@ export const useRefundOrderOutMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKeyOut]);
+      queryClient.invalidateQueries([initialQueryKeyOutCard]);
       console.log(res);
     },
     onError: (res) => {
@@ -302,6 +348,8 @@ export const useRefundManyOrderOutMutation = () => {
     },
     onSuccess: (res) => {
       queryClient.invalidateQueries([initialQueryKeyOut]);
+      queryClient.invalidateQueries([initialQueryKeyOutCard]);
+
       console.log(res);
     },
     onError: (res) => {
@@ -309,6 +357,7 @@ export const useRefundManyOrderOutMutation = () => {
     },
   });
 };
+
 //get QrCode
 export const GetQrCodeOrder = () => {
   return useMutation({
@@ -317,7 +366,7 @@ export const GetQrCodeOrder = () => {
         headers: {
           "Content-Type": "application/json",
         },
-         responseType: "blob",
+        responseType: "blob",
       });
       return response;
     },

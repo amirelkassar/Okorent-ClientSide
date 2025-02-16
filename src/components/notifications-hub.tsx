@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import * as signalR from "@microsoft/signalr";
@@ -9,7 +8,6 @@ import { useToken } from "../hooks/use-token";
 export const NotificationsHub = () => {
   const { token } = useToken();
   const tokenValue = token?.token || ""; // Destructure `token` correctly
-  console.log(tokenValue);
 
   const queryClient = useQueryClient();
 

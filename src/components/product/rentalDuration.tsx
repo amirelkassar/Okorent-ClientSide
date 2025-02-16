@@ -24,7 +24,7 @@ function RentalDuration({
   };
 
   return (
-    <div className="mb-8">
+    <div className=" mb-4 md:mb-8">
       <h3 className="text-xl mb-5">Choose rental duration</h3>
       <DatePicker
         type="range"
@@ -38,10 +38,14 @@ function RentalDuration({
           day: "data-[in-range]:bg-green data-[last-in-range]:rounded-e-[14px]  data-[first-in-range]:rounded-s-[14px] p-0 rounded-3 data-[in-range]:text-white",
           monthCell: "px-0",
           levelsGroup:
-            " lg:items-start items-center mb-3 flex-col sml:flex-row gap-5",
+            " lg:items-start items-center mb-3 flex-col sm:flex-row gap-5 w-full max-w-[600px]",
           weekday: "text-black",
-          calendarHeader: "text-grayMedium",
+          calendarHeader: "text-grayMedium w-full max-w-full sml:max-w-[300px]",
+          month: "w-full sml:max-w-[300px]",
+          monthsList: " sml:max-w-[300px] w-[300px]",
+          yearsList: " sml:max-w-[300px] w-[300px]",
         }}
+        className="w-full  "
         minDate={new Date()}
       />
     </div>

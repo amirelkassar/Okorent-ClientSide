@@ -2,7 +2,6 @@
 import FilterIcon from "@/src/assets/icons/filter";
 import { ColumnDef } from "@tanstack/react-table";
 import { StaticImageData } from "next/image";
-import CardStatus from "@/src/components/cardStatus";
 import avatar from "@/src/assets/images/avatar.png";
 import { getDate } from "@/src/lib/utils";
 import { Link } from "@/src/navigation";
@@ -126,6 +125,7 @@ export const columns: ColumnDef<RequestsTableData>[] = [
         <div className="flex items-center gap-3 w-fit">
           <ActionMenuRent
             id={id}
+            ProdId={ProdId}
             status={status}
             dataForReview={dataForReview}
             dataForReviewUser={dataForReviewUser}

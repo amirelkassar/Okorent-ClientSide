@@ -1,26 +1,23 @@
 "use client";
 import CardPhone from "@/src/components/card-phone";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import React from "react";
 import ActionMenu from "./action-menu";
-import { Link } from "@/src/navigation";
-import ROUTES from "@/src/routes";
 import RowCardPhone from "@/src/components/row-card-phone";
-import StarIcon from "@/src/assets/icons/star";
 import RenderStatus from "./render-status";
 import RenderCategory from "./render-category";
 import TicketModal from "./ticket-modal";
+import avatar from "@/src/assets/images/avatar.png";
+import { getDate } from "@/src/lib/utils";
 
 export type MedicalTeamTableData = {
   id: number;
-  name: string;
-  avatar: StaticImageData;
-  assignee: string;
-  avatarAssignee: StaticImageData;
-  category: string;
-  status: string;
-  description: string;
+  userName: string;
+  ticketType: string;
+  contactUsStatus: string | any;
+  title: string;
   date: string;
+  created: string;
 };
 interface CardDataProps {
   dataCard: MedicalTeamTableData;
@@ -31,45 +28,39 @@ function CardPhoneAccount({ dataCard }: CardDataProps) {
     <CardPhone>
       <div className="border-b border-grayLight/50 pb-2">
         <div className=" absolute top-4 end-3">
-          <ActionMenu id={dataCard?.id} />
+          <ActionMenu
+            id={dataCard?.id}
+            solved={dataCard.contactUsStatus === 4}
+          />
         </div>
-        <Link
-          href={ROUTES.ADMIN.ACCOUNTSDETAILS(dataCard.id)}
-          className="flex items-center w-fit gap-2"
-        >
+        <div className="flex items-center w-fit gap-2">
           <Image
-            src={dataCard.avatar}
-            alt={dataCard.name}
+            src={avatar}
+            alt={dataCard.userName}
             width={50}
             height={50}
             className=" size-10 h-full  object-contain "
           />
 
-          <h2 className="text-[16px] font-SemiBold">{dataCard.name}</h2>
-        </Link>
+          <h2 className="text-[16px] font-SemiBold">{dataCard.userName}</h2>
+        </div>
       </div>
       <div className="flex gap-2 mt-5">
-        <Image
-          src={dataCard.avatarAssignee}
-          alt={dataCard.assignee}
-          width={50}
-          height={50}
-          className=" size-10 h-full  object-contain "
-        />
         <div className="flex flex-col gap-3 w-full ">
-          <RowCardPhone title={dataCard.assignee} />
           <RowCardPhone
             title="Category"
-            cell={() => <RenderCategory category={dataCard.category} />}
+            cell={() => <RenderCategory status={dataCard.ticketType} />}
           />
           <RowCardPhone
             title="Status"
-            cell={() => <RenderStatus status={dataCard.status} />}
+            cell={() => <RenderStatus status={dataCard.contactUsStatus} />}
           />
-          <RowCardPhone title="Topic" info={dataCard.description} />
+          <RowCardPhone title="Topic" info={dataCard.title || ""} />
           <div className="flex  items-center gap-5 justify-between">
-            <h4 className="text-grayMedium text-sm  ">{dataCard.date}</h4>
-            <TicketModal />
+            <h4 className="text-grayMedium text-sm  ">
+              {getDate(dataCard?.created).timeFromNow}
+            </h4>
+            <TicketModal id={dataCard.id} name={dataCard.userName} />
           </div>
         </div>
       </div>

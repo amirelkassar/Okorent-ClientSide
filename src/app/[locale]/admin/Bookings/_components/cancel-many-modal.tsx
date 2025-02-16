@@ -1,6 +1,7 @@
 import Button from "@/src/components/button";
 import InputTextarea from "@/src/components/InputTextarea";
 import ModalComp from "@/src/components/modal-comp";
+import { useSelectRowTable } from "@/src/components/select-row-table-context";
 import { Toast } from "@/src/components/toast";
 import { useDeleteManyOrderByIDInAdmin } from "@/src/hooks/queries/admin/booking";
 import React, { useCallback } from "react";
@@ -16,6 +17,7 @@ function CancelManyModal({
 }) {
   console.log(selectedFromTable);
   const { mutateAsync: DeleteManyOrders } = useDeleteManyOrderByIDInAdmin();
+  const { setSelectRowTable } = useSelectRowTable();
 
   //delete order
   const onSubmitDelete = async () => {
@@ -26,7 +28,11 @@ function CancelManyModal({
       {
         success: "Deleted Orders Done",
         onSuccess: async (res) => {
+          setSelectRowTable([]);
           close();
+        },
+        onError(err) {
+          setSelectRowTable([]);
         },
       }
     );

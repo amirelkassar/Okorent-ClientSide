@@ -1,3 +1,4 @@
+'use client';
 import { AreaChart } from "@mantine/charts";
 import React from "react";
 
@@ -19,10 +20,10 @@ function ChartsPlatform({ data }: { data: { date: string; Rental: number }[] }) 
           " text-[14px] font-Regular relative after:absolute after:top-1/2 after:end-0 after:content-['-'] after:px-1 after:-translate-y-1/2 max-w-fit w-24 truncate text-white text-center ps-1 pe-4",
         axisLabel: "bg-red text-red min-w-5 min-h-5",
       }}
-      h={150}
+      h={130}
       data={data}
-      dataKey="date"
-      series={[{ name: "Rental", color: "#88BA52", label: "Rental" }]}
+      dataKey="month"
+      series={[{ name: "rentals", color: "#88BA52", label: "rentals" }]}
       curveType="bump"
       tickLine="none"
       gridAxis="none"

@@ -1,27 +1,48 @@
 import CardStatus from "@/src/components/cardStatus";
 import React from "react";
 
-function RenderCategory({ category }: { category: string }) {
+function RenderCategory({ status }: { status: string }) {
   let type: "blue" | "green" | "gray" | "red";
+  let Title:
+    | "Complaint"
+    | "Sales"
+    | "Something else"
+    | "Technical issue"
+    | "Guest Message"
+    | "Feedback"
+    | "--";
 
-  switch (category) {
-    case "Sales":
-      type = "green";
-      break;
-    case "Technical":
-      type = "gray";
-      break;
-    case "Un Assigned":
+  switch (status.toString()) {
+    case "1":
       type = "blue";
+      Title = "Complaint";
       break;
-    case "Feedback":
+    case "3":
+      type = "green";
+      Title = "Sales";
+      break;
+    case "4":
+      type = "gray";
+      Title = "Something else";
+      break;
+    case "2":
       type = "red";
+      Title = "Technical issue";
+      break;
+    case "5":
+      type = "blue";
+      Title = "Feedback";
+      break;
+    case "6":
+      type = "green";
+      Title = "Guest Message";
       break;
     default:
       type = "blue";
+      Title = "--";
       break;
   }
-  return <CardStatus  title={category} type={type} />;
+  return <CardStatus title={Title} type={type} />;
 }
 
 export default RenderCategory;

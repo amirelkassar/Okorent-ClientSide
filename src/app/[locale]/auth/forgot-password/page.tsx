@@ -26,7 +26,6 @@ function PageLogin() {
       loading: "Sending Token To Your Email... ",
       success: "Successfully Sent Token To Your Email",
       onSuccess: async (res) => {
-        console.log(res);
       },
       onError: (err) => {
         console.error("ForgetPassword error:", err);
@@ -36,7 +35,7 @@ function PageLogin() {
   return (
     <div className="flex-1 pt-4 lgl:pt-20  pb-8 md:pb-16  flex  min-h-full justify-center lgl:justify-start">
       <div className="max-w-[470px]  w-full flex flex-col gap-4">
-        <Logo theme="green" />
+        <Logo />
         <div className="flex-1 content-center">
           <h1 className=" font-Bold text-lg lg:text-xLarge mb-7">
             Enter your email to reset your password

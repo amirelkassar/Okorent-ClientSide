@@ -6,7 +6,7 @@ import { TextInput } from "@mantine/core";
 function NewsLetter() {
   return (
     <div className=" bg-[#F0F6FB]">
-      <div className=" max-w-screen-2xl mx-auto py-8 flex items-center gap-4 px-12 lgl:px-20">
+      <div className=" max-w-screen-2xl mx-auto py-8 flex items-center gap-4 px-9 lgl:px-20">
         <div className="flex-1 mdl:min-w-[480px] ">
           <h2 className="text-3xl lg:text-[42px] mb-1 font-Bold">Stay informed</h2>
           <h3 className="text-lg lg:text-[22px] font-Bold mb-3">

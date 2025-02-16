@@ -3,7 +3,7 @@ import { user } from "@/src/api/user";
 import { storeToken } from "@/src/lib/token";
 import { useRouter } from "@/src/navigation";
 import { decodedToken } from "@/token";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const initialQueryKey = "user.information";
 export const initialQueryKeyProductOrder = "user.information.ProductsOrder";
@@ -18,6 +18,7 @@ export const GetUserInfo = (id: any) => {
     },
   });
 };
+
 //edit user
 export const useUserEditMutation = (token: any) => {
   const router = useRouter();
@@ -51,6 +52,72 @@ export const GetUserProductsOrderByID = (id: any) => {
     queryFn: async () => {
       const response = await api.get(user.information.ProductsOrder(id));
       return response.data;
+    },
+  });
+};
+
+//get user Dashboard
+export const GetUserHeaderDashboard = () => {
+  return useQuery({
+    queryKey: [initialQueryKey, "Header_Dashboard"],
+    queryFn: async () => {
+      const response = await api.get(user.information.Header_Dashboard);
+      return response.data;
+    },
+  });
+};
+
+//get user Dashboard
+export const GetDashboardOngoingRentals = () => {
+  return useQuery({
+    queryKey: [initialQueryKey, "Ongoing_Rentals"],
+    queryFn: async () => {
+      const response = await api.get(user.information.Ongoing_Rentals);
+      return response.data;
+    },
+  });
+};
+
+//Vacation USer
+export const useVacationUser = () => {
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.put(user.information.Vacation, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
+
+// End Vacation USer
+export const useEndVacationUser = () => {
+  return useMutation({
+    mutationFn: async () => {
+      const response = await api.post(
+        user.information.End_Vacation,
+        {},
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
     },
   });
 };

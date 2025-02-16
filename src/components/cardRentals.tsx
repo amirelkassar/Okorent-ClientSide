@@ -18,8 +18,8 @@ function CardRentals({ data, Fav = false, edit = false }: CardRentalsProps) {
   const pathName = usePathname();
 
   return (
-    <div className="w-full flex-1 sml:flex-none max-w-[270px] min-w-[200px] block">
-      <div className=" w-full p-2 lg:p-4 bg-white/80 rounded-3xl  border border-black/25 duration-200 hover:shadow-md">
+    <div className="w-full flex-1 md:flex-none max-w-[50%]  sml:max-w-[270px] min-w-[162px] sml:min-w-[200px]  block last-of-type:me-auto sml:last-of-type:me-0">
+      <div className=" w-full p-2 lg:p-4 bg-white/80 rounded-xl md:rounded-3xl  border border-black/25 duration-200 hover:shadow-md">
         <div className=" relative mb-[6px] md:mb-3">
           <Link
             href={
@@ -36,7 +36,7 @@ function CardRentals({ data, Fav = false, edit = false }: CardRentalsProps) {
               width={252}
               height={160}
               property="10000000"
-              className="w-full h-[124px] md:h-[160px] object-cover object-center rounded-[18px]"
+              className="w-full h-[102px] sml:h-[124px] md:h-[160px] object-cover object-center rounded-lg md:rounded-[18px]"
             />
           </Link>
 
@@ -63,23 +63,23 @@ function CardRentals({ data, Fav = false, edit = false }: CardRentalsProps) {
                 <p className="text-[10px] md:text-[12px] text-grayDark">New</p>
               </div>
             ) : (
-              <div className="bg-[#F3F6FC] rounded-lg px-2 w-fit flex items-center justify-center gap-2 h-6">
+              <div className="bg-[#F3F6FC] rounded-lg px-2 w-fit flex items-center justify-center gap-1 lg:gap-2 h-5 lg:h-6">
                 <p className="text-[10px] md:text-[12px] text-grayDark">
                   Two days ago
                 </p>
               </div>
             )}
           </div>
-          <h4 className="text-blue text-sm lg:text-base font-medium capitalize  w-full max-w-full truncate ">
+          <h4 className="text-blue text-xs sml:text-sm lg:text-base font-medium capitalize  w-full max-w-full truncate ">
             {data?.name || data.title}
           </h4>
-          <h5 className="text-grayMedium text-[10px] md:text-[12px] pb-[6px] border-b border-black/20 min-h-7 max-w-full truncate">
+          <h5 className="text-grayMedium text-[8px] sml:text-[12px] pb-[2px] mdl:pb-[6px] border-b border-black/20  max-w-full truncate">
             {data?.description || data.details || "--"}
           </h5>
           <div className="flex md:items-center gap-1 lg:gap-2 mt-1 md:mt-2">
-            <LocationIcon className="w-3 min-w-3 md:w-[18px] h-auto" />
+            <LocationIcon className="w-3 min-w-3 md:min-w-[14px] md:w-[14px] h-auto" />
             <div>
-              <h6 className="text-[10px] md:text-[12px] font-Medium text-black/80 line-clamp-2 min-h-9 place-content-center">
+              <h6 className=" text-[8px] sml:text-[10px] md:text-[12px] font-Medium text-black/80 line-clamp-2 min-h-6 sml:min-h-9 place-content-center">
                 {data.address || data.location || "--"}
               </h6>
             </div>

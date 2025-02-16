@@ -1,6 +1,5 @@
 "use client";
 import LangIcon from "@/src/assets/icons/lang";
-import NotificationIcon from "@/src/assets/icons/notfication";
 import React, { useEffect, useMemo, useState } from "react";
 import { useLocale } from "next-intl";
 import Image from "next/image";
@@ -18,11 +17,11 @@ import BookingsIcon from "@/src/assets/icons/Bookings";
 import InboxIcon from "@/src/assets/icons/Inbox";
 import ClientsIcon from "@/src/assets/icons/Clients";
 import BillingIcon from "@/src/assets/icons/Billing";
-import NotificationsIcon from "@/src/assets/icons/Notifications";
 import MembershipsIcon from "@/src/assets/icons/memberships";
 import MasterDataIcon from "@/src/assets/icons/masterData";
 import { clearToken } from "@/src/lib/token";
 import { useToken } from "@/src/hooks/use-token";
+import Notifications from "@/src/components/Notifications";
 
 interface NavProps {
   linkLogo: string;
@@ -126,13 +125,6 @@ function Nav({ linkLogo = "#" }: NavProps) {
         url: ROUTES.ADMIN.MASTERDATA,
         active: path.includes(ROUTES.ADMIN.MASTERDATA),
       },
-      {
-        id: 13,
-        name: "Notifications",
-        icon: <NotificationsIcon />,
-        url: ROUTES.USER.SUPPORT,
-        active: path === ROUTES.ADMIN.SUPPORT,
-      },
     ],
     [path]
   );
@@ -157,12 +149,7 @@ function Nav({ linkLogo = "#" }: NavProps) {
           <PlusIcon className={"w-[16px] h-auto"} />
           <p className="text-base">List an item</p>
         </Link> */}
-        <div className="w-10 h-10 rounded-[50%] bg-[#E5F1FB] p-2 relative flex items-center justify-center  cursor-pointer duration-300 hover:shadow-lg">
-          <p className="text-white text-[8px] flex items-center border border-[#E5F1FB] justify-center bg-red min-w-[12px] w-fit h-[12px] aspect-[1/1] rounded-[50%] p-[2px] absolute top-2 right-2">
-            1
-          </p>
-          <NotificationIcon />
-        </div>
+        <Notifications />
         <Link
           href={path}
           locale={locale === "en" ? "ar" : "en"}
@@ -178,14 +165,18 @@ function Nav({ linkLogo = "#" }: NavProps) {
           <LogOutMenuIcon fill="#0F2A43" />
         </Link>
       </div>
-      <div
-        className="block mdl:hidden cursor-pointer duration-300 hover:shadow-md"
-        onClick={() => {
-          setShowMenu(!showMenu);
-        }}
-      >
-        <MenuIcon />
+      <div className="flex gap-3  mdl:hidden items-center">
+        <Notifications />
+        <div
+          className=" cursor-pointer duration-300 hover:shadow-md"
+          onClick={() => {
+            setShowMenu(!showMenu);
+          }}
+        >
+          <MenuIcon />
+        </div>
       </div>
+
       {isMobile && (
         <div
           className={`h-screen overflow-hidden w-screen z-50 start-0  duration-300   fixed top-0  ${

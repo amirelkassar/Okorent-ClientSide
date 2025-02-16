@@ -17,7 +17,7 @@ const OptionAvailability = [
     label: "Select Specific Period",
   },
 ];
-function DeactivateModal({ opened, close, id }: any) {
+function DeactivateModal({ opened, close, id }: { opened: any; close: any; id: any }) {
   console.log(id);
   const [valueDeactivate, setValueDeactivate] = useState("permanently");
   const [duration, setDuration] = useState({

@@ -4,13 +4,22 @@ import DeleteIcon from "@/src/assets/icons/delete";
 import { GetUniqueValues } from "@/src/lib/utils";
 import NoteTableIcon from "@/src/assets/icons/noteTable";
 import RefundIcon from "@/src/assets/icons/Refund";
+import { STYLE_ICON } from "@/src/lib/dataUser";
 
 interface ActionTableBookingInAdminProps {
   functionSelectView: any[];
   setSelectedFromTable: any;
   selectedFromTable: any;
 }
-export const useActionTableBookingInAdmin = ({open, open2, open3}:{open: any, open2: any, open3: any}): ActionTableBookingInAdminProps => {
+export const useActionTableBookingInAdmin = ({
+  open,
+  open2,
+  open3,
+}: {
+  open: any;
+  open2: any;
+  open3: any;
+}): ActionTableBookingInAdminProps => {
   const [selectedFromTable, setSelectedFromTable] = useState([]);
 
   const functionSelect = useMemo(
@@ -18,7 +27,7 @@ export const useActionTableBookingInAdmin = ({open, open2, open3}:{open: any, op
       //0
       {
         title: "Refund Payment",
-        icon: <RefundIcon fill="#006AFF" className="max-h-4 w-auto" />,
+        icon: <RefundIcon fill="#006AFF" className={STYLE_ICON} />,
         onclick: () => {
           open();
         },
@@ -26,7 +35,7 @@ export const useActionTableBookingInAdmin = ({open, open2, open3}:{open: any, op
       //1
       {
         title: "Send Note",
-        icon: <NoteTableIcon className="max-h-4 w-auto" />,
+        icon: <NoteTableIcon className={STYLE_ICON} />,
         onclick: () => {
           open2();
         },
@@ -34,7 +43,7 @@ export const useActionTableBookingInAdmin = ({open, open2, open3}:{open: any, op
       //2
       {
         title: "Delete",
-        icon: <DeleteIcon className="max-h-4 w-auto" />,
+        icon: <DeleteIcon className={STYLE_ICON} />,
         onclick: () => {
           open3();
         },
@@ -53,7 +62,7 @@ export const useActionTableBookingInAdmin = ({open, open2, open3}:{open: any, op
           return functionSelect;
       }
     } else {
-      return [functionSelect[2]];
+      return [functionSelect[1], functionSelect[2]];
     }
   }, [selectedFromTable, functionSelect]);
   console.log(functionSelectView);
@@ -61,6 +70,6 @@ export const useActionTableBookingInAdmin = ({open, open2, open3}:{open: any, op
   return {
     functionSelectView,
     setSelectedFromTable,
-    selectedFromTable
+    selectedFromTable,
   };
 };

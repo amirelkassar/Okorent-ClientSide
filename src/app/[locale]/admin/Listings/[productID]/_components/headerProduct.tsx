@@ -7,6 +7,7 @@ import LinkGreen from "@/src/components/linkGreen";
 import NoteModal from "@/src/components/NoteModal";
 import { Toast } from "@/src/components/toast";
 import { useDeleteProductInAdmin } from "@/src/hooks/queries/admin/lisiting";
+import { STYLE_ICON } from "@/src/lib/dataUser";
 import { useRouter } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import { useDisclosure } from "@mantine/hooks";
@@ -27,12 +28,12 @@ function HeaderProduct({ id }: any) {
   const functionSelect = [
     {
       title: "Send Note",
-      icon: <NoteTableIcon />,
+      icon: <NoteTableIcon className={STYLE_ICON}/>,
       onclick: open,
     },
     {
       title: "Delete",
-      icon: <DeleteIcon />,
+      icon: <DeleteIcon className={STYLE_ICON}/>,
       onclick: () => {
         onSubmitDelete();
       },
@@ -42,15 +43,15 @@ function HeaderProduct({ id }: any) {
     <div className="flex items-center gap-3 mb-8">
       <LinkGreen
         href={ROUTES.ADMIN.LISTINGSDETAILSEdit(id)}
-        className={"h-10 px-5 gap-1"}
+        className={"h-10 !px-4 mdl:!px-5 gap-2 "}
       >
-        <EditIcon fill="white" className="w-3 h-auto" />
-        <p className="text-sm">Edit</p>
+        <EditIcon fill="white" className={STYLE_ICON} />
+        <p className="text-xs mdl:text-base">Edit</p>
       </LinkGreen>
       {functionSelect.map((item, index) => {
         return <Events key={index} item={item} ids={[1]} />;
       })}
-      {opened && <NoteModal opened={opened} close={close} />}
+      {opened && <NoteModal id={id} opened={opened} close={close} />}
     </div>
   );
 }

@@ -3,12 +3,33 @@ import AttachIcon from "@/src/assets/icons/attach";
 import CloseChatIcon from "@/src/assets/icons/closeChat";
 import SendIcon from "@/src/assets/icons/send";
 import Button from "@/src/components/button";
+import { Toast } from "@/src/components/toast";
+import { useSendReply } from "@/src/hooks/queries/admin/support";
 import { FileButton, Textarea } from "@mantine/core";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 
-function MessageSend() {
+function MessageSend({ chatID = "" }: { chatID: string }) {
   const [selectedFile, setSelectedFile] = useState<any[]>([]);
+  const [message, setMessage] = useState("");
+  const { mutateAsync: SendReplyAdmin } = useSendReply(chatID);
+
+  const onSubmitSend = useCallback(async () => {
+    Toast.Promise(
+      SendReplyAdmin({
+        TicketId: chatID,
+        Content: message,
+        Attachment: selectedFile[0],
+      }),
+      {
+        success: "Successfully Send Message",
+        onSuccess: async (res) => {
+          setMessage("");
+          setSelectedFile([]);
+        },
+      }
+    );
+  }, [SendReplyAdmin, message, selectedFile, chatID]);
 
   return (
     <div className="flex items-center gap-1 pt-2">
@@ -41,7 +62,9 @@ function MessageSend() {
           </div>
         ) : null}
         <div className="relative flex-1 flex items-center gap-2 ">
-          <FileButton onChange={setSelectedFile} multiple>
+          <FileButton
+            onChange={(files: any) => files && setSelectedFile([files])}
+          >
             {(props) => (
               <button {...props}>
                 <AttachIcon className="h-4 w-auto" />
@@ -57,12 +80,17 @@ function MessageSend() {
               root: "flex-1",
             }}
             placeholder="Type your message here ..."
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
           />
         </div>
       </div>
 
       <Button
-        className={" w-11 bg-black h-8 px-2 py-2 lg:h-9 border-none"}
+        onClick={onSubmitSend}
+        className={` w-11 bg-black h-8 px-2 py-2 lg:h-9 border-none ${
+          message ? "" : " pointer-events-none opacity-50"
+        } `}
       >
         <SendIcon className="h-full w-auto" />
       </Button>

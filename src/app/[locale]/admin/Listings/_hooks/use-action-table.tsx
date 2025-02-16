@@ -4,21 +4,30 @@ import DeleteIcon from "@/src/assets/icons/delete";
 import { Toast } from "@/src/components/toast";
 import QuickEditIcon from "@/src/assets/icons/quickEdit";
 import { useDeleteManyProductInAdmin } from "@/src/hooks/queries/admin/lisiting";
+import { useSelectRowTable } from "@/src/components/select-row-table-context";
+import { STYLE_ICON } from "@/src/lib/dataUser";
 
 interface SignUpReturn {
   functionSelectView: any[];
   setSelectedFromTable: any;
+  selectedFromTable: any;
 }
-export const useActionTable = (): SignUpReturn => {
+export const useActionTable = (open: any): SignUpReturn => {
   const [selectedFromTable, setSelectedFromTable] = useState([]);
   const { mutateAsync: DeleteManyProducts } = useDeleteManyProductInAdmin();
-
+  const {setSelectRowTable } = useSelectRowTable();
   //Delete Many Product
   const onSubmitDelete = useCallback(
     async (data: any) => {
       Toast.Promise(DeleteManyProducts(data), {
         loading: "Processing...",
         success: "Deleted Products Done",
+        onSuccess(res) {
+          setSelectRowTable([]);
+        },
+        onError(err) {
+          setSelectRowTable([])
+        },
       });
     },
     [DeleteManyProducts]
@@ -29,7 +38,7 @@ export const useActionTable = (): SignUpReturn => {
       //0
       {
         title: "Quick Edit",
-        icon: <QuickEditIcon className="max-h-4 w-auto" />,
+        icon: <QuickEditIcon className={STYLE_ICON} />,
         onclick: () => {
           open();
         },
@@ -37,7 +46,7 @@ export const useActionTable = (): SignUpReturn => {
       //1
       {
         title: "Delete",
-        icon: <DeleteIcon className="max-h-4 w-auto" />,
+        icon: <DeleteIcon className={STYLE_ICON} />,
         onclick: (ids: any) => {
           onSubmitDelete({
             productIds: ids?.map((item: any) => item.id),
@@ -55,5 +64,6 @@ export const useActionTable = (): SignUpReturn => {
   return {
     functionSelectView,
     setSelectedFromTable,
+    selectedFromTable
   };
 };

@@ -5,13 +5,12 @@ import FAQ from "@/src/components/faq";
 import MapComponent from "@/src/components/map";
 import CardProduct from "@/src/components/product/cardProduct";
 import Description from "@/src/components/product/description";
-import QuestionView from "@/src/components/question";
 import Reviews from "@/src/components/reviews";
 import React, { useState } from "react";
 import HeaderProduct from "./_components/headerProduct";
 import AddProduct from "./_components/add-product";
 import { QueryWrapper } from "@/src/components/query-wrapper";
-import { GetProductsAll, GetProductsByID } from "@/src/hooks/queries/user/home";
+import { GetProductsAll } from "@/src/hooks/queries/user/home";
 import LoadingProductsRow from "@/src/components/product/loading-products-row";
 import { GetProductsInAdminByID } from "@/src/hooks/queries/admin/lisiting";
 import { GetReviewByIDInAdmin } from "@/src/hooks/queries/admin/lisiting/Reviews";
@@ -61,7 +60,6 @@ function Page({ params }: any) {
                 title="Cancelation Policy"
                 description="In case of cancellation 2 days before the rental period, 100% of the rental amount is refunded. If canceled one day before the rental period, 50% of the rental amount is refunded. If you cancel the same day the rental period starts, no refund is made."
               />
-              <QuestionView />
             </div>
             {data?.faQs?.length > 0 && <FAQ dataFAQ={data?.faQs || []} />}
             <div className="bg-grayBack max-w-full   pt-5 pb-8 lg:pb-10 relative before:content-[''] before:w-[calc(100%+32px)] lg:before:w-screen   before:bg-grayBack before:absolute before:bottom-0 before:-translate-x-1/2   before:h-full before:left-[50%]">

@@ -1,20 +1,19 @@
 "use client";
 
-import DeleteIcon from "@/src/assets/icons/delete";
 import EditIcon from "@/src/assets/icons/edit";
 import FilterIcon from "@/src/assets/icons/filter";
-import StarIcon from "@/src/assets/icons/star";
-import { ActionIcon } from "@mantine/core";
 import { ColumnDef } from "@tanstack/react-table";
-import Image, { StaticImageData } from "next/image";
-import phoneImg from "@/src/assets/images/phone.png";
-import CardStatus from "@/src/components/cardStatus";
 import PaymentStatus from "@/src/components/payment-status";
+import ImgProduct from "@/src/components/img-product";
+import { Link } from "@/src/navigation";
+import ROUTES from "@/src/routes";
+import { getDate } from "@/src/lib/utils";
+import avatar from "@/src/assets/images/avatar.png";
 
 export type RequestsTableData = {
   id: number;
-  name: string;
-  phone: string;
+  renterName: string;
+  productName: string;
   memberSince: string;
   statusUser: string;
   status: string;
@@ -23,50 +22,52 @@ export type RequestsTableData = {
   rentedItems: number;
   leasedItems: number;
   product: string;
-  payment: string;
+  amount: string;
   paymentStatus: string;
   rentalPeriod: number;
   startDate: string;
-  endDate: string;
+  to: string;
   country: string;
   action: string;
-  imgUser: StaticImageData;
-  imgHome: StaticImageData;
+  userImage: string;
+  heroImage: string;
 };
 
 export const columns: ColumnDef<RequestsTableData>[] = [
   {
-    accessorKey: "phone",
+    accessorKey: "productName",
     header: "Product",
     cell: ({ getValue, row }) => {
-      const phone = getValue<string>();
+      const productName = getValue<string>();
+      const image = row.original.heroImage;
+      const id = row.original.id;
+
       return (
-        <div className="flex items-center gap-2">
-          <div className="size-[50px] rounded-[50%] p-[6px] bg-grayBack flex justify-center items-center">
-            <Image
-              src={phoneImg}
-              alt={phone}
-              width={50}
-              height={50}
-              className="w-auto h-full  object-contain "
-            />
-          </div>
-          <h2 className="text-[16px] font-SemiBold">{phone}</h2>
-        </div>
+        <Link
+          href={ROUTES.USER.ORDERID(id)}
+          className="flex items-center gap-2"
+        >
+          {" "}
+          <ImgProduct productName={productName} src={image} />{" "}
+        </Link>
       );
     },
   },
   {
-    accessorKey: "endDate",
+    accessorKey: "to",
     header: "Rentals Ending Date",
     cell: ({ getValue }) => {
-      const end = getValue<string>();
+      const to = getValue<string>();
 
-      return <p className="text-grayMedium text-[16px]">{end}</p>;
+      return (
+        <p className="text-grayMedium text-[16px]">
+          {getDate(to).fullYearWithMonthName}
+        </p>
+      );
     },
   },
   {
-    accessorKey: "name",
+    accessorKey: "renterName",
     header: () => {
       return (
         <div className="flex items-center gap-1 cursor-pointer">
@@ -77,25 +78,14 @@ export const columns: ColumnDef<RequestsTableData>[] = [
     },
     cell: ({ getValue, row }) => {
       const name = getValue<string>();
-      const img = row.original.imgUser;
+      const userImage = row.original.userImage;
 
-      return (
-        <div className="flex items-center gap-2">
-          <Image
-            src={img}
-            alt={name}
-            width={50}
-            height={50}
-            className="w-12 h-12 rounded-[50%] object-cover object-top"
-          />
-          <h2 className="text-[16px] font-SemiBold">{name}</h2>
-        </div>
-      );
+      return <ImgProduct productName={name} src={userImage || avatar} />;
     },
   },
 
   {
-    accessorKey: "payment",
+    accessorKey: "amount",
     header: "Payment",
     cell: ({ getValue }) => {
       const payment = getValue<number>();
@@ -112,17 +102,5 @@ export const columns: ColumnDef<RequestsTableData>[] = [
   },
   {
     id: "actions",
-    cell: () => {
-      return (
-        <div className="flex items-center gap-3 w-fit">
-          <ActionIcon variant="transparent">
-            <EditIcon className="w-5 h-auto" />
-          </ActionIcon>
-          <ActionIcon variant="transparent">
-            <DeleteIcon className="w-5 h-auto" />
-          </ActionIcon>
-        </div>
-      );
-    },
   },
 ];

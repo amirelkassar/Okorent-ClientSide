@@ -19,9 +19,9 @@ export const GetAccounts = (queries: any) => {
 export const GetNewSubscriptions = () => {
   const queryClient = useQueryClient();
   return useQuery({
-    queryKey: [initialQueryKey, "filter=New"],
+    queryKey: [initialQueryKey, "IsNewUser=true"],
     queryFn: async () => {
-      const response = await api.get(admin.Accounts.base("filter=New"));
+      const response = await api.get(admin.Accounts.base("IsNewUser=true"));
       return response.data;
     },
   });
@@ -47,6 +47,7 @@ export const useDeleteAccountInAdmin = () => {
     },
     onSuccess: (res) => {
       queryClient.refetchQueries([initialQueryKey]);
+      queryClient.refetchQueries([initialQueryKey, ""]);
       console.log(res);
     },
     onError: (res) => {
@@ -107,6 +108,20 @@ export const useDeActivateAccountInAdmin = () => {
     onError: () => {},
   });
 };
+// DeActivate Many Account In Admin
+export const useDeActivateManyAccountInAdmin = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.put(admin.Accounts.DeActivateMany, data, {});
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKey]);
+    },
+    onError: () => {},
+  });
+};
 
 // Activate Account In Admin
 export const useActivateAccountInAdmin = (id: any) => {
@@ -129,14 +144,12 @@ export const useActivateAccountInAdmin = (id: any) => {
   });
 };
 
-//Delete Many Account In Admin
-export const useDeleteManyAccountInAdmin = () => {
+//Active Many Account In Admin
+export const useActiveManyAccountInAdmin = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await api.delete(admin.Accounts.DeleteManyAccounts, {
-        data: data,
-      });
+      const response = await api.post(admin.Accounts.ActiveManyUser, data, {});
       return response.data;
     },
     onSuccess: (res) => {
@@ -148,5 +161,104 @@ export const useDeleteManyAccountInAdmin = () => {
 
       console.log(res);
     },
+  });
+};
+
+//Delete Many Account In Admin
+export const useDeleteManyAccountInAdmin = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.post(admin.Accounts.DeleteManyAccounts, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.refetchQueries([initialQueryKey]);
+      console.log(res);
+    },
+    onError: (res) => {
+      queryClient.refetchQueries([initialQueryKey]);
+
+      console.log(res);
+    },
+  });
+};
+
+// Edit Account ID In Admin
+export const useEditAccountIDInAdmin = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.put(admin.Accounts.UpdateUserProfile, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKey]);
+    },
+    onError: () => {},
+  });
+};
+
+//edit Image User Profile
+export const useEditImageUserProfileInAdmin = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.put(
+        admin.Accounts.UpdateImageUserProfile,
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+      queryClient.invalidateQueries([initialQueryKey]);
+    },
+    onError: (err) => {
+      console.log(err);
+    },
+  });
+};
+
+// Verification Account In Admin
+export const useVerificationAccountInAdmin = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.put(admin.Accounts.Verification, data, {});
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKey]);
+    },
+    onError: () => {},
+  });
+};
+
+// Verification Many Account In Admin
+export const useVerificationManyAccountInAdmin = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.put(
+        admin.Accounts.Verification_Many,
+        data,
+        {}
+      );
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKey]);
+    },
+    onError: () => {},
   });
 };

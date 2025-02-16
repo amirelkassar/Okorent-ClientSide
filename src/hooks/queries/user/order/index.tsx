@@ -4,7 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 export const initialQueryKey = "user.myOrderAll";
 export const initialQueryTrackerKey = "user.orderTracker";
 
-export const useCreateOrderMutation = () => {
+export const useCreateOrderMutation = ( queries: any) => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -14,7 +14,7 @@ export const useCreateOrderMutation = () => {
     },
     onSuccess: async (res) => {
       console.log(res);
-      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.refetchQueries([initialQueryKey, queries]);
     },
     onError: (res) => {
       console.log(res);

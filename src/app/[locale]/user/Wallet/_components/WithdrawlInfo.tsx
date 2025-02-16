@@ -25,10 +25,10 @@ function WithdrawlInfo() {
     }).format(date);
   };
   return (
-    <div className=" bg-white/50 rounded-3xl border-green border shadow-md pt-10 pb-6  px-8  ">
+    <div className=" bg-white/50 rounded-3xl border-green border shadow-md pt-6 md:pt-10 pb-4 md:pb-6 px-5 md:px-8  ">
       <div className="flex flex-col lg:flex-row  justify-between flex-wrap xl:flex-nowrap gap-5 mb-6 lg:mb-9">
         <div className="flex-1">
-          <h3 className="text-2xl font-Regular mb-10">Withdrawl Option</h3>
+          <h3 className="text-2xl font-Regular mb-4 md:mb-10">Withdrawl Option</h3>
           <div className="flex gap-10 flex-col lg:flex-row justify-between">
             <div>
               <h4 className="text-base font-Regular mb-2">Withdrawl Option</h4>

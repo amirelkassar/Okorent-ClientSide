@@ -53,7 +53,8 @@ function NavLinks() {
         url: ROUTES.ADMIN.BOOKINGS,
         active:
           path === ROUTES.ADMIN.BOOKINGS ||
-          path === ROUTES.ADMIN.BOOKINGSDETAILS(params.bookingsId),
+          path === ROUTES.ADMIN.BOOKINGSDETAILS(params.bookingsId) ||
+          path === ROUTES.ADMIN.NOTESBOOKINGS,
       },
       {
         id: 8,
@@ -75,6 +76,12 @@ function NavLinks() {
       },
       {
         id: 12,
+        name: "Demo Requests",
+        url: ROUTES.ADMIN.DEMOREQUEST,
+        active: path === ROUTES.ADMIN.DEMOREQUEST,
+      },
+      {
+        id: 13,
         name: "Master Data",
         url: ROUTES.ADMIN.MASTERDATA,
         active: path.includes(ROUTES.ADMIN.MASTERDATA),
@@ -109,6 +116,30 @@ function NavLinks() {
         name: "Ads Details ",
         url: ROUTES.ADMIN.ADSDETAILS(params.adsId),
         active: path === ROUTES.ADMIN.ADSDETAILS(params.adsId),
+      },
+      {
+        id: 6,
+        name: "Accounts",
+        url: ROUTES.ADMIN.NOTESACCOUNTS,
+        active: path === ROUTES.ADMIN.NOTESACCOUNTS,
+      },
+      {
+        id: 7,
+        name: "Accounts",
+        url: ROUTES.ADMIN.NOTESACCOUNTSDETAILS(params.noteID),
+        active: path === ROUTES.ADMIN.NOTESACCOUNTSDETAILS(params.noteID),
+      },
+      {
+        id: 8,
+        name: "Bookings",
+        url: ROUTES.ADMIN.NOTESBOOKINGS,
+        active: path === ROUTES.ADMIN.NOTESBOOKINGS,
+      },
+      {
+        id: 9,
+        name: "Bookings",
+        url: ROUTES.ADMIN.NOTESBOOKINGSDETAILS(params.noteID),
+        active: path === ROUTES.ADMIN.NOTESBOOKINGSDETAILS(params.noteID),
       },
     ],
     [path]

@@ -17,6 +17,7 @@ import {
 } from "@/src/hooks/queries/admin/master-data/category";
 import StepLocation from "./stepLocation";
 import { useEditListingInAdmin } from "@/src/hooks/queries/admin/lisiting";
+import ErrorMsg from "@/src/components/error-msg";
 interface LocationProps {
   id: number;
   name: string;
@@ -172,6 +173,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
           existingImages={dataList?.images}
           edit
         />
+        <ErrorMsg error={GetErrorMsg(error, "Images")} textClassName="mt-2" />
       </div>
       <div className=" mt-1 mdl:mt-2 mdl:pb-8 flex-1">
         <h3 className={"text-sm lg:text-[24px] mb-2 lg:mb-3 "}>Item Price</h3>
@@ -291,11 +293,15 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
             label="Not Active"
           />
         </div>
-
-        <p className="mt-4 text-[14px] text-grayMedium font-Regular">
-          Set as Active to make the item available for rent Set as Not Active to
-          keep the item unavailable for rent
-        </p>
+        {selectedCheckbox === "true" ? (
+          <p className="mt-4 text-xs md:text-[14px] text-grayMedium font-Regular">
+            Set as &apos;Not Active&apos; to keep the item unavailable for rent
+          </p>
+        ) : (
+          <p className="mt-4 text-xs md:text-[14px] text-grayMedium font-Regular">
+            Set as &apos;Active&apos; to make the item available for rent
+          </p>
+        )}
       </div>
       <StepFAQ
         faqs={faqs}

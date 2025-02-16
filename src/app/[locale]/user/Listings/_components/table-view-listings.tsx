@@ -53,7 +53,6 @@ function TableViewListings({ query }: { query: any }) {
               <div>
                 <DataTable
                   //Component={CardViewPhoneListing}
-                  title=""
                   data={data}
                   columns={columns}
                   functionSelect={functionSelectView}

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Checkbox } from "@mantine/core";
 import DropImg from "@/src/components/DropImg";
 import Button from "@/src/components/button";
@@ -17,6 +17,7 @@ import {
   GetCategory,
   GetSubCategory,
 } from "@/src/hooks/queries/admin/master-data/category";
+import ErrorMsg from "@/src/components/error-msg";
 interface LocationProps {
   id: number;
   name: string;
@@ -45,7 +46,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
     reset,
   } = useEditListingMutation(dataList?.id);
   const { data: dataSubCategory, refetch: RefetchGetSubCategory } =
-    GetSubCategory(initialValues?.categoryId);
+    GetSubCategory(dataList?.categoryId);
   const [selectedCheckbox, setSelectedCheckbox] = useState<string | null>(
     initialValues.isActive ? "true" : "false"
   );
@@ -92,6 +93,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
       },
     });
   };
+  console.log(error);
 
   return (
     <div className="w-full lg:w-[810px] mb-section flex flex-col gap-4">
@@ -166,6 +168,7 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
           existingImages={dataList?.images}
           edit
         />
+        <ErrorMsg error={GetErrorMsg(error, "Images")} textClassName="mt-2" />
       </div>
       <div className=" mt-1 mdl:mt-2 mdl:pb-8 flex-1">
         <h3 className={"text-sm lg:text-[24px] mb-2 lg:mb-3 "}>Item Price</h3>
@@ -284,11 +287,15 @@ function UpdateListing({ initialValues }: { initialValues: any }) {
             label="Not Active"
           />
         </div>
-
-        <p className="mt-4 text-[14px] text-grayMedium font-Regular">
-          Set as Active to make the item available for rent Set as Not Active to
-          keep the item unavailable for rent
-        </p>
+        {selectedCheckbox === "true" ? (
+          <p className="mt-4 text-xs md:text-[14px] text-grayMedium font-Regular">
+            Set as &apos;Not Active&apos; to keep the item unavailable for rent
+          </p>
+        ) : (
+          <p className="mt-4 text-xs md:text-[14px] text-grayMedium font-Regular">
+            Set as &apos;Active&apos; to make the item available for rent
+          </p>
+        )}
       </div>
       <StepFAQ
         faqs={faqs}

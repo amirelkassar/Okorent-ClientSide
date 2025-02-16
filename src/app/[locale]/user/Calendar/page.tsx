@@ -1,6 +1,8 @@
+"use client";
 import React from "react";
 import CustomCalendar from "./_components/CustomCalendar";
-function page() {
+
+function Page() {
   return (
     <div className="">
       <CustomCalendar />
@@ -8,4 +10,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

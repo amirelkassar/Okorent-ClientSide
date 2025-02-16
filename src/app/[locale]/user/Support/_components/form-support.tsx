@@ -4,19 +4,28 @@ import ComplaintIcon from "@/src/assets/icons/complaint";
 import IssueIcon from "@/src/assets/icons/issue";
 import SalesIcon from "@/src/assets/icons/Sales";
 import SomethingIcon from "@/src/assets/icons/Something";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Input from "@/src/components/input";
 import Button from "@/src/components/button";
 import { cn } from "@/src/lib/utils";
 import InputTextarea from "@/src/components/InputTextarea";
+import { useSupportUser } from "@/src/hooks/queries/admin/support";
+import { Toast } from "@/src/components/toast";
+import GetErrorMsg from "@/src/components/getErrorMsg";
+import ErrorMsg from "@/src/components/error-msg";
 type SupportType = "complaint" | "technical" | "sales" | "other" | "feedback";
 
 function FormSupport() {
-  const [selectedType, setSelectedType] = useState<SupportType | null>(null);
+  const [formData, setFormData] = useState({
+    Title: "",
+    Content: "",
+    TicketType: "",
+  });
+  const { mutateAsync: SendSupport, error, reset } = useSupportUser();
 
   const supportTypes = [
     {
-      id: "complaint",
+      id: "1",
       label: "Complaint",
       icon: (active: any) => (
         <ComplaintIcon
@@ -26,7 +35,7 @@ function FormSupport() {
       ),
     },
     {
-      id: "technical",
+      id: "2",
       label: "Technical Issue",
       icon: (active: any) => (
         <IssueIcon
@@ -36,7 +45,7 @@ function FormSupport() {
       ),
     },
     {
-      id: "sales",
+      id: "3",
       label: "Sales support",
       icon: (active: any) => (
         <SalesIcon
@@ -46,7 +55,7 @@ function FormSupport() {
       ),
     },
     {
-      id: "other",
+      id: "4",
       label: "Something else",
       icon: (active: any) => (
         <SomethingIcon
@@ -56,6 +65,34 @@ function FormSupport() {
       ),
     },
   ];
+  // Handle input change
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    reset();
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+  const clearData = () => {
+    reset();
+    setFormData({
+      Title: "",
+      Content: "",
+      TicketType: "",
+    });
+  };
+  const handleSubmit = useCallback(async () => {
+    Toast.Promise(SendSupport(formData), {
+      success: "successfully Send Support",
+      onSuccess: async (res) => {
+        reset();
+        clearData();
+      },
+    });
+  }, [SendSupport, formData]);
 
   return (
     <Card className="rounded-2xl p-4 mdl:p-9">
@@ -70,17 +107,21 @@ function FormSupport() {
                   type="button"
                   className={cn(
                     "flex items-center h-10 md:h-[50px] hover:shadow-md text-xs mdl:text-base duration-300 min-w-[120px] mdl:min-w-[200px] justify-center px-3 mdl:px-6 rounded-xl gap-2 ",
-                    selectedType === type.id
+                    formData.TicketType === type.id
                       ? "bg-green text-white hover:bg-green"
                       : "bg-blueLight hover:bg-green/30 "
                   )}
-                  onClick={() => setSelectedType(type.id as SupportType)}
+                  onClick={() => {
+                    setFormData((prev) => ({ ...prev, TicketType: type.id }));
+                    reset();
+                  }}
                 >
-                  {type.icon(selectedType === type.id)}
+                  {type.icon(formData.TicketType === type.id)}
                   <span>{type.label}</span>
                 </button>
               ))}
             </div>
+            <ErrorMsg error={GetErrorMsg(error, "TicketType")} />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -89,9 +130,13 @@ function FormSupport() {
               </label>
               <Input
                 id="title"
-                placeholder="Profcunt Agency"
+                name="Title"
+                value={formData.Title || ""}
+                onChange={handleInputChange}
+                placeholder="Profound Agency"
                 inputClassName="bg-white !h-16 rounded-xl"
                 className="w-full"
+                error={GetErrorMsg(error, "Title")}
               />
             </div>
 
@@ -102,18 +147,29 @@ function FormSupport() {
               <InputTextarea
                 autosize
                 id="topic"
+                name="Content"
+                value={formData.Content || ""}
+                onChange={handleInputChange}
                 placeholder="I want help in adjusting my..."
                 inputClassName="bg-white !h-20 !min-h-20 rounded-xl"
                 className="w-full min-h-20 !mb-0 "
+                error={GetErrorMsg(error, "Content")}
               />
             </div>
           </div>
           <div className="flex gap-3 mt-6 md:mt-2">
-            <Button type="submit" className=" h-10 !px-8 ">
+            <Button
+              onClick={handleSubmit}
+              type="submit"
+              className=" h-10 !px-8 "
+            >
               Send
             </Button>
             <Button
               type="button"
+              onClick={() => {
+                clearData();
+              }}
               variant="outline"
               className="bg-blueLight text-black border-none h-10 !px-8"
             >

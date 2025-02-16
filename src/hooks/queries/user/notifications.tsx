@@ -3,8 +3,9 @@ import { notifications } from "@/src/api/user";
 import {
   useInfiniteQuery,
   UseInfiniteQueryResult,
+  useMutation,
+  useQueryClient,
 } from "@tanstack/react-query";
-import { AxiosResponse } from "axios";
 
 export const initialQueryKey = "user.notifications";
 
@@ -13,6 +14,7 @@ interface NotificationResponse {
     items: any[]; // Replace `any` with the specific type for a notification
     totalCount: number;
     pageSize: number;
+    unReadCount: number;
   };
 }
 
@@ -22,30 +24,62 @@ export interface NotificationQueryParams {
 }
 
 export const getNotifications = async (
-  queries: NotificationQueryParams
+  queries: NotificationQueryParams,
+  UnReadOnly: boolean
 ): Promise<NotificationResponse> => {
-  const response = await api.get(notifications.base);
-  console.log(response.data);
+  const response = await api.get(
+    notifications.base(`PageNumber=${queries.page}&UnReadOnly=${UnReadOnly}`)
+  );
   return response.data;
 };
 
-export const useNotifications = (): UseInfiniteQueryResult<
-  NotificationResponse,
-  any
-> => {
+export const useNotifications = (
+  UnReadOnly: boolean = false
+): UseInfiniteQueryResult<NotificationResponse, any> => {
   return useInfiniteQuery<NotificationResponse, Error>({
-    queryKey: [initialQueryKey],
+    queryKey: [initialQueryKey, UnReadOnly ? "UnRead" : "Read"],
     queryFn: async ({ pageParam = 1 }) => {
       const params: NotificationQueryParams = { page: pageParam };
-      return await getNotifications(params);
+
+      return await getNotifications(params, UnReadOnly);
     },
     getNextPageParam: (lastPage, allPages) => {
       const totalCount = lastPage?.data?.totalCount || 0;
       const pageSize = lastPage?.data?.pageSize || 1;
-
       const totalPages = Math.ceil(totalCount / pageSize);
-
       return allPages.length < totalPages ? allPages.length + 1 : undefined;
+    },
+  });
+};
+
+//Read notification
+export const useNotificationsMarkAsRead = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.put(notifications.actions.makeItRead, data);
+      return response.data;
+    },
+    onSuccess: async (res) => {
+      queryClient.refetchQueries([initialQueryKey]);
+    },
+    onError: (res) => {},
+  });
+};
+
+//Read All notification
+export const useNotificationsMarkAsReadAll = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.put(notifications.actions.makeItReadAll, data);
+      return response.data;
+    },
+    onSuccess: async (res) => {
+      queryClient.refetchQueries([initialQueryKey]);
+    },
+    onError: (res) => {
+      console.log(res);
     },
   });
 };

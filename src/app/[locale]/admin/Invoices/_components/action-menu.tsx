@@ -3,8 +3,11 @@ import DeleteIcon from "@/src/assets/icons/delete";
 import DownloadIcon from "@/src/assets/icons/download";
 import DataActions from "@/src/components/DataActions";
 import React from "react";
+import { useRowActionInvoicesInAdmin } from "../_hooks/use-delete-invoice";
 
 function ActionMenu({ id }: { id: any }) {
+  const { onSubmitDeleteInvoicesInAdmin } = useRowActionInvoicesInAdmin();
+
   const options = [
     {
       label: "Download",
@@ -16,7 +19,11 @@ function ActionMenu({ id }: { id: any }) {
       label: "Delete",
       icon: <DeleteIcon className="w-3 h-auto" />,
       type: "btn",
-      action: () => {},
+      action: () => {
+        onSubmitDeleteInvoicesInAdmin({
+          invoiceIds: [id],
+        });
+      },
     },
   ];
   return (

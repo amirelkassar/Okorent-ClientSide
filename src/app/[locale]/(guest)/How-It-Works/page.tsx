@@ -75,8 +75,8 @@ function page() {
     <div>
       <LookingFor />
       <Goals />
-      <div className="mb-16 mt-4 lg:mt-10 relative">
-        <h2 className="text-2xl text-center lg:text-3xl mb-14">
+      <div className="mb-12 lg:mb-16 mt-4 lg:mt-10 relative">
+        <h2 className="text-xl text-center lg:text-3xl mb-4 lg:mb-14">
           What our users say
         </h2>
 

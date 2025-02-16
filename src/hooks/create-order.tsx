@@ -5,6 +5,7 @@ import { Toast } from "@/src/components/toast";
 import { useCreateOrderMutation } from "./queries/user/order";
 import { useDisclosure } from "@mantine/hooks";
 import { useSwitchRent } from "../store/rent-slice";
+import { useSearchParams } from "next/navigation";
 
 // Define the type for the form state and handlers
 interface FormProps {
@@ -26,13 +27,16 @@ interface SignUpReturn {
 export const useCreateOrder = (): SignUpReturn => {
   const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
   const { isRent, setSwitchRent } = useSwitchRent();
+  const searchparams = useSearchParams();
+  console.log(searchparams.toString());
+  
   const {
     mutateAsync: CreateOrder,
     error,
     isPaused,
     isError,
     reset,
-  } = useCreateOrderMutation();
+  } = useCreateOrderMutation('');
 
   const onSubmit = useCallback(
     async (data: any) => {

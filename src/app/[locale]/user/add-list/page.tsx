@@ -8,7 +8,6 @@ import StepLocation from "./_components/stepLocation";
 import StepAvailability from "./_components/stepAvailability";
 import StepFAQ from "./_components/stepFAQ";
 import Preview from "./_components/preview";
-import LinkGreen from "@/src/components/linkGreen";
 import { useSearchParams } from "next/navigation";
 import InputTextarea from "@/src/components/InputTextarea";
 import { useCreateListingMutation } from "@/src/hooks/queries/user/add-lisiting";
@@ -20,6 +19,7 @@ import {
   GetCategory,
   GetSubCategory,
 } from "@/src/hooks/queries/admin/master-data/category";
+import ErrorMsg from "@/src/components/error-msg";
 
 interface LocationProps {
   id: number;
@@ -31,18 +31,26 @@ interface FAQ {
   answer: string;
 }
 function Page() {
+  //Hooks
   const [selectedCheckbox, setSelectedCheckbox] = useState<string | null>(null);
   const [location, setLocation] = useState<LocationProps[]>([]);
   const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [dataList, setDataList] = useState<any>({});
   const searchparams = useSearchParams();
+
+  //query
   const {
     mutateAsync: createListing,
     error,
     isError,
     reset,
   } = useCreateListingMutation();
+  const { data: dataCategory } = GetCategory();
 
+  const { data: dataSubCategory, refetch: RefetchGetSubCategory } =
+    GetSubCategory(dataList?.CategoryId);
+
+  //Functions
   const handleInputChangeLocation = (ids: any[]) => {
     reset();
     setLocation(ids);
@@ -74,11 +82,6 @@ function Page() {
     setFaqs(newFaqs);
     setDataList({ ...dataList, FAQs: newFaqs });
   };
-  const { data: dataCategory } = GetCategory();
-  console.log(dataCategory);
-  
-  const { data: dataSubCategory, refetch: RefetchGetSubCategory } =
-    GetSubCategory(dataList?.CategoryId);
 
   const handleSubmit = async () => {
     reset();
@@ -124,6 +127,7 @@ function Page() {
               data={dataSubCategory?.data?.map((item: any) => {
                 return { label: item.name, value: item.id };
               })}
+              value={dataList?.SubCategoryId}
               placeholder="Select SubCategory"
               onChange={(e) => {
                 reset();
@@ -171,6 +175,10 @@ function Page() {
             dec="You can upload up to 8 images"
           >
             <DropImg setDataList={setDataList} dataList={dataList} />
+            <ErrorMsg
+              error={GetErrorMsg(error, "ProductImageFiles")}
+              textClassName="mt-2"
+            />
           </Step>
           <Step
             title="Add item price"
@@ -314,11 +322,16 @@ function Page() {
                   label="Not Active"
                 />
               </div>
-
-              <p className="mt-4 text-xs md:text-[14px] text-grayMedium font-Regular">
-                Set as Active to make the item available for rent Set as Not
-                Active to keep the item unavailable for rent
-              </p>
+              {selectedCheckbox === "true" ? (
+                <p className="mt-4 text-xs md:text-[14px] text-grayMedium font-Regular">
+                  Set as &apos;Not Active&apos; to keep the item unavailable for
+                  rent
+                </p>
+              ) : (
+                <p className="mt-4 text-xs md:text-[14px] text-grayMedium font-Regular">
+                  Set as &apos;Active&apos; to make the item available for rent
+                </p>
+              )}
             </div>
           </Step>
           <StepFAQ
@@ -337,25 +350,6 @@ function Page() {
         >
           Save
         </Button>
-        {searchparams.get("preview") === "true" ? (
-          <LinkGreen
-            href={"?preview=false"}
-            className={
-              "w-full lg:w-[208px] h-12 mdl:h-[64px] text-black bg-grayBack border-none"
-            }
-          >
-            Back
-          </LinkGreen>
-        ) : (
-          <LinkGreen
-            href={"?preview=true"}
-            className={
-              "w-full lg:w-[208px] h-12 mdl:h-[64px] text-black bg-grayBack border-none"
-            }
-          >
-            Preview
-          </LinkGreen>
-        )}
       </div>
     </div>
   );

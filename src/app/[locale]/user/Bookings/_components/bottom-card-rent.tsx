@@ -28,20 +28,26 @@ const MessageLink: React.FC<ButtonProps> = ({ id, name, style }) => (
   </LinkGreen>
 );
 
-const RentAgainButton: React.FC<ButtonProps> = ({ onClick, style }) => (
-  <Button onClick={onClick} className={`btn-success h-10 flex-1  ${style}`}>
+const RentAgainButton: React.FC<ButtonProps> = ({ id, style }) => (
+  <LinkGreen
+    href={ROUTES.USER.PRODUCTDETAILS(id)}
+    className={` h-10 flex-1  ${style}`}
+  >
     Rent again
-  </Button>
+  </LinkGreen>
 );
 
-const ReorderButton: React.FC<ButtonProps> = ({ onClick, style }) => (
-  <Button onClick={onClick} className={`btn-warning h-10 flex-1  ${style}`}>
+const ReorderButton: React.FC<ButtonProps> = ({ id, style }) => (
+  <LinkGreen
+    href={ROUTES.USER.PRODUCTDETAILS(id)}
+    className={` h-10 flex-1  ${style}`}
+  >
     Reorder
-  </Button>
+  </LinkGreen>
 );
 const ScanForReceiving: React.FC<ButtonProps> = ({ onClick, style }) => (
   <Button onClick={onClick} className={`btn-warning h-10 flex-1  ${style}`}>
-    Scan For Receiving
+    Mark as Receiving
   </Button>
 );
 const Review: React.FC<ButtonProps> = ({ onClick, style }) => (

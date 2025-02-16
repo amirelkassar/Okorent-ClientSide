@@ -2,9 +2,14 @@
 import { useCallback, useMemo, useState } from "react";
 import OnlineIcon from "@/src/assets/icons/online";
 import DeleteIcon from "@/src/assets/icons/delete";
-import { GetIdsValues, GetUniqueValues } from "@/src/lib/utils";
+import { GetUniqueValues } from "@/src/lib/utils";
 import { Toast } from "@/src/components/toast";
-import { useUpdateManyToOnlineMutation } from "@/src/hooks/queries/user/lisitings";
+import {
+  useDeleteManyMyProduct,
+  useUpdateManyToOnlineMutation,
+} from "@/src/hooks/queries/user/lisitings";
+import { useSelectRowTable } from "@/src/components/select-row-table-context";
+import { STYLE_ICON } from "@/src/lib/dataUser";
 
 interface SignUpReturn {
   functionSelectView: any[];
@@ -13,6 +18,8 @@ interface SignUpReturn {
 export const useActionTable = (): SignUpReturn => {
   const [selectedFromTable, setSelectedFromTable] = useState([]);
   const { mutateAsync: UpdateManyToOnline } = useUpdateManyToOnlineMutation();
+  const { mutateAsync: DeleteManyMyProduct } = useDeleteManyMyProduct();
+  const { setSelectRowTable } = useSelectRowTable();
 
   //Make Many Product to Online
   const onSubmitMakeOnline = useCallback(
@@ -20,17 +27,35 @@ export const useActionTable = (): SignUpReturn => {
       Toast.Promise(UpdateManyToOnline(data), {
         loading: "Processing...",
         success: "Operation completed!",
-        error: "Failed to complete operation",
+        onSuccess(res) {
+          setSelectRowTable([]);
+        },
       });
     },
     [UpdateManyToOnline]
+  );
+  //Delete Many Product
+  const onSubmitDeleteProducts = useCallback(
+    async (data: any) => {
+      Toast.Promise(DeleteManyMyProduct(data), {
+        loading: "Processing...",
+        success: "Deleted Products Done",
+        onSuccess(res) {
+          setSelectRowTable([]);
+        },
+        onError(err) {
+          setSelectRowTable([]);
+        },
+      });
+    },
+    [DeleteManyMyProduct]
   );
 
   const functionSelect = useMemo(
     () => [
       {
         title: "Make online",
-        icon: <OnlineIcon fill="#006AFF" className="max-h-4 w-auto" />,
+        icon: <OnlineIcon fill="#006AFF" className={STYLE_ICON} />,
         onclick: (ids: any) => {
           console.log(ids);
 
@@ -42,9 +67,11 @@ export const useActionTable = (): SignUpReturn => {
       },
       {
         title: "Delete",
-        icon: <DeleteIcon className="max-h-4 w-auto" />,
+        icon: <DeleteIcon className={STYLE_ICON} />,
         onclick: (ids: any) => {
-          console.log(ids);
+          onSubmitDeleteProducts({
+            productIds: ids?.map((item: any) => item.id),
+          });
         },
       },
     ],

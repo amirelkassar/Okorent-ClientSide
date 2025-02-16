@@ -7,7 +7,7 @@ import React from "react";
 
 function FeaturesProduct({ numRates = 0 }: { numRates?: any }) {
   return (
-    <div className="flex items-center gap-3 flex-wrap ">
+    <div className="flex items-center md:gap-3 gap-2 flex-wrap ">
       <div className="bg-black px-3  rounded-lg flex items-center gap-[6px]">
         <ElectronicsWhiteIcon />
         <p className="text-sm lg:text-base text-white font-Regular]">

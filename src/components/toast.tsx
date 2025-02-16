@@ -4,7 +4,9 @@ import CloseNotficationsIcon from "../assets/icons/closeNotfications";
 import SuccessIcon from "../assets/icons/success";
 import ErrorNotficationIcon from "../assets/icons/error-notfication";
 import NotificationsIcon from "../assets/icons/Notifications";
-
+import NotificationIcon from "../assets/icons/notfication";
+import Image from "next/image";
+import notificationGif from "@/src/assets/images/notification.gif";
 interface ToastOptions {
   success?: string;
   loading?: string;
@@ -78,25 +80,28 @@ const Toast = {
     return toast.custom(
       (t) => (
         <div
-          style={{
-            background:
-              "linear-gradient(90.87deg, #FFFFFF 60.75%, #DBF3F6 96.31%)",
-            boxShadow:
-              "0px 8px 10px 0px rgba(0, 0, 0, 0.2), 0px 6px 30px 0px rgba(0, 0, 0, 0.12), 0px 16px 24px 0px rgba(0, 0, 0, 0.14)",
-          }}
-          className="flex items-center gap-5 relative w-fit rounded-xl border-b-[3px] border-greenMain p-5"
+          className={`flex items-center justify-between max-w-[94%] w-[550px] rounded-xl bg-white shadow-md p-4 ${
+            t.visible ? "animate-enter" : "animate-leave"
+          }`}
         >
-          <NotificationsIcon className="size-4 mdl:size-6 shrink-0" />
+          <div className="flex items-center">
+            <Image
+              src={notificationGif} // Replace with the path to your GIF
+              alt="Notification"
+              className="mdl:w-10 w-8  h-auto"
+            />
 
-          <p className="text-xs mdl:text-base font-medium flex-1">{message}</p>
-
-          <button onClick={() => toast.remove(t.id)}>
-            <CloseNotficationsIcon className="text-grayDark size-5" />
+            <div className="ml-2 text-sm mdl:text-base font-medium text-gray-800">
+              {message}
+            </div>
+          </div>
+          <button onClick={() => toast.dismiss(t.id)} className="ml-4">
+            <CloseNotficationsIcon className="w-4 text-gray-500 hover:text-gray-700" />
           </button>
         </div>
       ),
       {
-        duration: 2000,
+        duration: 7000,
       }
     );
   },

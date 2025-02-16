@@ -1,5 +1,4 @@
 "use client";
-import ClockIcon from "@/src/assets/icons/clock";
 import Button from "@/src/components/button";
 import Input from "@/src/components/input";
 import InputTextarea from "@/src/components/InputTextarea";
@@ -8,8 +7,8 @@ import SelectInput from "@/src/components/select-input";
 import { Toast } from "@/src/components/toast";
 import { useEditMyProfile } from "@/src/hooks/queries/user/my-profile";
 import { Language, WorkingDays } from "@/src/lib/dataUser";
+import { convertTo12Hour, convertTo24Hour } from "@/src/lib/utils";
 import { MultiSelect, ScrollArea } from "@mantine/core";
-import { TimeInput } from "@mantine/dates";
 import React, { useCallback, useState } from "react";
 
 function ModalEditProfile({
@@ -31,11 +30,11 @@ function ModalEditProfile({
     City: initialData?.city || "",
     PostalCode: initialData?.postalCode || "",
     streetName: initialData?.streetName || "",
-    PhoneNumber:initialData?.phoneNumber || "",
+    PhoneNumber: initialData?.phoneNumber || "",
     Language: "en",
     description: initialData?.description || "",
     UserLanguages:
-      initialData?.languages.map((item: any) =>
+      initialData?.languages?.map((item: any) =>
         item?.userLanguages?.toString()
       ) || [],
     address: initialData?.address || "",
@@ -43,6 +42,8 @@ function ModalEditProfile({
     workingTo: initialData?.workingTo || "",
     activeFrom: initialData?.activeFrom?.toString() || "",
     activeTo: initialData?.activeTo?.toString() || "",
+    region: initialData?.region || "",
+    zipCode: initialData?.zipCode || "",
   });
 
   const handleInputChange = (field: string, value: any) => {
@@ -122,19 +123,17 @@ function ModalEditProfile({
                 Address information
               </p>
               <Input
+                label="Address"
+                placeholder="Address"
+                defaultValue={formState.address}
+                onChange={(e) => handleInputChange("address", e.target.value)}
+              />
+              <Input
                 label="Street Name"
                 placeholder="Street Name"
                 defaultValue={formState.streetName}
                 onChange={(e) =>
                   handleInputChange("streetName", e.target.value)
-                }
-              />
-              <Input
-                label="Postal Code"
-                placeholder="Postal Code"
-                defaultValue={formState.PostalCode || ""}
-                onChange={(e) =>
-                  handleInputChange("PostalCode", e.target.value)
                 }
               />
             </div>
@@ -154,6 +153,28 @@ function ModalEditProfile({
                 onChange={(e) => handleInputChange("City", e.target.value)}
               />
             </div>
+            <div className="flex gap-4 mdl:gap-7 flex-wrap flex-col mdl:flex-row">
+              <Input
+                label="Region"
+                defaultValue={formState.region}
+                placeholder="Region"
+                className="flex-1"
+                onChange={(e) => handleInputChange("region", e.target.value)}
+              />
+              <Input
+                label="Zip Code"
+                defaultValue={formState.zipCode}
+                placeholder="Zip Code"
+                className="flex-1"
+                onChange={(e) => handleInputChange("zipCode", e.target.value)}
+              />
+            </div>
+            <Input
+              label="Postal Code"
+              placeholder="Postal Code"
+              defaultValue={formState.PostalCode || ""}
+              onChange={(e) => handleInputChange("PostalCode", e.target.value)}
+            />
             <InputTextarea
               label="About"
               placeholder="About"
@@ -194,30 +215,31 @@ function ModalEditProfile({
                 Opining hours
               </p>
               <div className="flex mdl:items-center gap-4 w-full flex-col mdl:flex-row">
-                <TimeInput
+                <Input
+                  type="time"
                   label="From"
-                  leftSection={<ClockIcon className="w-4 h-4" />}
-                  onChange={(value) =>
-                    handleInputChange("workingFrom", value.target.value)
-                  }
-                  defaultValue={formState.workingFrom}
-                  classNames={{
-                    input: "bg-grayLight border-none w-full h-11 rounded-xl ",
-                    section: "text-grayMedium",
+                  value={convertTo24Hour(formState.workingFrom)}
+                  onChange={(value) => {
+                    handleInputChange(
+                      "workingFrom",
+                      convertTo24Hour(value.target.value)
+                    );
                   }}
+                  inputClassName="bg-grayLight border-none w-full h-11 rounded-xl "
                   className="w-full"
                 />
-                <TimeInput
+
+                <Input
+                  type="time"
                   label="To"
-                  leftSection={<ClockIcon className="w-4 h-4" />}
                   onChange={(value) =>
-                    handleInputChange("workingTo", value.target.value)
+                    handleInputChange(
+                      "workingTo",
+                      convertTo24Hour(value.target.value)
+                    )
                   }
-                  defaultValue={formState.workingTo}
-                  classNames={{
-                    input: "bg-grayLight border-none w-full h-11 rounded-xl ",
-                    section: "text-grayMedium",
-                  }}
+                  value={convertTo24Hour(formState.workingTo)}
+                  inputClassName="bg-grayLight border-none w-full h-11 rounded-xl "
                   className="w-full"
                 />
               </div>

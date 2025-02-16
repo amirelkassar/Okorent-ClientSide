@@ -14,25 +14,6 @@ import Verify from "@/src/components/verify";
 import UploadAndCropImg from "./uploadAndCropImg";
 import ModalEditProfile from "./modal-edit-profile";
 import { getDate } from "@/src/lib/utils";
-const profileData = {
-  name: "Mark James",
-  memberSince: "March 2024",
-  image: imgUser,
-  rating: 4.52,
-  leasedItems: 320,
-  membership: "Starter Membership",
-  availability: "Available",
-  about: {
-    languagesSpoken: "English and French",
-    address: "Neatherland",
-    email: "markjames@gmail.com",
-  },
-  verify: {
-    verifiedPhoneNumber: true,
-    verifiedEmail: true,
-    verifiedIdentity: false,
-  },
-};
 
 function ProfileDetails({ initialData }: { initialData: any }) {
   const [opened, { open, close }] = useDisclosure(false);
@@ -40,29 +21,30 @@ function ProfileDetails({ initialData }: { initialData: any }) {
   return (
     <div className="bg-white/50 flex-1 md:flex-row flex-col min-w-[530ox] xxl:min-w-[800px] flex gap-4 md:gap-5 pt-6 pb-9 lg:pb-12  px-6 rounded-2xl border border-green/80 shadow-md">
       <div className="md:min-w-[200px]">
-        <UploadAndCropImg image={initialData.userImage || profileData.image} />
+        <UploadAndCropImg
+          image={initialData.userImage || imgUser}
+          verify={initialData.emailVerified && initialData.phoneNumberVerified}
+        />
         <p className="flex items-center gap-1 text-center mx-auto justify-center mb-1 md:mb-4 text-sm  md:text-base text-green">
           <span className="block h-[5px] w-[5px] rounded-full animate-pulse bg-green"></span>
-          {profileData.availability}
+          Available
         </p>
         <div className="flex items-center justify-center gap-2 w-fit mx-auto rounded-lg bg-green/15 px-3 py-1 md:py-2">
           <RocketIcon />
-          <p className="text-sm md:text-base font-Medium">
-            {profileData.membership}
-          </p>
+          <p className="text-sm md:text-base font-Medium">Starter Membership</p>
         </div>
       </div>
       <div className="flex lg:px-0 md:px-8 px-0 flex-wrap flex-1 gap-10 lg:gap-2 flex-col lg:flex-row md:pt-6">
         <div className="flex-1">
           <div className="flex flex-col text-center justify-center md:justify-start md:text-start gap-2 mb-8">
             <h2 className="text-2xl md:text-3xl ">
-              {initialData.name || profileData.name}
+              {initialData.name || "User Name"}
             </h2>
             <h3 className="text-base md:text-xl text-grayMedium ">
               Member Since{" "}
               {initialData.created
                 ? getDate(initialData.created).fullYearWithMonthName
-                : profileData.memberSince}
+                : null}
             </h3>
             <div className=" flex items-center justify-center md:justify-start gap-5">
               <div className="flex items-center gap-1 pe-4 border-e border-green">

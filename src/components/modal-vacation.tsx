@@ -1,18 +1,25 @@
 "use client";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import ModalComp from "./modal-comp";
 import { DatePicker } from "@mantine/dates";
 import Button from "./button";
 import Image from "next/image";
 import reservesImg from "@/src/assets/images/reserves.png";
 import { useDisclosure } from "@mantine/hooks";
+import { useVacationUser } from "../hooks/queries/user/home/user-info";
+import { Toast } from "./toast";
+import GetErrorMsg from "./getErrorMsg";
+import ErrorMsg from "./error-msg";
+import { getDate } from "../lib/utils";
 function ModalVacation({ opened, close }: { opened: boolean; close: any }) {
   const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
-
   const [value, setValue] = useState<[Date | null, Date | null]>([
     new Date(),
     new Date(),
   ]);
+
+  const { mutateAsync: VacationUser, error, reset } = useVacationUser();
+
   const formatDate = (date: Date | null) => {
     if (!date) return "";
     return new Intl.DateTimeFormat("en-US", {
@@ -21,6 +28,20 @@ function ModalVacation({ opened, close }: { opened: boolean; close: any }) {
       day: "numeric",
     }).format(date);
   };
+  const handleSubmit = useCallback(async () => {
+    Toast.Promise(
+      VacationUser({
+        VacationStart: getDate(value[0]?.toISOString()).fullYear,
+        VacationEnd: getDate(value[1]?.toISOString()).fullYear,
+      }),
+      {
+        success: "Done Vacation User",
+        onSuccess: async (res) => {
+          close();
+        },
+      }
+    );
+  }, [VacationUser, value, close, close2]);
   return (
     <div>
       <ModalComp opened={opened} close={close} title={"Select rental period"}>
@@ -36,7 +57,10 @@ function ModalVacation({ opened, close }: { opened: boolean; close: any }) {
             weekendDays={[]}
             type="range"
             value={value}
-            onChange={setValue}
+            onChange={(value) => {
+              setValue(value);
+              reset();
+            }}
             minDate={new Date()}
           />
           <div className="flex gap-6 flex-wrap bg-grayBack  rounded-xl py-2 px-3">
@@ -65,6 +89,16 @@ function ModalVacation({ opened, close }: { opened: boolean; close: any }) {
           >
             Remove Dates
           </button>
+          <div className="flex flex-col gap-2 my-1">
+            <ErrorMsg
+              error={GetErrorMsg(error, "VacationStart")}
+              textClassName="!text-xs"
+            />
+            <ErrorMsg
+              error={GetErrorMsg(error, "VacationEnd")}
+              textClassName="!text-xs"
+            />
+          </div>
           <Button className={"w-full"} onClick={() => open2()}>
             Save
           </Button>
@@ -99,8 +133,9 @@ function ModalVacation({ opened, close }: { opened: boolean; close: any }) {
             </Button>
             <Button
               onClick={() => {
+                reset();
+                handleSubmit();
                 close2();
-                close();
               }}
               className={"h-10 font-Medium flex-1"}
             >

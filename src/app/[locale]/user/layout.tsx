@@ -3,6 +3,7 @@ import NavLinks from "./_components/navLinks";
 import Nav from "@/src/components/nav";
 import Footer from "@/src/components/footer";
 import ROUTES from "@/src/routes";
+import { NotificationsHub } from "@/src/components/notifications-hub";
 
 interface layoutProps {
   children: React.ReactNode;
@@ -10,6 +11,7 @@ interface layoutProps {
 function layout({ children }: layoutProps) {
   return (
     <div className="font-Medium min-h-[100vh]  text-black   mx-auto ">
+      <NotificationsHub />
       <Nav linkLogo={ROUTES.USER.HOMEPAGE} />
       <NavLinks />
       <div className="max-w-[1600px] mx-auto ">

@@ -10,7 +10,7 @@ function LoadingProductsRow({
 }) {
   return (
     <div
-      className={`flex gap-3 lg:gap-4  mb-section ${
+      className={`flex gap-2 sml:gap-3 lg:gap-4  mb-section mdl:justify-start justify-center ${
         oneLine ? "" : "flex-wrap "
       }`}
     >

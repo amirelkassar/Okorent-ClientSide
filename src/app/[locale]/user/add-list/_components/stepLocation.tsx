@@ -47,7 +47,7 @@ function StepLocation({
         {data?.data.length > 0 ? (
           <div className="flex flex-col gap-5 lg:gap-6 max-w-full">
             <MultiSelect
-              data={data?.data.map((loc: any) => ({
+              data={data?.data?.map((loc: any) => ({
                 value: loc.id, // Use the `id` as the value
                 label: loc.name, // Use the `address` as the label
               }))}

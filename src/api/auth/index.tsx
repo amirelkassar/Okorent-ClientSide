@@ -1,4 +1,3 @@
-import { buildQuery } from "@/src/lib/utils";
 
 export const auth = {
   login: {

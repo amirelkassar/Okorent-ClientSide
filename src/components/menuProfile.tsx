@@ -6,7 +6,6 @@ import React, { useState } from "react";
 import profile from "@/src/assets/images/Shape.png";
 import ProfileIcon from "../assets/icons/Profile";
 import LogoutIcon from "../assets/icons/Logout";
-import SettingsIcon from "../assets/icons/Settings";
 import SubscriptionIcon from "../assets/icons/Subscription";
 import { Link } from "../navigation";
 import ROUTES from "../routes";
@@ -15,18 +14,18 @@ import AdsIcon from "../assets/icons/ads";
 import { clearToken } from "../lib/token";
 import { useLocale } from "next-intl";
 import { useToken } from "../hooks/use-token";
-import ModalComp from "./modal-comp";
-import { DatePicker } from "@mantine/dates";
 import { useDisclosure } from "@mantine/hooks";
-import Button from "./button";
 import ModalVacation from "./modal-vacation";
 import LocationIcon from "../assets/icons/location";
+import { GetMyProfile } from "../hooks/queries/user/my-profile";
 function MenuProfile() {
   const [openMenu, setOpened] = useState(false);
   const locale = useLocale();
   const { setToken } = useToken();
   const [opened, { open, close }] = useDisclosure(false);
+  const { data } = GetMyProfile();
 
+  
   const handleLogout = () => {
     setToken({}); // Clear token from the state
     clearToken(); // Clear token from storage
@@ -52,11 +51,11 @@ function MenuProfile() {
               <p className="text-[14px]">My Profile</p>
             </div>
             <Image
-              src={profile}
+              src={data?.data?.userImage||profile}
               width={40}
               height={40}
               alt="profile"
-              className="w-8 h-8 rounded-full"
+              className="w-8 h-8 rounded-full object-cover object-top"
             />
           </button>
         </Menu.Target>
@@ -65,7 +64,7 @@ function MenuProfile() {
             closeMenuOnClick={false}
             className="  py-0 h-[30px] px-1 !mb-2 text-[14px] font-SemiBold rounded-lg"
           >
-            <SwitchAvailable open={open} />
+            <SwitchAvailable open={open} vacation={data?.data?.isVacationEnd} />
           </Menu.Item>
           <Menu.Item
             leftSection={<ProfileIcon />}

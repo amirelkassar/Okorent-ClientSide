@@ -6,7 +6,6 @@ import CardProduct from "@/src/components/product/cardProduct";
 import Description from "@/src/components/product/description";
 import LoadingProductsRow from "@/src/components/product/loading-products-row";
 import { QueryWrapper } from "@/src/components/query-wrapper";
-import QuestionView from "@/src/components/question";
 import Reviews from "@/src/components/reviews";
 import { GetReviewByID } from "@/src/hooks/queries/user/booking/reviews";
 import { GetProductsAll, GetProductsByID } from "@/src/hooks/queries/user/home";
@@ -19,7 +18,7 @@ function Page({ params }: any) {
   const query = GetProductsByID(params.productID);
   const { data: dataCustomers, isLoading: isLoadingProducts } =
     GetProductsAll();
-  const { data:DataReviews, isLoading } = GetReviewByID(params.productID);
+  const { data: DataReviews, isLoading } = GetReviewByID(params.productID);
 
   return (
     <QueryWrapper query={query}>
@@ -63,7 +62,6 @@ function Page({ params }: any) {
                     title="Cancelation Policy"
                     description="In case of cancellation 2 days before the rental period, 100% of the rental amount is refunded. If canceled one day before the rental period, 50% of the rental amount is refunded. If you cancel the same day the rental period starts, no refund is made."
                   />
-                  <QuestionView />
                 </div>
                 <FAQ dataFAQ={data?.faQs || []} />
                 <div className="bg-grayBack max-w-full   pt-5 pb-8 lg:pb-10 relative before:content-[''] before:w-[calc(100%+32px)] lg:before:w-screen   before:bg-grayBack before:absolute before:bottom-0 before:-translate-x-1/2   before:h-full before:left-[50%]">

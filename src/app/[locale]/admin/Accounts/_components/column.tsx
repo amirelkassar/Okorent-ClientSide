@@ -1,5 +1,4 @@
 "use client";
-import FilterIcon from "@/src/assets/icons/filter";
 import StarIcon from "@/src/assets/icons/star";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
@@ -9,6 +8,7 @@ import ActionMenu from "./action-menu";
 import RenderPackage from "../../_components/render-package";
 import avatarUser from "@/src/assets/images/avatar.png";
 import { getDate } from "@/src/lib/utils";
+import TableFilter from "@/src/components/TableFilterProps";
 
 export type MedicalTeamTableData = {
   id: number;
@@ -19,7 +19,8 @@ export type MedicalTeamTableData = {
   payment: number;
   rating: number;
   userImage: string;
-  status: boolean;
+  isActivated: any;
+  isVerified: any;
   created: string;
   userName: string;
   totalProductsCount: any;
@@ -30,12 +31,7 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
   {
     accessorKey: "name",
     header: () => {
-      return (
-        <div className="flex items-center gap-1 cursor-pointer">
-          <p className="text-[18px]">Name</p>
-          <FilterIcon />
-        </div>
-      );
+      return <TableFilter title="Name" column="Name" type="search" />;
     },
     cell: ({ getValue, row }) => {
       const name = getValue<string>();
@@ -71,14 +67,15 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
   },
   {
     accessorKey: "memberShipName",
-    header: () => {
-      return (
-        <div className="flex items-center gap-1 cursor-pointer">
-          <p className="text-[18px]">Package</p>
-          <FilterIcon />
-        </div>
-      );
-    },
+    header: () => (
+      <TableFilter
+        title="Package"
+        column="package"
+        type="select"
+        options={["Pro Package", "Diamond Package"]}
+      />
+    ),
+
     cell: ({ getValue }) => {
       const packageVal = getValue<string>();
       return <RenderPackage packageVal={packageVal} />;
@@ -89,21 +86,29 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     header: "Payment",
     cell: ({ getValue }) => {
       const payment = getValue<number>();
-      return <p className=" text-[16px] font-SemiBold">{payment}$</p>;
+      return <p className=" text-[16px] font-SemiBold">{payment || 0} $</p>;
     },
   },
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: "isVerified",
+    header: "Verify",
     cell: ({ getValue }) => {
-      const status = getValue();
+      const isVerified = getValue();
       return (
         <p className="text-[16px] font-SemiBold">
-          {status === 2
-            ? "Verified"
-            : status === 1
-            ? "Un Verified"
-            : "Deactivated"}
+          {isVerified ? "Verified" : "Un Verified"}
+        </p>
+      );
+    },
+  },
+  {
+    accessorKey: "isActivated",
+    header: "Status",
+    cell: ({ getValue }) => {
+      const isActivated = getValue();
+      return (
+        <p className="text-[16px] font-SemiBold">
+          {isActivated ? "Activated" : "Deactivated"}
         </p>
       );
     },
@@ -125,10 +130,16 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
     id: "actions",
     cell: ({ row }) => {
       const id = row.original.id;
-      const status = row.original.status;
+      const isActivated = row.original.isActivated;
+      const isVerified = row.original.isVerified;
       return (
         <div className="flex items-center gap-3 justify-end">
-          <ActionMenu id={id} status={status} dataUSer={row.original} />
+          <ActionMenu
+            id={id}
+            isActivated={isActivated}
+            isVerified={isVerified}
+            dataUSer={row.original}
+          />
         </div>
       );
     },

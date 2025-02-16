@@ -108,17 +108,5 @@ export const columns: ColumnDef<MedicalTeamTableData>[] = [
 
   {
     id: "actions",
-    cell: () => {
-      return (
-        <div className="flex items-center gap-3 w-fit">
-          <ActionIcon variant="transparent">
-            <EditIcon className="w-5 h-auto" />
-          </ActionIcon>
-          <ActionIcon variant="transparent">
-            <DeleteIcon className="w-5 h-auto" />
-          </ActionIcon>
-        </div>
-      );
-    },
   },
 ];

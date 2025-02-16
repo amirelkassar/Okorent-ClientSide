@@ -333,3 +333,40 @@ li.search::before {
   svg {
   color: white;
 }
+.virtuoso-container {
+  @apply mt-1
+}
+/* Target the Virtuoso scroller */
+[data-virtuoso-scroller="true"]::-webkit-scrollbar {
+  width: 8px; /* Adjust scrollbar width */
+  /* display: none; */
+  @apply rounded-md;
+}
+
+[data-virtuoso-scroller="true"]::-webkit-scrollbar-track {
+  background: #f0f0f0; /* Background of the track */
+  @apply rounded-md;
+}
+
+[data-virtuoso-scroller="true"]::-webkit-scrollbar-thumb {
+  @apply bg-green rounded-md;
+  /* display: none; */
+}
+
+[data-virtuoso-scroller="true"]::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Scrollbar thumb hover color */
+}
+
+/* Optional: Handle horizontal scrollbar if needed */
+[data-virtuoso-scroller="true"]::-webkit-scrollbar:horizontal {
+  height: 8px; /* Adjust height for horizontal scrollbar */
+}
+.OfferSwiper .swiper-pagination {
+  @apply absolute h-3 flex items-center justify-center bottom-3 left-1/2 -translate-x-1/2 translate-y-1/2;
+}
+.OfferSwiper .swiper-pagination .swiper-pagination-bullet{
+  @apply w-[5px] h-[5px];
+}
+.OfferSwiper .swiper-pagination .swiper-pagination-bullet-active{
+  @apply  bg-green;
+}

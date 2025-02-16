@@ -37,7 +37,6 @@ export const useSignUp = (): SignUpReturn => {
   } = useCreateAccountMutation();
 
   const onSubmit = useCallback(async (formData:any) => {
-    console.log(formData);
     setUser(formData);
     const requestData = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
@@ -48,8 +47,6 @@ export const useSignUp = (): SignUpReturn => {
     Toast.Promise(CreateAccount(requestData), {
       success: "Successfully registered",
       onSuccess: (res) => {
-        console.log(res);
-        console.log(formData);
         if (res?.code === 200) {
           setUser({ ...formData, id: res?.data?.id });
           router.replace(
@@ -57,9 +54,7 @@ export const useSignUp = (): SignUpReturn => {
           );
         }
       },
-
       onError: (error) => {
-        console.log("error");
         console.log(error);
       },
     });

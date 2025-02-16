@@ -9,8 +9,6 @@ import MicIcon from "@/src/assets/icons/mic";
 import AttachIcon from "@/src/assets/icons/attach";
 import { cn } from "@/src/lib/utils";
 import CloseChatIcon from "@/src/assets/icons/closeChat";
-import PlayIcon from "@/src/assets/icons/play";
-import RecordIcon from "@/src/assets/icons/record";
 import ProductClient from "./productClient";
 import ArrowBackIcon from "@/src/assets/icons/arrowBack";
 import { useSearchParams } from "next/navigation";
@@ -72,15 +70,7 @@ const Chat = () => {
 
       <div className="overflow-y-auto hideScroll   max-h-full space-y-4  md:space-y-5 flex-1 pb-10">
         {/* RECEIVED MESSAGE */}
-        <div className="flex flex-row-reverse items-center gap-3">
-          <p className="bg-grayLight rounded-[32px] text-black text-[12px] leading-[15px] px-6 max-w-[344px] py-4 rounded-ee-none">
-            <span className="text-black flex items-center gap-2 w">
-              <PlayIcon />
-              <RecordIcon />
-              01:24
-            </span>
-          </p>
-        </div>
+
         <div className="flex flex-row-reverse items-center gap-3">
           <p className="bg-grayLight rounded-[32px] text-black text-[12px] leading-[15px] px-6 max-w-[270px] py-4 rounded-ee-none">
             Oh, hello! All perfectly. I will check it and get back to you soon
@@ -105,15 +95,7 @@ const Chat = () => {
             </p>
           </div>
         </div>
-        <div className="flex= items-center gap-3">
-          <p className="bg-grayBack rounded-[32px] text-black text-[12px] leading-[15px] px-6 max-w-[344px] py-4 rounded-es-none">
-            <span className="text-black flex items-center gap-2 w">
-              <PlayIcon />
-              <RecordIcon />
-              01:24
-            </span>
-          </p>
-        </div>
+
         <div className="flex items-center gap-3">
           <div className="flex flex-col gap-2">
             <p className="bg-grayBack rounded-[32px] text-black text-[12px] leading-[15px] px-6 max-w-[270px] py-4 rounded-es-none">
@@ -162,15 +144,6 @@ const Chat = () => {
             </span>
           </div>
         </div>
-        <div className="flex flex-row-reverse items-center gap-3">
-          <p className="bg-grayLight rounded-[32px] text-black text-[12px] leading-[15px] px-6 max-w-[344px] py-4 rounded-ee-none">
-            <span className="text-black flex items-center gap-2 w">
-              <PlayIcon />
-              <RecordIcon />
-              01:24
-            </span>
-          </p>
-        </div>
       </div>
 
       <div className="flex items-center gap-2  md:gap-5 ">
@@ -217,9 +190,6 @@ const Chat = () => {
             </div>
           ) : null}
           <div className="relative flex-1 flex items-center gap-5 ">
-            <button className="absolute top-1/2 end-2 md:end-3 -translate-y-1/2 z-20">
-              <MicIcon className= " w-[14px] md:w-4 h-auto"/>
-            </button>
             <Textarea
               className="flex-1 text-[16px]"
               autosize

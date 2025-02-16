@@ -1,37 +1,21 @@
-import EditIcon from "@/src/assets/icons/edit";
 import Button from "@/src/components/button";
 import CardDetailsList from "@/src/components/cardDetailsList";
 import FAQ from "@/src/components/faq";
-import LinkGreen from "@/src/components/linkGreen";
-import ROUTES from "@/src/routes";
 import Image from "next/image";
 import React from "react";
+import HeaderActions from "./header-actions";
 
-function PageListingId({ initialData,id }: { initialData: any,id:any }) {
+function PageListingId({ initialData, id }: { initialData: any; id: any }) {
   return (
-    <div className="flex flex-col lgl:mt-[-30px] gap-3 mb-20">
-      <LinkGreen
-        href={ROUTES.USER.LISTINGSEDIT(id)}
-        className={
-          " ms-auto relative lgl:bottom-[-40px] px-10  gap-2 h-10   text-medium"
-        }
-      >
-        <EditIcon fill="white" className="w-[16px]" />
-        <p className="text-white">Edit</p>
-      </LinkGreen>
-      <CardDetailsList
-        title="Item Category"
-        decs={initialData.categoryName}
-      />
+    <div className="flex flex-col gap-3 mb-20">
+      <HeaderActions id={id} />
+      <CardDetailsList title="Item Category" decs={initialData.categoryName} />
       <CardDetailsList
         title="Item Subcategory"
         decs={initialData.subCategoryName}
       />
       <CardDetailsList title="Title" decs={initialData?.name} />
-      <CardDetailsList
-        title="Describtion"
-        decs={initialData?.description}
-      />
+      <CardDetailsList title="Describtion" decs={initialData?.description} />
       <div className="pb-4 border-b border-grayMedium/40 last-of-type:border-none">
         <h3 className="text-base lg:text-[24px] mb-1">Item Images</h3>
         {initialData?.images.length > 0 && (
@@ -54,23 +38,15 @@ function PageListingId({ initialData,id }: { initialData: any,id:any }) {
 
         <p className="text-base border-b border-grayMedium/40 py-2 last-of-type:border-none text-grayMedium font-Regular">
           Per Day:{" "}
-          <span className="font-Medium">
-            {initialData?.dailyPrice}
-          </span>
+          <span className="font-Medium">{initialData?.dailyPrice}</span>
         </p>
         <p className="text-base border-b border-grayMedium/40 py-2 last-of-type:border-none text-grayMedium font-Regular">
           Per 3 Days:{" "}
-          <span className="font-Medium">
-            {" "}
-            {initialData?.weeklyPrice}{" "}
-          </span>
+          <span className="font-Medium"> {initialData?.weeklyPrice} </span>
         </p>
         <p className="text-base border-b border-grayMedium/40 py-2 last-of-type:border-none text-grayMedium font-Regular">
           Per Week:{" "}
-          <span className="font-Medium">
-            {" "}
-            {initialData?.monthlyPrice}{" "}
-          </span>
+          <span className="font-Medium"> {initialData?.monthlyPrice} </span>
         </p>
       </div>
       <div className="pb-4 border-b border-grayMedium/40 last-of-type:border-none">
@@ -95,7 +71,7 @@ function PageListingId({ initialData,id }: { initialData: any,id:any }) {
       <CardDetailsList
         title="Availability"
         decs={
-            initialData?.availableFrom
+          initialData?.availableFrom
             ? ` form ${initialData?.availableFrom} - to ${initialData?.availableTo} `
             : "Always available"
         }
@@ -132,7 +108,6 @@ function PageListingId({ initialData,id }: { initialData: any,id:any }) {
         decs={initialData?.isActive ? "Active" : "Not Active"}
       />
       <FAQ dataFAQ={initialData?.faQs} />
-      <Button className={"w-fit px-11 h-[64px] mt-8"}>Promote Listing</Button>
     </div>
   );
 }

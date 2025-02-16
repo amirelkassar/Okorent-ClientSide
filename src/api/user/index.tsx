@@ -19,11 +19,17 @@ export const user = {
     getMyProductsById: (id: any) => `/Product/my-product/${id}`,
     favoriteProducts: `/FavouriteProduct`,
     DeleteFavoriteProducts: (id: any) => `/FavouriteProduct/${id}`,
+    DeleteManyProduct: `/Product/DeleteMyProducts`,
+    barcode_my_products: "Barcode/generate-product-barcode",
   },
   information: {
     base: (id: any) => `/User/${id}`,
     user_edit: `/User`,
     ProductsOrder: (id: any) => `/User/User-Order-Products/${id}`,
+    Header_Dashboard: "/UserDashboard/User-Get-Dashboard",
+    Ongoing_Rentals: "/UserDashboard/User-Get-Ongoing-Rentals",
+    Vacation: "/User/UserVcation",
+    End_Vacation: "/User/User-End-Vcation",
   },
   stock: {
     base: "/Stock",
@@ -35,6 +41,8 @@ export const user = {
     base: "/BookingOrder/Direct-Order",
     booking: {
       i_rent: (queries: any) => buildQuery("/BookingOrder", queries),
+      i_rent_card: (queries: any) =>
+        buildQuery("/BookingOrder/BookingOrdersCarts", queries),
       i_rentOut: (queries: any) => buildQuery("/BookingOrder", queries),
       changeStatusById: (id: any) => `/BookingOrder/OrderStatus/${id}`,
       changeStatusByIds: `/BookingOrder/UpdateOrdersStatus`,
@@ -69,11 +77,23 @@ export const user = {
     ImageUpdate: "/MyProfile/Image",
     RecentActivities: "/MyProfile/My Recent Activities",
   },
+  Demo: {
+    create: "/Demo/Create-Demo",
+  },
+  Chat: {
+    Get_All_Chats: (queries: any) => buildQuery("/Chat/rooms", queries),
+    Get_Messages_By_Id: (id: any) => `/Chat/room/${id}`,
+    Create_New_Chat: "/Chat/room",
+    Send_Message: "/Chat/message",
+  },
 };
 
 export const admin = {
   Home: {
-    DashboardCount: "/AdminDashBoard/Get Users Overview",
+    DashboardCount: "/AdminDashBoard/Get-Users-Overview",
+    performace_year: "/AdminDashBoard/Get-Monthly-Performace-Orders",
+    performace_weekly: "/AdminDashBoard/Get-Weekly-Performace-Orders",
+    performace_month: "/AdminDashBoard/Get-Daily-Performace-Orders",
   },
   Category: {
     base: "/Category",
@@ -89,14 +109,33 @@ export const admin = {
     AccountsID: (id: any) => `/AdminManageUser/${id}`,
     CreateAccounts: `/AdminManageUser`,
     DeActivate: "/AdminManageUser/deactivate",
-    Activate: "/AdminManageUser/ReactivateUser",
+    DeActivateMany: "/AdminManageUser/Bulk-Deactivate",
+    Activate: "/AdminManageUser/Reactivate",
     DeleteManyAccounts: "/AdminManageUser/DeleteUsers",
+    UpdateUserProfile: "/AdminManageUser/UpdateUserProfile",
+    UpdateImageUserProfile: "/AdminManageUser/UpdateUserImage",
+    ActiveManyUser: "/AdminManageUser/Bulk-Reactivate",
+    Verification: "/AdminManageUser/Verification",
+    Verification_Many: "/AdminManageUser/Bulk-Verification",
+  },
+  Account_Dashboard: {
+    base: (id: any) => `/AdminGetUserDashBoard/${id}`,
+    Transactions: (queries: any) =>
+      buildQuery(
+        `/AdminGetUserDashBoard/Admin-Get-UserRecentTransactions`,
+        queries
+      ),
+    Rentals: (id: any) =>
+      `/AdminGetUserDashBoard/Get-Monthly-Performace-Orders-ForUser/${id}`,
+    Inventory: (id: any) =>
+      `/AdminGetUserDashBoard/Admin-Get-InventoryAllocation-ForUser/${id}`,
   },
   product: {
     base: (queries: any) => buildQuery("/AdminProduct", queries),
     getById: (id: any) => `/AdminProduct/${id}`,
     DeleteManyProducts: `/AdminProduct/Delete-Products`,
     productUserOrder: (id: any) => `/AdminProduct/User-Order-Products/${id}`,
+    quick_edit: `/AdminProduct/Update-Products`,
   },
   Stocks: {
     base: (id: any) => `/AdminUserStock/${id}`,
@@ -121,14 +160,53 @@ export const admin = {
   Invoices: {
     base: (queries: any) =>
       buildQuery("/AdminManageInvoices/GetAllInvoices", queries),
+    delete: "/AdminManageInvoices/DeleteInvoices",
+  },
+  Notes: {
+    get_all: (queries: any) =>
+      buildQuery("/AdminNote/Admin-GetAll-Notes", queries),
+    get_by_id: (queries: any) =>
+      buildQuery("/AdminNote/Get-Note-ByID", queries),
+    notes_id: (id: any) => `/AdminNote/${id}`,
+    create: "/AdminNote",
+    delete_bulk: "/AdminNote/DeleteNote-ForSpecificUsers",
+    delete_group: "/AdminNote/DeleteNotes",
+  },
+  Demo: {
+    base: (queries: any) => buildQuery("/Demo/Admin-GetAll-Demos", queries),
+    Change: "/Demo/Admin-Update-DemoStatus",
+    delete: (id: any) => `/Demo/Admin-Delete/${id}`,
+    add_note: "/Demo/Admin-Create-DemoNote",
+    get_note_byID: (id: any) => `/Demo/Admin-GetDemo-ByID/${id}`,
   },
 };
 
 export const notifications = {
-  base: "/notification",
+  base: (queries: any) => buildQuery("/notification", queries),
   list: (queries: any) => buildQuery("/notification/list", queries),
   actions: {
-    makeItRead: (id: any) => `/notification?id=${id}`,
+    makeItRead: "/Notification/read",
+    makeItReadAll: "/Notification/read-list",
     delete: (id: any) => `/notification?id=${id}`,
   },
+};
+
+export const Support = {
+  get_all: (queries: any) =>
+    buildQuery("/Tickets/User-GetAll-Tickets", queries),
+  get_by_id: (id: any) => `/Tickets/User-Get-Ticket/${id}`,
+  create_guest: "/Tickets/Guest-Create",
+  reply_guest: "/Tickets/Guest-Reply",
+  create_user: "/Tickets/User-Create",
+  reply_user: "/Tickets/User-Reply",
+  delete: `/Tickets/User-Delete`,
+  solved: "/Tickets/User-End-Ticket",
+};
+export const SupportAdmin = {
+  get_all: (queries: any) =>
+    buildQuery("/AdminTicket/Admin-GetAll-Tickets", queries),
+  get_by_id: (id: any) => `/AdminTicket/Admin-GetTicket-ByID?id=${id}`,
+  reply_admin: "/AdminTicket/Admin-Reply",
+  delete: (id: any) => `/AdminTicket/Admin-Delete/${id}`,
+  solved: "/AdminTicket/Admin-End-Ticket",
 };

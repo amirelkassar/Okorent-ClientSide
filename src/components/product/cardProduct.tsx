@@ -4,7 +4,6 @@ import ImagesProduct from "./imagesProduct";
 import PricingOptions from "./PricingOptions";
 import RentalDuration from "./rentalDuration";
 import PriceDetails from "./priceDetails";
-import ShareIcon from "@/src/assets/icons/share";
 import FavRedIcon from "@/src/assets/icons/favRed";
 import FeaturesProduct from "./FeaturesProduct";
 import ProductClient from "./productClient";
@@ -15,6 +14,10 @@ import ViewCheckout from "./checkout/view-checkout";
 import LinkGreen from "../linkGreen";
 import ROUTES from "@/src/routes";
 import { calculateDurationRange } from "@/src/lib/utils";
+import CopyLink from "../copy-link";
+import ModalContract from "../modal-contract";
+import { useDisclosure } from "@mantine/hooks";
+import Button from "../button";
 
 function CardProduct({
   data = [],
@@ -26,6 +29,7 @@ function CardProduct({
   admin?: boolean;
 }) {
   const params = useParams();
+  const [opened, { open, close }] = useDisclosure(false);
   const searchparams = useSearchParams();
   const [daysNumber, setDaysNumber] = useState(0);
   const [valueDate, setValueDate] = useState<[Date | null, Date | null]>([
@@ -48,7 +52,7 @@ function CardProduct({
     return priceOptions.Daily;
   }, [daysNumber, priceOptions]);
   const TotalPriceOrder = useMemo(
-    () => PriceBYDays * daysNumber - 50.82,
+    () => PriceBYDays * daysNumber,
     [PriceBYDays, daysNumber]
   );
 
@@ -96,12 +100,10 @@ function CardProduct({
       <div className=" w-full  border-b border-grayMedium/40 pb-6">
         <div className="flex w-full items-center  justify-between gap-3 mb-7 mt-5 md:mt-section ">
           <h2 className="text-lg lg:text-[32px] font-SemiBold ">
-            {data.name || "Hbada E3 Air Ergonomic Office Chair"}
+            {data.name || "Product Title"}
           </h2>
-          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-5">
-            <button className=" size-9 md:size-11 lg:size-[60px] rounded-full bg-grayBack flex items-center justify-center p-2 md:p-3 duration-300 hover:shadow-md">
-              <ShareIcon />
-            </button>
+          <div className="flex flex-wrap md:flex-nowrap md:flex-row items-center gap-2 md:gap-5">
+            <CopyLink />
             <button className=" size-9 md:size-11 lg:size-[60px] rounded-full bg-grayBack flex items-center justify-center p-2 md:p-3 duration-300 hover:shadow-md">
               <FavRedIcon />
             </button>
@@ -111,7 +113,7 @@ function CardProduct({
         <FeaturesProduct numRates={data?.usersReviews?.average || 0} />
       </div>
 
-      <div className="flex mt-5 md:mt-section items-start justify-between flex-col lg:flex-row gap-11">
+      <div className="flex mt-5 md:mt-section mb-8 lg:mb-0 items-start justify-between flex-col lg:flex-row gap-0 mdl:gap-11">
         <div className="lg:max-w-[650px] w-full flex-1">
           <div>
             <h3 className="text-base font-SemiBold mb-1 lg:mb-2 lg:text-xl">
@@ -141,13 +143,21 @@ function CardProduct({
           >
             {admin ? null : (
               <div className="flex items-center px-5 justify-between gap-4 pb-4 flex-wrap mt-5">
-                <LinkGreen
-                  href={
-                    guest
-                      ? ROUTES.AUTH.LOGIN
-                      : ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID)
-                  }
-                  className={`w-full  ${
+                <ModalContract opened={opened} close={close}>
+                  <LinkGreen
+                    href={
+                      guest
+                        ? ROUTES.AUTH.LOGIN
+                        : ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID)
+                    }
+                    className={'h-14 w-[310px] max-w-full mx-auto'}
+                  >
+                    Confirm
+                  </LinkGreen>
+                </ModalContract>
+                <Button
+                  onClick={open}
+                  className={`w-full !h-14  ${
                     valueAddressType &&
                     TotalPriceOrder &&
                     location &&
@@ -159,7 +169,7 @@ function CardProduct({
                   }  duration-300  `}
                 >
                   Request this item
-                </LinkGreen>
+                </Button>
               </div>
             )}
           </PriceDetails>

@@ -11,9 +11,11 @@ import {
 import React, { useCallback, useState } from "react";
 
 function SubCategoryRow({ data, idCategory }: { data: any; idCategory: any }) {
-
   const [edit, setEdit] = useState(false);
-  const { mutateAsync: DeleteSubCategory } = useDeleteSubCategory(data.id,idCategory);
+  const { mutateAsync: DeleteSubCategory } = useDeleteSubCategory(
+    data.id,
+    idCategory
+  );
   const { mutateAsync: EditSubCategory } = useEditSubCategory(idCategory);
   const [subCategoryName, setSubCategoryName] = useState(data.name);
   const onSubmitRemoveSubCategory = useCallback(async () => {
@@ -64,18 +66,24 @@ function SubCategoryRow({ data, idCategory }: { data: any; idCategory: any }) {
         </Button>
       ) : (
         <div className="flex items-center gap-2 min-w-[76px] mdl:min-w-[100px]">
-          <div
-            onClick={() => setEdit(true)}
-            className="flex size-8 mdl:size-10 min-w-8 mdl:min-w-10 items-center duration-300 hover:shadow-md cursor-pointer justify-center p-2 rounded-xl bg-blueLight"
-          >
-            <EditIcon fill="#006AFF" className=" w-4 mdl:w-5 h-auto" />
-          </div>
-          <div
-            onClick={onSubmitRemoveSubCategory}
-            className="flex size-8 mdl:size-10 min-w-8 mdl:min-w-10 items-center duration-300 hover:shadow-md cursor-pointer justify-center p-2 rounded-xl bg-blueLight"
-          >
-            <DeleteIcon className=" w-3 mdl:w-4 h-auto" />
-          </div>
+          {data?.isPending ? (
+            ""
+          ) : (
+            <>
+              <div
+                onClick={() => setEdit(true)}
+                className="flex size-8 mdl:size-10 min-w-8 mdl:min-w-10 items-center duration-300 hover:shadow-md cursor-pointer justify-center p-2 rounded-xl bg-blueLight"
+              >
+                <EditIcon fill="#006AFF" className=" w-4 mdl:w-5 h-auto" />
+              </div>
+              <div
+                onClick={onSubmitRemoveSubCategory}
+                className="flex size-8 mdl:size-10 min-w-8 mdl:min-w-10 items-center duration-300 hover:shadow-md cursor-pointer justify-center p-2 rounded-xl bg-blueLight"
+              >
+                <DeleteIcon className=" w-3 mdl:w-4 h-auto" />
+              </div>
+            </>
+          )}
         </div>
       )}
     </div>

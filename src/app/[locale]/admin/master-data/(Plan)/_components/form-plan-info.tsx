@@ -4,7 +4,7 @@ import React from "react";
 
 function FormPlanInfo() {
   return (
-    <Card className="flex flex-col gap-6 flex-1 p-9">
+    <Card className="flex flex-col gap-6 flex-1 p-5 md:p-9">
       <Input
         label="Package Name"
         placeholder="Pro"

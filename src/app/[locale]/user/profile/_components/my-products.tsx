@@ -7,7 +7,6 @@ import LoadingProductsRow from "@/src/components/product/loading-products-row";
 
 function MyProducts() {
   const { data, isLoading } = GetMyProductsAll("");
-  console.log(data);
 
   return (
     <div>

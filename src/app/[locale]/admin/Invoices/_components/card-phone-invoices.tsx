@@ -2,8 +2,6 @@
 import CardPhone from "@/src/components/card-phone";
 import Image, { StaticImageData } from "next/image";
 import React from "react";
-import { Link } from "@/src/navigation";
-import ROUTES from "@/src/routes";
 import RowCardPhone from "@/src/components/row-card-phone";
 import ActionMenu from "./action-menu";
 import avatar from "@/src/assets/images/avatar.png";
@@ -29,16 +27,16 @@ function CardPhoneInvoices({ dataCard }: CardDataProps) {
   return (
     <CardPhone>
       <div className="border-b border-grayLight/50 pb-2 pe-4">
-        <RowCardPhone title="Invoice No" info={`${dataCard.invoiceNo}`} />
+        <RowCardPhone
+          title="Invoice No"
+          info={`#${dataCard?.id?.slice(0, 6)}`}
+        />
       </div>
       <div className="border-b border-grayLight/50 pb-2 pt-3">
         <div className=" absolute top-4 end-3">
           <ActionMenu id={dataCard?.id} />
         </div>
-        <Link
-          href={ROUTES.ADMIN.BOOKINGSDETAILS(dataCard.id)}
-          className="flex items-center w-full gap-3 "
-        >
+        <div className="flex items-center w-full gap-3 ">
           <div className="flex flex-col justify-center flex-1 items-center ">
             <Image
               src={dataCard.lessorImage || avatar}
@@ -68,7 +66,7 @@ function CardPhoneInvoices({ dataCard }: CardDataProps) {
             </h2>
             <p className="text-sm text-grayMedium ">Renter</p>
           </div>
-        </Link>
+        </div>
       </div>
       <div className="flex gap-2 mt-5">
         <div className="size-11 rounded-[50%] p-1 bg-grayBack flex justify-center items-center">

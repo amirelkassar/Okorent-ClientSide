@@ -37,7 +37,6 @@ export const useUserEdit = (): UserEditReturn => {
     ProfileImageFile: null,
     AvatarFile: null,
   });
-  console.log(user);
   
   const {
     mutateAsync: CreateAccount,
@@ -57,14 +56,12 @@ export const useUserEdit = (): UserEditReturn => {
     Toast.Promise(CreateAccount(requestData), {
       success: "Successfully registered",
       onSuccess: async(res) => {
-        console.log(res);
         setToken(await authDecodedToken());
         setDone(true);
         setUser({});
       },
 
       onError: (error) => {
-        console.log("error");
         console.log(error);
       },
     });

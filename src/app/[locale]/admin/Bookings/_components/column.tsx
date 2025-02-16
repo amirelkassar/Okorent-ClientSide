@@ -2,7 +2,7 @@
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import { ColumnDef } from "@tanstack/react-table";
-import  { StaticImageData } from "next/image";
+import { StaticImageData } from "next/image";
 import ActionMenu from "./action-menu";
 import { getDate } from "@/src/lib/utils";
 import ImgProduct from "@/src/components/img-product";
@@ -12,6 +12,7 @@ import OrderStatus from "@/src/components/order-status";
 interface BookingsAdminData {
   id: number;
   renterName: string;
+  renterId: string;
   lessorName: string;
   productName: string;
   from: string;
@@ -20,6 +21,7 @@ interface BookingsAdminData {
   status: string;
   amount: string;
   lessorImage: StaticImageData;
+  lessorId: string;
   renterImage: StaticImageData;
   productImage: StaticImageData;
 }
@@ -110,9 +112,11 @@ export const columns: ColumnDef<BookingsAdminData>[] = [
     id: "actions",
     cell: ({ row }) => {
       const id = row.original.id;
+      const lessorId = row.original.lessorId;
+      const renterId = row.original.renterId;
       return (
         <div className="flex items-center gap-3 justify-end">
-          <ActionMenu id={id} />
+          <ActionMenu id={id} idsUserOrder={[lessorId,renterId]} />
         </div>
       );
     },

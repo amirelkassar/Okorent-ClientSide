@@ -6,15 +6,15 @@ import VerifyBlackIcon from "../assets/icons/verifyBlack";
 import Image from "next/image";
 import UserAvailable from "./userAvailable";
 import StarIcon from "../assets/icons/star";
-import FavIcon from "../assets/icons/fav";
-import ShareIcon from "../assets/icons/share";
 import SpeakIcon from "../assets/icons/speake";
 import LangIcon from "../assets/icons/lang";
 import AboutProfile from "./aboutProfile";
 import ReviewsProfile from "./reviewsProfile";
-import { getDate } from "../lib/utils";
+import { convertTo12Hour, getDate } from "../lib/utils";
 import LinkGreen from "./linkGreen";
 import ROUTES from "../routes";
+import UploadAndCropImg from "./uploadAndCropImg";
+import AlarmIcon from "../assets/icons/alarm";
 
 const profileData = {
   name: "Mark James",
@@ -44,20 +44,26 @@ function ViewProfile({
 }) {
   return (
     <div className="flex  flex-col lg:flex-row gap-10 lg:items-start  lg:gap-4 -mt-5 lg:-mt-[140px] lg:ps-8">
-      <div className="min-w-[370px]   bg-white rounded-2xl lg:rounded-3xl w-full max-w-[93%] lg:max-w-[370px] mx-auto flex-1 pb-12 lg:pb-24 shadow-md">
+      <div className="md:min-w-[370px] bg-white rounded-2xl lg:rounded-3xl w-full max-w-[93%] lg:max-w-[370px] mx-auto flex-1 pb-12 lg:pb-24 shadow-md">
         <div className="lg:min-w-[200px]">
-          <div className=" -mt-5 lg:-mt-24 size-[100px] lg:size-[156px] relative rounded-full mx-auto mb-5 border-2 border-white shadow-md ">
-            <div className=" absolute top-1/2 -end-4 lg:-end-6 w-7 lg:w-10 h-auto  ">
-              <VerifyBlackIcon className="w-full h-auto" />
+          {editAdmin ? (
+            <UploadAndCropImg image={data.userImage || imgUser} admin={editAdmin} userID={data.id} />
+          ) : (
+            <div className=" -mt-5 lg:-mt-24 size-[100px] lg:size-[156px] relative rounded-full mx-auto mb-5 border-2 border-white shadow-md ">
+              <div className=" absolute top-1/2 -end-4 lg:-end-6 w-7 lg:w-10 h-auto  ">
+                <VerifyBlackIcon className="w-full h-auto" />
+              </div>
+
+              <Image
+                src={data.userImage || profileData.image}
+                alt={data.name || profileData.name}
+                width={236}
+                height={195}
+                className="w-full h-full rounded-full object-cover object-top "
+              />
             </div>
-            <Image
-              src={data.userImage || profileData.image}
-              alt={data.name || profileData.name}
-              width={236}
-              height={195}
-              className="w-full h-full rounded-full object-cover object-top "
-            />
-          </div>
+          )}
+
           <div className="w-fit mx-auto">
             <UserAvailable available />
           </div>
@@ -88,27 +94,21 @@ function ViewProfile({
                 </p>
               </div>
             </div>
-            <div className="flex items-center justify-center md:justify-start gap-2 mt-7">
+            <div className="flex items-center pe-4 md:pe-12 justify-center md:justify-start gap-2 mt-7">
               <LinkGreen
                 href={
                   editAdmin
                     ? ROUTES.ADMIN.INBOX + "?chat=" + data?.id
                     : ROUTES.USER.INBOX + "?chat=" + data?.id
                 }
-                className={"h-[50px]"}
+                className={"h-[50px] w-full"}
               >
                 Message {data.name?.split(" ")[0] || "user"}
               </LinkGreen>
-              <button className=" size-[46px]  rounded-lg bg-grayBack flex items-center justify-center p-3 duration-300 hover:shadow-md">
-                <FavIcon className="w-full h-auto" />
-              </button>
-              <button className=" size-[46px]  rounded-lg bg-grayBack flex items-center justify-center p-3 duration-300 hover:shadow-md">
-                <ShareIcon />
-              </button>
             </div>
           </div>
           <div>
-            <h3 className="text-2xl lg:text-3xl mb-5">
+            <h3 className="text-xl lg:text-3xl mb-5">
               About{" "}
               <span className="font-Bold">{data.name?.split(" ")[0]}</span>{" "}
             </h3>
@@ -124,6 +124,13 @@ function ViewProfile({
                 <LangIcon className="min-w-5 lg:min-w-6 h-auto w-5 lg:w-6" />
                 <p className="text-base lg:text-xl text-grayMedium font-Medium">
                   Lives in {data?.city || "--"}
+                </p>
+              </div>
+              <div className="flex items-center gap-3">
+                <AlarmIcon className="min-w-5 lg:min-w-6 h-auto w-5 lg:w-6" />
+                <p className="text-base lg:text-lg text-grayMedium font-Medium">
+                  Open from {data?.workingFrom?convertTo12Hour(data?.workingFrom) : "--"} - 
+                  {data?.workingTo?convertTo12Hour(data?.workingTo) : "--"}
                 </p>
               </div>
 

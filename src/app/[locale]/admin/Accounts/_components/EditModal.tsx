@@ -40,6 +40,8 @@ function EditModal({
     country: dataUSer.country || "",
     zipCode: dataUSer.zipCode || "",
     region: dataUSer.region || "",
+    streetName: dataUSer?.streetName || "",
+    PostalCode: dataUSer?.postalCode || "",
     plan: "Basic",
   });
   console.log(formState);
@@ -124,6 +126,13 @@ function EditModal({
                     inputClassName="bg-white h-12 lg:h-16 rounded-xl"
                     className="flex-1"
                   />
+                   <Input
+                    label="Street Name"
+                    value={formState.streetName}
+                    onChange={(e) => handleChange("streetName", e.target.value)}
+                    inputClassName="bg-white h-12 lg:h-16 rounded-xl"
+                    className="flex-1"
+                  />
                   <div className="flex gap-3 flex-wrap lg:gap-7">
                     <Input
                       label="Zip Code"
@@ -156,6 +165,13 @@ function EditModal({
                       className="flex-1 min-w-[200px]"
                     />
                   </div>
+                  <Input
+                    label="Postal code"
+                    value={formState.PostalCode}
+                    onChange={(e) => handleChange("PostalCode", e.target.value)}
+                    inputClassName="bg-white h-12 lg:h-16 rounded-xl"
+                    className="flex-1"
+                  />
                 </div>
               </Accordion.Panel>
             </Accordion.Item>

@@ -33,7 +33,7 @@ function Page() {
       )}
       <div className="flex items-center mt-16 gap-7 md:flex-row flex-col">
         <Button className={"w-full lg:w-[208px] h-[64px]"}>Save</Button>
-        {searchparams.get("preview") === "true" ? (
+        {/* {searchparams.get("preview") === "true" ? (
           <LinkGreen
             href={"?preview=false"}
             className={
@@ -51,7 +51,7 @@ function Page() {
           >
             Preview
           </LinkGreen>
-        )}
+        )} */}
       </div>
     </div>
   );

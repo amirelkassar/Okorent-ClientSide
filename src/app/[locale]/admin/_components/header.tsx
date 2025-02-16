@@ -6,22 +6,7 @@ import RenewalsIcon from "@/src/assets/icons/Renewals";
 import CardStatistical from "@/src/components/cardStatistical";
 import { GetDashboardCount } from "@/src/hooks/queries/admin";
 import SkeletonLoading from "@/src/components/skeleton-loading";
-const number = [
-  {
-    id: 1,
-    title: "Total Members",
-    number: "1560",
-    percentage: 65,
-    icon: <AccountsIcon />,
-  },
-  {
-    id: 2,
-    title: "New Subscriptions",
-    number: "95",
-    percentage: 65,
-    icon: <SubscribersIcon />,
-  },
-];
+
 function HeaderDash() {
   const { data, isLoading } = GetDashboardCount();
   console.log(data);

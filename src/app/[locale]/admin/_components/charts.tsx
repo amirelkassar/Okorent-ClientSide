@@ -1,7 +1,32 @@
+"use client";
+import {
+  GetPerformanceMonth,
+  GetPerformanceWeek,
+  GetPerformanceYear,
+} from "@/src/hooks/queries/admin";
 import { AreaChart } from "@mantine/charts";
-import React from "react";
+import React, { useEffect } from "react";
 
-function ChartsPlatform({ data }: { data: { date: string; Rental: number }[] }) {
+function ChartsPlatform({
+  SelectView,
+}: {
+  SelectView: "Yearly" | "Monthly" | "Weekly";
+}) {
+  const { data } = GetPerformanceYear();
+  const { data: dataWeekly } = GetPerformanceWeek();
+  const { data: dataMonth } = GetPerformanceMonth();
+  useEffect(() => {
+    const originalConsoleError = console.error;
+    console.error = (...args: any[]) => {
+      if (typeof args[0] === "string" && /defaultProps/.test(args[0])) {
+        return;
+      }
+      originalConsoleError(...args);
+    };
+    return () => {
+      console.error = originalConsoleError;
+    };
+  }, []);
   return (
     <AreaChart
       tooltipAnimationDuration={200}
@@ -20,9 +45,23 @@ function ChartsPlatform({ data }: { data: { date: string; Rental: number }[] }) 
         axisLabel: "bg-red text-red min-w-5 min-h-5",
       }}
       h={250}
-      data={data}
-      dataKey="date"
-      series={[{ name: "Rental", color: "#88BA52", label: "Rental" }]}
+      data={
+        SelectView === "Yearly"
+          ? data?.data
+          : SelectView === "Monthly"
+          ? dataMonth?.data
+          : SelectView === "Weekly"
+          ? dataWeekly?.data
+          : []
+      }
+      dataKey={
+        SelectView === "Weekly"
+          ? "day"
+          : SelectView === "Yearly"
+          ? "month"
+          : "day"
+      }
+      series={[{ name: "rentals", color: "#88BA52", label: "Rentals" }]}
       curveType="bump"
       tickLine="none"
       gridAxis="none"

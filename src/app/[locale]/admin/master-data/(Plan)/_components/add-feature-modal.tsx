@@ -13,7 +13,7 @@ function AddFeatureModal() {
       <Button
         onClick={open}
         className={
-          "gap-2 text-blue bg-blueLight !border-none h-10 !px-8 hover:shadow-md"
+          "gap-2 text-blue bg-blueLight !border-none h-10 !px-3 mdl:!px-8 hover:shadow-md"
         }
       >
         Add Feature

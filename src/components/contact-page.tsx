@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useCallback, useState } from "react";
 import UnionContactIcon from "../assets/icons/UnionContact";
 import Button from "./button";
 import InputTextarea from "./InputTextarea";
@@ -6,8 +7,65 @@ import Input from "./input";
 import FacebookIcon from "../assets/icons/facebook";
 import InstaIcon from "../assets/icons/insta";
 import TwitterIcon from "../assets/icons/twitter";
+import { Toast } from "./toast";
+import { useContactUs, useSupportUser } from "../hooks/queries/admin/support";
+import GetErrorMsg from "./getErrorMsg";
 
-function ContactPage() {
+function ContactPage({ user = false }: { user?: boolean }) {
+  const [formData, setFormData] = useState({
+    UserName: "",
+    UserEmail: "",
+    Title: "",
+    Content: "",
+  });
+  const { mutateAsync: SendContactUs, error, reset } = useContactUs();
+  const {
+    mutateAsync: SendSupport,
+    error: errorSupportUser,
+    reset: resetSupport,
+  } = useSupportUser();
+
+  // Handle input change
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    resetSupport();
+    reset();
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmitGuest = useCallback(async () => {
+    Toast.Promise(SendContactUs(formData), {
+      success: "successfully Send Contact Us Message",
+      onSuccess: async (res) => {
+        resetSupport();
+        reset();
+      },
+    });
+  }, [SendContactUs, formData]);
+
+  const handleSubmitUser = useCallback(async () => {
+    Toast.Promise(
+      SendSupport({
+        Title: formData.Title,
+        Content: formData.Content,
+        TicketType: 4,
+      }),
+      {
+        success: "successfully Send Contact Us Message",
+        onSuccess: async (res) => {
+          resetSupport();
+          reset();
+        },
+      }
+    );
+  }, [SendSupport, formData]);
+  const handleSubmit = user ? handleSubmitUser : handleSubmitGuest;
+  
   return (
     <div>
       <div className="my-section">
@@ -33,37 +91,75 @@ function ContactPage() {
           </div>
         </div>
         <div className="mt-section">
-          <form action="" className="flex gap-4 mdl:gap-12 flex-wrap">
+          <form
+            onSubmit={handleSubmit}
+            className="flex gap-4 mdl:gap-12 flex-wrap"
+          >
             <Input
               label="Your Name"
               type="text"
+              name="UserName"
+              value={formData.UserName || ""}
+              onChange={handleInputChange}
               inputClassName="!h-16 !rounded-2xl bg-white"
-              className="flex-1 min-w-[350px]"
+              className="flex-1 min-w-full md:min-w-[350px]"
               labelClassName=" text-base mdl:!text-2xl"
+              error={
+                GetErrorMsg(error, "UserName") ||
+                GetErrorMsg(errorSupportUser, "UserName")
+              }
             />
             <Input
               label="Email Address"
               type="email"
+              name="UserEmail"
+              value={formData.UserEmail}
+              onChange={handleInputChange}
               inputClassName="!h-16 !rounded-2xl bg-white"
-              className="flex-1 min-w-[350px]"
+              className="flex-1 min-w-full md:min-w-[350px]"
               labelClassName=" text-base mdl:!text-2xl"
+              error={
+                GetErrorMsg(error, "UserEmail") ||
+                GetErrorMsg(errorSupportUser, "UserEmail")
+              }
             />
             <Input
               label="Subject"
               type="text"
+              name="Title"
+              value={formData.Title}
+              onChange={handleInputChange}
               inputClassName="!h-16 !rounded-2xl bg-white"
-              className="flex-1 min-w-[350px]"
+              className="flex-1 min-w-full md:min-w-[350px]"
               labelClassName=" text-base mdl:!text-2xl"
+              error={
+                GetErrorMsg(error, "Title") ||
+                GetErrorMsg(errorSupportUser, "Title")
+              }
             />
             <InputTextarea
               label="Message"
+              name="Content"
+              value={formData.Content}
+              onChange={handleInputChange}
               autosize
               inputClassName="!h-24 min-h-24 !rounded-2xl bg-white"
               labelClassName=" text-base mdl:!text-2xl"
               className="min-w-full !min-h-24"
+              error={
+                GetErrorMsg(error, "Content") ||
+                GetErrorMsg(errorSupportUser, "Content")
+              }
             />
+            <Button
+              onClick={() => {
+                handleSubmit();
+              }}
+              className={"!px-8 h-16 my-6"}
+            >
+              Leave Us a Message
+            </Button>
           </form>
-          <Button className={"!px-8 h-16 my-6"}>Leave Us a Message</Button>
         </div>
       </div>
       <div className="flex mt-16 lg:items-center z-10 gap-12 flex-col lg:flex-row py-14  mdl:py-28 relative before:content-[''] before:w-[calc(100%+32px)] lg:before:w-screen before:-z-10  before:bg-[#e6f2e1] before:absolute before:bottom-0 before:-translate-x-1/2   before:h-full before:left-[50%]">

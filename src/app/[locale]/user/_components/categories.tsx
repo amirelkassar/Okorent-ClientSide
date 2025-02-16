@@ -7,8 +7,7 @@ import Image from "next/image";
 import React from "react";
 
 function Categories() {
-  const { data, isLoading } = GetCategory();
-  console.log(data);
+  const { data } = GetCategory();
   return (
     <div className=" mb-5 md:mb-10 lg:mb-16">
       <h2 className="text-center headTitle">Our Most Popular Categories </h2>

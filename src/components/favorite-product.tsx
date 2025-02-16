@@ -11,6 +11,7 @@ import { useDisclosure } from "@mantine/hooks";
 import ModalComp from "./modal-comp";
 import ListRemove from "../assets/icons/listRemove";
 import Button from "./button";
+import { useToken } from "../hooks/use-token";
 
 function FavoriteProduct({
   favorite,
@@ -20,6 +21,7 @@ function FavoriteProduct({
   id?: string;
 }) {
   const [opened, { open, close }] = useDisclosure(false);
+  const { token } = useToken();
 
   //queries
   const { mutateAsync: FavoriteProduct } = useFavoriteProductMutation();
@@ -34,6 +36,9 @@ function FavoriteProduct({
       }),
       {
         success: "The product has been added to Favorites",
+        ...(!token?.userID && {
+          error: "Please log in first to add products to Favorites.",
+        }),
         onSuccess: async (res) => {},
       }
     );
@@ -59,7 +64,7 @@ function FavoriteProduct({
             open();
           }
         }}
-        className="p-[5px] md:p-2 rounded-lg bg-grayBack size-6 hover:shadow-md duration-300 md:size-8 flex items-center justify-center absolute bottom-3 end-2 z-10"
+        className="p-1 md:p-2 rounded-lg bg-grayBack size-5 sml:size-6 hover:shadow-md duration-300 md:size-8 flex items-center justify-center absolute bottom-3 end-2 z-10"
       >
         {favorite ? <FavRedIcon /> : <FavIcon />}
       </button>

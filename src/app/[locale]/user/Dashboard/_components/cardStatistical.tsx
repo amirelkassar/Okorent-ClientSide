@@ -1,4 +1,3 @@
-import Button from "@/src/components/button";
 import LinkGreen from "@/src/components/linkGreen";
 import React from "react";
 interface CardStatisticalProps {

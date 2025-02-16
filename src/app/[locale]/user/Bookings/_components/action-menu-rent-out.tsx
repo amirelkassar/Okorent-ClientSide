@@ -13,17 +13,18 @@ import AcceptedIcon from "@/src/assets/icons/accepted";
 import ViewQrModal from "./modal-rentOut/view-qr-modale";
 import TrueIcon from "@/src/assets/icons/true";
 import CloseIcon from "@/src/assets/icons/close";
-import DeleteIcon from "@/src/assets/icons/delete";
 import VersionHistoryModal from "./modal-rentOut/version-history-modal";
 import ROUTES from "@/src/routes";
 import PrintIcon from "@/src/assets/icons/print";
 import { useChangeStatusRentOut } from "../_hooks/use-change-status-rentOut";
+import ModalContract from "@/src/components/modal-contract";
+import Button from "@/src/components/button";
 
 function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
   const [opened, { open, close }] = useDisclosure(false);
   const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
+  const [opened3, { open: open3, close: close3 }] = useDisclosure(false);
   const {
-    onSubmitDelete,
     onSubmitChangeStatus,
     onSubmitReject,
     onSubmitCancel,
@@ -38,7 +39,7 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
       icon: <AcceptedIcon fill="#6F6B7D" className="w-3 h-auto" />,
       type: "btn",
       action: () => {
-        onSubmitChangeStatus();
+        open3();
       },
     },
     //1
@@ -52,12 +53,12 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
     },
     //2
     {
-      label: "Scan For Completed",
+      label: "Mark as Completed",
       icon: <BarcodeIcon className="w-3 h-auto" />,
       type: "btn",
       action: () => {
-       // open();
-       onSubmitChangeStatus();
+        // open();
+        onSubmitChangeStatus();
       },
     },
     //3
@@ -132,15 +133,6 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
     },
     //11
     {
-      label: "Delete",
-      icon: <DeleteIcon fill="#FF1D45" className="w-3 h-auto" />,
-      type: "btn",
-      action: () => {
-        onSubmitDelete();
-      },
-    },
-    //12
-    {
       label: "Print shipping label",
       icon: <PrintIcon className="w-3 h-auto" />,
       type: "btn",
@@ -150,21 +142,21 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
   const optionView = () => {
     switch (status.toString()) {
       case "1":
-        return [options[0], options[5], options[6], options[10], options[9]];
+        return [options[0], options[5], options[6], options[10]];
       case "3":
         return [options[1], options[4], options[5], options[6], options[9]];
       case "4":
-        return [options[12], options[5], options[6]];
+        return [options[11], options[5], options[6]];
       case "6":
         return [options[5], options[6]];
       case "7":
-        return [options[5], options[6], options[11]];
+        return [options[5], options[6]];
       case "8":
-        return [options[5], options[6], options[11]];
+        return [options[5], options[6]];
       case "9":
-        return [options[5], options[6], options[11]];
+        return [options[5], options[6]];
       case "10":
-        return [options[5], options[6], options[11]];
+        return [options[5], options[6]];
       case "11":
         return [options[7], options[8], options[5], options[6]];
       case "12":
@@ -180,6 +172,19 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
       {opened && <ViewQrModal opened={opened} close={close} id={id} />}
       {opened2 && (
         <VersionHistoryModal opened={opened2} close={close2} id={id} />
+      )}
+      {opened3 && (
+        <ModalContract opened={opened3} close={close3}>
+          <Button
+            onClick={() => {
+              onSubmitChangeStatus();
+              close3();
+            }}
+            className={"h-14 w-[310px] max-w-full mx-auto"}
+          >
+            Confirm
+          </Button>
+        </ModalContract>
       )}
     </>
   );

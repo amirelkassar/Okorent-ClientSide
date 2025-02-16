@@ -90,6 +90,23 @@ export const useUpdateManyToOnlineMutation = () => {
     },
   });
 };
+//delete Many my Product
+export const useDeleteManyMyProduct = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.post(user.product.DeleteManyProduct, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKey]);
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
 //getProductByID
 export const GetUserProductsByID = (id: any) => {
   return useQuery({
@@ -128,5 +145,23 @@ export const useComplaints = (
     queryKey: [initialQueryKey, queries],
     queryFn: () => getComplaints(queries),
     placeholderData: (previousData: any) => previousData, // Identity function
+  });
+};
+
+//get QrCode my Product
+export const GetQrCodeMyProduct = () => {
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.post(user.product.barcode_my_products, data, {
+        responseType: "blob",
+      });
+      return response;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
   });
 };

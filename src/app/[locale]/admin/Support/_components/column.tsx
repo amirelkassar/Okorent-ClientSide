@@ -1,39 +1,29 @@
 "use client";
-import { Link } from "@/src/navigation";
-import ROUTES from "@/src/routes";
 import { ColumnDef } from "@tanstack/react-table";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import ActionMenu from "./action-menu";
 import RenderStatus from "./render-status";
 import RenderCategory from "./render-category";
 import TicketModal from "./ticket-modal";
-
-
-
+import { getDate } from "@/src/lib/utils";
+import avatar from "@/src/assets/images/avatar.png";
 interface Ticket {
   id: number;
-  name: string;
-  avatar: StaticImageData;
-  assignee: string;
-  avatarAssignee: StaticImageData;
-  category: string;
-  status: string;
-  description: string;
+  userName: string;
+  ticketType: string;
+  contactUsStatus: string | any;
+  title: string;
   date: string;
+  created: string;
 }
 export const columns: ColumnDef<Ticket>[] = [
   {
-    accessorKey: "name",
+    accessorKey: "userName",
     header: "Sender",
     cell: ({ getValue, row }) => {
       const name = getValue<string>();
-      const avatar = row.original.avatar;
-      const id = row.original.id;
       return (
-        <Link
-          href={ROUTES.ADMIN.ACCOUNTSDETAILS(id)}
-          className="flex items-center gap-2"
-        >
+        <div className="flex items-center gap-2">
           <Image
             src={avatar}
             alt={name}
@@ -43,45 +33,20 @@ export const columns: ColumnDef<Ticket>[] = [
           />
 
           <h2 className="text-[16px] font-SemiBold">{name}</h2>
-        </Link>
+        </div>
       );
     },
   },
   {
-    accessorKey: "assignee",
-    header: "Assigned To",
-    cell: ({ getValue, row }) => {
-      const assignee = getValue<string>();
-      const avatarAssignee = row.original.avatarAssignee;
-      const id = row.original.id;
-      return (
-        <Link
-          href={ROUTES.ADMIN.ACCOUNTSDETAILS(id)}
-          className="flex items-center gap-2"
-        >
-          <Image
-            src={avatarAssignee}
-            alt={assignee}
-            width={50}
-            height={50}
-            className="w-12 h-12 rounded-[50%] object-cover object-top"
-          />
-
-          <h2 className="text-[16px] font-SemiBold">{assignee}</h2>
-        </Link>
-      );
-    },
-  },
-  {
-    accessorKey: "category",
+    accessorKey: "ticketType",
     header: "Category",
     cell: ({ getValue }) => {
-      const category = getValue<string>();
-      return <RenderCategory category={category} />;
+      const Category = getValue<string>();
+      return <RenderCategory status={Category} />;
     },
   },
   {
-    accessorKey: "status",
+    accessorKey: "contactUsStatus",
     header: "Status",
     cell: ({ getValue }) => {
       const status = getValue<string>();
@@ -89,18 +54,24 @@ export const columns: ColumnDef<Ticket>[] = [
     },
   },
   {
-    accessorKey: "description",
+    accessorKey: "title",
     header: "Topic",
+    cell: ({ row }) => {
+      const title = row.original.title;
+      return <h4 className="max-w-[330px] truncate">{title || ""}</h4>;
+    },
   },
   {
-    accessorKey: "date",
+    accessorKey: "created",
     header: "",
-    cell: ({ getValue }) => {
+    cell: ({ getValue, row }) => {
       const date = getValue<string>();
+      const id = row.original.id;
+      const name = row.original.userName;
       return (
         <div className="flex items-center gap-5 justify-between">
-          <h4 className="text-grayMedium">{date}</h4>
-          <TicketModal />
+          <h4 className="text-grayMedium">{getDate(date).timeFromNow}</h4>
+          <TicketModal id={id} name={name} />
         </div>
       );
     },
@@ -109,9 +80,10 @@ export const columns: ColumnDef<Ticket>[] = [
     id: "actions",
     cell: ({ row }) => {
       const id = row.original.id;
+      const solved = row.original.contactUsStatus === 4;
       return (
         <div className="flex items-center gap-3 w-fit">
-          <ActionMenu id={id} />
+          <ActionMenu id={id} solved={solved} />
         </div>
       );
     },

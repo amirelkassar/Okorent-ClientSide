@@ -59,9 +59,7 @@ export const useDeleteManyProductInAdmin = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await api.delete(admin.product.DeleteManyProducts, {
-        data: data,
-      });
+      const response = await api.post(admin.product.DeleteManyProducts, data);
       return response.data;
     },
 
@@ -103,7 +101,23 @@ export const useEditListingInAdmin = (id: any) => {
     },
   });
 };
-
+//Quick Edit Many  Product In Admin
+export const useQuickEditManyProductInAdmin = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.put(admin.product.quick_edit, data);
+      return response.data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries([initialQueryKey]);
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
 //get User Stock
 export const GetAllStockUser = (id: any) => {
   return useQuery({

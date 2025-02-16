@@ -1,5 +1,4 @@
 "use client";
-import Button from "@/src/components/button";
 import InputSubmit from "@/src/components/input-submit";
 import LinkGreen from "@/src/components/linkGreen";
 import Logo from "@/src/components/logo";
@@ -9,7 +8,6 @@ import { useResetPassword } from "@/src/hooks/queries/auth";
 import { useRouter } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useSearchParams } from "next/navigation";
 import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -31,8 +29,10 @@ const schema = yup.object().shape({
 
 function Page() {
   const router = useRouter();
-  const searchparams = useSearchParams();
   const { mutateAsync: ResetPassword } = useResetPassword();
+  const searchParams = new URLSearchParams(window.location.search);
+  const decodedToken = searchParams.get("token") || "";
+  const email = searchParams.get("email") || "";
 
   // react-hook-form setup
   const {
@@ -42,22 +42,20 @@ function Page() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  console.log(errors);
 
   const onSubmit = useCallback(
     async (data: { newPassword: string }) => {
       Toast.Promise(
         ResetPassword({
           newPassword: data.newPassword,
-          email: searchparams.get("email") || "",
-          token: searchparams.get("token") || "",
+          token: decodedToken,
+          email: email,
         }),
         {
           loading: "Sending New Password ...",
           success: "Successfully Changed Password",
           error: "Failed to change the password",
           onSuccess: async (res) => {
-            console.log(res);
             router.push(ROUTES.AUTH.LOGIN);
           },
           onError: (err) => {
@@ -66,12 +64,12 @@ function Page() {
         }
       );
     },
-    [ResetPassword]
+    [ResetPassword, router, decodedToken, email]
   );
   return (
     <div className="flex-1 pt-4 lgl:pt-20 pb-8 md:pb-16  flex  min-h-full justify-center lgl:justify-start">
       <div className="max-w-[470px] w-full flex flex-col gap-4">
-        <Logo theme="green" />
+        <Logo />
         <div className="flex-1 content-center">
           <h1 className=" font-Bold text-lg lg:text-xLarge">
             Reset Your password

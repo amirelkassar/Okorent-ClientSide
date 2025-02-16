@@ -5,7 +5,6 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import { twMerge } from 'tailwind-merge';
 import axios from "axios";
 import { usePathname, useRouter } from '../navigation';
-import { serialize } from 'object-to-formdata';
 
 
 
@@ -19,8 +18,6 @@ export async function blobUrlToFile(blobUrl: string, fileName: string) {
   const response = await fetch(blobUrl); // Fetch the blob data
   const blob = await response.blob(); // Convert the response to a Blob
   const file = new File([blob], fileName, { type: blob.type }); // Create a File object
-  console.log(file);
-
   return file;
 }
 export function formatDate(date: string | Date): string {
@@ -174,12 +171,11 @@ export const useSearchParams = () => {
 export const useUpdateQueryParams = () => {
   const router = useRouter();
   const pathName = usePathname();
-  console.log(pathName);
 
   // Utility: Update the URL query params
   const updateQueryParams = (key: string, values: string[]) => {
     const params = new URLSearchParams(window.location.search);
-    console.log(params);
+
     params.delete(key);
     values.forEach((value) => {
       if (value) params.append(key, value);
@@ -193,7 +189,7 @@ export const useUpdateQueryParams = () => {
 
 export const calculateDurationRange = (valueDateFrom: Date | null, valueDateTo: Date | null) => {
   if (valueDateFrom && valueDateTo) {
-    const diffTime = Math.abs(valueDateTo.getTime() - valueDateFrom.getTime());
+    const diffTime = valueDateTo.getTime() - valueDateFrom.getTime();
     return Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Convert the difference to days
   }
   return 0;
@@ -210,7 +206,7 @@ export const getFormData = async (data: Record<string, any>) => {
           formData.append(key, item, item.name);
         } else if (item.path) {
           // Fetch image and convert to Blob
-          console.log(item.path);
+
 
           const response = await axios.get(item.path, {
             responseType: 'blob', headers: {
@@ -219,16 +215,16 @@ export const getFormData = async (data: Record<string, any>) => {
               Expires: "0",
             }
           });
-          console.log(response);
+
 
 
           const blob = await response.data;
-          console.log(blob);
+
           const objectURL = URL.createObjectURL(blob);
-          console.log(objectURL);
+
 
           const fileName = item.path.split('/').pop() || "image.jpg";
-          console.log(new File([blob], fileName, { type: blob.type }));
+
 
           formData.append(key, new File([blob], fileName, { type: 'image/png' }));
         }
@@ -294,8 +290,6 @@ export async function ConvertImageUrlToFile(url: string): Promise<File> {
       }
     });
 
-
-
     // Get the image as a Blob
     const blob = await response.data;
     const fileName = url.split('/').pop() || "image.jpg";
@@ -349,4 +343,49 @@ export const getCroppedImg = (
     };
     image.onerror = () => reject(new Error('Failed to load the image'));
   });
+};
+
+
+
+
+export function convertTo24Hour(time12h: string) {
+  const [time, modifier] = time12h.split(" ");
+  let [hours, minutes] = time.split(":");
+
+  if (hours === "12") {
+    hours = "00";
+  }
+
+  if (modifier === "PM") {
+    hours = String(parseInt(hours, 10) + 12);
+  }
+
+  return `${hours.padStart(2, "0")}:${minutes}`;
+}
+
+export function convertTo12Hour(time24h: string) {
+  const [hours, minutes] = time24h.split(":");
+  const hour = parseInt(hours, 10);
+
+  if (hour === 0) {
+    return `12:${minutes} AM`;
+  }
+  if (hour === 12) {
+    return `12:${minutes} PM`;
+  }
+  if (hour > 12) {
+    return `${hour - 12}:${minutes} PM`;
+  }
+  return `${hour}:${minutes} AM`;
+}
+
+// Function to get the months for the current year
+export const getMonthsForCurrentYear = (): string[] => {
+  const months = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  const currentYear = new Date().getFullYear(); // Get the current year
+  return months.map(month => `${month} ${currentYear}`); // Append the year to each month
 };

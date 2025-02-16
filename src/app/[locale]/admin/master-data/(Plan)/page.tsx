@@ -18,10 +18,10 @@ function page() {
 
             <LinkGreen
               href={ROUTES.ADMIN.PLANSADD}
-              className={"gap-2 h-10 !px-5"}
+              className={"gap-2 h-10 !px-3 mdl:!px-5"}
             >
-              <PlusIcon className="w-4 h-auto" />
-              <p className="text-base font-Regular font-medium">Create Plan</p>
+              <PlusIcon className="md:w-4 w-3 h-auto" />
+              <p className="mdl:text-base text-sm font-Regular font-medium">Create Plan</p>
             </LinkGreen>
           </div>
         </div>

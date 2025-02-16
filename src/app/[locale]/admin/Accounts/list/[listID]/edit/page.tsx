@@ -85,12 +85,12 @@ function Page() {
   const [location, setLocation] = useState<LocationProps[]>([]);
   const [countValueInput, setCountValueInput] = useState(0);
   const [dataList, setDataList] = useState<any>({});
-  useEffect(()=>{
+  useEffect(() => {
     setDataList(data);
-    setLocation(data.addresses)
-    setVariations(data.Variations)
-    setSelectedCheckbox(data.Status )
-  },[])
+    setLocation(data.addresses);
+    setVariations(data.Variations);
+    setSelectedCheckbox(data.Status);
+  }, []);
 
   const handleInputChangeLocation = (
     index: number,
@@ -144,7 +144,6 @@ function Page() {
 
   return (
     <div className="w-[810px] mb-20 flex flex-col gap-4">
-     
       <div className="mt-[7px] pb-12 flex-1">
         <h3 className={"text-[24px] mb-3 "}>Choose item category</h3>
         <Select
@@ -197,7 +196,7 @@ function Page() {
           className="h-[64px] mb-6 duration-200 min-h-[64px] bg-white rounded-2xl border-2 border-green text-grayMedium"
         />
         <Textarea
-        defaultValue={data.Describe.dec}
+          defaultValue={data.Describe.dec}
           onChange={(e) => {
             setDataList({
               ...dataList,
@@ -256,9 +255,7 @@ function Page() {
             label={"Price for 1 Week"}
             name="attribute1"
             placeholder={"Add Price Here"}
-
             defaultValue={data.priceItems.ThreeDay}
-
             onChange={(e) => {
               setDataList({
                 ...dataList,
@@ -281,7 +278,6 @@ function Page() {
             name="attribute2"
             placeholder={"Add Price Here"}
             defaultValue={data.priceItems.Week}
-
             onChange={(e) => {
               setDataList({
                 ...dataList,
@@ -309,7 +305,7 @@ function Page() {
       <div className="mt-[7px] pb-12 flex-1">
         <h3 className={"text-[24px] mb-3 "}>Cancellation Terms</h3>
         <Radio.Group
-        defaultValue={data.Terms}
+          defaultValue={data.Terms}
           onChange={(e) => {
             setDataList({ ...dataList, Terms: e });
           }}
@@ -340,7 +336,7 @@ function Page() {
       <div className="mt-[7px] pb-12 flex-1">
         <h3 className={"text-[24px] mb-3 "}>Value of the item</h3>
         <TextInput
-         defaultValue={data.value}
+          defaultValue={data.value}
           onChange={(e) => {
             setDataList({ ...dataList, value: e.target.value });
           }}
@@ -354,8 +350,12 @@ function Page() {
         />
       </div>
 
-      <StepAvailability defaultValue={data.Availability} dataList={dataList} setDataList={setDataList} />
- 
+      <StepAvailability
+        defaultValue={data.Availability}
+        dataList={dataList}
+        setDataList={setDataList}
+      />
+
       <div className="mt-[7px] pb-12 flex-1">
         <h3 className={"text-[24px] mb-3 "}>Stock</h3>
         <TextInput
@@ -395,11 +395,15 @@ function Page() {
             label="Not Active"
           />
         </div>
-
-        <p className="mt-4 text-[14px] text-grayMedium font-Regular">
-          Set as Active to make the item available for rent Set as Not Active to
-          keep the item unavailable for rent
-        </p>
+        {selectedCheckbox === "Active" ? (
+          <p className="mt-4 text-xs md:text-[14px] text-grayMedium font-Regular">
+            Set as &apos;Not Active&apos; to keep the item unavailable for rent
+          </p>
+        ) : (
+          <p className="mt-4 text-xs md:text-[14px] text-grayMedium font-Regular">
+            Set as &apos;Active&apos; to make the item available for rent
+          </p>
+        )}
       </div>
 
       <div className="flex items-center gap-7">

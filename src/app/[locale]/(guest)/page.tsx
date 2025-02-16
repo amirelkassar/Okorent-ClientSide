@@ -10,7 +10,7 @@ import { useSearchParams } from "next/navigation";
 
 function Page() {
   const searchParams = useSearchParams();
-  const { data, isLoading, isFetching } = GetProductsAll(
+  const { data, isLoading } = GetProductsAll(
     searchParams.toString()
   );
   return (
@@ -24,7 +24,7 @@ function Page() {
         {isLoading ? (
           <LoadingProductsRow number={5} />
         ) : (
-          <ProductList more={false} data={data?.data?.items || []} />
+          <ProductList more={false} data={data?.data?.items?.slice(0, 5) || []} />
         )}
       </>
     </div>

@@ -25,7 +25,7 @@ const dataGoals = [
 ];
 function Goals() {
   return (
-    <div className="py-20 lg:py-32 relative mapBefore before:absolute before:left-1/2 before:top-1/2 before:bg-no-repeat before:rotate-[26deg] before:-translate-x-1/2 before:-translate-y-1/2 before:h-0 before:hidden lg:before:block lg:before:h-full before:bg-center before:w-0 lg:before:w-full ">
+    <div className=" py-12 mdl:py-20 lg:py-32 relative mapBefore before:absolute before:left-1/2 before:top-1/2 before:bg-no-repeat before:rotate-[26deg] before:-translate-x-1/2 before:-translate-y-1/2 before:h-0 before:hidden lg:before:block lg:before:h-full before:bg-center before:w-0 lg:before:w-full ">
       <h2 className="text-2xl lg:text-3xl text-center max-w-[460px] mx-auto relative">
         We support the worlds sustainable development goals
       </h2>

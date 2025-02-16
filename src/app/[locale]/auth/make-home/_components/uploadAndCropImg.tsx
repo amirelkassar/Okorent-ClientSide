@@ -70,7 +70,6 @@ function UploadAndCropImg({ formData, setFormData }: Props) {
     setZoom(1);
     setCrop({ x: 0, y: 0 });
   };
-  console.log(formData);
 
   return (
     <div>
