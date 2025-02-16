@@ -20,7 +20,7 @@ interface ProductListProps {
   data: dataProps[];
   more?: boolean;
 }
-function ProductList({ link, title, data, more = true }: ProductListProps) {
+function ProductList({ title, data, more = true }: ProductListProps) {
   const [PageNumber, setPageNumber] = useQueryState(
     "PageSize",
     parseAsInteger.withDefault(10)
@@ -33,7 +33,7 @@ function ProductList({ link, title, data, more = true }: ProductListProps) {
       )}
 
       {data.length > 0 && (
-        <div className="flex gap-3 lg:gap-4 justify-center xl:justify-start  flex-wrap ">
+        <div className="flex gap-2 md:gap-3 lg:gap-4 justify-center xl:justify-start  flex-wrap ">
           {data?.map((item, i) => {
             return <CardRentals data={item} key={i} Fav={true} />;
           })}
