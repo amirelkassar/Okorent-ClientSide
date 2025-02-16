@@ -96,17 +96,58 @@ export const GetSubCategory = (id: any) => {
 // Add SubCategory
 export const useCreateSubCategory = (id: any) => {
   const queryClient = useQueryClient();
-  return useMutation<void, any, Record<string, any>>({
+
+  return useMutation({
     mutationFn: async (data: any) => {
       const response = await api.post(admin.SubCategory.base, data);
       return response.data;
     },
-    onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey, id]);
-      queryClient.refetchQueries([initialQueryKeySub]);
-      queryClient.refetchQueries([initialQueryKey]);
+    onMutate: async (newSubCategory) => {
+      await queryClient.cancelQueries([
+        initialQueryKeySub,
+        initialQueryKey,
+        id,
+      ]);
+
+      const previousData = queryClient.getQueryData([
+        initialQueryKeySub,
+        initialQueryKey,
+        id,
+      ]);
+
+      queryClient.setQueryData(
+        [initialQueryKeySub, initialQueryKey, id],
+        (oldData: any) => ({
+          ...oldData,
+          data: [
+            ...(oldData?.data || []),
+            { ...newSubCategory, isPending: true, id: Date.now() },
+          ], // إضافة العنصر الجديد مؤقتًا
+        })
+      );
+
+      return { previousData };
     },
-    onError: (res) => console.error(res),
+    onSuccess: (newSubCategory) => {
+      queryClient.setQueryData(
+        [initialQueryKeySub, initialQueryKey, id],
+        (oldData: any) => ({
+          ...oldData,
+          data: oldData?.data.map(
+            (item: any) => (item.isPending ? newSubCategory : item) // استبدال العنصر الوهمي بالبيانات الحقيقية
+          ),
+        })
+      );
+    },
+    onError: (_, __, context) => {
+      queryClient.setQueryData(
+        [initialQueryKeySub, initialQueryKey, id],
+        context?.previousData
+      );
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries([initialQueryKeySub, initialQueryKey, id]);
+    },
   });
 };
 

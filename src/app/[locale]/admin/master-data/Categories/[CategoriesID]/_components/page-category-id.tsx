@@ -17,8 +17,6 @@ import EditIcon from "@/src/assets/icons/edit";
 import { ConvertImageUrlToFile } from "@/src/lib/utils";
 
 function PageCategoryId({ data }: { data: any }) {
-  console.log(data);
-
   //hooks
   const [editCategory, setEditCategory] = useState(false);
   const [addSubcategory, setAddSubcategory] = useState(false);
@@ -40,6 +38,8 @@ function PageCategoryId({ data }: { data: any }) {
   };
 
   const handleSubmitAddSubCategory = async () => {
+    setAddSubcategory(false);
+    setSubcategoryTitle("");
     await Toast.Promise(
       CreateSubCategory({
         name: SubcategoryTitle,
@@ -48,14 +48,10 @@ function PageCategoryId({ data }: { data: any }) {
       }),
       {
         success: "successfully Create SubCategory",
-        onSuccess: async (res) => {
-          setSubcategoryTitle("");
-          setAddSubcategory(false);
-        },
+        onSuccess: async (res) => {},
       }
     );
   };
-  console.log(categoryData);
 
   const handleSubmitEditCategory = async () => {
     const imgFile = await ConvertImageUrlToFile(data.iconPath);
@@ -67,9 +63,6 @@ function PageCategoryId({ data }: { data: any }) {
 
     await Toast.Promise(EditCategory(dataList), {
       success: "successfully Create Category",
-      onSuccess: async (res) => {
-        console.log(res);
-      },
     });
   };
   return (
@@ -102,7 +95,7 @@ function PageCategoryId({ data }: { data: any }) {
                 multiple={false}
                 onReject={(files) => console.log("Rejected files", files)}
                 maxSize={3 * 1024 ** 2} // 3MB
-                accept={[ MIME_TYPES.png]}
+                accept={[MIME_TYPES.png]}
                 className=" size-8 mdl:size-10   border-green/20 bg-grayBack overflow-hidden border-solid border rounded-full"
               >
                 <div className="h-full absolute w-full inset-0 flex justify-center items-center flex-col gap-3">
