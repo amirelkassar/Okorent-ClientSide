@@ -80,6 +80,12 @@ export const user = {
   Demo: {
     create: "/Demo/Create-Demo",
   },
+  Chat: {
+    Get_All_Chats: (queries: any) => buildQuery("/Chat/rooms", queries),
+    Get_Messages_By_Id: (id: any) => `/Chat/room/${id}`,
+    Create_New_Chat: "/Chat/room",
+    Send_Message: "/Chat/message",
+  },
 };
 
 export const admin = {
@@ -170,7 +176,7 @@ export const admin = {
     base: (queries: any) => buildQuery("/Demo/Admin-GetAll-Demos", queries),
     Change: "/Demo/Admin-Update-DemoStatus",
     delete: (id: any) => `/Demo/Admin-Delete/${id}`,
-    add_note:'/Demo/Admin-Create-DemoNote',
+    add_note: "/Demo/Admin-Create-DemoNote",
     get_note_byID: (id: any) => `/Demo/Admin-GetDemo-ByID/${id}`,
   },
 };
