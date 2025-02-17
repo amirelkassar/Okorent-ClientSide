@@ -82,7 +82,8 @@ export const user = {
   },
   Chat: {
     Get_All_Chats: (queries: any) => buildQuery("/Chat/rooms", queries),
-    Get_Messages_By_Id: (id: any) => `/Chat/room/${id}`,
+    Get_Messages_By_Id: (id: any, queries: any) =>
+      buildQuery(`/Chat/room/${id}`, queries),
     Create_New_Chat: "/Chat/room",
     Send_Message: "/Chat/message",
   },

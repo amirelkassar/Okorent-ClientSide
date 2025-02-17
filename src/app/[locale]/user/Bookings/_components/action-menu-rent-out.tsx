@@ -1,6 +1,6 @@
 "use client";
 import DataActions from "@/src/components/DataActions";
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import BarcodeIcon from "@/src/assets/icons/barcode";
 import CarReturn from "@/src/assets/icons/car-return";
@@ -21,6 +21,7 @@ import ModalContract from "@/src/components/modal-contract";
 import Button from "@/src/components/button";
 
 function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
+  const [RenterSignature, setRenterSignature] = useState<File | null>(null);
   const [opened, { open, close }] = useDisclosure(false);
   const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
   const [opened3, { open: open3, close: close3 }] = useDisclosure(false);
@@ -174,13 +175,20 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
         <VersionHistoryModal opened={opened2} close={close2} id={id} />
       )}
       {opened3 && (
-        <ModalContract opened={opened3} close={close3}>
+        <ModalContract
+          opened={opened3}
+          close={close3}
+          RenterSignature={RenterSignature}
+          setRenterSignature={setRenterSignature}
+        >
           <Button
             onClick={() => {
-              onSubmitChangeStatus();
+              onSubmitChangeStatus(RenterSignature);
               close3();
             }}
-            className={"h-14 w-[310px] max-w-full mx-auto"}
+            className={`h-14 w-[310px] max-w-full mx-auto ${
+              RenterSignature ? "" : "pointer-events-none opacity-60"
+            }`}
           >
             Confirm
           </Button>

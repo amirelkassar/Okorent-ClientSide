@@ -13,13 +13,13 @@ import phoneImg from "@/src/assets/images/phone.png";
 import { useCreateOrder } from "@/src/hooks/create-order";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
-
+import GetErrorMsg from "../../getErrorMsg";
+import ErrorMsg from "../../error-msg";
 
 function ViewCheckout({ data = {} }: { data: any }) {
-
   const [opened, { open, close }] = useDisclosure(false);
   const { form, status } = useCreateOrder();
-  const { onSubmit, opened2, close2 } = form;
+  const { onSubmit, opened2, close2, error } = form;
   const handleCreateOrder = () => {
     onSubmit(data);
   };
@@ -70,12 +70,15 @@ function ViewCheckout({ data = {} }: { data: any }) {
           </li>
           <li className="flex items-center justify-between pt-4 border-t border-x-grayMedium/40 ">
             <h3 className="text-base  ">Total</h3>
-            <p className="text-base ">USD {(data?.orderItems[0].price * 0.9).toFixed(2)}</p>
+            <p className="text-base ">
+              USD {(data?.orderItems[0].price * 0.9).toFixed(2)}
+            </p>
           </li>
         </ul>
-        <Button onClick={open} className={"w-full mt-6"}>
+        <Button onClick={open} className={"w-full mt-6 mb-1"}>
           Proceed to pay
         </Button>
+        {<ErrorMsg error={GetErrorMsg(error, "OrderItems")} />}
       </div>
       <ModalComp close={close} opened={opened} title="Payment on Hold">
         <div className="w-[670px] max-w-full">

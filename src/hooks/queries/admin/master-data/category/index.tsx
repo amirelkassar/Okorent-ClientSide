@@ -128,13 +128,14 @@ export const useCreateSubCategory = (id: any) => {
 
       return { previousData };
     },
-    onSuccess: (newSubCategory) => {
+    onSuccess: () => {
       queryClient.setQueryData(
         [initialQueryKeySub, initialQueryKey, id],
         (oldData: any) => ({
           ...oldData,
           data: oldData?.data.map(
-            (item: any) => (item.isPending ? newSubCategory : item) // استبدال العنصر الوهمي بالبيانات الحقيقية
+            (item: any) =>
+              item.isPending ? { ...item, isPending: false } : item // استبدال العنصر الوهمي بالبيانات الحقيقية
           ),
         })
       );
@@ -148,6 +149,7 @@ export const useCreateSubCategory = (id: any) => {
     onSettled: () => {
       queryClient.invalidateQueries([initialQueryKeySub, initialQueryKey, id]);
     },
+
   });
 };
 

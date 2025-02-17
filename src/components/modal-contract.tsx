@@ -1,24 +1,25 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import ModalComp from "./modal-comp";
 import Image, { StaticImageData } from "next/image";
 import Card from "./card";
 import placeTableProduct from "@/src/assets/images/placTableProduct.png";
 import { ScrollArea } from "@mantine/core";
-import { TermsAndConditions } from "../lib/dataUser";
+import { TermsContent } from "../lib/dataUser";
 import ModalSign from "./modal-sign";
 function ModalContract({
   opened,
   close,
   children,
+  setRenterSignature,
+  RenterSignature,
 }: {
   opened: boolean;
   close: any;
   children?: React.ReactNode;
+  setRenterSignature: React.Dispatch<React.SetStateAction<File | null>>;
+  RenterSignature: File | null;
 }) {
-  const [file, setFile] = useState<File | null>(null);
-  console.log(file);
-
   return (
     <ModalComp opened={opened} close={close} title={"Select rental period"}>
       <div className="mx-auto max-w-[95%] w-[1100px] lg:max-w-[1100px] flex flex-col gap-4">
@@ -32,18 +33,18 @@ function ModalContract({
         <ContractContent />
         <div>
           <h3 className="text-base md:text-lg font-SemiBold mb-4">Sign Here</h3>
-          {file ? (
+          {RenterSignature ? (
             <div className=" h-16 md:h-[100px] w-full">
               <Image
-                src={URL.createObjectURL(file)}
-                alt={`preview of ${file.name}`}
+                src={URL.createObjectURL(RenterSignature)}
+                alt={`preview of ${RenterSignature.name}`}
                 height={100}
                 width={500}
                 className="w-auto h-full object-contain object-center "
               />
             </div>
           ) : (
-            <ModalSign setFile={setFile}>
+            <ModalSign setFile={setRenterSignature}>
               <div className="w-full border-2 border-black/50 h-[70px] md:h-[100px] bg-[#EEEEEE] border-dashed rounded-2xl p-3 mdl:p-8">
                 <p className="text-grayMedium text-xs mdl:text-base">
                   Draw your signature here
@@ -118,24 +119,9 @@ const ContractContent = () => {
             Last Revised: December 16, 2013
           </p>
 
-          <p className="text-xs mdl:text-base text-grayMedium">
-            Welcome to www.lorem-ipsum.info. This site is provided as a service
-            to our visitors and may be used for informational purposes only.
-            Because the Terms and Conditions contain legal obligations, please
-            read them carefully.
-          </p>
-          {TermsAndConditions?.map((item, index) => {
-            return (
-              <div key={index}>
-                <h2 className="text-xs mdl:text-base text-grayMedium">
-                  {index + 1}. {item.Title}
-                </h2>
-                <p className="text-xs mdl:text-base text-grayMedium capitalize">
-                  {item.Content}
-                </p>
-              </div>
-            );
-          })}
+          <pre className="whitespace-pre-wrap text-xs mdl:text-base text-gray-600">
+            {TermsContent}
+          </pre>
         </div>
       </ScrollArea>
     </Card>

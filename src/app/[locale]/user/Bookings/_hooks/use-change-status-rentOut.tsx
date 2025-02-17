@@ -13,7 +13,7 @@ import { Toast } from "@/src/components/toast";
 import { useSelectRowTable } from "@/src/components/select-row-table-context";
 
 interface ActionTableIRentProps {
-  onSubmitChangeStatus: any;
+  onSubmitChangeStatus: (RenterSignature?: any) => void;
   onSubmitReject: any;
   onSubmitCancel: any;
   onSubmitRefundYes: any;
@@ -34,16 +34,26 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
   const { setSelectRowTable } = useSelectRowTable();
 
   //change status
-  const onSubmitChangeStatus = useCallback(async () => {
-    Toast.Promise(ChangeStatusProduct(id), {
-      loading: "Processing...",
-      success: "Operation completed!",
+  const onSubmitChangeStatus = useCallback(
+    async (RenterSignature?: any) => {
+      Toast.Promise(
+        ChangeStatusProduct(
+          RenterSignature
+            ? { data: { OrderId: id, LessorSignatureFile: RenterSignature } }
+            : {}
+        ),
+        {
+          loading: "Processing...",
+          success: "Operation completed!",
 
-      onSuccess(res) {
-        setSelectRowTable([]);
-      },
-    });
-  }, [ChangeStatusProduct, id]);
+          onSuccess(res) {
+            setSelectRowTable([]);
+          },
+        }
+      );
+    },
+    [ChangeStatusProduct, id]
+  );
 
   //change status ids
   const onSubmitChangeStatusIds = useCallback(

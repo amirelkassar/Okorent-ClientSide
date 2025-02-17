@@ -5,14 +5,16 @@ import { Link, usePathname } from "../navigation";
 import Image, { StaticImageData } from "next/image";
 import TimeIcon from "../assets/icons/time";
 import { useSearchParams } from "next/navigation";
-import { cn } from "../lib/utils";
+import { cn, getDate } from "../lib/utils";
+import avatarUser from "@/src/assets/images/avatar.png";
+
 interface ChatsDataProps {
-  id: number;
-  name: string;
-  date: string;
-  time: string;
+  chatId: number;
+  userName: string;
+  displayName: string;
+  lastMessageDate: string;
   identifier: number;
-  image: StaticImageData;
+  userImage: StaticImageData;
 }
 interface ChatListRowProps {
   data: ChatsDataProps;
@@ -26,34 +28,36 @@ function ChatListRow({ data }: ChatListRowProps) {
       href={
         (adminView ? ROUTES.ADMIN.INBOX : ROUTES.USER.INBOX) +
         "?chat=" +
-        data.id
+        data.chatId
       }
       className={cn(
         "py-1 px-2 flex items-center gap-3 cursor-pointer duration-300 hover:bg-grayBack/50 justify-between  w-full rounded-[18px] ",
         data.identifier > 0 ? "bg-grayBack hover:bg-grayBack" : null,
-        data.id.toString() === searchParams.get("chat")
+        data.chatId.toString() === searchParams.get("chat")
           ? "bg-green/30 hover:bg-green/50"
           : ""
       )}
     >
       <div className=" flex items-center gap-3 w-full rounded-2xl">
         <Image
-          src={data.image}
-          alt={data.name}
+          src={data?.userImage || avatarUser}
+          alt={data?.userName||'User'}
+          width={100}
+          height={100}
           priority
-          className=" size-[50px] md:size-[57px] rounded-full object-cover object-top "
+          className=" size-11 md:size-[57px] rounded-full object-cover object-top "
         />
         <div>
-          <h3 className="text-[16px] ">{data.name}</h3>
+          <h3 className=" text-sm md:text-[16px] ">{data?.userName||'User'}</h3>
           <div className="flex items-center gap-1">
             <TimeIcon />
-            <p className="text-grayMedium text-sm">
-              {data.date} | {data.time}
+            <p className="text-grayMedium text-xs md:text-sm">
+              {getDate(data.lastMessageDate).fullMonthNameWithDayName}
             </p>
           </div>
         </div>
       </div>
-      {data.id.toString() ===
+      {data.chatId.toString() ===
       searchParams.get("chat") ? null : data.identifier > 0 ? (
         <p className="p-[2px] text-[14px] h-auto w-fit min-w-[26px] min-h-fit aspect-square flex items-center justify-center text-white font-SemiBold rounded-full bg-green border-2 border-[#a9c788]">
           {data.identifier}

@@ -90,13 +90,30 @@ export const GetMyProductsByID = (id: any) => {
 };
 
 //ChangeStautsByID
-export const ChangeStautsByID = (id: any) => {
+export const ChangeStautsByID = (id?: any) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async () => {
-      const response = await api.put(user.order.booking.changeStatusById(id), {
-        orderId: id,
-      });
+    mutationFn: async ({
+      data,
+    }: {
+      data?: {
+        OrderId: any;
+        LessorSignatureFile: File | null;
+      };
+    }) => {
+      const response = await api.put(
+        user.order.booking.changeStatusById(id),
+        data
+          ? data
+          : {
+              orderId: id,
+            },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       return response.data;
     },
     onSuccess: (res) => {
@@ -115,7 +132,7 @@ export const ChangeStautsByID = (id: any) => {
 export const ChangeStatusByIDs = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: any) => {
+    mutationFn: async (data?: any) => {
       const response = await api.put(
         user.order.booking.changeStatusByIds,
         data

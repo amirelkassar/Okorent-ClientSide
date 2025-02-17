@@ -1,20 +1,35 @@
 "use client";
 import SearchIcon from "@/src/assets/icons/search";
 import { TextInput } from "@mantine/core";
-import React from "react";
+import React, { memo, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { ChatsData } from "@/src/lib/dataUser";
 import ChatListRow from "@/src/components/chat-list-row";
-import { GetAllChats } from "@/src/hooks/queries/user/chat";
-import SkeletonLoading from "@/src/components/skeleton-loading";
+import { useRomes } from "@/src/hooks/queries/user/chat";
+import { useInView } from "react-intersection-observer";
+import LoadingChat from "@/src/components/loading-chat";
 function ListChats() {
   const searchParams = useSearchParams();
-  const { data, isLoading } = GetAllChats(searchParams.toString());
-  console.log(data?.data);
+  const { ref, inView } = useInView();
+
+  const {
+    data: dateRomes,
+    isLoading,
+    isFetchingNextPage,
+    fetchNextPage,
+  } = useRomes();
+
+  const mergedNotifications =
+    dateRomes?.pages?.flatMap((page: any) => page?.data?.items) || [];
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, inView]);
 
   return (
     <div
-      className={`lg:max-w-[360px] ${
+      className={`lg:max-w-[360px] lg:min-w-[360px] ${
         searchParams.get("chat") ? "hidden lg:flex" : "flex"
       }  w-full flex-1 h-full min-h-full  flex-col gap-6`}
     >
@@ -35,15 +50,13 @@ function ListChats() {
       </div>
       <div className="py-2 md:py-7 md:px-2 md:bg-white md:border md:border-green rounded-3xl flex-1   h-[calc(100%-270px)]      md:shadow-sidebar  ">
         {isLoading ? (
-          <div className="flex flex-col gap-3 w-full p-1">
-            <SkeletonLoading className="md:!w-full w-full !h-12 md:!h-14 rounded-xl" />
-            <SkeletonLoading className="md:!w-full w-full !h-12 md:!h-14 rounded-xl" />
-          </div>
+          <LoadingChat />
         ) : (
           <div className=" flex flex-col gap-4  max-w-full overflow-auto h-full max-h-full md:h-[710px] ">
-            {ChatsData.map((item, i) => {
+            {mergedNotifications?.map((item: any, i: number) => {
               return <ChatListRow key={i} data={item} />;
             })}
+            <div ref={ref}>{isFetchingNextPage && <LoadingChat />}</div>
           </div>
         )}
       </div>
@@ -51,4 +64,4 @@ function ListChats() {
   );
 }
 
-export default ListChats;
+export default memo(ListChats);

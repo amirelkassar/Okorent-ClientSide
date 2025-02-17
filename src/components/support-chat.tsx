@@ -35,7 +35,7 @@ function SupportChat({
           }}
           className="pe-5"
         >
-          <div className=" w-full flex flex-col justify-end gap-5  mt-auto chatShow ">
+          <div className=" w-full flex flex-col justify-end gap-5  mt-auto  ">
             {chat?.map((item: any, index: number) => (
               <SupportMessageRow key={index} messageDetails={item} />
             ))}

@@ -4,12 +4,16 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 export const initialQueryKey = "user.myOrderAll";
 export const initialQueryTrackerKey = "user.orderTracker";
 
-export const useCreateOrderMutation = ( queries: any) => {
+export const useCreateOrderMutation = (queries: any) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await api.post(user.order.base, data, {});
+      const response = await api.post(user.order.base, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       return response.data;
     },
     onSuccess: async (res) => {
@@ -55,7 +59,7 @@ export const EditOrderByID = (id: any) => {
   });
 };
 
-export const useEditOrderByIDMutation = (id:any) => {
+export const useEditOrderByIDMutation = (id: any) => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -72,4 +76,4 @@ export const useEditOrderByIDMutation = (id:any) => {
       console.log(res);
     },
   });
-}
+};

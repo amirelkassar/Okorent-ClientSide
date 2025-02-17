@@ -18,6 +18,7 @@ import CopyLink from "../copy-link";
 import ModalContract from "../modal-contract";
 import { useDisclosure } from "@mantine/hooks";
 import Button from "../button";
+import { TermsContent } from "@/src/lib/dataUser";
 
 function CardProduct({
   data = [],
@@ -30,6 +31,8 @@ function CardProduct({
 }) {
   const params = useParams();
   const [opened, { open, close }] = useDisclosure(false);
+  const [RenterSignature, setRenterSignature] = useState<File | null>(null);
+
   const searchparams = useSearchParams();
   const [daysNumber, setDaysNumber] = useState(0);
   const [valueDate, setValueDate] = useState<[Date | null, Date | null]>([
@@ -66,6 +69,7 @@ function CardProduct({
         price: TotalPriceOrder,
       },
     ],
+    ContractText: TermsContent,
     handlingType: 1,
     deliveryType:
       valueAddressType === "store"
@@ -76,6 +80,7 @@ function CardProduct({
         ? 3
         : 1,
     paymentMethod: 1,
+    RenterSignature: RenterSignature,
     paymentAmount: TotalPriceOrder,
     handler: "4444",
     paymentAction: 1,
@@ -143,14 +148,21 @@ function CardProduct({
           >
             {admin ? null : (
               <div className="flex items-center px-5 justify-between gap-4 pb-4 flex-wrap mt-5">
-                <ModalContract opened={opened} close={close}>
+                <ModalContract
+                  opened={opened}
+                  close={close}
+                  setRenterSignature={setRenterSignature}
+                  RenterSignature={RenterSignature}
+                >
                   <LinkGreen
                     href={
                       guest
                         ? ROUTES.AUTH.LOGIN
                         : ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID)
                     }
-                    className={'h-14 w-[310px] max-w-full mx-auto'}
+                    className={`h-14 w-[310px] max-w-full mx-auto ${
+                      RenterSignature ? "" : "pointer-events-none opacity-60"
+                    }`}
                   >
                     Confirm
                   </LinkGreen>
