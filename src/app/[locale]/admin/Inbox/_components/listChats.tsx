@@ -37,9 +37,9 @@ function ListChats({ viewChats = "inbox" }: ListChatsProps) {
       <div className="py-2 md:py-5 md:px-2 md:bg-white md:border md:border-green rounded-3xl flex-1   h-[calc(100%-270px)]      md:shadow-sidebar  ">
         <div className=" flex flex-col gap-4  max-w-full overflow-auto h-full max-h-full md:h-[710px] ">
           {viewChats === "inbox" && <ChatGroup />}
-          {ChatsData.map((item, i) => {
+          {/* {ChatsData.map((item, i) => {
             return <ChatListRow key={i} data={item} />;
-          })}
+          })} */}
         </div>
       </div>
     </div>
