@@ -7,7 +7,7 @@ import Image from "next/image";
 import React from "react";
 
 function Categories() {
-  const { data, isLoading } = GetCategory();
+  const { data } = GetCategory();
   console.log(data);
   return (
     <div className="mb-10 lg:mb-16">

@@ -38,8 +38,8 @@ export const useEditOrderByIDInAdmin = (id: any) => {
     },
     onSuccess: async (res) => {
       console.log(res);
-      queryClient.invalidateQueries([initialQueryKey]);
-      queryClient.invalidateQueries([initialQueryKey, id]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey, id] });
     },
     onError: (res) => {
       console.log(res);
@@ -57,8 +57,8 @@ export const useDeleteOrderByIDInAdmin = (id: any) => {
     },
     onSuccess: async (res) => {
       console.log(res);
-      queryClient.invalidateQueries([initialQueryKey]);
-      queryClient.invalidateQueries([initialQueryKey, id]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey, id] });
     },
     onError: (res) => {
       console.log(res);
@@ -76,7 +76,7 @@ export const useDeleteManyOrderByIDInAdmin = () => {
     },
     onSuccess: async (res) => {
       console.log(res);
-      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
     },
     onError: (res) => {
       console.log(res);

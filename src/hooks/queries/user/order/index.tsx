@@ -18,7 +18,7 @@ export const useCreateOrderMutation = (queries: any) => {
     },
     onSuccess: async (res) => {
       console.log(res);
-      queryClient.refetchQueries([initialQueryKey, queries]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey, queries] });
     },
     onError: (res) => {
       console.log(res);
@@ -69,8 +69,8 @@ export const useEditOrderByIDMutation = (id: any) => {
     },
     onSuccess: async (res) => {
       console.log(res);
-      queryClient.invalidateQueries([initialQueryKey]);
-      queryClient.invalidateQueries([initialQueryTrackerKey, id]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
+      queryClient.invalidateQueries({ queryKey: [initialQueryTrackerKey, id] });
     },
     onError: (res) => {
       console.log(res);

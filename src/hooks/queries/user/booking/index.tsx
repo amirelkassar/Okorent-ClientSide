@@ -117,10 +117,10 @@ export const ChangeStautsByID = (id?: any) => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKeyOut]);
-      queryClient.invalidateQueries([initialQueryKeyOutCard]);
-      queryClient.invalidateQueries([initialQueryKey]);
-      queryClient.invalidateQueries([initialQueryKeyCard]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyOut] });
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyOutCard] });
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyCard] });
       console.log(res);
     },
     onError: (res) => {
@@ -140,10 +140,10 @@ export const ChangeStatusByIDs = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKeyOut]);
-      queryClient.invalidateQueries([initialQueryKeyOutCard]);
-      queryClient.invalidateQueries([initialQueryKey]);
-      queryClient.invalidateQueries([initialQueryKeyCard]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyOut] });
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyOutCard] });
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyCard] });
       console.log(res);
     },
     onError: (res) => {
@@ -161,8 +161,8 @@ export const useDeleteOrderOutMutation = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKeyOut]);
-      queryClient.invalidateQueries([initialQueryKeyOutCard]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyOut] });
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyOutCard] });
       console.log(res);
     },
     onError: (res) => {
@@ -179,8 +179,8 @@ export const useCancelOrderMutation = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
-      queryClient.invalidateQueries([initialQueryKeyCard]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyCard] });
       console.log(res);
     },
     onError: (res) => {
@@ -198,8 +198,8 @@ export const useCancelManyOrderMutation = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
-      queryClient.invalidateQueries([initialQueryKeyCard]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyCard] });
       console.log(res);
     },
     onError: (res) => {
@@ -217,8 +217,8 @@ export const useRejectOrderOutMutation = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKeyOut]);
-      queryClient.invalidateQueries([initialQueryKeyOutCard]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyOut] });
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyOutCard] });
       console.log(res);
     },
     onError: (res) => {
@@ -236,8 +236,8 @@ export const useRejectManyOrderOutMutation = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKeyOut]);
-      queryClient.invalidateQueries([initialQueryKeyOutCard]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyOut] });
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyOutCard] });
       console.log(res);
     },
     onError: (res) => {
@@ -254,8 +254,8 @@ export const useCancelOrderOutMutation = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKeyOut]);
-      queryClient.invalidateQueries([initialQueryKeyOutCard]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyOut] });
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyOutCard] });
       console.log(res);
     },
     onError: (res) => {
@@ -272,8 +272,8 @@ export const useCancelManyOrderOutMutation = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKeyOut]);
-      queryClient.invalidateQueries([initialQueryKeyOutCard]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyOut] });
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyOutCard] });
       console.log(res);
     },
     onError: (res) => {
@@ -290,8 +290,8 @@ export const useDeleteOrderMutation = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
-      queryClient.invalidateQueries([initialQueryKeyCard]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyCard] });
       console.log(res);
     },
     onError: (res) => {
@@ -308,8 +308,8 @@ export const useRefundOrderMutation = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
-      queryClient.invalidateQueries([initialQueryKeyCard]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyCard] });
 
       console.log(res);
     },
@@ -327,8 +327,8 @@ export const useRefundManyOrderMutation = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
-      queryClient.invalidateQueries([initialQueryKeyCard]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyCard] });
 
       console.log(res);
     },
@@ -346,8 +346,8 @@ export const useRefundOrderOutMutation = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKeyOut]);
-      queryClient.invalidateQueries([initialQueryKeyOutCard]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyOut] });
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyOutCard] });
       console.log(res);
     },
     onError: (res) => {
@@ -364,8 +364,8 @@ export const useRefundManyOrderOutMutation = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKeyOut]);
-      queryClient.invalidateQueries([initialQueryKeyOutCard]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyOut] });
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyOutCard] });
 
       console.log(res);
     },

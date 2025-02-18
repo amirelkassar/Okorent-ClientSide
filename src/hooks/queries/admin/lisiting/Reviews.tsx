@@ -29,7 +29,7 @@ export const useEditReviewInAdmin = (id: any) => {
     },
     onSuccess: (res) => {
       console.log(res);
-      queryClient.refetchQueries([initialQueryKey, id]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey, id] });
     },
     onError: (res) => {
       console.log(res);
@@ -47,7 +47,7 @@ export const useDeleteReviewProductInAdmin = (idProduct: any) => {
     },
 
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey, idProduct]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey, idProduct] });
       console.log(res);
     },
     onError: (res) => {

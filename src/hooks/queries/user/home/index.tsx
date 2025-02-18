@@ -51,11 +51,10 @@ export const useFavoriteProductMutation = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.refetchQueries([
-        initialQueryKeyFavUser,
-        "IncludeFavoritesOnly=true",
-      ]);
-      queryClient.refetchQueries([initialQueryKeyUser]);
+      queryClient.refetchQueries({
+        queryKey: [initialQueryKeyFavUser, "IncludeFavoritesOnly=true"],
+      });
+      queryClient.refetchQueries({ queryKey: [initialQueryKeyUser] });
       console.log(res);
     },
     onError: (res) => {
@@ -75,11 +74,10 @@ export const useDeleteFavoriteProductMutation = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([
-        initialQueryKeyFavUser,
-        "IncludeFavoritesOnly=true",
-      ]);
-      queryClient.refetchQueries([initialQueryKeyUser]);
+      queryClient.invalidateQueries({
+        queryKey: [initialQueryKeyFavUser, "IncludeFavoritesOnly=true"],
+      });
+      queryClient.refetchQueries({ queryKey: [initialQueryKeyUser] });
       console.log(res);
     },
     onError: (res) => {

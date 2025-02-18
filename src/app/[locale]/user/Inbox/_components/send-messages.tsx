@@ -3,44 +3,26 @@ import AttachIcon from "@/src/assets/icons/attach";
 import CloseChatIcon from "@/src/assets/icons/closeChat";
 import SendIcon from "@/src/assets/icons/send";
 import Button from "@/src/components/button";
-import { Toast } from "@/src/components/toast";
-import { useSendMessage } from "@/src/hooks/queries/user/chat";
 import { FileButton, Textarea } from "@mantine/core";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
+import { useAddMessage } from "../_hooks/use-add-message";
 
 function SendMessages() {
   const searchParams = useSearchParams();
   const [Message, setMessage] = useState("");
   const [selectedFile, setSelectedFile] = useState<any[]>([]);
-  const handleHeaderInputChange = (e: any) => {
-    const files = e.target.files; // Get the selected files
-    for (let i = 0; i < files.length; i++) {
-      const selectedFile = files[i];
-      console.log(selectedFile);
-      setSelectedFile((oldArray) => [...oldArray, selectedFile]);
-    }
-  };
-
-  const { mutateAsync: SendMessages } = useSendMessage(
-    searchParams.get("chat")?.toString()
-  );
+  const { onSend } = useAddMessage(searchParams.get("chat") || "");
 
   const onSubmitSendMessage = async () => {
     setMessage("");
-    await Toast.Promise(
-      SendMessages({
-        ChatRoomId: searchParams.get("chat")?.toString(),
-        MessageContent: Message,
-      }),
-      {
-        success: "successfully Send Message ",
-        error: "not send msg",
-        onSuccess: async (res) => {},
-      }
-    );
+    onSend({
+      ChatRoomId: searchParams.get("chat")?.toString(),
+      MessageContent: Message,
+    });
   };
+
   return (
     <div className="flex items-center gap-2  md:gap-5 ">
       <FileButton onChange={setSelectedFile} multiple>
@@ -98,6 +80,11 @@ function SendMessages() {
             value={Message}
             onChange={(e) => {
               setMessage(e.target.value);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                onSubmitSendMessage();
+              }
             }}
           />
         </div>

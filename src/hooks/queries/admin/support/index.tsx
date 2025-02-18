@@ -42,7 +42,7 @@ export const useContactUs = () => {
     },
     onSuccess: (res) => {
       console.log(res);
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
     },
     onError: (res) => {
       console.log(res);
@@ -65,7 +65,7 @@ export const useSupportUser = () => {
     },
     onSuccess: (res) => {
       console.log(res);
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
     },
     onError: (res) => {
       console.log(res);
@@ -87,8 +87,8 @@ export const useSendReply = (id: any) => {
     },
     onSuccess: (res) => {
       console.log(res);
-      queryClient.refetchQueries([initialQueryKey]);
-      queryClient.refetchQueries([initialQueryKey, id]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
+      queryClient.refetchQueries({ queryKey: [initialQueryKey, id] });
     },
     onError: (res) => {
       console.log(res);
@@ -110,8 +110,8 @@ export const useSolvedSupport = (id: any) => {
     },
     onSuccess: (res) => {
       console.log(res);
-      queryClient.refetchQueries([initialQueryKey, id]);
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey, id] });
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
     },
     onError: (res) => {
       console.log(res);
@@ -158,8 +158,8 @@ export const useReplyAdmin = (id: any) => {
     },
     onSuccess: (res) => {
       console.log(res);
-      queryClient.refetchQueries([initialQueryKeyAdmin, id]);
-      queryClient.refetchQueries([initialQueryKeyAdmin]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKeyAdmin, id] });
+      queryClient.refetchQueries({ queryKey: [initialQueryKeyAdmin] });
     },
     onError: (res) => {
       console.log(res);
@@ -182,8 +182,8 @@ export const useSolvedSupportInAdmin = (id: any) => {
     },
     onSuccess: (res) => {
       console.log(res);
-      queryClient.refetchQueries([initialQueryKeyAdmin, id]);
-      queryClient.refetchQueries([initialQueryKeyAdmin]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKeyAdmin, id] });
+      queryClient.refetchQueries({ queryKey: [initialQueryKeyAdmin] });
     },
     onError: (res) => {
       console.log(res);
@@ -201,8 +201,8 @@ export const useDeleteSupportInAdmin = (id: any) => {
     },
     onSuccess: (res) => {
       console.log(res);
-      queryClient.refetchQueries([initialQueryKeyAdmin, id]);
-      queryClient.refetchQueries([initialQueryKeyAdmin]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKeyAdmin, id] });
+      queryClient.refetchQueries({ queryKey: [initialQueryKeyAdmin] });
     },
     onError: (res) => {
       console.log(res);

@@ -39,7 +39,8 @@ export const useCreateCategory = () => {
       });
       return response.data;
     },
-    onSuccess: () => queryClient.refetchQueries([initialQueryKey]),
+    onSuccess: () =>
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] }),
     onError: (res) => console.error(res),
   });
 };
@@ -53,8 +54,8 @@ export const useDeleteCategory = (id: any) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey]);
-      queryClient.refetchQueries([initialQueryKey, id]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
+      queryClient.refetchQueries({ queryKey: [initialQueryKey, id] });
     },
     onError: (res) => console.error(res),
   });
@@ -71,8 +72,8 @@ export const useEditCategory = (id: any) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKey, id]);
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey, id] });
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
     },
     onError: (res) => console.error(res),
   });
@@ -103,11 +104,9 @@ export const useCreateSubCategory = (id: any) => {
       return response.data;
     },
     onMutate: async (newSubCategory) => {
-      await queryClient.cancelQueries([
-        initialQueryKeySub,
-        initialQueryKey,
-        id,
-      ]);
+      await queryClient.cancelQueries({
+        queryKey: [initialQueryKeySub, initialQueryKey, id],
+      });
 
       const previousData = queryClient.getQueryData([
         initialQueryKeySub,
@@ -147,9 +146,10 @@ export const useCreateSubCategory = (id: any) => {
       );
     },
     onSettled: () => {
-      queryClient.invalidateQueries([initialQueryKeySub, initialQueryKey, id]);
+      queryClient.invalidateQueries({
+        queryKey: [initialQueryKeySub, initialQueryKey, id],
+      });
     },
-
   });
 };
 
@@ -162,14 +162,12 @@ export const useDeleteSubCategory = (id: any, idCategory: any) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([
-        initialQueryKeySub,
-        initialQueryKey,
-        idCategory,
-      ]);
-      queryClient.refetchQueries([initialQueryKey, idCategory]);
-      queryClient.refetchQueries([initialQueryKey]);
-      queryClient.refetchQueries([initialQueryKeySub]);
+      queryClient.refetchQueries({
+        queryKey: [initialQueryKeySub, initialQueryKey, idCategory],
+      });
+      queryClient.refetchQueries({ queryKey: [initialQueryKey, idCategory] });
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
+      queryClient.refetchQueries({ queryKey: [initialQueryKeySub] });
     },
     onError: (res) => console.error(res),
   });
@@ -184,9 +182,11 @@ export const useEditSubCategory = (id: any) => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.refetchQueries([initialQueryKeySub, initialQueryKey, id]);
-      queryClient.refetchQueries([initialQueryKey, id]);
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.invalidateQueries({
+        queryKey: [initialQueryKeySub, initialQueryKey, id],
+      });
+      queryClient.refetchQueries({ queryKey: [initialQueryKey, id] });
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
     },
     onError: (res) => console.error(res),
   });

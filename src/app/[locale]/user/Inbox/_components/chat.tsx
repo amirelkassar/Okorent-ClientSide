@@ -6,7 +6,8 @@ import Loading from "@/src/components/loading";
 import ChatHeader from "./chat-header";
 import { useSearchParams } from "next/navigation";
 import SendMessages from "./send-messages";
-import ChatMessages from "./chat-messages";
+import { ChatCard } from "./chat-card";
+import { ChatHub } from "@/src/components/chat-hub";
 const Chat = () => {
   const searchParams = useSearchParams();
   const { data, isLoading } = GetMessageChatById(searchParams.get("chat"));
@@ -23,14 +24,10 @@ const Chat = () => {
         userImage={data?.data?.userImage}
         userName={data?.data?.userName}
       />
-
-      <ChatMessages
-        messages={data}
-        idUSer={data?.data?.userId || ""}
-        id={searchParams.get("chat")}
-      />
+      <ChatCard id={searchParams.get("chat") || ""} />
 
       <SendMessages />
+      <ChatHub />
     </div>
   );
 };

@@ -1,27 +1,22 @@
 "use client";
 import LoadingChat from "@/src/components/loading-chat";
-import { useGetMessages } from "@/src/hooks/queries/user/chat";
+import {  useUserChatMessages } from "@/src/hooks/queries/user/chat";
 import { getDate } from "@/src/lib/utils";
-import { ScrollArea } from "@mantine/core";
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
-import { Virtuoso } from "react-virtuoso";
 
 function ChatMessages({
-  messages,
   idUSer,
   id = "",
 }: {
   id: any;
-  messages: any[];
   idUSer: string;
 }) {
   const { ref, inView } = useInView();
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const { data, isLoading, isFetchingNextPage, fetchNextPage } =
-    useGetMessages(id);
-  console.log(data);
+  const { data, isFetchingNextPage, fetchNextPage } =
+  useUserChatMessages(id);
   const mergedNotifications =
     data?.pages?.flatMap((page: any) => page?.data?.messages).reverse() || [];
   useEffect(() => {

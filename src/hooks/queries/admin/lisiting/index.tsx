@@ -46,7 +46,7 @@ export const useDeleteProductInAdmin = () => {
     },
 
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
       console.log(res);
     },
     onError: (res) => {
@@ -64,7 +64,7 @@ export const useDeleteManyProductInAdmin = () => {
     },
 
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
       console.log(res);
     },
     onError: (res) => {
@@ -93,7 +93,7 @@ export const useEditListingInAdmin = (id: any) => {
     },
     onSuccess: (res) => {
       console.log(res);
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
       router.push(ROUTES.ADMIN.LISTINGS);
     },
     onError: (res) => {
@@ -110,7 +110,7 @@ export const useQuickEditManyProductInAdmin = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
       console.log(res);
     },
     onError: (res) => {
@@ -139,7 +139,7 @@ export const useCreateStockInAdmin = (id: any) => {
     },
 
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKeyStock, id]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyStock, id] });
       console.log(res);
     },
     onError: (res) => {
@@ -158,7 +158,7 @@ export const useEditStockInAdmin = (id: any) => {
     },
 
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKeyStock, id]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKeyStock, id] });
       console.log(res);
     },
     onError: (res) => {

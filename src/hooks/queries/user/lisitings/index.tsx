@@ -44,7 +44,7 @@ export const useDeleteMutation = () => {
     },
 
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
       console.log(res);
     },
     onError: (res) => {
@@ -65,7 +65,7 @@ export const useUpdateToOnlineMutation = () => {
     },
 
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
       console.log(res);
     },
     onError: (res) => {
@@ -82,7 +82,7 @@ export const useUpdateManyToOnlineMutation = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
       console.log(res);
     },
     onError: (res) => {
@@ -99,7 +99,7 @@ export const useDeleteManyMyProduct = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
       console.log(res);
     },
     onError: (res) => {

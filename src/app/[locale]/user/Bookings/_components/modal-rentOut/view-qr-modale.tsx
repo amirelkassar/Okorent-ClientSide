@@ -33,7 +33,7 @@ function ViewQrModal({
   close: any;
   id: string;
 }) {
-  const { mutateAsync: getQrCode, isLoading } = GetQrCodeOrder();
+  const { mutateAsync: getQrCode, isPending } = GetQrCodeOrder();
   const [qrType, setQrType] = useState<number | any>(null);
   const [ImageSrc, setImageSrc] = useState("");
   const onSubmitQr = useCallback(async () => {
@@ -85,7 +85,7 @@ function ViewQrModal({
           inputClassName=" !rounded-xl md:!rounded-2xl text-grayMedium !h-12  md:!h-16 bg-white"
         />
         <div className=" min-h-[140px] h-[180px] md:h-[240px] md:min-h-[240px] w-full flex items-center justify-center  mx-auto  my-7">
-          {isLoading ? (
+          {isPending ? (
             <h2 className="text-sm font-semibold">loading...</h2>
           ) : ImageSrc ? (
             <Image

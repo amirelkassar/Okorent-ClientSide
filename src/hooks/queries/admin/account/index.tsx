@@ -46,8 +46,8 @@ export const useDeleteAccountInAdmin = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.refetchQueries([initialQueryKey]);
-      queryClient.refetchQueries([initialQueryKey, ""]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
+      queryClient.refetchQueries({ queryKey: [initialQueryKey, ""] });
       console.log(res);
     },
     onError: (res) => {
@@ -69,7 +69,7 @@ export const useCreateAccountInAdmin = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
     },
     onError: () => {},
   });
@@ -88,7 +88,7 @@ export const useEditAccountInAdmin = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
     },
     onError: () => {},
   });
@@ -103,7 +103,7 @@ export const useDeActivateAccountInAdmin = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
     },
     onError: () => {},
   });
@@ -117,7 +117,7 @@ export const useDeActivateManyAccountInAdmin = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
     },
     onError: () => {},
   });
@@ -138,7 +138,7 @@ export const useActivateAccountInAdmin = (id: any) => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
     },
     onError: () => {},
   });
@@ -153,11 +153,11 @@ export const useActiveManyAccountInAdmin = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
       console.log(res);
     },
     onError: (res) => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
 
       console.log(res);
     },
@@ -173,11 +173,11 @@ export const useDeleteManyAccountInAdmin = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
       console.log(res);
     },
     onError: (res) => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
 
       console.log(res);
     },
@@ -197,7 +197,7 @@ export const useEditAccountIDInAdmin = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
     },
     onError: () => {},
   });
@@ -221,7 +221,7 @@ export const useEditImageUserProfileInAdmin = () => {
     },
     onSuccess: (res) => {
       console.log(res);
-      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
     },
     onError: (err) => {
       console.log(err);
@@ -238,7 +238,7 @@ export const useVerificationAccountInAdmin = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
     },
     onError: () => {},
   });
@@ -257,7 +257,7 @@ export const useVerificationManyAccountInAdmin = () => {
       return response.data;
     },
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
     },
     onError: () => {},
   });
