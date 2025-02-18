@@ -50,76 +50,22 @@ export const GetMessageChatById = (id?: any) => {
   });
 };
 
-//Send Message
-export const useSendMessage = (id: any) => {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: async (data: any) => {
-      const response = await api.post(user.Chat.Send_Message, data, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      return response.data; // استرجاع البيانات الحقيقية من الاستجابة
-    },
-    // onMutate: async (newMessage) => {
-    //   await queryClient.cancelQueries([initialQueryKey, { id }]);
-
-    //   const previousData = queryClient.getQueryData([initialQueryKey, { id }]);
-
-    //   // إضافة الرسالة المؤقتة فقط
-    //   queryClient.setQueryData([initialQueryKey, { id }], (oldData: any) => ({
-    //     ...oldData,
-    //     data: {
-    //       ...oldData?.data,
-    //       messages: [
-    //         {
-    //           messageContent: newMessage.MessageContent,
-    //           created: Date.now(),
-    //           isPending: true,
-    //         },
-    //         ...oldData.data.messages,
-    //       ],
-    //     },
-    //   }));
-
-    //   return { previousData };
-    // },
-    // onSuccess: () => {
-    //   // في حالة النجاح، نقوم فقط بتحديث الرسالة المؤقتة
-    //   queryClient.setQueryData([initialQueryKey, { id }], (oldData: any) => ({
-    //     ...oldData,
-    //     data: {
-    //       ...oldData?.data,
-    //       messages: oldData?.data?.messages.map((msg: any) =>
-    //         msg.isPending ? { ...msg, isPending: false } : msg
-    //       ),
-    //     },
-    //   }));
-    // },
-    // onError: (_, __, context) => {
-    //   if (context?.previousData) {
-    //     queryClient.setQueryData(
-    //       [initialQueryKey, { id }],
-    //       context.previousData
-    //     );
-    //   }
-    // },
-    // onSettled: () => {
-    //   queryClient.invalidateQueries([initialQueryKey, { id }]);
-    // },
-  });
-};
-
 //Create New Chat
-export const useCreateNewChat = () => {
+export const useCreateNewChat = (id: any) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await api.post(user.Chat.Create_New_Chat, data);
+      const response = await api.post(user.Chat.Create_New_Chat, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       return response.data;
     },
     onSuccess: (res) => {
       console.log(res);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey, id] });
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
     },
     onError: (res) => {
       console.log(res);
@@ -150,6 +96,7 @@ export const GetAllMessages = async (
 
 /*====================================================================================================================*/
 /*====================================================================================================================*/
+//Send Message
 export const useUserChatMessages = (
   id: string = "1"
 ): UseInfiniteQueryResult<InfiniteData<NotificationResponse>, Error> => {
@@ -226,7 +173,7 @@ export const useAddMessageLocally = () => {
                   ...page,
                   data: {
                     ...page.data,
-                    messages: [tempMessage, ...page.data.messages], // Corrected path
+                    messages: [tempMessage, ...page.data?.messages], // Corrected path
                   },
                 }
               : page

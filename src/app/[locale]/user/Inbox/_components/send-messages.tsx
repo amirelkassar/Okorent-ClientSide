@@ -9,18 +9,27 @@ import { useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import { useAddMessage } from "../_hooks/use-add-message";
 
-function SendMessages() {
+function SendMessages({ NoChat = false }: { NoChat: boolean }) {
   const searchParams = useSearchParams();
   const [Message, setMessage] = useState("");
   const [selectedFile, setSelectedFile] = useState<any[]>([]);
-  const { onSend } = useAddMessage(searchParams.get("chat") || "");
+  const { onSend, onCreateChat } = useAddMessage(
+    searchParams.get("chat") || ""
+  );
 
   const onSubmitSendMessage = async () => {
     setMessage("");
-    onSend({
-      ChatRoomId: searchParams.get("chat")?.toString(),
-      MessageContent: Message,
-    });
+    if (NoChat) {
+      onCreateChat({
+        UserId: searchParams.get("chat"),
+        MessageContent: Message,
+      });
+    } else {
+      onSend({
+        ChatRoomId: searchParams.get("chat")?.toString(),
+        MessageContent: Message,
+      });
+    }
   };
 
   return (

@@ -4,7 +4,9 @@ import { memo } from "react";
 import { ChatWrapper } from "./chat-wrapper";
 import { ChatBody } from "./chat-body";
 import { useUserChatMessages } from "@/src/hooks/queries/user/chat";
-import { getDate } from "@/src/lib/utils";
+import { cn, getDate } from "@/src/lib/utils";
+import SendMessages from "./send-messages";
+import ChatHeader from "./chat-header";
 
 // Define Chat Message Type
 interface ChatMessage {
@@ -37,35 +39,45 @@ interface RenderChatProps {
   chatId: string;
   messages: ChatMessage[];
   totalCount: number;
+  userImage: any;
+  userName: any;
   totalMessages: number;
   hasNextPage: boolean;
   isFetchingNextPage: boolean;
   fetchNextPage: () => void;
+  NoChat: boolean;
 }
 
-const RenderChat = memo<RenderChatProps>(({ chatId, ...props }) => {
-  return (
-    <div className="h-full flex flex-col gap-3 ">
-      <ChatBody {...props}>
-        {({ m, i }: { m: ChatMessage; i: number }) => {
-          return m.senderUserId === chatId ? (
-            <ReceivedChat
-              key={i}
-              massage={m?.messageContent}
-              date={m?.created} // Matches `ChatBody`'s `MessageType`
-            />
-          ) : (
-            <SentChat
-              key={i}
-              massage={m?.messageContent}
-              date={m?.created} // Matches `ChatBody`'s `MessageType`
-            />
-          );
-        }}
-      </ChatBody>
-    </div>
-  );
-});
+const RenderChat = memo<RenderChatProps>(
+  ({ chatId, userImage, userName, NoChat, ...props }) => {
+    return (
+      <div className={cn("h-full w-full flex flex-col flex-1   gap-5  ")}>
+        <ChatHeader userImage={userImage} userName={userName} />
+        <div className="h-full flex flex-col gap-3 ">
+          <ChatBody {...props}>
+            {({ m, i }: { m: ChatMessage; i: number }) => {
+              return m.senderUserId === chatId ? (
+                <ReceivedChat
+                  key={i}
+                  massage={m?.messageContent}
+                  date={m?.created} // Matches `ChatBody`'s `MessageType`
+                />
+              ) : (
+                <SentChat
+                  key={i}
+                  massage={m?.messageContent}
+                  date={m?.created} // Matches `ChatBody`'s `MessageType`
+                />
+              );
+            }}
+          </ChatBody>
+        </div>
+
+        <SendMessages NoChat={NoChat} />
+      </div>
+    );
+  }
+);
 
 RenderChat.displayName = "RenderChat";
 

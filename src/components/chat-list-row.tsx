@@ -15,6 +15,7 @@ interface ChatsDataProps {
   lastMessageDate: string;
   identifier: number;
   userImage: StaticImageData;
+  userId:any
 }
 interface ChatListRowProps {
   data: ChatsDataProps;
@@ -28,12 +29,12 @@ function ChatListRow({ data }: ChatListRowProps) {
       href={
         (adminView ? ROUTES.ADMIN.INBOX : ROUTES.USER.INBOX) +
         "?chat=" +
-        data.chatId
+        data.userId
       }
       className={cn(
         "py-1 px-2 flex items-center gap-3 cursor-pointer duration-300 hover:bg-grayBack/50 justify-between  w-full rounded-[18px] ",
         data.identifier > 0 ? "bg-grayBack hover:bg-grayBack" : null,
-        data?.chatId?.toString() === searchParams.get("chat")
+        data?.userId?.toString() === searchParams.get("chat")
           ? "bg-green/30 hover:bg-green/50"
           : ""
       )}
@@ -57,7 +58,7 @@ function ChatListRow({ data }: ChatListRowProps) {
           </div>
         </div>
       </div>
-      {data?.chatId?.toString() ===
+      {data?.userId?.toString() ===
       searchParams.get("chat") ? null : data.identifier > 0 ? (
         <p className="p-[2px] text-[14px] h-auto w-fit min-w-[26px] min-h-fit aspect-square flex items-center justify-center text-white font-SemiBold rounded-full bg-green border-2 border-[#a9c788]">
           {data.identifier}

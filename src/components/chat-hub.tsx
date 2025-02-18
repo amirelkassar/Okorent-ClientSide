@@ -40,7 +40,7 @@ export const ChatHub = () => {
       connection.on("OnNewMessage", (newMessage) => {
         console.log(newMessage);
 
-        const chatId = newMessage?.MessageID || "";
+        const chatId = newMessage?.chatRoomId || "";
         audio.play();
         addMessage({
           newMessage,

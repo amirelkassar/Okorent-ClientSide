@@ -21,10 +21,12 @@ export const ChatWrapper = memo(
       fetchNextPage,
       isFetchingNextPage,
     } = query;
+    console.log(data?.pages[0].data);
 
     if (isPending) return <Loading />;
 
     if (isError) return <Error500 />;
+    const NoChat = data?.pages[0].data === null && !isPending;
 
     const generalData = data?.pages[0]?.data || {};
 
@@ -51,6 +53,7 @@ export const ChatWrapper = memo(
       hasNextPage,
       fetchNextPage,
       isFetchingNextPage,
+      NoChat,
     });
   }
 );

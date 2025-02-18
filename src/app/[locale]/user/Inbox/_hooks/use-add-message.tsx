@@ -3,6 +3,7 @@
 import { useCallback } from "react";
 import {
   useAddMessageLocally,
+  useCreateNewChat,
   useUserChatAddMessage,
 } from "@/src/hooks/queries/user/chat";
 
@@ -10,6 +11,7 @@ export const useAddMessage = (chatId = "") => {
   const { mutate: sendMessage } = useUserChatAddMessage();
 
   const { mutate: addMessage } = useAddMessageLocally();
+  const { mutate: CreateChat } = useCreateNewChat(chatId);
 
   const onSend = useCallback(
     (data: any) => {
@@ -36,6 +38,27 @@ export const useAddMessage = (chatId = "") => {
     },
     [chatId, addMessage, sendMessage]
   );
+  const onCreateChat = useCallback(
+    (data: any) => {
+      const newMessage = data?.MessageContent;
+      if (!newMessage) return;
 
-  return { onSend };
+      const formDataToSend = {
+        UserId: data.UserId,
+        MessageContent: newMessage,
+      };
+
+      CreateChat(formDataToSend, {
+        onSuccess: (realMessage: any) => {
+          console.log(realMessage);
+        },
+        onError: (error: any) => {
+          console.log("error Msg", error);
+        },
+      });
+    },
+    [CreateChat]
+  );
+
+  return { onSend, onCreateChat };
 };
