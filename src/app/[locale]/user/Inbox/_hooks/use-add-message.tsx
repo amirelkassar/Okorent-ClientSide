@@ -6,13 +6,15 @@ import {
   useCreateNewChat,
   useUserChatAddMessage,
 } from "@/src/hooks/queries/user/chat";
+import { useRouter } from "@/src/navigation";
+import ROUTES from "@/src/routes";
 
 export const useAddMessage = (chatId = "") => {
   const { mutate: sendMessage } = useUserChatAddMessage();
 
   const { mutate: addMessage } = useAddMessageLocally();
   const { mutate: CreateChat } = useCreateNewChat(chatId);
-
+  const router = useRouter();
   const onSend = useCallback(
     (data: any) => {
       const newMessage = data?.MessageContent;
@@ -49,11 +51,11 @@ export const useAddMessage = (chatId = "") => {
       };
 
       CreateChat(formDataToSend, {
-        onSuccess: (realMessage: any) => {
-          console.log(realMessage);
-        },
-        onError: (error: any) => {
-          console.log("error Msg", error);
+        onSuccess(data, variables, context) {
+          console.log(data);
+          router.replace(`${ROUTES.USER.INBOX}?chat=${data?.data}`, {
+            scroll: false,
+          });
         },
       });
     },

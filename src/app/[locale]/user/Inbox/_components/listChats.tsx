@@ -26,6 +26,7 @@ function ListChats() {
       fetchNextPage();
     }
   }, [fetchNextPage, inView]);
+  console.log(mergedNotifications);
 
   return (
     <div

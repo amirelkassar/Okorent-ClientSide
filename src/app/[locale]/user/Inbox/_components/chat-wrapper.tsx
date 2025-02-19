@@ -7,9 +7,11 @@ export const ChatWrapper = memo(
   ({
     query,
     children,
+    NoChat = false,
   }: {
     query: any;
     children: (args: any) => React.ReactNode;
+    NoChat: boolean;
   }) => {
     if (!query) throw new Error("query is required");
 
@@ -25,8 +27,8 @@ export const ChatWrapper = memo(
 
     if (isPending) return <Loading />;
 
-    if (isError) return <Error500 />;
-    const NoChat = data?.pages[0].data === null && !isPending;
+    if (isError && !NoChat) return <Error500 />;
+    // const NoChat = data?.pages[0].data === null && !isPending;
 
     const generalData = data?.pages[0]?.data || {};
 

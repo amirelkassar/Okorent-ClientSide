@@ -83,7 +83,8 @@ export const user = {
   Chat: {
     Get_All_Chats: (queries: any) => buildQuery("/Chat/rooms", queries),
     Get_Messages_By_Id: (id: any, queries: any) =>
-      buildQuery(`/Chat/chatByUserId/${id}`, queries),
+      buildQuery(`/Chat/room/${id}`, queries),
+    Get_Messages_By_User_ID: (id: any) => `/Chat/chatByUserId/${id}`,
     Create_New_Chat: "/Chat/room",
     Send_Message: "/Chat/message",
   },
@@ -179,6 +180,14 @@ export const admin = {
     delete: (id: any) => `/Demo/Admin-Delete/${id}`,
     add_note: "/Demo/Admin-Create-DemoNote",
     get_note_byID: (id: any) => `/Demo/Admin-GetDemo-ByID/${id}`,
+  },
+  Ads: {
+    get_pricing: (queries: any) =>
+      buildQuery("/AdminAdvertisement/pricing", queries),
+    add_pricing: "/AdminAdvertisement/pricing",
+    edit_pricing: (id: any) => `/AdminAdvertisement/pricing/${id}`,
+    get_ads: (queries: any) =>
+      buildQuery("/AdminAdvertisement/user-advertisements", queries),
   },
 };
 

@@ -16,6 +16,7 @@ function SendMessages({ NoChat = false }: { NoChat: boolean }) {
   const { onSend, onCreateChat } = useAddMessage(
     searchParams.get("chat") || ""
   );
+  console.log(NoChat);
 
   const onSubmitSendMessage = async () => {
     setMessage("");

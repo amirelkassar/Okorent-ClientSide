@@ -7,6 +7,8 @@ import { useUserChatMessages } from "@/src/hooks/queries/user/chat";
 import { cn, getDate } from "@/src/lib/utils";
 import SendMessages from "./send-messages";
 import ChatHeader from "./chat-header";
+import { useRouter } from "@/src/navigation";
+import ROUTES from "@/src/routes";
 
 // Define Chat Message Type
 interface ChatMessage {
@@ -18,18 +20,22 @@ interface ChatMessage {
   created: string; // Renamed to match `ChatBody`'s `MessageType`
   status?: string;
 }
-
 // Define Props for ChatCard
 interface ChatCardProps {
   id?: string;
+  NoChat: boolean;
 }
 
-export const ChatCard: React.FC<ChatCardProps> = ({ id = "" }) => {
+export const ChatCard: React.FC<ChatCardProps> = ({
+  id = "",
+  NoChat = false,
+}) => {
   const query = useUserChatMessages(id);
+  console.log(NoChat);
 
   return (
-    <ChatWrapper query={query}>
-      {(props) => <RenderChat {...props} />}
+    <ChatWrapper query={query} NoChat={NoChat}>
+      {(props) => <RenderChat {...props} NoChatRoom={NoChat} />}
     </ChatWrapper>
   );
 };
@@ -46,10 +52,12 @@ interface RenderChatProps {
   isFetchingNextPage: boolean;
   fetchNextPage: () => void;
   NoChat: boolean;
+  NoChatRoom: boolean;
 }
 
 const RenderChat = memo<RenderChatProps>(
-  ({ chatId, userImage, userName, NoChat, ...props }) => {
+  ({ chatId, userImage, userName, NoChatRoom, NoChat, ...props }) => {
+    console.log(NoChatRoom);
     return (
       <div className={cn("h-full w-full flex flex-col flex-1   gap-5  ")}>
         <ChatHeader userImage={userImage} userName={userName} />
@@ -73,7 +81,7 @@ const RenderChat = memo<RenderChatProps>(
           </ChatBody>
         </div>
 
-        <SendMessages NoChat={NoChat} />
+        <SendMessages NoChat={NoChatRoom} />
       </div>
     );
   }

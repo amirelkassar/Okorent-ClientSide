@@ -93,7 +93,7 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
     {
       label: "Message",
       icon: <NoteTableIcon fill="#6F6B7D" className="w-3 h-auto" />,
-      link: ROUTES.USER.INBOX + "?chat=" + id,
+      link: ROUTES.USER.INBOX + "?chat=" + id + "&UserID=true",
       type: "link",
     },
     //7

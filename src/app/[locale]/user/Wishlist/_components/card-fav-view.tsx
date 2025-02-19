@@ -107,7 +107,7 @@ function CardFavView({ product }: { product?: any }) {
           >
             View Details
           </LinkGreen>
-          <LinkGreen href={ROUTES.USER.INBOX} className={"h-10 flex-1"}>
+          <LinkGreen href={ROUTES.USER.PRODUCTDETAILS(product?.id)} className={"h-10 flex-1"}>
             Request This Item
           </LinkGreen>
         </div>

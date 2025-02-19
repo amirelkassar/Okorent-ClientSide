@@ -21,7 +21,7 @@ const ViewDetailsLink: React.FC<ButtonProps> = ({ id, style }) => (
 
 const MessageLink: React.FC<ButtonProps> = ({ id, name, style }) => (
   <LinkGreen
-    href={id ? ROUTES.USER.INBOX + "?chat=" + id : "#"}
+    href={id ? (ROUTES.USER.INBOX + "?chat=" + id+ "&UserID=true") : "#"}
     className={`h-10 flex-1 truncate max-w-[180px]  ${style}`}
   >
     {`Message ${name || "User"}`}

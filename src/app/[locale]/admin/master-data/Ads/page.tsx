@@ -2,7 +2,6 @@
 import React from "react";
 import LayoutMaster from "../_components/layout-master";
 import { DataTable } from "@/src/components/data-table";
-import { AdsData } from "@/src/lib/dataUser";
 import EditIcon from "@/src/assets/icons/edit";
 import DeleteIcon from "@/src/assets/icons/delete";
 import { columns } from "./_components/column";
@@ -13,6 +12,9 @@ import { Link } from "@/src/navigation";
 import AddPricingIcon from "@/src/assets/icons/add-pricing";
 import CardPhoneAds from "./_components/card-phone-ads";
 import ROUTES from "@/src/routes";
+import { GetAdsUserInAdmin } from "@/src/hooks/queries/admin/master-data/ads";
+import { QueryWrapper } from "@/src/components/query-wrapper";
+import { Pagination } from "@/src/components/pagination";
 const FilterOptions = [
   {
     label: "Activate",
@@ -49,6 +51,8 @@ function page() {
       onclick: () => {},
     },
   ];
+  const query = GetAdsUserInAdmin();
+
   return (
     <LayoutMaster>
       <TableHeader>
@@ -66,12 +70,23 @@ function page() {
           options={FilterOptions}
         ></TableHeader.Last>
       </TableHeader>
-      <DataTable
-        data={AdsData}
-        columns={columns}
-        functionSelect={functionSelect}
-        Component={CardPhoneAds}
-      />
+      <QueryWrapper query={query}>
+        {({ data, totalPages }: { data: any; totalPages?: any }) => {
+          console.log(data);
+
+          return (
+            <div className="bg-white rounded-xl border border-green/30 shadow-md w-full px-3 mdl:px-8 py-1 mdl:py-2 mb-section">
+              <DataTable
+                data={data}
+                columns={columns}
+                functionSelect={functionSelect}
+                Component={CardPhoneAds}
+              />
+              <Pagination totalPages={totalPages} />
+            </div>
+          );
+        }}
+      </QueryWrapper>
     </LayoutMaster>
   );
 }

@@ -13,7 +13,7 @@ import {
 } from "@tanstack/react-query";
 import { useCallback } from "react";
 
-export const initialQueryKey = "user.myOrderAll";
+export const initialQueryKey = "user.Chat";
 
 //get All Chats
 export const GetAllChats = async (pageParam: any) => {
@@ -25,7 +25,7 @@ export const GetAllChats = async (pageParam: any) => {
 
 export function useRomes() {
   return useInfiniteQuery({
-    queryKey: [initialQueryKey],
+    queryKey: [initialQueryKey, "list"],
     queryFn: async ({ pageParam = 1 }) => {
       const params = { page: pageParam };
       return await GetAllChats(params);
@@ -65,7 +65,7 @@ export const useCreateNewChat = (id: any) => {
     onSuccess: (res) => {
       console.log(res);
       queryClient.invalidateQueries({ queryKey: [initialQueryKey, id] });
-      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey, "list"] });
     },
     onError: (res) => {
       console.log(res);
@@ -82,6 +82,7 @@ interface NotificationResponse {
     unReadCount: any;
   };
 }
+
 export const GetAllMessages = async (
   id: string,
   pageParam: any
@@ -117,6 +118,8 @@ export const useUserChatMessages = (
 };
 
 export const useUserChatAddMessage = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: async (data: any) => {
       return (
@@ -124,6 +127,11 @@ export const useUserChatAddMessage = () => {
           headers: { "Content-Type": "multipart/form-data" },
         })
       ).data;
+    },
+    onSuccess: (res) => {
+      queryClient.invalidateQueries({
+        queryKey: [initialQueryKey, "list"],
+      });
     },
   });
 };
@@ -183,7 +191,7 @@ export const useAddMessageLocally = () => {
         }
       );
       queryClient.invalidateQueries({
-        queryKey: [initialQueryKey + ".list"],
+        queryKey: [initialQueryKey, "list"],
       });
 
       return tempMessage;
@@ -192,4 +200,17 @@ export const useAddMessageLocally = () => {
   );
 
   return { mutate: addMessageLocally };
+};
+
+//check Messages
+
+export const GetAllMessagesByUserID = (id: string, userID = false): any => {
+  return useQuery({
+    queryKey: ["userChat", id],
+    queryFn: async () => {
+      const response = await api.get(user.Chat.Get_Messages_By_User_ID(id));
+      return response.data;
+    },
+    enabled: userID,
+  });
 };
