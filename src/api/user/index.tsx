@@ -188,6 +188,11 @@ export const admin = {
     edit_pricing: (id: any) => `/AdminAdvertisement/pricing/${id}`,
     get_ads: (queries: any) =>
       buildQuery("/AdminAdvertisement/user-advertisements", queries),
+    get_ads_by_id: (id: any) => `/AdminAdvertisement/user-advertisements/${id}`,
+    pause_ads: (id: any) => `/AdminAdvertisement/Pause/${id}`,
+    pause_many_ads: "/AdminAdvertisement/Pause",
+    Resume_ads: (id: any) => `/AdminAdvertisement/Resume/${id}`,
+    Resume_many_ads: "/AdminAdvertisement/Resume",
   },
 };
 

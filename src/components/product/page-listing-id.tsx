@@ -1,14 +1,20 @@
-import Button from "@/src/components/button";
 import CardDetailsList from "@/src/components/cardDetailsList";
 import FAQ from "@/src/components/faq";
 import Image from "next/image";
 import React from "react";
-import HeaderActions from "./header-actions";
 
-function PageListingId({ initialData, id }: { initialData: any; id: any }) {
+function PageListingId({
+  initialData,
+  id,
+  children,
+}: {
+  initialData: any;
+  id: any;
+  children?: React.ReactNode;
+}) {
   return (
     <div className="flex flex-col gap-3 mb-20">
-      <HeaderActions id={id} />
+      {children}
       <CardDetailsList title="Item Category" decs={initialData.categoryName} />
       <CardDetailsList
         title="Item Subcategory"

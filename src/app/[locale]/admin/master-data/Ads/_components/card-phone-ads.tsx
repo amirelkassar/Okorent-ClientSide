@@ -6,9 +6,10 @@ import ActionMenu from "./action-menu";
 import { Link } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import RowCardPhone from "@/src/components/row-card-phone";
-import RenderStatus from "./render-status";
 import avatar from "@/src/assets/images/avatar.png";
 import placeHolderImg from "@/src/assets/images/placTableProduct.png";
+import RenderStatusAds from "./render-status-ads";
+import { getDate } from "@/src/lib/utils";
 export type MedicalTeamTableData = {
   id: string;
   productName: string;
@@ -20,6 +21,7 @@ export type MedicalTeamTableData = {
   payment: string;
   advertisementStatus: string;
 };
+
 interface CardDataProps {
   dataCard: MedicalTeamTableData;
 }
@@ -29,19 +31,22 @@ function CardPhoneAds({ dataCard }: CardDataProps) {
     <CardPhone>
       <div className="border-b border-grayLight/50 pb-2">
         <div className=" absolute top-4 end-3">
-          <ActionMenu id={dataCard?.id} />
+          <ActionMenu
+            id={dataCard?.id}
+            status={dataCard?.advertisementStatus}
+          />
         </div>
         <Link
           href={ROUTES.ADMIN.ADSDETAILS(dataCard.id)}
           className="flex items-center gap-2"
         >
-          <div className="size-[50px] rounded-[50%] p-[6px] bg-grayBack flex justify-center items-center">
+          <div className="size-[50px] rounded-[50%] p-1 bg-grayBack flex justify-center items-center">
             <Image
               src={dataCard.productImage || placeHolderImg}
               alt={dataCard.productName}
               width={50}
               height={50}
-              className="w-auto h-full  object-contain "
+              className="w-full h-full  object-cover object-top rounded-full "
             />
           </div>
 
@@ -58,17 +63,25 @@ function CardPhoneAds({ dataCard }: CardDataProps) {
           alt={dataCard.userName}
           width={50}
           height={50}
-          className=" size-12 h-full  object-contain "
+          className=" size-12 min-w-12   object-cover object-top rounded-full "
         />
         <div className="flex flex-col gap-3 w-full ">
           <RowCardPhone title={dataCard.userName} />
 
-          <RowCardPhone title={"Starting Date"} info={dataCard.startDate} />
-          <RowCardPhone title={"Ending Date"} info={dataCard.endDate} />
-          <RowCardPhone title="Payment" info={dataCard.payment} />
+          <RowCardPhone
+            title={"Starting Date"}
+            info={getDate(dataCard.startDate).fullYearWithMonthName}
+          />
+          <RowCardPhone
+            title={"Ending Date"}
+            info={getDate(dataCard.endDate).fullYearWithMonthName}
+          />
+          <RowCardPhone title="Payment" info={`${dataCard.payment} $`} />
           <RowCardPhone
             title="Stock location"
-            cell={() => <RenderStatus status={dataCard.advertisementStatus} />}
+            cell={() => (
+              <RenderStatusAds status={dataCard.advertisementStatus} />
+            )}
           />
         </div>
       </div>

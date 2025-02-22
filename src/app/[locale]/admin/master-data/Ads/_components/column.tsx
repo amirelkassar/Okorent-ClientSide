@@ -4,10 +4,10 @@ import ROUTES from "@/src/routes";
 import { ColumnDef } from "@tanstack/react-table";
 import { StaticImageData } from "next/image";
 import ActionMenu from "./action-menu";
-import RenderStatus from "./render-status";
 import ImgProduct from "@/src/components/img-product";
 import avatar from "@/src/assets/images/avatar.png";
 import { getDate } from "@/src/lib/utils";
+import RenderStatusAds from "./render-status-ads";
 
 interface AdsDataProps {
   id: string;
@@ -84,7 +84,7 @@ export const columns: ColumnDef<AdsDataProps>[] = [
     header: "Status",
     cell: ({ getValue }) => {
       const status = getValue<string>();
-      return <RenderStatus status={status} />;
+      return <RenderStatusAds status={status} />;
     },
   },
 
@@ -92,9 +92,10 @@ export const columns: ColumnDef<AdsDataProps>[] = [
     id: "actions",
     cell: ({ row }) => {
       const id = row.original.id;
+      const status = row.original.advertisementStatus;
       return (
         <div className="flex items-center gap-3 justify-end">
-          <ActionMenu id={id} />
+          <ActionMenu id={id} status={status} />
         </div>
       );
     },

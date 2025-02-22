@@ -44,13 +44,89 @@ export const useEditPricingInAdmin = (id: any) => {
 
 //=========================================Ads========================================
 export const initialQueryKeyAds = "Ads";
-
+// Get All Ads in Admin
 export const GetAdsUserInAdmin = (queries?: any) => {
   return useQuery({
-    queryKey: [initialQueryKeyAds],
+    queryKey: [initialQueryKeyAds, queries],
     queryFn: async () => {
       const response = await api.get(admin.Ads.get_ads(queries));
       return response.data;
     },
+  });
+};
+
+// Get Ads by ID in Admin
+export const GetAdsIDUserInAdmin = (id: any) => {
+  return useQuery({
+    queryKey: [initialQueryKeyAds, id],
+    queryFn: async () => {
+      const response = await api.get(admin.Ads.get_ads_by_id(id));
+      return response.data;
+    },
+  });
+};
+//Pause Api
+// Pause  Ads in Admin
+export const usePauseAdsStatusInAdmin = (id: any) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.put(admin.Ads.pause_ads(id), data);
+      return response.data;
+    },
+    onSuccess: () =>
+      queryClient.invalidateQueries({
+        queryKey: [initialQueryKeyAds],
+      }),
+    onError: (res) => console.error(res),
+  });
+};
+
+// Pause Many Ads in Admin
+export const usePauseManyAdsStatusInAdmin = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.put(admin.Ads.pause_many_ads, data);
+      return response.data;
+    },
+    onSuccess: () =>
+      queryClient.invalidateQueries({
+        queryKey: [initialQueryKeyAds],
+      }),
+    onError: (res) => console.error(res),
+  });
+};
+
+//Resume Api
+// Resume  Ads in Admin
+export const useResumeAdsStatusInAdmin = (id: any) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.put(admin.Ads.Resume_ads(id), data);
+      return response.data;
+    },
+    onSuccess: () =>
+      queryClient.invalidateQueries({
+        queryKey: [initialQueryKeyAds],
+      }),
+    onError: (res) => console.error(res),
+  });
+};
+
+// Resume Many Ads in Admin
+export const useResumeManyAdsStatusInAdmin = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.put(admin.Ads.Resume_many_ads, data);
+      return response.data;
+    },
+    onSuccess: () =>
+      queryClient.invalidateQueries({
+        queryKey: [initialQueryKeyAds],
+      }),
+    onError: (res) => console.error(res),
   });
 };
