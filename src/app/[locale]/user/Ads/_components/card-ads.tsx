@@ -96,9 +96,6 @@ function CardAds({ product }: { product: CardAdsProps }) {
                   onSubmitCancel({ advertisementId: product?.id });
                 }}
               />
-              <BottomCardAds.DeleteAds
-                onClick={() => onSubmitDelete({ advertisementId: product?.id })}
-              />
             </>
           )}
           {product?.advertisementStatus === 2 && (
@@ -122,9 +119,6 @@ function CardAds({ product }: { product: CardAdsProps }) {
                 onClick={() => {
                   onSubmitCancel({ advertisementId: product?.id });
                 }}
-              />
-              <BottomCardAds.DeleteAds
-                onClick={() => onSubmitDelete({ advertisementId: product?.id })}
               />
             </>
           )}

@@ -135,7 +135,12 @@ export const ChangeStatusByIDs = () => {
     mutationFn: async (data?: any) => {
       const response = await api.put(
         user.order.booking.changeStatusByIds,
-        data
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       return response.data;
     },
