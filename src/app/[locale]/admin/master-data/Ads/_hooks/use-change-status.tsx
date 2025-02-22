@@ -8,7 +8,7 @@ import {
   useResumeManyAdsStatusInAdmin,
 } from "@/src/hooks/queries/admin/master-data/ads";
 
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 
 function UseChangeStatus(id: any) {
   const { mutateAsync: PauseAdsStatus } = usePauseAdsStatusInAdmin(id);

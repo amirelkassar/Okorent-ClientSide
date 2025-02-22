@@ -88,6 +88,14 @@ export const user = {
     Create_New_Chat: "/Chat/room",
     Send_Message: "/Chat/message",
   },
+  ads: {
+    get_ads: (queries: any) => buildQuery("/UserAdvertisement", queries),
+    get_ads_cart: "/UserAdvertisement/carts",
+    cancel_ads: (id: any) => `/UserAdvertisement/Cancel/${id}`,
+    resume_ads: (id: any) => `/UserAdvertisement/Resume/${id}`,
+    pause_ads: (id: any) => `/UserAdvertisement/Pause/${id}`,
+    delete_ads: (id: any) => `/UserAdvertisement/delete/${id}`,
+  },
 };
 
 export const admin = {
