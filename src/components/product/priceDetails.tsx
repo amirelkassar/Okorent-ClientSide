@@ -1,16 +1,21 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
+import PriceQuantity from "./price-quantity";
 interface PricingOptionsProps {
   daysNumber: number;
   PriceBYDays: number;
   TotalPriceOrder: number;
   children?: React.ReactNode;
+  setQuantity: React.Dispatch<React.SetStateAction<number>>;
+  quantity: number;
 }
 function PriceDetails({
   daysNumber,
   PriceBYDays = 0,
   TotalPriceOrder,
   children,
+  setQuantity,
+  quantity,
 }: PricingOptionsProps) {
 
   return (
@@ -36,6 +41,8 @@ function PriceDetails({
           </li>
         </ul>
       </div>
+
+      <PriceQuantity setQuantity={setQuantity} quantity={quantity} />
       <div className="pt-4 border-t flex items-center justify-between gap-3 px-5 border-[#B6BFC64D]/30">
         <h4 className="font-Bold text-[14px]">Total (CHF)</h4>
         <p className="font-Bold text-[14px]">

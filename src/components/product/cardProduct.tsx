@@ -32,7 +32,7 @@ function CardProduct({
   const params = useParams();
   const [opened, { open, close }] = useDisclosure(false);
   const [RenterSignature, setRenterSignature] = useState<File | null>(null);
-
+  const [quantity, setQuantity] = useState(1);
   const searchparams = useSearchParams();
   const [daysNumber, setDaysNumber] = useState(0);
   const [valueDate, setValueDate] = useState<[Date | null, Date | null]>([
@@ -63,7 +63,7 @@ function CardProduct({
     orderItems: [
       {
         productId: data?.id,
-        quantity: 1,
+        quantity: quantity || 1,
         from: valueDate[0]?.toISOString(),
         to: valueDate[1]?.toISOString(),
         price: TotalPriceOrder,
@@ -145,6 +145,8 @@ function CardProduct({
             daysNumber={daysNumber}
             TotalPriceOrder={TotalPriceOrder}
             PriceBYDays={PriceBYDays}
+            quantity={quantity}
+            setQuantity={setQuantity}
           >
             {admin ? null : (
               <div className="flex items-center px-5 justify-between gap-4 pb-4 flex-wrap mt-5">
