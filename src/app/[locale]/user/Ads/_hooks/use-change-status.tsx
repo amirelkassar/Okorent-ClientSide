@@ -49,10 +49,12 @@ function UseChangeStatus(id: any) {
 
   //Delete Ads
   const onSubmitDelete = useCallback(
-    async (data: any) => {
+    async (data: any, Router: () => void) => {
       Toast.Promise(DeleteAds(data), {
         success: "Delete Ads Done",
-        onSuccess: async (res) => {},
+        onSuccess: async (res) => {
+          Router();
+        },
       });
     },
     [DeleteAds]

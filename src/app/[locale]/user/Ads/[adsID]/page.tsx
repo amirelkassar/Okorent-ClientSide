@@ -6,7 +6,7 @@ import { GetUserAdsByFilter } from "@/src/hooks/queries/user/ads";
 import { QueryWrapper } from "@/src/components/query-wrapper";
 import { Pagination } from "@/src/components/pagination";
 
-function page() {
+function Page() {
   const searchParams = useSearchParams();
   console.log(searchParams.get("title"));
   const query = GetUserAdsByFilter(searchParams.toString());
@@ -37,4 +37,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

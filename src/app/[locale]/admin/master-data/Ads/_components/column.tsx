@@ -7,7 +7,7 @@ import ActionMenu from "./action-menu";
 import ImgProduct from "@/src/components/img-product";
 import avatar from "@/src/assets/images/avatar.png";
 import { getDate } from "@/src/lib/utils";
-import RenderStatusAds from "./render-status-ads";
+import RenderStatusAds from "@/src/components/render-status-ads";
 
 interface AdsDataProps {
   id: string;

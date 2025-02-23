@@ -1,11 +1,12 @@
+import Card from "@/src/components/card";
 import RenderStatusAds from "@/src/components/render-status-ads";
 import { getDate } from "@/src/lib/utils";
 import React from "react";
 
 function AdsDetails({ data }: { data: any }) {
   return (
-    <div className="bg-blue/5 rounded-xl p-4 md:p-9 flex-1 ">
-      <h3 className="text-blue text-lg md:text-2xl font-SemiBold mb-5 md:mb-12">
+    <Card className=" p-4 md:p-9 flex-1 ">
+      <h3 className="text-blue text-lg md:text-2xl font-SemiBold mb-5 md:mb-7">
         Ad Details
       </h3>
       <div className="flex  flex-wrap w-full gap-y-5 mdl:gap-y-10">
@@ -25,7 +26,7 @@ function AdsDetails({ data }: { data: any }) {
           )}
         />
       </div>
-    </div>
+    </Card>
   );
 }
 

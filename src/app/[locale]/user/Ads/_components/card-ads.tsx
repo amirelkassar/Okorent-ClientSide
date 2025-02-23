@@ -5,8 +5,7 @@ import React from "react";
 import placCardProduct from "@/src/assets/images/placCardProduct.png";
 import { getDate } from "@/src/lib/utils";
 import RenderStatusAds from "./render-status-ads";
-import BottomCardAds from "./bottom-card-ads";
-import UseChangeStatus from "../_hooks/use-change-status";
+import RowBottomAds from "./row-bottom-ads";
 interface CardAdsProps {
   advertisementStatus: number | string;
   endDate: string;
@@ -23,8 +22,6 @@ interface CardAdsProps {
 }
 
 function CardAds({ product }: { product: CardAdsProps }) {
-  const { onSubmitCancel, onSubmitPause, onSubmitResume, onSubmitDelete } =
-    UseChangeStatus(product?.id || "");
   return (
     <div className="bg-white border border-green/50 rounded-3xl px-3 lg:px-5 py-3 lg:py-4 max-w-[400px] mb-3 w-full mdl:min-w-[320px] shadow-sidebar relative">
       <div className=" rounded-xl bg-blueLight w-full h-[122px] lg:h-40">
@@ -80,63 +77,12 @@ function CardAds({ product }: { product: CardAdsProps }) {
       </div>
       <div className="flex flex-col  gap-3 mt-8">
         <LinkGreen
-          href={ROUTES.USER.PRODUCTDETAILS(50)}
+          href={ROUTES.USER.ADSDETAILSID(product?.id)}
           className={"!h-9 py-1 flex-1"}
         >
           View Details
         </LinkGreen>
-        <div className="flex items-center gap-4">
-          {product?.advertisementStatus === 1 && (
-            <>
-              <BottomCardAds.StopAds
-                onClick={() => onSubmitPause({ advertisementId: product?.id })}
-              />
-              <BottomCardAds.CancelAds
-                onClick={() => {
-                  onSubmitCancel({ advertisementId: product?.id });
-                }}
-              />
-            </>
-          )}
-          {product?.advertisementStatus === 2 && (
-            <>
-              <BottomCardAds.CancelAds
-                onClick={() => {
-                  onSubmitCancel({ advertisementId: product?.id });
-                }}
-              />
-              <BottomCardAds.DeleteAds
-                onClick={() => onSubmitDelete({ advertisementId: product?.id })}
-              />
-            </>
-          )}
-          {product?.advertisementStatus === 3 && (
-            <>
-              <BottomCardAds.ResumeAds
-                onClick={() => onSubmitResume({ advertisementId: product?.id })}
-              />
-              <BottomCardAds.CancelAds
-                onClick={() => {
-                  onSubmitCancel({ advertisementId: product?.id });
-                }}
-              />
-            </>
-          )}
-          {product?.advertisementStatus === 4 && (
-            <>
-              <BottomCardAds.DeleteAds
-                onClick={() => onSubmitDelete({ advertisementId: product?.id })}
-              />
-            </>
-          )}
-          {product?.advertisementStatus === 5 && (
-            <>
-              <BottomCardAds.DeleteAds
-                onClick={() => onSubmitDelete({ advertisementId: product?.id })}
-              />
-            </>
-          )}
-        </div>
+        <RowBottomAds id={product?.id} Status={product?.advertisementStatus} />
       </div>
     </div>
   );

@@ -15,7 +15,7 @@ const data = [
     name: "xxxx-9080",
   },
 ];
-function PriceAdsDetails() {
+function PriceAdsDetails({ pricingSelected }: { pricingSelected: any }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState("existing");
 
@@ -42,7 +42,7 @@ function PriceAdsDetails() {
               Payment Summary
             </h3>
             <h4 className="text-xs md:text-sm font-Regular text-grayMedium mb-2">
-              Your ad will run for 7 Days
+              Your ad will run for {pricingSelected?.durationDays || 0} Days
             </h4>
           </div>
           <ul className="flex flex-col gap-2 w-full">
@@ -51,7 +51,7 @@ function PriceAdsDetails() {
                 Total Budget
               </h5>
               <p className="text-sm mdl:text-base text-grayMedium font-Regular">
-                $220
+                ${pricingSelected?.durationPrice || 0}
               </p>
             </li>
             <li className="flex items-center justify-between gap-3 flex-wrap">
@@ -66,7 +66,9 @@ function PriceAdsDetails() {
         </div>
         <div className="pt-4 border-t flex items-center justify-between gap-3 px-5 border-[#B6BFC64D]/30">
           <h4 className="font-Bold text-sm mdl:text-base">Total Payment</h4>
-          <p className="font-Bold text-sm mdl:text-base">$230</p>
+          <p className="font-Bold text-sm mdl:text-base">
+            ${pricingSelected?.durationPrice || 0}
+          </p>
         </div>
       </Card>
       <Card className="py-4 px-4 rounded-2xl">

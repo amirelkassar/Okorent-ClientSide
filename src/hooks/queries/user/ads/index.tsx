@@ -14,6 +14,16 @@ export const GetUserAds = () => {
     },
   });
 };
+// Get ads by ID
+export const GetUserAdsByID = (id: any) => {
+  return useQuery({
+    queryKey: [initialQueryKey, id],
+    queryFn: async () => {
+      const response = await api.get(user.ads.get_ads_by_id(id));
+      return response.data;
+    },
+  });
+};
 // get ads by filter
 export const GetUserAdsByFilter = (queries?: any) => {
   return useQuery({
@@ -34,8 +44,15 @@ export const useCancelAds = (id: any) => {
       const response = await api.put(user.ads.cancel_ads(id), data);
       return response.data;
     },
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: [initialQueryKey] }),
+    onSuccess: () => {
+      queryClient.refetchQueries({
+        queryKey: [initialQueryKey],
+      });
+      queryClient.refetchQueries({
+        queryKey: [initialQueryKey, id],
+      });
+    },
+
     onError: (res) => console.error(res),
   });
 };
@@ -48,8 +65,11 @@ export const useResumeAds = (id: any) => {
       const response = await api.put(user.ads.resume_ads(id), data);
       return response.data;
     },
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: [initialQueryKey] }),
+    onSuccess: () => {
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
+      queryClient.refetchQueries({ queryKey: [initialQueryKey, id] });
+    },
+
     onError: (res) => console.error(res),
   });
 };
@@ -62,8 +82,11 @@ export const usePauseAds = (id: any) => {
       const response = await api.put(user.ads.pause_ads(id), data);
       return response.data;
     },
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: [initialQueryKey] }),
+    onSuccess: () => {
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
+      queryClient.refetchQueries({ queryKey: [initialQueryKey, id] });
+    },
+
     onError: (res) => console.error(res),
   });
 };
@@ -76,8 +99,39 @@ export const useDeleteAds = (id: any) => {
       const response = await api.put(user.ads.delete_ads(id), data);
       return response.data;
     },
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: [initialQueryKey] }),
+    onSuccess: () => {
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
+      queryClient.refetchQueries({ queryKey: [initialQueryKey, id] });
+    },
+
+    onError: (res) => console.error(res),
+  });
+};
+
+//========================================= create Ads &  pricing ==============================
+export const initialQueryKeyPricing = "Ads.User.Pricing";
+
+// Get Pricing
+export const GetUserPricing = () => {
+  return useQuery({
+    queryKey: [initialQueryKeyPricing],
+    queryFn: async () => {
+      const response = await api.get(user.ads.get_pricing);
+      return response.data;
+    },
+  });
+};
+
+export const useCreateAds = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.post(user.ads.create_ads, data);
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
+    },
     onError: (res) => console.error(res),
   });
 };

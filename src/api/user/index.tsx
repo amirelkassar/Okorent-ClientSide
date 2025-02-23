@@ -90,11 +90,14 @@ export const user = {
   },
   ads: {
     get_ads: (queries: any) => buildQuery("/UserAdvertisement", queries),
+    get_ads_by_id: (id: any) => `/UserAdvertisement/${id}`,
     get_ads_cart: "/UserAdvertisement/carts",
     cancel_ads: (id: any) => `/UserAdvertisement/Cancel/${id}`,
     resume_ads: (id: any) => `/UserAdvertisement/Resume/${id}`,
     pause_ads: (id: any) => `/UserAdvertisement/Pause/${id}`,
     delete_ads: (id: any) => `/UserAdvertisement/delete/${id}`,
+    get_pricing: "/UserAdvertisement/Pricing",
+    create_ads: "/UserAdvertisement",
   },
 };
 

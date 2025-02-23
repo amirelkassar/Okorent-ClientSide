@@ -8,8 +8,8 @@ import ROUTES from "@/src/routes";
 import RowCardPhone from "@/src/components/row-card-phone";
 import avatar from "@/src/assets/images/avatar.png";
 import placeHolderImg from "@/src/assets/images/placTableProduct.png";
-import RenderStatusAds from "./render-status-ads";
 import { getDate } from "@/src/lib/utils";
+import RenderStatusAds from "@/src/components/render-status-ads";
 export type MedicalTeamTableData = {
   id: string;
   productName: string;
@@ -67,7 +67,6 @@ function CardPhoneAds({ dataCard }: CardDataProps) {
         />
         <div className="flex flex-col gap-3 w-full ">
           <RowCardPhone title={dataCard.userName} />
-
           <RowCardPhone
             title={"Starting Date"}
             info={getDate(dataCard.startDate).fullYearWithMonthName}
