@@ -55,7 +55,7 @@ export const ChatBody = forwardRef<VirtuosoHandle, ChatBodyProps>(
           {isFetchingNextPage
             ? "loading"
             : !hasNextPage
-            ? "no_more_messages"
+            ? "No More Messages"
             : ""}
         </div>
       );
