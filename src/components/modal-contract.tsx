@@ -7,29 +7,30 @@ import placeTableProduct from "@/src/assets/images/placTableProduct.png";
 import { ScrollArea } from "@mantine/core";
 import { TermsContent } from "../lib/dataUser";
 import ModalSign from "./modal-sign";
+interface OrderDetailsProps {
+  productImage: StaticImageData;
+  title: string;
+  payment: number;
+}
 function ModalContract({
   opened,
   close,
   children,
   setRenterSignature,
   RenterSignature,
+  orderDetails,
 }: {
   opened: boolean;
   close: any;
   children?: React.ReactNode;
   setRenterSignature: React.Dispatch<React.SetStateAction<File | null>>;
   RenterSignature: File | null;
+  orderDetails: OrderDetailsProps;
 }) {
   return (
-    <ModalComp opened={opened} close={close} title={"Select rental period"}>
+    <ModalComp opened={opened} close={close} title={"Sign & Proceed"}>
       <div className="mx-auto max-w-[95%] w-[1100px] lg:max-w-[1100px] flex flex-col gap-4">
-        <HeaderContract
-          productDetails={{
-            title: "Bike",
-            payment: 10,
-            productImage: placeTableProduct,
-          }}
-        />
+        <HeaderContract productDetails={orderDetails} />
         <ContractContent />
         <div>
           <h3 className="text-base md:text-lg font-SemiBold mb-4">Sign Here</h3>
@@ -64,19 +65,15 @@ export default ModalContract;
 const HeaderContract = ({
   productDetails,
 }: {
-  productDetails: {
-    title: string;
-    payment: number;
-    productImage: StaticImageData;
-  };
+  productDetails: OrderDetailsProps;
 }) => {
   return (
     <Card className="py-2 px-2 md:px-4">
       <h2 className="text-base mdl:text-lg font-SemiBold mb-4">Item</h2>
       <div className="flex items-center gap-4 ">
         <Image
-          src={productDetails.productImage}
-          alt={productDetails.title}
+          src={productDetails.productImage || placeTableProduct}
+          alt={productDetails.title|| "Product Name"}
           width={100}
           height={100}
           className="w-[50px] h-[50px] object-cover rounded-full object-top"
@@ -86,13 +83,17 @@ const HeaderContract = ({
             <h3 className="text-xs md:text-sm font-Regular text-grayMedium">
               Product Name
             </h3>
-            <p className="text-xs md:text-base ">{productDetails.title}</p>
+            <p className="text-xs md:text-base ">
+              {productDetails.title || "Product Name"}
+            </p>
           </div>
           <div>
             <h3 className="text-xs md:text-sm font-Regular text-grayMedium">
               Payment
             </h3>
-            <p className="text-xs md:text-base ">{productDetails.payment}</p>
+            <p className="text-xs md:text-base ">
+              {productDetails.payment || 0}
+            </p>
           </div>
         </div>
       </div>

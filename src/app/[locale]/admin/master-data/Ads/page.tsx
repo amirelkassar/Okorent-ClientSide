@@ -40,8 +40,13 @@ const FilterOptions = [
     key: "AdvertisementStatus",
     value: "5",
   },
+  {
+    label: "Deleted",
+    key: "AdvertisementStatus",
+    value: "6",
+  },
 ];
-function page() {
+function Page() {
   const searchParams = useSearchParams();
   const { functionSelectView } = useActionTableAds();
   const query = GetAdsUserInAdmin(searchParams.toString());
@@ -84,4 +89,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

@@ -153,6 +153,11 @@ function CardProduct({
                   close={close}
                   setRenterSignature={setRenterSignature}
                   RenterSignature={RenterSignature}
+                  orderDetails={{
+                    productImage: data.heroImage || null,
+                    title: data.name,
+                    payment: TotalPriceOrder,
+                  }}
                 >
                   <LinkGreen
                     href={

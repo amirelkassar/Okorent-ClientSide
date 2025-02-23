@@ -33,6 +33,7 @@ export type RequestsTableData = {
   heroImage: StaticImageData;
   orderId: any;
   userImage: any;
+  amount: any;
 };
 
 export const columnsReq: ColumnDef<RequestsTableData>[] = [
@@ -161,9 +162,16 @@ export const columnsReq: ColumnDef<RequestsTableData>[] = [
     cell: ({ row }) => {
       const id = row.original.id;
       const status = row.original.status;
+      const title = row.original.productName;
+      const image = row.original.heroImage;
+      const payment = row.original.amount;
       return (
         <div className="flex items-center gap-3 w-fit">
-          <ActionMenuRentOut id={id} status={status} />
+          <ActionMenuRentOut
+            id={id}
+            status={status}
+            dataOrder={{ productImage: image, title: title, payment: payment }}
+          />
         </div>
       );
     },

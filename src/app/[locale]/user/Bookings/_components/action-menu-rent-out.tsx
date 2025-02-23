@@ -19,8 +19,21 @@ import PrintIcon from "@/src/assets/icons/print";
 import { useChangeStatusRentOut } from "../_hooks/use-change-status-rentOut";
 import ModalContract from "@/src/components/modal-contract";
 import Button from "@/src/components/button";
-
-function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
+import { StaticImageData } from "next/image";
+interface OrderDetailsProps {
+  productImage: StaticImageData;
+  title: string;
+  payment: number;
+}
+function ActionMenuRentOut({
+  id,
+  status = 1,
+  dataOrder,
+}: {
+  id: any;
+  status: any;
+  dataOrder: OrderDetailsProps;
+}) {
   const [RenterSignature, setRenterSignature] = useState<File | null>(null);
   const [opened, { open, close }] = useDisclosure(false);
   const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
@@ -180,6 +193,7 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
           close={close3}
           RenterSignature={RenterSignature}
           setRenterSignature={setRenterSignature}
+          orderDetails={dataOrder}
         >
           <Button
             onClick={() => {

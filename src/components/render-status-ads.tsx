@@ -9,6 +9,7 @@ function RenderStatusAds({ status }: { status: string }) {
     | "Stopped"
     | "Canceled"
     | "Completed"
+    | "Deleted"
     | "--";
 
   switch (status.toString()) {
@@ -31,6 +32,10 @@ function RenderStatusAds({ status }: { status: string }) {
     case "5":
       type = "gray";
       Title = "Completed";
+      break;
+    case "6":
+      type = "red";
+      Title = "Deleted";
       break;
     default:
       type = "blue";
