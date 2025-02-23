@@ -1,14 +1,12 @@
 "use client";
 
 import { memo } from "react";
-import { ChatWrapper } from "./chat-wrapper";
-import { ChatBody } from "./chat-body";
 import { useUserChatMessages } from "@/src/hooks/queries/user/chat";
 import { cn, getDate } from "@/src/lib/utils";
-import SendMessages from "./send-messages";
 import ChatHeader from "./chat-header";
-import { useRouter } from "@/src/navigation";
-import ROUTES from "@/src/routes";
+import SendMessages from "./send-messages";
+import { ChatBody } from "./chat-body";
+import { ChatWrapper } from "./chat-wrapper";
 
 // Define Chat Message Type
 interface ChatMessage {

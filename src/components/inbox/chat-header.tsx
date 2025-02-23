@@ -1,11 +1,12 @@
+"use client";
 import ArrowBackIcon from "@/src/assets/icons/arrowBack";
-import { Link } from "@/src/navigation";
+import { Link, usePathname } from "@/src/navigation";
 import ROUTES from "@/src/routes";
 import Image, { StaticImageData } from "next/image";
 import React from "react";
-import ProductClient from "./productClient";
 import CloseChatIcon from "@/src/assets/icons/closeChat";
 import avatar from "@/src/assets/images/avatar.png";
+import ProductClient from "./productClient";
 
 function ChatHeader({
   userImage,
@@ -14,11 +15,17 @@ function ChatHeader({
   userImage: StaticImageData;
   userName: string;
 }) {
+  const path = usePathname();
+
+  const isAdminRoute = path.includes(ROUTES.ADMIN.DASHBOARD);
   return (
     <div className="flex items-center justify-between  border-b-2 border-b-black/20 px-1  pb-3">
       <div className="flex gap-5 flex-wrap ">
         <div className=" flex items-center gap-2 lg:gap-4">
-          <Link href={ROUTES.USER.INBOX} className="block lg:hidden">
+          <Link
+            href={isAdminRoute ? ROUTES.ADMIN.INBOX : ROUTES.USER.INBOX}
+            className="block lg:hidden"
+          >
             <ArrowBackIcon />
           </Link>
           <Image

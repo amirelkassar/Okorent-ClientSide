@@ -1,5 +1,4 @@
-import ChatListRow from "@/src/components/chat-list-row";
-import { ChatsGroupData } from "@/src/lib/dataUser";
+
 import React from "react";
 import AddGroup from "./add-group";
 

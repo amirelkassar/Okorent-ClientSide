@@ -52,13 +52,15 @@ function ListChats() {
       <div className="py-2 md:py-7 md:px-2 md:bg-white md:border md:border-green rounded-3xl flex-1   h-[calc(100%-270px)]      md:shadow-sidebar  ">
         {isLoading ? (
           <LoadingChat />
-        ) : (
+        ) : mergedNotifications?.length > 0 ? (
           <div className=" flex flex-col gap-4  max-w-full overflow-auto h-full max-h-full md:h-[710px] ">
             {mergedNotifications?.map((item: any, i: number) => {
               return <ChatListRow key={i} data={item} />;
             })}
             <div ref={ref}>{isFetchingNextPage && <LoadingChat />}</div>
           </div>
+        ) : (
+          <p>No chats List</p>
         )}
       </div>
     </div>

@@ -7,14 +7,20 @@ import { FileButton, Textarea } from "@mantine/core";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import React, { useState } from "react";
-import { useAddMessage } from "../_hooks/use-add-message";
+import { useAddMessage } from "./use-add-message";
+import { usePathname } from "@/src/navigation";
+import ROUTES from "@/src/routes";
 
 function SendMessages({ NoChat = false }: { NoChat: boolean }) {
   const searchParams = useSearchParams();
   const [Message, setMessage] = useState("");
+  const path = usePathname();
+
   const [selectedFile, setSelectedFile] = useState<any[]>([]);
+  const isAdminRoute = path.includes(ROUTES.ADMIN.DASHBOARD);
   const { onSend, onCreateChat } = useAddMessage(
-    searchParams.get("chat") || ""
+    searchParams.get("chat") || "",
+    isAdminRoute
   );
   console.log(NoChat);
 

@@ -1,7 +1,7 @@
 import React from "react";
 import ListChats from "./_components/listChats";
-import Chat from "./_components/chat";
 import TopChat from "./_components/topChat";
+import Chat from "@/src/components/inbox/chat";
 
 function page() {
   return (

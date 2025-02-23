@@ -70,7 +70,12 @@ function ProductClient({ clientID }: { clientID: any }) {
       </div>
       <div className="flex items-center gap-6 flex-wrap mt-5">
         <LinkGreen
-          href={ROUTES.USER.INBOX + "?chat=" + clientID + "&UserID=true"}
+          href={
+            (isAdminRoute ? ROUTES.ADMIN.INBOX : ROUTES.USER.INBOX) +
+            "?chat=" +
+            clientID +
+            "&UserID=true"
+          }
           className={"flex-1 h-10 bg-transparent text-green border "}
         >
           Message Ahmed
