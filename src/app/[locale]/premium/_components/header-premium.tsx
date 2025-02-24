@@ -1,11 +1,10 @@
+"use client";
 import React from "react";
-import SearchItem from "./searchItem";
 import HeaderAdminIcon from "@/src/assets/icons/headerAdmin";
-import SelectDate from "./selectDate";
-import SelectLocation from "./selectLocation";
-function HeaderAdmin() {
+import SearchLocDate from "@/src/components/search-loc-date";
+function HeaderPremium() {
   return (
-    <div className="flex items-center gap-5 mb-9 lg:mb-10 justify-between">
+    <div className="flex items-center gap-5 mb-2 md:mb-9 lg:mb-10 justify-between">
       <div className="w-full lgl:max-w-[580px] ">
         <h2 className="text-[32px] lg:text-[56px] text-center lg:text-start font-Medium mb-3 lg:mb-5 leading-[36px] lg:leading-[56px]">
           Local <span className="text-blue">Rentals</span> <br />
@@ -15,11 +14,7 @@ function HeaderAdmin() {
           Discover and rent items nearby. Enter what you need, specify your
           location, and choose when you need it.
         </p>
-        <SearchItem />
-        <div className="flex items-center justify-center flex-col md:flex-row lg:justify-start gap-2 lg:gap-5  lg:mb-16">
-          <SelectLocation />
-          <SelectDate  />
-        </div>
+        <SearchLocDate premium />
       </div>
 
       <div className="w-[660px] max-w-full h-auto object-contain lg:block hidden">
@@ -29,4 +24,4 @@ function HeaderAdmin() {
   );
 }
 
-export default HeaderAdmin;
+export default HeaderPremium;

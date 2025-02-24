@@ -10,7 +10,13 @@ import SearchItem from "@/src/components/searchItem";
 import SelectLocation from "@/src/components/selectLocation";
 import SelectDate from "@/src/components/selectDate";
 
-function SearchLocDate({ guest = false }: { guest?: boolean }) {
+function SearchLocDate({
+  guest = false,
+  premium = false,
+}: {
+  guest?: boolean;
+  premium?: boolean;
+}) {
   const searchparams = useSearchParams();
   const router = useRouter();
   const [Filter, setFilter] = useQueryState("filter", { throttleMs: 2000 });
@@ -40,7 +46,11 @@ function SearchLocDate({ guest = false }: { guest?: boolean }) {
 
     // Return the complete URL
     return `${
-      guest ? ROUTES.GUEST.PRODUCTSPATH : ROUTES.USER.CATEGORIESPATH
+      guest
+        ? ROUTES.GUEST.PRODUCTSPATH
+        : premium
+        ? ROUTES.PREMIUM.CATEGORIESPATH
+        : ROUTES.USER.CATEGORIESPATH
     }?${queryString}`;
   };
 

@@ -16,73 +16,80 @@ function NavLinks() {
       {
         id: 1,
         name: "Homepage",
-        url: ROUTES.USER.HOMEPAGE,
+        url: ROUTES.PREMIUM.HOMEPAGE,
         active:
-          path === ROUTES.USER.HOMEPAGE ||
+          path === ROUTES.PREMIUM.HOMEPAGE ||
           path + `?category=${searchParams.get("category")}` ===
-            ROUTES.USER.CATEGORIES(searchParams.get("category")),
+            ROUTES.PREMIUM.CATEGORIES(searchParams.get("category")),
       },
+
       {
         id: 2,
         name: "Dashboard",
-        url: ROUTES.USER.DASHBOARD,
-        active: path.includes(ROUTES.USER.DASHBOARD),
+        url: ROUTES.PREMIUM.DASHBOARD,
+        active: path.includes(ROUTES.PREMIUM.DASHBOARD),
       },
       {
         id: 3,
         name: "My Listings",
-        url: ROUTES.USER.LISTINGS,
-        active: path.includes(ROUTES.USER.LISTINGS),
+        url: ROUTES.PREMIUM.LISTINGS,
+        active: path.includes(ROUTES.PREMIUM.LISTINGS),
         activeDetails:
-          path === ROUTES.USER.LISTINGSDETAILS(params.listID)
+          path === ROUTES.PREMIUM.LISTINGSDETAILS(params.listID)
             ? "/  Item Details"
-            : path === ROUTES.USER.LISTINGSEDIT(params.listID)
+            : path === ROUTES.PREMIUM.LISTINGSEDIT(params.listID)
             ? "/ Edit Listing"
             : null,
       },
       {
         id: 4,
         name: "Bookings",
-        url: ROUTES.USER.BOOKINGS,
+        url: ROUTES.PREMIUM.BOOKINGS,
         active:
-          path === ROUTES.USER.BOOKINGS ||
-          path === ROUTES.USER.BOOKINGSID(params.BookingID),
+          path === ROUTES.PREMIUM.BOOKINGS ||
+          path === ROUTES.PREMIUM.BOOKINGSID(params.BookingID) ||
+          path === ROUTES.PREMIUM.ORDERID(params.orderId),
       },
+
       {
         id: 5,
         name: "Inbox",
-        url: ROUTES.USER.INBOX,
-        active: path === ROUTES.USER.INBOX,
+        url: ROUTES.PREMIUM.INBOX,
+        active: path === ROUTES.PREMIUM.INBOX,
       },
       {
         id: 6,
         name: "Clients",
-        url: ROUTES.USER.CLIENTS,
-        active: path === ROUTES.USER.CLIENTS,
+        url: ROUTES.PREMIUM.CLIENTS,
+        active: path === ROUTES.PREMIUM.CLIENTS,
       },
       {
         id: 7,
         name: "Wishlist",
-        url: ROUTES.USER.WISHLIST,
-        active: path === ROUTES.USER.WISHLIST,
+        url: ROUTES.PREMIUM.WISHLIST,
+        active: path === ROUTES.PREMIUM.WISHLIST,
       },
       {
         id: 8,
         name: "Calendar",
-        url: ROUTES.USER.CALENDAR,
-        active: path === ROUTES.USER.CALENDAR,
+        url: ROUTES.PREMIUM.CALENDAR,
+        active: path === ROUTES.PREMIUM.CALENDAR,
       },
       {
         id: 9,
         name: "Billing",
-        url: ROUTES.USER.BILLING,
-        active: path === ROUTES.USER.BILLING,
+        url: ROUTES.PREMIUM.BILLING,
+        active: path === ROUTES.PREMIUM.BILLING,
       },
       {
         id: 10,
         name: "Support",
-        url: ROUTES.USER.SUPPORT,
-        active: path === ROUTES.USER.SUPPORT,
+        url: ROUTES.PREMIUM.SUPPORT,
+        active:
+          path === ROUTES.PREMIUM.SUPPORT ||
+          path === ROUTES.PREMIUM.SUPPORTHISTORY ||
+          path === ROUTES.PREMIUM.SUPPORTFAQ ||
+          path === ROUTES.PREMIUM.SUPPORTCONTACT,
       },
     ],
     [path]
@@ -91,52 +98,100 @@ function NavLinks() {
     () => [
       {
         id: 0,
-        name: `Homepage / ${searchParams.get("category")}`,
-        url: ROUTES.USER.CATEGORIES(searchParams.get("category")),
+        name: `Homepage / ${searchParams.get("category") || "Products"}`,
+        url: ROUTES.PREMIUM.CATEGORIES(searchParams.get("category")),
         active:
           path + `?category=${searchParams.get("category")}` ===
-          ROUTES.USER.CATEGORIES(searchParams.get("category")),
+          ROUTES.PREMIUM.CATEGORIES(searchParams.get("category")),
       },
       {
         id: 1,
-        name: `Bookings / ${params.BookingID?.toString().split("-").join('  ')}`,
-        url: ROUTES.USER.BOOKINGS,
-        active: path === ROUTES.USER.BOOKINGSID(params.BookingID),
+        name: `Bookings / ${searchParams
+          .get("statusTitle")
+          ?.toString()
+          .split("-")
+          .join("  ")}`,
+        url: ROUTES.PREMIUM.BOOKINGS,
+        active:
+          path === ROUTES.PREMIUM.BOOKINGSID(params.BookingID) &&
+          path + "?checkout=true" !==
+            ROUTES.PREMIUM.PRODUCTDETAILSCHECKOUT(params.productID),
       },
-      {
-        id: 2,
-        name: "Product Details ",
-        url: ROUTES.USER.PRODUCTDETAILS(params.productID),
-        active: path === ROUTES.USER.PRODUCTDETAILS(params.productID),
-      },
+
       {
         id: 3,
-        name: "Subscription",
-        url: ROUTES.USER.SUBSCRIPTION,
-        active: path === ROUTES.USER.SUBSCRIPTION,
+        name: "Product Details ",
+        url: ROUTES.PREMIUM.PRODUCTDETAILS(params.productID),
+        active: path === ROUTES.PREMIUM.PRODUCTDETAILS(params.productID),
       },
       {
         id: 4,
-        name: "My Profile",
-        url: ROUTES.USER.PROFILE,
-        active: path === ROUTES.USER.PROFILE,
+        name: "Subscription",
+        url: ROUTES.PREMIUM.SUBSCRIPTION,
+        active: path === ROUTES.PREMIUM.SUBSCRIPTION,
       },
       {
         id: 5,
+        name: "My Profile",
+        url: ROUTES.PREMIUM.PROFILE,
+        active: path === ROUTES.PREMIUM.PROFILE,
+      },
+      {
+        id: 6,
         name: "Wallet",
-        url: ROUTES.USER.WALLET,
-        active: path === ROUTES.USER.WALLET,
+        url: ROUTES.PREMIUM.WALLET,
+        active: path === ROUTES.PREMIUM.WALLET,
+      },
+      {
+        id: 7,
+        name: `Order Details`,
+        url: ROUTES.PREMIUM.BOOKINGS,
+        active: path === ROUTES.PREMIUM.ORDERID(params.orderId),
+      },
+      {
+        id: 8,
+        name: `Checkout`,
+        url: ROUTES.PREMIUM.PRODUCTDETAILS(params.productID),
+        active:
+          path + "?checkout=true" ===
+          ROUTES.PREMIUM.PRODUCTDETAILSCHECKOUT(params.productID),
+      },
+      {
+        id: 9,
+        name: `Promot Listing`,
+        url: ROUTES.PREMIUM.LISTINGSDETAILSADS(params.listID),
+        active: path === ROUTES.PREMIUM.LISTINGSDETAILSADS(params.listID),
+      },
+      {
+        id: 10,
+        name: `Ads`,
+        url: ROUTES.PREMIUM.ADS,
+        active: path === ROUTES.PREMIUM.ADS,
+      },
+      {
+        id: 11,
+        name: `Ads Details`,
+        url: ROUTES.PREMIUM.ADS,
+        active:
+          path === ROUTES.PREMIUM.ADSID(params.adsID) ||
+          path === ROUTES.PREMIUM.ADSDETAILSID(params.adsDetailsID),
+      },
+      {
+        id: 12,
+        name: `Warehouses`,
+        url: ROUTES.PREMIUM.WAREHOUSES,
+        active: path === ROUTES.PREMIUM.WAREHOUSES,
       },
     ],
-    [path]
+    [path, searchParams.toString()]
   );
-  
+
   return (
-    path !== ROUTES.USER.CHECKOUT &&
-    path !== ROUTES.USER.CHECKOUTID(params.checkoutID) && (
-      <div className="mt-2 max-w-full hidden lg:block ">
+    path !== ROUTES.PREMIUM.CHECKOUT &&
+    path !== ROUTES.PREMIUM.CHECKOUTID(params.checkoutID) && (
+      <div className="mt-2 max-w-full hidden lg:block  ">
         {newPath.find((item) => item.active) ? (
-          <div className="flex mb-5  items-center gap-3">
+          <div className="flex mb-5  items-center gap-3 max-w-[1600px] px-4 xl:px-[60px] mx-auto">
             <button
               className=" size-5"
               onClick={() => {
@@ -150,37 +205,38 @@ function NavLinks() {
             </h1>
           </div>
         ) : (
-          <h1 className="mb-6 text-[32px] font-Bold">
+          <h1 className="mb-6 text-[32px] font-Bold max-w-[1600px] px-4 xl:px-[60px] mx-auto">
             {LinksNav.find((item) => item.active)?.name}
-            {path === ROUTES.USER.ADDLIST && "List an item"}
+            {path === ROUTES.PREMIUM.ADDLIST && "List an item"}
             <span className="mx-3">
               {LinksNav.find((item) => item?.activeDetails)?.activeDetails}
             </span>
           </h1>
         )}
-
-        <div className=" max-w-full overflow-x-auto overflow-y-hidden mb-5 pb-4">
-          <ul className=" border-b-[1.5px] flex items-center gap-6 justify-between ">
-            {LinksNav.map((link) => {
-              return (
-                <li
-                  key={link.id}
-                  className={` pb-[14px] -mb-[2px] ${
-                    link.active && "border-b-[3px] border-green"
-                  } `}
-                >
-                  <Link
-                    href={link.url}
-                    className={`${
-                      link.active && "!font-Bold !text-black"
-                    } text-[16px] text-nowrap font-SemiBold duration-200 text-black/80 hover:text-black`}
+        <div className="overflow-x-auto overflow-y-hidden">
+          <div className=" border-b-[1.5px]  max-w-full   mb-5 ">
+            <ul className=" max-w-[1600px] px-4 xl:px-[60px] mx-auto flex items-center gap-6 justify-between ">
+              {LinksNav.map((link) => {
+                return (
+                  <li
+                    key={link.id}
+                    className={` pb-3 -mb-[2px]   ${
+                      link.active && "border-b-[3px] border-green "
+                    } `}
                   >
-                    {link.name}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+                    <Link
+                      href={link.url}
+                      className={`${
+                        link.active && "!font-Bold !text-black"
+                      } text-[16px] text-nowrap font-SemiBold duration-200 text-black/80 hover:text-black`}
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
       </div>
     )

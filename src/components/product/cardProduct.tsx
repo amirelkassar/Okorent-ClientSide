@@ -24,10 +24,12 @@ function CardProduct({
   data = [],
   guest = false,
   admin = false,
+  premium = false,
 }: {
   data?: any;
   guest?: boolean;
   admin?: boolean;
+  premium?: boolean;
 }) {
   const params = useParams();
   const [opened, { open, close }] = useDisclosure(false);
@@ -165,6 +167,8 @@ function CardProduct({
                     href={
                       guest
                         ? ROUTES.AUTH.LOGIN
+                        : premium
+                        ? ROUTES.PREMIUM.PRODUCTDETAILSCHECKOUT(params.productID)
                         : ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID)
                     }
                     className={`h-14 w-[310px] max-w-full mx-auto ${

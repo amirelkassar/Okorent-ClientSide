@@ -27,6 +27,8 @@ function CardRentals({ data, Fav = false, edit = false }: CardRentalsProps) {
                 ? ROUTES.USER.PRODUCTDETAILS(data.id)
                 : pathName.includes(ROUTES.ADMIN.DASHBOARD)
                 ? ROUTES.ADMIN.LISTINGSDETAILS(data.id)
+                : pathName.includes(ROUTES.PREMIUM.HOMEPAGE)
+                ? ROUTES.PREMIUM.PRODUCTDETAILS(data.id)
                 : ROUTES.GUEST.PRODUCTSDETAILS(data.id)
             }
           >
@@ -50,6 +52,8 @@ function CardRentals({ data, Fav = false, edit = false }: CardRentalsProps) {
               ? ROUTES.USER.PRODUCTDETAILS(data.id)
               : pathName.includes(ROUTES.ADMIN.DASHBOARD)
               ? ROUTES.ADMIN.LISTINGSDETAILS(data.id)
+              : pathName.includes(ROUTES.PREMIUM.HOMEPAGE)
+              ? ROUTES.PREMIUM.PRODUCTDETAILS(data.id)
               : ROUTES.GUEST.PRODUCTSDETAILS(data.id)
           }
         >
