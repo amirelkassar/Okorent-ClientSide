@@ -91,6 +91,8 @@ const ROUTES = {
     LISTINGSDETAILS: (id) => `/premium/Listings/${id}`,
     LISTINGSDETAILSADS: (id) => `/premium/Listings/${id}/ads`,
     LISTINGSEDIT: (id) => `/premium/Listings/${id}/edit`,
+    CREATEORDER: "/premium/Listings/create-order",
+
     RENTALS: "/premium/Rentals",
     REQUESTS: "/premium/Requests",
     BOOKINGS: "/premium/Bookings",

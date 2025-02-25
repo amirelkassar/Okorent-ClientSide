@@ -182,6 +182,12 @@ function NavLinks() {
         url: ROUTES.PREMIUM.WAREHOUSES,
         active: path === ROUTES.PREMIUM.WAREHOUSES,
       },
+      {
+        id: 13,
+        name: `New Order`,
+        url: ROUTES.PREMIUM.CREATEORDER,
+        active: path === ROUTES.PREMIUM.CREATEORDER,
+      },
     ],
     [path, searchParams.toString()]
   );

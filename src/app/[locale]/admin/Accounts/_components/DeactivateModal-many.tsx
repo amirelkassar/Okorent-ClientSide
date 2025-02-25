@@ -6,7 +6,6 @@ import DateDeactivateModal from "./DateDeactivateModal";
 import Button from "@/src/components/button";
 import { Toast } from "@/src/components/toast";
 import {
-  useDeActivateAccountInAdmin,
   useDeActivateManyAccountInAdmin,
 } from "@/src/hooks/queries/admin/account";
 import { getDate } from "@/src/lib/utils";
