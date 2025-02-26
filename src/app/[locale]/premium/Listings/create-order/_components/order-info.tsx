@@ -1,3 +1,4 @@
+"use client";
 import AddUserIcon from "@/src/assets/icons/addUser";
 import DateIcon from "@/src/assets/icons/date";
 import SearchIcon from "@/src/assets/icons/search";
@@ -7,22 +8,26 @@ import Input from "@/src/components/input";
 import SelectInput from "@/src/components/select-input";
 import { Radio } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
+import { useDisclosure } from "@mantine/hooks";
 import React from "react";
+import ModalAddCustomer from "./modal/modal-add-customer";
 const dataNotes = [
-    { value: "1", label: "Announcement" },
-    { value: "2", label: "Complaint" },
-  ];
-  const OptionAddresses = [
-    {
-      value: "store",
-      label: "In store",
-    },
-    {
-      value: "delivery",
-      label: "Delivery",
-    },
-  ];
+  { value: "1", label: "Announcement" },
+  { value: "2", label: "Complaint" },
+];
+const OptionAddresses = [
+  {
+    value: "store",
+    label: "In store",
+  },
+  {
+    value: "delivery",
+    label: "Delivery",
+  },
+];
 function OrderInfo() {
+  const [opened, { open, close }] = useDisclosure(false);
+
   return (
     <Card className="p-4">
       <div className="flex gap-y-5 gap-x-8 flex-wrap flex-col md:flex-row">
@@ -33,7 +38,10 @@ function OrderInfo() {
             className="h-full w-[calc(100%-60px)]"
             inputClassName=" bg-white   rounded-none w-full h-16  border-none"
           />
-          <button className="w-[60px] h-16 border-s border-green/50 flex items-center duration-300 justify-center hover:bg-blueLight/60">
+          <button
+            onClick={open}
+            className="w-[60px] h-16 border-s border-green/50 flex items-center duration-300 justify-center hover:bg-blueLight/60"
+          >
             <AddUserIcon className="w-6 h-auto" fill="#0F2A43" />
           </button>
         </div>
@@ -118,6 +126,7 @@ function OrderInfo() {
           className="h-auto min-w-[calc(50%-16px)] flex-1"
         />
       </div>
+      <ModalAddCustomer opened={opened} close={close} />
     </Card>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import ModalComp from "./modal-comp";
 import { useDisclosure } from "@mantine/hooks";
 import Button from "./button";
@@ -12,9 +12,7 @@ import { useCreateAccountInAdmin } from "../hooks/queries/admin/account";
 import { Toast } from "./toast";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import ErrorMsg from "./error-msg";
 import { schemaSignUp } from "../hooks/schema/auth-schema";
-import InputSubmit from "./input-submit";
 
 interface FormData {
   Name: string;

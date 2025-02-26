@@ -1,10 +1,15 @@
+"use client";
 import React from "react";
 import AccordionMethodOrder from "../accordion-method-order";
 import PaymentsIcon from "@/src/assets/icons/payments";
 import ActionMenuPaymentsReceived from "../action-menu-payments-received";
 import Button from "@/src/components/button";
+import ModalRefund from "../modal/modal-refund";
+import { useDisclosure } from "@mantine/hooks";
 
 function PaymentsReceived() {
+  const [opened, { open, close }] = useDisclosure(false);
+
   return (
     <AccordionMethodOrder
       title="Payments Received"
@@ -20,9 +25,13 @@ function PaymentsReceived() {
             <p className="font-Bold text-base">Total Received</p>
           </div>
         </div>
-        <Button className={"h-8 mt-7 !px-5 border-2  !rounded-lg ms-auto !text-xs"}>
+        <Button
+          onClick={open}
+          className={"h-8 mt-7 !px-5 border-2  !rounded-lg ms-auto !text-xs"}
+        >
           Refund
         </Button>
+        <ModalRefund opened={opened} close={close} />
       </div>
     </AccordionMethodOrder>
   );

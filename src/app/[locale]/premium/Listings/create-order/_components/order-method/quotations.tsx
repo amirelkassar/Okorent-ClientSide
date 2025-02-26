@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import QuotationsIcon from "@/src/assets/icons/Quotations";
 import AccordionMethodOrder from "../accordion-method-order";
@@ -5,8 +6,11 @@ import Button from "@/src/components/button";
 import FileIcon from "@/src/assets/icons/file";
 import CardStatus from "@/src/components/cardStatus";
 import ActionMenu from "../action-menu";
+import { useDisclosure } from "@mantine/hooks";
+import ModalChooseQuotation from "../modal/modal-choose-quotation";
 
 function Quotations() {
+  const [opened, { open, close }] = useDisclosure(false);
   return (
     <AccordionMethodOrder
       title="Quotations"
@@ -18,9 +22,13 @@ function Quotations() {
           <RowQuotation status={2} quotationId="OR02245082" />
         </div>
         <p className="text-center p-2 my-4">No Quotation was found</p>
-        <Button className={"h-9 px-3 !rounded-lg ms-auto !text-xs"}>
+        <Button
+          onClick={open}
+          className={"h-9 px-3 !rounded-lg ms-auto !text-xs"}
+        >
           Generate Quotation
         </Button>
+        <ModalChooseQuotation opened={opened} close={close} />
       </div>
     </AccordionMethodOrder>
   );

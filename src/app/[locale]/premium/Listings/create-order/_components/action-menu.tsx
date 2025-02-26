@@ -5,14 +5,20 @@ import React from "react";
 import CloseIcon from "@/src/assets/icons/close";
 import TrueIcon from "@/src/assets/icons/true";
 import SendIcon from "@/src/assets/icons/send";
+import ModalSendEmail from "./modal/modal-send-email";
+import { useDisclosure } from "@mantine/hooks";
 
 function ActionMenu({ id }: { id: any }) {
+  const [opened, { open, close }] = useDisclosure(false);
+
   const options = [
     {
       label: "Send to client",
       icon: <SendIcon className="w-3 h-auto -rotate-45" fill="#6F6B7D" />,
       type: "btn",
-      action: () => {},
+      action: () => {
+        open();
+      },
     },
 
     {
@@ -38,6 +44,7 @@ function ActionMenu({ id }: { id: any }) {
   return (
     <>
       <DataActions data={options} />
+      {opened && <ModalSendEmail opened={opened} close={close} />}
     </>
   );
 }

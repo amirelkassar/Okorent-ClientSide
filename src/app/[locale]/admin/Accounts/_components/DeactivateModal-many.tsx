@@ -78,11 +78,11 @@ function DeactivateModalMany({
             }}
           >
             <div className="flex my-6 lgl:items-center gap-4 flex-col md:flex-row  lgl:gap-14 flex-wrap">
-              {OptionAvailability.map((option, inedx) => {
+              {OptionAvailability.map((option, index) => {
                 return (
                   <Radio
                     color="#88BA52"
-                    key={inedx}
+                    key={index}
                     value={option.value}
                     label={option.label}
                     className="flex-1"
