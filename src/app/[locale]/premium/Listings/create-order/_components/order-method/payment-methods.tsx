@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import PaymentEditIcon from "@/src/assets/icons/payment-edit";
-import AccordionMethodOrder from "../accordion-method-order";
+
 import Button from "@/src/components/button";
 import MasterCardIcon from "@/src/assets/icons/MasterCard";
 import VisaIcon from "@/src/assets/icons/visa";
@@ -9,6 +9,7 @@ import PaymentsIcon from "@/src/assets/icons/payments";
 import LinkIcon from "@/src/assets/icons/link";
 import ModalCardPayment from "../modal/modal-card-payment";
 import { useDisclosure } from "@mantine/hooks";
+import AccordionRow from "@/src/components/accordion-row";
 
 function PaymentMethods() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -16,7 +17,7 @@ function PaymentMethods() {
   const [opened3, { open: open3, close: close3 }] = useDisclosure(false);
 
   return (
-    <AccordionMethodOrder
+    <AccordionRow
       title="Payment Methods"
       icon={() => <PaymentEditIcon className="w-full h-auto" />}
     >
@@ -82,7 +83,7 @@ function PaymentMethods() {
           title="Generate Payment Link"
         />
       </div>
-    </AccordionMethodOrder>
+    </AccordionRow>
   );
 }
 

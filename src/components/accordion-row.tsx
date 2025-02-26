@@ -1,8 +1,7 @@
-import PaymentsIcon from "@/src/assets/icons/payments";
 import { Accordion } from "@mantine/core";
 import React from "react";
 
-function AccordionMethodOrder({
+function AccordionRow({
   title = "",
   icon,
   children,
@@ -32,4 +31,4 @@ function AccordionMethodOrder({
   );
 }
 
-export default AccordionMethodOrder;
+export default AccordionRow;

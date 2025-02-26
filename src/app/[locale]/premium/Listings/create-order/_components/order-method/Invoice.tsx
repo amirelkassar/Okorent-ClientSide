@@ -1,14 +1,14 @@
 import React from "react";
-import AccordionMethodOrder from "../accordion-method-order";
 import InvoiceIcon from "@/src/assets/icons/Invoice";
 import Button from "@/src/components/button";
 import FileIcon from "@/src/assets/icons/file";
 import ActionMenuInvoice from "../action-menu-invoice";
 import CardStatus from "@/src/components/cardStatus";
+import AccordionRow from "@/src/components/accordion-row";
 
 function Invoice() {
   return (
-    <AccordionMethodOrder
+    <AccordionRow
       title="Invoice"
       icon={() => <InvoiceIcon className="w-full h-auto" />}
     >
@@ -22,7 +22,7 @@ function Invoice() {
           Generate Invoice
         </Button>
       </div>
-    </AccordionMethodOrder>
+    </AccordionRow>
   );
 }
 

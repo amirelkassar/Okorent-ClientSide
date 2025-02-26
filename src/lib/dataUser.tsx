@@ -616,8 +616,6 @@ export const BannersData: BannerProps[] = [
   },
 ];
 
-
-
 interface LanguageProps {
   label: string;
   value: string;
@@ -749,3 +747,94 @@ Welcome to www.lorem-ipsum.info. This site is provided as a service to our visit
 1. YOUR AGREEMENT
 By using this Site, you agree to be bound by, and to comply with, these Terms and Conditions. If you do not agree to these Terms and Conditions, please do not use this site.
 `;
+interface MaintenanceProps {
+  id: number;
+  product: string;
+  quantity: number;
+  from: string;
+  to: string;
+  remark: string;
+  assignedTo: string;
+  stockLocation: string;
+  status: string;
+}
+export const Maintenance: MaintenanceProps[] = [
+  {
+    id: 1,
+    product: "Iphone 15 Pro",
+    quantity: 120,
+    from: "11-10-2024",
+    to: "11-10-2024",
+    remark: "Needs External Part",
+    assignedTo: "James Cameron",
+    stockLocation: "Western Warehouse",
+    status: "Not Repaired",
+  },
+  {
+    id: 2,
+    product: "Iphone 15 Pro",
+    quantity: 13,
+    from: "11-10-2024",
+    to: "11-10-2024",
+    remark: "Needs External Part",
+    assignedTo: "James Cameron",
+    stockLocation: "Western Warehouse",
+    status: "Repaired",
+  },
+  {
+    id: 3,
+    product: "Iphone 15 Pro",
+    quantity: 2,
+    from: "11-10-2024",
+    to: "11-10-2024",
+    remark: "Needs External Part",
+    assignedTo: "James Cameron",
+    stockLocation: "Western Warehouse",
+    status: "Offline",
+  },
+  {
+    id: 4,
+    product: "Iphone 15 Pro",
+    quantity: 3,
+    from: "11-10-2024",
+    to: "11-10-2024",
+    remark: "Needs External Part",
+    assignedTo: "James Cameron",
+    stockLocation: "Western Warehouse",
+    status: "Repaired",
+  },
+  {
+    id: 5,
+    product: "Iphone 15 Pro",
+    quantity: 24,
+    from: "11-10-2024",
+    to: "11-10-2024",
+    remark: "Needs External Part",
+    assignedTo: "James Cameron",
+    stockLocation: "Western Warehouse",
+    status: "Repaired",
+  },
+  {
+    id: 6,
+    product: "Iphone 15 Pro",
+    quantity: 2,
+    from: "11-10-2024",
+    to: "11-10-2024",
+    remark: "Needs External Part",
+    assignedTo: "James Cameron",
+    stockLocation: "Western Warehouse",
+    status: "Repaired",
+  },
+  {
+    id: 7,
+    product: "Iphone 15 Pro",
+    quantity: 2,
+    from: "11-10-2024",
+    to: "11-10-2024",
+    remark: "Needs External Part",
+    assignedTo: "James Cameron",
+    stockLocation: "Western Warehouse",
+    status: "Repaired",
+  },
+];
+

@@ -77,12 +77,18 @@ function NavLinks() {
       },
       {
         id: 9,
+        name: "Maintenance",
+        url: ROUTES.PREMIUM.MAINTENANCE,
+        active: path === ROUTES.PREMIUM.MAINTENANCE,
+      },
+      {
+        id: 10,
         name: "Billing",
         url: ROUTES.PREMIUM.BILLING,
         active: path === ROUTES.PREMIUM.BILLING,
       },
       {
-        id: 10,
+        id: 11,
         name: "Support",
         url: ROUTES.PREMIUM.SUPPORT,
         active:
@@ -187,6 +193,12 @@ function NavLinks() {
         name: `New Order`,
         url: ROUTES.PREMIUM.CREATEORDER,
         active: path === ROUTES.PREMIUM.CREATEORDER,
+      },
+      {
+        id: 14,
+        name: `New Maintenance`,
+        url: ROUTES.PREMIUM.MAINTENANCEADD,
+        active: path === ROUTES.PREMIUM.MAINTENANCEADD,
       },
     ],
     [path, searchParams.toString()]

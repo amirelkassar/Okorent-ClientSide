@@ -1,18 +1,18 @@
 "use client";
 import React from "react";
 import QuotationsIcon from "@/src/assets/icons/Quotations";
-import AccordionMethodOrder from "../accordion-method-order";
 import Button from "@/src/components/button";
 import FileIcon from "@/src/assets/icons/file";
 import CardStatus from "@/src/components/cardStatus";
 import ActionMenu from "../action-menu";
 import { useDisclosure } from "@mantine/hooks";
 import ModalChooseQuotation from "../modal/modal-choose-quotation";
+import AccordionRow from "@/src/components/accordion-row";
 
 function Quotations() {
   const [opened, { open, close }] = useDisclosure(false);
   return (
-    <AccordionMethodOrder
+    <AccordionRow
       title="Quotations"
       icon={() => <QuotationsIcon className="w-full h-auto" />}
     >
@@ -30,7 +30,7 @@ function Quotations() {
         </Button>
         <ModalChooseQuotation opened={opened} close={close} />
       </div>
-    </AccordionMethodOrder>
+    </AccordionRow>
   );
 }
 

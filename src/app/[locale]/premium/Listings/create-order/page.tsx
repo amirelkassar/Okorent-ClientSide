@@ -20,9 +20,6 @@ import Quotations from "./_components/order-method/quotations";
 import Invoice from "./_components/order-method/Invoice";
 import PaymentsReceived from "./_components/order-method/payments-received";
 import Notes from "./_components/order-method/Notes";
-import Filter2Icon from "@/src/assets/icons/filter2";
-import { Link } from "@/src/navigation";
-import ArrowDownIcon from "@/src/assets/icons/arrowDown";
 import StateOrder from "./_components/state-order";
 
 const ProductDetails = [

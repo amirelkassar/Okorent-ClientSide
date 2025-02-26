@@ -92,7 +92,6 @@ const ROUTES = {
     LISTINGSDETAILSADS: (id) => `/premium/Listings/${id}/ads`,
     LISTINGSEDIT: (id) => `/premium/Listings/${id}/edit`,
     CREATEORDER: "/premium/Listings/create-order",
-
     RENTALS: "/premium/Rentals",
     REQUESTS: "/premium/Requests",
     BOOKINGS: "/premium/Bookings",
@@ -120,6 +119,8 @@ const ROUTES = {
     SUPPORTCONTACT: "/premium/Support/Contact",
     WAREHOUSES: "/premium/Warehouses",
     CLIENTS: "/premium/Clients",
+    MAINTENANCE: "/premium/Maintenance",
+    MAINTENANCEADD: "/premium/Maintenance/add",
   },
   GUEST: {
     HOMEPAGE: "/",

@@ -1,17 +1,17 @@
 "use client";
 import React from "react";
-import AccordionMethodOrder from "../accordion-method-order";
 import PaymentsIcon from "@/src/assets/icons/payments";
 import ActionMenuPaymentsReceived from "../action-menu-payments-received";
 import Button from "@/src/components/button";
 import ModalRefund from "../modal/modal-refund";
 import { useDisclosure } from "@mantine/hooks";
+import AccordionRow from "@/src/components/accordion-row";
 
 function PaymentsReceived() {
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
-    <AccordionMethodOrder
+    <AccordionRow
       title="Payments Received"
       icon={() => <PaymentsIcon className="w-full h-auto" />}
     >
@@ -33,7 +33,7 @@ function PaymentsReceived() {
         </Button>
         <ModalRefund opened={opened} close={close} />
       </div>
-    </AccordionMethodOrder>
+    </AccordionRow>
   );
 }
 
