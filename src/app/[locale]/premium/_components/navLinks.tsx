@@ -206,6 +206,12 @@ function NavLinks() {
         url: ROUTES.PREMIUM.MAINTENANCEADD,
         active: path === ROUTES.PREMIUM.CLIENTSDETAILS(params.clientID),
       },
+      {
+        id: 16,
+        name: `Taxes`,
+        url: ROUTES.PREMIUM.TAXES,
+        active: path === ROUTES.PREMIUM.TAXES,
+      },
     ],
     [path, searchParams.toString()]
   );
