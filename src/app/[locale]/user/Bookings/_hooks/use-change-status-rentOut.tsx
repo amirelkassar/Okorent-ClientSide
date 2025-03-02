@@ -3,6 +3,7 @@ import { useCallback } from "react";
 import {
   ChangeStatusByIDs,
   ChangeStautsByID,
+  GetShippingLabel,
   useCancelOrderOutMutation,
   useRefundManyOrderOutMutation,
   useRefundOrderOutMutation,
@@ -22,6 +23,7 @@ interface ActionTableIRentProps {
   onSubmitRejectOrdersIds: any;
   onSubmitRefundManyYes: any;
   onSubmitRefundManyNo: any;
+  onSubmitPrintShippingLabel: (id: any) => void;
 }
 export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
   const { mutateAsync: ChangeStatusProduct } = ChangeStautsByID(id);
@@ -31,6 +33,7 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
   const { mutateAsync: CancelOrder } = useCancelOrderOutMutation();
   const { mutateAsync: RefundOrder } = useRefundOrderOutMutation();
   const { mutateAsync: RefundManyOrder } = useRefundManyOrderOutMutation();
+  const { mutateAsync: PrintShippingLabel } = GetShippingLabel();
   const { setSelectRowTable } = useSelectRowTable();
 
   //change status
@@ -174,9 +177,19 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
         },
       });
     },
-    [RefundManyOrder, id]
+    [RefundManyOrder, setSelectRowTable]
   );
-
+  const onSubmitPrintShippingLabel = useCallback(
+    async (id: any) => {
+      Toast.Promise(PrintShippingLabel(id), {
+        success: "Request Rejected ",
+        onSuccess(res) {
+          setSelectRowTable([]);
+        },
+      });
+    },
+    [PrintShippingLabel]
+  );
   return {
     onSubmitChangeStatus,
     onSubmitReject,
@@ -187,5 +200,6 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
     onSubmitRejectOrdersIds,
     onSubmitRefundManyYes,
     onSubmitRefundManyNo,
+    onSubmitPrintShippingLabel
   };
 };

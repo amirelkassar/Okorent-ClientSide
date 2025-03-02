@@ -400,3 +400,18 @@ export const GetQrCodeOrder = () => {
     },
   });
 };
+
+export const GetShippingLabel = () => {
+  return useMutation({
+    mutationFn: async (id: any) => {
+      const response = await api.post(user.order.shipping_label(id));
+      return response;
+    },
+    onSuccess: (res) => {
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};

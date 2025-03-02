@@ -67,6 +67,7 @@ export const user = {
       getByID: (id: any) => `/UserReviews/${id}`,
     },
     barcode: "Barcode/generate",
+    shipping_label: (id: any) => `GeneratePDFs/Label/${id}`,
   },
   user: {
     getByID: (id: any) => `User/${id}`,

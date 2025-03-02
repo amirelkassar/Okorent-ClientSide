@@ -44,6 +44,7 @@ function ActionMenuRentOut({
     onSubmitCancel,
     onSubmitRefundNo,
     onSubmitRefundYes,
+    onSubmitPrintShippingLabel,
   } = useChangeStatusRentOut(id);
 
   const options = [
@@ -150,7 +151,9 @@ function ActionMenuRentOut({
       label: "Print shipping label",
       icon: <PrintIcon className="w-3 h-auto" />,
       type: "btn",
-      action: () => {},
+      action: () => {
+        onSubmitPrintShippingLabel(id);
+      },
     },
   ];
   const optionView = () => {
@@ -158,9 +161,16 @@ function ActionMenuRentOut({
       case "1":
         return [options[0], options[5], options[6], options[10]];
       case "3":
-        return [options[1], options[4], options[5], options[6], options[9]];
+        return [
+          options[11],
+          options[1],
+          options[4],
+          options[5],
+          options[6],
+          options[9],
+        ];
       case "4":
-        return [options[11], options[5], options[6]];
+        return [options[5], options[6]];
       case "6":
         return [options[5], options[6]];
       case "7":

@@ -18,6 +18,7 @@ interface FirstProps {
   children?: ReactNode;
   title?: string;
   functionSelect?: functionSelectProps[];
+  className?: string;
 }
 
 interface LastProps {
@@ -40,9 +41,18 @@ export const TableHeader: React.FC<TableHeaderProps> & {
   );
 };
 
-const First: React.FC<FirstProps> = ({ children, functionSelect, title }) => (
-  <div className="flex items-center space-x-4 lg:flex-1">
-    {title && <h2 className="headTitle mdl:min-h-10 text-nowrap place-content-center">{title}</h2>}
+const First: React.FC<FirstProps> = ({
+  children,
+  functionSelect,
+  title,
+  className = "",
+}) => (
+  <div className={`flex items-center space-x-4 lg:flex-1 ${className}`}>
+    {title && (
+      <h2 className="headTitle mdl:min-h-10 text-nowrap place-content-center">
+        {title}
+      </h2>
+    )}
     {children}
     {functionSelect &&
       functionSelect.map((item, index) => {

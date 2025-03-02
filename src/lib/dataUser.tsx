@@ -838,3 +838,86 @@ export const Maintenance: MaintenanceProps[] = [
   },
 ];
 
+type ClientProps = {
+  id: number;
+  name: string;
+  imageUSer: StaticImageData;
+  email: string;
+  transactions: number;
+  totalPayments: string;
+  type: "Online" | "Offline";
+  tags: string;
+};
+
+export const Clients: ClientProps[] = [
+  {
+    id: 1,
+    name: "James Cameron",
+    imageUSer: avatarUser,
+    email: "James@profound.com",
+    transactions: 21,
+    totalPayments: "USD 150",
+    type: "Online",
+    tags: "Loyal",
+  },
+  {
+    id: 2,
+    name: "James Cameron",
+    imageUSer: avatarUser,
+    email: "James@profound.com",
+    transactions: 53,
+    totalPayments: "USD 150",
+    type: "Online",
+    tags: "New",
+  },
+  {
+    id: 3,
+    name: "James Cameron",
+    imageUSer: avatarUser,
+    email: "James@profound.com",
+    transactions: 54,
+    totalPayments: "USD 150",
+    type: "Online",
+    tags: "Loyal",
+  },
+  {
+    id: 4,
+    name: "James Cameron",
+    imageUSer: avatarUser,
+    email: "James@profound.com",
+    transactions: 35,
+    totalPayments: "USD 150",
+    type: "Offline",
+    tags: "New",
+  },
+  {
+    id: 5,
+    name: "James Cameron",
+    imageUSer: avatarUser,
+    email: "James@profound.com",
+    transactions: 22,
+    totalPayments: "USD 150",
+    type: "Offline",
+    tags: "New",
+  },
+  {
+    id: 6,
+    name: "James Cameron",
+    imageUSer: avatarUser,
+    email: "James@profound.com",
+    transactions: 98,
+    totalPayments: "USD 150",
+    type: "Offline",
+    tags: "New",
+  },
+  {
+    id: 7,
+    name: "James Cameron",
+    imageUSer: avatarUser,
+    email: "James@profound.com",
+    transactions: 88,
+    totalPayments: "USD 150",
+    type: "Offline",
+    tags: "New",
+  },
+];

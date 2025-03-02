@@ -7,6 +7,7 @@ import { Maintenance } from "@/src/lib/dataUser";
 import ROUTES from "@/src/routes";
 import React from "react";
 import { columns } from "./_components/columns";
+import CardPhoneMaintenance from "./_components/card-phone-maintenance";
 const FilterOptions = [
   {
     label: "Repaired",
@@ -39,19 +40,15 @@ function page() {
             </LinkGreen>
           </div>
         </TableHeader.First>
-        <TableHeader.Last
-          className="mdl:!flex !hidden"
-          options={FilterOptions}
-        />
+        <TableHeader.Last options={FilterOptions} />
       </TableHeader>
-      <div className=" hidden mdl:block">
-        <div>
-          <DataTable
-            //Component={CardViewPhoneListing}
-            data={Maintenance}
-            columns={columns}
-          />
-        </div>
+
+      <div>
+        <DataTable
+          Component={CardPhoneMaintenance}
+          data={Maintenance}
+          columns={columns}
+        />
       </div>
     </div>
   );

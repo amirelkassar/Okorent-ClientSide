@@ -84,7 +84,7 @@ function Page() {
       <div className="flex gap-8 flex-col lgl:flex-row">
         <div className="flex flex-col gap-4 flex-1">
           <OrderInfo />
-          <Card className="p-4">
+          <Card className="py-4 px-2 md:px-4">
             <div className="flex mdl:min-w-[400px] flex-1 flex-wrap gap-y-5 gap-x-8 py-3 mdl:py-4 px-3 mdl:px-4 bg-white rounded-xl border border-green/50">
               <Input
                 leftSection={

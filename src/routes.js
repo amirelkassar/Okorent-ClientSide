@@ -119,6 +119,7 @@ const ROUTES = {
     SUPPORTCONTACT: "/premium/Support/Contact",
     WAREHOUSES: "/premium/Warehouses",
     CLIENTS: "/premium/Clients",
+    CLIENTSDETAILS: (id) => `/premium/Clients/${id}`,
     MAINTENANCE: "/premium/Maintenance",
     MAINTENANCEADD: "/premium/Maintenance/add",
   },

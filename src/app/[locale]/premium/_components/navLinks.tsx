@@ -200,6 +200,12 @@ function NavLinks() {
         url: ROUTES.PREMIUM.MAINTENANCEADD,
         active: path === ROUTES.PREMIUM.MAINTENANCEADD,
       },
+      {
+        id: 15,
+        name: `Clients - Profile`,
+        url: ROUTES.PREMIUM.MAINTENANCEADD,
+        active: path === ROUTES.PREMIUM.CLIENTSDETAILS(params.clientID),
+      },
     ],
     [path, searchParams.toString()]
   );

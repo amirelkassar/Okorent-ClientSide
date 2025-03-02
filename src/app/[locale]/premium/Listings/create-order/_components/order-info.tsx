@@ -29,7 +29,7 @@ function OrderInfo() {
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
-    <Card className="p-4">
+    <Card className="px-3 py-4 md:px-4">
       <div className="flex gap-y-5 gap-x-8 flex-wrap flex-col md:flex-row">
         <div className="bg-white   rounded-xl  h-16 border-green/50 border overflow-hidden  min-w-[calc(50%-16px)] flex-1 flex">
           <Input

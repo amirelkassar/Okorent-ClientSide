@@ -116,7 +116,7 @@ function SignupView() {
         <TermsModal />
         {/* Buttons */}
         <div className="w-full mt-2 flex flex-col gap-2">
-          <InputSubmit className="w-full" value="Create an account" />
+          <InputSubmit className="w-full cursor-pointer" value="Create an account"  />
           <button
             type="button"
             className="w-full flex items-center justify-center gap-2 py-3 h-[52px] border border-black rounded-xl"
