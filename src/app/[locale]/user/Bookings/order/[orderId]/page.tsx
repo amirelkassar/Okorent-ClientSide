@@ -38,7 +38,7 @@ function Page({ params }: any) {
             renterSignatureImage={data?.data?.renterSignatureImage}
             orderDetails={{
               title: data?.data?.title,
-              payment: data?.data?.paymentRecord[0].amount || 0 + " $",
+              payment: data?.data?.paymentRecord[0]?.amount || 0 + " $",
               productImage: data?.data?.getOrderItemDtos[0]?.heroImage || "",
             }}
           />
@@ -82,6 +82,7 @@ function Page({ params }: any) {
         </div>
         <OrderPayment
           ProductDetailsPayment={data?.data?.paymentRecord[0] || []}
+          invoiceId={data?.data?.invoiceId || ""}
         />
       </div>
     </div>

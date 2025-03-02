@@ -77,3 +77,22 @@ export const useEditOrderByIDMutation = (id: any) => {
     },
   });
 };
+
+export const useDownloadInvoice = (id: any) => {
+  return useMutation({
+    mutationFn: async () => {
+      const response = await api.post(
+        user.order.download_invoice(id),
+        {},
+        { responseType: "blob" }
+      );
+      return response.data;
+    },
+    onSuccess: async (res) => {
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};
