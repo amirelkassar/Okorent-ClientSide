@@ -182,9 +182,17 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
   const onSubmitPrintShippingLabel = useCallback(
     async (id: any) => {
       Toast.Promise(PrintShippingLabel(id), {
-        success: "Request Rejected ",
+        success: "Get Shipping Label Done",
         onSuccess(res) {
           setSelectRowTable([]);
+          const url = window.URL.createObjectURL(res);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = `shipping-label-${id}.pdf`; // Set the filename
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(url);
         },
       });
     },
@@ -200,6 +208,6 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
     onSubmitRejectOrdersIds,
     onSubmitRefundManyYes,
     onSubmitRefundManyNo,
-    onSubmitPrintShippingLabel
+    onSubmitPrintShippingLabel,
   };
 };
