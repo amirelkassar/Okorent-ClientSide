@@ -7,7 +7,7 @@ function AccordionRow({
   children,
 }: {
   title: string;
-  icon: () => React.ReactNode;
+  icon?: () => React.ReactNode;
   children: React.ReactNode;
 }) {
   return (
@@ -19,9 +19,13 @@ function AccordionRow({
         classNames={{ label: "font-SemiBold" }}
         className="border-none text-black font-SemiBold h-14"
         icon={
-          <div className="bg-blueLight/50 p-1 size-10 rounded-full flex items-center justify-center">
-            <div className="size-8 rounded-full bg-blueLight flex items-center justify-center p-2">{icon()}</div>
-          </div>
+          icon ? (
+            <div className="bg-blueLight/50 p-1 size-10 rounded-full flex items-center justify-center">
+              <div className="size-8 rounded-full bg-blueLight flex items-center justify-center p-2">
+                {icon()}
+              </div>
+            </div>
+          ) : null
         }
       >
         {title}

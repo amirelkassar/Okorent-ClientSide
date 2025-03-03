@@ -148,8 +148,8 @@ export const fetchLocationDetails = async (lat: number, lng: number): Promise<{
     const details = {
       address: results[0].formatted_address,
       country: getComponent("country"),
-      city: getComponent("locality") || getComponent("administrative_area_level_2"),
-      state: getComponent("administrative_area_level_1"),
+      city: getComponent("administrative_area_level_1"),
+      state: getComponent("locality") || getComponent("administrative_area_level_2"),
     };
 
     return details;
