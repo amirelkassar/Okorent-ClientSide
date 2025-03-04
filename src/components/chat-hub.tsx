@@ -24,7 +24,7 @@ export const ChatHub = () => {
   useEffect(() => {
     let connection: signalR.HubConnection | null = null;
     const audio = new Audio(
-      "/notification-received.mp3?v=" + new Date().getTime()
+      "/message-received.mp3?v=" + new Date().getTime()
     );
 
     const connectSignalR = async () => {
