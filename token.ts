@@ -15,10 +15,12 @@ type DecodedToken = {
   exp: number;
   ClientId: string;
 };
+
 type DecodeResponse = {
   userRole: "Administrator" | "Client" | 'User';
   tokenExpireDate: Date;
 } | null;
+
 export const decodedToken = async (token: string): Promise<DecodeResponse> => {
   try {
     const decodedToken = decodeJwt(token) as DecodedToken;
