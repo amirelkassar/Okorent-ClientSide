@@ -13,6 +13,7 @@
     "@fullcalendar/daygrid": "^6.1.15",
     "@fullcalendar/interaction": "^6.1.15",
     "@fullcalendar/react": "^6.1.15",
+    "@fullcalendar/resource": "^6.1.15",
     "@fullcalendar/resource-timeline": "^6.1.15",
     "@hookform/resolvers": "^3.9.1",
     "@mantine/charts": "^7.17.1",
