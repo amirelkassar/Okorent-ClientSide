@@ -68,7 +68,7 @@ function CardProduct({
         quantity: quantity || 1,
         from: valueDate[0]?.toISOString(),
         to: valueDate[1]?.toISOString(),
-        price: TotalPriceOrder,
+        price: (TotalPriceOrder*quantity),
       },
     ],
     ContractText: TermsContent,
@@ -160,7 +160,7 @@ function CardProduct({
                   orderDetails={{
                     productImage: data.heroImage || null,
                     title: data.name,
-                    payment: TotalPriceOrder,
+                    payment: (TotalPriceOrder*quantity),
                   }}
                 >
                   <LinkGreen

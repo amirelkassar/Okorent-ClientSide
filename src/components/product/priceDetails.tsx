@@ -17,7 +17,6 @@ function PriceDetails({
   setQuantity,
   quantity,
 }: PricingOptionsProps) {
-
   return (
     <div className=" border rounded-lg bg-white/50 pt-4 pb-2  border-green/30">
       <div className="px-5 mb-3">
@@ -46,7 +45,7 @@ function PriceDetails({
       <div className="pt-4 border-t flex items-center justify-between gap-3 px-5 border-[#B6BFC64D]/30">
         <h4 className="font-Bold text-[14px]">Total (CHF)</h4>
         <p className="font-Bold text-[14px]">
-          ₣ {TotalPriceOrder < 0 ? 0 : TotalPriceOrder}
+          ₣ {TotalPriceOrder * quantity < 0 ? 0 : TotalPriceOrder * quantity}
         </p>
       </div>
       {children}
