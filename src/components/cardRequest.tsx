@@ -217,7 +217,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
               onClick={() => onSubmitChangeStatus()}
             />
             <BottomCardRentOut.MessageLink
-              id={data?.id || "undefined"}
+              id={data?.renterId || "undefined"}
               name={FirstLessorName || "User"}
             />
             <BottomCardRentOut.CancelBookings
@@ -229,7 +229,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
         {status === 4 && (
           <>
             <BottomCardRentOut.MessageLink
-              id={data?.id || "undefined"}
+              id={data?.renterId || "undefined"}
               name={FirstLessorName || "User"}
             />
             <BottomCardRentOut.ViewDetailsLink id={data?.id || "undefined"} />
@@ -243,7 +243,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
               onClick={() => onSubmitChangeStatus()}
             />
             <BottomCardRentOut.MessageLink
-              id={data?.id || "undefined"}
+              id={data?.renterId || "undefined"}
               name={FirstLessorName || "User"}
             />
             <BottomCardRentOut.ViewDetailsLink id={data?.id || "undefined"} />
@@ -252,7 +252,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
         {status === 12 && (
           <>
             <BottomCardRentOut.MessageLink
-              id={data?.id || "undefined"}
+              id={data?.renterId || "undefined"}
               name={FirstLessorName || "User"}
             />
             <BottomCardRentOut.MarkAsCompleted
@@ -264,7 +264,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
         {(status === 9 || status === 8 || status === 7 || status === 10) && (
           <>
             <BottomCardRentOut.MessageLink
-              id={data?.id || "undefined"}
+              id={data?.renterId || "undefined"}
               name={FirstLessorName || "User"}
             />
           </>
@@ -277,7 +277,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
               onClick={() => onSubmitRefundYes()}
             />
             <BottomCardRentOut.MessageLink
-              id={data?.id || "undefined"}
+              id={data?.renterId || "undefined"}
               name={FirstLessorName || "User"}
             />
             <BottomCardRentOut.RejectReturn

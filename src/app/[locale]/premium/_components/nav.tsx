@@ -26,7 +26,10 @@ import MenuIcon from "@/src/assets/icons/menu";
 import LogOutMenuIcon from "@/src/assets/icons/logOutMenu";
 import { clearToken } from "@/src/lib/token";
 import { useToken } from "@/src/hooks/use-token";
-import MenuProfile from "./menuProfile";
+import ProfileIcon from "@/src/assets/icons/Profile";
+import SubscriptionIcon from "@/src/assets/icons/Subscription";
+import SettingsIcon from "@/src/assets/icons/Settings";
+import MenuProfile from "@/src/components/menuProfile";
 
 function Nav() {
   const locale = useLocale();
@@ -133,6 +136,41 @@ function Nav() {
     ],
     [pathname]
   );
+  const menuItems = useMemo(
+    () => [
+      {
+        icon: <ProfileIcon />,
+        text: "Profile",
+        link: ROUTES.PREMIUM.PROFILE,
+        active: pathname === ROUTES.PREMIUM.PROFILE,
+      },
+      {
+        icon: <SubscriptionIcon />,
+        text: "Wallet",
+        link: ROUTES.PREMIUM.WALLET,
+        active: pathname === ROUTES.PREMIUM.WALLET,
+      },
+      {
+        icon: <p>%</p>,
+        text: "Taxes",
+        link: ROUTES.PREMIUM.TAXES,
+        active: pathname === ROUTES.PREMIUM.TAXES,
+      },
+      {
+        icon: <AdsIcon />,
+        text: "Ads",
+        link: ROUTES.PREMIUM.ADS,
+        active: pathname === ROUTES.PREMIUM.ADS,
+      },
+      {
+        icon: <SettingsIcon fill="#0F2A43" className="w-3 h-auto" />,
+        text: "Settings",
+        link: ROUTES.PREMIUM.WAREHOUSES,
+        active: pathname === ROUTES.PREMIUM.WAREHOUSES,
+      },
+    ],
+    [pathname]
+  );
   return (
     <nav className="px-4 lg:px-16 py-5 lg:py-7 flex items-center justify-between gap-4 max-w-[1600px] mx-auto ">
       <Link href={ROUTES.PREMIUM.HOMEPAGE}>
@@ -156,7 +194,7 @@ function Nav() {
         >
           <LangIcon />
         </Link>
-        <MenuProfile />
+        <MenuProfile menuItems={menuItems} />
       </div>
       <div className="flex gap-3  mdl:hidden items-center">
         <Notifications />

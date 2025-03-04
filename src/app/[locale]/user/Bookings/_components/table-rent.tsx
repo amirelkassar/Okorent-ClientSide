@@ -17,7 +17,7 @@ function TableRent({ query }: { query: any }) {
   const totalCount = query.data?.data?.totalCount || 0;
 
   return (
-    <div className=" hidden mdl:block">
+    <div className=" hidden lg:block">
       <TableHeader>
         <TableHeader.First title="Bookings">
           {+totalCount > 0 ? (

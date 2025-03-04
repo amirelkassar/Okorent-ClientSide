@@ -111,6 +111,7 @@ export const columns: ColumnDef<RequestsTableData>[] = [
       const id = row.original.id;
       const ProdId = row.original.prodId;
       const status = row.original.status;
+      const lessorId = row.original.lessorId;
       const dataForReview = {
         ProdId: ProdId,
         imageProduct: row.original.heroImage,
@@ -125,6 +126,7 @@ export const columns: ColumnDef<RequestsTableData>[] = [
         <div className="flex items-center gap-3 w-fit">
           <ActionMenuRent
             id={id}
+            lessorId={lessorId}
             ProdId={ProdId}
             status={status}
             dataForReview={dataForReview}

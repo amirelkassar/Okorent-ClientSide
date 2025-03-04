@@ -4,17 +4,13 @@ import { useSwitchAvailable } from "../store/rent-slice";
 import SwitchControl from "./switch-control";
 import { useEndVacationUser } from "../hooks/queries/user/home/user-info";
 import { Toast } from "./toast";
+import ModalVacation from "./modal-vacation";
+import { useDisclosure } from "@mantine/hooks";
 
-function SwitchAvailable({
-  open,
-  vacation = false,
-}: {
-  open: () => void;
-  vacation: boolean;
-}) {
+function SwitchAvailable({ vacation = false }: { vacation: boolean }) {
+  const [opened, { open, close }] = useDisclosure(false);
+
   const { switchAvailable, setSwitchAvailable } = useSwitchAvailable();
-  console.log(switchAvailable);
-  console.log(vacation);
 
   useEffect(() => {
     setSwitchAvailable(vacation ? "Vacation" : "Available");
@@ -28,20 +24,23 @@ function SwitchAvailable({
         close();
       },
     });
-  }, [EndVacationUser]);
+  }, [EndVacationUser, close]);
   return (
-    <SwitchControl
-      options={[
-        { label: "Available", value: "Available" },
-        { label: "Vacation", value: "Vacation" },
-      ]}
-      defaultValue={vacation ? "Vacation" : "Available"}
-      onChange={(e) => {
-        if (e === "Vacation") open();
-        if (e === "Available") handleSubmitEndVacation();
-        setSwitchAvailable(e === "Available" ? "Available" : "Vacation");
-      }}
-    />
+    <>
+      <SwitchControl
+        options={[
+          { label: "Available", value: "Available" },
+          { label: "Vacation", value: "Vacation" },
+        ]}
+        defaultValue={vacation ? "Vacation" : "Available"}
+        onChange={(e) => {
+          if (e === "Vacation") open();
+          if (e === "Available") handleSubmitEndVacation();
+          setSwitchAvailable(e === "Available" ? "Available" : "Vacation");
+        }}
+      />
+      <ModalVacation opened={opened} close={close} />
+    </>
   );
 }
 

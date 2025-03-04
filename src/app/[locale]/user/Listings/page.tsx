@@ -16,7 +16,7 @@ function Page() {
       ) : (
         <>
           <TableViewListings query={query} />
-          <div className=" block mdl:hidden">
+          <div className=" block lg:hidden">
             <PageCardsView />
           </div>
         </>

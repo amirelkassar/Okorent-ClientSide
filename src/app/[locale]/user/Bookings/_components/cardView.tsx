@@ -42,7 +42,7 @@ function CardView({
 
           <Link
             href={ROUTES.USER.BOOKINGS}
-            className="px-3 duration-300 linkView hover:shadow-md w-fit py-2 rounded-xl border border-black flex items-center justify-center gap-2"
+            className="px-3 duration-300 linkView hover:shadow-md w-fit py-2 rounded-xl border border-black hidden lg:flex items-center justify-center gap-2"
           >
             <ListIcon />
             <p className="lg:text-[16px] text-sm text-nowrap">List View</p>

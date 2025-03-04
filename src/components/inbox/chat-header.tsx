@@ -29,7 +29,7 @@ function ChatHeader({
             <ArrowBackIcon />
           </Link>
           <Image
-            className="size-10 rounded-full"
+            className="size-10 rounded-full object-cover object-top"
             src={userImage || avatar}
             alt={userName || "User Name"}
             width={100}

@@ -42,7 +42,7 @@ function TableViewListings({ query }: { query: any }) {
             {+totalCount > 0 ? (
               <Link
                 href={ROUTES.PREMIUM.LISTINGS + "?card=true"}
-                className="px-3 hidden mdl:flex duration-300 hover:shadow-md w-fit py-2 rounded-xl border border-black  items-center justify-center gap-2"
+                className="px-3 hidden lg:flex duration-300 hover:shadow-md w-fit py-2 rounded-xl border border-black  items-center justify-center gap-2"
               >
                 <CardIcon />
                 <p>Card View</p>
@@ -51,11 +51,11 @@ function TableViewListings({ query }: { query: any }) {
           </div>
         </TableHeader.First>
         <TableHeader.Last
-          className="mdl:!flex !hidden"
+          className="lg:!flex !hidden"
           options={FilterOptions}
         />
       </TableHeader>
-      <div className=" hidden mdl:block">
+      <div className=" hidden lg:block">
         <QueryWrapper query={query}>
           {({ data, totalPages }: { data: any; totalPages?: any }) => {
             console.log(data);

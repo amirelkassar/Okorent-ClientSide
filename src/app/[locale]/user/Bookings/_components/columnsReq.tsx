@@ -13,6 +13,7 @@ import PaymentStatus from "@/src/components/payment-status";
 export type RequestsTableData = {
   id: number;
   renterName: string;
+  renterId: string;
   productName: string;
   memberSince: string;
   statusUser: string;
@@ -165,9 +166,11 @@ export const columnsReq: ColumnDef<RequestsTableData>[] = [
       const title = row.original.productName;
       const image = row.original.heroImage;
       const payment = row.original.amount;
+      const renterId = row.original.renterId;
       return (
         <div className="flex items-center gap-3 w-fit">
           <ActionMenuRentOut
+            renterId={renterId}
             id={id}
             status={status}
             dataOrder={{ productImage: image, title: title, payment: payment }}

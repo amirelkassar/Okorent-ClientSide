@@ -24,7 +24,7 @@ function Page() {
       ) : (
         <>
           <TableRent query={query} />
-          <div className=" block mdl:hidden">
+          <div className=" block lg:hidden">
             <PageCardRent />
           </div>
         </>
@@ -37,7 +37,7 @@ function Page() {
       ) : (
         <>
           <TableRentOut query={queryOut} />
-          <div className=" block mdl:hidden">
+          <div className=" block lg:hidden">
             <PageCardRentOut />
           </div>
         </>

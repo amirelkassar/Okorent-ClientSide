@@ -29,10 +29,12 @@ function ActionMenuRentOut({
   id,
   status = 1,
   dataOrder,
+  renterId,
 }: {
   id: any;
   status: any;
   dataOrder: OrderDetailsProps;
+  renterId: string;
 }) {
   const [RenterSignature, setRenterSignature] = useState<File | null>(null);
   const [opened, { open, close }] = useDisclosure(false);
@@ -107,7 +109,7 @@ function ActionMenuRentOut({
     {
       label: "Message",
       icon: <NoteTableIcon fill="#6F6B7D" className="w-3 h-auto" />,
-      link: ROUTES.USER.INBOX + "?chat=" + id + "&UserID=true",
+      link: ROUTES.USER.INBOX + "?chat=" + renterId + "&UserID=true",
       type: "link",
     },
     //7
