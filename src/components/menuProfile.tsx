@@ -4,28 +4,28 @@ import { Menu } from "@mantine/core";
 import Image from "next/image";
 import React, { useState } from "react";
 import profile from "@/src/assets/images/Shape.png";
-import ProfileIcon from "../assets/icons/Profile";
 import LogoutIcon from "../assets/icons/Logout";
-import SubscriptionIcon from "../assets/icons/Subscription";
 import { Link } from "../navigation";
-import ROUTES from "../routes";
 import SwitchAvailable from "./switchAvailable";
-import AdsIcon from "../assets/icons/ads";
 import { clearToken } from "../lib/token";
 import { useLocale } from "next-intl";
 import { useToken } from "../hooks/use-token";
-import { useDisclosure } from "@mantine/hooks";
-import ModalVacation from "./modal-vacation";
-import LocationIcon from "../assets/icons/location";
 import { GetMyProfile } from "../hooks/queries/user/my-profile";
-function MenuProfile() {
+interface MenuItemsProps {
+  icon: React.JSX.Element;
+  text: string;
+  link: string;
+  active: boolean;
+}
+function MenuProfile({ menuItems = [] }: { menuItems: MenuItemsProps[] }) {
+  //hooks
   const [openMenu, setOpened] = useState(false);
   const locale = useLocale();
   const { setToken } = useToken();
-  const [opened, { open, close }] = useDisclosure(false);
-  const { data } = GetMyProfile();
 
-  
+  //queries
+  const { data } = GetMyProfile();
+  //functions
   const handleLogout = () => {
     setToken({}); // Clear token from the state
     clearToken(); // Clear token from storage
@@ -51,7 +51,7 @@ function MenuProfile() {
               <p className="text-[14px]">My Profile</p>
             </div>
             <Image
-              src={data?.data?.userImage||profile}
+              src={data?.data?.userImage || profile}
               width={40}
               height={40}
               alt="profile"
@@ -64,43 +64,25 @@ function MenuProfile() {
             closeMenuOnClick={false}
             className="  py-0 h-[30px] px-1 !mb-2 text-[14px] font-SemiBold rounded-lg"
           >
-            <SwitchAvailable open={open} vacation={data?.data?.isVacationEnd} />
+            <SwitchAvailable vacation={data?.data?.isVacationEnd} />
           </Menu.Item>
-          <Menu.Item
-            leftSection={<ProfileIcon />}
-            className=" hover:bg-green/15 py-0 h-[30px] px-1 text-[14px] font-SemiBold rounded-lg"
-          >
-            <Link className="flex-1 w-full  block" href={ROUTES.USER.PROFILE}>
-              Profile
-            </Link>
-          </Menu.Item>
-          <Menu.Item
-            leftSection={<SubscriptionIcon />}
-            className=" hover:bg-green/15 py-0 h-[30px] px-1 text-[14px] font-SemiBold rounded-lg"
-          >
-            <Link className="flex-1 w-full  block" href={ROUTES.USER.WALLET}>
-              Wallet
-            </Link>
-          </Menu.Item>
-          <Menu.Item
-            leftSection={<AdsIcon />}
-            className=" hover:bg-green/15 py-0 h-[30px] px-1 text-[14px] font-SemiBold rounded-lg"
-          >
-            <Link className="flex-1 w-full  block" href={ROUTES.USER.ADS}>
-              Ads
-            </Link>
-          </Menu.Item>
-          <Menu.Item
-            leftSection={<LocationIcon fill="#0F2A43" className="w-3 h-auto" />}
-            className=" hover:bg-green/15 py-0 h-[30px] px-1 text-[14px] font-SemiBold rounded-lg"
-          >
-            <Link
-              className="flex-1 w-full  block"
-              href={ROUTES.USER.WAREHOUSES}
+          {menuItems.map((item, index) => (
+            <Menu.Item
+              key={index}
+              className={`hover:bg-green/15 py-0 h-[30px] px-0 text-[14px] font-SemiBold rounded-lg ${
+                item.active && "bg-green/15"
+              } `}
             >
-              Warehouses
-            </Link>
-          </Menu.Item>
+              <Link
+                href={item.link}
+                className="flex-1 w-full flex items-center gap-2 px-1 h-[30px]"
+              >
+                {item.icon}
+                {item.text}
+              </Link>
+            </Menu.Item>
+          ))}
+
           <Menu.Item
             onClick={handleLogout}
             component="a"
@@ -112,7 +94,6 @@ function MenuProfile() {
           </Menu.Item>
         </Menu.Dropdown>
       </Menu>
-      <ModalVacation opened={opened} close={close} />
     </>
   );
 }

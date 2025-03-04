@@ -166,7 +166,9 @@ function NavLinks() {
         id: 11,
         name: `Ads Details`,
         url: ROUTES.USER.ADS,
-        active: path === ROUTES.USER.ADSID(params.adsID),
+        active:
+          path === ROUTES.USER.ADSID(params.adsID) ||
+          path === ROUTES.USER.ADSDETAILSID(params.adsDetailsID),
       },
       {
         id: 12,

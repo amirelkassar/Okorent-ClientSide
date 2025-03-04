@@ -55,6 +55,8 @@ function GoogleMapAddress({ close, setLocation }: GoogleMapProps) {
     if (selectedLocation?.lat) {
       fetchLocationDetails(selectedLocation.lat, selectedLocation.lng)
         .then((details) => {
+          console.log(details);
+
           setPlaceName(details);
           setLocation({
             ...details,

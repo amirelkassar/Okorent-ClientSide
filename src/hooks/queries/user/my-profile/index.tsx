@@ -32,7 +32,7 @@ export const useEditMyProfile = () => {
     },
     onSuccess: (res) => {
       console.log(res);
-      queryClient.refetchQueries([initialQueryKeyMyProfile]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKeyMyProfile] });
     },
     onError: (err) => {
       console.log(err);
@@ -65,7 +65,7 @@ export const useEditImageMyProfile = () => {
     },
     onSuccess: (res) => {
       console.log(res);
-      queryClient.refetchQueries([initialQueryKeyMyProfile]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKeyMyProfile] });
     },
     onError: (err) => {
       console.log(err);
@@ -88,7 +88,7 @@ export const GetRecentActivitiesOrders = () => {
 export const useSendDemoRequest = () => {
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await api.post(user.Demo.create, data,{
+      const response = await api.post(user.Demo.create, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

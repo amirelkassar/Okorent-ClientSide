@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import ListChats from "./_components/listChats";
-import Chat from "./_components/chat";
 import TopChat from "./_components/topChat";
+import Chat from "@/src/components/inbox/chat";
 
 function Page() {
   const [viewChats, setViewChats] = useState<string>("inbox");

@@ -3,6 +3,7 @@ import { useCallback } from "react";
 import {
   ChangeStatusByIDs,
   ChangeStautsByID,
+  GetShippingLabel,
   useCancelOrderOutMutation,
   useRefundManyOrderOutMutation,
   useRefundOrderOutMutation,
@@ -13,7 +14,7 @@ import { Toast } from "@/src/components/toast";
 import { useSelectRowTable } from "@/src/components/select-row-table-context";
 
 interface ActionTableIRentProps {
-  onSubmitChangeStatus: any;
+  onSubmitChangeStatus: (RenterSignature?: any) => void;
   onSubmitReject: any;
   onSubmitCancel: any;
   onSubmitRefundYes: any;
@@ -22,6 +23,7 @@ interface ActionTableIRentProps {
   onSubmitRejectOrdersIds: any;
   onSubmitRefundManyYes: any;
   onSubmitRefundManyNo: any;
+  onSubmitPrintShippingLabel: (id: any) => void;
 }
 export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
   const { mutateAsync: ChangeStatusProduct } = ChangeStautsByID(id);
@@ -31,19 +33,30 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
   const { mutateAsync: CancelOrder } = useCancelOrderOutMutation();
   const { mutateAsync: RefundOrder } = useRefundOrderOutMutation();
   const { mutateAsync: RefundManyOrder } = useRefundManyOrderOutMutation();
+  const { mutateAsync: PrintShippingLabel } = GetShippingLabel();
   const { setSelectRowTable } = useSelectRowTable();
 
   //change status
-  const onSubmitChangeStatus = useCallback(async () => {
-    Toast.Promise(ChangeStatusProduct(id), {
-      loading: "Processing...",
-      success: "Operation completed!",
+  const onSubmitChangeStatus = useCallback(
+    async (RenterSignature?: any) => {
+      Toast.Promise(
+        ChangeStatusProduct(
+          RenterSignature
+            ? { data: { OrderId: id, LessorSignatureFile: RenterSignature } }
+            : {}
+        ),
+        {
+          loading: "Processing...",
+          success: "Operation completed!",
 
-      onSuccess(res) {
-        setSelectRowTable([]);
-      },
-    });
-  }, [ChangeStatusProduct, id]);
+          onSuccess(res) {
+            setSelectRowTable([]);
+          },
+        }
+      );
+    },
+    [ChangeStatusProduct, id]
+  );
 
   //change status ids
   const onSubmitChangeStatusIds = useCallback(
@@ -164,9 +177,27 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
         },
       });
     },
-    [RefundManyOrder, id]
+    [RefundManyOrder, setSelectRowTable]
   );
-
+  const onSubmitPrintShippingLabel = useCallback(
+    async (id: any) => {
+      Toast.Promise(PrintShippingLabel(id), {
+        success: "Get Shipping Label Done",
+        onSuccess(res) {
+          setSelectRowTable([]);
+          const url = window.URL.createObjectURL(res);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = `shipping-label-${id}.pdf`; // Set the filename
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(url);
+        },
+      });
+    },
+    [PrintShippingLabel]
+  );
   return {
     onSubmitChangeStatus,
     onSubmitReject,
@@ -177,5 +208,6 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
     onSubmitRejectOrdersIds,
     onSubmitRefundManyYes,
     onSubmitRefundManyNo,
+    onSubmitPrintShippingLabel,
   };
 };

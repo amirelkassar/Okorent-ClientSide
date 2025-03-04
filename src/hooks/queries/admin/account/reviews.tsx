@@ -1,10 +1,9 @@
 import { api } from "@/src/api/axios";
 import { admin, user } from "@/src/api/user";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { quadKey } from "ol/source/BingMaps";
 
 export const initialQueryKey = "admin.review";
-
-
 
 //get Review USer
 export const GetReviewsUserInAdmin = (id: any) => {
@@ -31,7 +30,7 @@ export const useEditReviewUserInAdmin = (id: any) => {
     },
     onSuccess: (res) => {
       console.log(res);
-      queryClient.refetchQueries([initialQueryKey, id]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey, id] });
     },
     onError: (res) => {
       console.log(res);
@@ -49,7 +48,7 @@ export const useDeleteReviewUserInAdmin = (idUser: any) => {
     },
 
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey, idUser]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey, idUser] });
       console.log(res);
     },
     onError: (res) => {

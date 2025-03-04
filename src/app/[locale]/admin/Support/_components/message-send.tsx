@@ -78,6 +78,11 @@ function MessageSend({ chatID = "" }: { chatID: string }) {
             placeholder="Type your message here ..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                onSubmitSend();
+              }
+            }}
           />
         </div>
       </div>

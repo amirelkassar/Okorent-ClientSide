@@ -2,53 +2,55 @@
 import React from "react";
 import LayoutMaster from "../_components/layout-master";
 import { DataTable } from "@/src/components/data-table";
-import { AdsData } from "@/src/lib/dataUser";
-import EditIcon from "@/src/assets/icons/edit";
-import DeleteIcon from "@/src/assets/icons/delete";
 import { columns } from "./_components/column";
-import VerifyIcon from "@/src/assets/icons/verify";
-import PauseIcon from "@/src/assets/icons/pause";
 import { TableHeader } from "@/src/components/table/table-header";
 import { Link } from "@/src/navigation";
 import AddPricingIcon from "@/src/assets/icons/add-pricing";
 import CardPhoneAds from "./_components/card-phone-ads";
 import ROUTES from "@/src/routes";
+import { GetAdsUserInAdmin } from "@/src/hooks/queries/admin/master-data/ads";
+import { QueryWrapper } from "@/src/components/query-wrapper";
+import { Pagination } from "@/src/components/pagination";
+import { useActionTableAds } from "./_hooks/use-action-table-ads";
+import { useSearchParams } from "next/navigation";
+import Card from "@/src/components/card";
 const FilterOptions = [
   {
-    label: "Activate",
-    key: "filter",
-    value: "Activate",
+    label: "Ongoing",
+    key: "AdvertisementStatus",
+    value: "1",
   },
   {
     label: "Suspend",
-    key: "filter",
-    value: "Suspend",
+    key: "AdvertisementStatus",
+    value: "2",
+  },
+  {
+    label: "Stopped",
+    key: "AdvertisementStatus",
+    value: "3",
+  },
+  {
+    label: "Cancelled",
+    key: "AdvertisementStatus",
+    value: "4",
+  },
+  {
+    label: "Completed",
+    key: "AdvertisementStatus",
+    value: "5",
+  },
+  {
+    label: "Deleted",
+    key: "AdvertisementStatus",
+    value: "6",
   },
 ];
-function page() {
-  const functionSelect = [
-    {
-      title: "Activate",
-      icon: <VerifyIcon fill="#006AFF" className="max-h-4 w-auto" />,
-      onclick: () => {},
-    },
-    {
-      title: "Suspend",
-      icon: <PauseIcon className="max-h-4 w-auto" />,
-      onclick: () => {},
-    },
+function Page() {
+  const searchParams = useSearchParams();
+  const { functionSelectView } = useActionTableAds();
+  const query = GetAdsUserInAdmin(searchParams.toString());
 
-    {
-      title: "Edit",
-      icon: <EditIcon fill="#006AFF" className="max-h-4 w-auto" />,
-      onclick: () => {},
-    },
-    {
-      title: "Delete",
-      icon: <DeleteIcon className="max-h-4 w-auto" />,
-      onclick: () => {},
-    },
-  ];
   return (
     <LayoutMaster>
       <TableHeader>
@@ -66,14 +68,25 @@ function page() {
           options={FilterOptions}
         ></TableHeader.Last>
       </TableHeader>
-      <DataTable
-        data={AdsData}
-        columns={columns}
-        functionSelect={functionSelect}
-        Component={CardPhoneAds}
-      />
+      <QueryWrapper query={query}>
+        {({ data, totalPages }: { data: any; totalPages?: any }) => {
+          console.log(data);
+
+          return (
+            <Card className="mdl:bg-white bg-transparent border-none mdl:border  px-0 mdl:px-8 py-0 mdl:py-2 mb-section">
+              <DataTable
+                data={data}
+                columns={columns}
+                functionSelect={functionSelectView}
+                Component={CardPhoneAds}
+              />
+              <Pagination totalPages={totalPages} />
+            </Card>
+          );
+        }}
+      </QueryWrapper>
     </LayoutMaster>
   );
 }
 
-export default page;
+export default Page;

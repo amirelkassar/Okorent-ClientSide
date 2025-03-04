@@ -6,7 +6,7 @@ import MapComponent from "@/src/components/map";
 import CardProduct from "@/src/components/product/cardProduct";
 import Description from "@/src/components/product/description";
 import Reviews from "@/src/components/reviews";
-import React, { useState } from "react";
+import React  from "react";
 import HeaderProduct from "./_components/headerProduct";
 import AddProduct from "./_components/add-product";
 import { QueryWrapper } from "@/src/components/query-wrapper";
@@ -16,7 +16,6 @@ import { GetProductsInAdminByID } from "@/src/hooks/queries/admin/lisiting";
 import { GetReviewByIDInAdmin } from "@/src/hooks/queries/admin/lisiting/Reviews";
 
 function Page({ params }: any) {
-  const [IsEdit, setIsEdit] = useState(false);
   const query = GetProductsInAdminByID(params?.productID);
   const { data: dataCustomers, isLoading: isLoadingProducts } =
     GetProductsAll();

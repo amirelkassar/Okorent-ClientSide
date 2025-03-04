@@ -39,7 +39,7 @@ export const useSendNotes = () => {
     },
     onSuccess: (res) => {
       console.log(res);
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
     },
     onError: (res) => {
       console.log(res);
@@ -57,7 +57,7 @@ export const useDeleteOneNote = () => {
     },
     onSuccess: (res) => {
       console.log(res);
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
     },
     onError: (res) => {
       console.log(res);
@@ -75,7 +75,7 @@ export const useDeleteManyNotes = () => {
     },
     onSuccess: (res) => {
       console.log(res);
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
     },
     onError: (res) => {
       console.log(res);
@@ -93,7 +93,7 @@ export const useDeleteNotesUser = () => {
     },
     onSuccess: (res) => {
       console.log(res);
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
     },
     onError: (res) => {
       console.log(res);

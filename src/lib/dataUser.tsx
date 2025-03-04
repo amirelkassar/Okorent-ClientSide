@@ -1,7 +1,6 @@
 import avatar from "@/src/assets/images/1.png";
 import house from "@/src/assets/images/house1.png";
 import house2 from "@/src/assets/images/house2.png";
-import phoneImg from "@/src/assets/images/phone.png";
 import { StaticImageData } from "next/image";
 import avatarUser from "@/src/assets/images/avatar.png";
 import bannerImg from "@/src/assets/images/offer.png";
@@ -617,96 +616,6 @@ export const BannersData: BannerProps[] = [
   },
 ];
 
-interface AdsDataProps {
-  id: number;
-  product: string;
-  user: string;
-  startDate: string;
-  endDate: string;
-  price: string;
-  status: string;
-  userImg: StaticImageData;
-  productImg: StaticImageData;
-}
-export const AdsData: AdsDataProps[] = [
-  {
-    id: 1,
-    product: "iPhone 15 Pro",
-    user: "Ahmed Mohamed",
-    startDate: "3 August 2024",
-    endDate: "3 August 2024",
-    price: "100$",
-    userImg: avatar,
-    productImg: phoneImg,
-    status: "Suspend",
-  },
-  {
-    id: 2,
-    product: "iPhone 15 Pro",
-    user: "Ahmed Mohamed",
-    startDate: "4 August 2024",
-    endDate: "4 August 2024",
-    price: "250$",
-    userImg: avatar,
-    productImg: phoneImg,
-    status: "Suspend",
-  },
-  {
-    id: 3,
-    product: "iPhone 15 Pro",
-    user: "Ahmed Mohamed",
-    startDate: "5 August 2024",
-    endDate: "5 August 2024",
-    price: "100$",
-    userImg: avatar,
-    productImg: phoneImg,
-    status: "Suspend",
-  },
-  {
-    id: 4,
-    product: "iPhone 15 Pro",
-    user: "Ahmed Mohamed",
-    startDate: "5 August 2024",
-    endDate: "5 August 2024",
-    price: "100$",
-    userImg: avatar,
-    productImg: phoneImg,
-    status: "Suspend",
-  },
-  {
-    id: 5,
-    product: "iPhone 15 Pro",
-    user: "Ahmed Mohamed",
-    startDate: "7 August 2024",
-    endDate: "7 August 2024",
-    price: "100$",
-    userImg: avatar,
-    productImg: phoneImg,
-    status: "Activate",
-  },
-  {
-    id: 6,
-    product: "iPhone 15 Pro",
-    user: "Ahmed Mohamed",
-    startDate: "8 August 2024",
-    endDate: "8 August 2024",
-    price: "100$",
-    userImg: avatar,
-    productImg: phoneImg,
-    status: "Suspend",
-  },
-  {
-    id: 7,
-    product: "iPhone 15 Pro",
-    user: "Ahmed Mohamed",
-    startDate: "9 August 2024",
-    endDate: "9 August 2024",
-    price: "100$",
-    userImg: avatar,
-    productImg: phoneImg,
-    status: "Activate",
-  },
-];
 interface LanguageProps {
   label: string;
   value: string;
@@ -766,7 +675,6 @@ export const WorkingDays: WorkingDaysProps[] = [
 ];
 
 export const STYLE_ICON = "w-3 md:w-4 h-auto";
-
 
 export const TermsAndConditions = [
   {
@@ -828,5 +736,188 @@ export const TermsAndConditions = [
     Title: "GENERAL",
     Content:
       "A. If any provision of these Terms and Conditions is held to be invalid or unenforceable, the provision shall be removed (or interpreted, if possible, in a manner as to be enforceable), and the remaining provisions shall be enforced. Headings are for reference purposes only and in no way define, limit, construe or describe the scope or extent of such section. Our failure to act with respect to a breach by you or others does not waive our right to act with respect to subsequent or similar breaches. These Terms and Conditions set forth the entire understanding and agreement between us with respect to the subject matter contained herein and supersede any other agreement, proposals and communications, written or oral, between our representatives and you with respect to the subject matter hereof, including any terms and conditions on any of customer's documents or purchase orders.\nB. No Joint Venture, No Derogation of Rights. You agree that no joint venture, partnership, employment, or agency relationship exists between you and us as a result of these Terms and Conditions or your use of the Site. Our performance of these Terms and Conditions is subject to existing laws and legal process, and nothing contained herein is in derogation of our right to comply with governmental, court and law enforcement requests or requirements relating to your use of the Site or information provided to or gathered by us with respect to such use.",
+  },
+];
+
+export const TermsContent = `
+Last Revised: December 16, 2013
+
+Welcome to www.lorem-ipsum.info. This site is provided as a service to our visitors and may be used for informational purposes only. Because the Terms and Conditions contain legal obligations, please read them carefully.
+
+1. YOUR AGREEMENT
+By using this Site, you agree to be bound by, and to comply with, these Terms and Conditions. If you do not agree to these Terms and Conditions, please do not use this site.
+`;
+interface MaintenanceProps {
+  id: number;
+  product: string;
+  quantity: number;
+  from: string;
+  to: string;
+  remark: string;
+  assignedTo: string;
+  stockLocation: string;
+  status: string;
+}
+export const Maintenance: MaintenanceProps[] = [
+  {
+    id: 1,
+    product: "Iphone 15 Pro",
+    quantity: 120,
+    from: "11-10-2024",
+    to: "11-10-2024",
+    remark: "Needs External Part",
+    assignedTo: "James Cameron",
+    stockLocation: "Western Warehouse",
+    status: "Not Repaired",
+  },
+  {
+    id: 2,
+    product: "Iphone 15 Pro",
+    quantity: 13,
+    from: "11-10-2024",
+    to: "11-10-2024",
+    remark: "Needs External Part",
+    assignedTo: "James Cameron",
+    stockLocation: "Western Warehouse",
+    status: "Repaired",
+  },
+  {
+    id: 3,
+    product: "Iphone 15 Pro",
+    quantity: 2,
+    from: "11-10-2024",
+    to: "11-10-2024",
+    remark: "Needs External Part",
+    assignedTo: "James Cameron",
+    stockLocation: "Western Warehouse",
+    status: "Offline",
+  },
+  {
+    id: 4,
+    product: "Iphone 15 Pro",
+    quantity: 3,
+    from: "11-10-2024",
+    to: "11-10-2024",
+    remark: "Needs External Part",
+    assignedTo: "James Cameron",
+    stockLocation: "Western Warehouse",
+    status: "Repaired",
+  },
+  {
+    id: 5,
+    product: "Iphone 15 Pro",
+    quantity: 24,
+    from: "11-10-2024",
+    to: "11-10-2024",
+    remark: "Needs External Part",
+    assignedTo: "James Cameron",
+    stockLocation: "Western Warehouse",
+    status: "Repaired",
+  },
+  {
+    id: 6,
+    product: "Iphone 15 Pro",
+    quantity: 2,
+    from: "11-10-2024",
+    to: "11-10-2024",
+    remark: "Needs External Part",
+    assignedTo: "James Cameron",
+    stockLocation: "Western Warehouse",
+    status: "Repaired",
+  },
+  {
+    id: 7,
+    product: "Iphone 15 Pro",
+    quantity: 2,
+    from: "11-10-2024",
+    to: "11-10-2024",
+    remark: "Needs External Part",
+    assignedTo: "James Cameron",
+    stockLocation: "Western Warehouse",
+    status: "Repaired",
+  },
+];
+
+type ClientProps = {
+  id: number;
+  name: string;
+  imageUSer: StaticImageData;
+  email: string;
+  transactions: number;
+  totalPayments: string;
+  type: "Online" | "Offline";
+  tags: string;
+};
+
+export const Clients: ClientProps[] = [
+  {
+    id: 1,
+    name: "James Cameron",
+    imageUSer: avatarUser,
+    email: "James@profound.com",
+    transactions: 21,
+    totalPayments: "USD 150",
+    type: "Online",
+    tags: "Loyal",
+  },
+  {
+    id: 2,
+    name: "James Cameron",
+    imageUSer: avatarUser,
+    email: "James@profound.com",
+    transactions: 53,
+    totalPayments: "USD 150",
+    type: "Online",
+    tags: "New",
+  },
+  {
+    id: 3,
+    name: "James Cameron",
+    imageUSer: avatarUser,
+    email: "James@profound.com",
+    transactions: 54,
+    totalPayments: "USD 150",
+    type: "Online",
+    tags: "Loyal",
+  },
+  {
+    id: 4,
+    name: "James Cameron",
+    imageUSer: avatarUser,
+    email: "James@profound.com",
+    transactions: 35,
+    totalPayments: "USD 150",
+    type: "Offline",
+    tags: "New",
+  },
+  {
+    id: 5,
+    name: "James Cameron",
+    imageUSer: avatarUser,
+    email: "James@profound.com",
+    transactions: 22,
+    totalPayments: "USD 150",
+    type: "Offline",
+    tags: "New",
+  },
+  {
+    id: 6,
+    name: "James Cameron",
+    imageUSer: avatarUser,
+    email: "James@profound.com",
+    transactions: 98,
+    totalPayments: "USD 150",
+    type: "Offline",
+    tags: "New",
+  },
+  {
+    id: 7,
+    name: "James Cameron",
+    imageUSer: avatarUser,
+    email: "James@profound.com",
+    transactions: 88,
+    totalPayments: "USD 150",
+    type: "Offline",
+    tags: "New",
   },
 ];

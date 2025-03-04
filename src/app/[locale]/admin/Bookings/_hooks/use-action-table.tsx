@@ -54,8 +54,6 @@ export const useActionTableBookingInAdmin = ({
 
   const functionSelectView = useMemo(() => {
     const ValueSelected = GetUniqueValues(selectedFromTable, "status");
-    console.log(ValueSelected);
-
     if (ValueSelected) {
       switch (ValueSelected.toString()) {
         default:
@@ -65,7 +63,6 @@ export const useActionTableBookingInAdmin = ({
       return [functionSelect[1], functionSelect[2]];
     }
   }, [selectedFromTable, functionSelect]);
-  console.log(functionSelectView);
 
   return {
     functionSelectView,

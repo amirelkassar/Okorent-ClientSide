@@ -207,7 +207,7 @@ function GoogleMapLoc({
         onChange={(e) => {
           setNameLocation(e.target.value);
         }}
-        inputClassName="bg-white h-14 border-2 border-green  rounded-xl"
+        inputClassName="bg-white h-12 md:h-14 border-2 border-green  rounded-xl"
         className="mt-5"
       />
     </div>

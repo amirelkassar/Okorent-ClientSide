@@ -5,6 +5,7 @@ import { useReSendOTP, useVerifyPhoneMutation } from "@/src/hooks/queries/auth";
 import { useRouter } from "@/src/navigation";
 import { Toast } from "@/src/components/toast";
 import { useUserStore } from "@/src/store/sign-up-store";
+import { useSearchParams } from "next/navigation";
 
 // Define the type for the form data
 interface FormDataProps {
@@ -31,12 +32,14 @@ interface VerifyPhoneReturn {
   status: StatusProps;
 }
 export const useVerifyPhone = (): VerifyPhoneReturn => {
+  const searchParams = useSearchParams();
+
   const router = useRouter();
   const [formData, setFormData] = useState<FormDataProps>({
     otp: "",
-    phoneNumber: null,
+    phoneNumber: searchParams.get("phone_number") || null,
   });
-  const { user ,setUser } = useUserStore();
+  const { user, setUser } = useUserStore();
   const {
     mutateAsync: VerifyPhone,
     error,
@@ -47,10 +50,11 @@ export const useVerifyPhone = (): VerifyPhoneReturn => {
   const { mutateAsync: ReSendOTP, error: errorReSend } = useReSendOTP();
 
   const onSubmitReSendOTP = useCallback(async () => {
+    console.log(formData);
+
     Toast.Promise(ReSendOTP({ phone: formData.phoneNumber }), {
       success: "The OTP has been sent again",
-      onSuccess: async (res) => {
-      },
+      onSuccess: async (res) => {},
       onError: (error) => {
         console.log(error);
       },

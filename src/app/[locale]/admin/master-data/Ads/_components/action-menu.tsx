@@ -1,39 +1,33 @@
 "use client";
-import DeleteIcon from "@/src/assets/icons/delete";
-import EditIcon from "@/src/assets/icons/edit";
 import DataActions from "@/src/components/DataActions";
-import ROUTES from "@/src/routes";
 import React from "react";
-import VerifyIcon from "@/src/assets/icons/verify";
 import PauseIcon from "@/src/assets/icons/pause";
+import ResumeIcon from "@/src/assets/icons/Resume";
+import UseChangeStatus from "../_hooks/use-change-status";
 
-function ActionMenu({ id }: { id: any }) {
+function ActionMenu({ id, status }: { id: any; status: any }) {
+  const { onSubmitResume, onSubmitSuspend } = UseChangeStatus(id);
+
   const options = [
-    {
-      label: " Activate",
-      icon: <VerifyIcon fill="#6F6B7D" className="w-3 h-auto" />,
-      type: "btn",
-      action: () => {},
-    },
-    {
-      label: " Suspend",
+    status === 1 && {
+      label: "Suspend",
       icon: <PauseIcon fill="#6F6B7D" className="w-3 h-auto" />,
       type: "btn",
-      action: () => {},
+      action: () => {
+        onSubmitSuspend({
+          advertisementId: id,
+        });
+      },
     },
-
-    {
-      label: "Edit",
-      icon: <EditIcon className="w-3 h-auto" />,
-      link: ROUTES.ADMIN.LISTINGSDETAILSEdit(id),
-      type: "link",
-    },
-    {
-      label: "Delete",
-      icon: <DeleteIcon className="w-3 h-auto" />,
+    status === 2 && {
+      label: "Resume",
+      icon: <ResumeIcon fill="#6F6B7D" className="w-3 h-auto" />,
       type: "btn",
-      action: () => {},
-      color: "red",
+      action: () => {
+        onSubmitResume({
+          advertisementId: id,
+        });
+      },
     },
   ];
   return (

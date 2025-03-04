@@ -18,18 +18,23 @@ import CopyLink from "../copy-link";
 import ModalContract from "../modal-contract";
 import { useDisclosure } from "@mantine/hooks";
 import Button from "../button";
+import { TermsContent } from "@/src/lib/dataUser";
 
 function CardProduct({
   data = [],
   guest = false,
   admin = false,
+  premium = false,
 }: {
   data?: any;
   guest?: boolean;
   admin?: boolean;
+  premium?: boolean;
 }) {
   const params = useParams();
   const [opened, { open, close }] = useDisclosure(false);
+  const [RenterSignature, setRenterSignature] = useState<File | null>(null);
+  const [quantity, setQuantity] = useState(1);
   const searchparams = useSearchParams();
   const [daysNumber, setDaysNumber] = useState(0);
   const [valueDate, setValueDate] = useState<[Date | null, Date | null]>([
@@ -60,12 +65,13 @@ function CardProduct({
     orderItems: [
       {
         productId: data?.id,
-        quantity: 1,
+        quantity: quantity || 1,
         from: valueDate[0]?.toISOString(),
         to: valueDate[1]?.toISOString(),
-        price: TotalPriceOrder,
+        price: (TotalPriceOrder*quantity),
       },
     ],
+    ContractText: TermsContent,
     handlingType: 1,
     deliveryType:
       valueAddressType === "store"
@@ -76,6 +82,7 @@ function CardProduct({
         ? 3
         : 1,
     paymentMethod: 1,
+    RenterSignature: RenterSignature,
     paymentAmount: TotalPriceOrder,
     handler: "4444",
     paymentAction: 1,
@@ -140,17 +147,33 @@ function CardProduct({
             daysNumber={daysNumber}
             TotalPriceOrder={TotalPriceOrder}
             PriceBYDays={PriceBYDays}
+            quantity={quantity}
+            setQuantity={setQuantity}
           >
             {admin ? null : (
               <div className="flex items-center px-5 justify-between gap-4 pb-4 flex-wrap mt-5">
-                <ModalContract opened={opened} close={close}>
+                <ModalContract
+                  opened={opened}
+                  close={close}
+                  setRenterSignature={setRenterSignature}
+                  RenterSignature={RenterSignature}
+                  orderDetails={{
+                    productImage: data.heroImage || null,
+                    title: data.name,
+                    payment: (TotalPriceOrder*quantity),
+                  }}
+                >
                   <LinkGreen
                     href={
                       guest
                         ? ROUTES.AUTH.LOGIN
+                        : premium
+                        ? ROUTES.PREMIUM.PRODUCTDETAILSCHECKOUT(params.productID)
                         : ROUTES.USER.PRODUCTDETAILSCHECKOUT(params.productID)
                     }
-                    className={'h-14 w-[310px] max-w-full mx-auto'}
+                    className={`h-14 w-[310px] max-w-full mx-auto ${
+                      RenterSignature ? "" : "pointer-events-none opacity-60"
+                    }`}
                   >
                     Confirm
                   </LinkGreen>

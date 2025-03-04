@@ -26,7 +26,7 @@ export const useCreateStockMutation = () => {
     },
 
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
       console.log(res);
     },
     onError: (res) => {
@@ -45,7 +45,7 @@ export const useEditStockMutation = (id: any) => {
     },
 
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
       console.log(res);
     },
     onError: (res) => {
@@ -64,7 +64,7 @@ export const useDeleteStockMutation = (id: any) => {
     },
 
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
       console.log(res);
     },
     onError: (res) => {

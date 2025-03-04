@@ -26,7 +26,7 @@ export const useDeleteInvoicesInAdmin = () => {
     },
 
     onSuccess: (res) => {
-      queryClient.invalidateQueries([initialQueryKey]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
       console.log(res);
     },
     onError: (res) => {

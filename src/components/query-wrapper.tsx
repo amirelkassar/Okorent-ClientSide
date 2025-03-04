@@ -52,6 +52,7 @@ console.log(query?.data);
 
   if (query?.isPaused) return <MemowizedServerError />;
   if (query?.isLoading) return <MemowizedLoader />;
+  if (query?.isPending) return <MemowizedLoader />;
   if (query?.isError && query?.failureReason?.status === 404)
     return <MemowizedNotFound404 />;
   if (query?.isError && query?.failureReason?.status === 403)

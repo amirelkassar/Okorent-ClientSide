@@ -79,6 +79,7 @@ function Notifications() {
       />
     );
   }, [data, isError, loadMore, isFetchingNextPage, isLoading]);
+
   const handlePopoverToggle = () => {
     if (opened) {
       setOpened(false);

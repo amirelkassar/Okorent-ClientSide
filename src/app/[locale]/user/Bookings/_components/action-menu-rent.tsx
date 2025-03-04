@@ -21,12 +21,14 @@ function ActionMenuRent({
   status = 0,
   dataForReview,
   dataForReviewUser,
+  lessorId,
 }: {
   id: any;
   ProdId: any;
   status: any;
   dataForReview: any;
   dataForReviewUser: any;
+  lessorId: any;
 }) {
   const [opened, { open, close }] = useDisclosure(false);
   const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
@@ -81,7 +83,7 @@ function ActionMenuRent({
     {
       label: "Message",
       icon: <NoteTableIcon fill="#6F6B7D" className="w-3 h-auto" />,
-      link: ROUTES.USER.INBOX + "?chat=" + id,
+      link: ROUTES.USER.INBOX + "?chat=" + lessorId + "&UserID=true",
       type: "link",
     },
     //6

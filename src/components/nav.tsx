@@ -27,6 +27,9 @@ import AdsIcon from "../assets/icons/ads";
 import { ScrollArea } from "@mantine/core";
 import { useToken } from "../hooks/use-token";
 import { clearToken } from "../lib/token";
+import ProfileIcon from "../assets/icons/Profile";
+import SubscriptionIcon from "../assets/icons/Subscription";
+import LocationIcon from "../assets/icons/location";
 interface NavProps {
   linkLogo: string;
 }
@@ -124,13 +127,43 @@ function Nav({ linkLogo = "#" }: NavProps) {
         url: ROUTES.USER.SUPPORT,
         active: pathname === ROUTES.USER.SUPPORT,
       },
-     
+
       {
         id: 12,
         name: "Ads",
         icon: <AdsIcon className="w-5 h-auto" />,
         url: ROUTES.USER.ADS,
         active: pathname === ROUTES.USER.ADS,
+      },
+    ],
+    [pathname]
+  );
+  // Menu Items
+  const menuItems = useMemo(
+    () => [
+      {
+        icon: <ProfileIcon />,
+        text: "Profile",
+        link: ROUTES.USER.PROFILE,
+        active: pathname === ROUTES.USER.PROFILE,
+      },
+      {
+        icon: <SubscriptionIcon />,
+        text: "Wallet",
+        link: ROUTES.USER.WALLET,
+        active: pathname === ROUTES.USER.WALLET,
+      },
+      {
+        icon: <AdsIcon />,
+        text: "Ads",
+        link: ROUTES.USER.ADS,
+        active: pathname === ROUTES.USER.ADS,
+      },
+      {
+        icon: <LocationIcon fill="#0F2A43" className="w-3 h-auto" />,
+        text: "Warehouses",
+        link: ROUTES.USER.WAREHOUSES,
+        active: pathname === ROUTES.USER.WAREHOUSES,
       },
     ],
     [pathname]
@@ -158,7 +191,7 @@ function Nav({ linkLogo = "#" }: NavProps) {
         >
           <LangIcon />
         </Link>
-        <MenuProfile />
+        <MenuProfile menuItems={menuItems} />
       </div>
       <div className="flex gap-3  mdl:hidden items-center">
         <Notifications />

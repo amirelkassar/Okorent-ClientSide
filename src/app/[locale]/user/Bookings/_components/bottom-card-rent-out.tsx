@@ -37,7 +37,7 @@ const OutForDelivery: React.FC<ButtonProps> = ({ onClick, style }) => (
 );
 const MessageLink: React.FC<ButtonProps> = ({ id, name, style }) => (
   <LinkGreen
-    href={id ? ROUTES.USER.INBOX + "?chat=" + id : "#"}
+    href={id ? (ROUTES.USER.INBOX + "?chat=" + id+ "&UserID=true") : "#"}
     className={`flex-1  h-10 text-black bg-grayBack border-none ${style}`}
   >
     {`Message ${name || "User"}`}

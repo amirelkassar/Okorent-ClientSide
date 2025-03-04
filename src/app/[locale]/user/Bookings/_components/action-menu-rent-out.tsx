@@ -1,6 +1,6 @@
 "use client";
 import DataActions from "@/src/components/DataActions";
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import BarcodeIcon from "@/src/assets/icons/barcode";
 import CarReturn from "@/src/assets/icons/car-return";
@@ -19,8 +19,24 @@ import PrintIcon from "@/src/assets/icons/print";
 import { useChangeStatusRentOut } from "../_hooks/use-change-status-rentOut";
 import ModalContract from "@/src/components/modal-contract";
 import Button from "@/src/components/button";
-
-function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
+import { StaticImageData } from "next/image";
+interface OrderDetailsProps {
+  productImage: StaticImageData;
+  title: string;
+  payment: number;
+}
+function ActionMenuRentOut({
+  id,
+  status = 1,
+  dataOrder,
+  renterId,
+}: {
+  id: any;
+  status: any;
+  dataOrder: OrderDetailsProps;
+  renterId: string;
+}) {
+  const [RenterSignature, setRenterSignature] = useState<File | null>(null);
   const [opened, { open, close }] = useDisclosure(false);
   const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
   const [opened3, { open: open3, close: close3 }] = useDisclosure(false);
@@ -30,6 +46,7 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
     onSubmitCancel,
     onSubmitRefundNo,
     onSubmitRefundYes,
+    onSubmitPrintShippingLabel,
   } = useChangeStatusRentOut(id);
 
   const options = [
@@ -92,7 +109,7 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
     {
       label: "Message",
       icon: <NoteTableIcon fill="#6F6B7D" className="w-3 h-auto" />,
-      link: ROUTES.USER.INBOX + "?chat=" + id,
+      link: ROUTES.USER.INBOX + "?chat=" + renterId + "&UserID=true",
       type: "link",
     },
     //7
@@ -136,7 +153,9 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
       label: "Print shipping label",
       icon: <PrintIcon className="w-3 h-auto" />,
       type: "btn",
-      action: () => {},
+      action: () => {
+        onSubmitPrintShippingLabel(id);
+      },
     },
   ];
   const optionView = () => {
@@ -144,9 +163,16 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
       case "1":
         return [options[0], options[5], options[6], options[10]];
       case "3":
-        return [options[1], options[4], options[5], options[6], options[9]];
+        return [
+          options[11],
+          options[1],
+          options[4],
+          options[5],
+          options[6],
+          options[9],
+        ];
       case "4":
-        return [options[11], options[5], options[6]];
+        return [options[5], options[6]];
       case "6":
         return [options[5], options[6]];
       case "7":
@@ -174,13 +200,21 @@ function ActionMenuRentOut({ id, status = 1 }: { id: any; status: any }) {
         <VersionHistoryModal opened={opened2} close={close2} id={id} />
       )}
       {opened3 && (
-        <ModalContract opened={opened3} close={close3}>
+        <ModalContract
+          opened={opened3}
+          close={close3}
+          RenterSignature={RenterSignature}
+          setRenterSignature={setRenterSignature}
+          orderDetails={dataOrder}
+        >
           <Button
             onClick={() => {
-              onSubmitChangeStatus();
+              onSubmitChangeStatus(RenterSignature);
               close3();
             }}
-            className={"h-14 w-[310px] max-w-full mx-auto"}
+            className={`h-14 w-[310px] max-w-full mx-auto ${
+              RenterSignature ? "" : "pointer-events-none opacity-60"
+            }`}
           >
             Confirm
           </Button>

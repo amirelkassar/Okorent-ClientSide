@@ -11,27 +11,19 @@ import PlusIcon from "@/src/assets/icons/plus";
 import { useDisclosure } from "@mantine/hooks";
 import Input from "@/src/components/input";
 import ModalComp from "@/src/components/modal-comp";
-const dataPricing = [
-  {
-    id: 1,
-    name: "Day",
-    price: "25.00 $",
-  },
-  {
-    id: 2,
-    name: "3 Days",
-    price: "30.00 $",
-  },
-  {
-    id: 3,
-    name: "1 Week",
-    price: "40.00 $",
-  },
-  
-];
+import { GetPricingInAdmin } from "@/src/hooks/queries/admin/master-data/ads";
+import GetErrorMsg from "@/src/components/getErrorMsg";
+import UseActionPricing from "./_hooks/use-action-pricing";
+import { QueryWrapper } from "@/src/components/query-wrapper";
 
 function Page() {
   const [opened, { open, close }] = useDisclosure(false);
+  const { handleChange, onSubmitCreatePricing, error, adData } =
+    UseActionPricing({
+      close,
+    });
+  //query
+  const query = GetPricingInAdmin();
 
   return (
     <LayoutMaster>
@@ -42,7 +34,7 @@ function Page() {
             className="text-sm border duration-300 hover:shadow-md border-black h-10 min-w-[140px] rounded-xl px-4 py-2 flex items-center gap-2"
           >
             <ManagementIcon />
-            Ads Managment
+            Ads Management
           </Link>
         </TableHeader.First>
         <TableHeader.Last className="ms-auto">
@@ -52,11 +44,18 @@ function Page() {
           </Button>
         </TableHeader.Last>
       </TableHeader>
-      <div className="bg-white rounded-xl border border-green/30 shadow-md w-full px-3 mdl:px-8 py-1 mdl:py-2 mb-section">
-        {dataPricing.map((item: any, index: number) => (
-          <PricingRow key={index} data={item} />
-        ))}
-      </div>
+      <QueryWrapper query={query}>
+        {({ data, totalPages }: { data: any; totalPages?: any }) => {
+          return (
+            <div className="bg-white rounded-xl border border-green/30 shadow-md w-full px-3 mdl:px-8 py-1 mdl:py-2 mb-section">
+              {data?.map((item: any, index: number) => (
+                <PricingRow key={index} data={item} />
+              ))}
+            </div>
+          );
+        }}
+      </QueryWrapper>
+
       <ModalComp title="Create New Pricing" opened={opened} close={close}>
         <div className="w-[584px] max-w-full">
           <div className="flex flex-col gap-3 mb-7">
@@ -65,6 +64,10 @@ function Page() {
               placeholder="15 Days"
               type="number"
               inputClassName="h-14 bg-white rounded-xl"
+              name="durationDays"
+              value={adData.durationDays}
+              onChange={handleChange}
+              error={GetErrorMsg(error, "DurationDays")}
             />
             <Input
               label="Duration Price"
@@ -74,6 +77,10 @@ function Page() {
               rightSection={
                 <div className="text-grayMedium text-base pe-4">$</div>
               }
+              name="durationPrice"
+              value={adData.durationPrice}
+              onChange={handleChange}
+              error={GetErrorMsg(error, "DurationPrice")}
             />
           </div>
           <div className="flex items-center gap-7 w-full">
@@ -83,7 +90,10 @@ function Page() {
             >
               Cancel
             </Button>
-            <Button onClick={close} className={" flex-1 h-[54px]"}>
+            <Button
+              onClick={onSubmitCreatePricing}
+              className={" flex-1 h-[54px]"}
+            >
               Save
             </Button>
           </div>

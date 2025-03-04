@@ -3,12 +3,22 @@ import ImgProduct from "./img-product";
 import placTableProduct from "@/src/assets/images/placTableProduct.png";
 import RowCardPhone from "./row-card-phone";
 import { calculateDurationRange } from "../lib/utils";
+import CloseIcon from "../assets/icons/close";
 
-function OrderCardPhone({ data }: { data: any }) {
+function OrderCardPhone({
+  data,
+  cellCounter,
+  cellDelete,
+}: {
+  data: any;
+  cellCounter?: () => React.ReactNode;
+  cellDelete?: () => React.ReactNode;
+}) {
   return (
     <div className="border border-green rounded-2xl py-5 px-4 w-full">
       <div className="flex items-center justify-between gap-2 mb-3">
         <h2 className="text-base">Product </h2>
+        {cellDelete && cellDelete()}
       </div>
       <div className="mb-7">
         <ImgProduct
@@ -18,7 +28,12 @@ function OrderCardPhone({ data }: { data: any }) {
         />
       </div>
       <div className="flex flex-col gap-5">
-        <RowCardPhone title="Quantity" info={data.quantity || 0}  />
+        {cellCounter ? (
+          <RowCardPhone title="Quantity" cell={() => cellCounter()} />
+        ) : (
+          <RowCardPhone title="Quantity" info={data.quantity || 0} />
+        )}
+
         <RowCardPhone
           title="Price"
           cell={() => (

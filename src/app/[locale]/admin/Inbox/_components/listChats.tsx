@@ -1,11 +1,12 @@
 "use client";
 import SearchIcon from "@/src/assets/icons/search";
 import { TextInput } from "@mantine/core";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { ChatsData } from "@/src/lib/dataUser";
-import ChatGroup from "./chat-group";
 import ChatListRow from "@/src/components/chat-list-row";
+import { useInView } from "react-intersection-observer";
+import { useRomes } from "@/src/hooks/queries/user/chat";
+import LoadingChat from "@/src/components/loading-chat";
 
 interface ListChatsProps {
   viewChats: string;
@@ -13,6 +14,24 @@ interface ListChatsProps {
 
 function ListChats({ viewChats = "inbox" }: ListChatsProps) {
   const searchParams = useSearchParams();
+  const { ref, inView } = useInView();
+
+  const {
+    data: dateRomes,
+    isLoading,
+    isFetchingNextPage,
+    fetchNextPage,
+  } = useRomes();
+
+  const mergedNotifications =
+    dateRomes?.pages?.flatMap((page: any) => page?.data?.items) || [];
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, inView]);
+  console.log(mergedNotifications);
   return (
     <div
       className={`lg:max-w-[360px] ${
@@ -34,13 +53,19 @@ function ListChats({ viewChats = "inbox" }: ListChatsProps) {
           <SearchIcon />
         </button>
       </div>
-      <div className="py-2 md:py-5 md:px-2 md:bg-white md:border md:border-green rounded-3xl flex-1   h-[calc(100%-270px)]      md:shadow-sidebar  ">
-        <div className=" flex flex-col gap-4  max-w-full overflow-auto h-full max-h-full md:h-[710px] ">
-          {viewChats === "inbox" && <ChatGroup />}
-          {ChatsData.map((item, i) => {
-            return <ChatListRow key={i} data={item} />;
-          })}
-        </div>
+      <div className="py-2 md:py-7 md:px-2 md:bg-white md:border md:border-green rounded-3xl flex-1   h-[calc(100%-270px)]      md:shadow-sidebar  ">
+        {isLoading ? (
+          <LoadingChat />
+        ) : mergedNotifications?.length > 0 ? (
+          <div className=" flex flex-col gap-4  max-w-full overflow-auto h-full max-h-full md:h-[710px] ">
+            {mergedNotifications?.map((item: any, i: number) => {
+              return <ChatListRow key={i} data={item} />;
+            })}
+            <div ref={ref}>{isFetchingNextPage && <LoadingChat />}</div>
+          </div>
+        ) : (
+          <p>No chats List</p>
+        )}
       </div>
     </div>
   );

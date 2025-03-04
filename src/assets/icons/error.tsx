@@ -1,7 +1,7 @@
 import { IconProps } from "@/src/types/type-icon";
 import React from "react";
 
-function ErrorIcon({ className = "" }: IconProps) {
+function ErrorIcon({ className = "", fill = "#FF001F" }: IconProps) {
   return (
     <svg
       width="20"
@@ -11,15 +11,9 @@ function ErrorIcon({ className = "" }: IconProps) {
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
-      <circle
-        cx="10"
-        cy="10.0764"
-        r="9.25"
-        stroke="#FF001F"
-        strokeWidth="1.5"
-      />
-      <path d="M10 12.0764L10 4.07635" stroke="#FF001F" strokeWidth="1.5" />
-      <circle cx="10" cy="15.0764" r="1" fill="#FF001F" />
+      <circle cx="10" cy="10.0764" r="9.25" stroke={fill} strokeWidth="1.5" />
+      <path d="M10 12.0764L10 4.07635" stroke={fill} strokeWidth="1.5" />
+      <circle cx="10" cy="15.0764" r="1" fill={fill} />
     </svg>
   );
 }

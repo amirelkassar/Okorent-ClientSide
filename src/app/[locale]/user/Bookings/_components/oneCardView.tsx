@@ -88,7 +88,7 @@ function OneCardView({ product, status }: { product?: any; status: any }) {
           <>
             <BottomCardRent.ViewDetailsLink id={product?.id || "undefined"} />
             <BottomCardRent.MessageLink
-              id={product?.id || "undefined"}
+              id={product?.lessorId || "undefined"}
               name={FirstLessorName || "User"}
             />
           </>
@@ -102,7 +102,7 @@ function OneCardView({ product, status }: { product?: any; status: any }) {
             />
             <BottomCardRent.ViewDetailsLink id={product?.id || "undefined"} />
             <BottomCardRent.MessageLink
-              id={product?.id || "undefined"}
+              id={product?.lessorId || "undefined"}
               name={FirstLessorName || "User"}
               style="bg-grayBack border-none  text-black"
             />
@@ -116,7 +116,7 @@ function OneCardView({ product, status }: { product?: any; status: any }) {
             />
             <BottomCardRent.ViewDetailsLink id={product?.id || "undefined"} />
             <BottomCardRent.MessageLink
-              id={product?.id || "undefined"}
+              id={product?.lessorId || "undefined"}
               name={FirstLessorName || "User"}
               style="bg-grayBack border-none  text-black"
             />

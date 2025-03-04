@@ -1,5 +1,6 @@
+"use client";
 import Image, { StaticImageData } from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import imageCard from "@/src/assets/images/placProduct.png";
 import imageUser from "@/src/assets/images/avatar.png";
 import StarIcon from "@/src/assets/icons/star";
@@ -7,6 +8,9 @@ import VerifyBlackIcon from "@/src/assets/icons/verifyBlack";
 import { calculateDurationRange, getDate } from "../lib/utils";
 import BottomCardRentOut from "../app/[locale]/user/Bookings/_components/bottom-card-rent-out";
 import { useChangeStatusRentOut } from "../app/[locale]/user/Bookings/_hooks/use-change-status-rentOut";
+import ModalContract from "./modal-contract";
+import Button from "./button";
+import { useDisclosure } from "@mantine/hooks";
 interface RequestData {
   id: number;
   renterName: string;
@@ -47,6 +51,8 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
     onSubmitRefundNo,
     onSubmitRefundYes,
   } = useChangeStatusRentOut(data.id);
+  const [RenterSignature, setRenterSignature] = useState<File | null>(null);
+  const [opened, { open, close }] = useDisclosure(false);
 
   if (!data) {
     return <p>No data available</p>; // Handle missing data case
@@ -194,7 +200,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
             <BottomCardRentOut.Accept
               style="w-full min-w-full"
               id={data?.id || "undefined"}
-              onClick={() => onSubmitChangeStatus()}
+              onClick={() => open()}
             />
             <BottomCardRentOut.Reject
               id={data?.id || "undefined"}
@@ -211,7 +217,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
               onClick={() => onSubmitChangeStatus()}
             />
             <BottomCardRentOut.MessageLink
-              id={data?.id || "undefined"}
+              id={data?.renterId || "undefined"}
               name={FirstLessorName || "User"}
             />
             <BottomCardRentOut.CancelBookings
@@ -223,7 +229,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
         {status === 4 && (
           <>
             <BottomCardRentOut.MessageLink
-              id={data?.id || "undefined"}
+              id={data?.renterId || "undefined"}
               name={FirstLessorName || "User"}
             />
             <BottomCardRentOut.ViewDetailsLink id={data?.id || "undefined"} />
@@ -237,7 +243,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
               onClick={() => onSubmitChangeStatus()}
             />
             <BottomCardRentOut.MessageLink
-              id={data?.id || "undefined"}
+              id={data?.renterId || "undefined"}
               name={FirstLessorName || "User"}
             />
             <BottomCardRentOut.ViewDetailsLink id={data?.id || "undefined"} />
@@ -246,7 +252,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
         {status === 12 && (
           <>
             <BottomCardRentOut.MessageLink
-              id={data?.id || "undefined"}
+              id={data?.renterId || "undefined"}
               name={FirstLessorName || "User"}
             />
             <BottomCardRentOut.MarkAsCompleted
@@ -258,7 +264,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
         {(status === 9 || status === 8 || status === 7 || status === 10) && (
           <>
             <BottomCardRentOut.MessageLink
-              id={data?.id || "undefined"}
+              id={data?.renterId || "undefined"}
               name={FirstLessorName || "User"}
             />
           </>
@@ -271,7 +277,7 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
               onClick={() => onSubmitRefundYes()}
             />
             <BottomCardRentOut.MessageLink
-              id={data?.id || "undefined"}
+              id={data?.renterId || "undefined"}
               name={FirstLessorName || "User"}
             />
             <BottomCardRentOut.RejectReturn
@@ -279,6 +285,31 @@ function CardRequest({ data, status = 1 }: CardRequestProps) {
               onClick={() => onSubmitRefundNo()}
             />
           </>
+        )}
+        {opened && (
+          <ModalContract
+            opened={opened}
+            close={close}
+            RenterSignature={RenterSignature}
+            setRenterSignature={setRenterSignature}
+            orderDetails={{
+              title: data?.productName,
+              productImage: data?.heroImage,
+              payment: data?.amount || 0,
+            }}
+          >
+            <Button
+              onClick={() => {
+                onSubmitChangeStatus(RenterSignature);
+                close();
+              }}
+              className={`h-14 w-[310px] max-w-full mx-auto ${
+                RenterSignature ? "" : "pointer-events-none opacity-60"
+              }`}
+            >
+              Confirm
+            </Button>
+          </ModalContract>
         )}
       </div>
     </div>

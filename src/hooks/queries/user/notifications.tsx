@@ -1,6 +1,7 @@
 import { api } from "@/src/api/axios";
 import { notifications } from "@/src/api/user";
 import {
+  InfiniteData,
   useInfiniteQuery,
   UseInfiniteQueryResult,
   useMutation,
@@ -14,7 +15,7 @@ interface NotificationResponse {
     items: any[]; // Replace `any` with the specific type for a notification
     totalCount: number;
     pageSize: number;
-    unReadCount: number;
+    unReadCount: any;
   };
 }
 
@@ -24,7 +25,7 @@ export interface NotificationQueryParams {
 }
 
 export const getNotifications = async (
-  queries: NotificationQueryParams,
+  queries: any,
   UnReadOnly: boolean
 ): Promise<NotificationResponse> => {
   const response = await api.get(
@@ -35,14 +36,15 @@ export const getNotifications = async (
 
 export const useNotifications = (
   UnReadOnly: boolean = false
-): UseInfiniteQueryResult<NotificationResponse, any> => {
+): UseInfiniteQueryResult<InfiniteData<NotificationResponse>, Error> => {
   return useInfiniteQuery<NotificationResponse, Error>({
     queryKey: [initialQueryKey, UnReadOnly ? "UnRead" : "Read"],
     queryFn: async ({ pageParam = 1 }) => {
-      const params: NotificationQueryParams = { page: pageParam };
+      const params = { page: pageParam };
 
       return await getNotifications(params, UnReadOnly);
     },
+    initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       const totalCount = lastPage?.data?.totalCount || 0;
       const pageSize = lastPage?.data?.pageSize || 1;
@@ -61,7 +63,7 @@ export const useNotificationsMarkAsRead = () => {
       return response.data;
     },
     onSuccess: async (res) => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
     },
     onError: (res) => {},
   });
@@ -76,7 +78,7 @@ export const useNotificationsMarkAsReadAll = () => {
       return response.data;
     },
     onSuccess: async (res) => {
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
     },
     onError: (res) => {
       console.log(res);

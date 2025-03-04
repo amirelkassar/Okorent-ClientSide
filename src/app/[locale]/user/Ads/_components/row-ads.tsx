@@ -8,10 +8,17 @@ import ArrowLeftIcon from "@/src/assets/icons/arrowLeft";
 import ArrowRightIcon from "@/src/assets/icons/ArrowRight";
 import { Navigation } from "swiper/modules";
 interface RowAdsProps {
-  title: string;
   products: any[];
+  status: number | any;
 }
-function RowAds({ title = "", products = [] }: RowAdsProps) {
+const statuses = [
+  { title: "Ongoing", statusAds: 1 },
+  { title: "Suspended", statusAds: 2 },
+  { title: "Stopped", statusAds: 3 },
+  { title: "Canceled", statusAds: 4 },
+  { title: "Completed", statusAds: 5 },
+];
+function RowAds({ products = [], status }: RowAdsProps) {
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
   const handleSwiper = (swiper: any) => {
@@ -22,20 +29,28 @@ function RowAds({ title = "", products = [] }: RowAdsProps) {
       swiper.navigation.update();
     }
   };
+  if (products.length === 0) return null;
+  const TitlePage = statuses.find(
+    ({ statusAds }) => statusAds === status
+  )?.title;
   return (
     <div className="swiperList swiperListBooking pt-4 lg:pt-10 pb-5 lg:pb-10 lg:border-t border-black first-of-type:border-none first-of-type:pt-0">
       <div
         className={`flex headBooking items-center  justify-start md:justify-between mb-2 lg:mb-6 gap-5 md:gap-7 flex-wrap lg:flex-nowrap   `}
       >
         <div className="flex items-center gap-5 w-fit md:justify-start justify-between">
-          <h2 className="text-xl lg:text-[32px] ">{title}</h2>
+          <h2 className="text-xl lg:text-[32px] ">{TitlePage} Ads</h2>
         </div>
-        <Link
-          href={ROUTES.USER.ADSID("55")}
-          className={` underline text-sm lg:text-lg min-w-fit text-end ms-auto   font-medium`}
-        >
-          View all
-        </Link>
+        {products.length > 0 && (
+          <Link
+            href={ROUTES.USER.ADSID(
+              `Status?AdvertisementStatus=${status}&title=${TitlePage}`
+            )}
+            className={` underline text-sm lg:text-lg min-w-fit text-end ms-auto   font-medium`}
+          >
+            View all
+          </Link>
+        )}
       </div>
       <div className="w-full relative flex items-center">
         <div className=" my-4 w-full xl:max-w-[calc(100%-80px)]">
@@ -67,10 +82,10 @@ function RowAds({ title = "", products = [] }: RowAdsProps) {
               },
             }}
           >
-            {products?.map((item) => {
+            {products?.map((item, index) => {
               return (
-                <SwiperSlide key={item.id}>
-                  <CardAds product={{}} />
+                <SwiperSlide key={index}>
+                  <CardAds product={item} />
                 </SwiperSlide>
               );
             })}
@@ -79,14 +94,14 @@ function RowAds({ title = "", products = [] }: RowAdsProps) {
         <div className="xl:flex hidden gap-3  absolute top-1/2 -translate-y-1/2 -right-10">
           <div
             ref={prevRef}
-            className={`cursor-pointer duration-200 swiper-button-prev-${title}`}
+            className={`cursor-pointer duration-200 swiper-button-prev-${TitlePage}`}
           >
             <ArrowLeftIcon fill="#0F2A43" />
           </div>
 
           <div
             ref={nextRef}
-            className={`cursor-pointer duration-200 swiper-button-next-${title}`}
+            className={`cursor-pointer duration-200 swiper-button-next-${TitlePage}`}
           >
             <ArrowRightIcon fill="#0F2A43" />
           </div>

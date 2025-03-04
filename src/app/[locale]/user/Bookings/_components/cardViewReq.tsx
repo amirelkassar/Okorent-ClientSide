@@ -66,7 +66,7 @@ function CardViewReq({
           <h2 className="text-xl lg:text-[32px] ">{title}</h2>
           <Link
             href={ROUTES.USER.BOOKINGS}
-            className="px-3 duration-300 linkView hover:shadow-md w-fit py-2 rounded-xl border border-black flex items-center justify-center gap-2"
+            className="px-3 duration-300 linkView hover:shadow-md w-fit py-2 rounded-xl hidden border border-black lg:flex items-center justify-center gap-2"
           >
             <ListIcon className="w-auto h-4 lg:h-5" />
             <p className="lg:text-[16px] text-sm text-nowrap">List View</p>

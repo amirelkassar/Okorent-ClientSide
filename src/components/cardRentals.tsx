@@ -18,7 +18,7 @@ function CardRentals({ data, Fav = false, edit = false }: CardRentalsProps) {
   const pathName = usePathname();
 
   return (
-    <div className="w-full flex-1 md:flex-none max-w-[50%]  sml:max-w-[270px] min-w-[162px] sml:min-w-[200px]  block last-of-type:me-auto sml:last-of-type:me-0">
+    <div className="w-full flex-1 md:flex-none max-w-[50%]  sml:max-w-[270px] min-w-[150px] sml:min-w-[200px]  block last-of-type:me-auto sml:last-of-type:me-0">
       <div className=" w-full p-2 lg:p-4 bg-white/80 rounded-xl md:rounded-3xl  border border-black/25 duration-200 hover:shadow-md">
         <div className=" relative mb-[6px] md:mb-3">
           <Link
@@ -27,6 +27,8 @@ function CardRentals({ data, Fav = false, edit = false }: CardRentalsProps) {
                 ? ROUTES.USER.PRODUCTDETAILS(data.id)
                 : pathName.includes(ROUTES.ADMIN.DASHBOARD)
                 ? ROUTES.ADMIN.LISTINGSDETAILS(data.id)
+                : pathName.includes(ROUTES.PREMIUM.HOMEPAGE)
+                ? ROUTES.PREMIUM.PRODUCTDETAILS(data.id)
                 : ROUTES.GUEST.PRODUCTSDETAILS(data.id)
             }
           >
@@ -50,6 +52,8 @@ function CardRentals({ data, Fav = false, edit = false }: CardRentalsProps) {
               ? ROUTES.USER.PRODUCTDETAILS(data.id)
               : pathName.includes(ROUTES.ADMIN.DASHBOARD)
               ? ROUTES.ADMIN.LISTINGSDETAILS(data.id)
+              : pathName.includes(ROUTES.PREMIUM.HOMEPAGE)
+              ? ROUTES.PREMIUM.PRODUCTDETAILS(data.id)
               : ROUTES.GUEST.PRODUCTSDETAILS(data.id)
           }
         >

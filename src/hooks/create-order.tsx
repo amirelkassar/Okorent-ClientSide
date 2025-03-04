@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { Toast } from "@/src/components/toast";
 import { useCreateOrderMutation } from "./queries/user/order";
 import { useDisclosure } from "@mantine/hooks";
@@ -29,17 +29,18 @@ export const useCreateOrder = (): SignUpReturn => {
   const { isRent, setSwitchRent } = useSwitchRent();
   const searchparams = useSearchParams();
   console.log(searchparams.toString());
-  
+
   const {
     mutateAsync: CreateOrder,
     error,
     isPaused,
     isError,
     reset,
-  } = useCreateOrderMutation('');
+  } = useCreateOrderMutation("");
 
   const onSubmit = useCallback(
     async (data: any) => {
+      reset();
       setSwitchRent("rent");
       Toast.Promise(CreateOrder(data), {
         success: "successfully Create Order",

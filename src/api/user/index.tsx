@@ -66,7 +66,9 @@ export const user = {
       base: "/UserReviews",
       getByID: (id: any) => `/UserReviews/${id}`,
     },
-    barcode: "Barcode/generate",
+    barcode: "/Barcode/generate",
+    shipping_label: (id: any) => `/GeneratePDFs/Label/${id}`,
+    download_invoice: (id: any) => `/GeneratePDFs/InvoiceDetails/${id}`,
   },
   user: {
     getByID: (id: any) => `User/${id}`,
@@ -82,9 +84,22 @@ export const user = {
   },
   Chat: {
     Get_All_Chats: (queries: any) => buildQuery("/Chat/rooms", queries),
-    Get_Messages_By_Id: (id: any) => `/Chat/room/${id}`,
+    Get_Messages_By_Id: (id: any, queries: any) =>
+      buildQuery(`/Chat/room/${id}`, queries),
+    Get_Messages_By_User_ID: (id: any) => `/Chat/chatByUserId/${id}`,
     Create_New_Chat: "/Chat/room",
     Send_Message: "/Chat/message",
+  },
+  ads: {
+    get_ads: (queries: any) => buildQuery("/UserAdvertisement", queries),
+    get_ads_by_id: (id: any) => `/UserAdvertisement/${id}`,
+    get_ads_cart: "/UserAdvertisement/carts",
+    cancel_ads: (id: any) => `/UserAdvertisement/Cancel/${id}`,
+    resume_ads: (id: any) => `/UserAdvertisement/Resume/${id}`,
+    pause_ads: (id: any) => `/UserAdvertisement/Pause/${id}`,
+    delete_ads: (id: any) => `/UserAdvertisement/delete/${id}`,
+    get_pricing: "/UserAdvertisement/Pricing",
+    create_ads: "/UserAdvertisement",
   },
 };
 
@@ -178,6 +193,19 @@ export const admin = {
     delete: (id: any) => `/Demo/Admin-Delete/${id}`,
     add_note: "/Demo/Admin-Create-DemoNote",
     get_note_byID: (id: any) => `/Demo/Admin-GetDemo-ByID/${id}`,
+  },
+  Ads: {
+    get_pricing: (queries: any) =>
+      buildQuery("/AdminAdvertisement/pricing", queries),
+    add_pricing: "/AdminAdvertisement/pricing",
+    edit_pricing: (id: any) => `/AdminAdvertisement/pricing/${id}`,
+    get_ads: (queries: any) =>
+      buildQuery("/AdminAdvertisement/user-advertisements", queries),
+    get_ads_by_id: (id: any) => `/AdminAdvertisement/user-advertisements/${id}`,
+    pause_ads: (id: any) => `/AdminAdvertisement/Pause/${id}`,
+    pause_many_ads: "/AdminAdvertisement/Pause",
+    Resume_ads: (id: any) => `/AdminAdvertisement/Resume/${id}`,
+    Resume_many_ads: "/AdminAdvertisement/Resume",
   },
 };
 

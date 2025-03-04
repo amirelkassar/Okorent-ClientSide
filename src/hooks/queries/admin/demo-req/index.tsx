@@ -28,7 +28,7 @@ export const useChangeStatusDemoInAdmin = () => {
     },
     onSuccess: (res) => {
       console.log(res);
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
     },
     onError: (res) => {
       console.log(res);
@@ -46,14 +46,14 @@ export const useDeleteDemoInAdmin = (id: any) => {
     },
     onSuccess: (res) => {
       console.log(res);
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
     },
     onError: (res) => {
       console.log(res);
     },
   });
 };
-//get  demo by ID 
+//get  demo by ID
 export const GetDemoRequestByIDInAdmin = (id: any): any => {
   return useQuery({
     queryKey: [initialQueryKey, id],
@@ -77,7 +77,7 @@ export const useAddNoteDemoInAdmin = () => {
     },
     onSuccess: (res) => {
       console.log(res);
-      queryClient.refetchQueries([initialQueryKey]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey] });
     },
     onError: (res) => {
       console.log(res);

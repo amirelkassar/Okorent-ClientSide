@@ -51,6 +51,8 @@ export function DataTable<TData extends { id: any }, TValue>({
         return [...prev, row];
       });
       if (setSelectedFromTable) {
+        console.log('yaaa');
+        
         setSelectedFromTable((prev: any) => {
           const existingIndex = prev.findIndex(
             (user: any) => user.id === row.id

@@ -4,17 +4,21 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 export const initialQueryKey = "user.myOrderAll";
 export const initialQueryTrackerKey = "user.orderTracker";
 
-export const useCreateOrderMutation = ( queries: any) => {
+export const useCreateOrderMutation = (queries: any) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await api.post(user.order.base, data, {});
+      const response = await api.post(user.order.base, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       return response.data;
     },
     onSuccess: async (res) => {
       console.log(res);
-      queryClient.refetchQueries([initialQueryKey, queries]);
+      queryClient.refetchQueries({ queryKey: [initialQueryKey, queries] });
     },
     onError: (res) => {
       console.log(res);
@@ -55,7 +59,7 @@ export const EditOrderByID = (id: any) => {
   });
 };
 
-export const useEditOrderByIDMutation = (id:any) => {
+export const useEditOrderByIDMutation = (id: any) => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -65,11 +69,30 @@ export const useEditOrderByIDMutation = (id:any) => {
     },
     onSuccess: async (res) => {
       console.log(res);
-      queryClient.invalidateQueries([initialQueryKey]);
-      queryClient.invalidateQueries([initialQueryTrackerKey, id]);
+      queryClient.invalidateQueries({ queryKey: [initialQueryKey] });
+      queryClient.invalidateQueries({ queryKey: [initialQueryTrackerKey, id] });
     },
     onError: (res) => {
       console.log(res);
     },
   });
-}
+};
+
+export const useDownloadInvoice = (id: any) => {
+  return useMutation({
+    mutationFn: async () => {
+      const response = await api.post(
+        user.order.download_invoice(id),
+        {},
+        { responseType: "blob" }
+      );
+      return response.data;
+    },
+    onSuccess: async (res) => {
+      console.log(res);
+    },
+    onError: (res) => {
+      console.log(res);
+    },
+  });
+};

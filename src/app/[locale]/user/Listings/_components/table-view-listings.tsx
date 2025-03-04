@@ -44,7 +44,7 @@ function TableViewListings({ query }: { query: any }) {
           options={FilterOptions}
         />
       </TableHeader>
-      <div className=" hidden mdl:block">
+      <div className=" hidden lg:block">
         <QueryWrapper query={query}>
           {({ data, totalPages }: { data: any; totalPages?: any }) => {
             console.log(data);

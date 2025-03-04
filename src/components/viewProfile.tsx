@@ -47,7 +47,11 @@ function ViewProfile({
       <div className="md:min-w-[370px] bg-white rounded-2xl lg:rounded-3xl w-full max-w-[93%] lg:max-w-[370px] mx-auto flex-1 pb-12 lg:pb-24 shadow-md">
         <div className="lg:min-w-[200px]">
           {editAdmin ? (
-            <UploadAndCropImg image={data.userImage || imgUser} admin={editAdmin} userID={data.id} />
+            <UploadAndCropImg
+              image={data.userImage || imgUser}
+              admin={editAdmin}
+              userID={data.id}
+            />
           ) : (
             <div className=" -mt-5 lg:-mt-24 size-[100px] lg:size-[156px] relative rounded-full mx-auto mb-5 border-2 border-white shadow-md ">
               <div className=" absolute top-1/2 -end-4 lg:-end-6 w-7 lg:w-10 h-auto  ">
@@ -98,8 +102,8 @@ function ViewProfile({
               <LinkGreen
                 href={
                   editAdmin
-                    ? ROUTES.ADMIN.INBOX + "?chat=" + data?.id
-                    : ROUTES.USER.INBOX + "?chat=" + data?.id
+                    ? ROUTES.ADMIN.INBOX + "?chat=" + data?.id + "&UserID=true"
+                    : ROUTES.USER.INBOX + "?chat=" + data?.id + "&UserID=true"
                 }
                 className={"h-[50px] w-full"}
               >
@@ -129,8 +133,11 @@ function ViewProfile({
               <div className="flex items-center gap-3">
                 <AlarmIcon className="min-w-5 lg:min-w-6 h-auto w-5 lg:w-6" />
                 <p className="text-base lg:text-lg text-grayMedium font-Medium">
-                  Open from {data?.workingFrom?convertTo12Hour(data?.workingFrom) : "--"} - 
-                  {data?.workingTo?convertTo12Hour(data?.workingTo) : "--"}
+                  Open from{" "}
+                  {data?.workingFrom
+                    ? convertTo12Hour(data?.workingFrom)
+                    : "--"}{" "}
+                  -{data?.workingTo ? convertTo12Hour(data?.workingTo) : "--"}
                 </p>
               </div>
 

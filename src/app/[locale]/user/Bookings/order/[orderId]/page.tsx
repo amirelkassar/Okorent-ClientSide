@@ -11,18 +11,20 @@ import { useSwitchRent } from "@/src/store/rent-slice";
 import { GetOrderByID } from "@/src/hooks/queries/user/order";
 import Loading from "@/src/components/loading";
 import EditIcon from "@/src/assets/icons/edit";
+import ContractButton from "./_components/contract-button";
 
 function Page({ params }: any) {
   const { isRent, setSwitchRent } = useSwitchRent();
   const { data, isLoading } = GetOrderByID(params.orderId);
   const [edit, setEdit] = useState(false);
+  console.log(data);
+
   const statusOrder = data?.data?.orderTrackers?.at(-1)?.newOrderStatus || 0;
   useEffect(() => {
     if (data?.data?.renterType) {
       setSwitchRent(data.data.renterType === "IRent" ? "rent" : "rent_out");
     }
-  }, [setSwitchRent, data?.data?.renterType,isLoading]);
-
+  }, [setSwitchRent, data?.data?.renterType, isLoading]);
 
   if (isLoading) {
     return <Loading />;
@@ -30,7 +32,17 @@ function Page({ params }: any) {
   return (
     <div className="mb-section">
       <div className="flex md:items-center justify-between gap-3 flex-col md:flex-row flex-wrap">
-        <h2 className=" text-xl lg:text-2xl font-Bold">Order Information</h2>
+        <div className="flex items-center gap-4 justify-between md:justify-start">
+          <h2 className=" text-xl lg:text-2xl font-Bold">Order Information</h2>
+          <ContractButton
+            renterSignatureImage={data?.data?.renterSignatureImage}
+            orderDetails={{
+              title: data?.data?.title,
+              payment: data?.data?.paymentRecord[0]?.amount || 0 + " $",
+              productImage: data?.data?.getOrderItemDtos[0]?.heroImage || "",
+            }}
+          />
+        </div>
         <div className=" pointer-events-none opacity-85 flex-1 mx-auto flex items-center justify-center">
           <RentSwitch typeUser="user" />
         </div>
@@ -70,6 +82,7 @@ function Page({ params }: any) {
         </div>
         <OrderPayment
           ProductDetailsPayment={data?.data?.paymentRecord[0] || []}
+          invoiceId={data?.data?.invoiceId || ""}
         />
       </div>
     </div>
