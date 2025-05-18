@@ -5,7 +5,7 @@ import ROUTES from "@/src/routes";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import React, { useMemo } from "react";
 
-function NavLinks() {
+function NavLinksPremium() {
   const path = usePathname();
   const params = useParams();
   const router = useRouter();
@@ -272,4 +272,4 @@ function NavLinks() {
     )
   );
 }
-export default NavLinks;
+export default NavLinksPremium;

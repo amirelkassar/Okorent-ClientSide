@@ -1,12 +1,12 @@
-import Button from "@/src/components/button";
-import Input from "@/src/components/input";
-import ModalComp from "@/src/components/modal-comp";
-import React from "react";
+import Button from '@/src/components/button';
+import Input from '@/src/components/input';
+import ModalComp from '@/src/components/modal-comp';
+import React from 'react';
 interface ModalEditBillingProps {
-    opened: boolean;
-    close: () => void;
+  opened: boolean;
+  close: () => void;
 }
-function ModalEditBilling({opened,close}:ModalEditBillingProps) {
+function ModalEditBilling({ opened, close }: ModalEditBillingProps) {
   return (
     <ModalComp title="Edit Billing information" opened={opened} close={close}>
       <div className="w-[764px] max-w-full">
@@ -45,13 +45,11 @@ function ModalEditBilling({opened,close}:ModalEditBillingProps) {
         <div className="flex items-center gap-7 w-full">
           <Button
             onClick={close}
-            className={
-              " flex-1 h-16 text-black hover:shadow-md bg-grayBack border-none"
-            }
+            className={' flex-1 h-16 text-black hover:shadow-md bg-grayBack border-none'}
           >
             Cancel
           </Button>
-          <Button onClick={close} className={" flex-1 h-16"}>
+          <Button onClick={close} className={' flex-1 h-16'}>
             Save
           </Button>
         </div>

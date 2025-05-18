@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { useCallback } from "react";
+import { useCallback } from 'react';
 import {
   useAddMessageLocally,
   useCreateNewChat,
   useUserChatAddMessage,
-} from "@/src/hooks/queries/user/chat";
-import { useRouter } from "@/src/navigation";
-import ROUTES from "@/src/routes";
+} from '@/src/hooks/queries/user/chat';
+import { useRouter } from '@/src/navigation';
+import ROUTES from '@/src/routes';
 
-export const useAddMessage = (chatId = "") => {
+export const useAddMessage = (chatId = '') => {
   const { mutate: sendMessage } = useUserChatAddMessage();
 
   const { mutate: addMessage } = useAddMessageLocally();
@@ -34,11 +34,11 @@ export const useAddMessage = (chatId = "") => {
           console.log(realMessage);
         },
         onError: (error) => {
-          console.log("error Msg", error);
+          console.log('error Msg', error);
         },
       });
     },
-    [chatId, addMessage, sendMessage]
+    [chatId, addMessage, sendMessage],
   );
   const onCreateChat = useCallback(
     (data: any) => {
@@ -59,7 +59,7 @@ export const useAddMessage = (chatId = "") => {
         },
       });
     },
-    [CreateChat]
+    [CreateChat],
   );
 
   return { onSend, onCreateChat };

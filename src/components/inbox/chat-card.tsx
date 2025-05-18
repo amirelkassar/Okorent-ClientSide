@@ -1,12 +1,17 @@
-"use client";
+'use client';
 
-import { memo } from "react";
-import { useUserChatMessages } from "@/src/hooks/queries/user/chat";
-import { cn, getDate } from "@/src/lib/utils";
-import ChatHeader from "./chat-header";
-import SendMessages from "./send-messages";
-import { ChatBody } from "./chat-body";
-import { ChatWrapper } from "./chat-wrapper";
+import React, { memo, useCallback, useEffect, useRef } from 'react';
+import { ScrollArea } from '@mantine/core';
+import SendIcon from '@/src/assets/icons/send';
+import { useUserChatMessages } from '@/src/hooks/queries/user/chat';
+import Button from '@/src/components/button';
+import { cn, getDate } from '@/src/lib/utils';
+import Image from 'next/image';
+import avatarUser from '@/src/assets/images/avatar.png';
+import ChatHeader from './chat-header';
+import SendMessages from './send-messages';
+import { ChatBody } from './chat-body';
+import { ChatWrapper } from './chat-wrapper';
 
 // Define Chat Message Type
 interface ChatMessage {
@@ -17,6 +22,7 @@ interface ChatMessage {
   senderImage?: string;
   created: string; // Renamed to match `ChatBody`'s `MessageType`
   status?: string;
+  messageImage?: string;
 }
 // Define Props for ChatCard
 interface ChatCardProps {
@@ -24,10 +30,7 @@ interface ChatCardProps {
   NoChat: boolean;
 }
 
-export const ChatCard: React.FC<ChatCardProps> = ({
-  id = "",
-  NoChat = false,
-}) => {
+export const ChatCard: React.FC<ChatCardProps> = ({ id = '', NoChat = false }) => {
   const query = useUserChatMessages(id);
   console.log(NoChat);
 
@@ -55,9 +58,31 @@ interface RenderChatProps {
 
 const RenderChat = memo<RenderChatProps>(
   ({ chatId, userImage, userName, NoChatRoom, NoChat, ...props }) => {
+    const [message, setMessage] = React.useState('');
+    const messagesEndRef = useRef<HTMLDivElement>(null);
+
+    const scrollToBottom = useCallback(() => {
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, []);
+
+    useEffect(() => {
+      scrollToBottom();
+    }, [scrollToBottom, props.messages?.length]);
+
+    const handleSendMessage = async () => {
+      if (!message.trim() || NoChat) return;
+
+      try {
+        await props.fetchNextPage();
+        setMessage('');
+      } catch (error) {
+        console.error('Failed to send message:', error);
+      }
+    };
+
     console.log(NoChatRoom);
     return (
-      <div className={cn("h-full w-full flex flex-col flex-1   gap-5  ")}>
+      <div className={cn('h-full w-full flex flex-col flex-1   gap-5  ')}>
         <ChatHeader userImage={userImage} userName={userName} />
         <div className="h-full flex flex-col gap-3 ">
           <ChatBody {...props}>
@@ -79,21 +104,36 @@ const RenderChat = memo<RenderChatProps>(
           </ChatBody>
         </div>
 
-        <SendMessages NoChat={NoChatRoom} />
+        <div className="flex items-center gap-4 pt-4 border-t border-gray-200">
+          <textarea
+            className="flex-1 resize-none border rounded-xl p-3 h-12 focus:outline-none focus:border-green"
+            placeholder="Type your message..."
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleSendMessage();
+              }
+            }}
+          />
+          <Button
+            onClick={handleSendMessage}
+            className={`w-11 bg-black h-8 px-2 py-2 lg:h-9 border-none ${
+              message && !NoChat ? '' : 'pointer-events-none opacity-50'
+            }`}
+          >
+            <SendIcon className="h-full w-auto" />
+          </Button>
+        </div>
       </div>
     );
-  }
+  },
 );
 
-RenderChat.displayName = "RenderChat";
+RenderChat.displayName = 'RenderChat';
 
-const ReceivedChat = ({
-  massage = "",
-  date = "",
-}: {
-  massage: string;
-  date: any;
-}) => {
+const ReceivedChat = ({ massage = '', date = '' }: { massage: string; date: any }) => {
   return (
     <div className="flex flex-row-reverse items-center gap-3 mx-2">
       <div className="flex flex-col gap-2">
@@ -108,22 +148,14 @@ const ReceivedChat = ({
   );
 };
 
-const SentChat = ({
-  massage = "",
-  date = "",
-}: {
-  massage: string;
-  date: any;
-}) => {
+const SentChat = ({ massage = '', date = '' }: { massage: string; date: any }) => {
   return (
     <div className="flex items-center gap-3 mx-2">
       <div className="flex flex-col gap-2">
-        <p className="bg-grayBack break-words rounded-[32px] text-black text-[12px] leading-[15px] px-6 max-w-[270px] py-4 rounded-es-none">
+        <p className="bg-green break-words rounded-[32px] text-white text-[12px] leading-[15px] px-6 max-w-[270px] py-4 rounded-es-none">
           {massage}
         </p>
-        <span className="text-[10px] md:text-[12px] text-[#B6BFC6] text-start">
-          {getDate(date).time}
-        </span>
+        <span className="text-[10px] md:text-[12px] text-[#B6BFC6]">{getDate(date).time}</span>
       </div>
     </div>
   );

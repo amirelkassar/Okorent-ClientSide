@@ -1,5 +1,5 @@
-"use client";
-import { useCallback } from "react";
+'use client';
+import { useCallback } from 'react';
 import {
   ChangeStatusByIDs,
   ChangeStautsByID,
@@ -9,9 +9,9 @@ import {
   useRefundOrderOutMutation,
   useRejectManyOrderOutMutation,
   useRejectOrderOutMutation,
-} from "@/src/hooks/queries/user/booking";
-import { Toast } from "@/src/components/toast";
-import { useSelectRowTable } from "@/src/components/select-row-table-context";
+} from '@/src/hooks/queries/user/booking';
+import { Toast } from '@/src/components/toast';
+import { useSelectRowTable } from '@/src/components/select-row-table-context';
 
 interface ActionTableIRentProps {
   onSubmitChangeStatus: (RenterSignature?: any) => void;
@@ -41,36 +41,34 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
     async (RenterSignature?: any) => {
       Toast.Promise(
         ChangeStatusProduct(
-          RenterSignature
-            ? { data: { OrderId: id, LessorSignatureFile: RenterSignature } }
-            : {}
+          RenterSignature ? { data: { OrderId: id, LessorSignatureFile: RenterSignature } } : {},
         ),
         {
-          loading: "Processing...",
-          success: "Operation completed!",
+          loading: 'Processing...',
+          success: 'Operation completed!',
 
           onSuccess(res) {
             setSelectRowTable([]);
           },
-        }
+        },
       );
     },
-    [ChangeStatusProduct, id]
+    [ChangeStatusProduct, id, setSelectRowTable],
   );
 
   //change status ids
   const onSubmitChangeStatusIds = useCallback(
     async (data: any) => {
       Toast.Promise(ChangeStatusManyProduct(data), {
-        loading: "Processing...",
-        success: "Operation completed!",
+        loading: 'Processing...',
+        success: 'Status updated successfully',
 
         onSuccess(res) {
           setSelectRowTable([]);
         },
       });
     },
-    [ChangeStatusManyProduct]
+    [ChangeStatusManyProduct, setSelectRowTable],
   );
 
   //reject order
@@ -81,27 +79,27 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
         answer: true,
       }),
       {
-        success: "Rejected Product Done",
+        success: 'Rejected Product Done',
         onSuccess(res) {
           setSelectRowTable([]);
         },
-      }
+      },
     );
-  }, [RejectOrderOut, id]);
+  }, [RejectOrderOut, id, setSelectRowTable]);
 
   //reject order ids
   const onSubmitRejectOrdersIds = useCallback(
     async (data: any) => {
       Toast.Promise(RejectManyOrderOut(data), {
-        loading: "Processing...",
-        success: "Operation completed!",
+        loading: 'Processing...',
+        success: 'Operation completed!',
 
         onSuccess(res) {
           setSelectRowTable([]);
         },
       });
     },
-    [RejectManyOrderOut]
+    [RejectManyOrderOut, setSelectRowTable],
   );
 
   //cancel order
@@ -112,13 +110,13 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
         answer: true,
       }),
       {
-        success: "Canceled Order",
+        success: 'Canceled Order',
         onSuccess(res) {
           setSelectRowTable([]);
         },
-      }
+      },
     );
-  }, [CancelOrder, id]);
+  }, [CancelOrder, id, setSelectRowTable]);
 
   //RefundYes order
   const onSubmitRefundYes = useCallback(async () => {
@@ -126,16 +124,16 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
       RefundOrder({
         orderId: id,
         answer: true,
-        lessorMessage: "string",
+        lessorMessage: 'string',
       }),
       {
-        success: " Request Approved ",
+        success: 'Refund request approved',
         onSuccess(res) {
           setSelectRowTable([]);
         },
-      }
+      },
     );
-  }, [RefundOrder, id]);
+  }, [RefundOrder, id, setSelectRowTable]);
 
   //RefundNo order
   const onSubmitRefundNo = useCallback(async () => {
@@ -143,50 +141,50 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
       RefundOrder({
         orderId: id,
         answer: false,
-        lessorMessage: "string",
+        lessorMessage: 'string',
       }),
       {
-        success: "Request Rejected ",
+        success: 'Refund request rejected',
         onSuccess(res) {
           setSelectRowTable([]);
         },
-      }
+      },
     );
-  }, [RefundOrder, id]);
+  }, [RefundOrder, id, setSelectRowTable]);
 
   //RefundYes many order
   const onSubmitRefundManyYes = useCallback(
     async (data: any) => {
       Toast.Promise(RefundManyOrder(data), {
-        success: " Request Approved ",
+        success: 'Multiple refund requests approved',
         onSuccess(res) {
           setSelectRowTable([]);
         },
       });
     },
-    [RefundManyOrder, id]
+    [RefundManyOrder, setSelectRowTable],
   );
 
   //RefundNo many order
   const onSubmitRefundManyNo = useCallback(
     async (data: any) => {
       Toast.Promise(RefundManyOrder(data), {
-        success: "Request Rejected ",
+        success: 'Multiple refund requests rejected',
         onSuccess(res) {
           setSelectRowTable([]);
         },
       });
     },
-    [RefundManyOrder, setSelectRowTable]
+    [RefundManyOrder, setSelectRowTable],
   );
   const onSubmitPrintShippingLabel = useCallback(
     async (id: any) => {
       Toast.Promise(PrintShippingLabel(id), {
-        success: "Get Shipping Label Done",
+        success: 'Shipping label downloaded successfully',
         onSuccess(res) {
           setSelectRowTable([]);
           const url = window.URL.createObjectURL(res);
-          const a = document.createElement("a");
+          const a = document.createElement('a');
           a.href = url;
           a.download = `shipping-label-${id}.pdf`; // Set the filename
           document.body.appendChild(a);
@@ -196,7 +194,7 @@ export const useChangeStatusRentOut = (id: any): ActionTableIRentProps => {
         },
       });
     },
-    [PrintShippingLabel]
+    [PrintShippingLabel, setSelectRowTable],
   );
   return {
     onSubmitChangeStatus,

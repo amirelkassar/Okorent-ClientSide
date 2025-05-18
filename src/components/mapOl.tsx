@@ -13,17 +13,30 @@ import MarkerIcon from "@/src/assets/images/location.png";
 import Point from "ol/geom/Point";
 import { Slider } from "@mantine/core";
 import { fetchLocationDetails } from "../lib/utils";
+import Button from "./button";
 
-const MapOl: React.FC = () => {
+interface MapOlProps {
+  onConfirm?: (locationData: {
+    location: number[];
+    radius: number;
+    address?: string;
+  }) => void;
+}
+
+const MapOl: React.FC<MapOlProps> = ({ onConfirm }) => {
   const mapElement = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<Map | null>(null);
   const [selectedLocation, setSelectedLocation] = useState<number[]>([]);
   const [radius, setRadius] = useState<number>(500);
+  const [locationDetails, setLocationDetails] = useState<any>(null);
 
   useEffect(() => {
     if (selectedLocation.length > 0) {
       fetchLocationDetails(selectedLocation[1], selectedLocation[0])
-        .then((details) => console.log(details))
+        .then((details) => {
+          console.log(details);
+          setLocationDetails(details);
+        })
         .catch((error) => console.error(error));
     }
   }, [selectedLocation]);
@@ -116,6 +129,16 @@ const MapOl: React.FC = () => {
     }
   }, [selectedLocation, radius]);
 
+  const handleConfirm = () => {
+    if (onConfirm && selectedLocation.length > 0) {
+      onConfirm({
+        location: selectedLocation,
+        radius,
+        address: locationDetails?.address,
+      });
+    }
+  };
+
   return (
     <div>
       <div
@@ -123,36 +146,50 @@ const MapOl: React.FC = () => {
         className="w-full h-[330px] rounded-2xl overflow-hidden "
       />
       {selectedLocation.length > 0 && (
-        <div className="flex items-center justify-center mt-7 mb-1 md:mb-20">
-          <span
-            className=" cursor-pointer text-xl leading-4 place-content-center flex items-center justify-center"
-            onClick={() => {
-              setRadius(radius - 100);
-            }}
-          >
-            -
-          </span>
-          <Slider
-            value={radius}
-            onChange={setRadius}
-            color="#88BA52"
-            min={500}
-            max={5000}
-            step={100}
-            size="xs"
-            radius="md"
-            className="mx-4"
-            style={{ width: 380 }}
-          />
-          <span
-            className="cursor-pointer text-xl leading-4 place-content-center flex items-center justify-center"
-            onClick={() => {
-              setRadius(radius + 100);
-            }}
-          >
-            +
-          </span>
-        </div>
+        <>
+          <div className="flex items-center justify-center mt-7 mb-1 md:mb-8">
+            <span
+              className=" cursor-pointer text-xl leading-4 place-content-center flex items-center justify-center"
+              onClick={() => {
+                setRadius(Math.max(500, radius - 100));
+              }}
+            >
+              -
+            </span>
+            <Slider
+              value={radius}
+              onChange={setRadius}
+              color="#88BA52"
+              min={500}
+              max={5000}
+              step={100}
+              size="xs"
+              radius="md"
+              className="mx-4"
+              style={{ width: 380 }}
+            />
+            <span
+              className="cursor-pointer text-xl leading-4 place-content-center flex items-center justify-center"
+              onClick={() => {
+                setRadius(Math.min(5000, radius + 100));
+              }}
+            >
+              +
+            </span>
+          </div>
+
+          {locationDetails && (
+            <div className="text-center text-sm text-grayMedium mb-4">
+              {locationDetails.address}
+            </div>
+          )}
+
+          <div className="flex justify-center mb-4 md:mb-8">
+            <Button onClick={handleConfirm} className="h-12 px-10">
+              Confirm Location
+            </Button>
+          </div>
+        </>
       )}
     </div>
   );
