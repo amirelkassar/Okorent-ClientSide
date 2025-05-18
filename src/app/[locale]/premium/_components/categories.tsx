@@ -6,7 +6,7 @@ import ROUTES from "@/src/routes";
 import Image from "next/image";
 import React from "react";
 
-function Categories() {
+function CategoriesPremium() {
   const { data } = GetCategory();
   return (
     <div className=" mb-5 md:mb-10 lg:mb-16">
@@ -44,4 +44,4 @@ function Categories() {
   );
 }
 
-export default Categories;
+export default CategoriesPremium;

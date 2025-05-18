@@ -1,12 +1,13 @@
-import ListIcon from "@/src/assets/icons/list";
-import { Link } from "@/src/navigation";
-import ROUTES from "@/src/routes";
-import React, { useRef } from "react";
-import OneCardView from "./oneCardView";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
-import ArrowLeftIcon from "@/src/assets/icons/arrowLeft";
-import ArrowRightIcon from "@/src/assets/icons/ArrowRight";
+import ListIcon from '@/src/assets/icons/list';
+import { Link } from '@/src/navigation';
+import ROUTES from '@/src/routes';
+import React, { useRef } from 'react';
+import OneCardView from './oneCardView';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import ArrowLeftIcon from '@/src/assets/icons/arrowLeft';
+import ArrowRightIcon from '@/src/assets/icons/ArrowRight';
+
 interface CardViewProps {
   title: string;
   first?: boolean;
@@ -14,11 +15,12 @@ interface CardViewProps {
   viewAllLink?: string;
   withStatus?: boolean;
 }
+
 function CardView({
   title,
   first = false,
   data = [],
-  viewAllLink = "",
+  viewAllLink = '',
   withStatus = false,
 }: CardViewProps) {
   const prevRef = useRef<HTMLDivElement>(null);
@@ -32,6 +34,7 @@ function CardView({
       swiper.navigation.update();
     }
   };
+
   if (data?.length === 0) {
     return null;
   }
@@ -52,10 +55,7 @@ function CardView({
           )}
         </div>
         {viewAllLink && (
-          <Link
-            href={viewAllLink}
-            className=" underline block text-sm mdl:text-lg font-medium"
-          >
+          <Link href={viewAllLink} className="underline block text-sm mdl:text-lg font-medium">
             View all
           </Link>
         )}
@@ -63,16 +63,12 @@ function CardView({
       {withStatus ? (
         <div className="w-full flex-wrap gap-6 my-4 relative flex items-center">
           {data?.map((item: any, index: number) => (
-            <OneCardView
-              key={index}
-              data={item}
-              offline={title === "Offline"}
-            />
+            <OneCardView key={index} data={item} offline={title === 'Offline'} />
           ))}
         </div>
       ) : (
-        <div className=" relative w-full flex items-center">
-          <div className=" my-4 w-full xl:max-w-[calc(100%-80px)]">
+        <div className="relative w-full flex items-center">
+          <div className="my-4 w-full xl:max-w-[calc(100%-80px)]">
             <Swiper
               onSwiper={handleSwiper}
               slidesPerView={1.1}
@@ -103,23 +99,22 @@ function CardView({
                 },
               }}
               modules={[Navigation]}
-              className={"mySwiper "}
+              className={'mySwiper'}
             >
               {data.map((item, index) => (
                 <SwiperSlide key={index}>
-                  <OneCardView data={item} offline={title === "Offline"} />
+                  <OneCardView data={item} offline={title === 'Offline'} />
                 </SwiperSlide>
               ))}
             </Swiper>
           </div>
-          <div className="lgl:flex hidden gap-3  absolute top-1/2 -translate-y-1/2 right-0">
+          <div className="lgl:flex hidden gap-3 absolute top-1/2 -translate-y-1/2 right-0">
             <div
               ref={prevRef}
               className={`cursor-pointer duration-200 swiper-button-prev-${title}`}
             >
               <ArrowLeftIcon fill="#0F2A43" />
             </div>
-
             <div
               ref={nextRef}
               className={`cursor-pointer duration-200 swiper-button-next-${title}`}

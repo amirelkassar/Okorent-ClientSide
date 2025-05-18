@@ -1,16 +1,19 @@
-"use client";
-import DownIcon from "@/src/assets/icons/down";
-import { Menu } from "@mantine/core";
-import Image from "next/image";
-import React, { useState } from "react";
-import profile from "@/src/assets/images/Shape.png";
-import LogoutIcon from "../assets/icons/Logout";
-import { Link } from "../navigation";
-import SwitchAvailable from "./switchAvailable";
-import { clearToken } from "../lib/token";
-import { useLocale } from "next-intl";
-import { useToken } from "../hooks/use-token";
-import { GetMyProfile } from "../hooks/queries/user/my-profile";
+'use client';
+import DownIcon from '@/src/assets/icons/down';
+import { Menu } from '@mantine/core';
+import Image from 'next/image';
+import React, { useState } from 'react';
+import profile from '@/src/assets/images/Shape.png';
+import LogoutIcon from '../assets/icons/Logout';
+import { Link } from '../navigation';
+import SwitchAvailable from './switchAvailable';
+import { clearToken } from '../lib/token';
+import { useLocale } from 'next-intl';
+import { useToken } from '../hooks/use-token';
+import { GetMyProfile } from '../hooks/queries/user/my-profile';
+import SubscriptionIcon from '@/src/assets/icons/Subscription';
+import ROUTES from '@/src/routes';
+
 interface MenuItemsProps {
   icon: React.JSX.Element;
   text: string;
@@ -39,15 +42,13 @@ function MenuProfile({ menuItems = [] }: { menuItems: MenuItemsProps[] }) {
         opened={openMenu}
         onChange={setOpened}
         classNames={{
-          dropdown: "bg-[rgba(240,246,251,1)] border rounded-xl border-black",
+          dropdown: 'bg-[rgba(240,246,251,1)] border rounded-xl border-black',
         }}
       >
         <Menu.Target>
           <button className="px-[6px] py-[3px] w-fit rounded-xl border  border-black  flex items-center justify-between gap-3">
             <div className="flex items-center gap-1">
-              <DownIcon
-                className={` duration-300 ${openMenu && "rotate-180"}`}
-              />
+              <DownIcon className={` duration-300 ${openMenu && 'rotate-180'}`} />
               <p className="text-[14px]">My Profile</p>
             </div>
             <Image
@@ -70,7 +71,7 @@ function MenuProfile({ menuItems = [] }: { menuItems: MenuItemsProps[] }) {
             <Menu.Item
               key={index}
               className={`hover:bg-green/15 py-0 h-[30px] px-0 text-[14px] font-SemiBold rounded-lg ${
-                item.active && "bg-green/15"
+                item.active && 'bg-green/15'
               } `}
             >
               <Link
@@ -82,6 +83,14 @@ function MenuProfile({ menuItems = [] }: { menuItems: MenuItemsProps[] }) {
               </Link>
             </Menu.Item>
           ))}
+          {/* <Menu.Item
+            component={Link}
+            href={`/${locale}`}
+            leftSection={<SubscriptionIcon />}
+            className="hover:bg-green/15 py-0 h-[30px] px-1 text-[14px] font-SemiBold rounded-lg"
+          >
+            Subscriptions
+          </Menu.Item> */}
 
           <Menu.Item
             onClick={handleLogout}

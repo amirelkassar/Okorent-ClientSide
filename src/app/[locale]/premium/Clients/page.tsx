@@ -1,96 +1,64 @@
-"use client";
-import { DataTable } from "@/src/components/data-table";
-import LinkGreen from "@/src/components/linkGreen";
-import { TableHeader } from "@/src/components/table/table-header";
-import { Clients, STYLE_ICON } from "@/src/lib/dataUser";
-import React, { useMemo } from "react";
-import { columns } from "./_components/columns";
-import ROUTES from "@/src/routes";
-import PlusIcon from "@/src/assets/icons/plus";
-import DeleteIcon from "@/src/assets/icons/delete";
-import EditIcon from "@/src/assets/icons/edit";
-import QuickEditIcon from "@/src/assets/icons/quickEdit";
-import CardPhoneClients from "./_components/card-phone-client";
-import { useDisclosure } from "@mantine/hooks";
-import ModalEditTags from "./_components/modal-edit-tags";
-import ModalEditClients from "./_components/modal-edit-clients";
-import ModalAddCustomer from "./_components/modal-add-customer";
-import Button from "@/src/components/button";
-const FilterOptions = [
-  {
-    label: "Online",
-    key: "Type",
-    value: "Online",
-  },
-  {
-    label: "Offline",
-    key: "Type",
-    value: "Offline",
-  },
-];
+'use client';
+import React, { useState } from 'react';
+import { DataTable } from '@/src/components/data-table';
+import { TableHeader } from '@/src/components/table/table-header';
+import { columns } from './_components/columns';
+import ROUTES from '@/src/routes';
+import PlusIcon from '@/src/assets/icons/plus';
+import CardPhoneClients from './_components/card-phone-client';
+import { useDisclosure } from '@mantine/hooks';
+import Button from '@/src/components/button';
+import { useCustomers } from '@/src/hooks/queries/premium/customers';
+import { QueryWrapper } from '@/src/components/query-wrapper';
+import ModalAddCustomer from './_components/modal-add-customer';
+import { CustomerDTO } from '@/src/api/admin/customers';
+
+type CustomerWithId = Required<Pick<CustomerDTO, 'id'>> & CustomerDTO;
 
 function Page() {
-  const [opened, { open, close }] = useDisclosure(false);
-  const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
-  const [opened3, { open: open3, close: close3 }] = useDisclosure(false);
+  // State for filters and pagination
+  const [page, setPage] = useState(1);
+  const [limit] = useState(10);
 
-  const functionSelect = useMemo(
-    () => [
-      {
-        title: "Edit Tag",
-        icon: <QuickEditIcon fill="#006AFF" className={STYLE_ICON} />,
-        onclick: (ids: any) => {
-          open();
-        },
-      },
-      {
-        title: "Quick Edit",
-        icon: <EditIcon fill="#006AFF" className={STYLE_ICON} />,
-        onclick: (ids: any) => {
-          open2();
-        },
-      },
-      {
-        title: "Delete",
-        icon: <DeleteIcon className={STYLE_ICON} />,
-        onclick: (ids: any) => {
-          console.log(ids);
-        },
-      },
-    ],
-    []
-  );
+  // Fetch customers with pagination
+  const { data, isLoading } = useCustomers({ page, limit });
+  const customers = data?.data ?? [];
+
+  // Modal states
+  const [opened, { open, close }] = useDisclosure(false);
+
   return (
     <div>
       <TableHeader>
-        <TableHeader.First title="" className="w-full ">
-          <div className="flex items-center gap-3 w-full lg:w-fit justify-between">
-            <h2 className="headTitle mdl:min-h-10 text-nowrap place-content-center block lg:hidden">
-              Clients
-            </h2>
-            <Button
-              onClick={() => open3()}
-              className={"gap-2 h-10"}
-            >
-              <PlusIcon className="w-4 h-auto" />
-              Add Customer
-            </Button>
-          </div>
+        <TableHeader.First title="Customers">
+          <p className="text-sm text-muted-foreground">See all your customers in one place</p>
         </TableHeader.First>
-        <TableHeader.Last className="" options={FilterOptions} />
+        <TableHeader.Last>
+          <Button
+            onClick={open}
+            className={
+              'gap-1 h-10 bg-green px-3 border-4 border-[#a9c788] hover:border-green duration-500 text-medium rounded-xl text-white flex items-center justify-center'
+            }
+          >
+            <PlusIcon className={'w-[16px] h-auto'} />
+            <p className="text-base">Add Customer</p>
+          </Button>
+        </TableHeader.Last>
       </TableHeader>
 
-      <div>
-        <DataTable
-          Component={CardPhoneClients}
-          data={Clients}
-          columns={columns}
-          functionSelect={functionSelect}
-        />
+      <div className="hidden lg:block">
+        <QueryWrapper query={{ isLoading, data: customers }}>
+          {({ data }) => (
+            <DataTable<CustomerWithId, any> columns={columns} data={data as CustomerWithId[]} />
+          )}
+        </QueryWrapper>
       </div>
-      <ModalEditTags opened={opened} close={close} />
-      <ModalEditClients opened={opened2} close={close2} />
-      <ModalAddCustomer opened={opened3} close={close3} />
+
+      <div className="lg:hidden flex flex-col gap-5">
+        <CardPhoneClients data={customers} />
+      </div>
+
+      <ModalAddCustomer opened={opened} close={close} />
     </div>
   );
 }

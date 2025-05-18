@@ -1,18 +1,18 @@
-import { buildQuery } from "@/src/lib/utils";
+import { buildQuery } from '@/src/lib/utils';
 
 export const user = {
   addListing: {
-    base: "/Product",
+    base: '/Product',
     edit_listing: (id: any) => `/Product/${id}`,
-    category: "/Category",
+    category: '/Category',
     subCategory_by_category: (id: any) => `/SubCategory/list?ParentId=${id}`,
   },
   register: {
-    base: "/User/register",
+    base: '/User/register',
   },
   product: {
-    base: (queries: any) => buildQuery("/Product", queries),
-    my_products: (queries: any) => buildQuery("/Product/my-products", queries),
+    base: (queries: any) => buildQuery('/Product', queries),
+    my_products: (queries: any) => buildQuery('/Product/my-products', queries),
     getById: (id: any) => `/Product/${id}`,
     upDateToOnlineById: (id: any) => `/Product/${id}/availability`,
     upDateManyToOnlineById: `/Product/update products availabilty`,
@@ -20,30 +20,29 @@ export const user = {
     favoriteProducts: `/FavouriteProduct`,
     DeleteFavoriteProducts: (id: any) => `/FavouriteProduct/${id}`,
     DeleteManyProduct: `/Product/DeleteMyProducts`,
-    barcode_my_products: "Barcode/generate-product-barcode",
+    barcode_my_products: 'Barcode/generate-product-barcode',
   },
   information: {
     base: (id: any) => `/User/${id}`,
     user_edit: `/User`,
     ProductsOrder: (id: any) => `/User/User-Order-Products/${id}`,
-    Header_Dashboard: "/UserDashboard/User-Get-Dashboard",
-    Ongoing_Rentals: "/UserDashboard/User-Get-Ongoing-Rentals",
-    Vacation: "/User/UserVcation",
-    End_Vacation: "/User/User-End-Vcation",
+    Header_Dashboard: '/UserDashboard/User-Get-Dashboard',
+    Ongoing_Rentals: '/UserDashboard/User-Get-Ongoing-Rentals',
+    Vacation: '/User/UserVcation',
+    End_Vacation: '/User/User-End-Vcation',
   },
   stock: {
-    base: "/Stock",
+    base: '/Stock',
     actions: {
       edit: (id: any) => `/Stock/${id}`,
     },
   },
   order: {
-    base: "/BookingOrder/Direct-Order",
+    base: '/BookingOrder/Direct-Order',
     booking: {
-      i_rent: (queries: any) => buildQuery("/BookingOrder", queries),
-      i_rent_card: (queries: any) =>
-        buildQuery("/BookingOrder/BookingOrdersCarts", queries),
-      i_rentOut: (queries: any) => buildQuery("/BookingOrder", queries),
+      i_rent: (queries: any) => buildQuery('/BookingOrder', queries),
+      i_rent_card: (queries: any) => buildQuery('/BookingOrder/BookingOrdersCarts', queries),
+      i_rentOut: (queries: any) => buildQuery('/BookingOrder', queries),
       changeStatusById: (id: any) => `/BookingOrder/OrderStatus/${id}`,
       changeStatusByIds: `/BookingOrder/UpdateOrdersStatus`,
     },
@@ -59,14 +58,14 @@ export const user = {
     reject_iRent: `/OrderRequest/Reject Order`,
     rejects_iRent: `/OrderRequest/Reject Orders`,
     review: {
-      base: "/ProductReviews",
+      base: '/ProductReviews',
       getByID: (id: any) => `/ProductReviews/${id}`,
     },
     reviewUser: {
-      base: "/UserReviews",
+      base: '/UserReviews',
       getByID: (id: any) => `/UserReviews/${id}`,
     },
-    barcode: "/Barcode/generate",
+    barcode: '/Barcode/generate',
     shipping_label: (id: any) => `/GeneratePDFs/Label/${id}`,
     download_invoice: (id: any) => `/GeneratePDFs/InvoiceDetails/${id}`,
   },
@@ -74,79 +73,128 @@ export const user = {
     getByID: (id: any) => `User/${id}`,
   },
   MyProfile: {
-    base: "/MyProfile",
+    base: '/MyProfile',
     reviews: `/MyProfile/Reviews About Me`,
-    ImageUpdate: "/MyProfile/Image",
-    RecentActivities: "/MyProfile/My Recent Activities",
+    ImageUpdate: '/MyProfile/Image',
+    RecentActivities: '/MyProfile/My Recent Activities',
   },
   Demo: {
-    create: "/Demo/Create-Demo",
+    create: '/Demo/Create-Demo',
   },
   Chat: {
-    Get_All_Chats: (queries: any) => buildQuery("/Chat/rooms", queries),
-    Get_Messages_By_Id: (id: any, queries: any) =>
-      buildQuery(`/Chat/room/${id}`, queries),
+    Get_All_Chats: (queries: any) => buildQuery('/Chat/rooms', queries),
+    Get_Messages_By_Id: (id: any, queries: any) => buildQuery(`/Chat/room/${id}`, queries),
     Get_Messages_By_User_ID: (id: any) => `/Chat/chatByUserId/${id}`,
-    Create_New_Chat: "/Chat/room",
-    Send_Message: "/Chat/message",
+    Create_New_Chat: '/Chat/room',
+    Send_Message: '/Chat/message',
   },
   ads: {
-    get_ads: (queries: any) => buildQuery("/UserAdvertisement", queries),
+    get_ads: (queries: any) => buildQuery('/UserAdvertisement', queries),
     get_ads_by_id: (id: any) => `/UserAdvertisement/${id}`,
-    get_ads_cart: "/UserAdvertisement/carts",
+    get_ads_cart: '/UserAdvertisement/carts',
     cancel_ads: (id: any) => `/UserAdvertisement/Cancel/${id}`,
     resume_ads: (id: any) => `/UserAdvertisement/Resume/${id}`,
     pause_ads: (id: any) => `/UserAdvertisement/Pause/${id}`,
     delete_ads: (id: any) => `/UserAdvertisement/delete/${id}`,
-    get_pricing: "/UserAdvertisement/Pricing",
-    create_ads: "/UserAdvertisement",
+    get_pricing: '/UserAdvertisement/Pricing',
+    create_ads: '/UserAdvertisement',
+  },
+  listings: {
+    base: (queries?: any) => buildQuery('/listings', queries),
+    getById: (id: string) => `/listings/${id}`,
+    create: '/listings/create',
+    update: (id: string) => `/listings/${id}`,
+    delete: (id: string) => `/listings/${id}`,
+    bulkDelete: '/listings/bulk-delete',
+    toggleStatus: (id: string) => `/listings/${id}/status`,
+    bulkToggleStatus: '/listings/bulk-status',
+  },
+
+  bookings: {
+    base: (queries?: any) => buildQuery('/bookings', queries),
+    getById: (id: string) => `/bookings/${id}`,
+    create: '/bookings/create',
+    update: (id: string) => `/bookings/${id}`,
+    cancel: (id: string) => `/bookings/${id}/cancel`,
+    bulkCancel: '/bookings/bulk-cancel',
+    approve: (id: string) => `/bookings/${id}/approve`,
+    reject: (id: string) => `/bookings/${id}/reject`,
+  },
+
+  inbox: {
+    base: (queries?: any) => buildQuery('/messages', queries),
+    getById: (id: string) => `/messages/${id}`,
+    send: '/messages/send',
+    delete: (id: string) => `/messages/${id}`,
+    markRead: (id: string) => `/messages/${id}/read`,
+    bulkMarkRead: '/messages/bulk-read',
+  },
+
+  clients: {
+    base: (queries?: any) => buildQuery('/clients', queries),
+    getById: (id: string) => `/clients/${id}`,
+    create: '/clients/create',
+    update: (id: string) => `/clients/${id}`,
+    delete: (id: string) => `/clients/${id}`,
+    getTransactions: (id: string) => `/clients/${id}/transactions`,
+  },
+
+  wishlist: {
+    base: (queries?: any) => buildQuery('/wishlist', queries),
+    add: (id: string) => `/wishlist/add/${id}`,
+    remove: (id: string) => `/wishlist/remove/${id}`,
+    clear: '/wishlist/clear',
+    moveToCart: (id: string) => `/wishlist/${id}/move-to-cart`,
+  },
+
+  billing: {
+    base: (queries?: any) => buildQuery('/billing', queries),
+    getInvoice: (id: string) => `/billing/invoices/${id}`,
+    getTransactions: (queries?: any) => buildQuery('/billing/transactions', queries),
+    downloadInvoice: (id: string) => `/billing/invoices/${id}/download`,
+    makePayment: '/billing/payment',
   },
 };
 
 export const admin = {
   Home: {
-    DashboardCount: "/AdminDashBoard/Get-Users-Overview",
-    performace_year: "/AdminDashBoard/Get-Monthly-Performace-Orders",
-    performace_weekly: "/AdminDashBoard/Get-Weekly-Performace-Orders",
-    performace_month: "/AdminDashBoard/Get-Daily-Performace-Orders",
+    DashboardCount: '/AdminDashBoard/Get-Users-Overview',
+    performace_year: '/AdminDashBoard/Get-Monthly-Performace-Orders',
+    performace_weekly: '/AdminDashBoard/Get-Weekly-Performace-Orders',
+    performace_month: '/AdminDashBoard/Get-Daily-Performace-Orders',
   },
   Category: {
-    base: "/Category",
+    base: '/Category',
     Category_ID: (id: any) => `/Category/${id}`,
   },
   SubCategory: {
-    base: "/SubCategory",
+    base: '/SubCategory',
     SubCategory_ID: (id: any) => `/SubCategory/${id}`,
     subCategory_by_category: (id: any) => `/SubCategory/list?ParentId=${id}`,
   },
   Accounts: {
-    base: (queries: any) => buildQuery("/AdminManageUser", queries),
+    base: (queries: any) => buildQuery('/AdminManageUser', queries),
     AccountsID: (id: any) => `/AdminManageUser/${id}`,
     CreateAccounts: `/AdminManageUser`,
-    DeActivate: "/AdminManageUser/deactivate",
-    DeActivateMany: "/AdminManageUser/Bulk-Deactivate",
-    Activate: "/AdminManageUser/Reactivate",
-    DeleteManyAccounts: "/AdminManageUser/DeleteUsers",
-    UpdateUserProfile: "/AdminManageUser/UpdateUserProfile",
-    UpdateImageUserProfile: "/AdminManageUser/UpdateUserImage",
-    ActiveManyUser: "/AdminManageUser/Bulk-Reactivate",
-    Verification: "/AdminManageUser/Verification",
-    Verification_Many: "/AdminManageUser/Bulk-Verification",
+    DeActivate: '/AdminManageUser/deactivate',
+    DeActivateMany: '/AdminManageUser/Bulk-Deactivate',
+    Activate: '/AdminManageUser/Reactivate',
+    DeleteManyAccounts: '/AdminManageUser/DeleteUsers',
+    UpdateUserProfile: '/AdminManageUser/UpdateUserProfile',
+    UpdateImageUserProfile: '/AdminManageUser/UpdateUserImage',
+    ActiveManyUser: '/AdminManageUser/Bulk-Reactivate',
+    Verification: '/AdminManageUser/Verification',
+    Verification_Many: '/AdminManageUser/Bulk-Verification',
   },
   Account_Dashboard: {
     base: (id: any) => `/AdminGetUserDashBoard/${id}`,
     Transactions: (queries: any) =>
-      buildQuery(
-        `/AdminGetUserDashBoard/Admin-Get-UserRecentTransactions`,
-        queries
-      ),
-    Rentals: (id: any) =>
-      `/AdminGetUserDashBoard/Get-Monthly-Performace-Orders-ForUser/${id}`,
-    Inventory: (id: any) =>
-      `/AdminGetUserDashBoard/Admin-Get-InventoryAllocation-ForUser/${id}`,
+      buildQuery(`/AdminGetUserDashBoard/Admin-Get-UserRecentTransactions`, queries),
+    Rentals: (id: any) => `/AdminGetUserDashBoard/Get-Monthly-Performace-Orders-ForUser/${id}`,
+    Inventory: (id: any) => `/AdminGetUserDashBoard/Admin-Get-InventoryAllocation-ForUser/${id}`,
   },
   product: {
-    base: (queries: any) => buildQuery("/AdminProduct", queries),
+    base: (queries: any) => buildQuery('/AdminProduct', queries),
     getById: (id: any) => `/AdminProduct/${id}`,
     DeleteManyProducts: `/AdminProduct/Delete-Products`,
     productUserOrder: (id: any) => `/AdminProduct/User-Order-Products/${id}`,
@@ -159,82 +207,75 @@ export const admin = {
   ProductReviews: {
     base: (id: any) => `/AdminProductReview/${id}`,
     getByID: (id: any) => `/AdminProductReview/${id}`,
-    Update: "/AdminProductReview",
+    Update: '/AdminProductReview',
   },
   userReview: {
     base: (id: any) => `/AdminUserReview/${id}`,
     delete: (id: any) => `/AdminUserReview/${id}`,
-    Update: "/AdminUserReview",
+    Update: '/AdminUserReview',
   },
   Bookings: {
-    base: (queries: any) => buildQuery("/AdminOrder", queries),
+    base: (queries: any) => buildQuery('/AdminOrder', queries),
     BookingID: (id: any) => `/AdminOrder/${id}`,
     UpdateOrder: `/AdminOrder`,
-    DeleteManyOrders: "/AdminOrder/DeleteOrders",
+    DeleteManyOrders: '/AdminOrder/DeleteOrders',
   },
   Invoices: {
-    base: (queries: any) =>
-      buildQuery("/AdminManageInvoices/GetAllInvoices", queries),
-    delete: "/AdminManageInvoices/DeleteInvoices",
+    base: (queries: any) => buildQuery('/AdminManageInvoices/GetAllInvoices', queries),
+    delete: '/AdminManageInvoices/DeleteInvoices',
   },
   Notes: {
-    get_all: (queries: any) =>
-      buildQuery("/AdminNote/Admin-GetAll-Notes", queries),
-    get_by_id: (queries: any) =>
-      buildQuery("/AdminNote/Get-Note-ByID", queries),
+    get_all: (queries: any) => buildQuery('/AdminNote/Admin-GetAll-Notes', queries),
+    get_by_id: (queries: any) => buildQuery('/AdminNote/Get-Note-ByID', queries),
     notes_id: (id: any) => `/AdminNote/${id}`,
-    create: "/AdminNote",
-    delete_bulk: "/AdminNote/DeleteNote-ForSpecificUsers",
-    delete_group: "/AdminNote/DeleteNotes",
+    create: '/AdminNote',
+    delete_bulk: '/AdminNote/DeleteNote-ForSpecificUsers',
+    delete_group: '/AdminNote/DeleteNotes',
   },
   Demo: {
-    base: (queries: any) => buildQuery("/Demo/Admin-GetAll-Demos", queries),
-    Change: "/Demo/Admin-Update-DemoStatus",
+    base: (queries: any) => buildQuery('/Demo/Admin-GetAll-Demos', queries),
+    Change: '/Demo/Admin-Update-DemoStatus',
     delete: (id: any) => `/Demo/Admin-Delete/${id}`,
-    add_note: "/Demo/Admin-Create-DemoNote",
+    add_note: '/Demo/Admin-Create-DemoNote',
     get_note_byID: (id: any) => `/Demo/Admin-GetDemo-ByID/${id}`,
   },
   Ads: {
-    get_pricing: (queries: any) =>
-      buildQuery("/AdminAdvertisement/pricing", queries),
-    add_pricing: "/AdminAdvertisement/pricing",
+    get_pricing: (queries: any) => buildQuery('/AdminAdvertisement/pricing', queries),
+    add_pricing: '/AdminAdvertisement/pricing',
     edit_pricing: (id: any) => `/AdminAdvertisement/pricing/${id}`,
-    get_ads: (queries: any) =>
-      buildQuery("/AdminAdvertisement/user-advertisements", queries),
+    get_ads: (queries: any) => buildQuery('/AdminAdvertisement/user-advertisements', queries),
     get_ads_by_id: (id: any) => `/AdminAdvertisement/user-advertisements/${id}`,
     pause_ads: (id: any) => `/AdminAdvertisement/Pause/${id}`,
-    pause_many_ads: "/AdminAdvertisement/Pause",
+    pause_many_ads: '/AdminAdvertisement/Pause',
     Resume_ads: (id: any) => `/AdminAdvertisement/Resume/${id}`,
-    Resume_many_ads: "/AdminAdvertisement/Resume",
+    Resume_many_ads: '/AdminAdvertisement/Resume',
   },
 };
 
 export const notifications = {
-  base: (queries: any) => buildQuery("/notification", queries),
-  list: (queries: any) => buildQuery("/notification/list", queries),
+  base: (queries: any) => buildQuery('/notification', queries),
+  list: (queries: any) => buildQuery('/notification/list', queries),
   actions: {
-    makeItRead: "/Notification/read",
-    makeItReadAll: "/Notification/read-list",
+    makeItRead: '/Notification/read',
+    makeItReadAll: '/Notification/read-list',
     delete: (id: any) => `/notification?id=${id}`,
   },
 };
 
 export const Support = {
-  get_all: (queries: any) =>
-    buildQuery("/Tickets/User-GetAll-Tickets", queries),
+  get_all: (queries: any) => buildQuery('/Tickets/User-GetAll-Tickets', queries),
   get_by_id: (id: any) => `/Tickets/User-Get-Ticket/${id}`,
-  create_guest: "/Tickets/Guest-Create",
-  reply_guest: "/Tickets/Guest-Reply",
-  create_user: "/Tickets/User-Create",
-  reply_user: "/Tickets/User-Reply",
+  create_guest: '/Tickets/Guest-Create',
+  reply_guest: '/Tickets/Guest-Reply',
+  create_user: '/Tickets/User-Create',
+  reply_user: '/Tickets/User-Reply',
   delete: `/Tickets/User-Delete`,
-  solved: "/Tickets/User-End-Ticket",
+  solved: '/Tickets/User-End-Ticket',
 };
 export const SupportAdmin = {
-  get_all: (queries: any) =>
-    buildQuery("/AdminTicket/Admin-GetAll-Tickets", queries),
+  get_all: (queries: any) => buildQuery('/AdminTicket/Admin-GetAll-Tickets', queries),
   get_by_id: (id: any) => `/AdminTicket/Admin-GetTicket-ByID?id=${id}`,
-  reply_admin: "/AdminTicket/Admin-Reply",
+  reply_admin: '/AdminTicket/Admin-Reply',
   delete: (id: any) => `/AdminTicket/Admin-Delete/${id}`,
-  solved: "/AdminTicket/Admin-End-Ticket",
+  solved: '/AdminTicket/Admin-End-Ticket',
 };

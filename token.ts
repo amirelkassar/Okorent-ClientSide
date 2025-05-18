@@ -3,22 +3,27 @@
 import { decodeJwt } from "jose";
 import { cookies } from "next/headers";
 import { AuthResponse } from "./src/types";
+import { bool } from "yup";
+import { randomUUID } from "node:crypto";
 
 type DecodedToken = {
   "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": string;
   Surname: string;
   "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress": string;
-  'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier': string
+  "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": string;
   "http://schemas.microsoft.com/ws/2008/06/identity/claims/role":
-  | "Administrator"
-  | "Client";
+    | "Administrator"
+    | "Client";
   exp: number;
   ClientId: string;
+  userMembership: string;
+  isPremium?: boolean;
 };
 
 type DecodeResponse = {
-  userRole: "Administrator" | "Client" | 'User';
+  userRole: "Administrator" | "Client" | "User";
   tokenExpireDate: Date;
+  isPremium?: boolean;
 } | null;
 
 export const decodedToken = async (token: string): Promise<DecodeResponse> => {
@@ -28,16 +33,17 @@ export const decodedToken = async (token: string): Promise<DecodeResponse> => {
     return {
       userRole:
         decodedToken[
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+          "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
         ],
       tokenExpireDate: new Date(decodedToken.exp * 1000),
+      isPremium: decodedToken.isPremium || false,
     };
   } catch {
     return null;
   }
 };
 
-export const authDecodedToken = async (): Promise<AuthResponse|any> => {
+export const authDecodedToken = async (): Promise<AuthResponse | any> => {
   try {
     const cookieStore = cookies();
     const token = cookieStore.get("accessToken")?.value;
@@ -51,23 +57,26 @@ export const authDecodedToken = async (): Promise<AuthResponse|any> => {
     }
 
     return {
-
       //userId: decodedToken.ClientId,
       userFirstName:
         decodedToken[
-        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
         ],
       //userLastName: decodedToken.Surname,
       userEmail:
         decodedToken[
-        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
+          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
         ],
-      userID: decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'],
+      userID:
+        decodedToken[
+          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
+        ],
       userRole:
         decodedToken[
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+          "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
         ],
       token: token,
+      isPremium: decodedToken.isPremium || false,
     };
   } catch {
     return null;

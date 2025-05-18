@@ -1,38 +1,31 @@
-"use client";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import NotificationIcon from "../assets/icons/notfication";
-import { Popover, ScrollArea } from "@mantine/core";
-import SwitchControl from "./switch-control";
+'use client';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import NotificationIcon from '../assets/icons/notfication';
+import { Popover, ScrollArea } from '@mantine/core';
+import SwitchControl from './switch-control';
 import {
   useNotifications,
   useNotificationsMarkAsReadAll,
-} from "../hooks/queries/user/notifications";
-import Error500 from "./error-500";
-import NotificationRow from "./notification-row";
-import { Virtuoso } from "react-virtuoso";
-import LoadingNotifications from "./loading-notifications";
-import { Toast } from "./toast";
+} from '../hooks/queries/user/notifications';
+import Error500 from './error-500';
+import NotificationRow from './notification-row';
+import { Virtuoso } from 'react-virtuoso';
+import LoadingNotifications from './loading-notifications';
+import { Toast } from './toast';
 
 function Notifications() {
   const [opened, setOpened] = useState(false);
-  const [typeNotifications, setTypeNotifications] = useState("All");
+  const [typeNotifications, setTypeNotifications] = useState('All');
   const [Ids, setIds] = useState<any[]>([]);
   const [unReadCount, setUnReadCount] = useState(0);
 
-  const {
-    data,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    isError,
-    isLoading,
-    refetch,
-  } = useNotifications(typeNotifications !== "All");
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isError, isLoading, refetch } =
+    useNotifications(typeNotifications !== 'All');
   const { mutateAsync: markAllAsRead } = useNotificationsMarkAsReadAll();
 
   const handleSubmitMarkAllAsRead = useCallback(async () => {
     Toast.Promise(markAllAsRead({ ids: Ids }), {
-      success: "Done Mark All As Read",
+      success: 'All notifications marked as read',
       onSuccess: async (res) => {},
     });
   }, [markAllAsRead, Ids]);
@@ -56,13 +49,8 @@ function Notifications() {
         </div>
       );
     }
-    const mergedNotifications =
-      data?.pages.flatMap((page) => page?.data?.items) || [];
-    setIds(
-      mergedNotifications
-        ?.filter((item) => item.status === 2)
-        ?.map((item) => item.id)
-    );
+    const mergedNotifications = data?.pages.flatMap((page) => page?.data?.items) || [];
+    setIds(mergedNotifications?.filter((item) => item.status === 2)?.map((item) => item.id));
 
     return (
       <Virtuoso
@@ -72,7 +60,7 @@ function Notifications() {
         components={{
           Footer: () => isFetchingNextPage && <LoadingNotifications />,
         }}
-        style={{ height: "332px", maxHeight: "332px", maxWidth: "99%" }}
+        style={{ height: '332px', maxHeight: '332px', maxWidth: '99%' }}
         itemContent={(index: number, data: any) => {
           return <NotificationRow key={index} notificationDetails={data} />;
         }}
@@ -101,10 +89,10 @@ function Notifications() {
         setOpened((o) => !o);
       }}
       position="bottom-end"
-      clickOutsideEvents={["mouseup", "touchend"]}
+      clickOutsideEvents={['mouseup', 'touchend']}
       offset={10}
       classNames={{
-        dropdown: "bg-white shadow-md py-0 max-w-[97%] md:max-w-[380px]",
+        dropdown: 'bg-white shadow-md py-0 max-w-[97%] md:max-w-[380px]',
       }}
       width={340}
     >
@@ -127,9 +115,7 @@ function Notifications() {
         <div className="w-full max-w-sm rounded-lg shadow-lg">
           <div className="p-4 border-b">
             <div className="flex items-center justify-between">
-              <h2 className=" text-sm md:text-base font-semibold">
-                Notifications
-              </h2>
+              <h2 className=" text-sm md:text-base font-semibold">Notifications</h2>
               {Ids.length > 0 ? (
                 <button
                   className=" text-xs md:text-sm text-blue hover:text-blue-700"
@@ -142,7 +128,7 @@ function Notifications() {
             <div className="mt-2 mx-auto flex items-center justify-center">
               <SwitchControl
                 options={[
-                  { label: "Unread", value: "Unread" },
+                  { label: 'Unread', value: 'Unread' },
                   {
                     label: (
                       <div className="flex gap-2 items-center">
@@ -152,7 +138,7 @@ function Notifications() {
                         </p> */}
                       </div>
                     ),
-                    value: "All",
+                    value: 'All',
                   },
                 ]}
                 value={typeNotifications}
