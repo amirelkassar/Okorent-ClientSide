@@ -9,7 +9,6 @@ const ROUTES = {
     RESET_PASSWORD: '/auth/reset-password',
     CONFIRM: '/auth/confirm',
   },
-
   ADMIN: {
     DASHBOARD: '/admin',
     ACCOUNTS: '/admin/Accounts',
