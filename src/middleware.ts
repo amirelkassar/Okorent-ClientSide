@@ -3,6 +3,7 @@ import { locales, localePrefix } from "./navigation";
 import { NextRequest, NextResponse } from "next/server";
 import { authDecodedToken } from "@/token";
 import ROUTES from "./routes";
+import { GetUserInfo } from "./hooks/queries/user/home/user-info";
 
 export const intlMiddleware = createMiddleware({
   defaultLocale: "en",
@@ -19,8 +20,11 @@ export async function middleware(request: NextRequest) {
   const { nextUrl } = request;
   const token = request.cookies.get("accessToken")?.value;
 
+
   const { isAdminRoute, isAuthRoute, isClientRoute, isPremiumRoute } =
     getRoutesStatus(nextUrl.pathname);
+
+  console.log('🔍 [MIDDLEWARE] Route status:', { isAdminRoute, isAuthRoute, isClientRoute, isPremiumRoute });
 
   // Redirect unauthenticated users to the login page for protected routes
   if (
@@ -37,17 +41,53 @@ export async function middleware(request: NextRequest) {
 
   const decoded = token ? await authDecodedToken() : null;
 
+  console.log('🔍 [MIDDLEWARE] decoded:', decoded);
+
   // If token is invalid, clear cookies and return
   if (!decoded) {
     response.cookies.delete("accessToken");
     return response;
   }
 
-  const { userRole, userID, isPremium } = decoded;
+  const { userRole, userID, isPremium, membership, membershipId } = decoded;
+
+  // Log membership information for debugging
+  if (userRole === "User") {
+  
+    const isPremiumUser = membershipId === "3";
+    
+    if (isPremiumUser && isClientRoute && nextUrl.pathname.includes('/user')) {
+      console.log("🚀 Redirecting premium user from /user to /premium routes");
+      const premiumPath = nextUrl.pathname.replace('/user', '/premium');
+      const premiumUrl = new URL(premiumPath, nextUrl.origin);
+      return NextResponse.redirect(premiumUrl);
+    }
+    
+    if (!isPremiumUser && nextUrl.pathname.includes('/premium')) {
+      console.log("❌ Redirecting non-premium user from /premium to subscription");
+      const subscriptionUrl = new URL(
+        `/${locale || "en"}${ROUTES.USER.SUBSCRIPTION}`,
+        nextUrl.origin
+      );
+      return NextResponse.redirect(subscriptionUrl);
+    }
+    
+    if (isPremiumUser && isPremiumRoute) {
+      console.log("✅ Premium user accessing premium route - allowing");
+    }
+  }
 
   // Redirect logged-in users from auth pages
   if (isAuthRoute) {
-    const redirectTo = userRole === "User" ? ROUTES.USER.HOMEPAGE : ROUTES.HOME;
+    let redirectTo;
+    if (userRole === "User") {
+      // For premium users (membershipId = "1"), redirect to premium homepage
+      const isPremiumUser = membershipId === "1";
+      redirectTo = isPremiumUser ? ROUTES.PREMIUM.HOMEPAGE : ROUTES.USER.HOMEPAGE;
+    } else {
+      redirectTo = ROUTES.HOME;
+    }
+    
     const redirectUrl = new URL(
       `/${locale || "en"}${redirectTo}`,
       nextUrl.origin
@@ -62,15 +102,6 @@ export async function middleware(request: NextRequest) {
   ) {
     const forbiddenUrl = new URL(`/${locale || "en"}/404`, nextUrl.origin);
     return NextResponse.redirect(forbiddenUrl);
-  }
-
-  // Premium route protection - redirect non-premium users to subscription page
-  if (isPremiumRoute && !isPremium) {
-    const subscriptionUrl = new URL(
-      `/${locale || "en"}${ROUTES.USER.SUBSCRIPTION}`,
-      nextUrl.origin
-    );
-    return NextResponse.redirect(subscriptionUrl);
   }
 
   return response;

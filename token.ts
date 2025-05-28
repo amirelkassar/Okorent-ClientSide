@@ -13,10 +13,13 @@ type DecodedToken = {
   "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": string;
   "http://schemas.microsoft.com/ws/2008/06/identity/claims/role":
     | "Administrator"
-    | "Client";
+    | "Client"
+    | "User";
   exp: number;
   ClientId: string;
   userMembership: string;
+  Membership: string;
+  MembershipId: string;
   isPremium?: boolean;
 };
 
@@ -30,13 +33,16 @@ export const decodedToken = async (token: string): Promise<DecodeResponse> => {
   try {
     const decodedToken = decodeJwt(token) as DecodedToken;
 
+    // For now, treat membershipId "1" as premium (will change later)
+    const isPremium = decodedToken.MembershipId === "1";
+
     return {
       userRole:
         decodedToken[
           "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
         ],
       tokenExpireDate: new Date(decodedToken.exp * 1000),
-      isPremium: decodedToken.isPremium || false,
+      isPremium: isPremium,
     };
   } catch {
     return null;
@@ -55,6 +61,9 @@ export const authDecodedToken = async (): Promise<AuthResponse | any> => {
       cookieStore.delete("accessToken");
       throw new Error("Invalid token");
     }
+
+    // For now, treat membershipId "1" as premium (will change later)
+    const isPremium = decodedToken.MembershipId === "1";
 
     return {
       //userId: decodedToken.ClientId,
@@ -75,8 +84,10 @@ export const authDecodedToken = async (): Promise<AuthResponse | any> => {
         decodedToken[
           "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
         ],
+      membership: decodedToken.Membership,
+      membershipId: decodedToken.MembershipId,
       token: token,
-      isPremium: decodedToken.isPremium || false,
+      isPremium: isPremium,
     };
   } catch {
     return null;

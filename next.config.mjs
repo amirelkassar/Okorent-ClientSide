@@ -6,7 +6,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'okorent.profound-group.com',
+        hostname: 'okorenthost.profound-group.com',
       },
     ],
     unoptimized: true,

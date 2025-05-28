@@ -91,7 +91,6 @@ const ROUTES = {
     ADS: '/user/Ads',
     ADSID: (id) => `/user/Ads/${id}`,
     ADSDETAILSID: (id) => `/user/Ads/ads-details/${id}`,
-    SUBSCRIPTION: `/user/Subscription/`,
     SUPPORT: '/user/Support',
     SUPPORTHISTORY: '/user/Support/support-history',
     SUPPORTFAQ: '/user/Support/Faq',

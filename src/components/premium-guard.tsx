@@ -51,12 +51,17 @@ export function PremiumGuard({
   }
 
   // If we already know from token or API that the user is not premium
-  if (isPremium === false || (userData && !userData?.data?.isPremium)) {
+  if (isPremium === false || (isPremium === null && userData && !userData?.data?.isPremium)) {
     if (redirectOnFailure) {
       router.replace(ROUTES.USER.SUBSCRIPTION);
       return null;
     }
     return fallback || null;
+  }
+
+  // If we already know from token that user is premium, don't check API
+  if (isPremium === true) {
+    return <>{children}</>;
   }
 
   // If the API confirms the user is premium, update our state
