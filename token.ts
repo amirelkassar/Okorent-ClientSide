@@ -33,8 +33,8 @@ export const decodedToken = async (token: string): Promise<DecodeResponse> => {
   try {
     const decodedToken = decodeJwt(token) as DecodedToken;
 
-    // For now, treat membershipId "1" as premium (will change later)
-    const isPremium = decodedToken.MembershipId === "1";
+    // MembershipId "3" = Premium, MembershipId "1" = Free
+    const isPremium = decodedToken.MembershipId === "3";
 
     return {
       userRole:
@@ -62,8 +62,8 @@ export const authDecodedToken = async (): Promise<AuthResponse | any> => {
       throw new Error("Invalid token");
     }
 
-    // For now, treat membershipId "1" as premium (will change later)
-    const isPremium = decodedToken.MembershipId === "1";
+    // MembershipId "3" = Premium, MembershipId "1" = Free
+    const isPremium = decodedToken.MembershipId === "3";
 
     return {
       //userId: decodedToken.ClientId,
