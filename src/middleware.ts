@@ -3,7 +3,6 @@ import { locales, localePrefix } from "./navigation";
 import { NextRequest, NextResponse } from "next/server";
 import { authDecodedToken } from "@/token";
 import ROUTES from "./routes";
-import { GetUserInfo } from "./hooks/queries/user/home/user-info";
 
 export const intlMiddleware = createMiddleware({
   defaultLocale: "en",
@@ -49,13 +48,13 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
-  const { userRole, userID, isPremium, membership, membershipId } = decoded;
+  const { userRole,  membershipId } = decoded;
 
   // Log membership information for debugging
   if (userRole === "User") {
   
     // MembershipId "3" = Premium, MembershipId "1" = Free
-    const isPremiumUser = membershipId === "3";
+    const isPremiumUser = membershipId === "1";
    
     if (isPremiumUser && isClientRoute && nextUrl.pathname.includes('/user')) {
       console.log("🚀 Redirecting premium user from /user to /premium routes");
@@ -83,7 +82,7 @@ export async function middleware(request: NextRequest) {
     let redirectTo;
     if (userRole === "User") {
       // For premium users (membershipId = "3"), redirect to premium homepage
-      const isPremiumUser = membershipId === "3";
+      const isPremiumUser = membershipId === "1";
       redirectTo = isPremiumUser ? ROUTES.PREMIUM.HOMEPAGE : ROUTES.USER.HOMEPAGE;
     } else {
       redirectTo = ROUTES.HOME;

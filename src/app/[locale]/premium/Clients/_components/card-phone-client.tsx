@@ -8,15 +8,19 @@ import ROUTES from '@/src/routes';
 import RowCardPhone from '@/src/components/row-card-phone';
 import avatarUser from '@/src/assets/images/avatar.png';
 import { CustomerDTO } from '@/src/api/admin/customers';
+import { getCustomerTypeDisplay } from '../_utils/customer-mappings';
 
 interface CardDataProps {
   data: CustomerDTO[];
 }
 
 function CardPhoneClients({ data }: CardDataProps) {
+  // Ensure data is an array before mapping
+  const customers = Array.isArray(data) ? data : [];
+
   return (
     <>
-      {data.map((customer) => (
+      {customers.map((customer) => (
         <CardPhone key={customer.id}>
           <div className="absolute top-4 end-3">
             <ActionMenu customer={customer} />
@@ -37,7 +41,7 @@ function CardPhoneClients({ data }: CardDataProps) {
           <div className="flex flex-col gap-3 w-full ps-8 sm:ps-11">
             <RowCardPhone title="Email" info={customer.email} />
             <RowCardPhone title="Phone" info={customer.phoneNumber} />
-            <RowCardPhone title="Type" info={customer.customerType} />
+            <RowCardPhone title="Type" info={getCustomerTypeDisplay(customer.customerType)} />
             <RowCardPhone
               title="Address"
               info={[customer.address, customer.city, customer.country].filter(Boolean).join(', ')}

@@ -18,6 +18,17 @@ function getAxiosInstance(URL: string) {
         config.headers.Authorization = `Bearer ${token}`;
       }
 
+      // Debug logging for customer creation
+      if (config.url?.includes('Customer/Create Customer')) {
+        console.log('AXIOS: Request config:', {
+          url: config.url,
+          method: config.method,
+          headers: config.headers,
+          data: config.data,
+          dataSize: config.data ? JSON.stringify(config.data).length : 0
+        });
+      }
+
       return config;
     },
     (err) => Promise.reject(err)

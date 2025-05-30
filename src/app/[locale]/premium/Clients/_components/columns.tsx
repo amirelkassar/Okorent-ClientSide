@@ -8,6 +8,7 @@ import { StaticImageData } from 'next/image';
 import { Link } from '@/src/navigation';
 import ROUTES from '@/src/routes';
 import { CustomerDTO } from '@/src/api/admin/customers';
+import { getCustomerTypeDisplay } from '../_utils/customer-mappings';
 
 type CustomerWithId = Required<Pick<CustomerDTO, 'id'>> & CustomerDTO;
 
@@ -44,8 +45,9 @@ export const columns: ColumnDef<CustomerWithId>[] = [
     accessorKey: 'customerType',
     header: 'Type',
     cell: ({ getValue }) => {
-      const type = getValue<string>();
-      return <p className="font-SemiBold text-[16px]">{type}</p>;
+      const type = getValue<string | number>();
+      const displayValue = getCustomerTypeDisplay(type);
+      return <p className="font-SemiBold text-[16px]">{displayValue}</p>;
     },
   },
   {

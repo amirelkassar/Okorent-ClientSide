@@ -9,16 +9,23 @@ import { Toast } from '@/src/components/toast';
 import { useDisclosure } from '@mantine/hooks';
 import Button from '@/src/components/button';
 import ModalEditCustomer from './modal-edit-customer';
+import { useRouter } from 'next/navigation';
 
 function ActionMenu({ customer }: { customer: CustomerDTO }) {
   const { mutate: deleteCustomer } = useDeleteCustomer();
+  const router = useRouter();
   const [deleteModalOpened, { open: openDelete, close: closeDelete }] = useDisclosure(false);
   const [editModalOpened, { open: openEdit, close: closeEdit }] = useDisclosure(false);
 
   const handleDelete = () => {
     if (customer.id) {
-      deleteCustomer(customer.id);
-      closeDelete();
+      deleteCustomer(customer.id, {
+        onSuccess: () => {
+          closeDelete();
+          // Ensure fresh data
+          window.location.reload();
+        },
+      });
     } else {
       // Use the Notification method instead of the non-existent error method
       Toast.Notification('Customer ID not found');

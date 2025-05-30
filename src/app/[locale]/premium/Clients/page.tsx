@@ -18,7 +18,7 @@ type CustomerWithId = Required<Pick<CustomerDTO, 'id'>> & CustomerDTO;
 function Page() {
   // State for filters and pagination
   const [page, setPage] = useState(1);
-  const [limit] = useState(10);
+  const [limit] = useState(100);
 
   // Fetch customers with pagination
   const { data, isLoading } = useCustomers({ page, limit });
@@ -27,6 +27,7 @@ function Page() {
   // Modal states
   const [opened, { open, close }] = useDisclosure(false);
 
+ 
   return (
     <div>
       <TableHeader>
@@ -55,7 +56,9 @@ function Page() {
       </div>
 
       <div className="lg:hidden flex flex-col gap-5">
-        <CardPhoneClients data={customers} />
+        <QueryWrapper query={{ isLoading, data: customers }}>
+          {({ data }) => <CardPhoneClients data={data as CustomerDTO[]} />}
+        </QueryWrapper>
       </div>
 
       <ModalAddCustomer opened={opened} close={close} />

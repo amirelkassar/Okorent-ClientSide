@@ -9,25 +9,14 @@ import React, { useState } from 'react';
 import { useForm } from '@mantine/form';
 import { CustomerDTO } from '@/src/api/admin/customers';
 import { useUpdateCustomer } from '@/src/hooks/queries/premium/customers';
-
-// Customer types
-const customerTypes = ['Individual', 'Business', 'Organization', 'VIP', 'Regular'];
-
-// Security deposit options
-const OptionQuotation = [
-  {
-    value: 'none',
-    label: 'No Deposit',
-  },
-  {
-    value: 'default',
-    label: 'Default item security deposit',
-  },
-  {
-    value: 'extra',
-    label: 'Extra Security Deposit',
-  },
-];
+import {
+  customerTypeFormOptions,
+  securityDepositFormOptions,
+  getCustomerTypeIndex,
+  getSecurityDepositIndex,
+  getCustomerTypeDisplay,
+  getSecurityDepositDisplay,
+} from '../_utils/customer-mappings';
 
 interface ModalEditCustomerProps {
   opened: boolean;
@@ -35,27 +24,33 @@ interface ModalEditCustomerProps {
   customer: CustomerDTO;
 }
 
+// A helper type for the form where customerType and securityDeposit can be string (display) or number (index)
+type CustomerFormValues = Omit<CustomerDTO, 'customerType' | 'securityDeposit'> & {
+  customerType: string | number;
+  securityDeposit: string | number;
+};
+
 export default function ModalEditCustomer({ opened, close, customer }: ModalEditCustomerProps) {
   const { mutate: updateCustomer, isPending } = useUpdateCustomer();
   const [addressOpened, setAddressOpened] = useState(false);
 
   // Initialize form with customer data
-  const form = useForm<CustomerDTO>({
+  const form = useForm<CustomerFormValues>({
     initialValues: {
-      id: customer.id,
-      name: customer.name,
-      email: customer.email,
-      phoneNumber: customer.phoneNumber,
-      address: customer.address || '',
-      country: customer.country || '',
-      city: customer.city || '',
-      state: customer.state || '',
-      reigon: customer.reigon || '',
-      zipCode: customer.zipCode || '',
-      discount: customer.discount || 0,
-      customerType: customer.customerType || 'Regular',
-      securityDeposit: customer.securityDeposit || 'none',
-      securityDepositValue: customer.securityDepositValue || '',
+      id: customer?.id || '',
+      name: customer?.name || '',
+      email: customer?.email || '',
+      phoneNumber: customer?.phoneNumber || '',
+      address: customer?.address || '',
+      country: customer?.country || '',
+      city: customer?.city || '',
+      state: customer?.state || '',
+      reigon: customer?.reigon || '',
+      zipCode: customer?.zipCode || '',
+      discount: customer?.discount || 0,
+      customerType: customer?.customerType ? getCustomerTypeDisplay(customer.customerType as any) : '',
+      securityDeposit: customer?.securityDeposit ? getSecurityDepositDisplay(customer.securityDeposit as any) : '',
+      securityDepositValue: customer?.securityDepositValue || '',
     },
     validate: {
       name: (value) => (!value ? 'Name is required' : null),
@@ -64,10 +59,27 @@ export default function ModalEditCustomer({ opened, close, customer }: ModalEdit
     },
   });
 
-  const handleSubmit = (values: CustomerDTO) => {
+  const handleSubmit = (values: CustomerFormValues) => {
     if (values.id) {
+      const payload: Partial<CustomerDTO> = {
+        id: values.id,
+        name: values.name?.trim() || '',
+        email: values.email?.trim() || '',
+        phoneNumber: values.phoneNumber?.trim() || '',
+        address: values.address?.trim() || '',
+        country: values.country?.trim() || '',
+        city: values.city?.trim() || '',
+        state: values.state?.trim() || '',
+        reigon: values.reigon?.trim() || '',
+        zipCode: values.zipCode?.trim() || '',
+        discount: Number(values.discount) || 0,
+        customerType: getCustomerTypeIndex(values.customerType as any),
+        securityDeposit: getSecurityDepositIndex(values.securityDeposit as any),
+        securityDepositValue: values.securityDepositValue?.trim() || '',
+      };
+
       updateCustomer(
-        { id: values.id, data: values },
+        { id: values.id, data: payload },
         {
           onSuccess: () => {
             close();
@@ -76,6 +88,39 @@ export default function ModalEditCustomer({ opened, close, customer }: ModalEdit
         },
       );
     }
+  };
+
+  // Direct update triggered by button, bypassing form.onSubmit (for reliability)
+  const handleDirectUpdateCustomer = () => {
+    const values = form.values;
+    if (!values.id) return;
+
+    const payload: Partial<CustomerDTO> = {
+      id: values.id,
+      name: values.name?.trim() || '',
+      email: values.email?.trim() || '',
+      phoneNumber: values.phoneNumber?.trim() || '',
+      address: values.address?.trim() || '',
+      country: values.country?.trim() || '',
+      city: values.city?.trim() || '',
+      state: values.state?.trim() || '',
+      reigon: values.reigon?.trim() || '',
+      zipCode: values.zipCode?.trim() || '',
+      discount: Number(values.discount) || 0,
+      customerType: getCustomerTypeIndex(values.customerType as any),
+      securityDeposit: getSecurityDepositIndex(values.securityDeposit as any),
+      securityDepositValue: values.securityDepositValue?.trim() || '',
+    };
+
+    updateCustomer(
+      { id: values.id, data: payload },
+      {
+        onSuccess: () => {
+          close();
+          form.reset();
+        },
+      },
+    );
   };
 
   return (
@@ -104,17 +149,17 @@ export default function ModalEditCustomer({ opened, close, customer }: ModalEdit
 
           <SelectInput
             label="Customer Type"
-            data={customerTypes.map((type) => ({ value: type, label: type }))}
+            data={customerTypeFormOptions}
             {...form.getInputProps('customerType')}
           />
 
           <SelectInput
             label="Security Deposit"
-            data={OptionQuotation}
+            data={securityDepositFormOptions}
             {...form.getInputProps('securityDeposit')}
           />
 
-          {form.values.securityDeposit !== 'none' && (
+          {`${form.values.securityDeposit}` !== 'none' && (
             <Input
               label="Security Deposit Value"
               placeholder="Enter amount"
@@ -170,8 +215,8 @@ export default function ModalEditCustomer({ opened, close, customer }: ModalEdit
           >
             Cancel
           </Button>
-          <Button type="submit" loading={isPending}>
-            Save Changes
+          <Button type="button" onClick={handleDirectUpdateCustomer} loading={isPending}>
+            {isPending ? 'Saving...' : 'Save Changes'}
           </Button>
         </div>
       </form>
