@@ -33,17 +33,16 @@ function Page() {
 
   const { control, handleSubmit, watch } = useForm({
     defaultValues: {
-      product: '',
+      customerId: '',
       quantity: 0,
       storeLocation: '',
-      maintenancePeriod: 'Only once',
+      maintenancePeriod: '0',
       dateRange: [null, null] as [Date | null, Date | null],
       reportedBy: '',
       assignedTo: '',
       maintenanceCost: 0,
-      remarks: '',
-      files: [],
-      status: 'Not Repaired',
+      remark: '',
+      fileLocation: '',
     },
   });
 
@@ -52,18 +51,18 @@ function Page() {
       const [from, to] = data.dateRange;
 
       const formData = {
-        ...data,
-        from: from?.toISOString(),
-        to: to?.toISOString(),
-        maintenancePeriod:
-          data.maintenancePeriod === 'Only once'
-            ? 'Once'
-            : data.maintenancePeriod === 'Every Month'
-            ? 'Monthly'
-            : 'BiAnnually',
+        customerId: data.customerId,
+        quantity: Number(data.quantity),
+        storeLocation: data.storeLocation,
+        maintenancePeriod: Number(data.maintenancePeriod),
+        rentalPeriodStart: from?.toISOString(),
+        rentalPeriodEnd: to?.toISOString(),
+        reportedBy: data.reportedBy,
+        assignedTo: data.assignedTo,
+        maintenanceCost: Number(data.maintenanceCost),
+        remark: data.remark,
+        fileLocation: data.fileLocation,
       };
-
-      delete formData.dateRange;
 
       await createMutation.mutateAsync(formData);
       notifications.show({
@@ -118,7 +117,7 @@ function Page() {
             <div className="flex gap-y-5 gap-x-8 flex-wrap flex-col md:flex-row">
               <div className="bg-white rounded-xl h-16 border-green/50 border overflow-hidden min-w-[calc(50%-16px)] flex-1 flex">
                 <Controller
-                  name="product"
+                  name="customerId"
                   control={control}
                   render={({ field }) => (
                     <Input
@@ -174,12 +173,16 @@ function Page() {
                 render={({ field }) => (
                   <Radio.Group {...field}>
                     <Group className="flex gap-2">
-                      {['Only once', 'Every Month', 'Bi Annually'].map((item) => (
+                      {[
+                        { value: '0', label: 'Only once' },
+                        { value: '1', label: 'Every Month' },
+                        { value: '2', label: 'Bi Annually' }
+                      ].map((item) => (
                         <Radio
-                          key={item}
+                          key={item.value}
                           labelPosition="left"
-                          value={item}
-                          label={item}
+                          value={item.value}
+                          label={item.label}
                           color="#88BA52"
                           classNames={{
                             root: 'border border-green rounded-xl px-4 py-2 flex items-center cursor-pointer transition-all focus-within:ring-2 focus-within:ring-green-400',
@@ -283,7 +286,7 @@ function Page() {
               icon={() => <NoteTableIcon fill="#0F2A43" className="w-full h-auto" />}
             >
               <Controller
-                name="remarks"
+                name="remark"
                 control={control}
                 render={({ field }) => (
                   <InputTextarea
@@ -301,12 +304,11 @@ function Page() {
               icon={() => <FileIcon fill="#0F2A43" className="w-full h-auto" />}
             >
               <Controller
-                name="files"
+                name="fileLocation"
                 control={control}
                 render={({ field: { onChange } }) => (
                   <Dropzone
-                    onDrop={(files) => onChange(files)}
-                    multiple={true}
+                    onDrop={(files) => onChange(files[0]?.path || '')}
                     maxSize={3 * 1024 ** 2}
                     className="w-full p-10 place-content-center rounded-2xl border-green/50 bg-white overflow-hidden border-solid border"
                   >

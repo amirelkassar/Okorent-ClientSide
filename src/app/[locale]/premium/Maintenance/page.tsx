@@ -3,23 +3,30 @@ import PlusIcon from '@/src/assets/icons/plus';
 import { DataTable } from '@/src/components/data-table';
 import LinkGreen from '@/src/components/linkGreen';
 import { TableHeader } from '@/src/components/table/table-header';
-import { Maintenance } from '@/src/lib/dataUser';
 import ROUTES from '@/src/routes';
 import React from 'react';
 import { columns } from './_components/columns';
 import CardPhoneMaintenance from './_components/card-phone-maintenance';
 import { useMaintenanceList } from '@/src/hooks/queries/maintenance';
+import { QueryWrapper } from '@/src/components/query-wrapper';
+import { MaintenanceItem } from '@/src/types/maintenance';
+
+interface ApiResponse<T> {
+  data: {
+    items: T[];
+  };
+}
 
 const FilterOptions = [
-  {
-    label: 'Repaired',
-    key: 'Status',
-    value: 'Repaired',
-  },
   {
     label: 'Not Repaired',
     key: 'Status',
     value: 'Not Repaired',
+  },
+  {
+    label: 'Repaired',
+    key: 'Status',
+    value: 'Repaired',
   },
   {
     label: 'Offline',
@@ -28,9 +35,8 @@ const FilterOptions = [
   },
 ];
 
-// Changed from lowercase 'page' to uppercase 'Page'
 function Page() {
-  const { data, isLoading } = useMaintenanceList();
+  const query = useMaintenanceList();
 
   return (
     <div>
@@ -46,16 +52,24 @@ function Page() {
         <TableHeader.Last options={FilterOptions} />
       </TableHeader>
 
-      <div>
-        <DataTable
-          Component={CardPhoneMaintenance}
-          data={data?.data?.items || []}
-          columns={columns}
-        />
-      </div>
+      <QueryWrapper query={query}>
+        {({ data }) => {
+          const response = data as ApiResponse<MaintenanceItem>;
+          const maintenanceData = response?.data?.items || [];
+          
+          return (
+            <div>
+              <DataTable<MaintenanceItem, unknown>
+                Component={CardPhoneMaintenance}
+                data={maintenanceData}
+                columns={columns}
+              />
+            </div>
+          );
+        }}
+      </QueryWrapper>
     </div>
   );
 }
 
-// Changed the export to match the new capitalized function name
 export default Page;

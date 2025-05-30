@@ -1,15 +1,14 @@
 export interface MaintenanceItem {
     id: string;
-    product: string;
+    customerId: string;
     quantity: number;
-    from: Date;
-    to: Date;
+    storeLocation: string;
+    maintenancePeriod: number;
+    rentalPeriodStart: string;
+    rentalPeriodEnd: string;
     reportedBy: string;
     assignedTo: string;
     maintenanceCost: number;
-    storeLocation: string;
-    remarks: string;
-    files: string[];
-    maintenancePeriod: 'Once' | 'Monthly' | 'BiAnnually';
-    status: 'Not Repaired' | 'Repaired' | 'Offline';
+    remark: string;
+    fileLocation: string;
 }

@@ -5,21 +5,24 @@ import ActionMenu from './action-menu';
 import placeHolderImgProduct from '@/src/assets/images/placTableProduct.png';
 import RenderStatus from './render-status';
 export type MaintenanceProps = {
-  id: number;
-  product: string;
+  id: string;
+  customerId: string;
   quantity: number;
-  from: string;
-  to: string;
-  remark: string;
+  storeLocation: string;
+  maintenancePeriod: number;
+  rentalPeriodStart: string;
+  rentalPeriodEnd: string;
+  reportedBy: string;
   assignedTo: string;
-  stockLocation: string;
-  status: string;
+  maintenanceCost: number;
+  remark: string;
+  fileLocation: string;
 };
 
 export const columns: ColumnDef<MaintenanceProps>[] = [
   {
-    accessorKey: 'product',
-    header: 'Product',
+    accessorKey: 'customerId',
+    header: 'Customer',
     cell: ({ getValue, row }) => {
       const name = getValue<string>();
       const id = row.original.id;
@@ -35,26 +38,26 @@ export const columns: ColumnDef<MaintenanceProps>[] = [
     },
   },
   {
-    accessorKey: 'from',
-    header: 'From',
+    accessorKey: 'rentalPeriodStart',
+    header: 'Start Date',
     cell: ({ getValue }) => {
-      const from = getValue<number>();
-      return <p className="text-grayMedium text-[16px]">{from}</p>;
+      const date = getValue<string>();
+      return <p className="text-grayMedium text-[16px]">{new Date(date).toLocaleDateString()}</p>;
     },
   },
   {
-    accessorKey: 'to',
-    header: 'To',
+    accessorKey: 'rentalPeriodEnd',
+    header: 'End Date',
     cell: ({ getValue }) => {
-      const to = getValue<number>();
-      return <p className="text-grayMedium text-[16px]">{to || 0}</p>;
+      const date = getValue<string>();
+      return <p className="text-grayMedium text-[16px]">{new Date(date).toLocaleDateString()}</p>;
     },
   },
   {
     accessorKey: 'remark',
     header: 'Remark',
     cell: ({ getValue }) => {
-      const remark = getValue<number>();
+      const remark = getValue<string>();
       return <p className="font-SemiBold text-[16px]">{remark}</p>;
     },
   },
@@ -63,7 +66,7 @@ export const columns: ColumnDef<MaintenanceProps>[] = [
     header: 'Assigned To',
     cell: ({ getValue }) => {
       const assignedTo = getValue<string>();
-      const word = getValue<string>()
+      const word = assignedTo
         .split(' ')
         .map((word) => word[0])
         .join('');
@@ -78,18 +81,19 @@ export const columns: ColumnDef<MaintenanceProps>[] = [
     },
   },
   {
-    accessorKey: 'stockLocation',
-    header: 'Stock Location',
+    accessorKey: 'storeLocation',
+    header: 'Store Location',
     cell: ({ getValue }) => {
-      const stockLocation = getValue<string>();
-      return <p className="font-SemiBold text-[16px]">{stockLocation}</p>;
+      const location = getValue<string>();
+      return <p className="font-SemiBold text-[16px]">{location}</p>;
     },
   },
   {
-    accessorKey: 'status',
+    accessorKey: 'maintenancePeriod',
     header: 'Status',
     cell: ({ getValue }) => {
-      const status = getValue<string>();
+      const period = getValue<number>();
+      const status = period === 0 ? 'Not Repaired' : period === 1 ? 'Repaired' : 'Offline';
       return <RenderStatus status={status} />;
     },
   },
@@ -99,7 +103,7 @@ export const columns: ColumnDef<MaintenanceProps>[] = [
       const id = row.original.id;
       return (
         <div className="flex items-center gap-3 w-fit">
-          <ActionMenu id={id.toString()} />
+          <ActionMenu id={id} />
         </div>
       );
     },
