@@ -12,7 +12,7 @@ function ActionMenu({ id }: { id: string }) {
     {
       label: "Edit",
       icon: <EditIcon className="w-3 h-auto" />,
-      link: ROUTES.PREMIUM.MAINTENANCEDETAILS(id) + "/edit",
+      link: ROUTES.PREMIUM.MAINTENANCEEDIT(id),
       type: "link",
     },
     {

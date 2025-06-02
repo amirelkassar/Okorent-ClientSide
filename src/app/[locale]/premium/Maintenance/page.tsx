@@ -12,9 +12,11 @@ import { QueryWrapper } from '@/src/components/query-wrapper';
 import { MaintenanceItem } from '@/src/types/maintenance';
 
 interface ApiResponse<T> {
-  data: {
-    items: T[];
-  };
+  code: number;
+  data: T[];
+  errors: null | any;
+  message: string;
+  succeeded: boolean;
 }
 
 const FilterOptions = [
@@ -55,7 +57,7 @@ function Page() {
       <QueryWrapper query={query}>
         {({ data }) => {
           const response = data as ApiResponse<MaintenanceItem>;
-          const maintenanceData = response?.data?.items || [];
+          const maintenanceData = response?.data || [];
           
           return (
             <div>

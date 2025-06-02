@@ -137,6 +137,7 @@ const ROUTES = {
     MAINTENANCE: '/premium/Maintenance',
     MAINTENANCEADD: '/premium/Maintenance/add',
     MAINTENANCEDETAILS: (id) => `/premium/Maintenance/${id}/details`,
+    MAINTENANCEEDIT: (id) => `/premium/Maintenance/${id}/details/edit`,
     TAXES: '/premium/Taxes',
   },
   GUEST: {

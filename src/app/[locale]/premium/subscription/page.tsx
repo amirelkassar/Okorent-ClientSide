@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { getToken } from '@/lib/token';
 import { Elements } from '@stripe/react-stripe-js';
@@ -11,40 +11,24 @@ import ROUTES from '@/src/routes';
 import { usePayment } from '@/src/hooks/payment';
 import MasterCardIcon from '@/src/assets/icons/MasterCard';
 import VisaIcon from '@/src/assets/icons/visa';
+import { MembershipService, Membership } from '@/src/services/membership';
+import { useMemberships, Plan } from '@/src/hooks/membership';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 type BillingPeriod = 'monthly' | 'yearly';
 
-interface Plan {
-  id: string;
-  name: string;
-  monthlyPrice: number;
-  yearlyPrice: number;
-  features: string[];
-  description: string;
-  popular?: boolean;
-}
-
-const plans: Plan[] = [
-  {
-    id: 'basic',
-    name: 'Basic Plan',
-    monthlyPrice: 3500,
-    yearlyPrice: 35000,
-    description: 'Perfect for getting started',
-    features: ['Up to 10 listings', 'Basic support', 'Standard analytics'],
-  },
-  {
-    id: 'pro',
-    name: 'Pro Plan',
-    monthlyPrice: 7500,
-    yearlyPrice: 75000,
-    description: 'For growing businesses',
-    features: ['Unlimited listings', 'Priority support', 'Advanced analytics', 'Custom branding'],
-    popular: true,
-  },
-];
+const convertMembershipToPlan = (membership: Membership): Plan => {
+  return {
+    id: membership.id,
+    name: membership.name,
+    monthlyPrice: Math.round(membership.pricePerMonth * 100), // Convert to cents for Stripe
+    yearlyPrice: Math.round(membership.pricePerYear * 100), // Convert to cents for Stripe
+    description: membership.description,
+    features: [], // You may want to add features from membershipFeatureMaps when available
+    popular: membership.name === 'Pro', // Mark Pro plan as popular
+  };
+};
 
 function BillingToggle({
   period,
@@ -229,9 +213,9 @@ function PaymentForm({
 function Page() {
   const router = useRouter();
   const token = getToken();
-  const [selectedPlan, setSelectedPlan] = useState(plans[1]);
   const [billingPeriod, setBillingPeriod] = useState<BillingPeriod>('monthly');
   const [isProcessing, setIsProcessing] = useState(false);
+  const { plans, selectedPlan, setSelectedPlan, isLoading, error } = useMemberships();
   const { createPaymentIntent } = usePayment();
 
   const handlePayment = async (event: React.FormEvent) => {
@@ -239,6 +223,11 @@ function Page() {
 
     if (!token) {
       router.push(ROUTES.AUTH.LOGIN);
+      return;
+    }
+
+    if (!selectedPlan) {
+      console.error('Please select a plan');
       return;
     }
 
@@ -263,6 +252,22 @@ function Page() {
     }
   };
 
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-red-500">{error}</div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-6xl mx-auto py-10 px-4">
       <h1 className="text-4xl font-bold text-center mb-2">Choose Your Plan</h1>
@@ -275,7 +280,7 @@ function Page() {
           <PlanCard
             key={plan.id}
             plan={plan}
-            isSelected={selectedPlan.id === plan.id}
+            isSelected={selectedPlan?.id === plan.id}
             onSelect={() => setSelectedPlan(plan)}
             billingPeriod={billingPeriod}
           />
@@ -284,7 +289,7 @@ function Page() {
 
       <Elements stripe={stripePromise}>
         <PaymentForm
-          selectedPlan={selectedPlan}
+          selectedPlan={selectedPlan || plans[0]}
           billingPeriod={billingPeriod}
           isProcessing={isProcessing}
           onSubmit={handlePayment}

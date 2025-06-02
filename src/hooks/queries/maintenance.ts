@@ -12,6 +12,24 @@ export const useMaintenanceList = () => {
     });
 };
 
+export const useMaintenanceById = (id: string) => {
+    return useQuery({
+        queryKey: [QUERY_KEY, id],
+        queryFn: () => api.get(maintenance.actions.getById(id))
+    });
+};
+
+export const useUpdateMaintenance = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: ({ id, data }: { id: string; data: Partial<MaintenanceItem> }) =>
+            api.put(maintenance.actions.update(id), data),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: [QUERY_KEY] });
+        }
+    });
+};
+
 export const useCreateMaintenance = () => {
     const queryClient = useQueryClient();
     return useMutation({
