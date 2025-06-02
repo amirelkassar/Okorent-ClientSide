@@ -11,11 +11,12 @@ import ROUTES from "@/src/routes";
 import React from "react";
 import { useLogin } from "./_hooks/use-login";
 import { Link } from "@/src/navigation";
+import { GoogleLogin } from "@react-oauth/google";
 
 function PageLogin() {
   const { form, status } = useLogin();
   // Destructure the form and status objects
-  const { onChange, onSubmit, error } = form;
+  const { onChange, onSubmit, onGoogleLogin, error } = form;
   const { isPaused, isError } = status;
 
   return (
@@ -58,28 +59,34 @@ function PageLogin() {
                 Login
               </Button>
               <ErrorMsg error={GetErrorMsg(error, "general")} />
-              <button
-                className={
-                  "w-full flex items-center justify-center gap-2 py-3 h-[52px] border border-black rounded-xl"
-                }
+              
+              <div className=                  "w-full flex items-center justify-center gap-2 py-3 h-[52px] border border-black rounded-xl"
               >
-                <GoogleIcon />
-                <p className="text-medium font-Medium">Sign in with google</p>
-              </button>
+                <GoogleLogin
+              
+                  
+                  size="large"
+                  onSuccess={onGoogleLogin}
+                  onError={() => {
+                    console.error("Google Login Failed");
+                  }}
+                />
+              </div>
               <button
+                type="button"
                 className={
                   "w-full flex items-center justify-center gap-2 py-3 h-[52px] border border-black rounded-xl"
                 }
               >
                 <AppleIcon />
-                <p className="text-medium font-Medium">Sign in with apple</p>
+                <p className="text-medium font-Medium">Sign in with Apple</p>
               </button>
             </div>
           </form>
 
           <div className="flex items-center justify-center py-5">
             <h3 className="flex items-center justify-center gap-1 font-Light">
-              Don’t have an account?
+              Don't have an account?
               <Link href={ROUTES.AUTH.SIGNUP} className="text-blue font-Medium">
                 {" "}
                 Sign up

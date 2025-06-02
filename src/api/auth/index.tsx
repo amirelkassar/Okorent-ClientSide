@@ -1,7 +1,7 @@
-
 export const auth = {
   login: {
     base: "/Auth/login",
+    google: "/Auth/google-login"
   },
   register: {
     base: "/Auth/register",

@@ -33,8 +33,8 @@ export const decodedToken = async (token: string): Promise<DecodeResponse> => {
   try {
     const decodedToken = decodeJwt(token) as DecodedToken;
 
-    // MembershipId "3" = Premium, MembershipId "1" = Free
-    const isPremium = decodedToken.MembershipId === "3";
+    // MembershipId "1" = Premium
+    const isPremium = decodedToken.MembershipId === "1";
 
     return {
       userRole:

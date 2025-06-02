@@ -47,14 +47,23 @@ export function PremiumGuard({
 
   // If we're checking with the token and don't know yet, or if we're loading user data
   if ((isPremium === null && isLoading) || !userId) {
-    return fallback || null;
+    return fallback || (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-white">
+        <div className="w-16 h-16 border-4 border-blue border-t-transparent rounded-full animate-spin"></div>
+        <p className="mt-4 text-lg text-gray-600">Loading your premium experience...</p>
+      </div>
+    );
   }
 
   // If we already know from token or API that the user is not premium
   if (isPremium === false || (isPremium === null && userData && !userData?.data?.isPremium)) {
     if (redirectOnFailure) {
       router.replace(ROUTES.USER.SUBSCRIPTION);
-      return null;
+      return (
+        <div className="min-h-screen flex flex-col items-center justify-center bg-white">
+          <p className="text-lg text-gray-600">Redirecting to subscription page...</p>
+        </div>
+      );
     }
     return fallback || null;
   }

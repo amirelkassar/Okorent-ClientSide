@@ -15,6 +15,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaSignUp } from "@/src/hooks/schema/auth-schema";
 import GetErrorMsg from "@/src/components/getErrorMsg";
 import TermsModal from "./terms-modal";
+import { GoogleLogin } from "@react-oauth/google";
 
 interface FormData {
   Name: string;
@@ -25,7 +26,7 @@ interface FormData {
 
 function SignupView() {
   const { form } = useSignUp();
-  const { onSubmit, error } = form;
+  const { onSubmit, onGoogleSignup, error } = form;
 
   // استخدام useForm للتحقق من صحة البيانات باستخدام yup
   const {
@@ -48,7 +49,7 @@ function SignupView() {
         Create New Account
       </h1>
       <p className="text-grayMedium text-sm lg:text-medium mb-6">
-        Let’s get started in leasing and renting some items
+        Let's get started in leasing and renting some items
       </p>
       <form
         onSubmit={handleSubmit(handleFormSubmit)} // استخدام handleSubmit من useForm
@@ -86,7 +87,7 @@ function SignupView() {
         <div className="w-full flex flex-col">
           <p className="text-[16px] mb-2 font-Medium ms-1">Phone number</p>
           <div dir="ltr">
-            <PhoneInput
+          <PhoneInput
               specialLabel=""
               enableSearch={true}
               country={"eg"} // Set Egypt as the default country
@@ -116,14 +117,16 @@ function SignupView() {
         <TermsModal />
         {/* Buttons */}
         <div className="w-full mt-2 flex flex-col gap-2">
-          <InputSubmit className="w-full cursor-pointer" value="Create an account"  />
-          <button
-            type="button"
-            className="w-full flex items-center justify-center gap-2 py-3 h-[52px] border border-black rounded-xl"
-          >
-            <GoogleIcon />
-            <p className="text-medium font-Medium">Sign in with Google</p>
-          </button>
+          <InputSubmit className="w-full cursor-pointer" value="Create an account" />
+          <div className="w-full flex items-center justify-center gap-2 py-3 h-[52px] border border-black rounded-xl">
+            <GoogleLogin
+              size="large"
+              onSuccess={onGoogleSignup}
+              onError={() => {
+                console.error("Google Login Failed");
+              }}
+            />
+          </div>
           <button
             type="button"
             className="w-full flex items-center justify-center gap-2 py-3 h-[52px] border border-black rounded-xl"

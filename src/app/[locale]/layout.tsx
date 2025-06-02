@@ -19,6 +19,7 @@ import { authDecodedToken } from '@/token';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { Toaster } from '@/src/components/toast';
 import { SelectRowTableProvider } from '@/src/components/select-row-table-context';
+import { GoogleAuthProvider } from "@/src/services/google-auth";
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -45,19 +46,21 @@ export default async function RootLayout({
           }}
         />
         <div className="relative">
-          <TokenProvider value={token ? token : null}>
-            <NuqsAdapter>
-              <ReactQueryConfig>
-                <MantineProvider>
-                  <NextIntlClientProvider locale={locale} messages={messages}>
-                    <Notifications position="top-right" zIndex={2000} />
-                    <SelectRowTableProvider>{children}</SelectRowTableProvider>
-                    <Toaster />
-                  </NextIntlClientProvider>
-                </MantineProvider>
-              </ReactQueryConfig>
-            </NuqsAdapter>
-          </TokenProvider>
+          <GoogleAuthProvider>
+            <TokenProvider value={token ? token : null}>
+              <NuqsAdapter>
+                <ReactQueryConfig>
+                  <MantineProvider>
+                    <NextIntlClientProvider locale={locale} messages={messages}>
+                      <Notifications position="top-right" zIndex={2000} />
+                      <SelectRowTableProvider>{children}</SelectRowTableProvider>
+                      <Toaster />
+                    </NextIntlClientProvider>
+                  </MantineProvider>
+                </ReactQueryConfig>
+              </NuqsAdapter>
+            </TokenProvider>
+          </GoogleAuthProvider>
         </div>
       </body>
     </html>
