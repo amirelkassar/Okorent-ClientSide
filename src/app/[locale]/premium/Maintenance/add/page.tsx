@@ -21,15 +21,19 @@ import { useCreateMaintenance } from '@/src/hooks/queries/maintenance';
 import { useRouter } from 'next/navigation';
 import ROUTES from '@/src/routes';
 import { notifications } from '@mantine/notifications';
+import { useQueryClient } from '@tanstack/react-query';
 
 const dataLocation = [
   { value: '1', label: 'Location' },
   { value: '2', label: 'Location2' },
 ];
 
+const MAINTENANCE_QUERY_KEY = 'maintenance';
+
 function Page() {
   const router = useRouter();
   const createMutation = useCreateMaintenance();
+  const queryClient = useQueryClient();
 
   const { control, handleSubmit, watch } = useForm({
     defaultValues: {
@@ -65,12 +69,21 @@ function Page() {
       };
 
       await createMutation.mutateAsync(formData);
+      
+      // Wait for the query to be invalidated and refetched
+      await Promise.all([
+        new Promise(resolve => setTimeout(resolve, 500)), // Small delay to ensure invalidation
+        queryClient.invalidateQueries({ queryKey: [MAINTENANCE_QUERY_KEY] })
+      ]);
+
       notifications.show({
         title: 'Success',
         message: 'Maintenance record created successfully',
         color: 'green',
       });
-      router.push(ROUTES.PREMIUM.MAINTENANCE);
+      
+      // Navigate with a timestamp to force a fresh load
+      router.push(ROUTES.PREMIUM.MAINTENANCE + '?t=' + Date.now());
     } catch (error: any) {
       notifications.show({
         title: 'Error',

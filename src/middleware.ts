@@ -54,7 +54,7 @@ export async function middleware(request: NextRequest) {
   if (userRole === "User") {
   
     // MembershipId "3" = Premium, MembershipId "1" = Free
-    const isPremiumUser = membershipId === "1";
+    const isPremiumUser = membershipId === "3";
    
     if (isPremiumUser && isClientRoute && nextUrl.pathname.includes('/user')) {
       console.log("🚀 Redirecting premium user from /user to /premium routes");
@@ -82,7 +82,7 @@ export async function middleware(request: NextRequest) {
     let redirectTo;
     if (userRole === "User") {
       // For premium users (membershipId = "3"), redirect to premium homepage
-      const isPremiumUser = membershipId === "1";
+      const isPremiumUser = membershipId === "3";
       redirectTo = isPremiumUser ? ROUTES.PREMIUM.HOMEPAGE : ROUTES.USER.HOMEPAGE;
     } else {
       redirectTo = ROUTES.HOME;

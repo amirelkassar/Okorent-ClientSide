@@ -62,7 +62,7 @@ export const authDecodedToken = async (): Promise<AuthResponse | any> => {
       throw new Error("Invalid token");
     }
 
-    const isPremium = decodedToken.MembershipId === "1";
+    const isPremium = decodedToken.MembershipId === "3";
 
     return {
       //userId: decodedToken.ClientId,

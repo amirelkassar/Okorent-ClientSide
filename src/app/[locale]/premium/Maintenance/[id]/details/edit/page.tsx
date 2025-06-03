@@ -23,6 +23,9 @@ import InputTextarea from '@/src/components/InputTextarea';
 import { Dropzone } from '@mantine/dropzone';
 import Image from 'next/image';
 import dropImg from '@/src/assets/images/dropImg.png';
+import { useQueryClient } from '@tanstack/react-query';
+
+const MAINTENANCE_QUERY_KEY = 'maintenance';
 
 interface PageProps {
   params: {
@@ -39,6 +42,7 @@ function Page({ params }: PageProps) {
   const router = useRouter();
   const query = useMaintenanceById(params.id);
   const updateMutation = useUpdateMaintenance();
+  const queryClient = useQueryClient();
 
   const { control, handleSubmit, watch, reset } = useForm({
     defaultValues: {
@@ -56,25 +60,52 @@ function Page({ params }: PageProps) {
   });
 
   useEffect(() => {
-    if (query.data?.data) {
-      const maintenance = query.data.data;
-      reset({
-        customerId: maintenance.customerId,
-        quantity: maintenance.quantity,
-        storeLocation: maintenance.storeLocation,
-        maintenancePeriod: maintenance.maintenancePeriod.toString(),
-        dateRange: [
-          maintenance.rentalPeriodStart ? new Date(maintenance.rentalPeriodStart) : null,
-          maintenance.rentalPeriodEnd ? new Date(maintenance.rentalPeriodEnd) : null,
-        ],
-        reportedBy: maintenance.reportedBy,
-        assignedTo: maintenance.assignedTo,
-        maintenanceCost: maintenance.maintenanceCost,
-        remark: maintenance.remark,
-        fileLocation: maintenance.fileLocation,
+    console.log('Query state:', {
+      isLoading: query.isLoading,
+      isError: query.isError,
+      error: query.error,
+      data: query.data
+    });
+
+    if (query.isError) {
+      notifications.show({
+        title: 'Error',
+        message: 'Failed to load maintenance data',
+        color: 'red',
       });
+      return;
     }
-  }, [query.data, reset]);
+
+    const maintenance = query.data?.data?.data;
+    if (maintenance) {
+      console.log('Setting form data with:', maintenance);
+      
+      try {
+        reset({
+          customerId: maintenance.customerId || '',
+          quantity: maintenance.quantity || 0,
+          storeLocation: maintenance.storeLocation || '',
+          maintenancePeriod: maintenance.maintenancePeriod?.toString() ?? '0',
+          dateRange: [
+            maintenance.rentalPeriodStart ? new Date(maintenance.rentalPeriodStart) : null,
+            maintenance.rentalPeriodEnd ? new Date(maintenance.rentalPeriodEnd) : null,
+          ],
+          reportedBy: maintenance.reportedBy || '',
+          assignedTo: maintenance.assignedTo || '',
+          maintenanceCost: maintenance.maintenanceCost || 0,
+          remark: maintenance.remark || '',
+          fileLocation: maintenance.fileLocation || '',
+        });
+      } catch (error) {
+        console.error('Error setting form data:', error);
+        notifications.show({
+          title: 'Error',
+          message: 'Failed to populate form data',
+          color: 'red',
+        });
+      }
+    }
+  }, [query.data, query.error, query.isError, reset]);
 
   const onSubmit = async (data: any) => {
     try {
@@ -95,12 +126,21 @@ function Page({ params }: PageProps) {
       };
 
       await updateMutation.mutateAsync({ id: params.id, data: formData });
+      
+      // Wait for the query to be invalidated and refetched
+      await Promise.all([
+        new Promise(resolve => setTimeout(resolve, 500)), // Small delay to ensure invalidation
+        queryClient.invalidateQueries({ queryKey: [MAINTENANCE_QUERY_KEY] })
+      ]);
+
       notifications.show({
         title: 'Success',
         message: 'Maintenance record updated successfully',
         color: 'green',
       });
-      router.push(ROUTES.PREMIUM.MAINTENANCE);
+      
+      // Navigate with a timestamp to force a fresh load
+      router.push(ROUTES.PREMIUM.MAINTENANCE + '?t=' + Date.now());
     } catch (error: any) {
       notifications.show({
         title: 'Error',

@@ -25,13 +25,13 @@ function Page() {
 
     const { data: userData, isLoading } = GetUserInfo(userId);
 
-    if (isLoading) {
+    if (isLoading || !userData?.data) {
         return null;
     }
 
     return (
         <div>
-            {userData?.data?.memberShipName.toLowerCase() == 'premium' ?
+            {userData.data.memberShipName?.toLowerCase() === 'premium' ?
                 <>
                     <HeaderPremium/>
                     <CategoriesPremium/>

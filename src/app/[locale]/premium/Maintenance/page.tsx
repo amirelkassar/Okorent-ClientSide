@@ -23,7 +23,7 @@ const FilterOptions = [
   {
     label: 'Not Repaired',
     key: 'Status',
-    value: 'Not Repaired',
+    value: 'Not_Repaired',
   },
   {
     label: 'Repaired',

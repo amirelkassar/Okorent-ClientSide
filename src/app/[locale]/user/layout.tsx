@@ -18,22 +18,50 @@ interface LayoutProps {
 function Layout({ children }: LayoutProps) {
     const { token } = useToken();
     const [userId, setUserId] = useState<string | null>(null);
+    const [isPremium, setIsPremium] = useState<boolean | null>(null);
 
     useEffect(() => {
-        if (token) {
-            authDecodedToken().then((decoded) => {
-                setUserId(decoded?.userID);
-            });
+        async function initializeAuth() {
+            if (token) {
+                const decoded = await authDecodedToken();
+                if (decoded?.userID) {
+                    setUserId(decoded.userID);
+                    // Set initial premium status from token
+                    setIsPremium(decoded.membershipId === "3");
+                }
+            }
         }
+        initializeAuth();
     }, [token]);
 
     const { data: userData, isLoading } = GetUserInfo(userId);
 
+    // Update premium status from API response if different
+    useEffect(() => {
+        if (userData?.data?.memberShipName) {
+            const isUserPremium = userData.data.memberShipName.toLowerCase() === 'premium';
+            setIsPremium(isUserPremium);
+        }
+    }, [userData?.data?.memberShipName]);
+
+    // Show loading state instead of blank screen
     if (isLoading) {
-        return null;
+        return (
+            <div className="min-h-screen flex items-center justify-center">
+                <div className="w-16 h-16 border-4 border-green border-t-transparent rounded-full animate-spin"></div>
+            </div>
+        );
     }
 
-    const isPremium = userData?.data?.memberShipName.toLowerCase() === 'premium';
+    // If we don't have user data yet but have premium status from token, we can still render
+    const shouldRender = isPremium !== null || userData?.data;
+    if (!shouldRender) {
+        return (
+            <div className="min-h-screen flex items-center justify-center">
+                <div className="w-16 h-16 border-4 border-green border-t-transparent rounded-full animate-spin"></div>
+            </div>
+        );
+    }
 
     return (
         <div className="font-Medium min-h-[100vh] text-black mx-auto">
