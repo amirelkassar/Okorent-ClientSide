@@ -65,10 +65,20 @@ export const useLogin = (): SignUpReturn => {
     [isError, reset]
   );
 
-  const setupAuthToken = async (token: string) => {
-    // Ensure token has Bearer prefix
-    const authToken = token.startsWith('Bearer ') ? token : `Bearer ${token}`;
-    const rawToken = token.replace('Bearer ', '');
+  const setupAuthToken = async (token: string | any) => {
+    // Ensure we have a string token and handle different response structures
+    let rawToken: string;
+    
+    if (typeof token === 'string') {
+      rawToken = token.startsWith('Bearer ') ? token.replace('Bearer ', '') : token;
+    } else if (token?.token) {
+      // Handle case where token is in an object
+      rawToken = token.token;
+    } else {
+      throw new Error('Invalid token format');
+    }
+    
+    const authToken = `Bearer ${rawToken}`;
     
     // Store in localStorage for client-side access
     localStorage.setItem('token', authToken);
@@ -84,22 +94,23 @@ export const useLogin = (): SignUpReturn => {
       axiosHeader: !!api.defaults.headers.common['Authorization'],
       cookieSet: true
     });
+
+    return rawToken;
   };
 
   const handleLoginSuccess = async (response: any) => {
     try {
-      // For regular login, response.data contains the token
-      // For Google login, response.data.data contains the token
-      const token = response.data?.token || response.data?.data?.token;
+      // Handle different response structures
+      const tokenData = response.data?.token || response.data;
       
-      if (!token) {
+      if (!tokenData) {
         throw new Error('No token received from server');
       }
 
-      // Setup authentication token
-      await setupAuthToken(token);
+      // Setup authentication token and get the raw token back
+      const rawToken = await setupAuthToken(tokenData);
 
-      const userRole = await decodedToken(token).then((res2) => {
+      const userRole = await decodedToken(rawToken).then((res2) => {
         return res2?.userRole;
       });
 
